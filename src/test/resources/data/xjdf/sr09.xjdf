@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XJDF DescriptiveName="2024 Granbury High School" JobID="045107-24-sr09"
+  Types="Product ConventionalPrinting Folding" xmlns="http://www.CIP4.org/JDFSchema_2_0">
+  <!--New elements: raw plate material in Media resource set with MediaType="Plate"-->
+  <!--Add resource set "ExposedMedia" for the imposed sets of plates for each sheet-->
+  <Comment Type="JobDescription">
+    <!--PreSchedule: 28 - PostSchedule: 13-->
+  </Comment>
+  <GeneralID IDUsage="PostScheduleNumber" IDValue="13"/>
+  <GeneralID IDUsage="PreScheduleNumber" IDValue="28"/>
+  <GeneralID IDUsage="ProductionType" IDValue="SP"/>
+  <ProductList>
+    <Product Amount="838" CommentURL="" DescriptiveName="2024 Granbury High School" IsRoot="true">
+      <Intent Name="BindingIntent">
+        <BindingIntent BindingType="HardCover"/>
+      </Intent>
+    </Product>
+    <Product DescriptiveName="Cover" IsRoot="false" ProductType="Cover">
+      <Intent Name="LayoutIntent">
+        <LayoutIntent FinishedDimensions="648 864 0" Pages="1"/>
+      </Intent>
+      <Intent ExternalID="CG_23X15375_65LB" Name="MediaIntent">
+        <MediaIntent MediaQuality="65# Gloss Cover" MediaType="Paper"/>
+      </Intent>
+    </Product>
+    <Product DescriptiveName="Text" IsRoot="false" ProductType="Body">
+      <Intent Name="LayoutIntent">
+        <LayoutIntent FinishedDimensions="648 864 0" Pages="240"/>
+      </Intent>
+      <Intent ExternalID="HMT_9-100LB" Name="MediaIntent">
+        <MediaIntent MediaQuality="HMT 9-100# Matte Text (196)" MediaType="Paper"/>
+      </Intent>
+    </Product>
+  </ProductList>
+  <ResourceSet CombinedProcessIndex="0" Name="CustomerInfo" Usage="Input">
+    <Resource>
+      <CustomerInfo CustomerID="1078907"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="0" Name="NodeInfo" Usage="Input">
+    <Resource>
+      <NodeInfo LastEnd="2024-07-06T00:00:00-05:00"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1 2" Name="Layout" Usage="Input">
+    <Resource DescriptiveName="Wk:28_OP:?">
+      <Part SheetName="Cover"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_1"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_2"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_3"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_4"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_5"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_6"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_7"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_8"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_9"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_10"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_11"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_12"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_13"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_14"/>
+      <Layout/>
+    </Resource>
+    <Resource DescriptiveName="Wk:13_OP:?">
+      <Part SheetName="Sheet_15"/>
+      <Layout/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1" Name="Component" Usage="Output">
+    <Resource DescriptiveName="Printed Sheet, Cover">
+      <AmountPool>
+        <PartAmount Amount="926" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Cover"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_1"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_2"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_3"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_4"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_5"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_6"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_7"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_8"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_9"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_10"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_11"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_12"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_13"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_14"/>
+    </Resource>
+    <Resource DescriptiveName="Printed Sheet, Text 16pg">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="60"/>
+      </AmountPool>
+      <Part SheetName="Sheet_15"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1" Name="ConventionalPrintingParams" Usage="Input">
+    <Resource>
+      <Part SheetName="Cover"/>
+      <ConventionalPrintingParams SheetLay="Left" WorkStyle="Simplex"/>
+    </Resource>
+    <Resource>
+      <Part SheetName="Sheet_1"/>
+      <Part SheetName="Sheet_2"/>
+      <Part SheetName="Sheet_3"/>
+      <Part SheetName="Sheet_4"/>
+      <Part SheetName="Sheet_5"/>
+      <Part SheetName="Sheet_6"/>
+      <Part SheetName="Sheet_7"/>
+      <Part SheetName="Sheet_8"/>
+      <Part SheetName="Sheet_9"/>
+      <Part SheetName="Sheet_10"/>
+      <Part SheetName="Sheet_11"/>
+      <Part SheetName="Sheet_12"/>
+      <Part SheetName="Sheet_13"/>
+      <Part SheetName="Sheet_14"/>
+      <Part SheetName="Sheet_15"/>
+      <ConventionalPrintingParams SheetLay="Left" WorkStyle="Perfecting"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1" Name="Device" Usage="Input">
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Cover"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_1"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_2"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_3"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_4"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_5"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_6"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_7"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_8"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_9"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_10"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_11"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_12"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_13"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_14"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+    <Resource DescriptiveName="XL106_Pool">
+      <Part SheetName="Sheet_15"/>
+      <Device DeviceID="XL106_Pool"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1" Name="ExposedMedia" Usage="Input">
+    <Resource>
+      <Part Separation="Black" SheetName="Cover" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Cover" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Cover" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Cover" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_1" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_1" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_1" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_1" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_1" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_1" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_1" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_1" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_2" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_2" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_2" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_2" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_2" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_2" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_2" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_2" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_3" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_3" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_3" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_3" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_3" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_3" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_3" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_3" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_4" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_4" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_4" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_4" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_4" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_4" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_4" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_4" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_5" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_5" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_5" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_5" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_5" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_5" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_5" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_5" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_6" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_6" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_6" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_6" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_6" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_6" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_6" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_6" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_7" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_7" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_7" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_7" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_7" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_7" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_7" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_7" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_8" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_8" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_8" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_8" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_8" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_8" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_8" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_8" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_9" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_9" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_9" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_9" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_9" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_9" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_9" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_9" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_10" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_10" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_10" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_10" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_10" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_10" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_10" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_10" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_11" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_11" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_11" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_11" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_11" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_11" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_11" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_11" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_12" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_12" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_12" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_12" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_12" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_12" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_12" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_12" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_13" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_13" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_13" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_13" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_13" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_13" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_13" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_13" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_14" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_14" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_14" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_14" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_14" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_14" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_14" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_14" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_15" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_15" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_15" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_15" Side="Back"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Black" SheetName="Sheet_15" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Cyan" SheetName="Sheet_15" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Magenta" SheetName="Sheet_15" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+    <Resource>
+      <Part Separation="Yellow" SheetName="Sheet_15" Side="Front"/>
+      <ExposedMedia MediaRef="REF_PL_XL106"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1" Name="Media" Usage="Input">
+    <Resource Brand="CG 23x15.375 65# Litho Cover (478) - Opus"
+      DescriptiveName="CG 23x15.375 65# Litho Cover (478) - Opus" ExternalID="CG_23X15375_65LB">
+      <Part SheetName="Cover"/>
+      <Media Dimension="1656 1107" GrainDirection="YDirection" ISOPaperSubstrate="PS1"
+        MediaQuality="65# Gloss Cover" MediaType="Paper" Thickness="142.24" Weight="175.77"/>
+    </Resource>
+    <Resource Brand="HMT 9-100# Matte Text (196)" DescriptiveName="HMT 9-100# Matte Text (196)" ExternalID="HMT_9-100LB">
+      <Part SheetName="Sheet_1"/>
+      <Part SheetName="Sheet_2"/>
+      <Part SheetName="Sheet_3"/>
+      <Part SheetName="Sheet_4"/>
+      <Part SheetName="Sheet_5"/>
+      <Part SheetName="Sheet_6"/>
+      <Part SheetName="Sheet_7"/>
+      <Part SheetName="Sheet_8"/>
+      <Part SheetName="Sheet_9"/>
+      <Part SheetName="Sheet_10"/>
+      <Part SheetName="Sheet_11"/>
+      <Part SheetName="Sheet_12"/>
+      <Part SheetName="Sheet_13"/>
+      <Part SheetName="Sheet_14"/>
+      <Part SheetName="Sheet_15"/>
+      <Media Dimension="2700 1836" GrainDirection="XDirection" ISOPaperSubstrate="PS2"
+        MediaQuality="100# Matte Text" MediaType="Paper" Thickness="120" Weight="148.01"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1" Name="Media" Usage="Input">
+    <Resource ID="REF_PL_XL106">
+      <Media Dimension="2990.52 2298.888" MediaType="Plate"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1" Name="NodeInfo" Usage="Input">
+    <Resource ExternalID="045107-24CPCV1">
+      <Part SheetName="Cover"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP001">
+      <Part SheetName="Sheet_1"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP002">
+      <Part SheetName="Sheet_2"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP003">
+      <Part SheetName="Sheet_3"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP004">
+      <Part SheetName="Sheet_4"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP005">
+      <Part SheetName="Sheet_5"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP006">
+      <Part SheetName="Sheet_6"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP007">
+      <Part SheetName="Sheet_7"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP008">
+      <Part SheetName="Sheet_8"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP009">
+      <Part SheetName="Sheet_9"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP0010">
+      <Part SheetName="Sheet_10"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP0011">
+      <Part SheetName="Sheet_11"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP0012">
+      <Part SheetName="Sheet_12"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP0013">
+      <Part SheetName="Sheet_13"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP0014">
+      <Part SheetName="Sheet_14"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+    <Resource ExternalID="045107-24CP0015">
+      <Part SheetName="Sheet_15"/>
+      <NodeInfo LastEnd="2024-05-06T00:00:00-05:00" Status="Waiting"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="2" Name="Component" Usage="Output">
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_1">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-1-01" SheetName="Sheet_1"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_2">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-2-01" SheetName="Sheet_2"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_3">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-3-01" SheetName="Sheet_3"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_4">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-4-01" SheetName="Sheet_4"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_5">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-5-01" SheetName="Sheet_5"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_6">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-6-01" SheetName="Sheet_6"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_7">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-7-01" SheetName="Sheet_7"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_8">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-8-01" SheetName="Sheet_8"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_9">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-9-01" SheetName="Sheet_9"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_10">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-10-01" SheetName="Sheet_10"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_11">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-11-01" SheetName="Sheet_11"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_12">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-12-01" SheetName="Sheet_12"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_13">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-13-01" SheetName="Sheet_13"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_14">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-14-01" SheetName="Sheet_14"/>
+    </Resource>
+    <Resource DescriptiveName="Folded Sheet, Text 16pg" ExternalID="045107-24FO00Sheet_15">
+      <AmountPool>
+        <PartAmount Amount="933" Waste="30"/>
+      </AmountPool>
+      <Part BlockName="16pg-15-01" SheetName="Sheet_15"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="2" Name="Device" Usage="Input">
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_1"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_2"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_3"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_4"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_5"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_6"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_7"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_8"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_9"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_10"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_11"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_12"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_13"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_14"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+    <Resource DescriptiveName="KH78">
+      <Part SheetName="Sheet_15"/>
+      <Device DeviceID="5220"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="2" Name="FoldingParams" Usage="Input">
+    <Resource>
+      <Part BlockName="16pg-1-01" SheetName="Sheet_1"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-2-01" SheetName="Sheet_2"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-3-01" SheetName="Sheet_3"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-4-01" SheetName="Sheet_4"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-5-01" SheetName="Sheet_5"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-6-01" SheetName="Sheet_6"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-7-01" SheetName="Sheet_7"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-8-01" SheetName="Sheet_8"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-9-01" SheetName="Sheet_9"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-10-01" SheetName="Sheet_10"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-11-01" SheetName="Sheet_11"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-12-01" SheetName="Sheet_12"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-13-01" SheetName="Sheet_13"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-14-01" SheetName="Sheet_14"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+    <Resource>
+      <Part BlockName="16pg-15-01" SheetName="Sheet_15"/>
+      <FoldingParams FoldCatalog="F16-6"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet Name="Contact" Usage="Input">
+    <Resource>
+      <Part ContactType="Customer"/>
+      <Contact>
+        <Address City="Granbury" CountryCode="US" PostalCode="76048" Region="TX" Street="2000 W Pearl St"/>
+        <Company CompanyID="1078907" OrganizationName="Granbury High School"/>
+      </Contact>
+    </Resource>
+    <Resource>
+      <Part ContactType="Delivery"/>
+      <Contact>
+        <Address City="Granbury" CountryCode="US" PostalCode="76048" Region="TX" Street="2000 W Pearl St"/>
+        <Company CompanyID="1078907" OrganizationName="Granbury High School"/>
+      </Contact>
+    </Resource>
+    <Resource ExternalID="1335">
+      <Part ContactType="Employee"/>
+      <Contact ContactTypeDetails="Sales Rep">
+        <Company CompanyID="744" OrganizationName="Jostens, Inc. Clarksville"/>
+        <Person FamilyName="Sheffield" FirstName="Tread" NamePrefix=""/>
+      </Contact>
+    </Resource>
+    <Resource ExternalID="667">
+      <Part ContactType="Employee"/>
+      <Contact ContactTypeDetails="Customer Consultant" UserID="brenna.scott">
+        <ComChannel ChannelType="Email" Locator="brenna.scott@jostens.com"/>
+        <Company CompanyID="744" OrganizationName="Jostens, Inc. Clarksville"/>
+        <Person FamilyName="Scott" FirstName="Brenna" NamePrefix=""/>
+      </Contact>
+    </Resource>
+  </ResourceSet>
+</XJDF>
