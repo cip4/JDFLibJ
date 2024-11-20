@@ -2989,7 +2989,7 @@ public class JDFElement extends KElement
 	 */
 	public static boolean isInAnyCIP4NameSpaceStatic(final String ns)
 	{
-		return ns != null && (ns.startsWith("http://www.CIP4.org/"));
+		return ns != null && ((ns.startsWith("http://www.CIP4.org/") || ns.startsWith("http://www.printtalk.org/")));
 	}
 
 	/**

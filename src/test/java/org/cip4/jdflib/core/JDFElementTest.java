@@ -1022,6 +1022,8 @@ class JDFElementTest extends JDFTestCaseBase
 	{
 		assertTrue(JDFElement.isInAnyCIP4NameSpaceStatic(new XJDFHelper("j1", null, null).getRoot()));
 		assertTrue(JDFElement.isInAnyCIP4NameSpaceStatic(JDFNode.createRoot()));
+		assertTrue(JDFElement.isInAnyCIP4NameSpaceStatic(KElement.createRoot("PrintTalk", "http://www.printtalk.org/schema_20")));
+		assertTrue(JDFElement.isInAnyCIP4NameSpaceStatic(KElement.createRoot("ptk:PrintTalk", "http://www.printtalk.org/schema_20")));
 		assertFalse(JDFElement.isInAnyCIP4NameSpaceStatic((String) null));
 		assertFalse(JDFElement.isInAnyCIP4NameSpaceStatic((KElement) null));
 	}
