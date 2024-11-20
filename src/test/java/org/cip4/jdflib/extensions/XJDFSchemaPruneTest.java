@@ -36,19 +36,28 @@
  */
 package org.cip4.jdflib.extensions;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.Test;
 
@@ -59,10 +68,10 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	void testPruneSimple()
 	{
 		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
-		final XJDFSchemaPrune w = new XJDFSchemaPrune(schema);
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.addType(EnumType.Product);
-		final KElement ret = w.prune(h.getRoot());
+		final KElement ret = prune.prune(h.getRoot());
 		assertNotNull(ret);
 		final String out = sm_dirTestDataTemp + "prune1.xsd";
 		ret.write2File(out);
@@ -70,6 +79,64 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
+	}
+
+	@Test
+	void testPruneForeign()
+	{
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
+		final XJDFHelper h = new XJDFHelper("j1", "p1");
+		h.addType(EnumType.Product);
+		prune.setRemoveForeign(false);
+		final KElement ret = prune.prune(h.getRoot());
+		assertNotNull(ret);
+		final String out = sm_dirTestDataTemp + "pruneForeign.xsd";
+		ret.write2File(out);
+		final XMLParser p = new XMLParser();
+		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		h.getRoot().setAttribute("foo:bar", "val", "www.foo.com");
+		h.getSet(ElementName.NODEINFO, null).getCreatePartition(0, false).getRoot().appendElement("foo:blub", "www.foo.com");
+		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
+		assertTrue(d.isSchemaValid());
+	}
+
+	@Test
+	void testPreForeign()
+	{
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
+		final XJDFHelper h = new XJDFHelper("j1", "p1");
+		h.addType(EnumType.Product);
+		h.getRoot().setAttribute("foo:bar", "val", "www.foo.com");
+		h.getSet(ElementName.NODEINFO, null).getCreatePartition(0, false).getRoot().appendElement("foo:blub", "www.foo.com");
+		prune.setRemoveForeign(false);
+		final KElement ret = prune.prune(h.getRoot());
+		assertNotNull(ret);
+		final String out = sm_dirTestDataTemp + "pruneForeign.xsd";
+		ret.write2File(out);
+		final XMLParser p = new XMLParser();
+		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
+		assertTrue(d.isSchemaValid());
+	}
+
+	@Test
+	void testPruneSimpleMissingRequired()
+	{
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
+		final XJDFHelper h = new XJDFHelper("j1", "p1");
+		h.setJobID(null);
+		h.addType(EnumType.Product);
+		final KElement ret = prune.prune(h.getRoot());
+		assertNotNull(ret);
+		final String out = sm_dirTestDataTemp + "pruneMiss.xsd";
+		ret.write2File(out);
+		final XMLParser p = new XMLParser();
+		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
+		assertFalse(d.isSchemaValid());
 	}
 
 	@Test
@@ -116,28 +183,33 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPruneComplex()
 	{
+		final File[] xjdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "xjdf"), "xjdf");
 		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
-		final XJDFSchemaPrune w = new XJDFSchemaPrune(schema);
 
-		final XJDFHelper h = XJDFHelper.parseFile(sm_dirTestData + "xjdf/sr09.xjdf");
-		final KElement ret = w.prune(h.getRoot());
-		assertNotNull(ret);
-		final String out = sm_dirTestDataTemp + "sr09.xsd";
-		ret.write2File(out);
-		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
-		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
-		assertTrue(d.isSchemaValid());
+		for (final File xjdf : xjdfs)
+		{
+			final XJDFSchemaPrune w = new XJDFSchemaPrune(schema);
+			final XJDFHelper h = XJDFHelper.parseFile(xjdf);
+			h.cleanUp();
+			final KElement ret = w.prune(h.getRoot());
+			assertNotNull(ret);
+			final File out = new File(sm_dirTestDataTemp, FileUtil.newExtension(xjdf, "xsd").getName());
+			ret.write2File(out);
+			final XMLParser p = new XMLParser();
+			p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(out, true));
+			final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
+			assertTrue(d.isSchemaValid());
+		}
 	}
 
 	@Test
 	void testPruneSimpleXJMF()
 	{
 		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
-		final XJDFSchemaPrune w = new XJDFSchemaPrune(schema);
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		final XJMFHelper h = new XJMFHelper();
 		h.appendMessage(EnumFamily.Query, org.cip4.jdflib.jmf.JDFMessage.EnumType.KnownMessages);
-		final KElement ret = w.prune(h.getRoot());
+		final KElement ret = prune.prune(h.getRoot());
 		assertNotNull(ret);
 		final String out = sm_dirTestDataTemp + "knownmessages.xsd";
 		ret.write2File(out);
@@ -185,6 +257,43 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		assertTrue(d.isSchemaValid());
 		final XMLDoc d2 = p.parseString(h2.getRoot().toDisplayXML(2));
 		assertTrue(d2.isSchemaValid());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSignalStatus()
+	{
+		JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF).setSenderID("DeviceID");
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		xjmfHelper.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(16, 59, 0).getDateTimeISO());
+		final MessageHelper s = xjmfHelper.appendMessage(EnumFamily.Signal, org.cip4.jdflib.jmf.JDFMessage.EnumType.Status);
+		s.getHeader().setID("S1");
+		s.getHeader().setAttribute(AttributeName.REFID, "Sub1");
+		s.getHeader().setAttribute(AttributeName.TIME, new JDFDate().setTime(16, 59, 0).getDateTimeISO());
+		final JDFDeviceInfo di = (JDFDeviceInfo) s.getRoot().appendElement(ElementName.DEVICEINFO);
+		di.setAttribute(AttributeName.STATUS, "Production");
+		final JDFJobPhase phase = di.appendJobPhase();
+		phase.setJobID("j1");
+		phase.setJobPartID("p1");
+		phase.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s1"));
+		phase.setStatus(EnumNodeStatus.Setup);
+		phase.setStartTime(new JDFDate().setTime(16, 0, 0));
+		xjmfHelper.cleanUp();
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
+		prune.setCheckAttributes(true);
+		final KElement ret = prune.prune(xjmfHelper);
+		assertNotNull(ret);
+
+		final String out = sm_dirTestDataTemp + "status.xsd";
+		ret.write2File(out);
+		final XMLParser p = new XMLParser();
+		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		final XMLDoc d = p.parseString(xjmfHelper.getRoot().toDisplayXML(2));
+		assertTrue(d.isSchemaValid());
+
 	}
 
 }

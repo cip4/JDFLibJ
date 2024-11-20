@@ -414,10 +414,11 @@ public class ContainerUtil
 	 *
 	 * @param strings the array of strings to append to <code>this</code>
 	 */
-	public static <A> void add(final Collection<A> c, final A a)
+	public static <A> boolean add(final Collection<A> c, final A a)
 	{
 		if (c != null && a != null)
-			c.add(a);
+			return c.add(a);
+		return false;
 	}
 
 	/**

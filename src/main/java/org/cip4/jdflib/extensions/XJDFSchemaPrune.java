@@ -74,6 +74,7 @@ import java.util.Set;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.extensions.XSDConstants.eAttributeUse;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -87,6 +88,17 @@ public class XJDFSchemaPrune
 	final Set<KElement> keep;
 	private final KElement schema;
 	private boolean checkAttributes;
+	private boolean removeForeign;
+
+	public boolean isRemoveForeign()
+	{
+		return removeForeign;
+	}
+
+	public void setRemoveForeign(final boolean removeForeign)
+	{
+		this.removeForeign = removeForeign;
+	}
 
 	/**
 	 * 
@@ -94,7 +106,9 @@ public class XJDFSchemaPrune
 	public XJDFSchemaPrune(final XMLDoc rootSchema)
 	{
 		keep = new HashSet<>();
-		schema = rootSchema.getRoot();
+		schema = rootSchema.getRoot().cloneNewDoc();
+		checkAttributes = true;
+		removeForeign = true;
 	}
 
 	public KElement prune(final KElement... examples)
@@ -102,6 +116,15 @@ public class XJDFSchemaPrune
 		for (final KElement e : examples)
 		{
 			addPrune(e);
+		}
+		return getPrunedSchema(schema);
+	}
+
+	public KElement prune(final BaseXJDFHelper... examples)
+	{
+		for (final BaseXJDFHelper h : examples)
+		{
+			addPrune(h.getRoot());
 		}
 		return getPrunedSchema(schema);
 	}
@@ -158,31 +181,51 @@ public class XJDFSchemaPrune
 		final VElement v = new VElement();
 		final String nodeName = example.getNodeName();
 		final KElement xsElement = getElementByName(nodeName);
-		ContainerUtil.add(v, xsElement);
-		KElement ct = xsElement.getElement(XSDConstants.XS_COMPLEX_TYPE);
-		if (ct == null)
-			ct = schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, nodeName, 0, false);
-		ContainerUtil.add(v, ct);
-		final KElement parent = example.getParentNode_KElement();
-		if (parent != null)
+		if (xsElement != null)
 		{
-			KElement schemaParent = getElementByName(parent.getNodeName());
-			while (schemaParent != null)
+			ContainerUtil.add(v, xsElement);
+			KElement ct = xsElement.getElement(XSDConstants.XS_COMPLEX_TYPE);
+			if (ct == null)
+				ct = schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, nodeName, 0, false);
+			addComplexType(v, ct);
+			final KElement parent = example.getParentNode_KElement();
+			if (parent != null)
 			{
+				KElement schemaParent = getElementByName(parent.getNodeName());
+				while (schemaParent != null)
+				{
 
-				final KElement ref = schemaParent.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, nodeName, 0, false);
-				ContainerUtil.add(v, ref);
-				checkSchemaParent(v, nodeName, schemaParent);
-				checkSubstitution(v, xsElement, schemaParent);
-				checkExtension(v, ct);
+					final KElement ref = schemaParent.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, nodeName, 0, false);
+					ContainerUtil.add(v, ref);
+					checkSchemaParent(v, nodeName, schemaParent);
+					checkSubstitution(v, xsElement, schemaParent);
+					checkExtension(v, ct);
 
-				final String parentSubst = schemaParent.getNonEmpty(XSDConstants.SUBSTITUTION_GROUP);
-				schemaParent = parentSubst == null ? null : getElementByName(parentSubst);
+					final String parentSubst = schemaParent.getNonEmpty(XSDConstants.SUBSTITUTION_GROUP);
+					schemaParent = parentSubst == null ? null : getElementByName(parentSubst);
 
+				}
 			}
 		}
 
 		return v;
+
+	}
+
+	void addComplexType(final VElement v, final KElement ct)
+	{
+		ContainerUtil.add(v, ct);
+		if (ct != null && !removeForeign)
+		{
+			addSchemaElement(ct.getElement(XSDConstants.XS_ANY));
+
+			addSchemaElement(ct.getElement(XSDConstants.XS_ANY_ATTRIBUTE));
+			final KElement seq = ct.getElement(XSDConstants.XS_SEQUENCE);
+			if (seq != null)
+			{
+				addSchemaElement(seq.getElement(XSDConstants.XS_ANY));
+			}
+		}
 
 	}
 
@@ -194,7 +237,7 @@ public class XJDFSchemaPrune
 				: schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, parenttyp, 0, false);
 		while (schemaParentCT != null)
 		{
-			ContainerUtil.add(v, schemaParentCT);
+			addComplexType(v, schemaParentCT);
 			ref = schemaParentCT.getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, nodeName, 0, false);
 			ContainerUtil.add(v, ref);
 			final KElement ext = getExtension(schemaParentCT);
@@ -210,7 +253,7 @@ public class XJDFSchemaPrune
 		{
 			final String base = extension.getNonEmpty(XSDConstants.BASE);
 			final KElement ctBase = schema.getChildWithAttribute(XSDConstants.XS_COMPLEX_TYPE, XSDConstants.NAME, null, base, 0, false);
-			ContainerUtil.add(v, ctBase);
+			addComplexType(v, ctBase);
 			extension = getExtension(ctBase);
 		}
 	}
@@ -239,10 +282,17 @@ public class XJDFSchemaPrune
 		final VElement atts = root.getChildrenByTagName(XSDConstants.XS_ATTRIBUTE);
 		for (final KElement e : atts)
 		{
-			if (!checkAttributes || example.hasAttribute(e.getAttribute(XSDConstants.NAME)))
+			if (!checkAttributes || example.hasAttribute(e.getAttribute(XSDConstants.NAME)) || isRequired(e))
+			{
 				addAttribute(e);
+			}
 		}
 
+	}
+
+	boolean isRequired(final KElement e)
+	{
+		return eAttributeUse.required.equals(eAttributeUse.getEnum(e.getAttribute(XSDConstants.USE)));
 	}
 
 	void addAttribute(final KElement e)
@@ -300,10 +350,11 @@ public class XJDFSchemaPrune
 	void addSchemaElement(final KElement e)
 	{
 		KElement e2 = e;
+		boolean added = (e2 != null);
 		while (e2 != null)
 		{
-			keep.add(e2);
-			e2 = e2.getParentNode_KElement();
+			added = keep.add(e2);
+			e2 = added ? e2.getParentNode_KElement() : null;
 		}
 	}
 
@@ -325,7 +376,7 @@ public class XJDFSchemaPrune
 	@Override
 	public String toString()
 	{
-		return "XJDFSchemaPrune [checkAttributes=" + checkAttributes + "]";
+		return "XJDFSchemaPrune [checkAttributes=" + checkAttributes + ", removeForeign=" + removeForeign + " " + keep.size();
 	}
 
 }

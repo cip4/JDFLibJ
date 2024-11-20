@@ -36,6 +36,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.util.JavaEnumUtil;
+
 public class XSDConstants
 {
 	private XSDConstants()
@@ -46,6 +48,8 @@ public class XSDConstants
 	static final String NAME = "name";
 	static final String REF = "ref";
 	static final String TYPE = "type";
+	static final String BASE = "base";
+	static final String USE = "use";
 
 	static final String ITEM_TYPE = "itemType";
 	static final String SUBSTITUTION_GROUP = "substitutionGroup";
@@ -59,6 +63,18 @@ public class XSDConstants
 	static final String XS_RESTRICTION = "xs:restriction";
 	static final String XS_SIMPLE_TYPE = "xs:simpleType";
 	static final String XS_SCHEMA = "xs:schema";
-	static final String BASE = "base";
+	static final String XS_ANY = "xs:any";
+	static final String XS_ANY_ATTRIBUTE = "xs:anyAttribute";
+	static final String XS_SEQUENCE = "xs:sequence";
+
+	enum eAttributeUse
+	{
+		optional, prohibited, required;
+
+		static eAttributeUse getEnum(final String s)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(eAttributeUse.class, s, optional);
+		}
+	}
 
 }
