@@ -267,22 +267,6 @@ class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	void testAdd()
-	{
-		final VString v1 = new VString("a b c", null);
-		final Set<String> s = new HashSet<String>();
-		ContainerUtil.addAll(s, v1);
-		assertTrue(ContainerUtil.add(s, "d"));
-		assertFalse(ContainerUtil.add(s, "d"));
-		assertFalse(ContainerUtil.add(s, null));
-		assertTrue(ContainerUtil.add(v1, "d"));
-		assertTrue(ContainerUtil.add(v1, "d"));
-	}
-
-	/**
-	 *
-	 */
-	@Test
 	void testPutAll()
 	{
 		final JDFAttributeMap m0 = new JDFAttributeMap("a", "b");

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--JDFToXJDF version: using: CIP4 JDFEditor development-->
+<XJDF xmlns="http://www.CIP4.org/JDFSchema_2_0" DescriptiveName="test collect" JobID="HD1"
+  JobPartID="n_180309_103028868_000256" Types="Product Imposition ConventionalPrinting Cutting" Version="2.2">
+  <AuditPool>
+    <AuditCreated>
+      <Header AgentName="CIP4 JDFEditor" AgentVersion="development" DeviceID="dummy" Time="2018-03-09T10:30:29+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="Prinect Cockpit" AgentVersion="" DeviceID="dummy" Time="2018-03-09T10:30:34+01:00"/>
+    </AuditCreated>
+    <AuditCreated>
+      <Header AgentName="CIP4 JDF Writer Java" AgentVersion="1.5 BLD 93" DeviceID="dummy" Time="2018-03-09T10:30:21+01:00"/>
+    </AuditCreated>
+  </AuditPool>
+  <Comment>Neuer Auftrag "HD1" erstellt auf Server "W21A019"</Comment>
+  <Comment>Das Teilprodukt AU301516637 wurde erstellt.</Comment>
+  <Comment>Das Teilprodukt AU301516638 wurde erstellt.</Comment>
+  <Comment>Das Teilprodukt AU301516639 wurde erstellt.</Comment>
+  <Comment>Das Teilprodukt AU301516634 wurde erstellt.</Comment>
+  <Comment>Das Teilprodukt AU301516636 wurde erstellt.</Comment>
+  <Comment>Das Teilprodukt AU301516635 wurde erstellt.</Comment>
+  <Comment>RAA_PAGE_ADDED:301516637.auto.pdf</Comment>
+  <Comment>RAA_PAGE_ADDED:301516636.auto.pdf</Comment>
+  <ProductList>
+    <Product DescriptiveName="test collect" ExternalID="P_180309_103028868_000256" IsRoot="true"/>
+    <Product Amount="1000" DescriptiveName="AU301516637" ExternalID="F01-01_ui_1x1_1_AU301516637"
+      ID="IDP_F01-01_ui_1x1_1_AU301516637" IsRoot="false"/>
+    <Product Amount="1000" DescriptiveName="AU301516638" ExternalID="F01-01_ui_1x1_1_AU301516638"
+      ID="IDP_F01-01_ui_1x1_1_AU301516638" IsRoot="false"/>
+    <Product Amount="1000" DescriptiveName="AU301516639" ExternalID="F01-01_ui_1x1_1_AU301516639"
+      ID="IDP_F01-01_ui_1x1_1_AU301516639" IsRoot="false"/>
+    <Product Amount="1000" DescriptiveName="AU301516634" ExternalID="F01-01_ui_1x1_1_AU301516634"
+      ID="IDP_F01-01_ui_1x1_1_AU301516634" IsRoot="false"/>
+    <Product Amount="1000" DescriptiveName="AU301516636" ExternalID="F01-01_ui_1x1_1_AU301516636"
+      ID="IDP_F01-01_ui_1x1_1_AU301516636" IsRoot="false"/>
+    <Product Amount="1000" DescriptiveName="AU301516635" ExternalID="F01-01_ui_1x1_1_AU301516635"
+      ID="IDP_F01-01_ui_1x1_1_AU301516635" IsRoot="false"/>
+  </ProductList>
+  <ResourceSet Name="NodeInfo" Usage="Input">
+    <Resource Status="Available">
+      <Part Product="F01-01_ui_1x1_1_AU301516637"/>
+      <NodeInfo NaturalLang="de" Status="Waiting"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Product="F01-01_ui_1x1_1_AU301516638"/>
+      <NodeInfo NaturalLang="de" Status="Waiting"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Product="F01-01_ui_1x1_1_AU301516639"/>
+      <NodeInfo NaturalLang="de" Status="Waiting"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Product="F01-01_ui_1x1_1_AU301516634"/>
+      <NodeInfo NaturalLang="de" Status="Waiting"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Product="F01-01_ui_1x1_1_AU301516636"/>
+      <NodeInfo NaturalLang="de" Status="Waiting"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Product="F01-01_ui_1x1_1_AU301516635"/>
+      <NodeInfo NaturalLang="de" Status="Waiting"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet Name="DeliveryParams" Usage="Input">
+    <Resource>
+      <Part DropID="DROP_0"/>
+      <DeliveryParams>
+        <DropItem Amount="1000" ItemRef="IDP_F01-01_ui_1x1_1_AU301516637"/>
+        <DropItem Amount="1000" ItemRef="IDP_F01-01_ui_1x1_1_AU301516638"/>
+        <DropItem Amount="1000" ItemRef="IDP_F01-01_ui_1x1_1_AU301516639"/>
+        <DropItem Amount="1000" ItemRef="IDP_F01-01_ui_1x1_1_AU301516634"/>
+        <DropItem Amount="1000" ItemRef="IDP_F01-01_ui_1x1_1_AU301516636"/>
+        <DropItem Amount="1000" ItemRef="IDP_F01-01_ui_1x1_1_AU301516635"/>
+      </DeliveryParams>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="0" Name="NodeInfo" Usage="Input">
+    <Resource Status="Available">
+      <Part Product="P_180309_103028868_000256"/>
+      <NodeInfo End="2018-03-09T10:30:11+01:00" JobPriority="0" NaturalLang="de" Status="InProgress"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="0" Name="CustomerInfo" Usage="Input">
+    <Resource Status="Available">
+      <Part Product="P_180309_103028868_000256"/>
+      <CustomerInfo CustomerJobName="cust" CustomerOrderID="HD1"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="0" Name="ColorantControl" Usage="Input">
+    <Resource Status="Available">
+      <Part Product="P_180309_103028868_000256"/>
+      <ColorantControl ColorantOrder="Black Cyan Magenta Yellow" ColorantParams="B C M Y X Z U V S1 S2 S3 S4 S5 S6 S7 S8 L1 L2 L3 L4"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet Name="Color" Usage="Input">
+    <Resource Status="Available">
+      <Part Separation="Black"/>
+      <Color ActualColorName="Black" CMYK="0 0 0 1" ColorType="Normal" NeutralDensity="1.67"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="Cyan"/>
+      <Color ActualColorName="Cyan" CMYK="1 0 0 0" ColorType="Normal" NeutralDensity="0.51"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="Magenta"/>
+      <Color ActualColorName="Magenta" CMYK="0 1 0 0" ColorType="Normal" NeutralDensity="0.62"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="Yellow"/>
+      <Color ActualColorName="Yellow" CMYK="0 0 1 0" ColorType="Normal" NeutralDensity="0.04"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="B"/>
+      <Color ActualColorName="B" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="C"/>
+      <Color ActualColorName="C" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="M"/>
+      <Color ActualColorName="M" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="Y"/>
+      <Color ActualColorName="Y" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="X"/>
+      <Color ActualColorName="X" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="Z"/>
+      <Color ActualColorName="Z" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="U"/>
+      <Color ActualColorName="U" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="V"/>
+      <Color ActualColorName="V" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="S1"/>
+      <Color ActualColorName="S1" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="S2"/>
+      <Color ActualColorName="S2" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="S3"/>
+      <Color ActualColorName="S3" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="S4"/>
+      <Color ActualColorName="S4" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="S5"/>
+      <Color ActualColorName="S5" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="S6"/>
+      <Color ActualColorName="S6" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="S7"/>
+      <Color ActualColorName="S7" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="S8"/>
+      <Color ActualColorName="S8" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="L1"/>
+      <Color ActualColorName="L1" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="L2"/>
+      <Color ActualColorName="L2" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="L3"/>
+      <Color ActualColorName="L3" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+    <Resource Status="Available">
+      <Part Separation="L4"/>
+      <Color ActualColorName="L4" CMYK="0 0 0 0.2" ColorType="Normal" NeutralDensity="0.2"/>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="0" Name="Content" Usage="Output">
+    <Resource Status="Available">
+      <Part Option="_180309_103036532_000263" PageNumber="0 0" Product="P_180309_103028868_000256"/>
+      <Content ContentStatus="PageProofed" ContentType="Page" Separations="Cyan Black">
+        <FileSpec FileSize="1870814" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516637.auto.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103037613_000281" PageNumber="1 1" Product="P_180309_103028868_000256"/>
+      <Content ContentStatus="PageProofed" ContentType="Page" Separations="Cyan Black">
+        <FileSpec FileSize="1870811" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516637.auto_1.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103038399_000295" PageNumber="2 2" Product="P_180309_103028868_000256"/>
+      <Content ContentStatus="PageProofed" ContentType="Page" Separations="Cyan Black">
+        <FileSpec FileSize="1870811" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516637.auto_2.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103039061_000309" PageNumber="3 3" Product="P_180309_103028868_000256"/>
+      <Content ContentStatus="PageProofed" ContentType="Page" Separations="Cyan Black">
+        <FileSpec FileSize="1870269" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516636.auto.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103039777_000324" PageNumber="4 4" Product="P_180309_103028868_000256"/>
+      <Content ContentStatus="PageProofed" ContentType="Page" Separations="Cyan Black">
+        <FileSpec FileSize="1870273" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516636.auto_1.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103040749_000338" PageNumber="5 5" Product="P_180309_103028868_000256"/>
+      <Content ContentStatus="PageProofed" ContentType="Page" Separations="Cyan Black">
+        <FileSpec FileSize="1870268" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516636.auto_2.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103036532_000263" Product="P_180309_103028868_000256"/>
+      <Content>
+        <FileSpec FileSize="1870814" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516637.auto.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103037613_000281" Product="P_180309_103028868_000256"/>
+      <Content>
+        <FileSpec FileSize="1870811" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516637.auto_1.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103038399_000295" Product="P_180309_103028868_000256"/>
+      <Content>
+        <FileSpec FileSize="1870811" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516637.auto_2.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103039061_000309" Product="P_180309_103028868_000256"/>
+      <Content>
+        <FileSpec FileSize="1870269" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516636.auto.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103039777_000324" Product="P_180309_103028868_000256"/>
+      <Content>
+        <FileSpec FileSize="1870273" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516636.auto_1.pdf"/>
+      </Content>
+    </Resource>
+    <Resource Status="Available">
+      <Part Option="_180309_103040749_000338" Product="P_180309_103028868_000256"/>
+      <Content>
+        <FileSpec FileSize="1870268" MimeType="application/pdf" URL="file://W21A019/PTJobs/Jobs/SignaGangJobs/HD1/System/Pagefiles/Current/301516636.auto_2.pdf"/>
+      </Content>
+    </Resource>
+  </ResourceSet>
+  <ResourceSet CombinedProcessIndex="1 2 3" Name="NodeInfo" Usage="Input">
+    <Resource Status="Available">
+      <NodeInfo Status="Completed"/>
+    </Resource>
+  </ResourceSet>
+</XJDF>
