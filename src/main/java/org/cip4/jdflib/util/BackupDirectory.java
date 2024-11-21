@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,6 +74,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.cip4.jdflib.util.file.FileTime;
 import org.cip4.jdflib.util.thread.DelayedPersist;
 import org.cip4.jdflib.util.thread.IPersistable;
 
@@ -88,49 +89,6 @@ import org.cip4.jdflib.util.thread.IPersistable;
  */
 public class BackupDirectory extends File implements IPersistable
 {
-	private class FileTime implements Comparable<FileTime>
-	{
-		protected File f;
-		private final long t;
-
-		/**
-		 * @param file
-		 */
-		protected FileTime(File file)
-		{
-			f = file;
-			t = f.lastModified();
-		}
-
-		/**
-		 * sort by old last
-		 * @see java.lang.Comparable#compareTo(java.lang.Object)
-		 * @param o
-		 * @return
-		 */
-		@Override
-		public int compareTo(FileTime o)
-		{
-			long l = t - o.t;
-			if (l > 0)
-				l = -1;
-			else if (l < 0)
-				l = 1;
-			return (int) l;
-		}
-
-		/**
-		 * @see java.lang.Object#toString()
-		 * @return
-		 */
-		@Override
-		public String toString()
-		{
-			return t + " : " + f.getAbsolutePath();
-		}
-
-	}
-
 	private final int nBackup;
 	private boolean isDirectory;
 
@@ -162,12 +120,13 @@ public class BackupDirectory extends File implements IPersistable
 
 	/**
 	 * creates a new file in this and assures than no more than nBackup files remain
+	 * 
 	 * @param localFile the local file to place in this directory
 	 * @return the file to write, null if an io exception occurred when creating it
 	 */
-	public File getNewFile(File localFile)
+	public File getNewFile(final File localFile)
 	{
-		File file = FileUtil.getFileInDirectory(this, localFile);
+		final File file = FileUtil.getFileInDirectory(this, localFile);
 		if (file.exists())
 			FileUtil.forceDelete(file);
 		else
@@ -185,7 +144,7 @@ public class BackupDirectory extends File implements IPersistable
 			{
 				ok = file.createNewFile();
 			}
-			catch (IOException x)
+			catch (final IOException x)
 			{
 				return null;
 			}
@@ -196,7 +155,7 @@ public class BackupDirectory extends File implements IPersistable
 	/**
 	 * 
 	 */
-	private void clean()
+	public void clean()
 	{
 		File[] all;
 		synchronized (this)
@@ -205,7 +164,7 @@ public class BackupDirectory extends File implements IPersistable
 		}
 		if (all != null && all.length >= nBackup)
 		{
-			FileTime[] time = new FileTime[all.length];
+			final FileTime[] time = new FileTime[all.length];
 			for (int i = 0; i < all.length; i++)
 			{
 				time[i] = new FileTime(all[i]);
@@ -213,7 +172,7 @@ public class BackupDirectory extends File implements IPersistable
 			Arrays.sort(time);
 			for (int i = nBackup; i < all.length; i++)
 			{
-				FileUtil.forceDelete(time[i].f);
+				FileUtil.forceDelete(time[i].getFile());
 			}
 		}
 
@@ -228,7 +187,7 @@ public class BackupDirectory extends File implements IPersistable
 	 * @param fileName
 	 * @return
 	 */
-	public File getNewFile(String fileName)
+	public File getNewFile(final String fileName)
 	{
 		return fileName == null ? null : getNewFile(new File(fileName));
 	}
@@ -257,7 +216,7 @@ public class BackupDirectory extends File implements IPersistable
 		return isDirectory;
 	}
 
-	public void setDirectory(boolean isDirectory)
+	public void setDirectory(final boolean isDirectory)
 	{
 		this.isDirectory = isDirectory;
 	}

@@ -38,6 +38,7 @@ package org.cip4.jdflib.util.file;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.apache.commons.logging.Log;
@@ -55,7 +56,7 @@ import org.cip4.jdflib.util.JDFDuration;
 public class FileJanitor
 {
 
-	class AgeFilter implements FileFilter
+	static class AgeFilter implements FileFilter
 	{
 		final long t0;
 		final long age;
@@ -137,11 +138,63 @@ public class FileJanitor
 		}
 	}
 
+	class ListFilter implements FileFilter
+	{
+
+		private final FileFilter baseFilter;
+
+		/**
+		 *
+		 * @param f
+		 */
+		ListFilter(final FileFilter f)
+		{
+			this.baseFilter = f;
+		}
+
+		/**
+		 * @see java.io.FileFilter#accept(java.io.File)
+		 */
+		@Override
+		public boolean accept(final File file)
+		{
+			boolean accept = baseFilter.accept(file);
+			if (delEmpty && !accept && file.isDirectory() && file.list().length == 0)
+			{
+				accept = true;
+			}
+
+			if (accept)
+			{
+				add(file);
+			}
+			return accept;
+		}
+
+		private void add(final File file)
+		{
+			keep.add(new FileTime(file));
+		}
+
+		@Override
+		public String toString()
+		{
+			return "KillFilter [baseFilter=" + baseFilter + "]";
+		}
+	}
+
 	private final File baseDir;
 	private KillFilter filter;
 	boolean logSingle;
 	final private static Log log = LogFactory.getLog(FileJanitor.class);
 	boolean delEmpty;
+	private final ArrayList<FileTime> keep;
+	int minKeep;
+
+	public void setMinKeep(final int minKeep)
+	{
+		this.minKeep = minKeep;
+	}
 
 	/**
 	 *
@@ -177,6 +230,8 @@ public class FileJanitor
 		this.baseDir = baseDir;
 		logSingle = false;
 		delEmpty = false;
+		keep = new ArrayList<FileTime>();
+		minKeep = 0;
 	}
 
 	/**
@@ -200,15 +255,34 @@ public class FileJanitor
 	 */
 	public Vector<File> cleanup()
 	{
-		return FileUtil.listFilesInTree(baseDir, filter);
+		keep.clear();
+		if (minKeep > 0 && (filter instanceof KillFilter))
+		{
+			FileUtil.listFilesInTree(baseDir, new ListFilter(filter.baseFilter));
+			final int size = keep.size();
+			final Vector<File> processed = new Vector<>();
+			if (size > minKeep)
+			{
+				keep.sort(null);
+
+				for (int i = minKeep; i < size; i++)
+				{
+					final File file = keep.get(i).getFile();
+					FileUtil.forceDelete(file);
+					processed.add(file);
+				}
+			}
+			return processed;
+		}
+		else
+		{
+			return FileUtil.listFilesInTree(baseDir, filter);
+		}
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "FileJanitor " + baseDir + " delEmpty=" + delEmpty + " filter=" + filter;
+		return "FileJanitor [baseDir=" + baseDir + ", logSingle=" + logSingle + ", delEmpty=" + delEmpty + ", minKeep=" + minKeep + "]";
 	}
 }

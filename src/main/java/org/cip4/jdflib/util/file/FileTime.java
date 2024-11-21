@@ -66,57 +66,57 @@
  * <http://www.cip4.org/>.
  *
  *
+ * 
  */
-package org.cip4.jdflib.util;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+package org.cip4.jdflib.util.file;
 
 import java.io.File;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.thread.DelayedPersist;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-/**
- * @author Rainer Prosi, Heidelberger Druckmaschinen *
- */
-class BackupDirectoryTest extends JDFTestCaseBase
+public class FileTime implements Comparable<FileTime>
 {
-	BackupDirectory dir;
+	private final File file;
+	private final long t;
 
 	/**
-	 * 
+	 * @param file
 	 */
-	@Test
-	void testGet()
+	public FileTime(final File f)
 	{
-		for (int i = 0; i < 30; i++)
-		{
-			final File newFile = dir.getNewFile("File" + i);
-			assertNotNull(newFile);
-			ThreadUtil.sleep(20);
-			if (i > 20)
-			{
-				Assertions.assertFalse(ContainerUtil.toHashSet(dir.listFiles()).contains(new File("File" + (20 - i))), "old die first");
-			}
-		}
-		DelayedPersist.shutDown();
-		Assertions.assertEquals(dir.listFiles().length, 20);
+		file = f;
+		t = file.lastModified();
 	}
 
 	/**
-	 * @see JDFTestCaseBase#setUp()
-	 * @throws Exception
+	 * sort by old last
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 * @param o
+	 * @return
 	 */
 	@Override
-	@BeforeEach
-	public void setUp() throws Exception
+	public int compareTo(final FileTime o)
 	{
-		super.setUp();
-		final File d = new File(sm_dirTestDataTemp + "backupDir");
-		FileUtil.deleteAll(d);
-		dir = new BackupDirectory(d, 20);
+		long l = t - o.t;
+		if (l > 0)
+			l = -1;
+		else if (l < 0)
+			l = 1;
+		return (int) l;
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		return t + " : " + file.getPath();
+	}
+
+	public File getFile()
+	{
+		return file;
+	}
+
 }

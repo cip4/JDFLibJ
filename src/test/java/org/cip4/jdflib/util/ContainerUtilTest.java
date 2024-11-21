@@ -544,7 +544,7 @@ class ContainerUtilTest extends JDFTestCaseBase
 	{
 		final Vector<String> v = new Vector<>();
 		assertNull(ContainerUtil.getNonEmpty(v));
-		assertNull(ContainerUtil.getNonEmpty((Map) null));
+		assertNull(ContainerUtil.getNonEmpty((Map<Object, Object>) null));
 
 		v.add("a");
 		assertEquals(v, ContainerUtil.getNonEmpty(v));
@@ -558,10 +558,14 @@ class ContainerUtilTest extends JDFTestCaseBase
 	{
 		final Vector<String> v = new Vector<>();
 		assertTrue(ContainerUtil.isEmpty(v));
-		assertTrue(ContainerUtil.isEmpty((Map) null));
+		assertTrue(ContainerUtil.isEmpty(new String[0]));
+
+		assertTrue(ContainerUtil.isEmpty((Map<Object, Object>) null));
 
 		v.add("a");
 		assertFalse(ContainerUtil.isEmpty(v));
+		assertTrue(ContainerUtil.isEmpty((String[]) null));
+		assertTrue(ContainerUtil.isEmpty((StringArray) null));
 	}
 
 	/**
@@ -572,10 +576,21 @@ class ContainerUtilTest extends JDFTestCaseBase
 	{
 		final JDFAttributeMap m = new JDFAttributeMap();
 		assertEquals(0, ContainerUtil.size(m));
-		assertEquals(0, ContainerUtil.size((List) null));
+		assertEquals(0, ContainerUtil.size((List<Object>) null));
 
 		m.put("a", "b");
 		assertEquals(1, ContainerUtil.size(m));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testLength()
+	{
+		assertEquals(0, ContainerUtil.length(null));
+		assertEquals(0, ContainerUtil.length(new String[0]));
+		assertEquals(5, ContainerUtil.length(new String[5]));
 	}
 
 	/**

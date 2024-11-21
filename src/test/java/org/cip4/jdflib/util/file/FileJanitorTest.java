@@ -91,6 +91,40 @@ class FileJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testOldKeep() throws Exception
+	{
+		final File f = new File(sm_dirTestDataTemp + "testJanitorKeep");
+		FileUtil.deleteAll(f);
+		f.mkdir();
+		FileUtil.getFileInDirectory(f, new File("dir1")).mkdir();
+		FileUtil.getFileInDirectory(f, new File("dir2")).mkdir();
+		for (int i = 0; i < 42; i++)
+		{
+			final File f2 = new File("dir2/foo" + i);
+			final File f1 = new File("dir1/bar" + i);
+			FileUtil.getFileInDirectory(f, f2).createNewFile();
+			FileUtil.getFileInDirectory(f, f1).createNewFile();
+		}
+		FileUtil.getFileInDirectory(f, new File("dir3")).mkdir();
+		ThreadUtil.sleep(3000);
+		FileJanitor fileJanitor = new FileJanitor(f, 2);
+		fileJanitor.setLogSingle(true);
+		fileJanitor.setMinKeep(10);
+		Vector<File> cleanupList = fileJanitor.cleanup();
+		assertEquals(cleanupList.size(), 76, 2);
+		fileJanitor = new FileJanitor(f, 1);
+		fileJanitor.setLogSingle(true);
+		fileJanitor.setMinKeep(5);
+		cleanupList = fileJanitor.cleanup();
+		assertEquals(cleanupList.size(), 4, 2);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 *
+	 */
+	@Test
 	void testDelEmpty() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "testJanitor");
@@ -140,8 +174,7 @@ class FileJanitorTest extends JDFTestCaseBase
 	void testAgeTostring() throws Exception
 	{
 
-		final FileJanitor fileJanitor = new FileJanitor(null, 2);
-		final AgeFilter af = fileJanitor.new AgeFilter(10000000l);
+		final AgeFilter af = new AgeFilter(10000000l);
 
 		assertNotNull(af.toString());
 	}

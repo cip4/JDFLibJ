@@ -1119,6 +1119,24 @@ public class ContainerUtil
 	 * @param c the collection to check
 	 * @return 0 for null or size
 	 */
+	public static int length(final Object[] c)
+	{
+		return c == null ? 0 : c.length;
+	}
+
+	/**
+	 * @param c the collection to check
+	 * @return 0 for null or size
+	 */
+	public static boolean isEmpty(final Object[] c)
+	{
+		return c == null ? true : c.length == 0;
+	}
+
+	/**
+	 * @param c the collection to check
+	 * @return 0 for null or size
+	 */
 	public static int size(final Collection<?> c)
 	{
 		return c == null ? 0 : c.size();
