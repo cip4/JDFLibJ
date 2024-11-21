@@ -350,10 +350,9 @@ public class XJDFSchemaPrune
 	void addSchemaElement(final KElement e)
 	{
 		KElement e2 = e;
-		boolean added = (e2 != null);
 		while (e2 != null)
 		{
-			added = keep.add(e2);
+			final boolean added = keep.add(e2);
 			e2 = added ? e2.getParentNode_KElement() : null;
 		}
 	}
