@@ -125,6 +125,39 @@ class FileJanitorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testOldKeepFlat() throws Exception
+	{
+		final File f = new File(sm_dirTestDataTemp + "testJanitorFlat");
+		FileUtil.deleteAll(f);
+		f.mkdir();
+		for (int i = 0; i < 42; i++)
+		{
+			final File f2 = new File("foo" + i);
+			final File f1 = new File("bar" + i);
+			FileUtil.getFileInDirectory(f, f2).createNewFile();
+			FileUtil.getFileInDirectory(f, f1).createNewFile();
+		}
+		ThreadUtil.sleep(3000);
+		FileJanitor fileJanitor = new FileJanitor(f, 2);
+		fileJanitor.setRecurseDirs(false);
+		fileJanitor.setLogSingle(true);
+		fileJanitor.setMinKeep(10);
+		Vector<File> cleanupList = fileJanitor.cleanup();
+		assertEquals(cleanupList.size(), 74, 2);
+		fileJanitor = new FileJanitor(f, 1);
+		fileJanitor.setLogSingle(true);
+		fileJanitor.setMinKeep(5);
+		fileJanitor.setRecurseDirs(false);
+		cleanupList = fileJanitor.cleanup();
+		assertEquals(cleanupList.size(), 4, 2);
+	}
+
+	/**
+	 * @throws Exception
+	 *
+	 *
+	 */
+	@Test
 	void testDelEmpty() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "testJanitor");

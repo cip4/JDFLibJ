@@ -43,6 +43,7 @@ import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
@@ -188,6 +189,7 @@ public class FileJanitor
 	boolean logSingle;
 	final private static Log log = LogFactory.getLog(FileJanitor.class);
 	boolean delEmpty;
+	boolean recurseDirs;
 	private final ArrayList<FileTime> keep;
 	int minKeep;
 
@@ -232,6 +234,17 @@ public class FileJanitor
 		delEmpty = false;
 		keep = new ArrayList<FileTime>();
 		minKeep = 0;
+		recurseDirs = true;
+	}
+
+	public boolean isRecurseDirs()
+	{
+		return recurseDirs;
+	}
+
+	public void setRecurseDirs(final boolean recurseDirs)
+	{
+		this.recurseDirs = recurseDirs;
 	}
 
 	/**
@@ -258,31 +271,53 @@ public class FileJanitor
 		keep.clear();
 		if (minKeep > 0 && (filter instanceof KillFilter))
 		{
-			FileUtil.listFilesInTree(baseDir, new ListFilter(filter.baseFilter));
-			final int size = keep.size();
-			final Vector<File> processed = new Vector<>();
-			if (size > minKeep)
-			{
-				keep.sort(null);
-
-				for (int i = minKeep; i < size; i++)
-				{
-					final File file = keep.get(i).getFile();
-					FileUtil.forceDelete(file);
-					processed.add(file);
-				}
-			}
-			return processed;
+			return cleanupKeepMin();
 		}
-		else
+		else if (recurseDirs)
 		{
 			return FileUtil.listFilesInTree(baseDir, filter);
 		}
+		else
+		{
+			return cleanupFlat();
+		}
+
+	}
+
+	Vector<File> cleanupFlat()
+	{
+		final File[] files = baseDir.listFiles(filter);
+		final Vector<File> ret = new Vector<File>();
+		ContainerUtil.addAll(ret, files);
+		return ret;
+	}
+
+	Vector<File> cleanupKeepMin()
+	{
+		if (recurseDirs)
+			FileUtil.listFilesInTree(baseDir, new ListFilter(filter.baseFilter));
+		else
+			baseDir.listFiles(new ListFilter(filter.baseFilter));
+		final int size = keep.size();
+		final Vector<File> processed = new Vector<>();
+		if (size > minKeep)
+		{
+			keep.sort(null);
+
+			for (int i = minKeep; i < size; i++)
+			{
+				final File file = keep.get(i).getFile();
+				FileUtil.forceDelete(file);
+				processed.add(file);
+			}
+		}
+		return processed;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "FileJanitor [baseDir=" + baseDir + ", logSingle=" + logSingle + ", delEmpty=" + delEmpty + ", minKeep=" + minKeep + "]";
+		return "FileJanitor [baseDir=" + baseDir + ", filter=" + filter + ", logSingle=" + logSingle + ", delEmpty=" + delEmpty + ", recurseDirs=" + recurseDirs + ", keep=" + keep
+				+ ", minKeep=" + minKeep + "]";
 	}
 }
