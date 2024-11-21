@@ -70,65 +70,32 @@
  */
 package org.cip4.jdflib.util.file;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
+import java.util.Arrays;
 
-import org.cip4.jdflib.util.JDFDate;
+import org.junit.jupiter.api.Test;
 
-public class FileTime implements Comparable<FileTime>
+class FileTimeTest
 {
-	private final File file;
-	private long lastMod;
 
-	/**
-	 * @param file
-	 */
-	public FileTime(final File f)
+	@Test
+	void testSort()
 	{
-		file = f;
-		lastMod = file.lastModified();
-	}
+		final FileTime[] ft = new FileTime[3];
+		ft[0] = new FileTime(new File("abc"));
+		ft[0].setLastMod(10000);
+		ft[1] = new FileTime(new File("def"));
+		ft[1].setLastMod(20000);
+		ft[2] = new FileTime(new File("defg"));
+		ft[2].setLastMod(15000);
+		Arrays.sort(ft);
+		for (int i = 0; i < 2; i++)
+		{
+			assertTrue(ft[i].getLastMod() > ft[i + 1].getLastMod());
+		}
 
-	/**
-	 * sort by old last
-	 * 
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 * @param o
-	 * @return
-	 */
-	@Override
-	public int compareTo(final FileTime o)
-	{
-		long l = lastMod - o.lastMod;
-		if (l > 0)
-			l = -1;
-		else if (l < 0)
-			l = 1;
-		return (int) l;
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		return new JDFDate(lastMod).getDateTimeReadable() + " : " + file.getPath();
-	}
-
-	public File getFile()
-	{
-		return file;
-	}
-
-	public long getLastMod()
-	{
-		return lastMod;
-	}
-
-	void setLastMod(final long lastMod)
-	{
-		this.lastMod = lastMod;
 	}
 
 }

@@ -937,6 +937,16 @@ class JDFDateTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	void testGetDateTimeReadable() throws Exception
+	{
+		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
+		assertEquals("19 Dec 2008 07:00", date.getDateTimeReadable());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	void testGetMonth() throws Exception
 	{
 

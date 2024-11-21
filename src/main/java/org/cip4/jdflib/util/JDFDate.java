@@ -764,13 +764,23 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * returns the date and time of this in none ISO pattern 'yyyyMMddHHmmss'
+	 * returns the date and time of this in non ISO pattern 'yyyyMMddHHmmss'
 	 *
 	 * @return String - the date in pattern yyyyMMddHHmmss
 	 */
 	public String getDateTime()
 	{
 		return getFormattedDateTime("yyyyMMddHHmmss");
+	}
+
+	/**
+	 * returns the date and time of this in none ISO pattern 'yyyyMMddHHmmss'
+	 *
+	 * @return String - the date in pattern yyyyMMddHHmmss
+	 */
+	public String getDateTimeReadable()
+	{
+		return getFormattedDateTime(DATETIMEREADABLE);
 	}
 
 	/**
