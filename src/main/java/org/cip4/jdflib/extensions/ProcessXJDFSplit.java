@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
@@ -200,28 +201,33 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 
 	protected VString extractTypes(final XJDFHelper root, final VString types, final int pos)
 	{
-		final SetHelper niSet = root.getSet(ElementName.NODEINFO, EnumUsage.Input, null, pos);
-		if (niSet != null)
+		resLoop: for (final String resType : new String[] { ElementName.DEVICE, ElementName.NODEINFO })
 		{
-			final JDFIntegerList cpi = niSet.getCombinedProcessIndex();
-			final VString found = new VString();
-			final int[] il = cpi.getIntArray();
-			int currentPos = pos;
-			for (final int ipos : il)
+			final SetHelper resSet = root.getSet(resType, EnumUsage.Input, null, pos);
+			if (resSet != null)
 			{
-				if (ipos == currentPos++)
+				final JDFIntegerList cpi = resSet.getCombinedProcessIndex();
+				final VString found = new VString();
+				final int[] il = cpi.getIntArray();
+				Arrays.sort(il);
+				int currentPos = pos;
+				for (final int ipos : il)
 				{
-					found.add(types.get(ipos - pos));
+					if (ipos == currentPos++)
+					{
+						found.add(types.get(ipos - pos));
+					}
+					else
+					{
+						continue resLoop; // java has goto!!!
+					}
 				}
-				else
-				{
-					return extractTypes(types);
-				}
+				for (int i = 0; i < il.length; i++)
+					types.remove(0);
+				return found;
 			}
-			for (int i = 0; i < il.length; i++)
-				types.remove(0);
-			return found;
 		}
+
 		return extractTypes(types);
 	}
 

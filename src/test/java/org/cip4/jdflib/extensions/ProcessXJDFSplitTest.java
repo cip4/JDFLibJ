@@ -482,7 +482,87 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 
 		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
 
-		VString types = h.getTypes();
+		final VString types = h.getTypes();
+		final VString t0 = splitter.extractTypes(h, types, 0);
+		assertEquals(2, t0.size());
+		final VString t1 = splitter.extractTypes(h, types, 2);
+		assertEquals(1, t1.size());
+		final VString t2 = splitter.extractTypes(h, types, 3);
+		assertEquals(3, t2.size());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	void testSplitDevice2() throws DataFormatException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Screening ImageSetting ConventionalPrinting Cutting Folding Trimming");
+		h.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("0 1"));
+		h.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("2"));
+		h.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("3 5 4"));
+
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+
+		final VString types = h.getTypes();
+		final VString t0 = splitter.extractTypes(h, types, 0);
+		assertEquals(2, t0.size());
+		final VString t1 = splitter.extractTypes(h, types, 2);
+		assertEquals(1, t1.size());
+		final VString t2 = splitter.extractTypes(h, types, 3);
+		assertEquals(3, t2.size());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	void testSplitDeviceNI() throws DataFormatException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Screening ImageSetting ConventionalPrinting Cutting Folding Trimming");
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("0 1"));
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("2"));
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("3 4 5"));
+
+		final XJDFHelper h2 = new XJDFHelper("j1", "root", null);
+		h2.setTypes("Screening ImageSetting ConventionalPrinting Cutting Folding Trimming");
+		h2.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("0 1"));
+		h2.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("2"));
+		h2.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("3 4 5"));
+
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+
+		final VString types = h2.getTypes();
+		final VString t0 = splitter.extractTypes(h2, types, 0);
+		assertEquals(2, t0.size());
+		final VString t1 = splitter.extractTypes(h2, types, 2);
+		assertEquals(1, t1.size());
+		final VString t2 = splitter.extractTypes(h2, types, 3);
+		assertEquals(3, t2.size());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 *
+	 */
+	@Test
+	void testSplitDeviceNIMix() throws DataFormatException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Screening ImageSetting ConventionalPrinting Cutting Folding Trimming");
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("2"));
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("3 4 5"));
+
+		h.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("0 1"));
+		h.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("2"));
+
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+
+		final VString types = h.getTypes();
 		final VString t0 = splitter.extractTypes(h, types, 0);
 		assertEquals(2, t0.size());
 		final VString t1 = splitter.extractTypes(h, types, 2);
