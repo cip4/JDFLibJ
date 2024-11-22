@@ -175,7 +175,7 @@ class RemovePrivateTest
 	 * 
 	 */
 	@Test
-	public void testPrintTalk()
+	void testPrintTalk()
 	{
 		final XMLDoc pt = new XMLDoc("PrintTalk", "http://www.printtalk.org/schema_20");
 		final KElement root = pt.getRoot();
@@ -189,7 +189,7 @@ class RemovePrivateTest
 	 * 
 	 */
 	@Test
-	public void testPrintTalkElem()
+	void testPrintTalkElem()
 	{
 		final KElement root = KElement
 				.parseString("<PrintTalk xmlns=\"http://www.printtalk.org/schema_20\" Version=\"2.2\"\r\n" + "  payloadID=\"P_000000\" timestamp=\"2024-11-22T13:25:53+01:00\">\r\n"
