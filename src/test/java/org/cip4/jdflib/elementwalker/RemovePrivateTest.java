@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
@@ -168,6 +169,40 @@ class RemovePrivateTest
 		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
 		assertEquals(e1, n.getElement("e", "www.blah.com", 0));
 		assertNotNull(n.getAuditPool());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPrintTalk()
+	{
+		final XMLDoc pt = new XMLDoc("PrintTalk", "http://www.printtalk.org/schema_20");
+		final KElement root = pt.getRoot();
+		root.setAttribute("foo:bar", "abc", "www.foo.com");
+		final RemovePrivate rp = new RemovePrivate();
+		rp.walkTree(root, null);
+		assertNull(root.getNonEmpty("foo:bar"));
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPrintTalkElem()
+	{
+		final KElement root = KElement
+				.parseString("<PrintTalk xmlns=\"http://www.printtalk.org/schema_20\" Version=\"2.2\"\r\n" + "  payloadID=\"P_000000\" timestamp=\"2024-11-22T13:25:53+01:00\">\r\n"
+						+ "  <Request BusinessID=\"RFQ_000001\">\r\n" + "    <RFQ/>\r\n" + "  </Request>\r\n" + "</PrintTalk>");
+		final RemovePrivate rp = new RemovePrivate();
+		root.appendElement("foo:bar", "www.foo.com");
+		final KElement req = root.getElement("Request");
+		req.appendElement("foo:bar", "www.foo.com");
+		root.setAttribute("foo:ggg", "abc", "www.foo.com");
+		rp.walkTree(root, null);
+		assertNull(root.getElement("foo:bar"));
+		assertNull(req.getElement("foo:bar"));
+		assertNull(req.getNonEmpty("foo:ggg"));
 	}
 
 	/**

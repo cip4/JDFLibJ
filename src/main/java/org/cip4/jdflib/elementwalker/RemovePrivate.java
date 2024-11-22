@@ -46,6 +46,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 
@@ -116,40 +117,65 @@ public class RemovePrivate extends BaseElementWalker
 			VString unknown = new VString();
 			if (prefixes == null)
 			{
-				if (!(e1 instanceof JDFElement) || JDFElement.isInXJDFNameSpaceStatic(e1))
-					return e1;
+				unknown = updateUnknown(e1, unknown);
+			}
+			else
+			{
+				unknown = e1.getAttributeVector_KElement();
+			}
+			return processUnknown(e1, unknown);
+		}
+
+		KElement processUnknown(final KElement e1, final VString unknown)
+		{
+			for (final String attName : unknown)
+			{
+				final String prefix = KElement.xmlnsPrefix(attName);
+				if (prefixes != null)
+				{
+					if (prefix == null)
+						continue;
+					if (JDFConstants.XMLNS.equals(prefix))
+					{
+						if (!prefixes.contains(KElement.xmlnsLocalName(attName)))
+							continue;
+					}
+					// not in list - move on
+					else if (!prefixes.contains(prefix))
+						continue;
+				}
+				else if (JDFConstants.XMLNS.equals(prefix))
+				{
+					continue;
+				}
+
+				e1.removeAttribute(attName);
+			}
+			return e1;
+		}
+
+		VString updateUnknown(final KElement e1, VString unknown)
+		{
+			if ((e1 instanceof JDFElement) && !JDFElement.isInXJDFNameSpaceStatic(e1))
+			{
 				final JDFElement j = (JDFElement) e1;
 				if (!e1.getClass().equals(JDFElement.class) && !e1.getClass().equals(JDFResource.class))
 				{
 					unknown = j.getUnknownAttributes(false, -1);
 				}
 			}
-			else
+			final JDFAttributeMap m = e1.getAttributeMap_KElement();
+			for (final String key : m.keySet())
 			{
-				unknown = e1.getAttributeVector_KElement();
-			}
-			if (unknown != null)
-			{
-				for (final String attName : unknown)
+				final String prefix = KElement.xmlnsPrefix(key);
+				final String ns = prefix == null ? null : e1.getNamespaceURIFromPrefix(prefix);
+				if (ns != null && !JDFElement.isInAnyCIP4NameSpaceStatic(ns))
 				{
-					if (prefixes != null)
-					{
-						final String prefix = KElement.xmlnsPrefix(attName);
-						if (prefix == null)
-							continue;
-						if (JDFConstants.XMLNS.equals(prefix))
-						{
-							if (!prefixes.contains(KElement.xmlnsLocalName(attName)))
-								continue;
-						}
-						// not in list - move on
-						else if (!prefixes.contains(prefix))
-							continue;
-					}
-					e1.removeAttribute(attName);
+					unknown.add(key);
 				}
+
 			}
-			return e1;
+			return unknown;
 		}
 
 		/**
