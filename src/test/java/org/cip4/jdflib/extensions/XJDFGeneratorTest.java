@@ -41,6 +41,8 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -66,6 +68,26 @@ import org.junit.jupiter.api.Test;
 class XJDFGeneratorTest extends XJDFCreatorTest
 {
 	// TODO do we need an explicit incremental flag in the JDF proper and or sets
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testXJDFXPath()
+	{
+		final KElement root = new JDFDoc(XJDFConstants.XJDF).getRoot();
+		root.setAttribute(AttributeName.JOBID, "j");
+		root.setAttribute(AttributeName.TYPES, "Product");
+		root.setNamespaceURI(JDFElement.getSchemaURL(2, 0));
+		root.setXPathAttribute("GeneralID[@IDUsage=\"CatalogID\"]/@IDValue", "Cover");
+		root.setXPathAttribute("GeneralID[@IDUsage=\"foo\"]/@IDValue", "bar");
+		root.setXPathAttribute("ProductList/Product/@Amount", "1000");
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource/Part/@Run", "Cover");
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource[Part/@Run=\"Cover\"]/RunList/FileSpec/@URL", "Cover");
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource[2]/Part/@Run", "Body");
+		root.setXPathAttribute("ResourceSet[@Name=\"RunList\"]/Resource[Part/@Run=\"Body\"]/RunList/FileSpec/@URL", "Body");
+		writeRoundTripX(root, "xpath.xml", EnumValidationLevel.Incomplete);
+	}
 
 	/**
 	 *
