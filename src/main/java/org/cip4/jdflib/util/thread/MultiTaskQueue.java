@@ -68,7 +68,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		return percentQueue;
 	}
 
-	public static void setPercentQueue(int percentQueue)
+	public static void setPercentQueue(final int percentQueue)
 	{
 		MultiTaskQueue.percentQueue = percentQueue;
 	}
@@ -111,7 +111,7 @@ public class MultiTaskQueue extends OrderedTaskQueue
 		name = getThreadName(name);
 		synchronized (theMap)
 		{
-			Map<String, OrderedTaskQueue> map = theMap.get();
+			final Map<String, OrderedTaskQueue> map = theMap.get();
 			OrderedTaskQueue orderedTaskQueue = map.get(name);
 			if (!(orderedTaskQueue instanceof MultiTaskQueue))
 			{
@@ -322,15 +322,6 @@ public class MultiTaskQueue extends OrderedTaskQueue
 	public int executing()
 	{
 		return executor == null ? 0 : executor.getActiveCount();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.util.thread.OrderedTaskQueue#size()
-	 */
-	@Override
-	public int size()
-	{
-		return super.size() + current.size();
 	}
 
 }

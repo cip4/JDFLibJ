@@ -483,7 +483,7 @@ public class OrderedTaskQueue extends Thread
 
 	public String shortString()
 	{
-		return getName() + " r:" + executing() + " all:" + size();
+		return getName() + " executing:" + executing() + " waiting:" + waiting();
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -115,9 +115,9 @@ class MultiTaskQueueTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	synchronized void testMaxParrallel()
+	synchronized void testMaxParallel()
 	{
-		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("testMaxParrallel", 3);
+		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("testMaxParallel", 3);
 		assertEquals(3, q.getMaxParallel());
 	}
 
@@ -132,7 +132,7 @@ class MultiTaskQueueTest extends JDFTestCaseBase
 		assertNotNull(q.toString());
 		for (int i = 0; i < 10; i++)
 			q.queue(new WaitRunner(i, i));
-		String shortString = q.shortString();
+		final String shortString = q.shortString();
 		assertNotNull(shortString);
 	}
 
