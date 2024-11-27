@@ -790,6 +790,36 @@ class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testSortChildrenMultiAttribute()
+	{
+		final XMLDoc d = new JDFDoc("parent");
+		final KElement e = d.getRoot();
+		final KElement b = e.appendElement("b");
+		final KElement a = e.appendElement("a");
+		a.setAttribute("at", "a1");
+		a.setAttribute("a", "a");
+		b.setAttribute("at", "a2");
+		b.setAttribute("a", "a");
+		final KElement c = e.appendElement("c");
+		c.setAttribute("at", "a3");
+		c.setAttribute("a", "a");
+		// sort forward
+		e.sortChildren(new KElement.MultiAttributeComparator(new StringArray("a b at"), false));
+		assertEquals(e.getFirstChildElement(), a);
+		assertEquals(a.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), c);
+		// now invert
+		e.sortChildren(new KElement.MultiAttributeComparator(new StringArray("a b at"), true));
+		assertEquals(e.getFirstChildElement(), c);
+		assertEquals(c.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), a);
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testSortChildrenAttributeIgnore()
 	{
 		final XMLDoc d = new JDFDoc("parent");

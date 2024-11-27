@@ -4481,6 +4481,56 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
+	 * sorts according to the value of one attribute<br/>
+	 * if the attribute is numeric, compare numerically, else lexical comparison is done
+	 *
+	 * @author prosirai
+	 */
+	public static class MultiAttributeComparator extends SingleXPathComparator
+	{
+		final List<String> names;
+
+		/**
+		 * if the attribute is numeric, compare numerically, else lexical comparison is done
+		 *
+		 * @param pAttName the attribute to use for comparing<br/>
+		 * @param pInvert if true, sort backwards
+		 */
+		public MultiAttributeComparator(final List<String> pAttName, final boolean pInvert)
+		{
+			super(pAttName.get(0), pInvert);
+			names = pAttName;
+		}
+
+		public MultiAttributeComparator(final List<String> pAttName, final boolean pInvert, final boolean checkNumber, final boolean caseSensitive)
+		{
+			super(pAttName.get(0), pInvert, checkNumber, caseSensitive);
+			names = pAttName;
+		}
+
+		/**
+		 * @param o1
+		 * @param o2
+		 * @return
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(final KElement o1, final KElement o2)
+		{
+			int ret = 0;
+			for (final String att : names)
+			{
+				final String a1 = o1.getAttribute_KElement(att, null, null);
+				final String a2 = o2.getAttribute_KElement(att, null, null);
+				ret = compare(a1, a2);
+				if (ret != 0)
+					return ret;
+			}
+			return ret;
+		}
+	}
+
+	/**
 	 * sorts all child elements by alphabet
 	 */
 	public void sortChildren()
