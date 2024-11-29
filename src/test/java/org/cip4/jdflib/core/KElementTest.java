@@ -813,6 +813,13 @@ class KElementTest extends JDFTestCaseBase
 		assertEquals(e.getFirstChildElement(), c);
 		assertEquals(c.getNextSiblingElement(), b);
 		assertEquals(b.getNextSiblingElement(), a);
+		a.setAttribute("b", 20, null);
+		b.setAttribute("b", 3, null);
+		c.setAttribute("b", 100, null);
+		e.sortChildren(new KElement.MultiAttributeComparator(new StringArray("a b at"), false, true, true));
+		assertEquals(e.getFirstChildElement(), b);
+		assertEquals(b.getNextSiblingElement(), a);
+		assertEquals(a.getNextSiblingElement(), c);
 
 	}
 

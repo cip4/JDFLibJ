@@ -267,7 +267,7 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 	{
 		final OrderedTaskQueue q = OrderedTaskQueue.getCreateQueue("test42");
 		assertTrue(q.queue(new WaitRunner(1, 200)));
-		assertEquals(0, q.idle.get());
+		assertEquals(0, q.idle.get(), 1);
 	}
 
 	/**
@@ -281,7 +281,7 @@ class OrderedTaskQueueTest extends JDFTestCaseBase
 		assertNotNull(q.toString());
 		for (int i = 0; i < 100; i++)
 			q.queue(new WaitRunner(i, i));
-		String shortString = q.shortString();
+		final String shortString = q.shortString();
 		assertNotNull(shortString);
 	}
 
