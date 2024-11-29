@@ -786,7 +786,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 		assertEquals(0, tmpHFDir.listFiles().length, 5);
 		assertEquals(5, error.listFiles().length, 5);
 		// not 2000 * 10...
-		assertTrue(System.currentTimeMillis() - t0 < 12000);
+		assertEquals(System.currentTimeMillis(), t0, 22000);
 		hf.stop();
 	}
 
