@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,6 +46,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
@@ -53,6 +54,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -99,10 +101,12 @@ public class WalkLayout extends WalkStrippingParams
 	private static final StringArray copyRefs = new StringArray(
 			new String[] { XJDFConstants.FilmRef, XJDFConstants.PaperRef, XJDFConstants.PlateRef, XJDFConstants.ProofPaperRef, AttributeName.AUTOMATED });
 
-	private boolean moveToStripping(final KElement e, final JDFStrippingParams stripParams)
+	boolean moveToStripping(final KElement e, final JDFStrippingParams stripParams)
 	{
 		final VString vAtt = stripParams.knownAttributes();
 		final JDFAttributeMap map = e.getAttributeMap();
+		final JDFAttributeMap mapRes = ResourceHelper.getHelper(e).getAttributeMap();
+		ContainerUtil.putAll(map, mapRes);
 		boolean foundSome = false;
 		for (final String s : map.keySet())
 		{
@@ -148,7 +152,7 @@ public class WalkLayout extends WalkStrippingParams
 	 * @param stripParams
 	 * @param trackLayout
 	 */
-	private void createStrippingPartition(final JDFStrippingParams stripParams, final JDFLayout trackLayout)
+	void createStrippingPartition(final JDFStrippingParams stripParams, final JDFLayout trackLayout)
 	{
 		JDFNode node = xjdfToJDFImpl.currentJDFNode;
 		node = getNode(stripParams.getParentNode_KElement().getParentNode_KElement(), node);
@@ -158,8 +162,8 @@ public class WalkLayout extends WalkStrippingParams
 		}
 		else
 		{
-			JDFNode layoutParent = trackLayout.getParentJDF();
-			JDFStrippingParams sp0 = layoutParent == null ? null : (JDFStrippingParams) layoutParent.getResourcePool().getResource(ElementName.STRIPPINGPARAMS, 0, null);
+			final JDFNode layoutParent = trackLayout.getParentJDF();
+			final JDFStrippingParams sp0 = layoutParent == null ? null : (JDFStrippingParams) layoutParent.getResourcePool().getResource(ElementName.STRIPPINGPARAMS, 0, null);
 			final JDFAttributeMap partMap = trackLayout.getPartMap();
 			final JDFStrippingParams sp;
 			if (sp0 != null)
@@ -179,12 +183,12 @@ public class WalkLayout extends WalkStrippingParams
 			tmpStripParams.removeAttribute(AttributeName.ID);
 			tmpStripParams.copyAttribute(AttributeName.STATUS, trackLayout);
 			tmpStripParams.removeAttribute(AttributeName.PARTIDKEYS);
-			List<? extends KElement> vLeaves = tmpStripParams.getDirectPartitionArray();
-			for (KElement leaf : vLeaves)
+			final List<? extends KElement> vLeaves = tmpStripParams.getDirectPartitionArray();
+			for (final KElement leaf : vLeaves)
 			{
-				JDFResource rLeaf = (JDFResource) leaf;
-				String bs = rLeaf.getBinderySignatureName();
-				JDFResource bsPart = part.getPartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bs), EnumPartUsage.Explicit);
+				final JDFResource rLeaf = (JDFResource) leaf;
+				final String bs = rLeaf.getBinderySignatureName();
+				final JDFResource bsPart = part.getPartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bs), EnumPartUsage.Explicit);
 				if (bsPart != null)
 				{
 					rLeaf.deleteNode();

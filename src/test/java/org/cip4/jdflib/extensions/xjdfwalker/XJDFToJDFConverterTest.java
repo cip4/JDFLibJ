@@ -2603,12 +2603,36 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testStrippingDescNameOnly()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("Stripping");
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
+		final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet1", true);
+		rh.setDescriptiveName("Description of the sheet");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfHelper);
+		final JDFNode n = d.getJDFRoot();
+		final JDFLayout loj = (JDFLayout) n.getResource(ElementName.LAYOUT, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, loj.getResStatus(false));
+		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
+		assertEquals("Description of the sheet", loj.getLeaf(0).getDescriptiveName());
+		assertEquals("Description of the sheet", sp.getLeaf(0).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testStrippingDescName()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
 		xjdfHelper.setTypes("Stripping");
 
-		final SetHelper shLO = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.LAYOUT, EnumUsage.Input);
+		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
 		final ResourceHelper rh = shLO.appendPartition(AttributeName.SHEETNAME, "sheet1", true);
 		rh.setDescriptiveName("Description of the sheet");
 		final JDFLayout lo = (JDFLayout) rh.getResource();
