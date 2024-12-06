@@ -101,6 +101,7 @@ public class WalkProduct extends WalkJDF
 		final JDFAttributeMap map = node.getAttributeMap();
 		super.updateAttributes(map);
 		newRootP.setAttributes(map);
+		super.prepareRootMap(node, newRootP);
 	}
 
 	/**

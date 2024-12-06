@@ -204,7 +204,7 @@ public class WalkJDF extends WalkJDFElement
 
 	void prepareRootMap(final JDFNode node, final KElement newRootP)
 	{
-		// nop
+		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 	}
 
 	/**
