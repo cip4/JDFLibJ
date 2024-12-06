@@ -2727,6 +2727,44 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testProjectID()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setStatus(EnumNodeStatus.Completed);
+		n.setProjectID("p1");
+		n.setJobID("j1");
+		n.setType(EnumType.Product);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertEquals("j1", xjdf.getAttribute(AttributeName.JOBID));
+		assertEquals("p1", xjdf.getAttribute(AttributeName.PROJECTID));
+		assertEquals("", xjdf.getAttribute(AttributeName.ID));
+		assertEquals("", xjdf.getAttribute(AttributeName.STATUS));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStatus()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setStatus(EnumNodeStatus.Completed);
+		n.setProjectID("p1");
+		n.setJobID("j1");
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.convert(n);
+		assertEquals("j1", xjdf.getAttribute(AttributeName.JOBID));
+		assertEquals("p1", xjdf.getAttribute(AttributeName.PROJECTID));
+		assertEquals("", xjdf.getAttribute(AttributeName.ID));
+		assertEquals("", xjdf.getAttribute(AttributeName.STATUS));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testAuditProcessRun()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

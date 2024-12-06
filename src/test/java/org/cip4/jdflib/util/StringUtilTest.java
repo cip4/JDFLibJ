@@ -959,6 +959,7 @@ class StringUtilTest extends JDFTestCaseBase
 	{
 		assertEquals(StringUtil.parseInt("", 0), 0);
 		assertEquals(StringUtil.parseInt("1234123456", 0), 1234123456);
+		assertEquals(StringUtil.parseInt(" 1234123456 ", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("+1234123456", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("1234123456.0", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("abc", 99), 99);
@@ -1011,6 +1012,12 @@ class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.parseDouble(s, 0), -123.450, 0.);
 		assertTrue(StringUtil.isNumber(s));
 		s = ".45";
+		assertEquals(StringUtil.parseDouble(s, 0), 0.450, 0., "missing leading zero ok");
+		assertTrue(StringUtil.isNumber(s));
+		s = " .45";
+		assertEquals(StringUtil.parseDouble(s, 0), 0.450, 0., "missing leading zero ok");
+		assertTrue(StringUtil.isNumber(s));
+		s = ".45 ";
 		assertEquals(StringUtil.parseDouble(s, 0), 0.450, 0., "missing leading zero ok");
 		assertTrue(StringUtil.isNumber(s));
 		s = "-123.45a";

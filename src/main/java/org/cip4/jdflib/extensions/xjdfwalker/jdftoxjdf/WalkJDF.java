@@ -182,9 +182,9 @@ public class WalkJDF extends WalkJDFElement
 	private void setRootAttributes(final JDFNode node, final KElement newRootP)
 	{
 		newRootP.setXMLComment("JDFToXJDF version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), true);
-		newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
-		setAttributes(node, newRootP);
 
+		setAttributes(node, newRootP);
+		prepareRootMap(node, newRootP);
 		removeUnusedElements(newRootP);
 
 		if (jdfToXJDF.isUpdateVersion())
@@ -200,6 +200,11 @@ public class WalkJDF extends WalkJDFElement
 		{
 			newRootP.setAttribute(XJDFConstants.ParentID, parentProduct.getJobPartID(false));
 		}
+	}
+
+	void prepareRootMap(final JDFNode node, final KElement newRootP)
+	{
+		// nop
 	}
 
 	/**

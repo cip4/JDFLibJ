@@ -95,6 +95,14 @@ public class WalkProduct extends WalkJDF
 		return super.matches(toCheck) && jdfToXJDF.isWantProduct() && EnumType.Product.equals(((JDFNode) toCheck).getEnumType());
 	}
 
+	@Override
+	void prepareRootMap(final JDFNode node, final KElement newRootP)
+	{
+		final JDFAttributeMap map = node.getAttributeMap();
+		super.updateAttributes(map);
+		newRootP.setAttributes(map);
+	}
+
 	/**
 	 * @param newRootP
 	 */
