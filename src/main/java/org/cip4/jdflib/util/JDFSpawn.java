@@ -687,8 +687,8 @@ public class JDFSpawn
 				nSpawned += vvRO.size() + vvRW.size();
 
 				// get the effected resources
-				VElement vRes = new VElement();
-				VElement vResRoot = new VElement();
+				final VElement vRes = new VElement();
+				final VElement vResRoot = new VElement();
 				if (resLink != null)
 				{
 					// make sure that spawned resources are sufficiently
@@ -705,10 +705,8 @@ public class JDFSpawn
 						mainMap = mainMap.getOrMaps(vSpawnParts);
 					resLink.setPartMapVector(mainMap);
 					dummy.setPartMapVector(mainMap);
-
-					vResRoot = ((JDFResourceLink) liRoot).getTargetVector(-1);
-
-					vRes = dummy.getTargetVector(-1);
+					ContainerUtil.addAll(vResRoot, ((JDFResourceLink) liRoot).getTargetVector(-1));
+					ContainerUtil.addAll(vRes, dummy.getTargetVector(-1));
 					if (vRes.isEmpty())
 					{
 						final JDFResource r0 = dummy.getTarget();
@@ -966,7 +964,7 @@ public class JDFSpawn
 		{
 			finalizePartitions(spawnAudit, outLinks, mainLinks);
 		}
-		VString rw = spawnAudit.getrRefsRWCopied();
+		final VString rw = spawnAudit.getrRefsRWCopied();
 		removeRO(outLinks, spawnAudit.getNewSpawnID(), rw, false);
 		removeRO(mainLinks, spawnAudit.getNewSpawnID(), rw, true);
 		finalizeStatusAndAudits(spawnAudit);
@@ -974,7 +972,7 @@ public class JDFSpawn
 
 	final static String ro = EnumSpawnStatus.SpawnedRO.getName();
 
-	private void removeRO(final VElement outLinks, final String spawnID, VString rw, final boolean isMain)
+	private void removeRO(final VElement outLinks, final String spawnID, final VString rw, final boolean isMain)
 	{
 		for (final KElement e : outLinks)
 		{
@@ -991,7 +989,7 @@ public class JDFSpawn
 		}
 	}
 
-	void removeROFromLeaf(final String spawnID, VString rw, final KElement r)
+	void removeROFromLeaf(final String spawnID, final VString rw, final KElement r)
 	{
 		if (ro.equals(r.getAttribute_KElement(AttributeName.SPAWNSTATUS)))
 		{
@@ -1010,7 +1008,7 @@ public class JDFSpawn
 		}
 	}
 
-	void removeROFromElement(final String spawnID, VString rw, final KElement r)
+	void removeROFromElement(final String spawnID, final VString rw, final KElement r)
 	{
 		final List<JDFRefElement> refs = r.getChildArrayByClass_KElement(JDFRefElement.class, false, 0);
 		if (refs != null)
