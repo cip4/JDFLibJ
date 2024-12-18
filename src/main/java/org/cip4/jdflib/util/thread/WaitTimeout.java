@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -37,6 +37,7 @@
 package org.cip4.jdflib.util.thread;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.cip4.jdflib.util.ThreadUtil;
 
@@ -94,7 +95,7 @@ public abstract class WaitTimeout<a> implements Runnable
 		return waitMillis;
 	}
 
-	private a theObject;
+	private final AtomicReference<a> theObject;
 	private final static AtomicInteger threadNumber = new AtomicInteger(0);
 	private Thread myThread = null;
 	protected String baseName;
@@ -105,7 +106,7 @@ public abstract class WaitTimeout<a> implements Runnable
 	public WaitTimeout(final int millis)
 	{
 		waitMillis = millis;
-		theObject = null;
+		theObject = new AtomicReference<>();
 		setup();
 		mutex = new MyMutex();
 		myThread = new Thread(this, baseName + threadNumber.incrementAndGet());
@@ -129,7 +130,7 @@ public abstract class WaitTimeout<a> implements Runnable
 	public final void run()
 	{
 		t0 = System.currentTimeMillis();
-		theObject = handle();
+		theObject.set(handle());
 		myThread = null;
 		final MyMutex tmp = mutex;
 		mutex = null;
@@ -152,7 +153,7 @@ public abstract class WaitTimeout<a> implements Runnable
 			}
 			mutex = null;
 		}
-		return theObject;
+		return theObject.get();
 	}
 
 	/**
@@ -160,7 +161,7 @@ public abstract class WaitTimeout<a> implements Runnable
 	 */
 	public final a peekWaitedObject()
 	{
-		return theObject;
+		return theObject.get();
 	}
 
 	/**

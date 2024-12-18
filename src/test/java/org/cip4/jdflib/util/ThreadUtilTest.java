@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,10 +39,14 @@
 
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.thread.MyMutex;
 import org.cip4.jdflib.util.thread.WaitTimeout;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -61,7 +65,7 @@ class ThreadUtilTest extends JDFTestCaseBase
 		 * @param millis
 		 * @param sleep
 		 */
-		public TestWait(final int millis, final int sleep)
+		TestWait(final int millis, final int sleep)
 		{
 			super(millis);
 			this.sleep = sleep;
@@ -85,17 +89,17 @@ class ThreadUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public synchronized void testWaitTimeout()
+	synchronized void testWaitTimeout()
 	{
-		Assertions.assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
-		Assertions.assertNull(new TestWait(2, 5000).getWaitedObject());
+		assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
+		assertNull(new TestWait(2, 5000).getWaitedObject());
 	}
 
 	/**
 	 *
 	 */
 	@Test
-	public synchronized void testPeekWaitTimeout()
+	synchronized void testPeekWaitTimeout()
 	{
 		final TestWait testWait = new TestWait(1400, 2);
 		int n = 0;
@@ -106,37 +110,37 @@ class ThreadUtilTest extends JDFTestCaseBase
 				break;
 		}
 
-		Assertions.assertEquals(testWait.getWaitedObject().intValue(), 42);
-		Assertions.assertEquals(testWait.peekWaitedObject().intValue(), 42);
+		assertEquals(testWait.getWaitedObject().intValue(), 42);
+		assertEquals(testWait.peekWaitedObject().intValue(), 42);
 	}
 
 	/**
 	 *
 	 */
 	@Test
-	public synchronized void testWaitTimeoutDelay()
+	synchronized void testWaitTimeoutDelay()
 	{
 		final TestWait testWait = new TestWait(2000, 1000);
 		ThreadUtil.sleep(1200);
 		final long t0 = System.currentTimeMillis();
-		Assertions.assertNotNull(testWait.getWaitedObject());
-		Assertions.assertTrue(System.currentTimeMillis() - t0 < 1000);
+		assertNotNull(testWait.getWaitedObject());
+		assertTrue(System.currentTimeMillis() - t0 < 1000);
 	}
 
 	/**
 	 *
 	 */
 	@Test
-	public synchronized void testWaitTimeoutFail()
+	synchronized void testWaitTimeoutFail()
 	{
-		Assertions.assertNull(new TestWait(2, 14200).getWaitedObject());
+		assertNull(new TestWait(2, 14200).getWaitedObject());
 	}
 
 	/**
 	 *
 	 */
 	@Test
-	public synchronized void testWaitTimeoutMany()
+	synchronized void testWaitTimeoutMany()
 	{
 		for (int i = 1; i < 666; i++)
 		{
@@ -149,8 +153,8 @@ class ThreadUtilTest extends JDFTestCaseBase
 			}
 			ThreadUtil.sleep(1);
 			final Integer waitedObject = testWait.getWaitedObject();
-			Assertions.assertNotNull(waitedObject, "Waited Loop " + i);
-			Assertions.assertEquals(waitedObject.intValue(), 42, "Loop " + i);
+			assertNotNull(waitedObject, "Waited Loop " + i);
+			assertEquals(waitedObject.intValue(), 42, "Loop " + i);
 		}
 	}
 
@@ -158,13 +162,13 @@ class ThreadUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	void testMyMutex()
+	synchronized void testMyMutex()
 	{
 		int nLast = -1;
 		for (int i = 0; i < 10000; i++)
 		{
 			final int n = StringUtil.parseInt(StringUtil.token(new MyMutex().toString(), 1, " "), 0);
-			Assertions.assertTrue(n > nLast);
+			assertTrue(n > nLast);
 			nLast = n;
 		}
 	}
