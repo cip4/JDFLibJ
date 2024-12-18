@@ -158,6 +158,23 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertEquals(contact.getCompany().getProductID(), "company_id");
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	void testProjectID()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "jp1");
+		h.setAttribute(AttributeName.PROJECTID, "p1");
+		h.addType(EnumType.Product);
+		final JDFDoc d = xCon.convert(h);
+		final JDFNode jdf = d.getJDFRoot();
+		assertEquals("j1", jdf.getAttribute(AttributeName.JOBID));
+		assertEquals("p1", jdf.getAttribute(AttributeName.PROJECTID));
+		assertEquals("jp1", jdf.getAttribute(AttributeName.JOBPARTID));
+	}
+
 	@Test
 	void testReorder3()
 	{

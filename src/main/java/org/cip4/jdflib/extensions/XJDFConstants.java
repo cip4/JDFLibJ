@@ -116,6 +116,7 @@ public abstract class XJDFConstants
 	public static final String Metadata = "Metadata";
 	public static final String ModifyQueueEntry = "ModifyQueueEntry";
 	public static final String ModifyQueueEntryParams = "ModifyQueueEntryParams";
+	public static final String ModuleInfo = "ModuleInfo";
 	public static final String ModuleIDs = "ModuleIDs";
 	public static final String ModuleCondition = "ModuleCondition";
 	public static final String ModuleStatus = "ModuleStatus";
@@ -162,6 +163,8 @@ public abstract class XJDFConstants
 	public static final String ResponseResource = "ResponseResource";
 	public static final String ResponseStatus = "ResponseStatus";
 	public static final String RestApiBaseURL = "RestApiBaseURL";
+
+	public static final String Role = "Role";
 
 	public static final String ScrewBinding = "ScrewBinding";
 	public static final String ScrewBindingDetails = "ScrewBindingDetails";

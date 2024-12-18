@@ -2733,11 +2733,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setStatus(EnumNodeStatus.Completed);
 		n.setProjectID("p1");
 		n.setJobID("j1");
+		n.setJobPartID("jp1");
 		n.setType(EnumType.Product);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		assertEquals("j1", xjdf.getAttribute(AttributeName.JOBID));
 		assertEquals("p1", xjdf.getAttribute(AttributeName.PROJECTID));
+		assertEquals("jp1", xjdf.getAttribute(AttributeName.JOBPARTID));
 		assertEquals("", xjdf.getAttribute(AttributeName.ID));
 		assertEquals("", xjdf.getAttribute(AttributeName.STATUS));
 	}
