@@ -45,6 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
@@ -282,14 +283,15 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	void testDeviceInfo2()
+	void testDeviceInfoOffline()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
-		jmf.getSignal(0).appendDeviceInfo().appendDevice().setDeviceID("d1");
+		jmf.getSignal(0).appendDeviceInfo().setDeviceCondition(EnumDeviceCondition.OffLine);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		final XJMFHelper xh = new XJMFHelper(xjmf);
-		assertEquals("d1", xh.getMessageHelper(0).getHeader().getAttribute(AttributeName.DEVICEID));
+		final JDFDeviceInfo devInfo = (JDFDeviceInfo) xh.getMessageHelper(0).getXPathElement(ElementName.DEVICEINFO);
+		assertEquals("Offline", devInfo.getAttribute(AttributeName.DEVICECONDITION));
 	}
 
 	/**

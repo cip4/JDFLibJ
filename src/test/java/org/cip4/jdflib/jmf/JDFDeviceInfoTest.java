@@ -45,10 +45,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -57,6 +59,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.eUnit;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
+import org.cip4.jdflib.jmf.JDFDeviceInfo.eXjdfDeviceCondition;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -157,6 +160,19 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		assertEquals(mi, di.getModuleInfo());
 		assertEquals(mi, di.getCreateModuleInfo(0));
 		assertEquals(mi, di.getAllModuleInfo().iterator().next());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testOffline()
+	{
+		di.setDeviceStatus(null);
+		di.setXJDFDeviceCondition(EnumDeviceCondition.OffLine);
+		assertEquals("Offline", di.getAttribute(AttributeName.DEVICECONDITION));
+		di.setXJDFDeviceCondition(EnumDeviceCondition.OK);
+		assertEquals(eXjdfDeviceCondition.OK, di.getXJDFDeviceCondition());
 	}
 
 	/**
@@ -294,8 +310,21 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 	{
 		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
 		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
-		di.setXJMFStatus(eDeviceStatus.Offline);
-		assertEquals(eDeviceStatus.Offline, di.getXJMFStatus());
+		di2.setXJMFStatus(eDeviceStatus.Offline);
+		assertEquals(eDeviceStatus.Offline, di2.getXJMFStatus());
+	}
+
+	/**
+	*
+	*/
+	@Test
+	void testXJMFCondition()
+	{
+		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Brief);
+		final JDFDeviceInfo di2 = jmf.getSignal(0).getCreateDeviceInfo(0);
+		di2.setXJDFDeviceCondition(eXjdfDeviceCondition.Offline);
+		assertEquals(eXjdfDeviceCondition.Offline, di2.getXJDFDeviceCondition());
+		assertEquals(EnumDeviceCondition.OffLine, di2.getDeviceCondition());
 	}
 
 	/**

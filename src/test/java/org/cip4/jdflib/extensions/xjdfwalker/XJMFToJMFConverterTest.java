@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
@@ -57,6 +58,8 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFDeviceInfo.eXjdfDeviceCondition;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -76,6 +79,22 @@ import org.junit.jupiter.api.Test;
  */
 class XJMFToJMFConverterTest extends JDFTestCaseBase
 {
+
+	/**
+	 *
+	 */
+	@Test
+	void testDeviceInfoOffline()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		final MessageHelper mh = h.appendMessage(EnumFamily.Signal, EnumType.Status);
+		final JDFDeviceInfo di = (JDFDeviceInfo) mh.appendElement(ElementName.DEVICEINFO);
+		di.setXJDFDeviceCondition(eXjdfDeviceCondition.Offline);
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		final JDFDeviceInfo dij = d.getJMFRoot().getSignal(0).getDeviceInfo(0);
+		assertEquals(EnumDeviceCondition.OffLine.getName(), dij.getAttribute(AttributeName.DEVICECONDITION));
+	}
 
 	/**
 	 *
@@ -135,14 +154,14 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, "ModifyQueueEntry");
-		JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
+		final JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
 		qe.setQueueEntryID("q1");
 
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
-		JDFJMF jmf = d.getJMFRoot();
-		JDFResponse r = jmf.getResponse();
+		final JDFJMF jmf = d.getJMFRoot();
+		final JDFResponse r = jmf.getResponse();
 		assertEquals(0, r.getReturnCode());
 		assertNull(r.getElement(ElementName.QUEUEENTRY));
 	}
@@ -164,14 +183,14 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, "ModifyQueueEntry");
 		mh.setQuery(mh0);
-		JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
+		final JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
 		qe.setQueueEntryID("q1");
 
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
-		JDFJMF jmf = d.getJMFRoot();
-		JDFResponse r = jmf.getResponse();
+		final JDFJMF jmf = d.getJMFRoot();
+		final JDFResponse r = jmf.getResponse();
 		assertEquals(0, r.getReturnCode());
 		assertNull(r.getElement(ElementName.QUEUEENTRY));
 		assertEquals("AbortQueueEntry", r.getType());
@@ -186,13 +205,13 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, "ModifyQueueEntry");
 		mh.setReturnCode(113);
-		JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
+		final JDFQueueEntry qe = (JDFQueueEntry) mh.appendElement(ElementName.QUEUEENTRY);
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
 		qe.setQueueEntryID("q1");
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
-		JDFJMF jmf = d.getJMFRoot();
-		JDFResponse r = jmf.getResponse();
+		final JDFJMF jmf = d.getJMFRoot();
+		final JDFResponse r = jmf.getResponse();
 		assertEquals(113, r.getReturnCode());
 		assertNull(r.getElement(ElementName.QUEUEENTRY));
 	}
@@ -205,23 +224,23 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, EnumType.Resource);
-		JDFResourceInfo ri = (JDFResourceInfo) mh.appendElement(ElementName.RESOURCEINFO);
+		final JDFResourceInfo ri = (JDFResourceInfo) mh.appendElement(ElementName.RESOURCEINFO);
 		ri.setScope(org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope.Present);
 
-		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
+		final SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
 		sh.setName(ElementName.MEDIA);
 		sh.setUsage(EnumUsage.Input);
 		for (int i = 0; i < 2; i++)
 		{
-			ResourceHelper p = sh.appendPartition(null, true);
+			final ResourceHelper p = sh.appendPartition(null, true);
 			p.setDescriptiveName("paper " + i);
-			JDFMedia m = (JDFMedia) p.getResource();
+			final JDFMedia m = (JDFMedia) p.getResource();
 			m.setMediaType(EnumMediaType.Paper);
 			m.setWeight(80 + 20 * i);
 		}
 		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
 		final JDFDoc d = xc.convert(h.getRoot());
-		JDFJMF jmf = d.getJMFRoot();
+		final JDFJMF jmf = d.getJMFRoot();
 		assertNotNull(jmf.getResponse(0).getResourceInfo(0));
 		assertNotNull(jmf.getResponse(0).getResourceInfo(1));
 		assertNull(jmf.getResponse(0).getResourceInfo(2));

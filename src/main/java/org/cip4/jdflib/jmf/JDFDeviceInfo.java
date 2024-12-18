@@ -99,6 +99,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 // ----------------------------------
@@ -129,6 +130,39 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
 		elemInfoTable[1] = new ElemInfoTable(ElementName.EVENT, 0x33333333);
+	}
+
+	/**
+	 * note the case of Offline vs. OffLine
+	 */
+	public enum eXjdfDeviceCondition
+	{
+		OK, NeedsAttention, Failure, Offline;
+
+		public static eXjdfDeviceCondition getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(eXjdfDeviceCondition.class, name);
+		}
+
+		public static eXjdfDeviceCondition getEnum(final EnumDeviceCondition condition)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(eXjdfDeviceCondition.class, EnumUtil.getName(condition));
+		}
+	}
+
+	public void setXJDFDeviceCondition(final EnumDeviceCondition enumVar)
+	{
+		setAttribute(AttributeName.DEVICECONDITION, eXjdfDeviceCondition.getEnum(enumVar), null);
+	}
+
+	public void setXJDFDeviceCondition(final eXjdfDeviceCondition enumVar)
+	{
+		setAttribute(AttributeName.DEVICECONDITION, enumVar, null);
+	}
+
+	public eXjdfDeviceCondition getXJDFDeviceCondition()
+	{
+		return eXjdfDeviceCondition.getEnum(getAttribute(AttributeName.DEVICECONDITION));
 	}
 
 	/**
@@ -193,17 +227,6 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	public JDFDeviceInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * toString()
-	 *
-	 * @see org.cip4.jdflib.auto.JDFAutoDeviceInfo#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFDeviceInfo[  --> " + super.toString() + " ]";
 	}
 
 	/**
@@ -565,5 +588,11 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	public JDFModuleInfo getModuleInfo(final String id)
 	{
 		return getChildWithAttribute(JDFModuleInfo.class, AttributeName.MODULEID, id);
+	}
+
+	@Override
+	public EnumDeviceCondition getDeviceCondition()
+	{
+		return (EnumDeviceCondition) EnumUtil.getEnumIgnoreCase(EnumDeviceCondition.class, getAttribute(AttributeName.DEVICECONDITION));
 	}
 }

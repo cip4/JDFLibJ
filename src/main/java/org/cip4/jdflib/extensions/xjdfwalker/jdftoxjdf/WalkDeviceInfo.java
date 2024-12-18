@@ -76,8 +76,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
+import org.cip4.jdflib.jmf.JDFDeviceInfo.eXjdfDeviceCondition;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -150,6 +152,7 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 				}
 			}
 		}
+		map.put(AttributeName.DEVICECONDITION, JavaEnumUtil.getName(eXjdfDeviceCondition.getEnum(dc)));
 		if (eS != null)
 			status = eS.name();
 		map.put(AttributeName.STATUS, status);
