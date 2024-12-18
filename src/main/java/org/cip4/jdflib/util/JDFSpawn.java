@@ -965,14 +965,14 @@ public class JDFSpawn
 			finalizePartitions(spawnAudit, outLinks, mainLinks);
 		}
 		final VString rw = spawnAudit.getrRefsRWCopied();
-		removeRO(outLinks, spawnAudit.getNewSpawnID(), rw, false);
-		removeRO(mainLinks, spawnAudit.getNewSpawnID(), rw, true);
+		removeRO(outLinks, spawnAudit.getNewSpawnID(), rw);
+		removeRO(mainLinks, spawnAudit.getNewSpawnID(), rw);
 		finalizeStatusAndAudits(spawnAudit);
 	}
 
 	final static String ro = EnumSpawnStatus.SpawnedRO.getName();
 
-	private void removeRO(final VElement outLinks, final String spawnID, final VString rw, final boolean isMain)
+	private void removeRO(final VElement outLinks, final String spawnID, final VString rw)
 	{
 		for (final KElement e : outLinks)
 		{
