@@ -512,7 +512,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 */
 	public JDFResource.EnumResStatus getStatusJDF()
 	{
-		EnumResStatus resStatus = getLinkRoot().getResStatus(false);
+		final EnumResStatus resStatus = getLinkRoot().getResStatus(false);
 		return resStatus == null ? null : JDFResource.EnumResStatus.getEnum(resStatus.getName());
 	}
 
@@ -843,10 +843,10 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			v.addElement(resRoot);
 			return v;
 		}
-		// get the value of PartUsage
-		final JDFResource.EnumPartUsage partUsage = resRoot.getPartUsage();
 
-		if (JDFResource.EnumPartUsage.Implicit.equals(partUsage))
+		final EnumPartUsage partUsage = resRoot.getPartUsage();
+
+		if (EnumPartUsage.Implicit.equals(partUsage))
 		{
 			vmParts.reduceMap(resRoot.getPartIDKeys().getSet());
 		}
@@ -858,7 +858,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 		final PartitionGetter partitionGetter = new PartitionGetter(resRoot);
 		partitionGetter.setFollowIdentical(followIdentical);
-		return partitionGetter.getPartitionVector(vmParts, partUsage);
+		final VElement partitionVector = partitionGetter.getPartitionVector(vmParts, partUsage);
+
+		return partitionVector == null ? v : partitionVector;
 	}
 
 	/**
