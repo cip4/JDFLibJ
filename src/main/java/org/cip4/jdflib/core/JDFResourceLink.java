@@ -512,7 +512,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 */
 	public JDFResource.EnumResStatus getStatusJDF()
 	{
-		final EnumResStatus resStatus = getLinkRoot().getResStatus(false);
+		final JDFResource linkRoot = getLinkRoot();
+		final EnumResStatus resStatus = linkRoot == null ? null : linkRoot.getResStatus(false);
 		return resStatus == null ? null : JDFResource.EnumResStatus.getEnum(resStatus.getName());
 	}
 

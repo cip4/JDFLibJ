@@ -226,6 +226,22 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testGetStatusJDF()
+	{
+		final JDFDoc d = new JDFDoc("MediaLink");
+		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
+		assertNull(rl.getStatusJDF());
+		final JDFNode n = JDFNode.createRoot();
+		final JDFResource r = n.addResource(ElementName.NODEINFO, EnumUsage.Input);
+		r.setResStatus(EnumResStatus.Draft, false);
+		final JDFResourceLink l = n.getLink(r, null);
+		assertEquals(EnumResStatus.Draft, l.getStatusJDF());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testAppendAmountPool()
 	{
 		final JDFDoc d = new JDFDoc("MediaLink");
