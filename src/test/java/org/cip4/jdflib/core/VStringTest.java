@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,6 +41,7 @@ package org.cip4.jdflib.core;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -73,6 +74,22 @@ class VStringTest extends JDFTestCaseBase
 		v.appendUnique("c");
 		assertEquals(StringUtil.setvString(v, " ", null, null), "a b c", "a b c");
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSame()
+	{
+		final VString v = new VString();
+		v.add("c");
+		v.add("c");
+		v.add("c");
+		v.add("c");
+		v.add(0, "c");
+		v.set(0, new String("c"));
+		assertSame(v.get(0), v.get(1));
 	}
 
 	/**

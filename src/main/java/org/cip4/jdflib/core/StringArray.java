@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -62,6 +62,24 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class StringArray extends ArrayList<String>
 {
+	@Override
+	public String set(final int index, final String element)
+	{
+		return super.set(index, StringUtil.intern(element));
+	}
+
+	@Override
+	public boolean add(final String e)
+	{
+		return super.add(StringUtil.intern(e));
+	}
+
+	@Override
+	public void add(final int index, final String element)
+	{
+		super.add(index, StringUtil.intern(element));
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	/**

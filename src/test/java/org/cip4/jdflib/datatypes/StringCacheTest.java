@@ -44,7 +44,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("deprecation")
@@ -55,7 +54,7 @@ class StringCacheTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public synchronized void testAddAll()
+	synchronized void testAddAll()
 	{
 		assertEquals(0, StringCache.size(), 50);
 		StringCache.addAll(new VString("a b c d e f g h i j"));
@@ -65,7 +64,7 @@ class StringCacheTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
-	public synchronized void testSame()
+	synchronized void testSame()
 	{
 		final String s1 = StringCache.getCreateString("a");
 		final String s2 = StringCache.getString("a");
@@ -78,7 +77,7 @@ class StringCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public synchronized void testAddMany()
+	synchronized void testAddMany()
 	{
 		for (int i = 0; i < 10000; i++)
 		{
@@ -95,7 +94,7 @@ class StringCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public synchronized void testGetMany()
+	synchronized void testGetMany()
 	{
 		StringCache.enable(false);
 		StringCache.enable(true);
@@ -115,7 +114,7 @@ class StringCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public synchronized void testGetCreateMany()
+	synchronized void testGetCreateMany()
 	{
 		for (int i = 0; i < 10000; i++)
 		{
@@ -137,7 +136,7 @@ class StringCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public synchronized void testCreateNull()
+	synchronized void testCreateNull()
 	{
 		StringCache.enable(true);
 		assertNull(StringCache.getCreateString(null));
@@ -148,31 +147,9 @@ class StringCacheTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public synchronized void testNull()
+	synchronized void testNull()
 	{
 		assertNull(StringCache.getString(null));
-	}
-
-	/**
-	 * @see JDFTestCaseBase#setUp()
-	 */
-	@Override
-	@BeforeEach
-	public void setUp() throws Exception
-	{
-		StringCache.enable(false);
-		StringCache.enable(true);
-		super.setUp();
-	}
-
-	/**
-	 * @see JDFTestCaseBase#tearDown()
-	 */
-	@Override
-	public void tearDown() throws Exception
-	{
-		StringCache.enable(false);
-		super.tearDown();
 	}
 
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -68,6 +68,19 @@ import org.cip4.jdflib.util.StringUtil;
 public class VString extends Vector<String>
 {
 	private static final long serialVersionUID = 1L;
+
+	@Override
+	public String set(final int index, final String e)
+	{
+		return super.set(index, StringUtil.intern(e));
+	}
+
+	@Override
+	public void add(final int index, final String element)
+	{
+		super.add(index, StringUtil.intern(element));
+	}
+
 	/**
 	 * the empty VString
 	 *
@@ -75,6 +88,12 @@ public class VString extends Vector<String>
 	 */
 	@Deprecated
 	final public static VString emptyVector = new VString();
+
+	@Override
+	public boolean add(final String e)
+	{
+		return super.add(StringUtil.intern(e));
+	}
 
 	/**
 	 * are we null or empty or contain only an empty JDFAttributeMap
