@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -69,7 +69,6 @@ import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFNumberList;
-import org.cip4.jdflib.datatypes.StringCache;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 
 /**
@@ -251,7 +250,7 @@ public class StringUtil
 				s.append(vs.get(i).trim());
 			}
 		}
-		return s.toString();
+		return intern(s.toString());
 	}
 
 	/**
@@ -304,7 +303,7 @@ public class StringUtil
 				vObj[i] = StringUtil.replaceString(s, "__comma__äö-eher selten", ","); // undo quick hack ;-)
 			}
 		}
-		return String.format(format, vObj);
+		return intern(String.format(format, vObj));
 	}
 
 	/**
@@ -316,16 +315,15 @@ public class StringUtil
 	 *
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format
-	 * @deprecated use String.format
+	 * 
 	 */
-	@Deprecated
 	public static String sprintf(final String format, final Object[] objects)
 	{
 		if (objects == null || format == null)
 		{
 			return null;
 		}
-		return String.format(format, objects);
+		return intern(String.format(format, objects));
 	}
 
 	/**
@@ -450,7 +448,7 @@ public class StringUtil
 			return null;
 		}
 
-		return strWork.substring(0, n <= strWork.length() ? n : strWork.length());
+		return intern(strWork.substring(0, n <= strWork.length() ? n : strWork.length()));
 	}
 
 	/**
@@ -493,7 +491,7 @@ public class StringUtil
 			last = strWork.length();
 		}
 
-		return strWork.substring(first, last);
+		return intern(strWork.substring(first, last));
 	}
 
 	/**
@@ -526,7 +524,7 @@ public class StringUtil
 			return strWork;
 		}
 
-		return strWork.substring(strWork.length() - n);
+		return intern(strWork.substring(strWork.length() - n));
 	}
 
 	/**
@@ -549,7 +547,7 @@ public class StringUtil
 			final StringTokenizer st = new StringTokenizer(strWork, delim, delim2token);
 			while (st.hasMoreTokens())
 			{
-				v.add(st.nextToken());
+				v.add(intern(st.nextToken()));
 			}
 			return v;
 		}
@@ -588,14 +586,14 @@ public class StringUtil
 			}
 			if (strSep.isEmpty())
 			{
-				l.add(strIn);
+				l.add(intern(strIn));
 			}
 			else
 			{
 				final StringTokenizer sToken = new StringTokenizer(strIn, strSep);
 				while (sToken.hasMoreTokens())
 				{
-					l.add(StringCache.getString(sToken.nextToken()));
+					l.add(intern(sToken.nextToken()));
 				}
 			}
 		}
@@ -896,7 +894,7 @@ public class StringUtil
 
 			if (index < v.size())
 			{
-				return v.get(index);
+				return intern(v.get(index));
 			}
 
 			return null;
@@ -911,7 +909,7 @@ public class StringUtil
 			s = st.nextToken();
 			if (n++ == index)
 			{
-				return s;
+				return intern(s);
 			}
 		}
 		return null;
@@ -930,15 +928,14 @@ public class StringUtil
 	 */
 	public static String replaceCharSet(String strWork, final String charSet, final String replaceString, final int offset)
 	{
-		if (charSet == null)
+		if (charSet != null)
 		{
-			return strWork;
+			for (int i = 0; i < charSet.length(); i++)
+			{
+				strWork = replaceChar(strWork, charSet.charAt(i), replaceString, offset);
+			}
 		}
-		for (int i = 0; i < charSet.length(); i++)
-		{
-			strWork = replaceChar(strWork, charSet.charAt(i), replaceString, offset);
-		}
-		return strWork;
+		return intern(strWork);
 	}
 
 	/**
@@ -984,7 +981,7 @@ public class StringUtil
 			lastPos = pos >= 0 ? pos + 1 : pos;
 		}
 
-		return b.toString();
+		return intern(b.toString());
 	}
 
 	/**
@@ -1081,7 +1078,7 @@ public class StringUtil
 			final String outString = b.toString();
 			final int lenOut = outString.length();
 
-			return lenOut == lenIn || !reRead ? outString : StringUtil.replaceString(outString, toReplace, replaceBy);
+			return lenOut == lenIn || !reRead ? intern(outString) : StringUtil.replaceString(outString, toReplace, replaceBy);
 		}
 	}
 
@@ -1172,7 +1169,7 @@ public class StringUtil
 		strWork = strWork.replaceAll("\\s+", replace);
 		if (toLower)
 			strWork = strWork.toLowerCase();
-		return strWork;
+		return intern(strWork);
 	}
 
 	/**
@@ -1289,7 +1286,7 @@ public class StringUtil
 	 */
 	public static String getNonEmpty(final String s)
 	{
-		return isEmpty(s) ? null : s;
+		return isEmpty(s) ? null : s.intern();
 	}
 
 	/**
@@ -1672,7 +1669,7 @@ public class StringUtil
 			}
 		}
 
-		return strTextLocal;
+		return intern(strTextLocal);
 	}
 
 	private static boolean isValidXML10Char(final char c)
@@ -1876,7 +1873,7 @@ public class StringUtil
 		{
 			target = new char[0]; // should never reached
 		}
-		return new String(target);
+		return intern(new String(target));
 	}
 
 	/**
@@ -1943,7 +1940,7 @@ public class StringUtil
 		{
 			target = new char[0];
 		}
-		return new String(target);
+		return intern(new String(target));
 	}
 
 	/**
@@ -2071,11 +2068,11 @@ public class StringUtil
 				{
 					s = new String(utf8, "Cp1252");
 				}
-				return s;
+				return intern(s);
 			}
 			catch (final UnsupportedEncodingException e)
 			{
-				return new String(utf8, StandardCharsets.UTF_8);
+				return intern(new String(utf8, StandardCharsets.UTF_8));
 			}
 		}
 		return null;
@@ -2140,7 +2137,7 @@ public class StringUtil
 		{
 			s = String.valueOf(i);
 		}
-		return s;
+		return intern(s);
 	}
 
 	/**
@@ -2785,7 +2782,7 @@ public class StringUtil
 		}
 		if (v.size() == 1)
 		{
-			return StringUtils.isAllUpperCase(v.get(0)) ? StringUtils.capitalize(v.get(0).toLowerCase()) : StringUtils.capitalize(v.get(0));
+			return intern(StringUtils.isAllUpperCase(v.get(0)) ? StringUtils.capitalize(v.get(0).toLowerCase()) : StringUtils.capitalize(v.get(0)));
 		}
 		else
 		{
@@ -2794,7 +2791,7 @@ public class StringUtil
 			{
 				ret += StringUtils.capitalize(s.toLowerCase());
 			}
-			return ret;
+			return intern(ret);
 		}
 	}
 
@@ -2881,7 +2878,7 @@ public class StringUtil
 
 			simpleRegExp = b.toString();
 		}
-		return simpleRegExp;
+		return intern(simpleRegExp);
 	}
 
 	/**
@@ -3229,7 +3226,7 @@ public class StringUtil
 			if (str.startsWith(quote) && str.endsWith(quote))
 				str = str.substring(1, str.length() - 1);
 		}
-		return str;
+		return intern(str);
 	}
 
 	/**
@@ -3254,7 +3251,7 @@ public class StringUtil
 			}
 
 		}
-		return b.length() > 0 ? b.toString() : null;
+		return b.length() > 0 ? intern(b.toString()) : null;
 	}
 
 	/**
@@ -3300,7 +3297,7 @@ public class StringUtil
 			}
 		}
 		final String trimmed = work.substring(nStart, nEnd);
-		return trimmed.length() > 0 ? trimmed : null;
+		return getNonEmpty(trimmed);
 	}
 
 	/**
@@ -3339,6 +3336,11 @@ public class StringUtil
 		normalized = StringUtil.escape(normalized, UrlUtil.m_URIEscape, "_", -1, 0, 0x20, 0x7f);
 		normalized = StringUtil.replaceString(normalized, "__", JDFConstants.UNDERSCORE);
 		return normalized;
+	}
+
+	public static String intern(final String value)
+	{
+		return value == null ? null : value.intern();
 	}
 
 }

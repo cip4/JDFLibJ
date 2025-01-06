@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -130,7 +130,7 @@ public class NumberFormatter
 				s = '-' + s;
 			}
 		}
-		return s;
+		return StringUtil.intern(s);
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class NumberFormatter
 				s = Integer.toString((int) (d - 0.5));
 			}
 		}
-		return s;
+		return StringUtil.intern(s);
 	}
 
 	private String zappTrailing(String s)

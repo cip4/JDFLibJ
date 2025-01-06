@@ -48,6 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
@@ -257,6 +258,19 @@ class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.isEmpty(""));
 		assertTrue(StringUtil.isEmpty((String) null));
 		assertFalse(StringUtil.isEmpty("a"));
+	}
+
+	/**
+	 * test for getNonEmpty
+	 */
+	@Test
+	void testIntern()
+	{
+		assertSame("", StringUtil.intern(""));
+		assertSame("a", StringUtil.intern("a"));
+		assertSame("a", StringUtil.intern(new String("a")));
+		assertSame("a", StringUtil.trim(new String(" a "), null));
+		assertSame("ab", "a" + "b");
 	}
 
 	/**

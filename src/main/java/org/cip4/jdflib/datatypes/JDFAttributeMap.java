@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -202,12 +202,12 @@ public class JDFAttributeMap extends HashMap<String, String>
 	public String put(final String key, final String value)
 	{
 		// check input parameter (valid or invalid)
-		if (key == null || key.equals(JDFCoreConstants.EMPTYSTRING))
+		if (StringUtil.isEmpty(key))
 		{
 			return null;
 		}
 		// put key value to hashmap. The map returns null if the key was new or an object (the old value) if the value was replaced
-		return super.put(StringCache.getCreateString(key), StringCache.getString(value));
+		return super.put(key.intern(), StringUtil.intern(value));
 	}
 
 	/**

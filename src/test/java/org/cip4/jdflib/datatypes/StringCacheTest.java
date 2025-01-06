@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,12 +38,16 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.VString;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("deprecation")
 class StringCacheTest extends JDFTestCaseBase
 {
 
@@ -53,9 +57,21 @@ class StringCacheTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testAddAll()
 	{
-		Assertions.assertEquals(51, StringCache.size(), 10);
+		assertEquals(0, StringCache.size(), 50);
 		StringCache.addAll(new VString("a b c d e f g h i j"));
-		Assertions.assertEquals(60, StringCache.size(), 10);
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public synchronized void testSame()
+	{
+		final String s1 = StringCache.getCreateString("a");
+		final String s2 = StringCache.getString("a");
+		assertSame(s1, s2);
+		final String s3 = StringCache.getString(new String("a"));
+		assertSame(s1, s3);
 	}
 
 	/**
@@ -68,11 +84,11 @@ class StringCacheTest extends JDFTestCaseBase
 		{
 			StringCache.getCreateString("" + (i % 100));
 		}
-		Assertions.assertEquals(110, StringCache.size(), 10);
+		assertEquals(0, StringCache.size(), 10);
 		StringCache.getCreateString(null);
-		Assertions.assertEquals(111, StringCache.size(), 10);
+		assertEquals(0, StringCache.size(), 10);
 		StringCache.enable(false);
-		Assertions.assertEquals(0, StringCache.size());
+		assertEquals(0, StringCache.size());
 	}
 
 	/**
@@ -87,11 +103,33 @@ class StringCacheTest extends JDFTestCaseBase
 		{
 			StringCache.getString("_" + (i % 100));
 		}
-		Assertions.assertEquals(51, StringCache.size(), 10);
+		assertEquals(0, StringCache.size(), 10);
 		StringCache.getCreateString(null);
-		Assertions.assertEquals(52, StringCache.size(), 10);
+		assertEquals(0, StringCache.size(), 10);
 		StringCache.enable(false);
-		Assertions.assertEquals(0, StringCache.size());
+		assertEquals(0, StringCache.size());
+		StringCache.enable(true);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public synchronized void testGetCreateMany()
+	{
+		for (int i = 0; i < 10000; i++)
+		{
+			StringCache.getCreateString("_" + i);
+		}
+		for (int i = 0; i < 100000; i++)
+		{
+			StringCache.getString("_" + (i % 10000));
+		}
+		assertEquals(0, StringCache.size(), 10);
+		StringCache.getCreateString(null);
+		assertEquals(0, StringCache.size(), 10);
+		StringCache.enable(false);
+		assertEquals(0, StringCache.size());
 		StringCache.enable(true);
 	}
 
@@ -102,7 +140,7 @@ class StringCacheTest extends JDFTestCaseBase
 	public synchronized void testCreateNull()
 	{
 		StringCache.enable(true);
-		Assertions.assertNull(StringCache.getCreateString(null));
+		assertNull(StringCache.getCreateString(null));
 		StringCache.enable(false);
 	}
 
@@ -112,9 +150,7 @@ class StringCacheTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testNull()
 	{
-		StringCache.enable(true);
-		Assertions.assertNull(StringCache.getString(null));
-		StringCache.enable(false);
+		assertNull(StringCache.getString(null));
 	}
 
 	/**

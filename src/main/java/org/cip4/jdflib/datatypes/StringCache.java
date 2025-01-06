@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,20 +48,13 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.Collection;
-import java.util.HashMap;
-
-import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
- *
+ * @deprecated - simply use the jave intern method
  */
+@Deprecated
 public class StringCache
 {
-	static private HashMap<String, String> theSet = null;
 
 	private StringCache()
 	{
@@ -73,33 +66,6 @@ public class StringCache
 	static public void enable(final boolean enable)
 	{
 
-		if (enable && theSet == null)
-		{
-			theSet = new HashMap<>();
-			getCreateString(JDFConstants.EMPTYSTRING);
-			getCreateString(JDFConstants.SLASH);
-			getCreateString(JDFConstants.SPACE);
-			getCreateString(JDFConstants.TRUE);
-			getCreateString(JDFConstants.FALSE);
-			getCreateString(ElementName.JDF);
-			getCreateString(ElementName.JMF);
-			getCreateString(XJDFConstants.XJDF);
-			getCreateString(XJDFConstants.XJMF);
-			getCreateString(new JDFIntegerRange(0, -1).getString(0));
-			getCreateString("-1");
-			for (int i = 0; i < 32; i++)
-			{
-				getCreateString("" + i);
-			}
-			for (final String c : JDFColor.getCMYKSeparations())
-				getCreateString(c);
-			getCreateString(EnumSide.Front.getName());
-			getCreateString(EnumSide.Back.getName());
-		}
-		else if (!enable)
-		{
-			theSet = null;
-		}
 	}
 
 	/**
@@ -109,19 +75,7 @@ public class StringCache
 	 */
 	public static String getCreateString(final String s)
 	{
-		if (theSet != null)
-		{
-			final String s2 = theSet.get(s);
-			if (s2 != null)
-			{
-				return s2;
-			}
-			else
-			{
-				theSet.put(s, s);
-			}
-		}
-		return s;
+		return s == null ? null : s.intern();
 	}
 
 	/**
@@ -132,19 +86,8 @@ public class StringCache
 	 */
 	public static String getString(final String s)
 	{
-		if (theSet != null)
-		{
-			final String s2 = theSet.get(s);
-			if (s2 != null)
-			{
-				return s2;
-			}
-			else if (s != null && s.length() < 3)
-			{
-				theSet.put(s, s);
-			}
-		}
-		return s;
+
+		return s == null ? null : s.intern();
 	}
 
 	/**
@@ -153,7 +96,7 @@ public class StringCache
 	 */
 	public static int size()
 	{
-		return theSet == null ? 0 : theSet.size();
+		return 0;
 	}
 
 	/**
@@ -162,12 +105,5 @@ public class StringCache
 	 */
 	public static void addAll(final Collection<String> c)
 	{
-		if (c != null && theSet != null)
-		{
-			for (final String s : c)
-			{
-				getCreateString(s);
-			}
-		}
 	}
 }
