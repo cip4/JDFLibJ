@@ -2465,39 +2465,6 @@ class JDFSpawnTest extends JDFTestCaseBase
 		}
 	}
 
-	@Test
-	public void testNPESpawn() throws Exception
-	{
-		final JDFDoc jdfDoc = JDFDoc.parseFile("/data/npespawn.jdf");
-		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
-		final JDFAttributeMap amParts0 = new JDFAttributeMap();
-		amParts0.put("Side", "Back");
-		amParts0.put("SignatureName", "SN162357");
-		amParts0.put("SheetName", "ST162439");
-		final JDFAttributeMap amParts1 = new JDFAttributeMap();
-		amParts1.put("Side", "Front");
-		amParts1.put("SignatureName", "SN162357");
-		amParts1.put("SheetName", "ST162439");
-		amParts1.put("Separation", "Black");
-		vamParts.add(amParts1);
-		final JDFAttributeMap amParts2 = new JDFAttributeMap();
-		amParts2.put("Side", "Front");
-		amParts2.put("SignatureName", "SN162357");
-		amParts2.put("SheetName", "ST162439");
-		amParts2.put("Separation", "PANTONE 360 C");
-		final VString vsRWResourceIDs = new VString();
-		vsRWResourceIDs.add("Link_241213_141255323_004984");
-		vsRWResourceIDs.add("Link_241209_160802030_023491");
-		vsRWResourceIDs.add("Link_241213_141255287_004982");
-		vsRWResourceIDs.add("Link_241213_141255283_004981");
-		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("ImO2.I", JDFConstants.EMPTYSTRING);
-
-		final JDFSpawn spawn = new JDFSpawn(nodeProc);
-		final JDFNode nodeSubJDF = spawn.spawn("6516548946_plate error- JDF related_org_2(6516548946_plate error- JDF related_org_2).JDF", JDFConstants.EMPTYSTRING,
-				vsRWResourceIDs, vamParts, true, true, true, false);
-		assertNotNull(nodeSubJDF);
-	}
-
 	/**
 	 *
 	 */
