@@ -70,7 +70,7 @@ public class VString extends Vector<String>
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public String set(final int index, final String e)
+	public synchronized String set(final int index, final String e)
 	{
 		return super.set(index, StringUtil.intern(e));
 	}
@@ -90,7 +90,7 @@ public class VString extends Vector<String>
 	final public static VString emptyVector = new VString();
 
 	@Override
-	public boolean add(final String e)
+	public synchronized boolean add(final String e)
 	{
 		return super.add(StringUtil.intern(e));
 	}

@@ -622,9 +622,12 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param nameSpaceURI the namespace the element is in
 	 * @throws JDFException if no settings of its attributes are possible
 	 */
-	public void setAttribute(final String key, final String value, final String nameSpaceURI)
+	public void setAttribute(String key, String value, String nameSpaceURI)
 	{
 		final Document d = getOwnerDocument();
+		key = StringUtil.intern(key);
+		value = StringUtil.intern(value);
+		nameSpaceURI = StringUtil.intern(nameSpaceURI);
 		if ((d instanceof DocumentXMLImpl) && !((DocumentXMLImpl) d).isStrictNSCheck())
 		{
 			super.setAttributeNS(nameSpaceURI, key, value);
@@ -898,7 +901,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 */
 	public void setAttributeRaw(final String key, final String value)
 	{
-		super.setAttribute(key, value);
+		super.setAttribute(StringUtil.intern(key), StringUtil.intern(value));
 	}
 
 	/**
@@ -910,7 +913,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 */
 	public void setAttributeNSRaw(final String ns, final String key, final String value)
 	{
-		super.setAttributeNS(ns, key, value);
+		super.setAttributeNS(StringUtil.intern(ns), StringUtil.intern(key), StringUtil.intern(value));
 	}
 
 	/**
@@ -1696,9 +1699,10 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param nameSpaceURI
 	 * @return KElement
 	 */
-	private KElement createChildFromName(final String elementName, final String nameSpaceURI)
+	private KElement createChildFromName(String elementName, final String nameSpaceURI)
 	{
 		KElement newChild = null;
+		elementName = StringUtil.intern(elementName);
 		final DocumentXMLImpl ownerDoc = (DocumentXMLImpl) getOwnerDocument();
 
 		if (nameSpaceURI == null || JDFCoreConstants.EMPTYSTRING.equals(nameSpaceURI))
@@ -1730,7 +1734,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		}
 		else
 		{ // /////////////// DOM Level 2 ////////////////
-			newChild = ownerDoc.factoryCreate(this, nameSpaceURI, elementName);
+			newChild = ownerDoc.factoryCreate(this, StringUtil.intern(nameSpaceURI), elementName);
 		}
 
 		return newChild;
