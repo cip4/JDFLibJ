@@ -2307,15 +2307,12 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="ScavengerArea" substitutionGroup="SpecificResource" type="ScavengerArea"/>
+	<xs:element name="ScavengerArea" type="ScavengerArea"/>
 	<xs:complexType name="ScavengerArea">
-		<xs:complexContent>
-			<xs:extension base="SpecificResource">
-				<xs:attribute name="Center" type="XYPair" use="required"/>
-				<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
-				<xs:attribute name="Size" type="XYPair" use="optional"/>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:attribute name="Center" type="XYPair" use="required"/>
+		<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
+		<xs:attribute name="Size" type="XYPair" use="optional"/>
+		<xs:anyAttribute namespace="##other" processContents="lax"/>
 	</xs:complexType>
 	<xs:element name="ShapeCuttingParams" substitutionGroup="SpecificResource" type="ShapeCuttingParams"/>
 	<xs:complexType name="ShapeCuttingParams">
@@ -3045,12 +3042,6 @@
 					<xs:element maxOccurs="unbounded" minOccurs="1" ref="ShapeCut"/>
 				</xs:sequence>
 			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:element name="SizeIntent" substitutionGroup="ProductIntent" type="SizeIntent"/>
-	<xs:complexType name="SizeIntent">
-		<xs:complexContent>
-			<xs:extension base="ProductIntent"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:element name="Address">
@@ -4166,14 +4157,14 @@
 			<xs:attribute name="DataType" use="optional">
 				<xs:simpleType>
 					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="xs:string"/>
-						<xs:enumeration value="xs:int"/>
-						<xs:enumeration value="xs:float"/>
-						<xs:enumeration value="xs:NMTOKEN"/>
-						<xs:enumeration value="xs:boolean"/>
-						<xs:enumeration value="xs:dateTime"/>
-						<xs:enumeration value="xs:duration"/>
+						<xs:enumeration value="boolean"/>
+						<xs:enumeration value="dateTime"/>
+						<xs:enumeration value="duration"/>
+						<xs:enumeration value="float"/>
+						<xs:enumeration value="integer"/>
 						<xs:enumeration value="NamedFeature"/>
+						<xs:enumeration value="NMTOKEN"/>
+						<xs:enumeration value="string"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

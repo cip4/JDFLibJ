@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -167,9 +167,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @param exactMap the map that must be present
 	 * @return
 	 */
-	public boolean hasPartition(JDFAttributeMap exactMap)
+	public boolean hasPartition(final JDFAttributeMap exactMap)
 	{
-		VJDFAttributeMap partMapVector = getPartMapVector();
+		final VJDFAttributeMap partMapVector = getPartMapVector();
 		if (JDFAttributeMap.isEmpty(exactMap))
 		{
 			return VJDFAttributeMap.isEmpty(partMapVector);
@@ -671,9 +671,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setGeneralID(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void setGeneralID(final String idUsage, final String idValue)
+	public JDFGeneralID setGeneralID(final String idUsage, final String idValue)
 	{
-		super.setGeneralID(idUsage, idValue);
+		return super.setGeneralID(idUsage, idValue);
 	}
 
 	/**
@@ -698,7 +698,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 		{
 			return new ResourceHelper(null);
 		}
-		KElement newElement = theElement.getParentNode_KElement().copyElement(theElement, theElement.getNextSiblingElement());
+		final KElement newElement = theElement.getParentNode_KElement().copyElement(theElement, theElement.getNextSiblingElement());
 		return new ResourceHelper(newElement);
 	}
 

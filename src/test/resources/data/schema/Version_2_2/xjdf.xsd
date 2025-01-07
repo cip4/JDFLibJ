@@ -3044,12 +3044,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:element name="SizeIntent" substitutionGroup="ProductIntent" type="SizeIntent"/>
-	<xs:complexType name="SizeIntent">
-		<xs:complexContent>
-			<xs:extension base="ProductIntent"/>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:element name="Address">
 		<xs:complexType>
 			<xs:sequence>
@@ -4163,14 +4157,14 @@
 			<xs:attribute name="DataType" use="optional">
 				<xs:simpleType>
 					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="xs:string"/>
-						<xs:enumeration value="xs:int"/>
-						<xs:enumeration value="xs:float"/>
-						<xs:enumeration value="xs:NMTOKEN"/>
-						<xs:enumeration value="xs:boolean"/>
-						<xs:enumeration value="xs:dateTime"/>
-						<xs:enumeration value="xs:duration"/>
+						<xs:enumeration value="boolean"/>
+						<xs:enumeration value="dateTime"/>
+						<xs:enumeration value="duration"/>
+						<xs:enumeration value="float"/>
+						<xs:enumeration value="integer"/>
 						<xs:enumeration value="NamedFeature"/>
+						<xs:enumeration value="NMTOKEN"/>
+						<xs:enumeration value="string"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>

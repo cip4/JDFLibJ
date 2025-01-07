@@ -59,6 +59,7 @@ import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.ICSVersion;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
@@ -1375,9 +1376,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setGeneralID(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void setGeneralID(final String idUsage, final String idValue)
+	public JDFGeneralID setGeneralID(final String idUsage, final String idValue)
 	{
-		super.setGeneralID(idUsage, idValue);
+		return super.setGeneralID(idUsage, idValue);
 	}
 
 }

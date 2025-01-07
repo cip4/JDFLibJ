@@ -143,8 +143,8 @@
 			<xs:enumeration value="Carton"/>
 			<xs:enumeration value="CollectedStack"/>
 			<xs:enumeration value="CompensatedStack"/>
-			<xs:enumeration value="Product"/>
 			<xs:enumeration value="Pallet"/>
+			<xs:enumeration value="Product"/>
 			<xs:enumeration value="Roll"/>
 			<xs:enumeration value="Sheet"/>
 			<xs:enumeration value="Stack"/>
@@ -616,7 +616,7 @@
 			<xs:enumeration value="OK"/>
 			<xs:enumeration value="NeedsAttention"/>
 			<xs:enumeration value="Failure"/>
-			<xs:enumeration value="OffLine"/>
+			<xs:enumeration value="Offline"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="DeviceStatus">
@@ -910,6 +910,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Activity"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Employee"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Event"/>
 				<xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="JobPhase"/>
@@ -928,6 +929,17 @@
 			<xs:attribute name="StatusDetails" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
 			<xs:attribute name="TotalProductionCounter" type="xs:float" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Employee">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Person"/>
+			</xs:sequence>
+			<xs:attribute name="CostCenterID" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="PersonalID" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="Role" type="xs:NMTOKEN" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -1010,9 +1022,13 @@
 	</xs:element>
 	<xs:element name="ModuleInfo">
 		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
+			</xs:sequence>
 			<xs:attribute name="HourCounter" type="xs:duration" use="optional"/>
 			<xs:attribute name="ModuleCondition" type="DeviceCondition" use="optional"/>
 			<xs:attribute name="ModuleID" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="ModuleType" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ProductionCounter" type="xs:float" use="optional"/>
 			<xs:attribute name="Status" type="DeviceStatus" use="required"/>
 			<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
@@ -4182,14 +4198,14 @@
 			<xs:attribute name="DataType" use="optional">
 				<xs:simpleType>
 					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="xs:string"/>
-						<xs:enumeration value="xs:int"/>
-						<xs:enumeration value="xs:float"/>
-						<xs:enumeration value="xs:NMTOKEN"/>
-						<xs:enumeration value="xs:boolean"/>
-						<xs:enumeration value="xs:dateTime"/>
-						<xs:enumeration value="xs:duration"/>
+						<xs:enumeration value="boolean"/>
+						<xs:enumeration value="dateTime"/>
+						<xs:enumeration value="duration"/>
+						<xs:enumeration value="float"/>
+						<xs:enumeration value="integer"/>
 						<xs:enumeration value="NamedFeature"/>
+						<xs:enumeration value="NMTOKEN"/>
+						<xs:enumeration value="string"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
@@ -5237,6 +5253,9 @@
 	<xs:complexType name="SheetOptimizingReport">
 		<xs:complexContent>
 			<xs:extension base="SpecificResource">
+				<xs:sequence>
+					<xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
+				</xs:sequence>
 				<xs:attribute name="AreaUse" type="Use" use="required"/>
 				<xs:attribute name="BackUse" type="Use" use="optional"/>
 				<xs:attribute name="DateSpread" type="xs:duration" use="optional"/>

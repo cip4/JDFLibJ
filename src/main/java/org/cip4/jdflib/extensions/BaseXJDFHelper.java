@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
@@ -431,12 +432,13 @@ public abstract class BaseXJDFHelper
 	 * @param idUsage
 	 * @param idValue
 	 */
-	void setGeneralID(final String idUsage, final String idValue)
+	JDFGeneralID setGeneralID(final String idUsage, final String idValue)
 	{
 		if (theElement instanceof JDFElement)
 		{
-			((JDFElement) theElement).setGeneralID(idUsage, idValue);
+			return ((JDFElement) theElement).setGeneralID(idUsage, idValue);
 		}
+		return null;
 	}
 
 	/**

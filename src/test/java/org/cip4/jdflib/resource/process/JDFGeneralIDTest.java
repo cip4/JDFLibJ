@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,8 +73,11 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -85,7 +88,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class JDFGeneralIDTest extends JDFTestCaseBase
 {
@@ -96,9 +99,9 @@ class JDFGeneralIDTest extends JDFTestCaseBase
 	@Test
 	void testMatches()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		JDFGeneralID gid1 = n.appendGeneralID("foo", "bar");
-		JDFGeneralID gid2 = n.appendGeneralID("foo", "bar");
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFGeneralID gid1 = n.appendGeneralID("foo", "bar");
+		final JDFGeneralID gid2 = n.appendGeneralID("foo", "bar");
 		Assertions.assertTrue(gid1.matches(gid2));
 		Assertions.assertTrue(gid1.matches("bar"));
 		gid2.setIDValue("notBar");
@@ -116,8 +119,24 @@ class JDFGeneralIDTest extends JDFTestCaseBase
 		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setVersion(EnumVersion.Version_1_4);
 		root.setType(EnumType.Tiling);
-		JDFGeneralID gid = root.appendGeneralID("Foo", "Bar", EnumDataType.NamedFeature);
+		final JDFGeneralID gid = root.appendGeneralID("Foo", "Bar", EnumDataType.NamedFeature);
 		checkSchema(gid, EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testXJDFDataType()
+	{
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
+		root.setVersion(EnumVersion.Version_1_4);
+		root.setType(EnumType.Tiling);
+		final JDFGeneralID gid = root.appendGeneralID("Foo", "Bar", EnumDataType.NamedFeature);
+		gid.setXJDFDataType(EnumDataType.double_);
+		assertEquals("float", gid.getAttribute(AttributeName.DATATYPE));
+		assertEquals(EnumDataType.double_, gid.getDataType());
 	}
 
 }

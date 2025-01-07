@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,7 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoGeneralID;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
@@ -91,42 +92,68 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFGeneralID extends JDFAutoGeneralID implements IMatches
 {
+	private static final String DOUBLE = "double";
+	private static final String FLOAT = "float";
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFGeneralID
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
 	 * 
 	 */
-	public JDFGeneralID(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFGeneralID(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFGeneralID
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
 	 * 
 	 */
-	public JDFGeneralID(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFGeneralID(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFGeneralID
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 * 
 	 */
-	public JDFGeneralID(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFGeneralID(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * (5) set attribute DataType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setXJDFDataType(final EnumDataType enumVar)
+	{
+		final String dt = enumVar == null ? null : enumVar.getName();
+		setAttribute(AttributeName.DATATYPE, DOUBLE.equals(dt) ? FLOAT : dt, null);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public EnumDataType getDataType()
+	{
+		final String dt = getNonEmpty(AttributeName.DATATYPE);
+		return EnumDataType.getEnum(FLOAT.equalsIgnoreCase(dt) ? DOUBLE : dt);
 	}
 
 	/**
@@ -144,13 +171,13 @@ public class JDFGeneralID extends JDFAutoGeneralID implements IMatches
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 * @param subset
 	 * @return true if it matches
-	*/
+	 */
 	@Override
-	public boolean matches(Object subset)
+	public boolean matches(final Object subset)
 	{
 		if (subset == null)
 		{
-			return true; // null always matches 
+			return true; // null always matches
 		}
 		if (subset instanceof String)
 		{
@@ -158,7 +185,7 @@ public class JDFGeneralID extends JDFAutoGeneralID implements IMatches
 		}
 		if (subset instanceof JDFGeneralID)
 		{
-			JDFGeneralID gid = (JDFGeneralID) subset;
+			final JDFGeneralID gid = (JDFGeneralID) subset;
 			return ContainerUtil.equals(getIDUsage(), gid.getIDUsage()) && StringUtil.matches(getIDValue(), gid.getIDValue());
 		}
 		return false;

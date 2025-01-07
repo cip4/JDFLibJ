@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,6 +49,7 @@ import java.util.Set;
 import javax.xml.validation.SchemaFactory;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -65,6 +66,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
@@ -499,6 +501,26 @@ class XJDFSchemaTest extends JDFTestCaseBase
 		d.setDeviceID("id");
 		final KElement root = h.getRoot();
 		assertTrue(reparse(root, 2, -1));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGeneralID()
+	{
+		for (final Object o : EnumDataType.getEnumList())
+		{
+			final EnumDataType dt = (EnumDataType) o;
+			final XJDFHelper h = new XJDFHelper("j1", "p", null);
+			h.addType(org.cip4.jdflib.node.JDFNode.EnumType.Product);
+			final JDFGeneralID gid = h.setGeneralID("foo", "bar");
+			gid.setXJDFDataType(dt);
+			final KElement root = h.getRoot();
+			h.cleanUp();
+			assertTrue(reparse(root, 2, 3));
+		}
 
 	}
 
