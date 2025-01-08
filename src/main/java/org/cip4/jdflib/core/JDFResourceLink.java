@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1101,6 +1101,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		final VJDFAttributeMap vPartMap = getPartMapVector();
 		final int nPartChildren = vPartMap == null ? 0 : vPartMap.size();
 		final JDFResource root = getLinkRoot();
+		if (root == null)
+			return null;
 
 		final List<JDFResource> leaves = root.getLeafArray(false);
 		// loop over resource leaves
@@ -1128,7 +1130,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			}
 		}
 
-		return vMap.size() == 0 ? null : vMap;
+		return vMap.isEmpty() ? null : vMap;
 	}
 
 	/**
