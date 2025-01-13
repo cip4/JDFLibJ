@@ -82,6 +82,12 @@
 			<xs:length value="4"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="Percentage">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TransferFunction">
 		<xs:restriction base="FloatList"/>
 	</xs:simpleType>
@@ -227,12 +233,12 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="LooseBindMaterial">
-	<xs:restriction base="xs:NMTOKEN">
-		<xs:enumeration value="Steel"/>
-		<xs:enumeration value="ColorCoatedSteel"/>
-		<xs:enumeration value="Plastic"/>
-	</xs:restriction>
-    </xs:simpleType>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Steel"/>
+			<xs:enumeration value="ColorCoatedSteel"/>
+			<xs:enumeration value="Plastic"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="EnumEmbossDirection">
 		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Both"/>
@@ -1006,7 +1012,7 @@
 			<xs:attribute name="JobID" type="xs:NMTOKEN" use="required"/>
 			<xs:attribute name="JobPartID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ModuleIDs" type="xs:NMTOKENS" use="optional"/>
-			<xs:attribute name="PercentCompleted" type="xs:float" use="optional"/>
+			<xs:attribute name="PercentCompleted" type="Percentage" use="optional"/>
 			<xs:attribute name="QueueEntryID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RelatedJobID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RelatedJobPartID" type="xs:NMTOKEN" use="optional"/>
@@ -3784,7 +3790,7 @@
 					</xs:simpleType>
 				</xs:attribute>
 				<xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>
-				<xs:attribute name="Powder" type="xs:float" use="optional"/>
+				<xs:attribute name="Powder" type="Percentage" use="optional"/>
 				<xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
 				<xs:attribute name="Speed" type="xs:float" use="optional"/>
 				<xs:attribute name="WorkStyle" type="WorkStyle" use="optional"/>
@@ -3935,7 +3941,7 @@
 					</xs:simpleType>
 				</xs:attribute>
 				<xs:attribute name="Rotated" type="xs:boolean" use="optional"/>
-				<xs:attribute name="Waste" type="xs:float" use="optional"/>
+				<xs:attribute name="Waste" type="Percentage" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -4540,7 +4546,7 @@
 				</xs:attribute>
 				<xs:attribute name="Polarity" type="Polarity" use="optional"/>
 				<xs:attribute name="PrintingTechnology" type="xs:NMTOKEN" use="optional"/>
-				<xs:attribute name="RecycledPercentage" type="xs:float" use="optional"/>
+				<xs:attribute name="RecycledPercentage" type="Percentage" use="optional"/>
 				<xs:attribute name="ReliefThickness" type="xs:float" use="optional"/>
 				<xs:attribute name="RollDiameter" type="xs:float" use="optional"/>
 				<xs:attribute name="ShrinkIndex" type="XYPair" use="optional"/>

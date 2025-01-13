@@ -50,6 +50,7 @@ import javax.xml.validation.SchemaFactory;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -67,6 +68,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
@@ -502,6 +504,30 @@ class XJDFSchemaTest extends JDFTestCaseBase
 		final KElement root = h.getRoot();
 		assertTrue(reparse(root, 2, -1));
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testPercentValidate()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p", null);
+		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.Product);
+		final JDFMedia m = (JDFMedia) h.getCreateSet(ElementName.MEDIA, EnumUsage.Input).getCreateResource().getResource();
+		m.setMediaType(EnumMediaType.Paper);
+		final KElement root = h.getRoot();
+		assertTrue(reparse(root, 2, -1));
+		m.setRecycledPercentage(42);
+		assertTrue(reparse(root, 2, -1));
+		m.setRecycledPercentage(0);
+		assertTrue(reparse(root, 2, -1));
+		m.setRecycledPercentage(100);
+		assertTrue(reparse(root, 2, -1));
+		m.setAttribute(AttributeName.RECYCLEDPERCENTAGE, 429, null);
+		assertFalse(reparse(root, 2, -1));
+		m.setAttribute(AttributeName.RECYCLEDPERCENTAGE, -1, null);
+		assertFalse(reparse(root, 2, -1));
 	}
 
 	/**

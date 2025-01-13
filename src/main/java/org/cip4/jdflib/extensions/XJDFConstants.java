@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -42,6 +42,7 @@ public abstract class XJDFConstants
 {
 	public static final String AreaUse = "AreaUse";
 	public static final String AssemblingIntent = "AssemblingIntent";
+	public static final String AssemblyItem = "AssemblyItem";
 
 	public static final String AuditCreated = "AuditCreated";
 	public static final String AuditNotification = "AuditNotification";
@@ -63,6 +64,7 @@ public abstract class XJDFConstants
 
 	public static final String ChannelBindingDetails = "ChannelBindingDetails";
 	public static final String ChildProduct = "ChildProduct";
+	public static final String ChildRef = "ChildRef";
 	public static final String ChildRefs = "ChildRefs";
 	public static final String Coating = "Coating";
 	public static final String CoatingDetail = "CoatingDetail";

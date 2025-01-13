@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -433,5 +433,18 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 			removeAttribute(AttributeName.GRADE);
 		else
 			throw new IllegalArgumentException("Invalid grade (1-5); " + grade);
+	}
+
+	/**
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoMedia#setRecycledPercentage(double)
+	 * @throws IllegalArgumentException if value<0 or >100
+	 */
+	@Override
+	public void setRecycledPercentage(final double value)
+	{
+		if (value < 0 || value > 100)
+			throw new IllegalArgumentException("Invalid RecycledPercentage (0-100); " + value);
+		super.setRecycledPercentage(value);
 	}
 }

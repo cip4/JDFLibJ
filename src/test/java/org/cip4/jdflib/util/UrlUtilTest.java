@@ -824,6 +824,8 @@ class UrlUtilTest extends JDFTestCaseBase
 			assertEquals("file:/a/4%25.txt", UrlUtil.fileToUrl(new File("/a/4%.txt"), false));
 		}
 		assertEquals("a,b.txt", UrlUtil.getFileName(UrlUtil.fileToUrl(new File("a,b.txt"), false), null));
+		final String hash = UrlUtil.fileToUrl(new File("a#b.txt"), false);
+		assertEquals("a%23b.txt", StringUtil.token(hash, -1, "/"));
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -55,8 +55,10 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -75,7 +77,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
 	 */
 	@Test
-	public final void testSetGetDimension()
+	final void testSetGetDimension()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
@@ -114,7 +116,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testThicknessFromWeight()
+	final void testThicknessFromWeight()
 	{
 		final JDFMedia m = (JDFMedia) new JDFDoc("Media").getRoot();
 		m.setThicknessFromWeight(true, false);
@@ -134,7 +136,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testGetBackGrade()
+	final void testGetBackGrade()
 	{
 		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setGrade(5);
@@ -153,7 +155,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testGetGrade()
+	final void testGetGrade()
 	{
 		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setISOPaperSubstrate(EnumISOPaperSubstrate.PS4);
@@ -165,7 +167,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testSetGrade()
+	final void testSetGrade()
 	{
 		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setGrade(3);
@@ -180,7 +182,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testGradeFromISOGrade()
+	final void testGradeFromISOGrade()
 	{
 		assertEquals(1, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS1));
 		assertEquals(0, JDFMedia.getGradeFromIsoPaper(null));
@@ -193,7 +195,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testISOGrade()
+	final void testISOGrade()
 	{
 		for (int i = 1; i <= 5; i++)
 		{
@@ -207,7 +209,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 * 1.5 enums...
 	 */
 	@Test
-	public final void testMediaType()
+	final void testMediaType()
 	{
 		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
 		m.setMediaType(EnumMediaType.Vinyl);
@@ -219,7 +221,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testHoleType()
+	final void testHoleType()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode root = doc.getJDFRoot();
@@ -261,7 +263,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testMatches()
+	final void testMatches()
 	{
 		final JDFDoc doc = new JDFDoc("Media");
 		final JDFMedia m = (JDFMedia) doc.getRoot();
@@ -289,7 +291,7 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
-	public final void testMatchesBrand()
+	final void testMatchesBrand()
 	{
 		final JDFDoc doc = new JDFDoc("Media");
 		final JDFMedia m = (JDFMedia) doc.getRoot();
@@ -307,6 +309,23 @@ class JDFMediaTest extends JDFTestCaseBase
 		m.setDimensionCM(new JDFXYPair(10, 20));
 		m2.setDimensionCM(new JDFXYPair(10.1, 20));
 		assertFalse(m.matches(m2));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testPercentValidate()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p", null);
+		h.addType(org.cip4.jdflib.node.JDFNode.EnumType.Product);
+		final JDFMedia m = (JDFMedia) h.getCreateSet(ElementName.MEDIA, EnumUsage.Input).getCreateResource().getResource();
+		m.setMediaType(EnumMediaType.Paper);
+		final KElement root = h.getRoot();
+		m.setRecycledPercentage(42);
+		assertEquals(42, m.getRecycledPercentage(), 0);
+		assertThrows(IllegalArgumentException.class, () -> m.setRecycledPercentage(142));
+		assertThrows(IllegalArgumentException.class, () -> m.setRecycledPercentage(-1));
 	}
 
 	/**
