@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -541,7 +541,8 @@ public class StatusCounter
 		{
 			return;
 		}
-		percentComplete = la.lastBag.totalAmount / la.startAmount * 100.0;
+		setPercentComplete(la.lastBag.totalAmount / la.startAmount * 100.0);
+
 	}
 
 	/**
@@ -1952,7 +1953,7 @@ public class StatusCounter
 	 */
 	public void setPercentComplete(final double percent)
 	{
-		percentComplete = percent;
+		percentComplete = Math.min(100, percent);
 	}
 
 	/**
@@ -1962,7 +1963,7 @@ public class StatusCounter
 	 */
 	public void updatePercentComplete(final double percent)
 	{
-		percentComplete += percent;
+		setPercentComplete(percentComplete + percent);
 	}
 
 	/**

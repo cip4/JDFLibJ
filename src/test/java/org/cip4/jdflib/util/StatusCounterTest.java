@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -182,7 +182,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		final JDFDoc docJMF = sc.getDocJMFPhaseTime();
 		final JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
-		assertEquals(200, deviceInfo.getJobPhase().getPercentCompleted(), 0.1);
+		assertEquals(100, deviceInfo.getJobPhase().getPercentCompleted(), 0.1);
 		sc.setPercentComplete(42);
 		final boolean bChanged2 = sc.setPhase(null, null, null, null);
 		assertFalse(bChanged2);
@@ -271,7 +271,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 			jp = sig.getDeviceInfo(0).getJobPhase(0);
 			assertEquals(jp.getAmount(), 200, 0, "multiple setPhase calls do not modify");
 			assertEquals(rlXM.getActualAmount(new JDFAttributeMap("Condition", "Good")), 200, 0, "multiple setPhase calls do not modify: " + loop);
-			assertEquals(jp.getPercentCompleted(), 200.0, 0, "% " + loop);
+			assertEquals(jp.getPercentCompleted(), 100.0, 0, "% " + loop);
 			sc.addPhase(resID, 0, 100, true);
 			assertEquals(jp.getWaste(), loop * 100, 0, "" + loop);
 			assertEquals(rlXM.getActualAmount(new JDFAttributeMap("Condition", "Waste")), 100 * loop, 0, "multiple setPhase calls do Stack: " + loop);
