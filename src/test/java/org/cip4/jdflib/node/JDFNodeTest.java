@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -146,6 +147,55 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFNode n = creatXMDoc().getJDFRoot();
 		assertNull(n.getLinkedResourceVector(EnumUsage.Output, ElementName.EXPOSEDMEDIA, null, true));
 		assertEquals(n.getLinkedResourceVector(EnumUsage.Input, ElementName.EXPOSEDMEDIA, null, true).size(), 8);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testEnsureValidResPosition()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Product);
+		final JDFNode n1 = n.addProduct();
+		final JDFResource mi = n1.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
+		n1.ensureValidResPosition(mi);
+		assertEquals(n1, mi.getParentJDF());
+		final JDFNode n2 = n.addProduct();
+		final JDFResource loi = n2.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
+		n1.ensureValidResPosition(loi);
+		assertEquals(n, loi.getParentJDF());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testEnsureValidResPositionDeleted()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Product);
+		final JDFNode n1 = n.addProduct();
+		final JDFResource mi = n1.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
+		n.ensureValidResPosition(mi);
+		assertEquals(n, mi.getParentJDF());
+		n.ensureValidResPosition(null);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testEnsureValidResPositionOther()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Product);
+		final JDFNode n1 = JDFNode.createRoot();
+		final JDFResource mi = n1.addResource(ElementName.MEDIAINTENT, EnumUsage.Input);
+		assertThrows(JDFException.class, () -> n.ensureValidResPosition(mi));
 	}
 
 	/**
