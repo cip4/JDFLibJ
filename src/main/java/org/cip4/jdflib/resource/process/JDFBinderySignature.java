@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -132,6 +132,38 @@ public class JDFBinderySignature extends JDFAutoBinderySignature
 			setBinderySignatureType(EnumBinderySignatureType.Fold);
 		}
 		super.setFoldCatalog(value);
+	}
+
+	/**
+	 * 
+	 * @param pages
+	 * @param index
+	 */
+	public void setFoldCatalog(final int pages, final int index)
+	{
+		if (!hasNonEmpty_KElement(AttributeName.BINDERYSIGNATURETYPE))
+		{
+			setBinderySignatureType(EnumBinderySignatureType.Fold);
+		}
+		final String value = getCatalog(pages, index);
+		setFoldCatalog(value);
+	}
+
+	/**
+	 * 
+	 * @param pages
+	 * @param index
+	 * @return the foldcatalog entry
+	 * @throws IllegalArgumentException if pages is noegative or an odd number or index is 0 or negative
+	 */
+	public static String getCatalog(final int pages, final int index)
+	{
+		if (pages < 1 || pages % 2 != 0)
+			throw new IllegalArgumentException("invalid pages for fold catalog: " + pages);
+		if (index < 1)
+			throw new IllegalArgumentException("invalid index for fold catalog: " + index);
+
+		return "F" + pages + "-" + index;
 	}
 
 	/**

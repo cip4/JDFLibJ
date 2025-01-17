@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@
 package org.cip4.jdflib.examples;
 
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
@@ -77,6 +78,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
@@ -91,31 +93,93 @@ class StrippingExampleTest extends ExampleTest
 	@Test
 	void testMultiDieLayout()
 	{
-		JDFNode n = JDFNode.createRoot();
+		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
-		JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
-		JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		as.setAssemblyIDs(new VString("a1 a2 b1 b2"));
 		as.setOrder(EnumOrder.None);
 
-		JDFPosition p1 = sp.appendPosition();
+		final JDFPosition p1 = sp.appendPosition();
 		p1.setRelativeBox(new JDFRectangle(0, 0, 0.5, 1));
 
-		JDFPosition p2 = sp.appendPosition();
+		final JDFPosition p2 = sp.appendPosition();
 		p2.setRelativeBox(new JDFRectangle(0.5, 0, 1, 1));
 
-		JDFBinderySignature bs = sp.appendBinderySignature();
-		JDFDieLayout dlo = bs.appendDieLayout();
-		JDFStation s1 = dlo.appendStation();
+		final JDFBinderySignature bs = sp.appendBinderySignature();
+		final JDFDieLayout dlo = bs.appendDieLayout();
+		final JDFStation s1 = dlo.appendStation();
 		s1.setAssemblyIDs(new VString("a1 b1"));
 		s1.setStationName("S1");
-		JDFStation s2 = dlo.appendStation();
+		final JDFStation s2 = dlo.appendStation();
 		s2.setAssemblyIDs(new VString("a2 b2"));
 		s2.setStationName("S2");
 
-		JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
 		lo.setDescriptiveName("dummy layout");
 		writeRoundTrip(n, "MultiDieLayout");
 
+	}
+
+	@Test
+	void testMultiPosition()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Stripping);
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		final JDFStrippingParams spLeaf = (JDFStrippingParams) sp.getCreatePartition(EnumPartIDKey.SignatureName, "Sig1", null).getCreatePartition(EnumPartIDKey.SheetName,
+				"Sheet1", null);
+		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		as.setAssemblyIDs(new VString("BS1"));
+		as.setOrder(EnumOrder.Collecting);
+
+		final JDFPosition p1 = spLeaf.appendPosition();
+		p1.setRelativeBox(new JDFRectangle(0, 0, 0.5, 1));
+
+		final JDFPosition p2 = spLeaf.appendPosition();
+		p2.setRelativeBox(new JDFRectangle(0.5, 0, 1, 1));
+
+		spLeaf.setAssemblyIDs(new VString("BS1"));
+
+		final JDFBinderySignature bs = spLeaf.appendBinderySignature();
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs.setFoldCatalog(8, 1);
+		bs.makeRootResource();
+
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
+		lo.setDescriptiveName("dummy layout");
+		writeRoundTrip(n, "MultiPosition");
+	}
+
+	@Test
+	void testMultiSection()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType(EnumType.Stripping);
+		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		final JDFStrippingParams spLeaf = (JDFStrippingParams) sp.getCreatePartition(EnumPartIDKey.SignatureName, "Sig1", null).getCreatePartition(EnumPartIDKey.SheetName,
+				"Sheet1", null);
+		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		as.setAssemblyIDs(new VString("BS1 BS2"));
+		as.setOrder(EnumOrder.Collecting);
+
+		final JDFStrippingParams spLeaf1 = (JDFStrippingParams) spLeaf.getCreatePartition(EnumPartIDKey.BinderySignatureName, "BS1", null);
+		final JDFPosition p1 = spLeaf1.appendPosition();
+		p1.setRelativeBox(new JDFRectangle(0, 0, 0.5, 1));
+		spLeaf1.setAssemblyIDs(new VString("BS1"));
+
+		final JDFStrippingParams spLeaf2 = (JDFStrippingParams) spLeaf.getCreatePartition(EnumPartIDKey.BinderySignatureName, "BS1", null);
+		final JDFPosition p2 = spLeaf2.appendPosition();
+		p2.setRelativeBox(new JDFRectangle(0.5, 0, 1, 1));
+		spLeaf2.setAssemblyIDs(new VString("BS2"));
+
+		JDFBinderySignature bs = spLeaf.appendBinderySignature();
+		bs.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		bs.setFoldCatalog(8, 1);
+		bs = (JDFBinderySignature) bs.makeRootResource();
+
+		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
+		lo.setDescriptiveName("dummy layout");
+		writeRoundTrip(n, "MultiSection");
 	}
 }

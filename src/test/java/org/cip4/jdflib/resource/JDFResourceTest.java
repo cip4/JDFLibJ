@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -503,7 +503,7 @@ class JDFResourceTest extends JDFTestCaseBase
 		final JDFResourcePool p = n.appendResourcePool();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
 		final JDFMedia m = xm.appendMedia();
-		final JDFMedia m2 = (JDFMedia) m.makeRootResource(null, null, true);
+		final JDFMedia m2 = (JDFMedia) m.makeRootResource();
 		assertEquals(m, m2);
 		assertEquals(m2.getParentNode_KElement(), p);
 	}

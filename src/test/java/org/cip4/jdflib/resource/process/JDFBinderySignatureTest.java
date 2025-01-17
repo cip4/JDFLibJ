@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,11 +36,13 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class JDFBinderySignatureTest extends JDFTestCaseBase
@@ -55,7 +57,25 @@ class JDFBinderySignatureTest extends JDFTestCaseBase
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setFoldCatalog("F4-1");
-		Assertions.assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
+		assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testSetFoldCatalogInt()
+	{
+		assertEquals("F4-1", JDFBinderySignature.getCatalog(4, 1));
+		assertEquals("F6-3", JDFBinderySignature.getCatalog(6, 3));
+		assertThrows(IllegalArgumentException.class, () -> JDFBinderySignature.getCatalog(5, 3));
+		assertThrows(IllegalArgumentException.class, () -> JDFBinderySignature.getCatalog(-6, 3));
+		assertThrows(IllegalArgumentException.class, () -> JDFBinderySignature.getCatalog(6, -3));
+
+		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
+		bs.setFoldCatalog(2, 1);
+		assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
 	}
 
 	/**
@@ -67,7 +87,7 @@ class JDFBinderySignatureTest extends JDFTestCaseBase
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.setNumberUp(3, 3);
-		Assertions.assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
+		assertEquals(EnumBinderySignatureType.Fold, bs.getBinderySignatureType());
 	}
 
 	/**
@@ -79,7 +99,7 @@ class JDFBinderySignatureTest extends JDFTestCaseBase
 	{
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.appendDieLayout();
-		Assertions.assertEquals(EnumBinderySignatureType.Die, bs.getBinderySignatureType());
+		assertEquals(EnumBinderySignatureType.Die, bs.getBinderySignatureType());
 	}
 
 }
