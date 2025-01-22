@@ -331,7 +331,6 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 		assertEquals("rl", s.get(0).getSet(ElementName.RUNLIST, 0).getExternalID());
 		assertEquals("cp", s.get(1).getSet(ElementName.NODEINFO, 0).getExternalID());
 		assertNull(s.get(1).getSet(ElementName.NODEINFO, 1), "cp");
-
 	}
 
 	/**

@@ -158,6 +158,7 @@ class JavaEnumUtilTest extends JDFTestCaseBase
 			assertEquals(t, JavaEnumUtil.getEnumIgnoreCase(eProductType.class, t.name().toLowerCase()));
 			assertEquals(t, JavaEnumUtil.getEnumIgnoreCase(eProductType.class, t.name(), null));
 			assertEquals(t, JavaEnumUtil.getEnumIgnoreCase(eProductType.class, t.name().toUpperCase(), null));
+			assertEquals(t, JavaEnumUtil.getEnumIgnoreCase(eProductType.class, t.name().toUpperCase() + "   ", null));
 			assertEquals(t, JavaEnumUtil.getEnumIgnoreCase(eProductType.class, "foo", t));
 		}
 		assertNull(JavaEnumUtil.getEnumIgnoreCase(eProductType.class, null, null));

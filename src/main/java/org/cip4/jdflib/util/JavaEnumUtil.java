@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -183,8 +183,9 @@ public class JavaEnumUtil
 	 * @param <T>
 	 * @return
 	 */
-	public static <T extends Enum<T>> T getEnumIgnoreCase(final Class<T> c, final String val, final T def)
+	public static <T extends Enum<T>> T getEnumIgnoreCase(final Class<T> c, String val, final T def)
 	{
+		val = StringUtil.trim(val, null);
 		if (!StringUtil.isEmpty(val))
 		{
 			try
