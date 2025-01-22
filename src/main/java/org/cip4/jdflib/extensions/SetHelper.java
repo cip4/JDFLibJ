@@ -789,11 +789,12 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 					mod = true;
 				}
 			}
-			if (mod)
+			if (!mod)
 			{
-				setCombinedProcessIndex(il);
+				il.add(pos);
 			}
 		}
+		setCombinedProcessIndex(il);
 	}
 
 	/**
