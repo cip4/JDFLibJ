@@ -80,6 +80,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.junit.jupiter.api.Test;
 
@@ -191,6 +192,30 @@ class JavaEnumUtilTest extends JDFTestCaseBase
 		assertEquals(3, JavaEnumUtil.getNameList(c2, true).size());
 		assertEquals(6, JavaEnumUtil.getNameList(c2, false).size());
 		assertTrue(JavaEnumUtil.getNameList(null, true).isEmpty());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetEnumList3()
+	{
+		final Collection<E> c = ContainerUtil.addAll(new ArrayList<>(), E.values());
+		StringArray nameList = JavaEnumUtil.getNameList(c, true);
+		assertEquals(3, nameList.size());
+		Collection<E> roundtrip = JavaEnumUtil.getEnumList(E.class, nameList, true);
+		assertEquals(3, roundtrip.size());
+
+		final Collection<E> c2 = ContainerUtil.addAll(c, E.values());
+		assertEquals(3, JavaEnumUtil.getNameList(c2, true).size());
+		assertEquals(6, JavaEnumUtil.getNameList(c2, false).size());
+		assertTrue(JavaEnumUtil.getNameList(null, true).isEmpty());
+
+		nameList = JavaEnumUtil.getNameList(c, false);
+		roundtrip = JavaEnumUtil.getEnumList(E.class, nameList, true);
+		assertEquals(3, roundtrip.size());
+		roundtrip = JavaEnumUtil.getEnumList(E.class, nameList, false);
+		assertEquals(6, roundtrip.size());
 	}
 
 }

@@ -70,6 +70,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -250,6 +251,29 @@ public class JavaEnumUtil
 			if (unique)
 			{
 				ret.unify();
+			}
+		}
+		return ret;
+	}
+
+	/**
+	 * null safe convenience name list getter
+	 *
+	 * @param esn the enum collection to get the list of names
+	 * @return
+	 */
+	public static <T extends Enum<T>> List<T> getEnumList(final Class<T> c, final Collection<String> strings, final boolean unique)
+	{
+		final ArrayList<T> ret = new ArrayList<T>();
+		if (!StringUtil.isEmpty(strings))
+		{
+			for (final String s : strings)
+			{
+				ContainerUtil.add(ret, getEnumIgnoreCase(c, s));
+			}
+			if (unique)
+			{
+				ContainerUtil.unify(ret);
 			}
 		}
 		return ret;
