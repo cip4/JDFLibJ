@@ -185,9 +185,9 @@ class JavaEnumUtilTest extends JDFTestCaseBase
 	@Test
 	void testGetEnumList2()
 	{
-		final Collection<Enum<?>> c = ContainerUtil.addAll(new ArrayList<>(), E.values());
+		final Collection<E> c = ContainerUtil.addAll(new ArrayList<>(), E.values());
 		assertEquals(3, JavaEnumUtil.getNameList(c, true).size());
-		final Collection<Enum<?>> c2 = ContainerUtil.addAll(c, E.values());
+		final Collection<E> c2 = ContainerUtil.addAll(c, E.values());
 		assertEquals(3, JavaEnumUtil.getNameList(c2, true).size());
 		assertEquals(6, JavaEnumUtil.getNameList(c2, false).size());
 		assertTrue(JavaEnumUtil.getNameList(null, true).isEmpty());

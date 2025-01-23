@@ -233,12 +233,12 @@ public class JavaEnumUtil
 	}
 
 	/**
-	 * null safe convenience name listgetter
+	 * null safe convenience name list getter
 	 *
-	 * @param en the enum to get the name of the class
+	 * @param esn the enum collection to get the list of names
 	 * @return
 	 */
-	public static StringArray getNameList(final Collection<Enum<?>> esn, final boolean unique)
+	public static <T extends Enum<T>> StringArray getNameList(final Collection<T> esn, final boolean unique)
 	{
 		final StringArray ret = new StringArray();
 		if (!ContainerUtil.isEmpty(esn))
