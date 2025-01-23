@@ -70,6 +70,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.cip4.jdflib.core.StringArray;
@@ -229,5 +230,28 @@ public class JavaEnumUtil
 			return ret;
 		}
 		return null;
+	}
+
+	/**
+	 * null safe convenience name listgetter
+	 *
+	 * @param en the enum to get the name of the class
+	 * @return
+	 */
+	public static StringArray getNameList(final Collection<Enum<?>> esn, final boolean unique)
+	{
+		final StringArray ret = new StringArray();
+		if (!ContainerUtil.isEmpty(esn))
+		{
+			for (final Enum<?> e : esn)
+			{
+				ret.add(e.name());
+			}
+			if (unique)
+			{
+				ret.unify();
+			}
+		}
+		return ret;
 	}
 }

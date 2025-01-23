@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,6 +75,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
@@ -174,6 +177,20 @@ class JavaEnumUtilTest extends JDFTestCaseBase
 	{
 		assertEquals(3, JavaEnumUtil.getNamesList(E.class).size());
 		assertNull(JavaEnumUtil.getNamesList(null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetEnumList2()
+	{
+		final Collection<Enum<?>> c = ContainerUtil.addAll(new ArrayList<>(), E.values());
+		assertEquals(3, JavaEnumUtil.getNameList(c, true).size());
+		final Collection<Enum<?>> c2 = ContainerUtil.addAll(c, E.values());
+		assertEquals(3, JavaEnumUtil.getNameList(c2, true).size());
+		assertEquals(6, JavaEnumUtil.getNameList(c2, false).size());
+		assertTrue(JavaEnumUtil.getNameList(null, true).isEmpty());
 	}
 
 }

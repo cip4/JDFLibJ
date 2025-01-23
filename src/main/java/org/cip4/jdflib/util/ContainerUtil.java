@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -68,9 +68,7 @@ import org.cip4.jdflib.ifaces.IMatches;
  * class with utilities for containers, e.g. Vectors, sets etc. <br/>
  * also simple object utilities
  *
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
- *         before June 18, 2009
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG before June 18, 2009
  */
 public class ContainerUtil
 {
@@ -205,14 +203,16 @@ public class ContainerUtil
 		for (final A element : array)
 		{
 			if (element != null)
+			{
 				v.add(element);
+			}
 		}
 		return v;
 	}
 
 	/**
 	 * create a sorted String - never null
-	 * 
+	 *
 	 * @param <A>
 	 * @param c
 	 * @return
@@ -231,7 +231,9 @@ public class ContainerUtil
 		for (final A e : l)
 		{
 			if (i++ > 0)
+			{
 				b.append(JDFConstants.COMMA);
+			}
 			b.append(e.toString());
 		}
 		return b.toString();
@@ -255,7 +257,9 @@ public class ContainerUtil
 		for (final A element : array)
 		{
 			if (element != null)
+			{
 				v.add(element);
+			}
 		}
 		return v;
 	}
@@ -267,7 +271,6 @@ public class ContainerUtil
 	 * @param c2 second collection
 	 * @param <A> type
 	 * @return c1 with c2 added, c2 if c1==null
-	 *
 	 */
 	public static <A> Collection<A> addAll(final Collection<A> c1, final Collection<A> c2)
 	{
@@ -342,7 +345,9 @@ public class ContainerUtil
 			for (final A a : c)
 			{
 				if (equals(a, other))
+				{
 					n++;
+				}
 			}
 		}
 		return n;
@@ -397,16 +402,19 @@ public class ContainerUtil
 	 *
 	 * @param strings the array of strings to append to <code>this</code>
 	 */
-	public static <A> void addAll(final Collection<A> c, final A[] a)
+	public static <A> Collection<A> addAll(final Collection<A> c, final A[] a)
 	{
 		if (a != null && c != null)
 		{
 			for (final A aa : a)
 			{
 				if (aa != null)
+				{
 					c.add(aa);
+				}
 			}
 		}
+		return c;
 	}
 
 	/**
@@ -414,10 +422,13 @@ public class ContainerUtil
 	 *
 	 * @param strings the array of strings to append to <code>this</code>
 	 */
-	public static <A> void add(final Collection<A> c, final A a)
+	public static <A> Collection<A> add(final Collection<A> c, final A a)
 	{
 		if (c != null && a != null)
+		{
 			c.add(a);
+		}
+		return c;
 	}
 
 	/**
@@ -813,12 +824,13 @@ public class ContainerUtil
 	 *
 	 * @param a the A to append, if null nothing is added
 	 */
-	public static <A> void appendUnique(final Collection<A> c, final A a)
+	public static <A> Collection<A> appendUnique(final Collection<A> c, final A a)
 	{
 		if (a != null && !c.contains(a))
 		{
 			c.add(a);
 		}
+		return c;
 	}
 
 	/**
@@ -841,7 +853,6 @@ public class ContainerUtil
 	}
 
 	/**
-	 *
 	 * @param l
 	 * @param i
 	 * @return
@@ -849,7 +860,9 @@ public class ContainerUtil
 	public static <A> int index(final List<A> l, int i)
 	{
 		if (l == null)
+		{
 			return -1;
+		}
 		final int size = l.size();
 		if (i < 0)
 		{
@@ -859,7 +872,6 @@ public class ContainerUtil
 	}
 
 	/**
-	 *
 	 * @param l
 	 * @param i
 	 * @return
@@ -1152,7 +1164,6 @@ public class ContainerUtil
 	}
 
 	/**
-	 *
 	 * @param c
 	 * @return
 	 */
@@ -1162,7 +1173,6 @@ public class ContainerUtil
 	}
 
 	/**
-	 *
 	 * @param c
 	 * @return
 	 */
@@ -1195,7 +1205,6 @@ public class ContainerUtil
 	}
 
 	/**
-	 * 
 	 * @param <A>
 	 * @param <B>
 	 * @param map
@@ -1205,15 +1214,18 @@ public class ContainerUtil
 	public static <A, B> Map<A, B> putAll(final Map<A, B> map, final Map<A, B> map2)
 	{
 		if (map == null)
+		{
 			return map2;
+		}
 		if (map2 != null)
+		{
 			map.putAll(map2);
+		}
 		return map;
 
 	}
 
 	/**
-	 * 
 	 * @param <A>
 	 * @param <B>
 	 * @param map
@@ -1225,13 +1237,17 @@ public class ContainerUtil
 		if (map != null)
 		{
 			if (isEmpty(keep))
+			{
 				map.clear();
+			}
 			else
 			{
 				for (final A key : getKeyArray(map))
 				{
 					if (!keep.contains(key))
+					{
 						map.remove(key);
+					}
 				}
 			}
 		}
@@ -1240,7 +1256,6 @@ public class ContainerUtil
 	}
 
 	/**
-	 * 
 	 * @param <A>
 	 * @param <B>
 	 * @param map
@@ -1250,7 +1265,9 @@ public class ContainerUtil
 	public static <A, B> B put(final Map<A, B> map, final A key, final B value)
 	{
 		if (map != null && key != null && value != null)
+		{
 			return map.put(key, value);
+		}
 		return null;
 
 	}
