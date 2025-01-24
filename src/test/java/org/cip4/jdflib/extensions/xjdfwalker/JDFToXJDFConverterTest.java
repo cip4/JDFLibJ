@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -156,8 +157,10 @@ import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 import org.cip4.jdflib.resource.process.JDFDieLayout;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
+import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -2573,6 +2576,47 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final XJDFHelper h = new XJDFHelper(xjdf);
 		assertEquals("v1", h.getRootProduct(0).getAttribute(AttributeName.PARTVERSION));
 		assertEquals("v2", h.getRootProduct(1).getAttribute(AttributeName.PARTVERSION));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testProductPartVersionDelivery()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+
+		final JDFNode n1 = n.addJDFNode(EnumType.Product);
+		final JDFComponent c1 = (JDFComponent) n1.addResource(ElementName.COMPONENT, null);
+		c1.setComponentType(EnumComponentType.FinalProduct, null);
+		final JDFComponent c11 = (JDFComponent) c1.addPartition(EnumPartIDKey.PartVersion, "v1");
+		n1.ensureLink(c11, EnumUsage.Output, null).setAmount(100);
+
+		final JDFNode n2 = n.addJDFNode(EnumType.Product);
+		final JDFComponent c12 = (JDFComponent) c1.addPartition(EnumPartIDKey.PartVersion, "v2");
+		n2.ensureLink(c12, EnumUsage.Output, null).setAmount(200);
+
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		final JDFDropIntent dropIntent = di.appendDropIntent();
+		dropIntent.getCreateEarliest().setActual(new JDFDate());
+		final JDFDropItemIntent dii1 = dropIntent.appendDropItemIntent();
+		dii1.refComponent(c11);
+		dii1.setAmount(42);
+		final JDFDropItemIntent dii2 = dropIntent.appendDropItemIntent();
+		dii2.refComponent(c12);
+		dii2.setAmount(66);
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		final XJDFHelper h = new XJDFHelper(xjdf);
+		assertEquals("v1", h.getRootProduct(0).getAttribute(AttributeName.PARTVERSION));
+		assertEquals("v2", h.getRootProduct(1).getAttribute(AttributeName.PARTVERSION));
+		final SetHelper sh = h.getSet(ElementName.DELIVERYPARAMS, 0);
+		final JDFDeliveryParams dp = (JDFDeliveryParams) sh.getResource(0).getResource();
+		final JDFDropItem d0 = dp.getDropItem(0);
+		final JDFDropItem d1 = dp.getDropItem(1);
+		assertNotEquals(d0.getItemRef(), d1.getItemRef());
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,6 +75,7 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import java.util.Collection;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,7 +89,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * 
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDeliveryParams extends JDFAutoDeliveryParams
 {
@@ -96,39 +97,42 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 
 	/**
 	 * Constructor for JDFDeliveryParams
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 * 
 	 */
-	public JDFDeliveryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeliveryParams
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
 	 * 
 	 */
-	public JDFDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeliveryParams
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 * 
 	 * @throws DOMException
 	 */
-	public JDFDeliveryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFDeliveryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,17 +153,17 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 	/**
 	 * @param adi the artdeliveryintent
 	 */
-	public void setFromArtDelivery(JDFArtDeliveryIntent adi)
+	public void setFromArtDelivery(final JDFArtDeliveryIntent adi)
 	{
 		if (adi == null)
 			return;
 
-		Vector<JDFArtDelivery> v = adi.getChildrenByClass(JDFArtDelivery.class, false, 0);
+		final Vector<JDFArtDelivery> v = adi.getChildrenByClass(JDFArtDelivery.class, false, 0);
 
 		copyElements(adi.getChildElementVector(ElementName.CONTACT, null), null);
-		for (JDFArtDelivery ad : v)
+		for (final JDFArtDelivery ad : v)
 		{
-			JDFDrop drop = appendDrop();
+			final JDFDrop drop = appendDrop();
 			drop.setFromArtDelivery(ad);
 		}
 	}
@@ -168,15 +172,77 @@ public class JDFDeliveryParams extends JDFAutoDeliveryParams
 	 * 
 	 * @param delIntent
 	 */
-	public void setFromDeliveryIntent(JDFDeliveryIntent delIntent)
+	public void setFromDeliveryIntent(final JDFDeliveryIntent delIntent)
 	{
 		if (delIntent == null)
 			return;
-		Vector<JDFDropIntent> v = delIntent.getChildrenByClass(JDFDropIntent.class, false, 0);
-		for (JDFDropIntent di : v)
+		final Vector<JDFDropIntent> v = delIntent.getChildrenByClass(JDFDropIntent.class, false, 0);
+		for (final JDFDropIntent di : v)
 		{
-			JDFDrop drop = appendDrop();
+			final JDFDrop drop = appendDrop();
 			drop.setFromDropIntent(di);
 		}
+	}
+
+	/**
+	 * XJDF Only
+	 *
+	 * @return JDFDropItem the element
+	 */
+	public JDFDropItem getDropItem()
+	{
+		return (JDFDropItem) getElement(ElementName.DROPITEM, null, 0);
+	}
+
+	/**
+	 * XJDF Only
+	 * 
+	 * @return JDFDropItem the element
+	 */
+	public JDFDropItem getCreateDropItem()
+	{
+		return (JDFDropItem) getCreateElement_JDFElement(ElementName.DROPITEM, null, 0);
+	}
+
+	/**
+	 * XJDF Only
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFDropItem the element
+	 */
+	public JDFDropItem getCreateDropItem(final int iSkip)
+	{
+		return (JDFDropItem) getCreateElement_JDFElement(ElementName.DROPITEM, null, iSkip);
+	}
+
+	/**
+	 * XJDF Only
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFDropItem the element default is getDropItem(0)
+	 */
+	public JDFDropItem getDropItem(final int iSkip)
+	{
+		return (JDFDropItem) getElement(ElementName.DROPITEM, null, iSkip);
+	}
+
+	/**
+	 * XJDF Only
+	 * 
+	 * @return Collection<JDFDropItem>, null if none are available
+	 */
+	public Collection<JDFDropItem> getAllDropItem()
+	{
+		return getChildArrayByClass(JDFDropItem.class, false, 0);
+	}
+
+	/**
+	 * XJDF Only
+	 *
+	 * @return JDFDropItem the element
+	 */
+	public JDFDropItem appendDropItem()
+	{
+		return (JDFDropItem) appendElement(ElementName.DROPITEM, null);
 	}
 }

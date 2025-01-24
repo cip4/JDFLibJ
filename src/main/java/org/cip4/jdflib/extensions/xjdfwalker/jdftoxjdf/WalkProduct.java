@@ -177,7 +177,7 @@ public class WalkProduct extends WalkJDF
 			{
 				new ProductHelper(prod).setRoot();
 			}
-			jdfToXJDF.putComponentProduct(component.getID(), prod.getID());
+			jdfToXJDF.putComponentProduct(component.getID(), component.getPartMap(), prod.getID());
 		}
 		return true;
 	}

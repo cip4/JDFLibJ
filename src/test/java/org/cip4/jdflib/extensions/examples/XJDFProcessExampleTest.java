@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -85,6 +84,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
+import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
@@ -155,15 +155,15 @@ class XJDFProcessExampleTest extends ExampleTest
 		product.setAmount(30);
 		product.setProductType("Book");
 		product.setID("IDBook");
-		final SetHelper shc = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.CONTACT, EnumUsage.Input);
-		final SetHelper shdp = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.DELIVERYPARAMS, EnumUsage.Input);
+		final SetHelper shc = xjdfHelper.getCreateSet(ElementName.CONTACT, EnumUsage.Input);
+		final SetHelper shdp = xjdfHelper.getCreateSet(ElementName.DELIVERYPARAMS, EnumUsage.Input);
 		for (int i = 1; i < 3; i++)
 		{
 			final JDFAttributeMap map = new JDFAttributeMap("DropID", "Drop" + i);
 			final ResourceHelper rhdp = shdp.getCreatePartition(map, true);
-			final KElement dropItem = rhdp.getResource().appendElement(ElementName.DROPITEM);
+			final JDFDropItem dropItem = (JDFDropItem) rhdp.getResource().appendElement(ElementName.DROPITEM);
 			dropItem.setAttribute(AttributeName.AMOUNT, "" + (i * 10));
-			dropItem.setAttribute(XJDFConstants.ItemRef, product.ensureID());
+			dropItem.setItemRef(product.ensureID());
 			map.put(XJDFConstants.ContactType, EnumContactType.Delivery.getName());
 			final ResourceHelper rhc = shc.getCreatePartition(map, true);
 			rhc.getResource().appendElement(ElementName.ADDRESS).setAttribute(AttributeName.CITY, "city" + i);

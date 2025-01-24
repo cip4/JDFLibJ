@@ -125,7 +125,7 @@ public class WalkRefElement extends WalkJDFElement
 	private void refProduct(final JDFRefElement refElem, final KElement xjdf)
 	{
 		final String attName = "ItemRef";
-		final String id = jdfToXJDF.getProduct(refElem.getrRef());
+		final String id = jdfToXJDF.getProduct(refElem.getrRef(), refElem.getPartMap());
 		xjdf.appendAttribute(attName, id, null, " ", true);
 	}
 
@@ -136,7 +136,7 @@ public class WalkRefElement extends WalkJDFElement
 	 */
 	private boolean isProduct(final JDFRefElement refElem)
 	{
-		return jdfToXJDF.getProduct(refElem.getrRef()) != null;
+		return jdfToXJDF.getProduct(refElem.getrRef(), refElem.getPartMap()) != null;
 	}
 
 	/**

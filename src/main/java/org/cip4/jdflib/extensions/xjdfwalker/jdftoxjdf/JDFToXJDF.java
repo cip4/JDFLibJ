@@ -75,11 +75,12 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
- *         conversion class to convert JDF 1.x to the experimental JDF 2.0<br/>
+ *         conversion class to convert JDF 1.x to XJDF 2.x<br/>
  *         very experimental and subject to change without notice
  *
  *         15.01.2009
@@ -111,7 +112,7 @@ public class JDFToXJDF extends PackageElementWalker
 		wantProduct = true;
 		rootID = null;
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
-		componentProductMap = new JDFAttributeMap();
+		componentProductMap = new HashMap<MyPair<String, JDFAttributeMap>, String>();
 		resourceAlias = new HashSet<>();
 		completedRefs = new HashMap<>();
 		wantDependent = true;
@@ -321,7 +322,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	boolean wantProduct;
 
-	final private JDFAttributeMap componentProductMap;
+	final private HashMap<MyPair<String, JDFAttributeMap>, String> componentProductMap;
 	final Set<String> resourceAlias;
 	final HashMap<JDFAttributeMap, String> completedRefs;
 
@@ -638,11 +639,12 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 *
 	 * @param compID
+	 * @param jdfAttributeMap
 	 * @param productID
 	 */
-	protected void putComponentProduct(final String compID, final String productID)
+	protected void putComponentProduct(final String compID, final JDFAttributeMap partMap, final String productID)
 	{
-		componentProductMap.put(compID, productID);
+		componentProductMap.put(new MyPair<>(compID, partMap), productID);
 	}
 
 	/**
@@ -650,9 +652,9 @@ public class JDFToXJDF extends PackageElementWalker
 	 * @param compID
 	 * @return
 	 */
-	protected String getProduct(final String compID)
+	protected String getProduct(final String compID, final JDFAttributeMap partMap)
 	{
-		return componentProductMap.get(compID);
+		return componentProductMap.get(new MyPair<>(compID, partMap));
 	}
 
 	/**

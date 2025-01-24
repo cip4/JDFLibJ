@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,13 +82,14 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDropItem;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.w3c.dom.DOMException;
 
 /**
  * 
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDropItem extends JDFAutoDropItem
 {
@@ -96,39 +97,42 @@ public class JDFDropItem extends JDFAutoDropItem
 
 	/**
 	 * Constructor for JDFDropItem
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
 	 * 
 	 * @throws DOMException
 	 */
-	public JDFDropItem(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFDropItem(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDropItem
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * 
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDropItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDropItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDropItem
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 * 
 	 */
-	public JDFDropItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFDropItem(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -136,7 +140,7 @@ public class JDFDropItem extends JDFAutoDropItem
 	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoDropItem#toString()
 	 * @return
-	*/
+	 */
 	@Override
 	public String toString()
 	{
@@ -146,7 +150,7 @@ public class JDFDropItem extends JDFAutoDropItem
 	/**
 	 * @param ad
 	 */
-	public void setFromArtDelivery(JDFArtDelivery ad)
+	public void setFromArtDelivery(final JDFArtDelivery ad)
 	{
 		// TODO Auto-generated method stub
 
@@ -156,7 +160,7 @@ public class JDFDropItem extends JDFAutoDropItem
 	 * 
 	 * @param dropItemIntent
 	 */
-	public void setFromDropItemIntent(JDFDropItemIntent dropItemIntent)
+	public void setFromDropItemIntent(final JDFDropItemIntent dropItemIntent)
 	{
 		if (dropItemIntent == null)
 			return;
@@ -167,5 +171,15 @@ public class JDFDropItem extends JDFAutoDropItem
 			copyElement(e, null);
 			e = e.getNextSiblingElement();
 		}
+	}
+
+	public String getItemRef()
+	{
+		return getAttribute(XJDFConstants.ItemRef);
+	}
+
+	public void setItemRef(final String ref)
+	{
+		setAttribute(XJDFConstants.ItemRef, ref);
 	}
 }
