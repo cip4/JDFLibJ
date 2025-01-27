@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -123,27 +123,17 @@ public class WalkIntent extends WalkXElement
 		if (r != null)
 		{
 			r.setAttributes(e);
-			if (r.getResourceClass() == null)
-			{
-				r.setResourceClass(EnumResourceClass.Intent);
-			}
 			final JDFResourceLink rl = parent.ensureLink(r, inOut, null);
 			if (rl != null)
 			{
 				rl.setrRef(id);
-				r.removeAttribute(AttributeName.USAGE);
 				rl.moveAttribute(AttributeName.PROCESSUSAGE, r);
 				rl.moveAttribute(AttributeName.AMOUNT, r);
 				rl.moveAttribute(AttributeName.ACTUALAMOUNT, r);
 				rl.moveAttribute(AttributeName.MAXAMOUNT, r);
 				rl.moveAttribute(AttributeName.MINAMOUNT, r);
 			}
-			r.removeAttribute(AttributeName.NAME);
-			r.removeAttribute(AttributeName.USAGE);
-			if (!r.hasAttribute(AttributeName.STATUS))
-			{
-				r.setResStatus(EnumResStatus.Available, true);
-			}
+			updateAttributes(r);
 		}
 		return r;
 	}
@@ -159,5 +149,22 @@ public class WalkIntent extends WalkXElement
 		final KElement parent = toCheck.getParentNode_KElement();
 		final boolean bL1 = parent != null && parent.getLocalName().equals(ProductHelper.PRODUCT);
 		return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals(XJDFConstants.Intent);
+	}
+
+	@Override
+	protected void updateAttributes(final KElement elem)
+	{
+		super.updateAttributes(elem);
+		final JDFResource r = (JDFResource) elem;
+		if (r.getResourceClass() == null)
+		{
+			r.setResourceClass(EnumResourceClass.Intent);
+		}
+		r.removeAttribute(AttributeName.NAME);
+		r.removeAttribute(AttributeName.USAGE);
+		if (!r.hasAttribute(AttributeName.STATUS))
+		{
+			r.setResStatus(EnumResStatus.Available, true);
+		}
 	}
 }
