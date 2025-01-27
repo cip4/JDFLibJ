@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,11 @@ package org.cip4.jdflib.resource.process.postpress;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoFoldingParams;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 public class JDFFoldingParams extends JDFAutoFoldingParams
@@ -132,10 +137,8 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 	/**
 	 * get the correctly formatted fold catalog string
 	 *
-	 * @param pages
-	 *            number of finished pages
-	 * @param index
-	 *            index of the catalog
+	 * @param pages number of finished pages
+	 * @param index index of the catalog
 	 * @return
 	 */
 	public static String getCatalog(final int pages, final int index)
@@ -144,17 +147,159 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 	}
 
 	/**
+	 * get the correctly formatted fold catalog string
+	 *
+	 * @param pages number of finished pages
+	 * @param index index of the catalog
+	 * @return
+	 */
+	public static JDFXYPair getNumUpFromCatalog(final String foldCatalog)
+	{
+		final JDFXYPair xyFold = getCatalogXY(foldCatalog);
+		if (xyFold == null)
+			return null;
+		final int p = (int) xyFold.getX();
+		final int i = (int) xyFold.getY();
+		if (i <= getMax(p))
+		{
+			final int y = getY(p, i);
+			return new JDFXYPair(p / (y * 2), y);
+		}
+		return null;
+
+	}
+
+	static int getY(final int p, final int i)
+	{
+		if (isWrap(p, i))
+		{
+			return 1;
+		}
+		else if (is2Y(p, i))
+		{
+			return 2;
+		}
+		else if (is3Y(p, i))
+		{
+			return 3;
+		}
+		else if (is4Y(p, i))
+		{
+			return 4;
+		}
+		else
+		{
+			return 6;
+		}
+
+	}
+
+	static int getMax(final int p)
+	{
+		if (p < 2 || p % 2 != 0 || p > 64)
+			return 0;
+		switch (p)
+		{
+		case 2:
+		case 14:
+		case 28:
+		case 40:
+			return 1;
+		case 4:
+		case 20:
+		case 36:
+		case 48:
+		case 64:
+			return 2;
+		case 6:
+			return 8;
+		case 8:
+			return 7;
+		case 10:
+			return 3;
+		case 12:
+		case 16:
+			return 14;
+		case 18:
+		case 32:
+			return 9;
+		case 24:
+			return 11;
+
+		default:
+			return 0;
+		}
+	}
+
+	/**
+	 * the following lines are living proof that the fold catalog is a bit weird...
+	 * 
+	 * @param p
+	 * @param i
+	 * @return
+	 */
+	static boolean isWrap(final int p, final int i)
+	{
+		return p <= 6 || (p == 8 && i <= 6) || p == 10 || ((p == 12 && i <= 6)) || p == 14 || (p == 16 && i <= 5) || (p == 18 && i <= 4) || (p == 32 && i <= 1);
+	}
+
+	static boolean is2Y(final int p, final int i)
+	{
+		return (p == 8 && i >= 7) || (p == 12 && i >= 6 && i <= 11) || (p == 16 && i >= 6 && i <= 12) || p == 20 || (p == 24 && i <= 7) || p == 28 || (p == 32 && i >= 2 && i <= 3)
+				|| (p == 36 && i <= 1);
+	}
+
+	static boolean is3Y(final int p, final int i)
+	{
+		return (p == 12 && i >= 12) || (p == 18 && i >= 5) || (p == 24 && i >= 11) || (p == 36 && i >= 2);
+	}
+
+	static boolean is4Y(final int p, final int i)
+	{
+		return (p == 16 && i >= 13) || (p == 24 && i >= 8 && i <= 10) || (p == 32 && i >= 4) || p == 40 || p == 48 && i <= 1 || p == 64;
+	}
+
+	static boolean is6Y(final int p, final int i)
+	{
+		return p == 48 && i >= 2;
+	}
+
+	public static JDFXYPair getCatalogXY(final String foldCatalog)
+	{
+		final String pi0 = StringUtil.rightStr(foldCatalog, -1);
+		final VString v = StringUtil.tokenize(pi0, "-", false);
+		if (ContainerUtil.size(v) == 2)
+		{
+			final int p = StringUtil.parseInt(v.get(0), -1);
+			final int i = StringUtil.parseInt(v.get(1), -1);
+			return (i > 0 && p > 0) ? new JDFXYPair(p, i) : null;
+		}
+		return null;
+	}
+
+	/**
 	 * set the correctly formatted fold catalog string
 	 *
-	 * @param pages
-	 *            number of finished pages
-	 * @param index
-	 *            index of the catalog
+	 * @param pages number of finished pages
+	 * @param index index of the catalog
 	 * @return
 	 */
 	public void setFoldCatalog(final int pages, final int index)
 	{
 		setFoldCatalog(getCatalog(pages, index));
+	}
+
+	@Override
+	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
+	{
+		final VString invalidAttributes = super.getInvalidAttributes(level, bIgnorePrivate, nMax);
+		if (!bIgnorePrivate)
+		{
+			final String fc = getFoldCatalog();
+			if (!StringUtil.isEmpty(fc) && getNumUpFromCatalog(fc) == null)
+				invalidAttributes.appendUnique(AttributeName.FOLDCATALOG);
+		}
+		return invalidAttributes;
 	}
 
 }
