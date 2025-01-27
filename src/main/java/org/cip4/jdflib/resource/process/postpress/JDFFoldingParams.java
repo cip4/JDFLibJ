@@ -240,7 +240,7 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 	 */
 	static boolean isWrap(final int p, final int i)
 	{
-		return p <= 6 || (p == 8 && i <= 6) || p == 10 || ((p == 12 && i <= 6)) || p == 14 || (p == 16 && i <= 5) || (p == 18 && i <= 4) || (p == 32 && i <= 1);
+		return p <= 6 || (p == 8 && i <= 6) || p == 10 || (p == 12 && i <= 6) || p == 14 || (p == 16 && i <= 5) || (p == 18 && i <= 4) || (p == 32 && i <= 1);
 	}
 
 	static boolean is2Y(final int p, final int i)
