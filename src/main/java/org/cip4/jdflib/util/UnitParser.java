@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,7 +71,8 @@
 package org.cip4.jdflib.util;
 
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
@@ -80,8 +81,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.span.JDFSpanBase;
 
 /**
@@ -91,12 +93,45 @@ import org.cip4.jdflib.span.JDFSpanBase;
  */
 public class UnitParser
 {
-	public static final String UNIT_IN = "in";
-	public static final String UNIT_CM = "cm";
-	public static final String UNIT_MM = "mm";
-	public static final String UNIT_PT = "pt";
 	final static Set<String> unitKeys = getUnitKeys();
 	private int precision;
+
+	public enum eParserUnit
+	{
+		in, cm, mm, pt;
+
+		public static eParserUnit getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(eParserUnit.class, val);
+		}
+
+		public static double getFactor(final String val)
+		{
+			final eParserUnit pu = getEnum(val);
+			return pu == null ? 1.0 : pu.getFactor();
+		}
+
+		/**
+		 * get the factor for one of the units to points
+		 *
+		 * @param unit
+		 * @return
+		 */
+		public double getFactor()
+		{
+			switch (this)
+			{
+			case mm:
+				return 72. / 25.4;
+			case cm:
+				return 72. / 2.54;
+			case in:
+				return 72.0;
+			default:
+				return 1.0;
+			}
+		}
+	}
 
 	/**
 	 *
@@ -110,21 +145,36 @@ public class UnitParser
 	/**
 	 * @param element
 	 */
+	public void convertUnits(final KElement element, final boolean recurse)
+	{
+		convertUnits(element);
+		if (recurse)
+		{
+			final List<KElement> v = element.getChildList();
+			for (final KElement e : v)
+			{
+				convertUnits(e, recurse);
+			}
+		}
+	}
+
+	/**
+	 * @param element
+	 */
 	public void convertUnits(final KElement element)
 	{
 		final JDFAttributeMap map = element.getAttributeMap_KElement();
-		final Iterator<String> keyIt = map.getKeyIterator();
 		final boolean elemSpan = (element instanceof JDFSpanBase) && isUnit(element.getLocalName());
-		while (keyIt.hasNext())
+		for (final Entry<String, String> e : map.entrySet())
 		{
-			final String key = keyIt.next();
 
+			final String key = e.getKey();
 			if (!elemSpan && !isUnit(key))
 			{
 				continue;
 			}
 
-			final String val = map.get(key);
+			final String val = e.getValue();
 			final String newVal = extractUnits(val);
 			if (!val.equals(newVal))
 			{
@@ -167,7 +217,14 @@ public class UnitParser
 		final Set<String> keys = new HashSet<>();
 		if (keys.isEmpty())
 		{
+			keys.add(AttributeName.ABSOLUTEBOX);
+			keys.add(AttributeName.ABSOLUTEHEIGHT);
+			keys.add(AttributeName.ABSOLUTEWIDTH);
+			keys.add(AttributeName.ADVANCEDISTANCE);
+			keys.add(AttributeName.BACKING);
 			keys.add(AttributeName.BACKOVERFOLD);
+			keys.add(AttributeName.BLANKDIMENSIONSX);
+			keys.add(AttributeName.BLANKDIMENSIONSY);
 			keys.add(AttributeName.BLEEDBOTTOM);
 			keys.add(AttributeName.BLEEDFACE);
 			keys.add(AttributeName.BLEEDFOOT);
@@ -175,35 +232,107 @@ public class UnitParser
 			keys.add(AttributeName.BLEEDLEFT);
 			keys.add(AttributeName.BLEEDRIGHT);
 			keys.add(AttributeName.BLEEDSPINE);
+			keys.add(AttributeName.BOTTOMFOLDIN);
+			keys.add(AttributeName.BOX);
 			keys.add(AttributeName.BOUNDINGBOX);
+			keys.add(AttributeName.BURNOUTAREA);
+			keys.add(AttributeName.CARTONTOPFLAPS);
+			keys.add(AttributeName.CASERADIUS);
 			keys.add(AttributeName.CENTER);
+			keys.add(AttributeName.CLAMPSIZE);
+			keys.add(AttributeName.CLIPBOX);
+			keys.add(AttributeName.COVERWIDTH);
 			keys.add(AttributeName.CUTBOX);
+			keys.add(AttributeName.CUTWIDTH);
 			keys.add(AttributeName.DIAMETER);
 			keys.add(AttributeName.DIMENSION);
 			keys.add(ElementName.DIMENSIONS);
+			keys.add(XJDFConstants.ExpansionBox);
 			keys.add(AttributeName.EXTENT);
 			keys.add(ElementName.FINISHEDDIMENSIONS);
+			keys.add(AttributeName.FLATDIMENSIONS);
+			keys.add(AttributeName.FOLDINGDISTANCE);
 			keys.add(AttributeName.FOLDINGWIDTH);
 			keys.add(AttributeName.FOLDINGWIDTH + "Back");
+			keys.add(AttributeName.FRONTFOLDIN);
 			keys.add(AttributeName.FRONTOVERFOLD);
+			keys.add(AttributeName.GLUELINEWIDTH);
+			keys.add(AttributeName.GLUINGPATTERN);
+			keys.add(AttributeName.GUTTERX);
+			keys.add(AttributeName.GUTTERX2);
+			keys.add(AttributeName.GUTTERY);
+			keys.add(AttributeName.GUTTERY2);
 			keys.add(AttributeName.HEIGHT);
+			keys.add(AttributeName.HORIZONTALEXCESS);
+			keys.add(AttributeName.HORIZONTALEXCESSBACK);
+			keys.add(AttributeName.INNERCOREDIAMETER);
+			keys.add(AttributeName.INNERDIMENSIONS);
+			keys.add(AttributeName.JOINTWIDTH);
+			keys.add(AttributeName.KNOCKOUTBLEED);
+			keys.add(AttributeName.LAMINATINGBOX);
 			keys.add(AttributeName.LENGTH);
+			keys.add(AttributeName.LENGTHOVERALL);
+			keys.add(AttributeName.MARGINBOTTOM);
+			keys.add(AttributeName.MARGINLEFT);
+			keys.add(AttributeName.MARGINRIGHT);
+			keys.add(AttributeName.MARGINTOP);
+			keys.add(AttributeName.MAXHEIGHT);
 			keys.add(AttributeName.MILLINGDEPTH);
+			keys.add(AttributeName.MINGUTTER);
+			keys.add(AttributeName.NEEDLEPOSITIONS);
+			keys.add(AttributeName.NIPWIDTH);
+			keys.add(AttributeName.NOTCHINGDEPTH);
+			keys.add(AttributeName.NOTCHINGDISTANCE);
+			keys.add(AttributeName.OFFSET);
+			keys.add(AttributeName.OUTERCOREDIAMETER);
+			keys.add(AttributeName.OVERFOLD);
+			keys.add(AttributeName.OVERHANG);
+			keys.add(AttributeName.OVERHANGOFFSET);
 			keys.add(AttributeName.PITCH);
 			keys.add(ElementName.POSITION);
+			keys.add(AttributeName.ROLLCUT);
+			keys.add(AttributeName.ROLLDIAMETER);
+			keys.add(AttributeName.ROUNDING);
+			keys.add(AttributeName.SIZE);
 			keys.add(AttributeName.SPINE);
+			keys.add(AttributeName.SPINEWIDTH);
+			keys.add(AttributeName.STARTPOSITION);
+			keys.add(AttributeName.STITCHPOSITIONS);
+			keys.add(AttributeName.STITCHWIDTH);
+			keys.add(AttributeName.STRAPPOSITIONS);
+			keys.add(AttributeName.STRIPLENGTH);
+			keys.add(AttributeName.SURFACECONTENTSBOX);
 			keys.add(AttributeName.TABEXTENSIONDISTANCE);
+			keys.add(AttributeName.TABOFFSET);
+			keys.add(AttributeName.TABWIDTH);
 			keys.add(AttributeName.THICKNESS);
+			keys.add(AttributeName.THREADLENGTH);
+			keys.add(AttributeName.THREADPOSITIONS);
+			keys.add(AttributeName.THREADSTITCHWIDTH);
+			keys.add(AttributeName.THREADTHICKNESS);
+			keys.add(AttributeName.TOPEXCESS);
+			keys.add(AttributeName.TOPFOLDIN);
+			keys.add(AttributeName.TOTALDIMENSIONS);
+			keys.add(AttributeName.TRAVEL);
 			keys.add(AttributeName.TRIMBOTTOM);
 			keys.add(AttributeName.TRIMBOX);
 			keys.add(AttributeName.TRIMFACE);
 			keys.add(AttributeName.TRIMFOOT);
 			keys.add(AttributeName.TRIMHEAD);
 			keys.add(AttributeName.TRIMLEFT);
+			keys.add(AttributeName.TRIMMINGOFFSET);
 			keys.add(AttributeName.TRIMRIGHT);
 			keys.add(AttributeName.TRIMSIZE);
 			keys.add(AttributeName.TRIMTOP);
+			// keys.add(AttributeName.VALUE);
+			keys.add(AttributeName.VISIBLELENGTH);
 			keys.add(AttributeName.WIDTH);
+			keys.add(AttributeName.WIREGAUGE);
+			keys.add(AttributeName.WORKINGDIRECTION);
+			keys.add(AttributeName.WORKINGLENGTH);
+			keys.add(AttributeName.WORKINGPATH);
+			keys.add(AttributeName.ZONEHEIGHT);
+			keys.add(AttributeName.ZONEWIDTH);
 		}
 		return keys;
 	}
@@ -214,27 +343,9 @@ public class UnitParser
 	 * @param unit
 	 * @return
 	 */
-	public double getFactor(String unit)
+	public double getFactor(final String unit)
 	{
-		final double factor;
-		unit = StringUtil.normalize(unit, true);
-		if (UNIT_MM.equals(unit))
-		{
-			factor = 72. / 25.4;
-		}
-		else if (UNIT_CM.equals(unit))
-		{
-			factor = 72. / 2.54;
-		}
-		else if (UNIT_IN.equals(unit))
-		{
-			factor = 72.;
-		}
-		else
-		{
-			factor = 1.0;
-		}
-		return factor;
+		return eParserUnit.getFactor(unit);
 	}
 
 	/**
@@ -245,7 +356,7 @@ public class UnitParser
 	 */
 	public String extractUnits(final String key, final String val)
 	{
-		if (key != null && unitKeys.contains(key))
+		if (ContainerUtil.contains(unitKeys, key))
 		{
 			return extractUnits(val);
 		}
@@ -269,27 +380,18 @@ public class UnitParser
 			return val;
 		}
 
-		final VString v = StringUtil.tokenize(val, JDFConstants.BLANK, false);
-		final VString keep = new VString(v);
+		final StringArray v = StringArray.getVString(val, null);
+		final StringArray keep = new StringArray(v);
 		boolean oneGood = false;
 		final int size = v.size();
 		for (int i = 0; i < size; i++)
 		{
 			String tmp = v.get(i).toLowerCase();
 			double factor = 1.0;
-			if (tmp.endsWith(UNIT_MM))
+			final eParserUnit pu = eParserUnit.getEnum(StringUtil.rightStr(tmp, 2));
+			if (pu != null)
 			{
-				factor = 72. / 25.4;
-				tmp = StringUtil.leftStr(tmp, -2);
-			}
-			else if (tmp.endsWith(UNIT_CM))
-			{
-				factor = 72. / 2.54;
-				tmp = StringUtil.leftStr(tmp, -2);
-			}
-			else if (tmp.endsWith(UNIT_IN))
-			{
-				factor = 72.;
+				factor = pu.getFactor();
 				tmp = StringUtil.leftStr(tmp, -2);
 			}
 
@@ -298,7 +400,7 @@ public class UnitParser
 				if (i < 2 || !JDFConstants.QUOTE.equals(v.get(i - 2)))
 				{
 					tmp = v.get(i - 1);
-					v.setElementAt(JDFConstants.QUOTE, i - 1);
+					v.set(i - 1, JDFConstants.QUOTE);
 				}
 				else
 				{
@@ -316,13 +418,13 @@ public class UnitParser
 			{
 				if (factor == 1.0 && (tmp.startsWith("0") || tmp.startsWith("-0")) && StringUtil.isInteger(tmp)) // we want to retain explicit starts with 0
 				{
-					v.setElementAt(tmp, i);
+					v.set(i, tmp);
 				}
 				else
 				{
 					oneGood = true;
 					final double dbl = StringUtil.parseDouble(tmp, -1) * factor;
-					v.setElementAt(new NumberFormatter().formatDouble(dbl, precision), i);
+					v.set(i, new NumberFormatter().formatDouble(dbl, precision));
 				}
 			}
 			else
@@ -347,6 +449,21 @@ public class UnitParser
 	public void setPrecision(final int precision)
 	{
 		this.precision = precision;
+	}
+
+	/**
+	 * getter for unit attribute
+	 *
+	 * @param precision the precision to set
+	 */
+	public String getUnitString(final eParserUnit unit, final double points, final String separator)
+	{
+		return (points / unit.getFactor()) + separator + unit.name();
+	}
+
+	public String getUnitString(final eParserUnit unit, final double points)
+	{
+		return getUnitString(unit, points, " ");
 	}
 
 	/**

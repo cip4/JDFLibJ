@@ -92,6 +92,7 @@ public abstract class XJDFConstants
 	public static final String DROP_ID = DropID;
 
 	public static final String EndCustomer = "EndCustomer";
+	public static final String ExpansionBox = "ExpansionBox";
 	public static final String ExternalID = "ExternalID";
 
 	public static final String Face = "Face";

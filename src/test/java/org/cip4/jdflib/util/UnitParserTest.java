@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.UnitParser.eParserUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -122,6 +123,18 @@ class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testUnitString()
+	{
+		assertEquals(14, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getUnitString(eParserUnit.mm, 42), 2), -1), 1);
+		assertEquals(42, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getUnitString(eParserUnit.pt, 42), 2), -1), 1);
+		assertEquals(1.4, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getUnitString(eParserUnit.cm, 42), 2), -1), 1);
+		assertEquals(5, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getUnitString(eParserUnit.in, 420), 2), -1), 1);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testAdd()
 	{
 		assertEquals(unitParser.extractUnits("0.1CM"), "2.8346");
@@ -184,8 +197,7 @@ class UnitParserTest extends JDFTestCaseBase
 		fd.setAttribute(AttributeName.ACTUAL, "10cm 5cm 0cm");
 		fd.setAttribute(AttributeName.FACECELLS, "10cm 5cm 0cm");
 		unitParser.setPrecision(0);
-		unitParser.convertUnits(d);
-		unitParser.convertUnits(fd);
+		unitParser.convertUnits(n, true);
 		assertEquals(li.getXPathAttribute("Dimensions/@Actual", null), "283 142");
 		assertEquals(li.getXPathAttribute("FinishedDimensions/@Actual", null), "283 142 0");
 		assertEquals(li.getXPathAttribute("FinishedDimensions/@FaceCells", null), "283 142 0");

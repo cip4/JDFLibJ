@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1155,17 +1155,13 @@ public final class AttributeName
 	public static final String FOLDCATALOGORIENTATION = "FoldCatalogOrientation";
 	/** */
 	public static final String FOLDERMODULEINDEX = "FolderModuleIndex";
-	/** */
 	public static final String FOLDINDEX = "FoldIndex";
 	public static final String FOLDINGDETAILS = "FoldingDetails";
+	public static final String FOLDINGDISTANCE = "FoldingDistance";
 	public static final String FOLDINGWIDTH = "FoldingWidth";
-	/** */
 	public static final String FOLDLAY = "FoldLay";
-	/** */
 	public static final String FOLDOUTPAGES = "FoldOutPages";
-	/** */
 	public static final String FOLDS = "Folds";
-	/** */
 	public static final String FOLDSHEETIN = "FoldSheetIn";
 	/** */
 	public static final String FOLIO = "Folio";
