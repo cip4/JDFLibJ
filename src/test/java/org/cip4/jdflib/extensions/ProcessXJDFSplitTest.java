@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -541,6 +541,28 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 		final VString t1 = splitter.extractTypes(h2, types, 2);
 		assertEquals(1, t1.size());
 		final VString t2 = splitter.extractTypes(h2, types, 3);
+		assertEquals(3, t2.size());
+	}
+
+	/**
+	 * @throws DataFormatException
+	 */
+	@Test
+	void testSplitDeviceIncomplete() throws DataFormatException
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "root", null);
+		h.setTypes("Screening ImageSetting ConventionalPrinting Cutting Folding Trimming");
+		h.appendSet(ElementName.NODEINFO, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("0 1"));
+		h.appendSet(ElementName.DEVICE, EnumUsage.Input).setCombinedProcessIndex(new JDFIntegerList("3 5 4"));
+
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+
+		final VString types = h.getTypes();
+		final VString t0 = splitter.extractTypes(h, types, 0);
+		assertEquals(2, t0.size());
+		final VString t1 = splitter.extractTypes(h, types, 2);
+		assertEquals(1, t1.size());
+		final VString t2 = splitter.extractTypes(h, types, 3);
 		assertEquals(3, t2.size());
 	}
 
