@@ -366,6 +366,63 @@ public class UnitParser
 		}
 	}
 
+	public String getUnitString(final String key, final eParserUnit pu, final String val0, final String sep)
+	{
+		if (isUnit(key))
+			return getUnitString(pu, val0, sep);
+		else
+			return val0;
+	}
+
+	private static final UnitParser roundTrip = getRoundTrip();
+
+	/**
+	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace characters may be placed between the numbers and the units the unit case
+	 * is ignored
+	 *
+	 * @param val the string to convert
+	 * @return the converted unit string
+	 */
+	public String getUnitString(final eParserUnit pu, final String val0, final String sep)
+	{
+
+		final String val = roundTrip.extractUnits(val0);
+		if (val == null)
+		{
+			return val;
+		}
+
+		final StringArray v = StringArray.getVString(val, null);
+		final StringBuilder ret = new StringBuilder();
+		boolean first = true;
+		for (final String v0 : v)
+		{
+			if (StringUtil.isNumber(v0))
+			{
+				if (!first)
+				{
+					ret.append(' ');
+				}
+				final double d = StringUtil.parseDouble(v0, 0);
+				ret.append(getNoUnitString(pu, d, sep));
+				first = false;
+			}
+			else
+			{
+				return val0;
+			}
+		}
+
+		return ret.toString();
+	}
+
+	private static UnitParser getRoundTrip()
+	{
+		final UnitParser p = new UnitParser();
+		p.setPrecision(42);
+		return p;
+	}
+
 	/**
 	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace characters may be placed between the numbers and the units the unit case
 	 * is ignored
@@ -456,14 +513,14 @@ public class UnitParser
 	 *
 	 * @param precision the precision to set
 	 */
-	public String getUnitString(final eParserUnit unit, final double points, final String separator)
+	public String getNoUnitString(final eParserUnit unit, final double points, final String separator)
 	{
-		return (points / unit.getFactor()) + separator + unit.name();
+		return StringUtil.formatDouble(points / unit.getFactor(), precision) + separator + unit.name();
 	}
 
-	public String getUnitString(final eParserUnit unit, final double points)
+	public String getNoUnitString(final eParserUnit unit, final double points)
 	{
-		return getUnitString(unit, points, " ");
+		return getNoUnitString(unit, points, " ");
 	}
 
 	/**

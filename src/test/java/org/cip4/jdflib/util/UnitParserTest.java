@@ -123,12 +123,34 @@ class UnitParserTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testNoUnitString()
+	{
+		assertEquals(14, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getNoUnitString(eParserUnit.mm, 42), 2), -1), 1);
+		assertEquals(42, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getNoUnitString(eParserUnit.pt, 42), 2), -1), 1);
+		assertEquals(1.4, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getNoUnitString(eParserUnit.cm, 42), 2), -1), 1);
+		assertEquals(5, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getNoUnitString(eParserUnit.in, 420), 2), -1), 1);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testUnitString()
 	{
-		assertEquals(14, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getUnitString(eParserUnit.mm, 42), 2), -1), 1);
-		assertEquals(42, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getUnitString(eParserUnit.pt, 42), 2), -1), 1);
-		assertEquals(1.4, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getUnitString(eParserUnit.cm, 42), 2), -1), 1);
-		assertEquals(5, StringUtil.parseDouble(StringUtil.leftStr(unitParser.getUnitString(eParserUnit.in, 420), 2), -1), 1);
+		assertEquals("42 mm", unitParser.getUnitString(eParserUnit.mm, "42mm", " "));
+		assertEquals("4.2 cm 4.2 cm", unitParser.getUnitString(eParserUnit.cm, "42mm 42mm", " "));
+		assertEquals("4.2cm 4.2cm", unitParser.getUnitString(eParserUnit.cm, "42mm 42mm", ""));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testUnitStringKey()
+	{
+		assertEquals("42 mm", unitParser.getUnitString("Center", eParserUnit.mm, "42mm", " "));
+		assertEquals("abc", unitParser.getUnitString("Center", eParserUnit.mm, "abc", " "));
+		assertEquals("42mm", unitParser.getUnitString("fff", eParserUnit.mm, "42mm", " "));
 	}
 
 	/**
