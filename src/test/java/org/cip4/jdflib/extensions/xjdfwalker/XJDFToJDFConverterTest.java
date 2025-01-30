@@ -2392,6 +2392,21 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
+	*
+	*
+	*/
+	@Test
+	void testForeignNamespace()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "root", null);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		h.appendElement("foo:bar", "www.foo.com").appendElement("foo:XJDF", "www.foo.com").setAttribute("abc", "d");
+		final JDFDoc d = xCon.convert(h);
+		assertNotNull(d.getJDFRoot().getElement("foo:bar"));
+		d.write2File(sm_dirTestDataTemp + "foobar.jdf", 2, false);
+	}
+
+	/**
 	 *
 	 */
 	@Test

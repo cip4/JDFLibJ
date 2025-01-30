@@ -168,7 +168,7 @@ class StrippingExampleTest extends ExampleTest
 		p1.setRelativeBox(new JDFRectangle(0, 0, 0.5, 1));
 		spLeaf1.setAssemblyIDs(new VString("BS1"));
 
-		final JDFStrippingParams spLeaf2 = (JDFStrippingParams) spLeaf.getCreatePartition(EnumPartIDKey.BinderySignatureName, "BS1", null);
+		final JDFStrippingParams spLeaf2 = (JDFStrippingParams) spLeaf.getCreatePartition(EnumPartIDKey.BinderySignatureName, "BS2", null);
 		final JDFPosition p2 = spLeaf2.appendPosition();
 		p2.setRelativeBox(new JDFRectangle(0.5, 0, 1, 1));
 		spLeaf2.setAssemblyIDs(new VString("BS2"));

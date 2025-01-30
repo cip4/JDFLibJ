@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,8 +38,10 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -151,7 +153,7 @@ public class WalkXJDF extends WalkXElement
 	@Override
 	public boolean matches(final KElement toCheck)
 	{
-		return super.matches(toCheck) && XJDFConstants.XJDF.equals(toCheck.getLocalName());
+		return super.matches(toCheck) && JDFElement.isInXJDFNameSpaceStatic(toCheck);
 	}
 
 	/**
@@ -162,5 +164,11 @@ public class WalkXJDF extends WalkXElement
 	{
 		elem.removeAttribute(XJDFConstants.ParentID);
 		super.updateAttributes(elem);
+	}
+
+	@Override
+	public VString getElementNames()
+	{
+		return new VString(XJDFConstants.XJDF);
 	}
 }

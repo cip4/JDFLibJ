@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -167,8 +167,9 @@ public class JDFDoc extends XMLDoc
 		((DocumentJDFImpl) m_doc).bKElementOnly = false;
 	}
 
-	static EnumVersion getVersionFromDocType(final String strDocType)
+	static EnumVersion getVersionFromDocType(String strDocType)
 	{
+		strDocType = JDFElement.xmlnsLocalName(strDocType);
 		final boolean isXjdf = XJDFConstants.XJDF.equals(strDocType) || XJDFConstants.XJMF.equals(strDocType);
 		if (isXjdf)
 			return XJDFHelper.defaultVersion();
@@ -184,7 +185,7 @@ public class JDFDoc extends XMLDoc
 	 */
 	public JDFDoc(final String strDocType, final EnumVersion version)
 	{
-		super(strDocType, JDFElement.getSchemaURL(version));
+		super(strDocType, JDFElement.getSchemaURL(version == null ? getVersionFromDocType(strDocType) : version));
 		((DocumentJDFImpl) m_doc).bInitOnCreate = true;
 		((DocumentJDFImpl) m_doc).bKElementOnly = false;
 	}
