@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -321,7 +321,14 @@ public class JDFValidator
 		final VElement ve = jdfElement.getChildElementVector(null, null, null, true, 0, false);
 		for (final KElement e : ve)
 		{
-			printBad(e, indent + 2, testElement, false);
+			try
+			{
+				printBad(e, indent + 2, testElement, false);
+			}
+			catch (final Exception x)
+			{
+				// limp along
+			}
 		}
 	}
 
@@ -632,9 +639,9 @@ public class JDFValidator
 		{
 			final String invElems = xmlParent.getAttribute("DeprecatedElements");
 			bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
-			if (!bIsOK)
+			final EnumVersion v = bIsOK ? null : ((JDFElement) jdfElement.getParentNode_KElement()).getLastVersion(elmName, true);
+			if (v != null)
 			{
-				final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getLastVersion(elmName, true);
 				testElement.setAttribute("LastVersion", v.getName());
 				setErrorType(testElement, "DeprecatedElement", elmName + " is not valid in JDF Version" + getVersion(jdfElement) + " Last Valid version: " + v.getName(),
 						indent + 2);
