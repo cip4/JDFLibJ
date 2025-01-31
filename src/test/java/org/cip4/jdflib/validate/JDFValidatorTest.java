@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -196,6 +197,20 @@ class JDFValidatorTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	void testTypo()
+	{
+		final JDFNode node = doc.getJDFRoot();
+		final KElement e = node.appendElement("cip4:bar", "www.cip4.org");
+		validator.setWarning(false);
+		assertTrue(validator.isValid(doc));
+		validator.setWarning(true);
+		assertTrue(validator.isValid(doc));
+	}
+
+	/**
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -226,6 +241,24 @@ class JDFValidatorTest extends JDFTestCaseBase
 		final JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);
 		assertTrue(resourceInfo.isValid(EnumValidationLevel.Complete));
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testDeprecated()
+	{
+		final JDFJMF jmf = JDFDoc.parseFile(sm_dirTestData + "ResourceInfo.jmf").getJMFRoot();
+		final JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);
+		final KElement root = KElement.createRoot("foo");
+		validator.checkDeprecated(0, root, "ResourceInfo", validator.getTestElement(resourceInfo, root), resourceInfo, false);
+		validator.checkDeprecated(0, root, "ResourceInfo", validator.getTestElement(resourceInfo, root), resourceInfo, true);
+		validator.setWarning(true);
+		validator.checkDeprecated(0, root, "ResourceInfo", validator.getTestElement(resourceInfo, root), resourceInfo, false);
+		validator.checkDeprecated(0, root, "ResourceInfo", validator.getTestElement(resourceInfo, root), resourceInfo, true);
+		root.setAttribute("DeprecatedElements", ElementName.RESOURCEINFO);
+		validator.checkDeprecated(0, root, "ResourceInfo", validator.getTestElement(resourceInfo, root), resourceInfo, true);
 	}
 
 }
