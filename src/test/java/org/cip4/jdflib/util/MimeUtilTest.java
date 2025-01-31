@@ -164,6 +164,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 			assertEquals(mr.getBodyParts().length, 5);
 			final MimeWriter mw = new MimeWriter(mp);
 			mw.writeToDir(new File(UrlUtil.newExtension(out.getPath(), null)));
+			ThreadUtil.sleep(42);
 			assertTrue(out.renameTo(out), "File '" + out + "' is still locked.");
 		}
 	}
