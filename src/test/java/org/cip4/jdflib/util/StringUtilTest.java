@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -360,7 +360,7 @@ class StringUtilTest extends JDFTestCaseBase
 	void testSprintf()
 	{
 		Object[] o = new Object[1];
-		o[0] = new Integer(5);
+		o[0] = Integer.valueOf(5);
 		assertEquals(StringUtil.sprintf("abc%03def", o), "abc005ef");
 		o[0] = "foobar";
 		assertEquals(StringUtil.sprintf("abc%7sdef", o), "abc foobardef");
@@ -380,10 +380,10 @@ class StringUtilTest extends JDFTestCaseBase
 			//
 		}
 
-		o = new Object[] { new Integer(5), "foobar" };
+		o = new Object[] { Integer.valueOf(5), "foobar" };
 		assertEquals(StringUtil.sprintf("abc %02d%7sdef", o), "abc 05 foobardef");
 		assertEquals(StringUtil.sprintf("%02d%7sdef", o), "05 foobardef");
-		o = new Object[] { new Long(5), "foobar" };
+		o = new Object[] { Long.valueOf(5), "foobar" };
 		assertEquals(StringUtil.sprintf("abc %02d%7sdef", o), "abc 05 foobardef");
 		assertEquals(StringUtil.sprintf("%02d%7sdef", o), "05 foobardef");
 		o = new Object[] { 5, "foobar" };

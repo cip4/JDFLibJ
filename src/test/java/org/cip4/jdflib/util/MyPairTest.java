@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,8 +36,10 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -72,7 +74,7 @@ class MyPairTest extends JDFTestCaseBase
 	@Test
 	void testToString()
 	{
-		Assertions.assertEquals("TestPair a,b", new TestPair("a", "b").toString());
+		assertEquals("TestPair a,b", new TestPair("a", "b").toString());
 	}
 
 	/**
@@ -82,11 +84,11 @@ class MyPairTest extends JDFTestCaseBase
 	@Test
 	void testEquals()
 	{
-		final MyPair<Integer, Integer> p = new MyPair<>(new Integer(1), new Integer(2));
-		final MyPair<Integer, Integer> p2 = new MyPair<>(new Integer(1), new Integer(2));
-		final MyPair<Integer, Integer> p3 = new MyPair<>(new Integer(1), new Integer(3));
-		Assertions.assertEquals(p, p2);
-		Assertions.assertNotSame(p, p3);
+		final MyPair<Integer, Integer> p = new MyPair<>(Integer.valueOf(1), Integer.valueOf(2));
+		final MyPair<Integer, Integer> p2 = new MyPair<>(Integer.valueOf(1), Integer.valueOf(2));
+		final MyPair<Integer, Integer> p3 = new MyPair<>(Integer.valueOf(1), Integer.valueOf(3));
+		assertEquals(p, p2);
+		assertNotSame(p, p3);
 	}
 
 	/**
@@ -96,9 +98,9 @@ class MyPairTest extends JDFTestCaseBase
 	@Test
 	void testHash()
 	{
-		final MyPair<Integer, Integer> p = new MyPair<>(new Integer(1), new Integer(2));
-		final MyPair<Integer, Integer> p2 = new MyPair<>(new Integer(1), new Integer(2));
-		Assertions.assertEquals(p.hashCode(), p2.hashCode());
+		final MyPair<Integer, Integer> p = new MyPair<>(Integer.valueOf(1), Integer.valueOf(2));
+		final MyPair<Integer, Integer> p2 = new MyPair<>(Integer.valueOf(1), Integer.valueOf(2));
+		assertEquals(p.hashCode(), p2.hashCode());
 	}
 
 }
