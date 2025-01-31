@@ -119,7 +119,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		testBuildMimePackageDocJMF(tempPath);
 	}
 
-	public void testBuildMimePackageDocJMF(final Path tempDir) throws MessagingException, IOException
+	public synchronized void testBuildMimePackageDocJMF(final Path tempDir) throws MessagingException, IOException
 	{
 		for (int ii = 0; ii < 3; ii++)
 		{
@@ -164,7 +164,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 			assertEquals(mr.getBodyParts().length, 5);
 			final MimeWriter mw = new MimeWriter(mp);
 			mw.writeToDir(new File(UrlUtil.newExtension(out.getPath(), null)));
-			ThreadUtil.sleep(42);
+			ThreadUtil.sleep(123);
 			assertTrue(out.renameTo(out), "File '" + out + "' is still locked.");
 		}
 	}
