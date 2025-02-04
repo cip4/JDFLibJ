@@ -85,7 +85,7 @@ public class WalkXJDF extends WalkXElement
 	 * @param jdf2
 	 * @return
 	 */
-	private JDFNode getParentProduct(final KElement xjdf, final KElement jdf)
+	JDFNode getParentProduct(final KElement xjdf, final KElement jdf)
 	{
 		JDFNode jdfNode = (JDFNode) jdf;
 		final String parentID = xjdf.getNonEmpty(XJDFConstants.ParentID);

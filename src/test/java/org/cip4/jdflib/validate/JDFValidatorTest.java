@@ -77,20 +77,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
+import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.util.FileUtil;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -100,8 +103,6 @@ import org.junit.jupiter.api.Test;
  */
 class JDFValidatorTest extends JDFTestCaseBase
 {
-	private JDFValidator validator;
-	private JDFDoc doc;
 
 	/**
 	 *
@@ -109,6 +110,8 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testInlineColorPool()
 	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFValidator validator = getValidator();
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
@@ -123,6 +126,8 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testInlineMultiColorPool()
 	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFValidator validator = getValidator();
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
@@ -138,6 +143,8 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testInlineEmptyColorPool()
 	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFValidator validator = getValidator();
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource cc = node.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		final JDFColorPool cp = (JDFColorPool) cc.appendElement(ElementName.COLORPOOL);
@@ -150,14 +157,19 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testExamples()
 	{
-		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData), "*.jdf"))
+		for (final Object l : EnumValidationLevel.getEnumList())
 		{
-			final JDFDoc d = JDFDoc.parseFile(f);
-			if (f.length() < 1000000 && d != null)
+			final JDFValidator validator = getValidator();
+			validator.level = (EnumValidationLevel) l;
+			for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData), "*.jdf"))
 			{
-				assertNotNull(d);
-				final boolean ok = validator.isValid(d);
-				log.info(f.getPath() + " " + ok);
+				final JDFDoc d = JDFDoc.parseFile(f);
+				if (f.length() < 1000000 && d != null)
+				{
+					assertNotNull(d);
+					final boolean ok = validator.isValid(d);
+					log.info(f.getPath() + " " + ok);
+				}
 			}
 		}
 	}
@@ -168,14 +180,19 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testJMFExamples()
 	{
-		for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData), "*.jmf"))
+		for (final Object l : EnumValidationLevel.getEnumList())
 		{
-			final JDFDoc d = JDFDoc.parseFile(f);
-			if (d != null)
+			final JDFValidator validator = getValidator();
+			validator.level = (EnumValidationLevel) l;
+			for (final File f : FileUtil.listFilesInTree(new File(sm_dirTestData), "*.jmf"))
 			{
-				assertNotNull(d);
-				final boolean ok = validator.isValid(d);
-				log.info(f.getPath() + " " + ok);
+				final JDFDoc d = JDFDoc.parseFile(f);
+				if (d != null)
+				{
+					assertNotNull(d);
+					final boolean ok = validator.isValid(d);
+					log.info(f.getPath() + " " + ok);
+				}
 			}
 		}
 	}
@@ -186,6 +203,8 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testResourceAuditLinks()
 	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFValidator validator = getValidator();
 		final JDFNode node = doc.getJDFRoot();
 		final JDFResource media = node.addResource(ElementName.MEDIA, EnumUsage.Input);
 		final JDFResourceAudit ra = node.getCreateAuditPool().addResourceAudit("dummy");
@@ -202,6 +221,8 @@ class JDFValidatorTest extends JDFTestCaseBase
 	@Test
 	void testTypo()
 	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFValidator validator = getValidator();
 		final JDFNode node = doc.getJDFRoot();
 		final KElement e = node.appendElement("cip4:bar", "www.cip4.org");
 		validator.setWarning(false);
@@ -210,25 +231,11 @@ class JDFValidatorTest extends JDFTestCaseBase
 		assertTrue(validator.isValid(doc));
 	}
 
-	/**
-	 * @see JDFTestCaseBase#setUp()
-	 */
-	@Override
-	@BeforeEach
-	public void setUp() throws Exception
+	private JDFValidator getValidator()
 	{
-		super.setUp();
-		doc = new JDFDoc(ElementName.JDF);
-		validator = new JDFValidator();
-	}
-
-	/**
-	 * @see JDFTestCaseBase#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return super.toString() + "\n" + doc;
+		final JDFValidator validator = new JDFValidator();
+		validator.setPrint(false);
+		return validator;
 	}
 
 	/**
@@ -247,8 +254,170 @@ class JDFValidatorTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testPrintURL()
+	{
+		final JDFValidator validator = getValidator();
+		final KElement e = KElement.createRoot("abc");
+		final KElement t = KElement.createRoot("test");
+		validator.printURL(e, 0, t);
+		e.setAttribute("URL", "blub");
+		validator.printURL(e, 0, t);
+		assertNotNull(t);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMissingAll()
+	{
+		final JDFValidator validator = getValidator();
+		final JDFNode empty = JDFNode.createRoot();
+		validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testTypes()
+	{
+		final JDFValidator validator = getValidator();
+		validator.level = EnumValidationLevel.Complete;
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMultiID()
+	{
+		final JDFValidator validator = getValidator();
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setType("foo", false);
+		final JDFResource r = empty.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		empty.addResource(ElementName.COMPONENT, EnumUsage.Input).setID(r.getID());
+
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testBadParent()
+	{
+		final JDFValidator validator = getValidator();
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setType("Product", false);
+
+		empty.addProduct();
+		empty.addProduct();
+		empty.setType("ProcessGroup", false);
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testDeprecatedElem()
+	{
+		final JDFValidator validator = getValidator();
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setVersion(EnumVersion.Version_1_6);
+		empty.setType("Product", false);
+		empty.appendElement(ElementName.CUSTOMERINFO);
+		empty.appendElement(ElementName.NODEINFO);
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testDangleref()
+	{
+		final JDFValidator validator = getValidator();
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setVersion(EnumVersion.Version_1_6);
+		empty.setType("Product", false);
+		final JDFResource c1 = empty.addProduct().addResource(ElementName.COMPONENT, EnumUsage.Input);
+		final JDFResource c2 = empty.addProduct().addResource(ElementName.COMPONENT, EnumUsage.Input);
+		final JDFResource c3 = empty.addProduct().addResource(ElementName.MEDIA, EnumUsage.Input);
+		final JDFResource c4 = empty.addResource(ElementName.MEDIA, EnumUsage.Input);
+		c2.appendElement("MediaRef").setAttribute(AttributeName.RREF, c3.appendAnchor(null));
+		c1.appendElement("FooRef").setAttribute(AttributeName.RREF, c4.appendAnchor(null));
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMultiJPID()
+	{
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setType("Product", false);
+
+		empty.addJDFNode(org.cip4.jdflib.node.JDFNode.EnumType.Product).setJobPartID(null);
+		empty.addJDFNode(org.cip4.jdflib.node.JDFNode.EnumType.Product).setJobPartID("P1");
+		empty.addJDFNode(org.cip4.jdflib.node.JDFNode.EnumType.Product).setJobPartID("P1");
+		final JDFValidator validator = getValidator();
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testMissingLinks()
+	{
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setType("Product", false);
+
+		empty.addJDFNode(org.cip4.jdflib.node.JDFNode.EnumType.Product).setJobPartID(null);
+		empty.addJDFNode(org.cip4.jdflib.node.JDFNode.EnumType.Product).setJobPartID("P1");
+		empty.addJDFNode(org.cip4.jdflib.node.JDFNode.EnumType.Product).setJobPartID("P1");
+		final JDFValidator validator = getValidator();
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testColorPool()
+	{
+		final JDFNode empty = JDFNode.createRoot();
+		empty.setType("Product", false);
+		final JDFColorPool cp = (JDFColorPool) empty.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		cp.getCreateColorWithName("ab", "ab");
+		final JDFColor c = cp.appendColorWithName("abc", "abc");
+		c.setActualColorName("ab");
+		c.setName("ab");
+		final JDFValidator validator = getValidator();
+		final XMLDoc d = validator.processSingleDocument(empty.getOwnerDocument_JDFElement());
+		assertNotNull(d);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testDeprecated()
 	{
+		final JDFValidator validator = getValidator();
 		final JDFJMF jmf = JDFDoc.parseFile(sm_dirTestData + "ResourceInfo.jmf").getJMFRoot();
 		final JDFResourceInfo resourceInfo = jmf.getResponse(0).getResourceInfo(0);
 		final KElement root = KElement.createRoot("foo");
