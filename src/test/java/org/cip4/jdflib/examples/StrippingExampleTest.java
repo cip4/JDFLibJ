@@ -114,9 +114,12 @@ class StrippingExampleTest extends ExampleTest
 		final JDFStation s2 = dlo.appendStation();
 		s2.setAssemblyIDs(new VString("a2 b2"));
 		s2.setStationName("S2");
+		bs.makeRootResource();
 
 		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
 		lo.setDescriptiveName("dummy layout");
+		setSnippet(n.getResourcePool(), true);
+		setSnippet(n.getResourceLinkPool(), true);
 		writeRoundTrip(n, "MultiDieLayout");
 
 	}
@@ -148,6 +151,8 @@ class StrippingExampleTest extends ExampleTest
 
 		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
 		lo.setDescriptiveName("dummy layout");
+		setSnippet(n.getResourcePool(), true);
+		setSnippet(n.getResourceLinkPool(), true);
 		writeRoundTrip(n, "MultiPosition");
 	}
 
@@ -180,6 +185,8 @@ class StrippingExampleTest extends ExampleTest
 
 		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
 		lo.setDescriptiveName("dummy layout");
+		setSnippet(n.getResourcePool(), true);
+		setSnippet(n.getResourceLinkPool(), true);
 		writeRoundTrip(n, "MultiSection");
 	}
 }
