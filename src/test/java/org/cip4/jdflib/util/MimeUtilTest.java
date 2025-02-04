@@ -107,6 +107,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	@TempDir
 	Path testDir;
+	boolean copied = false;
 
 	/**
 	 * @throws IOException
@@ -116,7 +117,11 @@ public class MimeUtilTest extends JDFTestCaseBase
 	synchronized void testBuildMimePackageDocJMF() throws MessagingException, IOException
 	{
 		final Path tempPath = new File(sm_dirTestDataTemp).toPath();
-		testBuildMimePackageDocJMF(tempPath);
+		if (!copied)
+		{
+			copied = true;
+			testBuildMimePackageDocJMF(tempPath);
+		}
 	}
 
 	public synchronized void testBuildMimePackageDocJMF(final Path tempDir) throws MessagingException, IOException
@@ -189,26 +194,6 @@ public class MimeUtilTest extends JDFTestCaseBase
 			FileUtil.copyFile(new File(unc), new File(unc2));
 		fs1.setURL(uncToUrl);
 		return n;
-	}
-
-	/**
-	 *
-	 */
-	@Test
-	void testBuildMimePackageDocJMFURL()
-	{
-		/*
-		 * final JDFDoc docJMF = new JDFDoc("JMF"); docJMF.setOriginalFileName("JMF.jmf"); final JDFJMF jmf = docJMF.getJMFRoot(); final JDFCommand com = (JDFCommand)
-		 * jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry); com.appendQueueSubmissionParams().setURL("TheJDF");
-		 *
-		 * final JDFDoc doc = new JDFDoc("JDF"); doc.setOriginalFileName("JDF.jdf"); final JDFNode n = doc.getJDFRoot(); n.setType(EnumType.ColorSpaceConversion); final
-		 * JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null,
-		 * null); final JDFFileSpec fs0 = cscp.appendFinalTargetDevice(); fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true)); final JDFRunList rl =
-		 * (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null); rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator +
-		 * "url1.pdf", false), 0, -1); for (int i = 0; i < 100; i++) { rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url?.pdf", false), 0, -1); } final Multipart
-		 * m = MimeUtil.buildMimePackage(docJMF, doc, true); final HttpURLConnection uc = MimeUtil.writeToURL(m, "http://192.168.14.143:8010/FJC/Fiery", null);
-		 * assertEquals(uc.getResponseCode(), 200); assertTrue(uc.getContentLength() > 0); final InputStream is = uc.getInputStream(); IOUtils.copy(is, System.out);
-		 */
 	}
 
 	/**
