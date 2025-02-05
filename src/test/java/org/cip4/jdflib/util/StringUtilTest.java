@@ -1232,8 +1232,6 @@ class StringUtilTest extends JDFTestCaseBase
 		assertNull(StringUtil.token("", 0, null));
 	}
 
-	// /////////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -1258,6 +1256,24 @@ class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testTokenizeMulti()
+	{
+		final String s = "a:/20/:b/c:::d";
+		assertEquals("a", StringUtil.tokenize(s, ":/", true).get(0));
+		assertEquals(":/", StringUtil.tokenize(s, ":/", true).get(1));
+		assertEquals("20", StringUtil.tokenize(s, ":/", true).get(2));
+		assertEquals("/:", StringUtil.tokenize(s, ":/", true).get(3));
+		assertEquals("b", StringUtil.tokenize(s, ":/", true).get(4));
+		assertEquals("/", StringUtil.tokenize(s, ":/", true).get(5));
+		assertEquals("c", StringUtil.tokenize(s, ":/", true).get(6));
+		assertEquals(":::", StringUtil.tokenize(s, ":/", true).get(7));
+		assertEquals("d", StringUtil.tokenize(s, ":/", true).get(8));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testReplaceTokenString()
 	{
 		final String s = "a/b/c";
@@ -1271,6 +1287,16 @@ class StringUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testReplaceTokenStringMulti()
+	{
+		assertEquals(StringUtil.replaceToken("http://foo:44/aa", 2, "/:", "42"), "http://foo:42/aa");
+		assertEquals(StringUtil.replaceToken("http://foo:44/aa", 2, "/:", ""), "http://foo:/aa");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testRemoveTokenString()
 	{
 		final String s = "a/b/c";
@@ -1278,6 +1304,15 @@ class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.removeToken(s, "b", "/"), "a/c");
 		assertEquals(StringUtil.removeToken(s, "c", "/"), "a/b");
 		assertEquals(StringUtil.removeToken("aa/bb/cc", "c", "/"), "aa/bb/cc");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRemoveTokenMulti()
+	{
+		assertEquals(StringUtil.removeToken("http://foo:44/aa", 2, "/:"), "http://foo:/aa");
 	}
 
 	/**
@@ -1350,8 +1385,7 @@ class StringUtilTest extends JDFTestCaseBase
 		final String s = "http://aa/b?c";
 		final VString v = new VString();
 		v.add("http:");
-		v.add("/");
-		v.add("/");
+		v.add("//");
 		v.add("aa");
 		v.add("/");
 		v.add("b");

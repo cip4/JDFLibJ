@@ -186,7 +186,7 @@ public class StringUtil
 			"Mein schönes Fräulein, darf ich wagen, Meinen Arm und Geleit Ihr anzutragen? Bin weder Fräulein, weder schön, Kann ungeleitet nach Hause gehn.",
 			"And I'm thinking you weren't burdened with an overabundance of schooling. So why don't we just ignore each other 'til we go away.",
 			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet.",
-			"I'm afraid not. The guns have stopped because we are about to attack. Not even our generals are mad enough to shell their own men. They feel it's more sporting to let the Germans do it. ",
+			"I'm afraid not. The guns have stopped because we are about to attack. Not even our generals are mad enough to shell their own men. They feel it's more sporting to let the Germans do it.",
 			"If they take the ship they will rape us to death, eat our flesh, and sew our skins in to their clothing, and if we're very, very lucky, they’ll do it in that order.",
 			"Hier konnte niemand sonst Einlaß erhalten, denn dieser Eingang war nur für dich bestimmt. Ich gehe jetzt und schließe ihn.",
 			"Hohe Herren von der Akademie! Sie erweisen mir die Ehre, mich aufzufordern, der Akademie einen Bericht über mein äffisches Vorleben einzureichen.",
@@ -545,9 +545,25 @@ public class StringUtil
 			delim = delim == null ? JDFConstants.BLANK : delim;
 			final VString v = new VString();
 			final StringTokenizer st = new StringTokenizer(strWork, delim, delim2token);
+			boolean lastToken = false;
 			while (st.hasMoreTokens())
 			{
-				v.add(intern(st.nextToken()));
+				String nextToken = st.nextToken();
+				if (delim.contains(nextToken))
+				{
+					if (lastToken)
+					{
+						nextToken = v.get(-1) + nextToken;
+						v.set(v.size() - 1, nextToken);
+						continue;
+					}
+					lastToken = true;
+				}
+				else
+				{
+					lastToken = false;
+				}
+				v.add(intern(nextToken));
 			}
 			return v;
 		}
@@ -832,7 +848,7 @@ public class StringUtil
 		int i = 0;
 		for (final String token : v2)
 		{
-			if (!delim.equals(token))
+			if (!delim.contains(token.substring(0, 1)))
 			{
 				if (n == index)
 					break;
@@ -843,9 +859,9 @@ public class StringUtil
 		if (newToken == null)
 		{
 			v2.remove(i);
-			if (i > 0)
+			if (i > 0 && delim.equals(v2.get(i - 1)))
 				v2.remove(i - 1);
-			else if (i < v2.size())
+			else if (i < v2.size() && delim.equals(v2.get(i)))
 				v2.remove(i);
 		}
 		else
