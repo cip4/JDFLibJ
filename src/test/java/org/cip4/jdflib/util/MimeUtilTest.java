@@ -94,6 +94,7 @@ import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.mime.MimeWriter;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -107,7 +108,13 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	@TempDir
 	Path testDir;
-	boolean copied = false;
+
+	@BeforeAll
+	static void ensurecopy() throws MessagingException, IOException
+	{
+		final Path tempPath = new File(sm_dirTestDataTemp).toPath();
+		testBuildMimePackageDocJMF(tempPath);
+	}
 
 	/**
 	 * @throws IOException
@@ -116,15 +123,10 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 */
 	synchronized void testBuildMimePackageDocJMF() throws MessagingException, IOException
 	{
-		final Path tempPath = new File(sm_dirTestDataTemp).toPath();
-		if (!copied)
-		{
-			copied = true;
-			testBuildMimePackageDocJMF(tempPath);
-		}
+		// nop
 	}
 
-	public synchronized void testBuildMimePackageDocJMF(final Path tempDir) throws MessagingException, IOException
+	public static synchronized void testBuildMimePackageDocJMF(final Path tempDir) throws MessagingException, IOException
 	{
 		for (int ii = 0; ii < 3; ii++)
 		{
