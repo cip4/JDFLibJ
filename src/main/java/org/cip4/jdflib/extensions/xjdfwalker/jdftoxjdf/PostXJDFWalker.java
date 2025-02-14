@@ -100,6 +100,7 @@ import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFMedia.ECoating;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
@@ -236,15 +237,8 @@ class PostXJDFWalker extends BaseElementWalker
 
 		public String getCoating(final String coating)
 		{
-			if (coating == null)
-			{
-				return null;
-			}
-			if ("glossy".equalsIgnoreCase(coating))
-			{
-				return "Gloss";
-			}
-			return coating;
+			final ECoating c = ECoating.getEnum(coating);
+			return c == null ? null : c.name();
 		}
 
 		/**

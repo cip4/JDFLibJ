@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -51,6 +51,8 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFMedia.ECoating;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -101,27 +103,37 @@ public class WalkMedia extends WalkIntentResource
 		{
 			map.put(AttributeName.MEDIATYPE, EnumMediaType.Other);
 		}
-		updateGrade(map, AttributeName.GRADE, AttributeName.ISOPAPERSUBSTRATE);
-		updateGrade(map, "BackGrade", AttributeName.BACKISOPAPERSUBSTRATE);
+		updateCoating(map, AttributeName.FRONTCOATINGS, XJDFConstants.Coating);
+		updateCoating(map, AttributeName.BACKCOATINGS, XJDFConstants.BackCoating);
+		updateGrade(map, AttributeName.GRADE, AttributeName.ISOPAPERSUBSTRATE, XJDFConstants.Coating);
+		updateGrade(map, "BackGrade", AttributeName.BACKISOPAPERSUBSTRATE, XJDFConstants.BackCoating);
 		updateFluteGrain(AttributeName.FLUTEDIRECTION, map);
 		updateFluteGrain(AttributeName.GRAINDIRECTION, map);
-		map.renameKey(AttributeName.FRONTCOATINGS, XJDFConstants.Coating);
-		map.renameKey(AttributeName.FRONTCOATINGS, XJDFConstants.CoatingDetail);
+		map.renameKey(AttributeName.FRONTCOATINGDETAIL, XJDFConstants.CoatingDetail);
 		map.renameKey(AttributeName.FRONTGLOSSVALUE, XJDFConstants.GlossValue);
 		super.updateAttributes(map);
 	}
 
-	private void updateGrade(final JDFAttributeMap map, final String oldGrade, final String newGrade)
+	static void updateGrade(final JDFAttributeMap map, final String oldGrade, final String newGrade, final String coatkey)
 	{
 		final String grade = map.remove(oldGrade);
 		if (map.getNonEmpty(newGrade) == null)
 		{
 			final int igrade = StringUtil.parseInt(grade, 0);
-			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(igrade);
+			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(igrade, ECoating.getEnum(map.get(coatkey)));
 			if (ips != null)
 			{
 				map.put(newGrade, ips.getName());
 			}
+		}
+	}
+
+	static void updateCoating(final JDFAttributeMap map, final String oldCoat, final String newCoat)
+	{
+		final String coat = map.remove(oldCoat);
+		if (map.getNonEmpty(newCoat) == null)
+		{
+			map.putNotNull(newCoat, JavaEnumUtil.getName(ECoating.getEnum(coat)));
 		}
 	}
 
@@ -157,20 +169,20 @@ public class WalkMedia extends WalkIntentResource
 	}
 
 	@Override
-	protected void setAttributes(KElement jdf, KElement xjdf)
+	protected void setAttributes(final KElement jdf, final KElement xjdf)
 	{
 		movePattern((JDFMedia) jdf, xjdf);
 		super.setAttributes(jdf, xjdf);
 	}
 
-	void movePattern(JDFMedia media, KElement xjdf)
+	void movePattern(final JDFMedia media, final KElement xjdf)
 	{
-		Vector<? extends ValuedEnum> pattern = media.getHoleType();
+		final Vector<? extends ValuedEnum> pattern = media.getHoleType();
 		if (pattern != null)
 		{
 			pattern.remove(EnumHoleType.None);
 			pattern.remove(EnumHoleType.Explicit); // Handeled by HoleList
-			for (ValuedEnum t : pattern)
+			for (final ValuedEnum t : pattern)
 			{
 				xjdf.appendElement(XJDFConstants.HolePattern).setAttribute(AttributeName.PATTERN, t.getName());
 			}

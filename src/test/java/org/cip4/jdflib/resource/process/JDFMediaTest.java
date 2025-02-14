@@ -63,6 +63,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.process.JDFMedia.ECoating;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.junit.jupiter.api.Test;
 
@@ -109,8 +110,6 @@ class JDFMediaTest extends JDFTestCaseBase
 		result = media.getDimensionInch();
 		assertEquals(new JDFXYPair(1, 1), result);
 	}
-
-	// //////////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -209,13 +208,29 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	final void testGetCoating()
+	{
+		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
+		m.setCoating(ECoating.Matte);
+		assertEquals(ECoating.Matte, m.getCoating());
+		assertEquals(ECoating.Matte, m.getBackCoating());
+		m.setBackCoating(ECoating.Gloss);
+		assertEquals(ECoating.Matte, m.getCoating());
+		assertEquals(ECoating.Gloss, m.getBackCoating());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	final void testGradeFromISOGrade()
 	{
-		assertEquals(1, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS1));
-		assertEquals(0, JDFMedia.getGradeFromIsoPaper(null));
-		assertEquals(3, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS2));
-		assertEquals(4, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS7));
-		assertEquals(5, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS8));
+		assertEquals(1, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS1, null));
+		assertEquals(2, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS1, ECoating.Matte));
+		assertEquals(0, JDFMedia.getGradeFromIsoPaper(null, null));
+		assertEquals(3, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS2, null));
+		assertEquals(4, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS7, null));
+		assertEquals(5, JDFMedia.getGradeFromIsoPaper(EnumISOPaperSubstrate.PS8, null));
 	}
 
 	/**
@@ -226,10 +241,20 @@ class JDFMediaTest extends JDFTestCaseBase
 	{
 		for (int i = 1; i <= 5; i++)
 		{
-			assertEquals(i, JDFMedia.getGradeFromIsoPaper(JDFMedia.getIsoPaperFromGrade(i)));
+			assertEquals(i, JDFMedia.getGradeFromIsoPaper(JDFMedia.getIsoPaperFromGrade(i, null), null));
 		}
-		assertNull(JDFMedia.getIsoPaperFromGrade(-2));
-		assertNull(JDFMedia.getIsoPaperFromGrade(42));
+		for (int i = 2; i <= 5; i++) // grade=1 has a known matte / gloss swap
+		{
+			for (final ECoating c : ECoating.values())
+				assertEquals(i, JDFMedia.getGradeFromIsoPaper(JDFMedia.getIsoPaperFromGrade(i, c), c));
+		}
+		assertNull(JDFMedia.getIsoPaperFromGrade(-2, null));
+		assertNull(JDFMedia.getIsoPaperFromGrade(42, null));
+		assertEquals(1, JDFMedia.getGradeFromIsoPaper(null, ECoating.Gloss));
+		assertEquals(1, JDFMedia.getGradeFromIsoPaper(null, ECoating.Satin));
+		assertEquals(1, JDFMedia.getGradeFromIsoPaper(null, ECoating.Coated));
+		assertEquals(2, JDFMedia.getGradeFromIsoPaper(null, ECoating.Matte));
+		assertEquals(4, JDFMedia.getGradeFromIsoPaper(null, ECoating.None));
 	}
 
 	/**

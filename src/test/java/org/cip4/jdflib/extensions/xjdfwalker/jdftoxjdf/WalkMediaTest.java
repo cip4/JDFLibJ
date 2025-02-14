@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumHoleType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
@@ -70,6 +71,22 @@ class WalkMediaTest extends JDFTestCaseBase
 		walkMedia.jdfToXJDF = new JDFToXJDF();
 		walkMedia.walk(m, res);
 		assertEquals(EnumISOPaperSubstrate.PS8, ((JDFMedia) res.getElement(ElementName.MEDIA)).getISOPaperSubstrate());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testCoating()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		m.setFrontCoatings(EnumFrontCoatings.Glossy);
+		final KElement res = new JDFDoc("Resource").getRoot();
+		final WalkMedia walkMedia = new WalkMedia();
+		walkMedia.jdfToXJDF = new JDFToXJDF();
+		walkMedia.walk(m, res);
+		assertEquals("Gloss", res.getElement(ElementName.MEDIA).getAttribute(XJDFConstants.Coating));
 	}
 
 	/**
@@ -112,10 +129,10 @@ class WalkMediaTest extends JDFTestCaseBase
 	void testHolePatternComplet()
 	{
 		final JDFNode n = JDFNode.parseFile(sm_dirTestData + "xjdf/Media_HoleType.jdf");
-		JDFToXJDF c = new JDFToXJDF();
-		KElement xjdf = c.convert(n);
-		XJDFHelper h = XJDFHelper.getHelper(xjdf);
-		KElement m = h.getSet(ElementName.MEDIA, 0).getPartition(0).getResource();
+		final JDFToXJDF c = new JDFToXJDF();
+		final KElement xjdf = c.convert(n);
+		final XJDFHelper h = XJDFHelper.getHelper(xjdf);
+		final KElement m = h.getSet(ElementName.MEDIA, 0).getPartition(0).getResource();
 		assertEquals("R2-generic", m.getElement(XJDFConstants.HolePattern).getAttribute(XJDFConstants.Pattern));
 	}
 

@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 
@@ -124,6 +125,11 @@ public class WalkMediaIntent extends WalkIntentResource
 		{
 			map.put(AttributeName.MEDIATYPE, EnumMediaType.Paper);
 		}
+		WalkMedia.updateCoating(map, AttributeName.FRONTCOATINGS, XJDFConstants.Coating);
+		WalkMedia.updateCoating(map, AttributeName.BACKCOATINGS, XJDFConstants.BackCoating);
+		WalkMedia.updateGrade(map, AttributeName.GRADE, AttributeName.ISOPAPERSUBSTRATE, XJDFConstants.Coating);
+		WalkMedia.updateGrade(map, "BackGrade", AttributeName.BACKISOPAPERSUBSTRATE, XJDFConstants.BackCoating);
+
 		super.updateAttributes(map);
 	}
 
