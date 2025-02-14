@@ -415,7 +415,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	{
 		final EnumMediaType typ = getMediaType();
 		return EnumMediaType.Paper.equals(typ) || EnumMediaType.CorrugatedBoard.equals(typ) || EnumMediaType.SelfAdhesive.equals(typ) || EnumMediaType.Transparency.equals(typ)
-				|| EnumMediaType.Vinyl.equals(typ);
+				|| EnumMediaType.Vinyl.equals(typ) || EnumMediaType.Textile.equals(typ) || EnumMediaType.Synthetic.equals(typ);
 	}
 
 	/**

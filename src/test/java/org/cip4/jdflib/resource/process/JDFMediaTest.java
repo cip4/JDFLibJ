@@ -167,6 +167,33 @@ class JDFMediaTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	final void testIsComponentMedia()
+	{
+		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
+		m.setMediaType(EnumMediaType.Paper);
+		assertTrue(m.isComponentMedia());
+		m.setMediaType(EnumMediaType.Vinyl);
+		assertTrue(m.isComponentMedia());
+		m.setMediaType(EnumMediaType.Synthetic);
+		assertTrue(m.isComponentMedia());
+		m.setMediaType(EnumMediaType.Plate);
+		assertFalse(m.isComponentMedia());
+		int n = 0;
+		for (final Object o : EnumMediaType.getEnumList())
+		{
+			final EnumMediaType mt = (EnumMediaType) o;
+			m.setMediaType(mt);
+			if (m.isComponentMedia())
+				n++;
+		}
+		assertEquals(7, n);
+		assertEquals(16, EnumMediaType.getEnumList().size() - n);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	final void testSetGrade()
 	{
 		final JDFMedia m = (JDFMedia) new JDFDoc(ElementName.MEDIA).getRoot();
