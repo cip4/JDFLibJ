@@ -74,6 +74,7 @@ import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFEnums.eCoating;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -100,7 +101,6 @@ import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
-import org.cip4.jdflib.resource.process.JDFMedia.ECoating;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
@@ -237,7 +237,7 @@ class PostXJDFWalker extends BaseElementWalker
 
 		public String getCoating(final String coating)
 		{
-			final ECoating c = ECoating.getEnum(coating);
+			final eCoating c = eCoating.getEnum(coating);
 			return c == null ? null : c.name();
 		}
 

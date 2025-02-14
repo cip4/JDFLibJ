@@ -89,9 +89,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFEnums.eCoating;
 import org.cip4.jdflib.ifaces.IMatches;
-import org.cip4.jdflib.util.EnumUtil;
-import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -101,31 +100,6 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFMedia extends JDFAutoMedia implements IMatches
 {
 	private static final long serialVersionUID = 1L;
-
-	public enum ECoating
-	{
-		Coated, Gloss, Matte, None, Satin;
-
-		public static ECoating getEnum(final String s)
-		{
-			final ECoating c = JavaEnumUtil.getEnumIgnoreCase(ECoating.class, s);
-			final EnumFrontCoatings fc = c == null ? (EnumFrontCoatings) EnumUtil.getEnumIgnoreCase(EnumFrontCoatings.class, s) : null;
-			if (fc != null)
-			{
-
-				if (EnumFrontCoatings.Glossy.equals(fc) || EnumFrontCoatings.HighGloss.equals(fc))
-					return Gloss;
-				if (EnumFrontCoatings.Semigloss.equals(fc))
-					return Satin;
-			}
-			return c;
-		}
-
-		public String getJDFVal()
-		{
-			return Gloss == this ? EnumFrontCoatings.Glossy.getName() : name();
-		}
-	}
 
 	/**
 	 * implementation of spec table Translation of Paper grades between [ISO12647-2:2004] and [ISO12647-2:2013]
@@ -146,7 +120,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 *
 	 * @return 1-5 if valid; else null
 	 */
-	public static EnumISOPaperSubstrate getIsoPaperFromGrade(final int grade, final ECoating coating)
+	public static EnumISOPaperSubstrate getIsoPaperFromGrade(final int grade, final eCoating coating)
 	{
 		if (grade == 1)
 		{
@@ -204,7 +178,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 	 * @param coating
 	 * @return 1-5 if valid; else 0
 	 */
-	public static int getGradeFromIsoPaper(final EnumISOPaperSubstrate iso, final ECoating coating)
+	public static int getGradeFromIsoPaper(final EnumISOPaperSubstrate iso, final eCoating coating)
 	{
 		if (iso == null && coating != null)
 		{
@@ -223,7 +197,7 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 		}
 		else if (EnumISOPaperSubstrate.PS1.equals(iso))
 		{
-			return ECoating.Matte.equals(coating) ? 2 : 1;
+			return eCoating.Matte.equals(coating) ? 2 : 1;
 		}
 		else if (EnumISOPaperSubstrate.PS2.equals(iso) || EnumISOPaperSubstrate.PS3.equals(iso))
 		{
@@ -439,30 +413,30 @@ public class JDFMedia extends JDFAutoMedia implements IMatches
 		return getGradeFromIsoPaper(getISOPaperSubstrate(), getCoating());
 	}
 
-	public ECoating getCoating()
+	public eCoating getCoating()
 	{
 		String c = getNonEmpty(AttributeName.FRONTCOATINGS);
 		if (c == null)
 			c = getNonEmpty(XJDFConstants.Coating);
-		return ECoating.getEnum(c);
+		return eCoating.getEnum(c);
 	}
 
-	public void setCoating(final ECoating c)
+	public void setCoating(final eCoating c)
 	{
 		setAttribute(XJDFConstants.Coating, c, null);
 	}
 
-	public void setBackCoating(final ECoating c)
+	public void setBackCoating(final eCoating c)
 	{
 		setAttribute(XJDFConstants.BackCoating, c, null);
 	}
 
-	public ECoating getBackCoating()
+	public eCoating getBackCoating()
 	{
 		String c = getNonEmpty(AttributeName.BACKCOATINGS);
 		if (c == null)
 			c = getNonEmpty(XJDFConstants.BackCoating);
-		final ECoating coating = ECoating.getEnum(c);
+		final eCoating coating = eCoating.getEnum(c);
 		return coating == null ? getCoating() : coating;
 	}
 

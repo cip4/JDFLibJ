@@ -50,8 +50,8 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFEnums.eCoating;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.JDFMedia.ECoating;
 import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -120,7 +120,7 @@ public class WalkMedia extends WalkIntentResource
 		if (map.getNonEmpty(newGrade) == null)
 		{
 			final int igrade = StringUtil.parseInt(grade, 0);
-			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(igrade, ECoating.getEnum(map.get(coatkey)));
+			final EnumISOPaperSubstrate ips = JDFMedia.getIsoPaperFromGrade(igrade, eCoating.getEnum(map.get(coatkey)));
 			if (ips != null)
 			{
 				map.put(newGrade, ips.getName());
@@ -133,7 +133,7 @@ public class WalkMedia extends WalkIntentResource
 		final String coat = map.remove(oldCoat);
 		if (map.getNonEmpty(newCoat) == null)
 		{
-			map.putNotNull(newCoat, JavaEnumUtil.getName(ECoating.getEnum(coat)));
+			map.putNotNull(newCoat, JavaEnumUtil.getName(eCoating.getEnum(coat)));
 		}
 	}
 

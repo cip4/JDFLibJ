@@ -37,8 +37,11 @@
 package org.cip4.jdflib.extensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
 import org.junit.jupiter.api.Test;
 
 class XJDFEnumsTest extends XJDFEnums
@@ -54,6 +57,41 @@ class XJDFEnumsTest extends XJDFEnums
 		}
 		assertNull(eDeviceStatus.getEnum(""));
 		assertNull(eDeviceStatus.getEnum("foo"));
+	}
+
+	@Test
+	void testDeviceStatusVal()
+	{
+		for (final Object o : EnumDeviceStatus.getEnumList())
+		{
+			final EnumDeviceStatus ds = (EnumDeviceStatus) o;
+			assertNotNull(eDeviceStatus.getEnum(ds.getName()), "" + ds);
+			if (!EnumDeviceStatus.Down.equals(o))
+				assertEquals(ds.getName(), eDeviceStatus.getEnum(ds.getName()).getJDFVal(), "" + ds);
+		}
+	}
+
+	@Test
+	void testCoatings()
+	{
+		for (final eCoating s : eCoating.values())
+		{
+			assertEquals(s, eCoating.getEnum(s.name().toLowerCase()));
+			assertEquals(s, eCoating.getEnum(s.name()));
+		}
+		assertNull(eCoating.getEnum(""));
+		assertNull(eCoating.getEnum("foo"));
+	}
+
+	@Test
+	void testCoatingVal()
+	{
+		for (final Object o : EnumFrontCoatings.getEnumList())
+		{
+			final EnumFrontCoatings coat = (EnumFrontCoatings) o;
+			if (eCoating.getEnum(coat.getName()) != null)
+				assertNotNull(eCoating.getEnum(coat.getName()).getJDFVal(), "" + coat);
+		}
 	}
 
 }

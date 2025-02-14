@@ -41,9 +41,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFEnums.eCoating;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.JDFMedia.ECoating;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -112,7 +112,7 @@ public class WalkMedia extends WalkResource
 
 	void updateCoating(final JDFMedia m, final String xjdf, final String jdf)
 	{
-		final ECoating c = ECoating.getEnum(m.getNonEmpty(xjdf));
+		final eCoating c = eCoating.getEnum(m.getNonEmpty(xjdf));
 		if (c != null)
 		{
 			m.removeAttribute(xjdf);

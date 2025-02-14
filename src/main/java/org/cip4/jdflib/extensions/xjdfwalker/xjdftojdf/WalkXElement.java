@@ -52,11 +52,11 @@ import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFEnums.eCoating;
 import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-import org.cip4.jdflib.resource.process.JDFMedia.ECoating;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -382,7 +382,7 @@ public class WalkXElement extends BaseWalker
 	 */
 	String getCoating(final String coating)
 	{
-		final ECoating c = ECoating.getEnum(coating);
+		final eCoating c = eCoating.getEnum(coating);
 		return c == null ? null : c.getJDFVal();
 	}
 }
