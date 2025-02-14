@@ -80,7 +80,6 @@ import org.cip4.jdflib.jmf.JDFDeviceInfo.eXjdfDeviceCondition;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.JavaEnumUtil;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -139,17 +138,6 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 			if (EnumDeviceOperationMode.NonProductive.equals(eOpMode) || EnumDeviceOperationMode.Maintenance.equals(eOpMode))
 			{
 				eS = eDeviceStatus.NonProductive;
-			}
-			else if (StringUtil.getNonEmpty(status) != null)
-			{
-				if ("Unknown".equals(status) || "Down".equals(status))
-				{
-					eS = eDeviceStatus.Offline;
-				}
-				else if ("Running".equals(status))
-				{
-					eS = eDeviceStatus.Production;
-				}
 			}
 		}
 		map.put(AttributeName.DEVICECONDITION, JavaEnumUtil.getName(eXjdfDeviceCondition.getEnum(dc)));
