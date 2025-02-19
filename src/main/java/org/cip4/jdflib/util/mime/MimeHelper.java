@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -60,7 +60,14 @@ import org.cip4.jdflib.util.UrlUtil;
 public class MimeHelper
 {
 	protected Multipart theMultipart;
-	private static boolean bNeedAParser = true;
+
+	// there is a bug in xerces that screws up the reference count for shared files when the static stuff in domparser is initialized.
+	// make sure that this happens prior to any mime related tasks and all is well
+	static
+	{
+		new JDFParser();
+	}
+
 	protected int markSize;
 	protected final static Log log = LogFactory.getLog(MimeHelper.class);
 
@@ -70,13 +77,6 @@ public class MimeHelper
 	public MimeHelper()
 	{
 		super();
-		// there is a bug in xerces that screws up the reference count for shared files when the static stuff in domparser is initialized.
-		// make sure that this happens prior to any mime related tasks and all is well
-		if (bNeedAParser)
-		{
-			bNeedAParser = false;
-			new JDFParser();
-		}
 		theMultipart = null;
 		markSize = 1000000;
 	}
