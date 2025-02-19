@@ -615,7 +615,6 @@ public class XMLDoc implements Cloneable, IStreamWriter
 			{
 				serial.serialize(m_doc);
 			}
-			return; // all is well here
 		}
 	}
 
