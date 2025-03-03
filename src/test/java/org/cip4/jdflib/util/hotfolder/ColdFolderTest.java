@@ -111,7 +111,8 @@ class ColdFolderTest extends JDFTestCaseBase
 			assertTrue(file.exists());
 			Mockito.verify(listener, Mockito.timeout(10_000)).hotFile(file);
 			assertTrue(file.exists());
-			file.delete();
+			FileUtil.forceDelete(file);
+			ThreadUtil.sleep(42);
 		}
 		cf.stop();
 	}
