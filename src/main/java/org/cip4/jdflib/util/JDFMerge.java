@@ -666,15 +666,23 @@ public class JDFMerge
 		{
 			if (src.getIdentical() != null)
 			{
+				log.warn("skipping identical source: " + JDFAttributeMap.showKeys(src.getPartMap(), null) + " " + spawnID);
 				continue; // no need to merge identical elements
 			}
 			final JDFAttributeMap srcMap = src.getPartMap(mergeIDKeys);
-			JDFResource trg = targetRes.getPartition(srcMap, EnumPartUsage.Implicit);
-
+			final org.cip4.jdflib.resource.PartitionGetter pg = new org.cip4.jdflib.resource.PartitionGetter(targetRes);
+			pg.setFollowIdentical(false);
+			JDFResource trg = pg.getPartition(srcMap, EnumPartUsage.Implicit);
 			if (trg == null)
 			{
 				trg = targetRes;
 			}
+			if (trg.getIdentical() != null)
+			{
+				log.warn("skipping identical target: " + JDFAttributeMap.showKeys(src.getPartMap(), null) + " " + spawnID);
+				continue; // no need to merge identical elements
+			}
+
 			JDFAttributeMap trgMap = trg.getPartMap();
 
 			// RP 220605 - not puristic, but pragmatic
@@ -758,12 +766,12 @@ public class JDFMerge
 		return root;
 	}
 
-	static void checkNamespace(final JDFResource src, JDFResource trg)
+	static void checkNamespace(final JDFResource src, final JDFResource trg)
 	{
-		JDFAttributeMap map = src.getAttributeMap();
-		for (String key : map.keySet())
+		final JDFAttributeMap map = src.getAttributeMap();
+		for (final String key : map.keySet())
 		{
-			String prefix = KElement.xmlnsPrefix(key);
+			final String prefix = KElement.xmlnsPrefix(key);
 			if (prefix != null)
 			{
 				String uri = trg.getNamespaceURIFromPrefix(prefix);

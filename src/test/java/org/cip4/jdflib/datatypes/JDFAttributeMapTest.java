@@ -86,6 +86,17 @@ class JDFAttributeMapTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testShowKeysStatic()
+	{
+		assertEquals("", JDFAttributeMap.showKeys(null, null));
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		assertEquals(JDFAttributeMap.showKeys(m1, " "), "(a1 = v1)");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testRemoveEmpty()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");

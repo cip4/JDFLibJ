@@ -908,6 +908,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 		return new JDFAttributeMap(this);
 	}
 
+	public static String showKeys(final JDFAttributeMap map, final String sep)
+	{
+		return map == null ? "" : map.showKeys(sep);
+	}
+
 	/**
 	 *
 	 * @param jdfAttributeMap
