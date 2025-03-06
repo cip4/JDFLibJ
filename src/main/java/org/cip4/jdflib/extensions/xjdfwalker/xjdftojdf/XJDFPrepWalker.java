@@ -40,6 +40,7 @@ import java.util.List;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
@@ -47,11 +48,14 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDFDataCache;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * some generic preprocessing that is better done on the XJDF prior to XJDF--> JDF Conversion
@@ -61,12 +65,20 @@ import org.cip4.jdflib.resource.process.JDFContact;
 class XJDFPrepWalker extends BaseElementWalker
 {
 
+	private final BaseXJDFHelper h;
+
 	/**
 	 * @param newRoot
 	 */
-	XJDFPrepWalker()
+	XJDFPrepWalker(final BaseXJDFHelper h)
 	{
 		super(new BaseWalkerFactory());
+		this.h = h;
+	}
+
+	public void convert()
+	{
+		walkTreeKidsFirst(h.getRoot());
 	}
 
 	protected class WalkContact extends WalkElement
@@ -173,10 +185,9 @@ class XJDFPrepWalker extends BaseElementWalker
 					{
 						final KElement newRI = parent.appendElement(ElementName.RESOURCEINFO);
 						newRI.setAttributes(xjdf);
-						final KElement newSet = newRI.appendElement(XJDFConstants.ResourceSet);
-						newSet.setAttributes(sh.getRoot());
+						final SetHelper newSet = SetHelper.appendSet(newRI, sh.getName(), sh.getUsage());
 						final ResourceHelper part = sh.getPartition(i);
-						newSet.moveElement(part.getRoot(), null);
+						newSet.getRoot().moveElement(part.getRoot(), null);
 					}
 				}
 			}
@@ -209,26 +220,30 @@ class XJDFPrepWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			final List<KElement> kids = xjdf.getChildList();
-			final StringArray names = JDFToXJDFDataCache.getStripMarkElements();
-			for (final KElement kid : kids)
+			final ResourceHelper helper = ResourceHelper.getHelper(xjdf.getDeepParent(XJDFConstants.Resource, 0));
+			if (helper != null && !StringUtil.isEmpty(helper.getPartKey(AttributeName.SIDE)))
 			{
-				if (names.contains(kid.getLocalName()))
+				final List<KElement> kids = xjdf.getChildList();
+				final StringArray names = JDFToXJDFDataCache.getStripMarkElements();
+				for (final KElement kid : kids)
 				{
-					final KElement parent = xjdf.getParentNode_KElement();
-
-					KElement mo = parent.getElement("PlacedObject/MarkObject");
-					if (mo == null)
+					if (names.contains(kid.getLocalName()))
 					{
-						final KElement po = parent.insertBefore(XJDFConstants.PlacedObject, xjdf, null);
-						mo = po.appendElement(ElementName.MARKOBJECT);
+						final KElement parent = xjdf.getParentNode_KElement();
+
+						KElement mo = parent.getElement("PlacedObject/MarkObject");
+						if (mo == null)
+						{
+							final KElement po = parent.insertBefore(XJDFConstants.PlacedObject, xjdf, null);
+							mo = po.appendElement(ElementName.MARKOBJECT);
+						}
+						for (final KElement kid2 : kids)
+							mo.moveElement(kid2, null);
+						final KElement dm = mo.appendElement(ElementName.DEVICEMARK);
+						dm.setAttributes(xjdf);
+						xjdf.deleteNode();
+						return super.walk(mo, dummy);
 					}
-					for (final KElement kid2 : kids)
-						mo.moveElement(kid2, null);
-					final KElement dm = mo.appendElement(ElementName.DEVICEMARK);
-					dm.setAttributes(xjdf);
-					xjdf.deleteNode();
-					return super.walk(mo, dummy);
 				}
 			}
 			return super.walk(xjdf, dummy);
@@ -238,6 +253,66 @@ class XJDFPrepWalker extends BaseElementWalker
 		public VString getElementNames()
 		{
 			return new VString(ElementName.STRIPMARK);
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkLayoutSet extends WalkElement
+	{
+
+		@Override
+		public boolean matches(final KElement e)
+		{
+			return SetHelper.isSet(e) && ElementName.LAYOUT.equals(SetHelper.getResourceName(e));
+		}
+
+		public WalkLayoutSet()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			final SetHelper sh = SetHelper.getHelper(xjdf);
+			final KElement parent = xjdf.getParentNode_KElement();
+			for (final ResourceHelper loRes : sh.getPartitionList())
+			{
+				if (isStripping(loRes))
+				{
+					final SetHelper shStrip = SetHelper.getCreateSet(parent, ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+					final KElement lo = loRes.getResource();
+					if (lo != null)
+					{
+						final JDFStrippingParams sp = (JDFStrippingParams) loRes.getRoot().appendElement(ElementName.STRIPPINGPARAMS);
+						sp.mergeElement(lo, true);
+					}
+					shStrip.getRoot().moveElement(loRes.getRoot(), null);
+					if (EnumUsage.Output.equals(sh.getUsage()))
+					{
+						sh.appendResource(loRes.getPartMapVector(), false);
+					}
+				}
+			}
+			if (sh.isEmpty())
+			{
+				sh.deleteNode();
+				return null;
+			}
+			return super.walk(xjdf, dummy);
+		}
+
+		boolean isStripping(final ResourceHelper loRes)
+		{
+			return loRes.getPartKey(AttributeName.SIDE) == null && !VJDFAttributeMap.isEmpty(loRes.getPartMapList()) || loRes.getXPathElement("Layout/Position") != null
+					|| loRes.getXPathElement("Layout/FileSpec") != null;
 		}
 
 	}

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,7 +41,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -64,23 +63,22 @@ class XJDFPrepWalkerTest
 	{
 		final XJMFHelper h = new XJMFHelper();
 		final MessageHelper mh = h.appendMessage(EnumFamily.Response, EnumType.Resource);
-		JDFResourceInfo ri = (JDFResourceInfo) mh.appendElement(ElementName.RESOURCEINFO);
+		final JDFResourceInfo ri = (JDFResourceInfo) mh.appendElement(ElementName.RESOURCEINFO);
 		ri.setScope(org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope.Present);
 
-		SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
+		final SetHelper sh = new SetHelper(ri.appendElement(XJDFConstants.ResourceSet));
 		sh.setName(ElementName.MEDIA);
 		sh.setUsage(EnumUsage.Input);
 		for (int i = 0; i < 2; i++)
 		{
-			ResourceHelper p = sh.appendPartition(null, true);
+			final ResourceHelper p = sh.appendPartition(null, true);
 			p.setDescriptiveName("paper " + i);
-			JDFMedia m = (JDFMedia) p.getResource();
+			final JDFMedia m = (JDFMedia) p.getResource();
 			m.setMediaType(EnumMediaType.Paper);
 			m.setWeight(80 + 20 * i);
 		}
-		final XJDFPrepWalker w = new XJDFPrepWalker();
-		KElement root = h.getRoot();
-		w.walkTree(root, null);
+		final XJDFPrepWalker w = new XJDFPrepWalker(h);
+		w.convert();
 		assertEquals(2, mh.getRoot().numChildElements(ElementName.RESOURCEINFO, null));
 	}
 

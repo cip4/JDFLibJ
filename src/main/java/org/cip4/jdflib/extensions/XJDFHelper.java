@@ -657,18 +657,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
 	{
-		KElement e = theElement.getFirstChildElement();
-		final String usageString = usage == null ? null : usage.getName();
-		while (e != null)
-		{
-			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
-					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && ContainerUtil.containsAny(new SetHelper(e).getCombinedProcessIndex(), cpi))
-			{
-				return new SetHelper(e);
-			}
-			e = e.getNextSiblingElement();
-		}
-		return null;
+		return SetHelper.getSet(theElement, name, usage, processUsage, cpi);
 	}
 
 	/**
@@ -680,18 +669,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final int cpi)
 	{
-		KElement e = theElement.getFirstChildElement();
-		final String usageString = usage == null ? null : usage.getName();
-		while (e != null)
-		{
-			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
-					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && ContainerUtil.contains(new SetHelper(e).getCombinedProcessIndex(), cpi))
-			{
-				return new SetHelper(e);
-			}
-			e = e.getNextSiblingElement();
-		}
-		return null;
+		return getSet(name, usage, processUsage, cpi < 0 ? null : new JDFIntegerList(cpi));
 	}
 
 	/**
@@ -703,14 +681,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public SetHelper getCreateSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
 	{
-		SetHelper s0 = getSet(name, usage, processUsage, cpi);
-		if (s0 == null)
-		{
-			s0 = appendResourceSet(name, usage);
-			s0.setProcessUsage(processUsage);
-			s0.setCombinedProcessIndex(cpi);
-		}
-		return s0;
+		return SetHelper.getCreateSet(theElement, name, usage, processUsage, cpi);
 	}
 
 	/**
@@ -721,29 +692,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage)
 	{
-		KElement e = theElement.getFirstChildElement();
-		final String usageString = usage == null ? null : usage.getName();
-		while (e != null)
-		{
-			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE)))
-			{
-				return new SetHelper(e);
-			}
-			e = e.getNextSiblingElement();
-		}
-		if (usage == null)
-		{
-			e = theElement.getFirstChildElement();
-			while (e != null)
-			{
-				if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))))
-				{
-					return new SetHelper(e);
-				}
-				e = e.getNextSiblingElement();
-			}
-		}
-		return null;
+		return SetHelper.getSet(theElement, name, usage);
 	}
 
 	/**
@@ -752,19 +701,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param usage
 	 * @return a new set element
 	 */
-	public SetHelper appendSet(String family, String name, final EnumUsage usage)
+	public SetHelper appendSet(final String family, final String name, final EnumUsage usage)
 	{
-		if (family == null)
-			family = XJDFConstants.Resource;
-		final KElement newSet = theElement.appendElement(family + "Set");
-		newSet.setAttribute(AttributeName.NAME, name);
-		if (name == null)
-			name = "Set";
-		final SetHelper h = new SetHelper(newSet);
-		h.setID(KElement.xmlnsLocalName(name) + KElement.uniqueID(0));
-		if (usage != null)
-			h.setUsage(usage);
-		return h;
+		return SetHelper.appendSet(theElement, name, usage);
 	}
 
 	/**
@@ -838,7 +777,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		SetHelper set = getSet(name, usage, processUsage);
 		if (set == null)
 		{
-			set = appendSet(RESOURCE, name, usage);
+			set = appendSet(name, usage);
 			set.setProcessUsage(processUsage);
 		}
 		return set;
@@ -912,7 +851,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public SetHelper appendResourceSet(final String name, final EnumUsage usage)
 	{
-		return appendSet(XJDFConstants.Resource, name, usage);
+		return SetHelper.appendSet(theElement, name, usage);
 	}
 
 	/**
@@ -922,7 +861,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public SetHelper appendSet(final String name, final EnumUsage usage)
 	{
-		return appendSet(XJDFConstants.Resource, name, usage);
+		return SetHelper.appendSet(theElement, name, usage);
 	}
 
 	/**

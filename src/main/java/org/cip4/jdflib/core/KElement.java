@@ -4170,7 +4170,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		}
 
 		setAttributes(kElem);
-
+		if (bDelete)
+			kElem.deleteNode();
 		return this;
 	}
 

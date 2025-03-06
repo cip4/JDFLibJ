@@ -597,11 +597,22 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	/**
 	 *
 	 * @param e the element to test
-	 * @return then asset type name (Parameter, Resource etc)
+	 * @return the asset type name (Parameter, Resource etc)
 	 */
 	public static String getSetName(final KElement e)
 	{
 		return e == null ? null : getSetName(e.getLocalName());
+	}
+
+	/**
+	 *
+	 * @param e the element to test
+	 * @return then resourceset @Name (RunList, Layout etc)
+	 */
+	public static String getResourceName(final KElement e)
+	{
+		final SetHelper h = getHelper(e);
+		return h == null ? null : h.getName();
 	}
 
 	/**
@@ -612,6 +623,111 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	public static String getSetName(final String setName)
 	{
 		return (isSet(setName) || "IntentSet".equals(setName)) ? StringUtil.leftStr(setName, -3) : null;
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 * @param processUsage
+	 *
+	 * @return the SetHelper for the vector of resourcesets
+	 */
+	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
+	{
+		KElement e = parent.getFirstChildElement();
+		final String usageString = usage == null ? null : usage.getName();
+		while (e != null)
+		{
+			if (isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
+					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && ContainerUtil.containsAny(new SetHelper(e).getCombinedProcessIndex(), cpi))
+			{
+				return new SetHelper(e);
+			}
+			e = e.getNextSiblingElement();
+		}
+		return null;
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 *
+	 * @return the SetHelper for the vector of resourcesets
+	 */
+	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage)
+	{
+		KElement e = parent.getFirstChildElement();
+		final String usageString = usage == null ? null : usage.getName();
+		while (e != null)
+		{
+			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE)))
+			{
+				return new SetHelper(e);
+			}
+			e = e.getNextSiblingElement();
+		}
+		if (usage == null)
+		{
+			e = parent.getFirstChildElement();
+			while (e != null)
+			{
+				if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))))
+				{
+					return new SetHelper(e);
+				}
+				e = e.getNextSiblingElement();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 *
+	 * @param name
+	 * @param usage
+	 * @return a new set element
+	 */
+	public static SetHelper getCreateSet(final KElement parent, final String name, final EnumUsage usage)
+	{
+		SetHelper set = getSet(parent, name, usage);
+		if (set == null)
+			set = appendSet(parent, name, usage);
+		return set;
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 * @param processUsage
+	 *
+	 * @return the SetHelper
+	 */
+	public static SetHelper getCreateSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
+	{
+		SetHelper s0 = getSet(parent, name, usage, processUsage, cpi);
+		if (s0 == null)
+		{
+			s0 = appendSet(parent, name, usage);
+			s0.setProcessUsage(processUsage);
+			s0.setCombinedProcessIndex(cpi);
+		}
+		return s0;
+	}
+
+	/**
+	 * @param family - always RESOURCE better use appendResourceSet
+	 * @param name
+	 * @param usage
+	 * @return a new set element
+	 */
+	public static SetHelper appendSet(final KElement parent, final String name, final EnumUsage usage)
+	{
+		final KElement newSet = parent.appendElement(XJDFConstants.ResourceSet);
+		newSet.setAttribute(AttributeName.NAME, name);
+		final SetHelper h = new SetHelper(newSet);
+		h.setID(KElement.xmlnsLocalName(name) + KElement.uniqueID(0));
+		h.setUsage(usage);
+		return h;
 	}
 
 	/**
@@ -1111,5 +1227,10 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	public int size()
 	{
 		return theElement == null ? 0 : ContainerUtil.size(theElement.getChildList(getPartitionName(), null));
+	}
+
+	public boolean isEmpty()
+	{
+		return getResource(0) == null;
 	}
 }

@@ -246,7 +246,7 @@ class QueueHotFolderTest extends JDFTestCaseBase
 		assertNull(FileUtil.listFilesWithExtension(theStorage, null), "File is still there after stop");
 		assertEquals(myListener.vJMF.size(), 0);
 		hf.restart();
-		for (int i = 0; i < 420; i++)
+		for (int i = 0; i < 1420; i++)
 		{
 			if (!file.exists() && !myListener.vJMF.isEmpty())
 			{

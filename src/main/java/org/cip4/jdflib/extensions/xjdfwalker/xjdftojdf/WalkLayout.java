@@ -36,31 +36,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
-import java.util.List;
-
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.StringArray;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.extensions.ResourceHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
-import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
-import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Layout elements TODO unmerge stripping and binderysignature and signaturecell see WalkRunList
  */
-public class WalkLayout extends WalkStrippingParams
+public class WalkLayout extends WalkResource
 {
 	/**
 	 *
@@ -87,135 +69,6 @@ public class WalkLayout extends WalkStrippingParams
 	 * @param e
 	 * @param trackElem
 	 */
-	private void splitLayout(final KElement e, final KElement trackElem)
-	{
-		final JDFStrippingParams stripParams = (JDFStrippingParams) e.appendElement(ElementName.STRIPPINGPARAMS);
-		final boolean foundSome = moveToStripping(e, stripParams);
-		if (foundSome)
-		{
-			createStrippingPartition(stripParams, (JDFLayout) trackElem);
-		}
-		stripParams.deleteNode();
-	}
-
-	private static final StringArray copyRefs = new StringArray(
-			new String[] { XJDFConstants.FilmRef, XJDFConstants.PaperRef, XJDFConstants.PlateRef, XJDFConstants.ProofPaperRef, AttributeName.AUTOMATED });
-
-	boolean moveToStripping(final KElement e, final JDFStrippingParams stripParams)
-	{
-		final VString vAtt = stripParams.knownAttributes();
-		final JDFAttributeMap map = e.getAttributeMap();
-		final JDFAttributeMap mapRes = ResourceHelper.getHelper(e).getAttributeMap();
-		ContainerUtil.putAll(map, mapRes);
-		boolean foundSome = false;
-		for (final String s : map.keySet())
-		{
-			if (copyRefs.contains(s))
-			{
-				stripParams.setAttribute(s, map.get(s));
-				foundSome = true;
-			}
-			else if (vAtt.contains(s))
-			{
-				stripParams.setAttribute(s, map.get(s));
-				e.removeAttribute(s);
-				foundSome = true;
-			}
-
-		}
-		final VString stripKnown = stripParams.knownElements();
-		final List<KElement> vMyElm = e.getChildArray_KElement(null, null, null, true, 0);
-		for (final KElement myElm : vMyElm)
-		{
-			final String localName = myElm.getLocalName();
-			if (stripKnown.contains(localName) || localName.endsWith(JDFConstants.REF) && stripKnown.contains(StringUtil.leftStr(localName, -3)))
-			{
-				stripParams.moveElement(myElm, null);
-				foundSome = true;
-			}
-			else if (ElementName.FILESPEC.equals(localName))
-			{
-				stripParams.getCreateExternalImpositionTemplate().moveElement(myElm, null);
-				foundSome = true;
-			}
-			else if (ElementName.FITPOLICY.equals(localName))
-			{
-				// TODO fix when stripping valid
-				myElm.deleteNode();
-			}
-		}
-		return foundSome;
-	}
-
-	/**
-	 *
-	 * @param stripParams
-	 * @param trackLayout
-	 */
-	void createStrippingPartition(final JDFStrippingParams stripParams, final JDFLayout trackLayout)
-	{
-		JDFNode node = xjdfToJDFImpl.currentJDFNode;
-		node = getNode(stripParams.getParentNode_KElement().getParentNode_KElement(), node);
-		if (node == null)
-		{
-			log.error("whazzup - not in xjdf root???");
-		}
-		else
-		{
-			final JDFNode layoutParent = trackLayout.getParentJDF();
-			final JDFStrippingParams sp0 = layoutParent == null ? null : (JDFStrippingParams) layoutParent.getResourcePool().getResource(ElementName.STRIPPINGPARAMS, 0, null);
-			final JDFAttributeMap partMap = trackLayout.getPartMap();
-			final JDFStrippingParams sp;
-			if (sp0 != null)
-			{
-				sp = sp0;
-				node.ensureLink(sp, EnumUsage.Input, null);
-			}
-			else
-			{
-				sp = (JDFStrippingParams) node.getCreateResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
-			}
-			final JDFStrippingParams part = (JDFStrippingParams) sp.getCreatePartition(partMap, trackLayout.getPartIDKeys());
-			final KElement foo = part.appendElement(ElementName.RESOURCEPOOL);
-			xjdfToJDFImpl.walkTree(stripParams, foo);
-			final JDFResource tmpStripParams = (JDFResource) foo.getElement(ElementName.STRIPPINGPARAMS);
-			tmpStripParams.removeAttribute(AttributeName.CLASS);
-			tmpStripParams.removeAttribute(AttributeName.ID);
-			tmpStripParams.copyAttribute(AttributeName.STATUS, trackLayout);
-			tmpStripParams.removeAttribute(AttributeName.PARTIDKEYS);
-			final List<? extends KElement> vLeaves = tmpStripParams.getDirectPartitionArray();
-			for (final KElement leaf : vLeaves)
-			{
-				final JDFResource rLeaf = (JDFResource) leaf;
-				final String bs = rLeaf.getBinderySignatureName();
-				final JDFResource bsPart = part.getPartition(new JDFAttributeMap(AttributeName.BINDERYSIGNATURENAME, bs), EnumPartUsage.Explicit);
-				if (bsPart != null)
-				{
-					rLeaf.deleteNode();
-				}
-			}
-
-			part.copyAttribute(AttributeName.DESCRIPTIVENAME, trackLayout);
-			part.copyInto(tmpStripParams, false);
-			if (tmpStripParams.getElement_KElement(ElementName.STRIPPINGPARAMS, null, 0) != null)
-			{
-				sp.addPartIDKey(EnumPartIDKey.BinderySignatureName);
-			}
-			foo.deleteNode();
-		}
-
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	public KElement walk(final KElement xjdfLayout, final KElement jdfLayout)
-	{
-		splitLayout(xjdfLayout, jdfLayout);
-		final KElement walk = super.walk(xjdfLayout, jdfLayout);
-		return walk;
-	}
 
 	/**
 	 *

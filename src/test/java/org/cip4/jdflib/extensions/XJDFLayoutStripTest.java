@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,9 +41,13 @@ import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFCustomerInfo;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
@@ -53,6 +57,7 @@ import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFJobField;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFAssembly;
@@ -62,6 +67,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
+import org.cip4.jdflib.resource.process.JDFStripMark;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,7 +87,7 @@ class XJDFLayoutStripTest extends XJDFCreatorTest
 	@Test
 	void testStripLayout_BSSep()
 	{
-		bssh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final ResourceHelper bsh = bssh.appendPartition(new JDFAttributeMap(), true);
 		final JDFBinderySignature bs = (JDFBinderySignature) bsh.getCreateResource();
 		initBS(bs, 0);
@@ -164,7 +170,7 @@ class XJDFLayoutStripTest extends XJDFCreatorTest
 		losh.setUsage(EnumUsage.Output);
 		final ResourceHelper loh = losh.appendPartition(getSheetMap(1), true);
 		final JDFLayout lo = (JDFLayout) loh.getResource();
-		bssh = theHelper.getCreateSet(XJDFConstants.Resource, ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		bssh = theHelper.getCreateSet(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final ResourceHelper bsh = bssh.getCreatePartition(0, true);
 		final JDFBinderySignature bs = (JDFBinderySignature) bsh.getResource();
 		initBS(bs, 0);
@@ -230,6 +236,31 @@ class XJDFLayoutStripTest extends XJDFCreatorTest
 		}
 
 		theHelper.writeToFile(sm_dirTestDataTemp + "loGang.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testStripLayoutMarks()
+	{
+		theHelper.setTypes(EnumType.Stripping.getName());
+		final JDFAttributeMap sheetMap = getSheetMap(1);
+		final ResourceHelper loh = losh.appendPartition(sheetMap, true);
+		final JDFLayout lo = (JDFLayout) loh.getResource();
+		loh.setDescriptiveName("Layout for " + sheetMap.showKeys(null));
+		lo.setAutomated(true);
+		final JDFPosition pos = (JDFPosition) lo.appendElement(ElementName.POSITION);
+		pos.setAbsoluteBox((JDFRectangle) new JDFRectangle(0, 0, 21, 29).scaleFromCM(1));
+		for (final String key : new String[] { AttributeName.JOBID, AttributeName.SHEETNAME })
+		{
+			final JDFStripMark sm = (JDFStripMark) lo.appendElement(ElementName.STRIPMARK);
+			sm.setMarkName("JobField");
+			final JDFJobField jobField = sm.appendJobField();
+			jobField.setJobTemplate(key);
+		}
+		theHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Output);
+		writeRoundTripX(theHelper, "loStripMark.xjdf", EnumValidationLevel.Incomplete);
 	}
 
 	/**

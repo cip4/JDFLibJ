@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,13 +68,16 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
+import java.util.List;
+
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkStrippingParams extends WalkResource
+public class WalkStrippingParams extends WalkLayout
 {
 	/**
 	 * 
@@ -95,17 +98,23 @@ public class WalkStrippingParams extends WalkResource
 		return toCheck instanceof JDFStrippingParams;
 	}
 
-	/**
-	 * 
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getRefName(java.lang.String)
-	 */
 	@Override
-	protected String getRefName(final String val)
+	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+		final List<KElement> vMyElm = e.getChildArray_KElement(null, null, null, true, 0);
+		for (final KElement myElm : vMyElm)
 		{
-			return "MediaRef";
+			final String localName = myElm.getLocalName();
+			if (ElementName.FILESPEC.equals(localName))
+			{
+				((JDFStrippingParams) e).getCreateExternalImpositionTemplate().moveElement(myElm, null);
+			}
+			else if (ElementName.FITPOLICY.equals(localName))
+			{
+				// TODO fix when stripping valid
+				myElm.deleteNode();
+			}
 		}
-		return super.getRefName(val);
+		return super.walk(e, trackElem);
 	}
 }

@@ -505,6 +505,7 @@ public class RemoveEmpty extends BaseElementWalker
 			v.add(AttributeName.STATUS);
 			v.add(AttributeName.PARTIDKEYS);
 			v.add(AttributeName.PARTUSAGE);
+
 			final VString partAttribs = part.knownAttributes();
 			final JDFElement foo = (JDFElement) part.getElement("foo");
 			final VString fooAttribs = foo.knownAttributes();

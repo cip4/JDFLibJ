@@ -271,7 +271,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 	private boolean prepareConvert(final KElement _xjdf)
 	{
 		final KElement newXJDF = new JDFDoc(_xjdf.cloneNewDoc().getOwnerDocument()).getRoot();
-		idMap = new IDFinder().getMap(newXJDF);
 		final String docType = newXJDF.getLocalName();
 		final boolean isJMF = ElementName.JMF.equals(docType) || XJDFConstants.XJMF.equals(docType);
 		xjdf = new XJDFHelper(newXJDF);
@@ -286,8 +285,9 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		}
 		xjdf.setAttribute(AttributeName.MAXVERSION, getXJDFVersion().getName());
 		xjdf.setAttribute(AttributeName.VERSION, getVersion().getName());
-		new XJDFPrepWalker().walkTree(newXJDF, null);
+		new XJDFPrepWalker(xjdf).convert();
 		xjdf.cleanUp(false);
+		idMap = new IDFinder().getMap(newXJDF);
 		return isJMF;
 	}
 
