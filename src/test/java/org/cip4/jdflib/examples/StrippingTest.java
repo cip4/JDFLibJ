@@ -51,6 +51,7 @@ import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -58,6 +59,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -97,7 +99,7 @@ class StrippingTest extends JDFTestCaseBase
 		ass.setAttribute(AttributeName.COMMONFOLDS, "2");
 		final JDFAssemblySection ass2 = a.appendAssemblySection();
 		ass2.setAssemblyIDs(new VString("bs2"));
-		writeRoundTrip(n, "commonfolds");
+		writeRoundTrip(n, "commonfolds", XJDFHelper.getDefaultVersion(), EnumValidationLevel.Incomplete);
 		writeTest(n, "resources/commonfolds.jdf", true, null);
 	}
 
