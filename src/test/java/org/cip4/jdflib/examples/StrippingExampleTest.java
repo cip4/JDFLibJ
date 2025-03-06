@@ -72,9 +72,11 @@ package org.cip4.jdflib.examples;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -120,7 +122,7 @@ class StrippingExampleTest extends ExampleTest
 		lo.setDescriptiveName("dummy layout");
 		setSnippet(n.getResourcePool(), true);
 		setSnippet(n.getResourceLinkPool(), true);
-		writeRoundTrip(n, "MultiDieLayout");
+		writeRoundTrip(n, "MultiDieLayout", XJDFHelper.getDefaultVersion(), EnumValidationLevel.Incomplete);
 
 	}
 
