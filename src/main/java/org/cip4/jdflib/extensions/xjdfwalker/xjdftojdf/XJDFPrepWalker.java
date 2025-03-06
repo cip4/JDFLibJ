@@ -99,14 +99,14 @@ class XJDFPrepWalker extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			final JDFContact c = (JDFContact) e;
-			final ResourceHelper h = ResourceHelper.getHelper(c);
-			final VJDFAttributeMap vMap = h == null ? null : h.getPartMapVector();
+			final ResourceHelper contactHelper = ResourceHelper.getHelper(c);
+			final VJDFAttributeMap vMap = contactHelper == null ? null : contactHelper.getPartMapVector();
 			if (!VJDFAttributeMap.isEmpty(vMap))
 			{
 				final VString cTypes = vMap.getPartValues(XJDFConstants.ContactType, true);
 				if (!VString.isEmpty(cTypes))
 				{
-					final SetHelper sh = h.getSet();
+					final SetHelper sh = contactHelper.getSet();
 					c.setContactTypes(cTypes);
 					vMap.removeKey(XJDFConstants.ContactType);
 					if (vMap.getKeys().isEmpty() && sh.size() > 1)
@@ -116,7 +116,7 @@ class XJDFPrepWalker extends BaseElementWalker
 							vMap.put(AttributeName.OPTION, ctypeString);
 					}
 					vMap.unify();
-					h.setPartMapVector(vMap);
+					contactHelper.setPartMapVector(vMap);
 				}
 			}
 			final KElement ret = super.walk(e, trackElem);
