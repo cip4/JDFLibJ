@@ -283,7 +283,8 @@ class XJDFPrepWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			final SetHelper sh = SetHelper.getHelper(xjdf);
-			if (ContainerUtil.containsAny(sh.getXJDF().getTypes(), new StringArray("ImpositionPreparation Stripping")))
+			if (ContainerUtil.containsAny(sh.getXJDF().getTypes(), new StringArray("ImpositionPreparation Stripping")) || xjdf.getXPathElement("Resource/Layout/Position") != null
+					|| xjdf.getXPathElement("Resource/Layout/FileSpec") != null)
 			{
 				moveToStrippingParams(xjdf, sh);
 				if (sh.isEmpty())
