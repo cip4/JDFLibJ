@@ -850,6 +850,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final KElement e = new XMLDoc(XJDFConstants.XJDF, null).getRoot();
+		new XJDFHelper(e).setTypes("Stripping");
 		final KElement c = e.appendElement(SetHelper.RESOURCE_SET);
 		c.setAttribute("Name", "Layout");
 		c.setAttribute("Usage", "Input");
@@ -1005,6 +1006,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 	void testSignatureName()
 	{
 		final XJDFHelper h = new XJDFHelper("j1", null, null);
+		h.setTypes("Stripping");
 		final SetHelper lh = h.appendResourceSet(ElementName.LAYOUT, EnumUsage.Input);
 		final ResourceHelper ph = lh.appendPartition(new JDFAttributeMap(AttributeName.SHEETNAME, "S1"), true);
 		ph.setAttribute(AttributeName.DESCRIPTIVENAME, "d1", null);

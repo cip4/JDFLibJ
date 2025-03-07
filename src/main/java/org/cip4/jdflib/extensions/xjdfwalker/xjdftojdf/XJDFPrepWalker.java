@@ -53,8 +53,10 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDFDataCache;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -282,6 +284,20 @@ class XJDFPrepWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			final SetHelper sh = SetHelper.getHelper(xjdf);
+			if (ContainerUtil.contains(sh.getXJDF().getTypes(), EnumType.Stripping.getName()))
+			{
+				moveToStrippingParams(xjdf, sh);
+				if (sh.isEmpty())
+				{
+					sh.deleteNode();
+					return null;
+				}
+			}
+			return super.walk(xjdf, dummy);
+		}
+
+		void moveToStrippingParams(final KElement xjdf, final SetHelper sh)
+		{
 			final KElement parent = xjdf.getParentNode_KElement();
 			for (final ResourceHelper loRes : sh.getPartitionList())
 			{
@@ -301,12 +317,6 @@ class XJDFPrepWalker extends BaseElementWalker
 					}
 				}
 			}
-			if (sh.isEmpty())
-			{
-				sh.deleteNode();
-				return null;
-			}
-			return super.walk(xjdf, dummy);
 		}
 
 		boolean isStripping(final ResourceHelper loRes)
