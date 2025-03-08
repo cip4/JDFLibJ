@@ -162,6 +162,38 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testLayoutDescName()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "jp1");
+		h.setTypes(EnumType.ConventionalPrinting.getName());
+		h.getCreateSet(ElementName.LAYOUT, EnumUsage.Input).getCreateResource().setDescriptiveName("d1");
+		final JDFDoc d = xCon.convert(h);
+		final JDFNode jdf = d.getJDFRoot();
+		assertEquals("d1", jdf.getResource(ElementName.LAYOUT).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testLayoutDescName2()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "jp1");
+		h.setTypes(EnumType.ConventionalPrinting.getName());
+		final ResourceHelper lo = h.getCreateSet(ElementName.LAYOUT, EnumUsage.Input).getCreateResource();
+		lo.setDescriptiveName("d1");
+		lo.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s1"));
+		final JDFDoc d = xCon.convert(h);
+		final JDFNode jdf = d.getJDFRoot();
+		assertEquals("d1", jdf.getResource(ElementName.LAYOUT).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testProjectID()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -2491,6 +2523,45 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0).getLeaf(0);
 		assertEquals("Sig_sheet1", sp.getXPathAttribute("../MediaRef/Part/@SignatureName", null));
+		assertNotNull(sp.getMedia(1));
+		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testLayoutMedia()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("ConventionalPrinting");
+
+		final SetHelper shPap = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final ResourceHelper rhPap = shPap.getCreatePartition(AttributeName.SHEETNAME, "sheet1", true);
+		rhPap.setID("idPaper");
+		final JDFMedia pap = (JDFMedia) rhPap.getResource();
+		pap.setMediaType(EnumMediaType.Paper);
+
+		final SetHelper shPlate = xjdfHelper.appendResourceSet(ElementName.MEDIA, null);
+		final ResourceHelper rhPlate = shPlate.getCreatePartition(AttributeName.SHEETNAME, "sheet1", true);
+		rhPlate.setID("idPlate");
+		final JDFMedia plate = (JDFMedia) rhPlate.getResource();
+		plate.setMediaType(EnumMediaType.Plate);
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.LAYOUT, EnumUsage.Input);
+		final JDFAttributeMap pm = new JDFAttributeMap(AttributeName.SHEETNAME, "sheet1");
+		pm.put("Side", "Front");
+		final ResourceHelper rh = shLO.appendPartition(pm, true);
+		final JDFLayout lo = (JDFLayout) rh.getResource();
+
+		lo.setAttribute(XJDFConstants.PaperRef, "idPaper");
+		lo.setAttribute(XJDFConstants.PlateRef, "idPlate");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfHelper);
+		final JDFNode n = d.getJDFRoot();
+		final JDFLayout sp = (JDFLayout) n.getResource(ElementName.LAYOUT, EnumUsage.Input, 0).getLeaf(0);
+		assertEquals("Sig_sheet1", sp.getXPathAttribute("MediaRef/Part/@SignatureName", null));
 		assertNotNull(sp.getMedia(1));
 		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
 	}

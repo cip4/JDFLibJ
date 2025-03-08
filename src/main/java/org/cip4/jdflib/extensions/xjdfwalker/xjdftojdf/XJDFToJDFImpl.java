@@ -263,6 +263,15 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		walkTree(root, jdfDoc.getRoot());
 	}
 
+	protected XJDFHelper presplit(final KElement e)
+	{
+		final KElement newXJDF = new JDFDoc(e.cloneNewDoc().getOwnerDocument()).getRoot();
+
+		final XJDFHelper h = new XJDFHelper(newXJDF);
+		new XJDFPrepWalker(h).convert();
+		return h;
+	}
+
 	/**
 	 *
 	 * @param _xjdf
@@ -285,7 +294,6 @@ public class XJDFToJDFImpl extends PackageElementWalker
 		}
 		xjdf.setAttribute(AttributeName.MAXVERSION, getXJDFVersion().getName());
 		xjdf.setAttribute(AttributeName.VERSION, getVersion().getName());
-		new XJDFPrepWalker(xjdf).convert();
 		xjdf.cleanUp(false);
 		idMap = new IDFinder().getMap(newXJDF);
 		return isJMF;

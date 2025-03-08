@@ -98,29 +98,35 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 	public JDFDoc convert(final KElement xjdf)
 	{
 		JDFDoc d = null;
-		if (needSplit(xjdf))
+		if (xjdf != null)
 		{
-			final Collection<XJDFHelper> vSplit = splitter.splitXJDF(new XJDFHelper(xjdf));
-			if (vSplit == null || vSplit.size() == 0)
+			final XJDFHelper xjdfHelper = presplit(xjdf);
+
+			if (needSplit(xjdfHelper.getRoot()))
 			{
-				log.error("no xjdf elements returned by splitter");
+
+				final Collection<XJDFHelper> vSplit = splitter.splitXJDF(xjdfHelper);
+				if (vSplit == null || vSplit.size() == 0)
+				{
+					log.error("no xjdf elements returned by splitter");
+				}
+				else
+				{
+					for (final XJDFHelper h : vSplit)
+					{
+						d = super.convert(h.getRoot());
+						setCreateProduct(false);
+					}
+				}
 			}
 			else
 			{
-				for (final XJDFHelper h : vSplit)
-				{
-					d = super.convert(h.getRoot());
-					setCreateProduct(false);
-				}
+				d = super.convert(xjdfHelper.getRoot());
 			}
-		}
-		else
-		{
-			d = super.convert(xjdf);
-		}
-		if (d != null)
-		{
-			mapActualColors(d);
+			if (d != null)
+			{
+				mapActualColors(d);
+			}
 		}
 		return d;
 	}
