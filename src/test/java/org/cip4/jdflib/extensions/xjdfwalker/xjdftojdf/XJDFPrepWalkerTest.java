@@ -37,14 +37,18 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -80,6 +84,42 @@ class XJDFPrepWalkerTest
 		final XJDFPrepWalker w = new XJDFPrepWalker(h);
 		w.convert();
 		assertEquals(2, mh.getRoot().numChildElements(ElementName.RESOURCEINFO, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRoot()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		h.setVersion(EnumVersion.Version_1_1);
+
+		final XJDFPrepWalker w = new XJDFPrepWalker(h);
+		w.convert();
+		assertNull(h.getRoot().getNonEmpty(AttributeName.VERSION));
+		h.setVersion(EnumVersion.Version_2_0);
+		w.convert();
+		assertEquals(EnumVersion.Version_2_0, h.getVersion());
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRoot2()
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.setVersion(EnumVersion.Version_1_1);
+
+		final XJDFPrepWalker w = new XJDFPrepWalker(h);
+		w.convert();
+		assertNull(h.getRoot().getNonEmpty(AttributeName.VERSION));
+		h.setVersion(EnumVersion.Version_2_0);
+		w.convert();
+		assertEquals(EnumVersion.Version_2_0, h.getVersion());
+
 	}
 
 }

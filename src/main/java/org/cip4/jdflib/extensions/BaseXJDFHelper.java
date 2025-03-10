@@ -274,6 +274,28 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 *
+	 * @return the underlying parent XJDF element
+	 */
+	public XJMFHelper getXJMFRoot()
+	{
+		return XJMFHelper.getHelper(theElement);
+	}
+
+	/**
+	 *
+	 * @return the underlying parent XJDF element
+	 */
+	public EnumVersion getVersion()
+	{
+		BaseXJDFHelper helper = XJDFHelper.getHelper(theElement);
+		if (helper == null)
+			helper = XJMFHelper.getHelper(theElement);
+		final String v = helper == null ? null : helper.getAttribute(AttributeName.VERSION);
+		return EnumVersion.getEnum(v);
+	}
+
+	/**
+	 *
 	 * @return
 	 */
 	public KElement deleteNode()

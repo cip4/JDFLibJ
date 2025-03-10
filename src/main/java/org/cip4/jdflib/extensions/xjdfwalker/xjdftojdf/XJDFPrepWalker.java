@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,8 +38,11 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
@@ -67,6 +70,8 @@ class XJDFPrepWalker extends BaseElementWalker
 {
 
 	private final BaseXJDFHelper h;
+
+	private static final Log sLog = LogFactory.getLog(XJDFPrepWalker.class);
 
 	/**
 	 * @param newRoot
@@ -131,6 +136,44 @@ class XJDFPrepWalker extends BaseElementWalker
 		public VString getElementNames()
 		{
 			return VString.getVString(ElementName.CONTACT, null);
+		}
+	}
+
+	protected class WalkRoot extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkRoot()
+		{
+			super();
+		}
+
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+
+			final String ver = e.getNonEmpty(AttributeName.VERSION);
+			final EnumVersion v = EnumVersion.getEnum(ver);
+			if (!StringUtil.isEmpty(ver) || v == null || v.getMajorVersion() != 2)
+			{
+				e.removeAttribute(AttributeName.VERSION);
+				sLog.warn("removing invalid version:'" + ver + "' from " + e.getLocalName());
+			}
+			return e;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return VString.getVString("XJDF XJMF", null);
 		}
 	}
 

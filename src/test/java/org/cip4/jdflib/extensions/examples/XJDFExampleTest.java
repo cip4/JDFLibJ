@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -78,12 +81,10 @@ import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
-import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JDFDate;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Comment;
@@ -120,11 +121,11 @@ class XJDFExampleTest extends ExampleTest
 	void testSnippet()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
-		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
 		final ResourceHelper rh = shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		setSnippet(rh.getRoot(), true);
-		Assertions.assertTrue(xjdfHelper.toString().indexOf("<!-- START SNIPPET -->") > 0);
-		Assertions.assertTrue(xjdfHelper.toString().indexOf("<!-- END SNIPPET -->") > 0);
+		assertTrue(xjdfHelper.toString().indexOf("<!-- START SNIPPET -->") > 0);
+		assertTrue(xjdfHelper.toString().indexOf("<!-- END SNIPPET -->") > 0);
 	}
 
 	/**
@@ -137,10 +138,10 @@ class XJDFExampleTest extends ExampleTest
 		setSnippet(xjdfHelper, true);
 		setSnippet(xjdfHelper.getAuditPool(), false);
 		final KElement ap = xjdfHelper.getAuditPool().getRoot();
-		Assertions.assertTrue(ap.getPreviousSibling() instanceof Comment);
-		Assertions.assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
-		Assertions.assertTrue(ap.getNextSibling() instanceof Comment);
-		Assertions.assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
+		assertTrue(ap.getPreviousSibling() instanceof Comment);
+		assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
+		assertTrue(ap.getNextSibling() instanceof Comment);
+		assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
 	}
 
 	/**
@@ -153,10 +154,10 @@ class XJDFExampleTest extends ExampleTest
 		setSnippet(xjdfHelper.getAuditPool(), false);
 		setSnippet(xjdfHelper, true);
 		final KElement ap = xjdfHelper.getAuditPool().getRoot();
-		Assertions.assertTrue(ap.getPreviousSibling() instanceof Comment);
-		Assertions.assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
-		Assertions.assertTrue(ap.getNextSibling() instanceof Comment);
-		Assertions.assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
+		assertTrue(ap.getPreviousSibling() instanceof Comment);
+		assertEquals(ap.getPreviousSibling().getNodeValue(), " END SNIPPET ");
+		assertTrue(ap.getNextSibling() instanceof Comment);
+		assertEquals(ap.getNextSibling().getNodeValue(), " START SNIPPET ");
 	}
 
 	/**
@@ -166,12 +167,12 @@ class XJDFExampleTest extends ExampleTest
 	void testSnippetRoot()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Extension", null, null);
-		final SetHelper shMedia = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.MEDIA, EnumUsage.Input);
+		final SetHelper shMedia = xjdfHelper.getCreateSet(ElementName.MEDIA, EnumUsage.Input);
 		shMedia.appendPartition(AttributeName.SHEETNAME, "S1", true);
 		final KElement root = xjdfHelper.getRoot();
 		setSnippet(root, true);
-		Assertions.assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- START SNIPPET -->") > 0);
-		Assertions.assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- END SNIPPET -->") > 0);
+		assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- START SNIPPET -->") > 0);
+		assertTrue(root.getOwnerDocument_KElement().write2String(2).indexOf("<!-- END SNIPPET -->") > 0);
 	}
 
 	/**
@@ -217,7 +218,7 @@ class XJDFExampleTest extends ExampleTest
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("CPI_Example", null, null);
 		xjdfHelper.setTypes("Cutting Folding");
-		final SetHelper sh1 = xjdfHelper.getCreateSet(XJDFConstants.Resource, ElementName.NODEINFO, EnumUsage.Input);
+		final SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.NODEINFO, EnumUsage.Input);
 		final JDFDate jdfDate = new JDFDate().setTime(13, 0, 0);
 		sh1.getPartition((JDFAttributeMap) null).getResource().setAttribute(AttributeName.START, jdfDate.getDateTimeISO());
 		sh1.setAttribute(AttributeName.COMBINEDPROCESSINDEX, "0");

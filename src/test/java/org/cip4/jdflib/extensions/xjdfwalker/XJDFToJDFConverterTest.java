@@ -2235,6 +2235,26 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 	*
 	*/
 	@Test
+	void testMediaIntentQuality()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "root", null);
+		h.setVersion(EnumVersion.Version_1_1);
+		final ProductHelper book = h.appendProduct();
+		book.setRoot();
+		final KElement mi = book.getCreateIntent(ElementName.MEDIAINTENT).getResource();
+		mi.setAttribute(ElementName.MEDIAQUALITY, "QQ");
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(h);
+		final JDFMediaIntent mij = (JDFMediaIntent) d.getJDFRoot().getResource(ElementName.MEDIAINTENT, EnumUsage.Input, 0);
+		assertEquals("QQ", mij.getMediaQuality().getActual());
+
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
 	void testFoldinfIntentDetails()
 	{
 		final XJDFHelper h = new XJDFHelper("j", "root", null);
