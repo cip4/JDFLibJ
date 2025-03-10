@@ -159,7 +159,7 @@ class XJDFPrepWalker extends BaseElementWalker
 
 			final String ver = e.getNonEmpty(AttributeName.VERSION);
 			final EnumVersion v = EnumVersion.getEnum(ver);
-			if (!StringUtil.isEmpty(ver) || v == null || v.getMajorVersion() != 2)
+			if (!StringUtil.isEmpty(ver) && (v == null || v.getMajorVersion() != 2))
 			{
 				e.removeAttribute(AttributeName.VERSION);
 				sLog.warn("removing invalid version:'" + ver + "' from " + e.getLocalName());
