@@ -197,6 +197,17 @@ public class FixVersionImpl extends PackageElementWalker
 		newYear = -1;
 		ignoreMap = new ListMap<>();
 		ignoreMap.setUnique(true);
+		bRepairData = false;
+	}
+
+	public boolean isbRepairData()
+	{
+		return bRepairData;
+	}
+
+	public void setRepairData(final boolean bRepairData)
+	{
+		this.bRepairData = bRepairData;
 	}
 
 	public int getNewYear()

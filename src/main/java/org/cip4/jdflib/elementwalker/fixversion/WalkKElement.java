@@ -72,7 +72,7 @@ public class WalkKElement extends WalkAnyElement
 	{
 		final JDFAttributeMap m = e.getAttributeMap_KElement();
 		final Collection<String> keys = m.keySet();
-		if (keys != null)
+		if (fixVersion.bRepairData)
 		{
 			final List<String> ignore = fixVersion.ignoreMap.get(e.getLocalName());
 			for (final String key : keys)

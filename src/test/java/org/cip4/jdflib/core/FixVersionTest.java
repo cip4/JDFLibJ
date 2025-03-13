@@ -155,6 +155,22 @@ class FixVersionTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testrepair()
+	{
+		final KElement a = KElement.createRoot("a");
+		a.setAttribute("b", "1234-01-01");
+		final FixVersion f = new FixVersion(EnumVersion.Version_1_11);
+		f.walkTree(a, null);
+		assertEquals("1234-01-01", a.getAttribute("b"));
+		f.setRepairData(true);
+		f.walkTree(a, null);
+		assertEquals(new JDFDate().getDateTimeISO().length(), a.getAttribute("b").length());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testRanges()
 	{
 		final FixVersion v = new FixVersion(EnumVersion.Version_2_2);
