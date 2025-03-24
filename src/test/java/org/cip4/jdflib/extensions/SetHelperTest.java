@@ -436,7 +436,7 @@ class SetHelperTest extends JDFTestCaseBase
 		sh.addTypeToCPI(2);
 		assertEquals(1, sh.getCombinedProcessIndex().getInt(0));
 		assertEquals(4, sh.getCombinedProcessIndex().getInt(1));
-		sh.addTypeToCPI(5);
+		sh.addTypeToCPI(5, true);
 		assertEquals(5, sh.getCombinedProcessIndex().getInt(2));
 	}
 
