@@ -246,6 +246,37 @@ class XJDFHelperTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testAddTypeCPI2()
+	{
+		theHelper.setTypes("Folding");
+		final SetHelper rlSet = theHelper.appendSet(null, ElementName.FOLDINGPARAMS, null);
+		rlSet.setCombinedProcessIndex(JDFIntegerList.createIntegerList("0"));
+		theHelper.addType("Cutting", -1);
+		assertEquals(0, rlSet.getCombinedProcessIndex().getInt(0));
+		assertEquals(1, rlSet.getCombinedProcessIndex().size());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	public void testAddTypeCPI3()
+	{
+		theHelper.setTypes("Folding");
+		final SetHelper rlSet = theHelper.appendSet(null, ElementName.FOLDINGPARAMS, null);
+		rlSet.setCombinedProcessIndex(JDFIntegerList.createIntegerList("0"));
+		theHelper.addType("Cutting", -1, true);
+		assertEquals(0, rlSet.getCombinedProcessIndex().getInt(0));
+		assertEquals(1, rlSet.getCombinedProcessIndex().getInt(1));
+		assertEquals(2, rlSet.getCombinedProcessIndex().size());
+	}
+
+	/**
 	*
 	*
 	*/

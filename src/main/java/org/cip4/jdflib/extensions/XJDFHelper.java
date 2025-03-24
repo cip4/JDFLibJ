@@ -1164,6 +1164,12 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		return this;
 	}
 
+	public void addType(final String typ, final int i)
+	{
+		addType(typ, i, false);
+
+	}
+
 	/**
 	 * append a enumerated types token
 	 *
@@ -1180,8 +1186,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 *
 	 * @param typ
 	 * @param iSkip <0 for append
+	 * @param insert
 	 */
-	public void addType(final String typ, int iSkip)
+	public void addType(final String typ, int iSkip, final boolean insert)
 	{
 		VString types = getTypes();
 		if (types == null)
@@ -1201,7 +1208,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 			{
 				for (final SetHelper set : sets)
 				{
-					set.addTypeToCPI(iSkip);
+					set.addTypeToCPI(iSkip, insert);
 				}
 			}
 		}

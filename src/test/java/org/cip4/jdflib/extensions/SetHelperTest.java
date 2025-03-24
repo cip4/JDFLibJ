@@ -417,7 +417,7 @@ class SetHelperTest extends JDFTestCaseBase
 	@Test
 	void testIndexOf()
 	{
-		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
+		final SetHelper sh = new XJDFHelper(root).getCreateSet("FoldingParams", EnumUsage.Input);
 		assertEquals(sh.indexOf(null), -1);
 		final ResourceHelper rh = sh.getCreatePartition(0, false);
 		assertEquals(sh.indexOf(rh), 0);
@@ -429,7 +429,7 @@ class SetHelperTest extends JDFTestCaseBase
 	@Test
 	void testAddTypeToCPI()
 	{
-		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
+		final SetHelper sh = new XJDFHelper(root).getCreateSet("FoldingParams", EnumUsage.Input);
 		sh.addTypeToCPI(0);
 		assertNull(sh.getCombinedProcessIndex());
 		sh.setCombinedProcessIndex(JDFIntegerList.createIntegerList("1 3"));
@@ -446,7 +446,7 @@ class SetHelperTest extends JDFTestCaseBase
 	@Test
 	void testRemoveTypeFromCPI()
 	{
-		final SetHelper sh = new XJDFHelper(root).getCreateSet(XJDFConstants.Resource, "FoldingParams", EnumUsage.Input);
+		final SetHelper sh = new XJDFHelper(root).getCreateSet("FoldingParams", EnumUsage.Input);
 		sh.addTypeToCPI(0);
 		assertNull(sh.getCombinedProcessIndex());
 		sh.setCombinedProcessIndex(JDFIntegerList.createIntegerList("1 4"));

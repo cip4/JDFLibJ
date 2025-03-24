@@ -884,13 +884,18 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		}
 	}
 
+	public void addTypeToCPI(final int pos)
+	{
+		addTypeToCPI(pos, false);
+	}
+
 	/**
 	 * add a CPI process
 	 *
 	 * @param typ
 	 * @param pos
 	 */
-	public void addTypeToCPI(final int pos)
+	public void addTypeToCPI(final int pos, final boolean insert)
 	{
 		final JDFIntegerList il = getCombinedProcessIndex();
 		if (il != null)
@@ -905,12 +910,16 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 					mod = true;
 				}
 			}
-			if (!mod)
+			if (!mod && insert)
 			{
 				il.add(pos);
+				mod = true;
+			}
+			if (mod)
+			{
+				setCombinedProcessIndex(il);
 			}
 		}
-		setCombinedProcessIndex(il);
 	}
 
 	/**
