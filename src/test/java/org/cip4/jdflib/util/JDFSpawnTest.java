@@ -4398,6 +4398,7 @@ class JDFSpawnTest extends JDFTestCaseBase
 	 * @throws Throwable
 	 */
 	@Test
+	@Ignore
 	public void mergeTest() throws Throwable
 	{
 		final JDFNode jdf = JDFNode.parseFile("C:\\data\\296690-PD\\main.jdf");

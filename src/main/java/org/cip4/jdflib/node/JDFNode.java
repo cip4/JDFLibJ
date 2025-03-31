@@ -5845,7 +5845,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				return getAncestorPool().getGeneralID(idUsage, iPos);
 			}
 		}
-		return null;
+		return s;
 	}
 
 	/**
