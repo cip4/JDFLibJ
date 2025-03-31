@@ -133,7 +133,7 @@ public class JDFSpawn
 	/**
 	 * if true, copy comments
 	 */
-	public boolean bCopyComments = false;
+	public boolean bCopyComments = true;
 
 	/**
 	 * if true, ensure sufficient partitioning of rw resources, else do not add missing partitions

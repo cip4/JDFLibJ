@@ -5822,6 +5822,33 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
+	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
+	 *
+	 * @param idUsage
+	 * @param iPos
+	 *
+	 * @return String the attribute value
+	 */
+	@Override
+	public String getGeneralID(final String idUsage, final int iPos)
+	{
+		final String s = super.getGeneralID(idUsage, iPos);
+		if (StringUtil.isEmpty(s))
+		{
+			final JDFNode n2 = getParentJDF();
+			if (n2 != null)
+			{
+				return n2.getGeneralID(idUsage, iPos);
+			}
+			else if (getAncestorPool() != null)
+			{
+				return getAncestorPool().getGeneralID(idUsage, iPos);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * gets the existing NodeInfo or creates a new one if none exists this method will check if a NodeInfo exists,
 	 *
 	 * @return the found or created nodeinfo.

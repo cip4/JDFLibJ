@@ -104,7 +104,7 @@ public class JDFLabColor extends JDFNumList
 	 */
 	public static JDFLabColor createLabColor(final String s)
 	{
-		if (s == null || s.length() < 5) // we want at least 2 values + 1 blank=3
+		if (s == null || s.length() < 5) // we want at least 3 values + 3 blank=5
 			return null;
 
 		try

@@ -1944,6 +1944,23 @@ class JDFSpawnTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testSpawnGeneralID()
+	{
+		final JDFNode nn = new JDFDoc("JDF").getJDFRoot();
+		nn.setType("Product", false);
+		final JDFNode n = nn.addJDFNode(EnumType.ImageSetting);
+		nn.setGeneralID("foo", "bar");
+		final JDFSpawn s = new JDFSpawn(n);
+		final JDFNode n2 = s.spawn();
+		assertEquals("bar", n2.getAncestorPool().getAncestor().getGeneralID("foo"));
+		assertEquals("bar", n2.getGeneralID("foo"));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testSpawnPartRefElem()
 	{
 		final JDFNode nn = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -4375,6 +4392,19 @@ class JDFSpawnTest extends JDFTestCaseBase
 		assertTrue(myres.getAttribute("SpawnIDs", null, JDFConstants.EMPTYSTRING).equals(JDFConstants.EMPTYSTRING), "Merged Resource contains SpawnID");
 
 		assertTrue(mydoc.write2File(sm_dirTestDataTemp + "testMergeJDF2_merged.jdf", 0, true));
+	}
+
+	/**
+	 * @throws Throwable
+	 */
+	@Test
+	public void mergeTest() throws Throwable
+	{
+		final JDFNode jdf = JDFNode.parseFile("C:\\data\\296690-PD\\main.jdf");
+		final JDFNode sub = JDFNode.parseFile("C:\\data\\296690-PD\\JDF.26071.xml");
+		new JDFMerge(jdf).mergeJDF(sub);
+		jdf.write2File(sm_dirTestDataTemp + "mergeident.jdf");
+
 	}
 
 	/**

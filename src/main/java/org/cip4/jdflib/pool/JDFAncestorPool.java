@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,7 +48,7 @@
  */
 package org.cip4.jdflib.pool;
 
-import java.util.Vector;
+import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAncestorPool;
@@ -68,6 +68,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -183,6 +184,30 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	}
 
 	/**
+	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
+	 *
+	 * @param idUsage
+	 * @param iPos
+	 *
+	 * @return String the attribute value
+	 */
+	@Override
+	public String getGeneralID(final String idUsage, final int iPos)
+	{
+		final VElement v = getPoolChildren(null);
+		// the last in list is the direct parent, the first is the original root
+		for (int i = v.size() - 1; i >= 0; i--)
+		{
+			final JDFAncestor ancestor = (JDFAncestor) v.elementAt(i);
+			final String s = ancestor.getGeneralID(idUsage, iPos);
+			if (!StringUtil.isEmpty(s))
+				return s;
+		}
+		// not found, return an empty element
+		return null;
+	}
+
+	/**
 	 * true id a non default occurence in the ancestor elements exists
 	 *
 	 * @param attrib the attribute name
@@ -260,57 +285,11 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 			// only copy nodeinfo and customerinfo in real parent nodes, not in this of partitioned spawns
 			if (!thisParentNode.getID().equals(node.getID()))
 			{
-				if (bCopyNodeInfo)
-				{
-					final JDFNodeInfo nodeInfo = node.getNodeInfo();
-					if (nodeInfo != null)
-					{
-						if (nodeInfo.getParentNode_KElement() instanceof JDFResourcePool)
-						{
-							// add a low level refelement, the copying takes place in addspawnedresources
-							final JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.NODEINFO + JDFConstants.REF);
-							re.setrRef(nodeInfo.getID());
-							re.setPartMap(nodeInfo.getPartMap());
-						}
-						else
-						{
-							ancestor.copyElement(nodeInfo, null);
-						}
-					}
-				}
+				copyNodeInfo(bCopyNodeInfo, node, ancestor);
 
-				if (bCopyCustomerInfo)
-				{
-					final JDFCustomerInfo customerInfo = node.getCustomerInfo();
-					if (customerInfo != null)
-					{
-						if (customerInfo.getParentNode_KElement() instanceof JDFResourcePool)
-						{
-							// add a low level refelement, the copying takes place inaddspawnedresources
-							final JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.CUSTOMERINFO + JDFConstants.REF);
-							re.setrRef(customerInfo.getID());
-							re.setPartMap(customerInfo.getPartMap());
-						}
-						else
-						{
-							ancestor.copyElement(customerInfo, null);
-						}
-					}
-				}
+				copyCustomerInfo(bCopyCustomerInfo, node, ancestor);
 
-				if (bCopyComments)
-				{
-					final Vector<JDFComment> vc = node.getChildrenByClass(JDFComment.class, false, 0);
-					for (final KElement comment : vc)
-					{
-						ancestor.copyElement(comment, null);
-					}
-					final Vector<JDFGeneralID> vgid = node.getChildrenByClass(JDFGeneralID.class, false, 0);
-					for (final KElement generalid : vgid)
-					{
-						ancestor.copyElement(generalid, null);
-					}
-				}
+				copyComments(bCopyComments, node, ancestor);
 			}
 
 			final JDFNode node2 = node.getParentJDF();
@@ -340,6 +319,67 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 				final JDFAncestor ancestor = (JDFAncestor) vAncestors.elementAt(i);
 				final JDFAncestor parentAncestor = (JDFAncestor) parentAncestors.elementAt(i);
 				ancestor.mergeElement(parentAncestor, false);
+			}
+		}
+	}
+
+	void copyComments(final boolean bCopyComments, final JDFNode node, final JDFAncestor ancestor)
+	{
+		if (bCopyComments)
+		{
+			final List<JDFComment> vc = node.getChildArrayByClass(JDFComment.class, false, 0);
+			for (final KElement comment : vc)
+			{
+				ancestor.copyElement(comment, null);
+			}
+		}
+		final List<JDFGeneralID> vgid = node.getChildArrayByClass(JDFGeneralID.class, false, 0);
+		for (final KElement generalid : vgid)
+		{
+			ancestor.copyElement(generalid, null);
+		}
+	}
+
+	void copyCustomerInfo(final boolean bCopyCustomerInfo, final JDFNode node, final JDFAncestor ancestor)
+	{
+		if (bCopyCustomerInfo)
+		{
+			final JDFCustomerInfo customerInfo = node.getCustomerInfo();
+			if (customerInfo != null)
+			{
+				if (customerInfo.getParentNode_KElement() instanceof JDFResourcePool)
+				{
+					// add a low level refelement, the copying takes place in addspawnedresources
+					final JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.CUSTOMERINFO + JDFConstants.REF);
+					re.setrRef(customerInfo.getID());
+					re.setPartMap(customerInfo.getPartMap());
+				}
+				else
+				{
+					ancestor.copyElement(customerInfo, null);
+				}
+			}
+		}
+	}
+
+	void copyNodeInfo(final boolean bCopyNodeInfo, final JDFNode node, final JDFAncestor ancestor)
+	{
+		if (bCopyNodeInfo)
+		{
+			final JDFNodeInfo nodeInfo = node.getNodeInfo();
+			if (nodeInfo != null)
+			{
+				if (nodeInfo.getParentNode_KElement() instanceof JDFResourcePool)
+				{
+					// add a low level refelement, the copying takes place in addspawnedresources
+					final JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.NODEINFO + JDFConstants.REF);
+					re.setrRef(nodeInfo.getID());
+					re.setPartMap(nodeInfo.getPartMap());
+				}
+				else
+				{
+					ancestor.copyElement(nodeInfo, null);
+				}
 			}
 		}
 	}
