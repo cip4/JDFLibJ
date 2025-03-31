@@ -4395,22 +4395,8 @@ class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Throwable
-	 */
-	@Test
-	@Ignore
-	public void mergeTest() throws Throwable
-	{
-		final JDFNode jdf = JDFNode.parseFile("C:\\data\\296690-PD\\main.jdf");
-		final JDFNode sub = JDFNode.parseFile("C:\\data\\296690-PD\\JDF.26071.xml");
-		new JDFMerge(jdf).mergeJDF(sub);
-		jdf.write2File(sm_dirTestDataTemp + "mergeident.jdf");
-
-	}
-
-	/**
-	 *
-	 */
+	*
+	*/
 	@Test
 	void testMergeJDFNewXMLNS()
 	{
