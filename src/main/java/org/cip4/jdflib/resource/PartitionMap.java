@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -79,9 +79,12 @@ class PartitionMap
 			{
 				final JDFResource r = (JDFResource) e;
 				final JDFAttributeMap newMap = parentMap.clone();
-				final String val = r.getAttribute_KElement(key);
-				newMap.put(key, val);
-				addPartitionMap(newMap, r);
+				final String val = r.getNonEmpty_KElement(key);
+				if (val != null)
+				{
+					newMap.put(key, val);
+					addPartitionMap(newMap, r);
+				}
 			}
 		}
 	}

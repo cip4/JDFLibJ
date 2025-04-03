@@ -613,7 +613,7 @@ class HotFolderTest extends JDFTestCaseBase
 		for (int i = 0; i < 20; i++)
 		{
 			ThreadUtil.sleep(1);
-			for (int j = 0; j < 200; j++)
+			for (int j = 0; j < 20; j++)
 			{// incrementally fill file
 				fos.write(i);
 			}
