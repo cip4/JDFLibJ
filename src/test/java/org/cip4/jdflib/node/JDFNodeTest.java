@@ -139,6 +139,26 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 */
+	@Test
+	void testGetGeneralID()
+	{
+		final JDFNode n0 = new JDFDoc("JDF").getJDFRoot();
+		n0.setGeneralID("Foo", "Bar1");
+		n0.appendGeneralID("Foo", "Bar2");
+		n0.setType(EnumType.Product);
+		final JDFNode n = n0.addCombined(null);
+		assertEquals(n.getGeneralID("Foo", 0), "Bar1");
+		assertEquals(n.getGeneralID("Foo", 1), "Bar2");
+		assertEquals(n.getGeneralID("Foo", -2), "Bar1");
+		assertEquals(n.getGeneralID("Foo", -1), "Bar2");
+		assertNull(n.getGeneralID("Foo", 3));
+		assertNull(n.getGeneralID("Foo", -3));
+		assertNull(n.getGeneralID("Foo", 0, false));
+	}
+
+	/**
+	 *
 	 *
 	 */
 	@Test

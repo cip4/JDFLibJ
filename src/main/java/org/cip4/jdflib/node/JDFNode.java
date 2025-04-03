@@ -5829,16 +5829,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @return String the attribute value
 	 */
-	@Override
-	public String getGeneralID(final String idUsage, final int iPos)
+	public String getGeneralID(final String idUsage, final int iPos, final boolean inherit)
 	{
 		final String s = super.getGeneralID(idUsage, iPos);
-		if (StringUtil.isEmpty(s))
+		if (StringUtil.isEmpty(s) && inherit)
 		{
 			final JDFNode n2 = getParentJDF();
 			if (n2 != null)
 			{
-				return n2.getGeneralID(idUsage, iPos);
+				return n2.getGeneralID(idUsage, iPos, inherit);
 			}
 			else if (getAncestorPool() != null)
 			{
@@ -5846,6 +5845,20 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			}
 		}
 		return s;
+	}
+
+	/**
+	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
+	 *
+	 * @param idUsage
+	 * @param iPos
+	 *
+	 * @return String the attribute value
+	 */
+	@Override
+	public String getGeneralID(final String idUsage, final int iPos)
+	{
+		return getGeneralID(idUsage, iPos, true);
 	}
 
 	/**

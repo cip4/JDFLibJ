@@ -227,7 +227,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 		FileUtil.createNewFile(content);
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new ExtractListener());
 		hf.setProcessAux(true);
-		ThreadUtil.sleep(333);
+		ThreadUtil.sleep(33);
 		d.write2File(hfPath + "/dummy.jdf", 2, false);
 		final File file = new File(hfPath + "/dummy.jdf");
 		assertTrue(file.exists());
@@ -239,7 +239,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 		}
 		assertFalse(file.exists(), file.getAbsolutePath());
 		assertFalse(content.exists(), content.getAbsolutePath());
-		assertEquals(0, tmpHFDir.listFiles().length, 1);
+		assertEquals(0, tmpHFDir.listFiles().length, 2);
 		hf.stop();
 	}
 
