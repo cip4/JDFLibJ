@@ -533,6 +533,20 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testKnownMessageResponse()
+	{
+		final JDFJMF jmf = JDFJMF.parseFile(sm_dirTestData + "jmf/KnownMessages.resp.jmf");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNotNull(xjmf.getXPathElement("ResponseKnownMessages"));
+
+		writeRoundTrip(jmf, "KnownMessageResp");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testSubscriptionJMF()
 	{
 		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(null).buildStatusSubscription("url", 42, 21, "qe33");

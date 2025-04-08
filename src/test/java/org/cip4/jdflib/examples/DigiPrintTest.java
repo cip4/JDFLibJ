@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -717,6 +718,37 @@ class DigiPrintTest extends ExampleTest
 		docResJMF.write2File(sm_dirTestDataTemp + File.separator + "DigiPrintAmountResource4.jmf", 2, false);
 
 		doc.write2File(sm_dirTestDataTemp + File.separator + "DigiPrintAmount_final.jdf", 2, false);
+	}
+
+	/**
+	 * test amount handling
+	 * 
+	 * @throws Exception
+	 *
+	 */
+	@Test
+	void testMixAmount() throws Exception
+	{
+		rlComp.setAmount(20, null);
+		rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
+		comp.addPartition(EnumPartIDKey.SignatureName, "cover").addPartition(EnumPartIDKey.SheetName, "cover");
+		comp.addPartition(EnumPartIDKey.SignatureName, "body").addPartition(EnumPartIDKey.SheetName, "body");
+
+		final JDFAttributeMap m1 = new JDFAttributeMap();
+		m1.put(EnumPartIDKey.SignatureName, "cover");
+		m1.put(EnumPartIDKey.SheetName, "cover");
+		rlComp.setAmount(10, m1);
+		m1.put(EnumPartIDKey.SignatureName, "body");
+		m1.put(EnumPartIDKey.SheetName, "body");
+		rlComp.setAmount(100, m1);
+		final JDFNode prod = JDFNode.createRoot();
+		prod.setType(EnumType.Product);
+		final JDFNode next = (JDFNode) prod.copyElement(doc.getJDFRoot(), null);
+		prod.moveAttribute(AttributeName.JOBID, next);
+		setSnippet(next, true);
+		next.removeChild(ElementName.AUDITPOOL, null, 0);
+		writeRoundTrip(prod, "DigitalMixedOutput", getDefaultXJDFVersion(), EnumValidationLevel.Incomplete);
+
 	}
 
 	/**

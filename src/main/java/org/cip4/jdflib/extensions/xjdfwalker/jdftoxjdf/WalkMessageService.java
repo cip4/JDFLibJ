@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
+import org.cip4.jdflib.auto.JDFAutoMessageService.EnumJMFRole;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -125,14 +126,14 @@ public class WalkMessageService extends WalkJDFSubElement
 		map.remove(AttributeName.ACKNOWLEDGE);
 		map.remove(AttributeName.GENERICATTRIBUTES);
 		map.remove(AttributeName.JMFROLE);
-		String pers = map.remove(AttributeName.PERSISTENT);
-		String query = map.get(AttributeName.QUERY);
-		StringArray cm = new StringArray(map.remove(AttributeName.CHANNELMODE));
+		final String pers = map.remove(AttributeName.PERSISTENT);
+		final String query = map.get(AttributeName.QUERY);
+		final StringArray cm = new StringArray(map.remove(AttributeName.CHANNELMODE));
 		if (StringUtil.parseBoolean(pers, false))
 			cm.appendUnique(EnumChannelMode.FireAndForget.getName());
 		if (StringUtil.parseBoolean(query, false))
 			cm.appendUnique(ElementName.RESPONSE);
-		map.put(XJDFConstants.ResponseModes, cm.getString());
+		map.putNotNull(XJDFConstants.ResponseModes, cm.getString());
 
 		map.remove(AttributeName.REGISTRATION);
 		final String urlschemes = map.get(AttributeName.URLSCHEMES);
@@ -161,5 +162,17 @@ public class WalkMessageService extends WalkJDFSubElement
 			}
 		}
 		super.removeUnusedElements(jdf);
+	}
+
+	@Override
+	public KElement walk(final KElement jdf, final KElement xjdf)
+	{
+		final JDFMessageService ms = (JDFMessageService) jdf;
+		final EnumJMFRole role = ms.getJMFRole();
+		if (EnumJMFRole.Sender.equals(role))
+		{
+			return null;
+		}
+		return super.walk(jdf, xjdf);
 	}
 }

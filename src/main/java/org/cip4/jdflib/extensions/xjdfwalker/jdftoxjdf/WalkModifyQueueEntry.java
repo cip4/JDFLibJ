@@ -131,9 +131,10 @@ public class WalkModifyQueueEntry extends WalkMessage
 	 * @param type
 	 * @return
 	 */
-	boolean isQueueControl(final String type)
+	public static boolean isQueueControl(final String type)
 	{
-		return StringUtil.hasToken("AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetGangQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry", type, ",", 0);
+		return StringUtil.hasToken(
+				"AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetGangQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry", type, ",", 0);
 	}
 
 }

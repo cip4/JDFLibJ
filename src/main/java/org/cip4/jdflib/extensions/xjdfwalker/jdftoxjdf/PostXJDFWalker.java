@@ -38,6 +38,7 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
@@ -2736,6 +2737,17 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				splitMessageService(xjdf, ms);
 			}
+			final HashSet<String> gotIt = new HashSet<>();
+			final List<JDFMessageService> v2 = xjdf.getChildArrayByClass(JDFMessageService.class, false, 0);
+			for (int i = v2.size() - 1; i >= 0; i--)
+			{
+				final JDFMessageService ms = v2.get(i);
+				final String t = ms.getType();
+				if (!gotIt.add(t))
+				{
+					ms.deleteNode();
+				}
+			}
 		}
 
 		void splitMessageService(final KElement xjdf, final JDFMessageService ms)
@@ -2744,23 +2756,34 @@ class PostXJDFWalker extends BaseElementWalker
 			final boolean c = ms.getCommand();
 			final boolean s = ms.getSignal();
 			final boolean q = ms.getQuery();
-			final String t = ms.getType();
+			String t = ms.getType();
+			if (WalkModifyQueueEntry.isQueueControl(t))
+			{
+				t = XJDFConstants.ModifyQueueEntry;
+			}
+			String t1 = KElement.xmlnsPrefix(t);
+			if (t1 == null)
+				t1 = "";
+			else
+				t1 = t1 + ":";
+			t = KElement.xmlnsLocalName(t);
+
 			ms.removeAttributes(new StringArray("Command Query Signal"));
 			if (c)
 			{
-				ms.setType(ElementName.COMMAND + t);
+				ms.setType(t1 + ElementName.COMMAND + t);
 				i++;
 			}
 			if (s)
 			{
 				final JDFMessageService ms0 = (JDFMessageService) (i > 0 ? xjdf.copyElement(ms, ms) : ms);
-				ms0.setType(ElementName.SIGNAL + t);
+				ms0.setType(t1 + ElementName.SIGNAL + t);
 				i++;
 			}
 			if (q)
 			{
 				final JDFMessageService ms0 = (JDFMessageService) (i > 0 ? xjdf.copyElement(ms, ms) : ms);
-				ms0.setType(ElementName.QUERY + t);
+				ms0.setType(t1 + ElementName.QUERY + t);
 			}
 
 		}
