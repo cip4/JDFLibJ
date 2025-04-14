@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,8 @@
  **/
 package org.cip4.jdflib.jmf;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -92,11 +94,14 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.ifaces.IDeviceCapable;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 //----------------------------------
 /**
@@ -176,7 +181,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	 */
 	public EnumType getEnumType()
 	{
-		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
+		return EnumType.getEnum(getNonEmpty(AttributeName.TYPE));
 	}
 
 	/**
@@ -188,6 +193,64 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	{
 		final String typeName = value == null ? null : value.getName();
 		setType(typeName);
+	}
+
+	public enum EResponseMode
+	{
+		FireAndForget, Reliable, Response, Poll;
+
+		public static EResponseMode getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EResponseMode.class, val);
+		}
+
+		public static List<EResponseMode> getEnums(final String val)
+		{
+			return JavaEnumUtil.getEnumList(EResponseMode.class, val, true);
+		}
+
+	}
+
+	/**
+	 * Typesafe enumerated attribute Type
+	 *
+	 * @return EnumType: the enumeration value of the attribute
+	 */
+	public List<EResponseMode> getResponseModes()
+	{
+		return EResponseMode.getEnums(getAttribute(XJDFConstants.ResponseModes));
+	}
+
+	/**
+	 * Set attribute Type
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setResponseModes(final EResponseMode value)
+	{
+		setAttribute(XJDFConstants.ResponseModes, value, null);
+	}
+
+	/**
+	 * Set attribute Type
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setResponseModes(final Collection<EResponseMode> values)
+	{
+		setAttribute(XJDFConstants.ResponseModes, JavaEnumUtil.getNameList(values, true), null);
+	}
+
+	/**
+	 * Set attribute Type
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void addResponseModes(final EResponseMode value)
+	{
+		final List<EResponseMode> l = getResponseModes();
+		ContainerUtil.appendUnique(l, value);
+		setResponseModes(value);
 	}
 
 	/**
@@ -210,7 +273,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setChannelMode(EnumChannelMode enumVar)
+	public void setChannelMode(final EnumChannelMode enumVar)
 	{
 		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
 	}

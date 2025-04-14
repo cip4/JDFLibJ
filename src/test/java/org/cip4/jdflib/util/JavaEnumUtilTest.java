@@ -218,4 +218,16 @@ class JavaEnumUtilTest extends JDFTestCaseBase
 		assertEquals(6, roundtrip.size());
 	}
 
+	/**
+	 *
+	 */
+	@Test
+	void testGetEnumList4()
+	{
+		final Collection<E> c = ContainerUtil.addAll(new ArrayList<>(), E.values());
+		final Collection<E> roundtrip = JavaEnumUtil.getEnumList(E.class, "a b", true);
+		assertEquals(2, roundtrip.size());
+
+	}
+
 }

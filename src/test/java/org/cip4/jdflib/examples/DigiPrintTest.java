@@ -729,24 +729,17 @@ class DigiPrintTest extends ExampleTest
 	@Test
 	void testMixAmount() throws Exception
 	{
-		rlComp.setAmount(20, null);
-		rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
-		comp.addPartition(EnumPartIDKey.SignatureName, "cover").addPartition(EnumPartIDKey.SheetName, "cover");
-		comp.addPartition(EnumPartIDKey.SignatureName, "body").addPartition(EnumPartIDKey.SheetName, "body");
+		rlComp.setDescriptiveName("The link points to 10 copies of the first document and 100 copies of the second document");
+		comp.addPartition(EnumPartIDKey.DocIndex, "0");
+		comp.addPartition(EnumPartIDKey.DocIndex, "1");
 
 		final JDFAttributeMap m1 = new JDFAttributeMap();
-		m1.put(EnumPartIDKey.SignatureName, "cover");
-		m1.put(EnumPartIDKey.SheetName, "cover");
+		m1.put(EnumPartIDKey.DocIndex, "0");
 		rlComp.setAmount(10, m1);
-		m1.put(EnumPartIDKey.SignatureName, "body");
-		m1.put(EnumPartIDKey.SheetName, "body");
+		m1.put(EnumPartIDKey.DocIndex, "1");
 		rlComp.setAmount(100, m1);
-		final JDFNode prod = JDFNode.createRoot();
-		prod.setType(EnumType.Product);
-		final JDFNode next = (JDFNode) prod.copyElement(doc.getJDFRoot(), null);
-		prod.moveAttribute(AttributeName.JOBID, next);
-		setSnippet(next, true);
-		next.removeChild(ElementName.AUDITPOOL, null, 0);
+		final JDFNode prod = doc.getJDFRoot();
+		setSnippet(prod.getResourceLinkPool(), true);
 		writeRoundTrip(prod, "DigitalMixedOutput", getDefaultXJDFVersion(), EnumValidationLevel.Incomplete);
 
 	}

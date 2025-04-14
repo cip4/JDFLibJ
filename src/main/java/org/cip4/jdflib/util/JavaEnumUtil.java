@@ -278,4 +278,16 @@ public class JavaEnumUtil
 		}
 		return ret;
 	}
+
+	/**
+	 * null safe convenience name list getter
+	 *
+	 * @param esn the enum collection to get the list of names
+	 * @return
+	 */
+	public static <T extends Enum<T>> List<T> getEnumList(final Class<T> c, final String strings, final boolean unique)
+	{
+		final StringArray lst = StringArray.getVString(strings, null);
+		return getEnumList(c, lst, unique);
+	}
 }

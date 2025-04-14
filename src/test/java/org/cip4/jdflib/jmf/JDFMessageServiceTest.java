@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessageService.EResponseMode;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -120,6 +121,29 @@ class JDFMessageServiceTest
 		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
 		ms.setFamily(EnumFamily.Query);
 		assertTrue(ms.getQuery());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	void testsetResponseMode()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
+		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
+		ms.setResponseModes(EResponseMode.Reliable);
+		assertEquals(EResponseMode.Reliable, ms.getResponseModes().get(0));
+		ms.addResponseModes(EResponseMode.Reliable);
+		assertEquals(1, ms.getResponseModes().size());
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	void testEResponseMode()
+	{
+		assertEquals(2, EResponseMode.getEnums("Reliable fireandforget").size());
 	}
 
 	/**

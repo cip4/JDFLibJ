@@ -624,7 +624,6 @@ public abstract class JDFTestCaseBase
 	static protected XMLDoc printValid(final JDFDoc converted)
 	{
 		final JDFValidator jdfValidator = new JDFValidator();
-		jdfValidator.bQuiet = true;
 		jdfValidator.level = EnumValidationLevel.Complete;
 		return jdfValidator.processSingleDocument(converted);
 	}
