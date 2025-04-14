@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -887,15 +887,15 @@ public class UrlUtil
 	public static String addPath(final String baseUrl, final String path) throws IllegalArgumentException
 	{
 
-		final String newBase = getSecurePath(baseUrl, true);
+		getSecurePath(baseUrl, true);
 		if (path == null)
 		{
-			return newBase;
+			return baseUrl;
 		}
-		final String newPath = getSecurePath(path, false);
-		String request = StringUtil.token(newBase, 0, "?");
-		request = StringUtil.addToken(request, "/", newPath);
-		final String params = StringUtil.token(newBase, 1, "?");
+		getSecurePath(path, false);
+		String request = StringUtil.token(baseUrl, 0, "?");
+		request = StringUtil.addToken(request, "/", path);
+		final String params = StringUtil.token(baseUrl, 1, "?");
 		if (params != null)
 			request += "?" + params;
 
