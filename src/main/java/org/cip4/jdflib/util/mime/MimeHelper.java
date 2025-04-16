@@ -61,15 +61,23 @@ public class MimeHelper
 {
 	protected Multipart theMultipart;
 
-	// there is a bug in xerces that screws up the reference count for shared files when the static stuff in domparser is initialized.
-	// make sure that this happens prior to any mime related tasks and all is well
-	static
-	{
-		new JDFParser();
-	}
+	private static boolean bNeedAParser = true;
 
 	protected int markSize;
 	protected final static Log log = LogFactory.getLog(MimeHelper.class);
+
+	// there is a bug in xerces that screws up the reference count for shared files when the static stuff in domparser is initialized.
+	// make sure that this happens prior to any mime related tasks and all is well
+	static void initXML()
+	{
+		log.info("initializing mime parser");
+		new JDFParser().parseString("<JDF/>");
+	}
+
+	static
+	{
+		initXML();
+	}
 
 	/**
 	 *
@@ -77,6 +85,13 @@ public class MimeHelper
 	public MimeHelper()
 	{
 		super();
+		// there is a bug in xerces that screws up the reference count for shared files when the static stuff in domparser is initialized.
+		// make sure that this happens prior to any mime related tasks and all is well
+		if (bNeedAParser)
+		{
+			bNeedAParser = false;
+			initXML();
+		}
 		theMultipart = null;
 		markSize = 1000000;
 	}
