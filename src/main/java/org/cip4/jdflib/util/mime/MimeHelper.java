@@ -205,7 +205,7 @@ public class MimeHelper
 		cid = StringUtil.getNonEmpty(cid);
 		if (UrlUtil.isNotCID(cid))
 		{
-			log.debug("incorrect CID format: cid=" + cid);
+			log.warn("incorrect CID format: cid=" + cid);
 			return null;
 		}
 		try

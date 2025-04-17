@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2021 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -70,9 +70,29 @@ class MimeReaderTest extends JDFTestCaseBase
 	}
 
 	@Test
+	void testGetByCIDNet()
+	{
+		final MimeReader mr = new MimeReader(sm_dirTestData + File.separator + "evilchars.mjm");
+		assertNull(mr.getPartByCID("http://foo/OtherJDF"));
+	}
+
+	@Test
 	void testGetByCID2()
 	{
 		final MimeReader mr = new MimeReader(sm_dirTestData + File.separator + "evil.mjm");
 		assertNotNull(mr.getPartByCID("../../OtherJDF.jdf"));
+	}
+
+	@Test
+	void testGetByCIDMany()
+	{
+		for (int i = 0; i < 42; i++)
+		{
+			final MimeReader mr = new MimeReader(sm_dirTestData + File.separator + "evil.mjm");
+			for (int j = 0; j < 42; j++)
+			{
+				assertNotNull(mr.getPartByCID("../../OtherJDF.jdf"));
+			}
+		}
 	}
 }

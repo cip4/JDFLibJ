@@ -87,13 +87,13 @@ public class UrlUtil
 
 	private static final String SLASHSLASH = "//";
 
-	private static final String FILE = "file:";
+	public static final String FILE = "file:";
 
-	private static final String FTP = "ftp:";
+	public static final String FTP = "ftp:";
 
-	private static final String HTTPS = "https:";
+	public static final String HTTPS = "https:";
 
-	private static final String HTTP = "http:";
+	public static final String HTTP = "http:";
 
 	public static final int MAX_STREAM = 12345678;
 
