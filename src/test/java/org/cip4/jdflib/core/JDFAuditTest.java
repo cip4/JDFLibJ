@@ -76,7 +76,7 @@ class JDFAuditTest extends ExampleTest
 	void readVersionDetails() throws Exception
 	{
 		assertEquals("CIP4 JDF Writer Java", JDFAudit.readBuildProperty("lib.name"), "AgentName is wrong");
-		assertTrue(JDFAudit.readBuildProperty("lib.version").toString().startsWith("2.1."), "AgentVersion is wrong");
+		assertTrue(JDFAudit.readBuildProperty("lib.version").toString().startsWith("2.2."), "AgentVersion is wrong");
 	}
 
 	/**
