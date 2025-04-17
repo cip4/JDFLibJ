@@ -72,7 +72,7 @@ import org.junit.jupiter.api.Test;
 class JDFAuditTest extends ExampleTest
 {
 
-	// todo reintroduce once labeled
+	@Test
 	void readVersionDetails() throws Exception
 	{
 		assertEquals("CIP4 JDF Writer Java", JDFAudit.readBuildProperty("lib.name"), "AgentName is wrong");
