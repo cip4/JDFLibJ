@@ -72,7 +72,7 @@ public class URLWriter implements Runnable
 		return "UrlWriter: " + method + " addDirect=" + addDirect + " / " + contentType + " --> " + url;
 	}
 
-	static final Log log = LogFactory.getLog(URLWriter.class);
+	static private final Log log = LogFactory.getLog(URLWriter.class);
 	private final URL url;
 	private final ByteArrayIOStream stream;
 	private final String method;
