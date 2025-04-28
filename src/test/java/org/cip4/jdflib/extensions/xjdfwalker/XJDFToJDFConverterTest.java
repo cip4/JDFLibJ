@@ -231,7 +231,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(d);
 		final JDFNode root = d.getJDFRoot();
 		final JDFNodeInfo ni = root.getNodeInfo();
-		assertEquals(new VString("Run Option RunPage"), ni.getPartIDKeys());
+		assertEquals(new VString("Run RunPage Option"), ni.getPartIDKeys());
 		assertEquals(22, ni.getLeaves(true).size());
 	}
 

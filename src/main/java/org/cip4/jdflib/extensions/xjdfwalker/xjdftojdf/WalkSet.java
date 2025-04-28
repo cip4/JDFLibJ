@@ -144,10 +144,13 @@ public class WalkSet extends WalkXElement
 		for (final ResourceHelper p : vp)
 		{
 			final JDFAttributeMap pMap = p.getPartMap();
+			if (ContainerUtil.containsAny(pMap.keySet(), sss))
+				return new JDFAttributeMapArray();
 			final JDFAttributeMap map2 = map.getCommonMap(pMap);
 			if (!JDFAttributeMap.isEmpty(map2))
 			{
 				map2.removeKeys(sss);
+
 				if (!map2.keySet().containsAll(keyset))
 				{
 					map2.reduceMap(keyset);

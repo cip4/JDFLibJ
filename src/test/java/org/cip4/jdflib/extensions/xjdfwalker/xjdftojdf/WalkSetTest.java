@@ -114,7 +114,7 @@ class WalkSetTest extends WalkSet
 		final XJDFHelper h = new XJDFHelper("j1", null, v);
 		set.reorderResources(h.getNodeInfo().getRoot());
 		final List<ResourceHelper> l = h.getNodeInfo().getPartitionList();
-		assertEquals(11, l.size());
+		assertEquals(9, l.size());
 	}
 
 	@Test
