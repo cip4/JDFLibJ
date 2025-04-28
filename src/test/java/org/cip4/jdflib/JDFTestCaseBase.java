@@ -43,6 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.net.URL;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
@@ -104,6 +106,7 @@ public abstract class JDFTestCaseBase
 {
 
 	private static final String VALID = "Valid";
+	protected static Lock sequential = new ReentrantLock();
 
 	/**
 	 *
