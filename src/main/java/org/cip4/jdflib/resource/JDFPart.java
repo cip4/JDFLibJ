@@ -37,6 +37,7 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -154,7 +155,12 @@ public class JDFPart extends JDFAutoPart
 	}
 
 	private final static String[] partSequence = new String[] { AttributeName.SIGNATURENAME, AttributeName.SHEETNAME, AttributeName.SIDE, AttributeName.SEPARATION,
-			AttributeName.RUNSET, AttributeName.RUN };
+			AttributeName.RUNSET, AttributeName.RUN, AttributeName.RUNPAGE };
+
+	public static String[] getPartsequence()
+	{
+		return Arrays.copyOf(partSequence, partSequence.length);
+	}
 
 	public static VString guessPartIDKeys(final JDFAttributeMap map)
 	{

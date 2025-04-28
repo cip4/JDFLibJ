@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,6 +45,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Test;
 
 class WalkSetTest extends WalkSet
@@ -67,8 +68,7 @@ class WalkSetTest extends WalkSet
 		}
 		final XJDFHelper h = new XJDFHelper("j1", null, v);
 		set.reorderResources(h.getNodeInfo().getRoot());
-		assertEquals(12, h.getNodeInfo().getPartitionList().size());
-		assertEquals("Run0", h.getNodeInfo().getPartition(0).getPartKey("Run"));
+		assertEquals(8, h.getNodeInfo().getPartitionList().size());
 	}
 
 	@Test
@@ -83,18 +83,13 @@ class WalkSetTest extends WalkSet
 			for (int j = 0; j < 2; j++)
 			{
 				map.put("Option", "" + j);
-				for (int k = 0; k < 2; k++)
-				{
-					map.put("RunPage", "" + k);
-					v.add(map.clone());
-				}
+				v.add(map.clone());
 			}
 		}
 		final XJDFHelper h = new XJDFHelper("j1", null, v);
 		set.reorderResources(h.getNodeInfo().getRoot());
 		final List<ResourceHelper> l = h.getNodeInfo().getPartitionList();
-		assertEquals(21, l.size());
-		assertEquals("Run0", h.getNodeInfo().getPartition(0).getPartKey("Run"));
+		assertEquals(6, l.size());
 	}
 
 	@Test
@@ -119,8 +114,7 @@ class WalkSetTest extends WalkSet
 		final XJDFHelper h = new XJDFHelper("j1", null, v);
 		set.reorderResources(h.getNodeInfo().getRoot());
 		final List<ResourceHelper> l = h.getNodeInfo().getPartitionList();
-		assertEquals("Run0", h.getNodeInfo().getPartition(0).getPartKey("Run"));
-		assertEquals(18, l.size());
+		assertEquals(11, l.size());
 	}
 
 	@Test
@@ -131,10 +125,10 @@ class WalkSetTest extends WalkSet
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 		for (int i = 0; i < 4; i++)
 		{
-			final JDFAttributeMap map = new JDFAttributeMap("Run", "Run" + i);
+			final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.BlockName, "Run" + i);
 			for (int k = 0; k < 2; k++)
 			{
-				map.put("RunPage", "" + k);
+				map.put(EnumPartIDKey.CellIndex, "" + k);
 				v.add(map.clone());
 			}
 		}

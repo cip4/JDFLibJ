@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -53,6 +53,7 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFCuttingParams;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFColor;
@@ -91,7 +92,7 @@ class XJDFResourceExampleTest extends ExampleTest
 	*
 	*/
 	@Test
-	public final void testColorantAlias()
+	final void testColorantAlias()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("RawName", null, null);
 		xjdfHelper.setTypes(EnumType.ColorSpaceConversion.getName());
@@ -123,7 +124,22 @@ class XJDFResourceExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public final void testPrintConditions()
+	void testCutMarks()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("CutMarks", null, null);
+		xjdfHelper.setTypes("Cutting");
+		final SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		final ResourceHelper rh1 = sh1.getCreatePartition(0, true);
+		final JDFCuttingParams cp = (JDFCuttingParams) rh1.getResource();
+		xjdfHelper.appendResourceSet(ElementName.LAYOUT, EnumUsage.Input).appendPartition(null, false);
+		writeTest(xjdfHelper, "structure/CutMark.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	final void testPrintConditions()
 	{
 		final XJDFHelper h = new XJDFHelper("PrintCondition", null, null);
 		h.setVersion(EnumVersion.Version_2_0);
@@ -132,7 +148,7 @@ class XJDFResourceExampleTest extends ExampleTest
 		final SetHelper sint = h.getCreateSet(ElementName.PRINTCONDITION, EnumUsage.Input);
 		final ResourceHelper rint = sint.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
 		final JDFPrintCondition intp = (JDFPrintCondition) rint.getResource();
-		//		intp.setAttribute("PrintQuality", EnumPrintQuality.High.getName());
+		// intp.setAttribute("PrintQuality", EnumPrintQuality.High.getName());
 		intp.setAttribute("Name", "7-Color");
 
 		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
@@ -171,7 +187,7 @@ class XJDFResourceExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public final void testPrintConditions21()
+	final void testPrintConditions21()
 	{
 		final XJDFHelper h = new XJDFHelper("PrintCondition", null, null);
 		h.setVersion(EnumVersion.Version_2_1);
@@ -211,7 +227,7 @@ class XJDFResourceExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	public final void testPrintConditionCoverBody()
+	final void testPrintConditionCoverBody()
 	{
 		final XJDFHelper h = new XJDFHelper("PrintCondition", null, null);
 		h.setVersion(EnumVersion.Version_2_1);

@@ -56,6 +56,7 @@ import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.extensions.xjdfwalker.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -133,10 +134,11 @@ public class WalkSet extends WalkXElement
 		return vp;
 	}
 
-	private JDFAttributeMapArray findCommonParts(final List<ResourceHelper> vp)
+	JDFAttributeMapArray findCommonParts(final List<ResourceHelper> vp)
 	{
 		final JDFAttributeMapArray foundparts = new JDFAttributeMapArray();
-		final StringArray sss = new StringArray("SignatureName SheetName Side Separation");
+		final StringArray sss = new StringArray(JDFPart.getPartsequence());
+		// final StringArray sss = new StringArray("SignatureName SheetName Side Separation Run");
 		JDFAttributeMap map = new JDFAttributeMap();
 		final Set<String> keyset = new HashSet<String>();
 		for (final ResourceHelper p : vp)
