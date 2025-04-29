@@ -83,7 +83,7 @@ package org.cip4.jdflib.core;
 import java.util.HashMap;
 import java.util.Vector;
 
-import javax.mail.BodyPart;
+import jakarta.mail.BodyPart;
 
 import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ParentNode;

@@ -58,8 +58,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
-import javax.mail.BodyPart;
-import javax.mail.Multipart;
+import jakarta.mail.BodyPart;
+import jakarta.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;

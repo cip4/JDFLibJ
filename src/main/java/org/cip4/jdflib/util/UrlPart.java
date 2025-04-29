@@ -45,8 +45,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URLConnection;
 
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.XMLDoc;

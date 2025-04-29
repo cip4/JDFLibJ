@@ -51,15 +51,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.activation.DataHandler;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
+import jakarta.activation.DataHandler;
+import jakarta.mail.BodyPart;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.Session;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+import jakarta.mail.util.ByteArrayDataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -141,7 +141,7 @@ public class MimeWriter extends MimeHelper implements IStreamWriter
 		}
 
 		/**
-		 * @see javax.mail.internet.MimeMessage#updateMessageID()
+		 * @see jakarta.mail.internet.MimeMessage#updateMessageID()
 		 */
 		@Override
 		protected void updateMessageID() throws MessagingException

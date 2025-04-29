@@ -48,10 +48,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.util.Vector;
 
-import javax.activation.DataSource;
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
+import jakarta.activation.DataSource;
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
 
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
@@ -138,7 +138,7 @@ public class MimeUtil extends UrlUtil
 		/**
 		 * * (non-Javadoc)
 		 *
-		 * @see javax.activation.DataSource#getContentType()
+		 * @see jakarta.activation.DataSource#getContentType()
 		 */
 		@Override
 		public String getContentType()
@@ -147,7 +147,7 @@ public class MimeUtil extends UrlUtil
 		}
 
 		/**
-		 * @see javax.activation.DataSource#getInputStream()
+		 * @see jakarta.activation.DataSource#getInputStream()
 		 */
 		@Override
 		public InputStream getInputStream()
@@ -156,7 +156,7 @@ public class MimeUtil extends UrlUtil
 		}
 
 		/**
-		 * @see javax.activation.DataSource#getName()
+		 * @see jakarta.activation.DataSource#getName()
 		 */
 		@Override
 		public String getName()
@@ -165,7 +165,7 @@ public class MimeUtil extends UrlUtil
 		}
 
 		/**
-		 * @see javax.activation.DataSource#getOutputStream()
+		 * @see jakarta.activation.DataSource#getOutputStream()
 		 */
 		@Override
 		public OutputStream getOutputStream()

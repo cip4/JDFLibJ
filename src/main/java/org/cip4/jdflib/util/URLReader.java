@@ -74,8 +74,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 
-import javax.mail.BodyPart;
-import javax.mail.Multipart;
+import jakarta.mail.BodyPart;
+import jakarta.mail.Multipart;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

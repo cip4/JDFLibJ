@@ -53,8 +53,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
 
-import javax.mail.BodyPart;
-import javax.mail.Multipart;
+import jakarta.mail.BodyPart;
+import jakarta.mail.Multipart;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

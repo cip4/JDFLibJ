@@ -78,7 +78,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.io.File;
 import java.net.URL;
 
-import javax.mail.Multipart;
+import jakarta.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
