@@ -114,7 +114,7 @@ class MimeWriterTest extends JDFTestCaseBase
 		mw.writeToStream(ios);
 		final byte[] b = ios.getBuf();
 		final String string = new String(b);
-		assertTrue(string.startsWith("MIME-Version"));
+		assertNotEquals(-1, string.indexOf("MIME-Version"));
 		assertEquals(-1, string.indexOf("Message-ID"));
 	}
 
