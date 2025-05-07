@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,9 +73,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.util.Base64;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.Test;
@@ -110,8 +114,79 @@ class UrlPartTest extends JDFTestCaseBase
 	void testRespString() throws IOException
 	{
 		final UrlPart p = new UrlPart(new File(sm_dirTestData + "29694232.ptk"));
-		String responseString = p.getResponseString(142);
+		final String responseString = p.getResponseString(142);
 		assertFalse(responseString.contains("<not buffered>"));
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	void testgetHeaders() throws IOException
+	{
+		final UrlPart p = new UrlPart(new File(sm_dirTestData + "29694232.ptk"));
+		assertTrue(p.getHeaders().isEmpty());
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	void testgetHeadersConnect() throws IOException
+	{
+		final HttpURLConnection c = mock(HttpURLConnection.class);
+		final ListMap<String, String> map = new ListMap<String, String>();
+		map.setUnique(false);
+		when(c.getHeaderFields()).thenReturn(map);
+		final UrlPart p = new UrlPart(c);
+		assertTrue(p.getHeaders().isEmpty());
+		map.putOne("a", "b");
+		assertEquals("b", p.getHeaders().get("a"));
+		map.putOne("a", "b");
+		assertEquals("b b", p.getHeaders().get("a"));
+		assertEquals("b b", p.getHeader("a"));
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	void testgetAuthentication() throws IOException
+	{
+		final HttpURLConnection c = mock(HttpURLConnection.class);
+		final ListMap<String, String> map = new ListMap<String, String>();
+		map.setUnique(false);
+		when(c.getHeaderFields()).thenReturn(map);
+		final UrlPart p = new UrlPart(c);
+		assertTrue(p.getHeaders().isEmpty());
+		String val = "Basic a:b:b";
+		val = Base64.getEncoder().encodeToString(val.getBytes());
+		map.putOne(UrlUtil.AUTHORIZATION, val);
+		assertEquals("a", p.getAuthorizationUser());
+		assertEquals("b:b", p.getAuthorizationPassword());
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	@Test
+	void testgetAuthenticationBad() throws IOException
+	{
+		final HttpURLConnection c = mock(HttpURLConnection.class);
+		final ListMap<String, String> map = new ListMap<String, String>();
+		map.setUnique(false);
+		when(c.getHeaderFields()).thenReturn(map);
+		final UrlPart p = new UrlPart(c);
+		assertTrue(p.getHeaders().isEmpty());
+		final String val = "Basic a:b:b";
+		// not base 64
+		map.putOne(UrlUtil.AUTHORIZATION, val);
+		assertEquals(null, p.getAuthorizationUser());
+		assertEquals(null, p.getAuthorizationPassword());
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,17 +44,22 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URLConnection;
-
-import jakarta.mail.BodyPart;
-import jakarta.mail.MessagingException;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.core.XMLParserFactory;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 import org.cip4.jdflib.util.net.IPollDetails;
+
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
 
 /**
  * simple struct to contain the stream and type of a bodypart
@@ -213,10 +218,10 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	 * @param maxLen
 	 * @return
 	 */
-	public String getResponseString(int maxLen)
+	public String getResponseString(final int maxLen)
 	{
 		buffer();
-		ByteArrayIOInputStream bios = bufferStream.getInputStream();
+		final ByteArrayIOInputStream bios = bufferStream.getInputStream();
 		return bios.asString(maxLen);
 	}
 
@@ -251,6 +256,21 @@ public class UrlPart implements IPollDetails, IStreamWriter
 		{
 			bufferStream = new ByteArrayIOFileStream(inStream, UrlUtil.MAX_STREAM);
 		}
+	}
+
+	public JDFAttributeMap getHeaders()
+	{
+		final JDFAttributeMap ret = new JDFAttributeMap();
+		if (connection != null)
+		{
+			final Map<String, List<String>> map = connection.getHeaderFields();
+			for (final Entry<String, List<String>> e : map.entrySet())
+			{
+				ret.put(e.getKey(), StringUtil.setvString(e.getValue()));
+			}
+
+		}
+		return ret;
 	}
 
 	/**
@@ -298,5 +318,41 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	public static int getReturnCode(final UrlPart p)
 	{
 		return p == null ? -1 : p.getResponseCode();
+	}
+
+	public String getHeader(final String string)
+	{
+		return getHeaders().get(string);
+	}
+
+	public String getAuthorizationUser()
+	{
+		String authHeader = getAuthorizationHeader();
+		authHeader = StringUtil.removeToken(authHeader, rc, " ");
+		return StringUtil.token(authHeader, 0, ":");
+	}
+
+	public String getAuthorizationPassword()
+	{
+		String authHeader = getAuthorizationHeader();
+		authHeader = StringUtil.removeToken(authHeader, rc, " ");
+		return StringUtil.removeToken(authHeader, 0, ":");
+	}
+
+	public String getAuthorizationHeader()
+	{
+		String authHeader = getHeader(UrlUtil.AUTHORIZATION);
+		if (authHeader != null)
+		{
+			try
+			{
+				authHeader = new String(Base64.getDecoder().decode(authHeader));
+			}
+			catch (final Exception x)
+			{
+				authHeader = null;
+			}
+		}
+		return authHeader;
 	}
 }
