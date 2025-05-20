@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,10 +69,13 @@
 package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams;
+import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams.eOperation;
 
 public class WalkModifyQueueEntryParams extends WalkXElement
 {
@@ -89,15 +92,15 @@ public class WalkModifyQueueEntryParams extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
-		String operation = elem.getNonEmpty(AttributeName.OPERATION);
+		final eOperation operation = eOperation.getEnum(elem.getAttribute(AttributeName.OPERATION));
 		elem.removeAttribute(AttributeName.OPERATION);
-		if ("Abort".equals(operation))
+		if (eOperation.Abort.equals(operation))
 		{
 			elem.setAttribute(AttributeName.ENDSTATUS, EnumNodeStatus.Aborted.getName());
 		}
-		else if ("Complete".equals(operation))
+		else if (eOperation.Complete.equals(operation))
 		{
 			elem.setAttribute(AttributeName.ENDSTATUS, EnumNodeStatus.Completed.getName());
 		}
@@ -117,21 +120,45 @@ public class WalkModifyQueueEntryParams extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#getJDFName(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	String getJDFName(KElement e)
+	String getJDFName(final KElement e)
 	{
-		String operation = e.getNonEmpty(AttributeName.OPERATION);
+		final JDFModifyQueueEntryParams mqp = (JDFModifyQueueEntryParams) e;
+		eOperation operation = mqp.getOperation();
 		if (operation != null)
 		{
-			if ("Complete".equals(operation))
+			if (eOperation.Complete.equals(operation))
 			{
-				operation = "Abort";
+				operation = eOperation.Abort;
 			}
-			return operation + "QueueEntryParams";
+			else if (eOperation.Move.equals(operation))
+			{
+				if (mqp.hasAttribute(AttributeName.PRIORITY))
+				{
+					return ElementName.QUEUEENTRYPRIPARAMS;
+				}
+				else
+				{
+					return ElementName.QUEUEENTRYPOSPARAMS;
+				}
+			}
+			return operation.name() + "QueueEntryParams";
 		}
 		else
 		{
 			return super.getJDFName(e);
 		}
+	}
+
+	@Override
+	public KElement walk(final KElement e, final KElement trackElem)
+	{
+		final KElement ret = super.walk(e, trackElem);
+		if (ElementName.QUEUEENTRYPOSPARAMS.equals(getJDFName(e)))
+		{
+			ret.setAttribute(AttributeName.QUEUEENTRYID, e.getXPathAttribute("QueueFilter/@QueueEntryIDs", null));
+			return null;
+		}
+		return ret;
 	}
 
 }

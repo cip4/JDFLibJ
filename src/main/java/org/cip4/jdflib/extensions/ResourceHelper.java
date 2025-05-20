@@ -120,7 +120,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	/**
 	 * factory to create a helper from an element
 	 *
-	 * @param res the element to parseeither a "Resource" or a resource element
+	 * @param res the element to parse either a "Resource" or a resource element
 	 * @return the helper
 	 */
 	public static ResourceHelper getHelper(final KElement res)

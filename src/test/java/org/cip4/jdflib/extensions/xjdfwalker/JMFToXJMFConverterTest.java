@@ -79,6 +79,8 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFPipeParams;
 import org.cip4.jdflib.jmf.JDFQuery;
+import org.cip4.jdflib.jmf.JDFQueueEntryPosParams;
+import org.cip4.jdflib.jmf.JDFQueueEntryPriParams;
 import org.cip4.jdflib.jmf.JDFRemoveQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
@@ -139,6 +141,38 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		xjmf = conv.makeNewJMF(jmfResp);
 		assertEquals(xjmf.getElement("ResponsePipeControl").getLocalName(), "ResponsePipeControl");
 		writeRoundTrip(jmf, "pipecontrol.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testPrioJMF()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.SetQueueEntryPriority);
+		final JDFQueueEntryPriParams pp = jmf.getCommand(0).getCreateQueueEntryPriParams(0);
+		pp.setPriority(42);
+		pp.setQueueEntryID("q0");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("42", xjmf.getXPathAttribute("CommandModifyQueueEntry/ModifyQueueEntryParams/@Priority", null));
+		writeRoundTrip(jmf, "prio.jmf", getDefaultXJDFVersion(), EnumValidationLevel.NoWarnComplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testPosJMF()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.SetQueueEntryPosition);
+		final JDFQueueEntryPosParams pp = jmf.getCommand(0).getCreateQueueEntryPosParams(0);
+		pp.setNextQueueEntryID("q1");
+		pp.setQueueEntryID("q0");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("q1", xjmf.getXPathAttribute("CommandModifyQueueEntry/ModifyQueueEntryParams/@NextQueueEntryID", null));
+		writeRoundTrip(jmf, "pos.jmf", getDefaultXJDFVersion(), EnumValidationLevel.NoWarnComplete);
 	}
 
 	/**

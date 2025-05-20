@@ -917,6 +917,8 @@ class DocumentData
 		sm_PackageNames.put(ElementName.XYPAIRSTATE, JDFLIB + "resource.devicecapability.JDFXYPairState");
 
 		sm_PackageNames.put(ElementName.YPOSITION, NUMBER_SPAN);
+
+		sm_PackageNames.put(XJDFConstants.ModifyQueueEntryParams, JDFLIB + "jmf.JDFModifyQueueEntryParams");
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,9 +40,13 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams;
+import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams.eOperation;
 import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 import org.cip4.jdflib.util.StringUtil;
@@ -74,37 +78,70 @@ public class WalkModifyQueueEntry extends WalkMessage
 		{
 			final String id = m.getID();
 			final String originalType = super.getMessageType(m);
-			final String operation = StringUtil.leftStr(originalType, -10); // -10 = queueentry.size()
-			XJMFTypeMap.getMap().put(id, originalType);
-			final KElement modifyParams = m.getCreateElement("ModifyQueueEntryParams", null, 0);
-			modifyParams.setAttribute(AttributeName.OPERATION, operation);
-			final String oldParams = originalType + "Params";
-			final JDFQueueEntryDef queueEntryDef = (JDFQueueEntryDef) m.getElement(ElementName.QUEUEENTRYDEF, null, 0);
-			final String qeid = queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
-			if (qeid != null)
+			final eOperation operation = eOperation.getEnum(originalType);
+			if (operation != null)
 			{
-				modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);
-				m.removeChild(ElementName.QUEUEENTRYDEF, null, 0);
-			}
-			else
-			{
-				final KElement op = m.getElement(oldParams);
-				if (op != null)
-				{
-					if ("Abort".equals(operation))
-					{
-						final String endstate = op.getNonEmpty(AttributeName.ENDSTATUS);
-						if (EnumNodeStatus.Completed.getName().equals(endstate))
-						{
-							modifyParams.setAttribute(AttributeName.OPERATION, "Complete");
-						}
-					}
-					modifyParams.moveElement(op.getElement(ElementName.QUEUEFILTER), null);
-					op.deleteNode();
-				}
+				updateMQP(m, id, originalType, operation);
 			}
 		}
+
 		return m;
+	}
+
+	void updateMQP(JDFMessage m, final String id, final String originalType, final eOperation operation)
+	{
+		XJMFTypeMap.getMap().put(id, originalType);
+		final JDFModifyQueueEntryParams modifyParams = (JDFModifyQueueEntryParams) m.getCreateElement(XJDFConstants.ModifyQueueEntryParams, null, 0);
+		modifyParams.setOperation(operation);
+		final String oldParams;
+		if (EnumType.SetQueueEntryPriority.getName().equals(originalType))
+		{
+			oldParams = ElementName.QUEUEENTRYPRIPARAMS;
+			final KElement op = m.getElement(oldParams);
+			modifyParams.setAttributes(op);
+		}
+		else if (EnumType.SetQueueEntryPosition.getName().equals(originalType))
+		{
+			oldParams = ElementName.QUEUEENTRYPOSPARAMS;
+			final KElement op = m.getElement(oldParams);
+			modifyParams.setAttributes(op);
+			modifyParams.removeAttribute(AttributeName.QUEUEENTRYID);
+		}
+		else
+		{
+			oldParams = originalType + "Params";
+		}
+		final JDFQueueEntryDef queueEntryDef = (JDFQueueEntryDef) m.getElement(ElementName.QUEUEENTRYDEF, null, 0);
+		final String qeid = queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
+		if (qeid != null)
+		{
+			modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid);
+			m.removeChild(ElementName.QUEUEENTRYDEF, null, 0);
+		}
+		updateOP(m, operation, modifyParams, oldParams);
+	}
+
+	void updateOP(JDFMessage m, final eOperation operation, final JDFModifyQueueEntryParams modifyParams, final String oldParams)
+	{
+		final KElement op = m.getElement(oldParams);
+		if (op != null)
+		{
+			final String qeid0 = op.getNonEmpty(AttributeName.QUEUEENTRYID);
+			if (qeid0 != null)
+			{
+				modifyParams.setXPathAttribute("QueueFilter/@QueueEntryIDs", qeid0);
+			}
+			if (eOperation.Abort.equals(operation))
+			{
+				final String endstate = op.getNonEmpty(AttributeName.ENDSTATUS);
+				if (EnumNodeStatus.Completed.getName().equals(endstate))
+				{
+					modifyParams.setOperation(eOperation.Complete);
+				}
+			}
+			modifyParams.moveElement(op.getElement(ElementName.QUEUEFILTER), null);
+			op.deleteNode();
+		}
 	}
 
 	/**
@@ -114,7 +151,7 @@ public class WalkModifyQueueEntry extends WalkMessage
 	@Override
 	String getMessageType(final JDFMessage m)
 	{
-		return "ModifyQueueEntry";
+		return XJDFConstants.ModifyQueueEntry;
 	}
 
 	/**

@@ -403,6 +403,15 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	}
 
 	/**
+	 *
+	 * @param queueEntrieDef
+	 */
+	public void setQueueEntrieDef(final String queueEntrieDef)
+	{
+		getCreateQueueEntryDef().setQueueEntryID(queueEntrieDef);
+	}
+
+	/**
 	 * Constructor for JDFQueueFilter
 	 *
 	 * @param myOwnerDocument
@@ -892,5 +901,11 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				def = Integer.MAX_VALUE;
 		}
 		return getIntAttribute(AttributeName.MAXENTRIES, null, def);
+	}
+
+	public String getQueueEntryID()
+	{
+		final JDFQueueEntryDef queueEntryDef = getQueueEntryDef();
+		return queueEntryDef == null ? null : queueEntryDef.getQueueEntryID();
 	}
 }

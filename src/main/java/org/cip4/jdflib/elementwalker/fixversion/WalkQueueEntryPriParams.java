@@ -1,8 +1,7 @@
-/*
+/**
  * The CIP4 Software License, Version 1.0
  *
- *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -23,7 +22,7 @@
  *       "This product includes software developed by the
  *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
+ *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of
@@ -33,7 +32,7 @@
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
+ *    nor may "CIP4" appear in their name, without prior written
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -45,7 +44,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -57,7 +56,7 @@
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
+ * originally based on software
  * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
@@ -65,83 +64,65 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
+ *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
+package org.cip4.jdflib.elementwalker.fixversion;
 
-import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
-import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.jmf.JDFQueueEntryPriParams;
+import org.cip4.jdflib.jmf.JDFQueueFilter;
+import org.cip4.jdflib.util.EnumUtil;
 
-public class WalkModifyQueueEntry extends WalkTypesafeMessage
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ *
+ *
+ */
+public class WalkQueueEntryPriParams extends WalkElement
 {
 
 	/**
 	 *
 	 */
-	public WalkModifyQueueEntry()
+	public WalkQueueEntryPriParams()
 	{
 		super();
 	}
 
 	/**
 	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#matches(org.cip4.jdflib.core.KElement)
+	 * @see org.cip4.jdflib.elementwalker.fixversion.WalkJMFCommandQueueFilter#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	public boolean matches(final KElement toCheck)
+	public KElement walk(final KElement e1, final KElement trackElem)
 	{
-		return true;
-	}
-
-	/**
-	 *
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkTypesafeMessage#getMessageType(org.cip4.jdflib.core.KElement, java.lang.String, java.lang.String)
-	 */
-	@Override
-	String getMessageType(final KElement e, final String messageName, final String family)
-	{
-		String operation = e.getXPathAttribute("ModifyQueueEntryParams/@Operation", null);
-		if (operation == null)
+		final JDFQueueEntryPriParams sqp = (JDFQueueEntryPriParams) e1;
+		if (fixVersion.version != null)
 		{
-			final String refID = e.getNonEmpty(AttributeName.REFID);
-			operation = XJMFTypeMap.getMap().remove(refID);
-			if (operation == null)
+			if (!EnumUtil.aLessThanB(fixVersion.version, EnumVersion.Version_1_5))
 			{
-				operation = super.getMessageType(e, messageName, family);
-			}
-		}
-		else
-		{
-			final String id = e.getID();
-			if ("Complete".equals(operation))
-			{
-				operation = "AbortQueueEntry";
-			}
-			else if ("Move".equals(operation))
-			{
-				final String prio = e.getXPathAttribute("ModifyQueueEntryParams/@Priority", null);
-				operation = StringUtil.isEmpty(prio) ? EnumType.SetQueueEntryPosition.getName() : EnumType.SetQueueEntryPriority.getName();
+				((JDFQueueFilter) e1.getCreateElement(ElementName.QUEUEFILTER)).setQueueEntrieDef(sqp.getQueueEntryID());
 			}
 			else
 			{
-				operation += "QueueEntry";
+				final JDFQueueFilter qf = (JDFQueueFilter) e1.getElement(ElementName.QUEUEFILTER);
+				if (qf != null)
+				{
+					sqp.setQueueEntryID(qf.getQueueEntryID());
+					qf.deleteNode();
+				}
 			}
-			XJMFTypeMap.getMap().put(id, operation);
-
 		}
-
-		return operation;
+		return super.walk(e1, trackElem);
 	}
 
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
-	 */
 	@Override
 	public VString getElementNames()
 	{
-		return VString.getVString("CommandModifyQueueEntry ResponseModifyQueueEntry", null);
+		return new VString(ElementName.QUEUEENTRYPRIPARAMS);
 	}
+
 }
