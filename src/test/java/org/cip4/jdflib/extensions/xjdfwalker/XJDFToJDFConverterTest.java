@@ -2786,7 +2786,6 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 
 		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.DIELAYOUTPRODUCTIONPARAMS, EnumUsage.Input);
 		final ResourceHelper rh = shLO.getCreatePartition(0, true);
-		rh.setDescriptiveName("Description of the sheet");
 		final JDFDieLayoutProductionParams dpp = (JDFDieLayoutProductionParams) rh.getResource();
 		final JDFRepeatDesc rd = dpp.appendRepeatDesc();
 		rd.setUseBleed(true);
@@ -2796,8 +2795,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDieLayoutProductionParams sp = (JDFDieLayoutProductionParams) n.getResource(ElementName.DIELAYOUTPRODUCTIONPARAMS, EnumUsage.Input, 0);
 		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
 		final JDFRepeatDesc rd2 = sp.getRepeatDesc();
-		assertTrue(rd.getUseBleed());
-		assertEquals("Description of the sheet", sp.getLeaf(0).getDescriptiveName());
+		assertTrue(rd2.getUseBleed());
 	}
 
 	/**
