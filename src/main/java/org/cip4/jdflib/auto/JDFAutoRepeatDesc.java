@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -105,7 +105,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.GUTTERY2, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.LAYOUTSTYLE, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.ORDERQUANTITY, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.USEBLEEDS, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.USEBLEED, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override
@@ -116,36 +116,36 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 
 	/**
 	 * Constructor for JDFAutoRepeatDesc
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRepeatDesc(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	protected JDFAutoRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoRepeatDesc
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	protected JDFAutoRepeatDesc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	protected JDFAutoRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFAutoRepeatDesc
-	 *
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	protected JDFAutoRepeatDesc(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	protected JDFAutoRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		protected EnumAllowedRotate(String name)
+		protected EnumAllowedRotate(final String name)
 		{
 			super(name, m_startValue++);
 		}
@@ -169,7 +169,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		 * @param enumName the string to convert
 		 * @return the enum
 		 */
-		public static EnumAllowedRotate getEnum(String enumName)
+		public static EnumAllowedRotate getEnum(final String enumName)
 		{
 			return (EnumAllowedRotate) getEnum(EnumAllowedRotate.class, enumName);
 		}
@@ -178,7 +178,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 		 * @param enumValue the integer to convert
 		 * @return the enum
 		 */
-		public static EnumAllowedRotate getEnum(int enumValue)
+		public static EnumAllowedRotate getEnum(final int enumValue)
 		{
 			return (EnumAllowedRotate) getEnum(EnumAllowedRotate.class, enumValue);
 		}
@@ -227,17 +227,17 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	/**
 	 * (5) set attribute AllowedRotate
-	 *
+	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setAllowedRotate(EnumAllowedRotate enumVar)
+	public void setAllowedRotate(final EnumAllowedRotate enumVar)
 	{
 		setAttribute(AttributeName.ALLOWEDROTATE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
 	 * (9) get attribute AllowedRotate
-	 *
+	 * 
 	 * @return the value of the attribute
 	 */
 	public EnumAllowedRotate getAllowedRotate()
@@ -250,17 +250,17 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	/**
 	 * (36) set attribute GutterX
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterX(double value)
+	public void setGutterX(final double value)
 	{
 		setAttribute(AttributeName.GUTTERX, value, null);
 	}
 
 	/**
 	 * (17) get double attribute GutterX
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getGutterX()
@@ -273,17 +273,17 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	/**
 	 * (36) set attribute GutterX2
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterX2(double value)
+	public void setGutterX2(final double value)
 	{
 		setAttribute(AttributeName.GUTTERX2, value, null);
 	}
 
 	/**
 	 * (17) get double attribute GutterX2
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getGutterX2()
@@ -296,17 +296,17 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	/**
 	 * (36) set attribute GutterY
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterY(double value)
+	public void setGutterY(final double value)
 	{
 		setAttribute(AttributeName.GUTTERY, value, null);
 	}
 
 	/**
 	 * (17) get double attribute GutterY
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getGutterY()
@@ -319,17 +319,17 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	/**
 	 * (36) set attribute GutterY2
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setGutterY2(double value)
+	public void setGutterY2(final double value)
 	{
 		setAttribute(AttributeName.GUTTERY2, value, null);
 	}
 
 	/**
 	 * (17) get double attribute GutterY2
-	 *
+	 * 
 	 * @return double the value of the attribute
 	 */
 	public double getGutterY2()
@@ -342,17 +342,17 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	/**
 	 * (36) set attribute LayoutStyle
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayoutStyle(VString value)
+	public void setLayoutStyle(final VString value)
 	{
 		setAttribute(AttributeName.LAYOUTSTYLE, value, null);
 	}
 
 	/**
 	 * (21) get VString attribute LayoutStyle
-	 *
+	 * 
 	 * @return VString the value of the attribute
 	 */
 	public VString getLayoutStyle()
@@ -369,17 +369,17 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	/**
 	 * (36) set attribute OrderQuantity
-	 *
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setOrderQuantity(int value)
+	public void setOrderQuantity(final int value)
 	{
 		setAttribute(AttributeName.ORDERQUANTITY, value, null);
 	}
 
 	/**
 	 * (15) get int attribute OrderQuantity
-	 *
+	 * 
 	 * @return int the value of the attribute
 	 */
 	public int getOrderQuantity()
@@ -388,26 +388,26 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UseBleeds ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute UseBleed ---------------------------------------------------------------------
 	 */
 	/**
-	 * (36) set attribute UseBleeds
-	 *
+	 * (36) set attribute UseBleed
+	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setUseBleeds(boolean value)
+	public void setUseBleed(final boolean value)
 	{
-		setAttribute(AttributeName.USEBLEEDS, value, null);
+		setAttribute(AttributeName.USEBLEED, value, null);
 	}
 
 	/**
-	 * (18) get boolean attribute UseBleeds
-	 *
+	 * (18) get boolean attribute UseBleed
+	 * 
 	 * @return boolean the value of the attribute
 	 */
-	public boolean getUseBleeds()
+	public boolean getUseBleed()
 	{
-		return getBoolAttribute(AttributeName.USEBLEEDS, null, false);
+		return getBoolAttribute(AttributeName.USEBLEED, null, false);
 	}
 
 }

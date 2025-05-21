@@ -3511,7 +3511,9 @@ public final class AttributeName
 	/** */
 	public static final String USEARTIFICIALTEXTEFFECT = "UseArtificialTextEffect";
 	/** */
-	public static final String USEBLEEDS = "UseBleeds";
+	public static final String USEBLEED = "UseBleed";
+	@Deprecated
+	public static final String USEBLEEDS = USEBLEED;
 	/** */
 	public static final String USEDEFAULTFONT = "UseDefaultFont";
 	/** */

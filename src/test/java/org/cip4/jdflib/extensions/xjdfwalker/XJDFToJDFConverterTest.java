@@ -125,6 +125,7 @@ import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.resource.process.JDFRepeatDesc;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
@@ -2771,6 +2772,31 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFStrippingParams sp = (JDFStrippingParams) n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
+		assertEquals("Description of the sheet", sp.getLeaf(0).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testDieLyaoutRepeatDesc()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("j1", "p1");
+		xjdfHelper.setTypes("Stripping");
+
+		final SetHelper shLO = xjdfHelper.getCreateSet(ElementName.DIELAYOUTPRODUCTIONPARAMS, EnumUsage.Input);
+		final ResourceHelper rh = shLO.getCreatePartition(0, true);
+		rh.setDescriptiveName("Description of the sheet");
+		final JDFDieLayoutProductionParams dpp = (JDFDieLayoutProductionParams) rh.getResource();
+		final JDFRepeatDesc rd = dpp.appendRepeatDesc();
+		rd.setUseBleed(true);
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfHelper);
+		final JDFNode n = d.getJDFRoot();
+		final JDFDieLayoutProductionParams sp = (JDFDieLayoutProductionParams) n.getResource(ElementName.DIELAYOUTPRODUCTIONPARAMS, EnumUsage.Input, 0);
+		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
+		final JDFRepeatDesc rd2 = sp.getRepeatDesc();
+		assertTrue(rd.getUseBleed());
 		assertEquals("Description of the sheet", sp.getLeaf(0).getDescriptiveName());
 	}
 
