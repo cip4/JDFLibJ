@@ -77,13 +77,14 @@ public class HotFolder
 	 */
 	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
 	private int maxCheck;
+	private int nLoop;
 
 	public int getMaxCheck()
 	{
 		return maxCheck;
 	}
 
-	public void setMaxCheck(int maxCheck)
+	public void setMaxCheck(final int maxCheck)
 	{
 		this.maxCheck = maxCheck;
 	}
@@ -130,13 +131,13 @@ public class HotFolder
 		final long lastMod = dir.lastModified();
 		final int n = lastFileTime.size();
 		boolean mod = false;
-		if (lastMod > lastModified || n > 0 || (t0 - lastModified) < 42000)
+		if (lastMod > lastModified || n > 0 || ((t0 - lastModified) < 42000) || (nLoop % 100) == 0)
 		{
 			lastModified = lastMod;
-			File[] files = getHotFiles();
+			final File[] files = getHotFiles();
 			if (files != null)
 			{
-				Set<File> hotFiles = ContainerUtil.toHashSet(files);
+				final Set<File> hotFiles = ContainerUtil.toHashSet(files);
 				if (!lastFileTime.isEmpty())
 				{
 					for (int i = 0; i < lastFileTime.size(); i++)
@@ -162,7 +163,7 @@ public class HotFolder
 				}
 			}
 		}
-
+		nLoop++;
 		return mod;
 
 	}
@@ -282,6 +283,8 @@ public class HotFolder
 		hfl = new ArrayList<>();
 		hfRunning = new AtomicReference<>(new HashSet<>());
 		allExtensions = null;
+		maxCheck = 0;
+		nLoop = 0;
 		HotFolderRunner.getCreateTherunner();
 		if (_hfl != null)
 		{
@@ -340,7 +343,7 @@ public class HotFolder
 		int n = 0;
 		if (files != null)
 		{
-			Set<File> running = hfRunning.get();
+			final Set<File> running = hfRunning.get();
 			for (int i = 0; i < files.length; i++)
 			{
 				final File file = files[i];
@@ -457,7 +460,7 @@ public class HotFolder
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + " " + dir + " " + lastModified;
+		return getClass().getSimpleName() + " loop=" + nLoop + " " + dir + " " + lastModified;
 	}
 
 	/**

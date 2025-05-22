@@ -514,6 +514,16 @@ class HotFolderTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	public void testToString() throws Exception
+	{
+		final HotFolder hh = new HotFolder(new File(sm_dirTestDataTemp), null, null);
+		assertNotNull(hh.toString());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	public synchronized void testGetExtension() throws Exception
 	{
 		final MyListener myl = new MyListener(true);
