@@ -57,9 +57,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-
-import jakarta.mail.BodyPart;
-import jakarta.mail.Multipart;
+import java.util.Base64;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -76,6 +74,9 @@ import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.net.HTTPDetails;
 import org.cip4.jdflib.util.zip.ZipReader;
 import org.junit.jupiter.api.Test;
+
+import jakarta.mail.BodyPart;
+import jakarta.mail.Multipart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -111,6 +112,14 @@ class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("foo/bar", UrlUtil.getLocalURL(null, "foo/bar"));
 		assertEquals("foo/bar", UrlUtil.getLocalURL("", "foo/bar"));
 		assertEquals("bar/a.b", UrlUtil.getLocalURL("file://foo", "File://foo/bar/a.b"));
+	}
+
+	@Test
+	void testgetAuthentication() throws Exception
+	{
+		String val = "Basic a:b:b";
+		val = Base64.getEncoder().encodeToString(val.getBytes());
+		assertEquals("a:b:b", UrlUtil.getAuthorizationHeader(val));
 	}
 
 	/**

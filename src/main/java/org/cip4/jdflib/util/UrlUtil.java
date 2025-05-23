@@ -55,10 +55,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-
-import jakarta.mail.BodyPart;
-import jakarta.mail.MessagingException;
-import jakarta.mail.Multipart;
+import java.util.Base64;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
@@ -74,6 +71,10 @@ import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 import org.cip4.jdflib.util.zip.ZipReader;
+
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
 
 /**
  * collection of helper routines to convert urls
@@ -121,6 +122,22 @@ public class UrlUtil
 		{
 			super(strUrl, streamWriter, method, contentType, details);
 		}
+	}
+
+	public static String getAuthorizationHeader(String authHeader)
+	{
+		if (authHeader != null)
+		{
+			try
+			{
+				authHeader = new String(Base64.getDecoder().decode(authHeader));
+			}
+			catch (final Exception x)
+			{
+				authHeader = null;
+			}
+		}
+		return StringUtil.removeToken(authHeader, 0, " ");
 	}
 
 	/**

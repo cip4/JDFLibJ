@@ -44,7 +44,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URLConnection;
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -328,31 +327,20 @@ public class UrlPart implements IPollDetails, IStreamWriter
 	public String getAuthorizationUser()
 	{
 		String authHeader = getAuthorizationHeader();
-		authHeader = StringUtil.removeToken(authHeader, rc, " ");
+		authHeader = StringUtil.removeToken(authHeader, 0, " ");
 		return StringUtil.token(authHeader, 0, ":");
 	}
 
 	public String getAuthorizationPassword()
 	{
 		String authHeader = getAuthorizationHeader();
-		authHeader = StringUtil.removeToken(authHeader, rc, " ");
+		authHeader = StringUtil.removeToken(authHeader, 0, " ");
 		return StringUtil.removeToken(authHeader, 0, ":");
 	}
 
 	public String getAuthorizationHeader()
 	{
-		String authHeader = getHeader(UrlUtil.AUTHORIZATION);
-		if (authHeader != null)
-		{
-			try
-			{
-				authHeader = new String(Base64.getDecoder().decode(authHeader));
-			}
-			catch (final Exception x)
-			{
-				authHeader = null;
-			}
-		}
-		return authHeader;
+		final String authHeader = getHeader(UrlUtil.AUTHORIZATION);
+		return UrlUtil.getAuthorizationHeader(authHeader);
 	}
 }
