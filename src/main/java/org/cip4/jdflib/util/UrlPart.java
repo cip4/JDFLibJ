@@ -326,15 +326,13 @@ public class UrlPart implements IPollDetails, IStreamWriter
 
 	public String getAuthorizationUser()
 	{
-		String authHeader = getAuthorizationHeader();
-		authHeader = StringUtil.removeToken(authHeader, 0, " ");
+		final String authHeader = getAuthorizationHeader();
 		return StringUtil.token(authHeader, 0, ":");
 	}
 
 	public String getAuthorizationPassword()
 	{
-		String authHeader = getAuthorizationHeader();
-		authHeader = StringUtil.removeToken(authHeader, 0, " ");
+		final String authHeader = getAuthorizationHeader();
 		return StringUtil.removeToken(authHeader, 0, ":");
 	}
 
