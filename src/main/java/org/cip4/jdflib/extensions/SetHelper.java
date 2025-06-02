@@ -638,8 +638,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		final String usageString = usage == null ? null : usage.getName();
 		while (e != null)
 		{
+			final JDFIntegerList setCpi = new SetHelper(e).getCombinedProcessIndex();
 			if (isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
-					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && ContainerUtil.containsAny(new SetHelper(e).getCombinedProcessIndex(), cpi))
+					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && (setCpi == null || ContainerUtil.containsAny(setCpi, cpi)))
 			{
 				return new SetHelper(e);
 			}

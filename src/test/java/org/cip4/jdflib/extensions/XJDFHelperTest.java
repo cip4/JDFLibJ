@@ -38,6 +38,7 @@
 package org.cip4.jdflib.extensions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -335,7 +336,23 @@ class XJDFHelperTest extends JDFTestCaseBase
 		assertNotNull(sh1);
 		final SetHelper sh2 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2));
 		assertNotNull(sh2);
-		assertNotSame(sh1, sh2);
+		assertNotEquals(sh1, sh2);
+
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	void testGetCreateSet5()
+	{
+		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
+		final SetHelper sh1 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", null);
+		assertNotNull(sh1);
+		final SetHelper sh2 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2));
+		assertNotNull(sh2);
+		assertEquals(sh1, sh2);
 
 	}
 
