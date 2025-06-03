@@ -172,6 +172,7 @@ public class WalkProduct extends WalkJDF
 
 			map.renameKey(AttributeName.PRODUCTID, XJDFConstants.ExternalID);
 			map.reduceMap(copyKeep);
+			map.removeKeys(prod.getAttributeArray_KElement());
 			prod.setAttributes(map);
 			if (component.isComponentType(EnumComponentType.FinalProduct))
 			{
@@ -206,6 +207,7 @@ public class WalkProduct extends WalkJDF
 				map.put(XJDFConstants.ExternalID, xid);
 			}
 			updateAttributes(map);
+			map.removeKeys(prod.getAttributeArray_KElement());
 			prod.setAttributes(map);
 
 			calcChildren(node, prod);

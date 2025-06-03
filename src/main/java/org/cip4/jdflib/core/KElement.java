@@ -1523,7 +1523,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public int setAttributes(final JDFAttributeMap map)
 	{
 		int iRet = 0;
-		if (map != null && !map.isEmpty())
+		if (!ContainerUtil.isEmpty(map))
 		{
 			for (final Entry<String, String> entry : map.entrySet())
 			{
