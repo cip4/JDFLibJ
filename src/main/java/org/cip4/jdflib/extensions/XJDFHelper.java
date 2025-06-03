@@ -655,9 +655,21 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
+	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi, final boolean explicitCPI)
+	{
+		return SetHelper.getSet(theElement, name, usage, processUsage, cpi, explicitCPI);
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 * @param processUsage
+	 *
+	 * @return the SetHelper for the vector of resourcesets
+	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
 	{
-		return SetHelper.getSet(theElement, name, usage, processUsage, cpi);
+		return getSet(name, usage, processUsage, cpi, true);
 	}
 
 	/**
@@ -681,7 +693,19 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 */
 	public SetHelper getCreateSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
 	{
-		return SetHelper.getCreateSet(theElement, name, usage, processUsage, cpi);
+		return getCreateSet(name, usage, processUsage, cpi, true);
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 * @param processUsage
+	 * @param explicitCPI TODO
+	 * @return the SetHelper
+	 */
+	public SetHelper getCreateSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi, final boolean explicitCPI)
+	{
+		return SetHelper.getCreateSet(theElement, name, usage, processUsage, cpi, explicitCPI);
 	}
 
 	/**

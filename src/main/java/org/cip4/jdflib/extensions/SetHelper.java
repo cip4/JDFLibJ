@@ -634,13 +634,25 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
 	{
+		return getSet(parent, name, usage, processUsage, cpi, true);
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 * @param processUsage
+	 * @param explicitCPI TODO
+	 * @return the SetHelper for the vector of resourcesets
+	 */
+	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi, final boolean explicitCPI)
+	{
 		KElement e = parent.getFirstChildElement();
 		final String usageString = usage == null ? null : usage.getName();
 		while (e != null)
 		{
 			final JDFIntegerList setCpi = new SetHelper(e).getCombinedProcessIndex();
 			if (isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
-					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && (setCpi == null || ContainerUtil.containsAny(setCpi, cpi)))
+					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && (!explicitCPI && setCpi == null || ContainerUtil.containsAny(setCpi, cpi)))
 			{
 				return new SetHelper(e);
 			}
@@ -705,7 +717,19 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public static SetHelper getCreateSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
 	{
-		SetHelper s0 = getSet(parent, name, usage, processUsage, cpi);
+		return getCreateSet(parent, name, usage, processUsage, cpi, true);
+	}
+
+	/**
+	 * @param name
+	 * @param usage
+	 * @param processUsage
+	 * @param explicitCPI TODO
+	 * @return the SetHelper
+	 */
+	public static SetHelper getCreateSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi, final boolean explicitCPI)
+	{
+		SetHelper s0 = getSet(parent, name, usage, processUsage, cpi, explicitCPI);
 		if (s0 == null)
 		{
 			s0 = appendSet(parent, name, usage);

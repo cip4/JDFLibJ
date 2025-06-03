@@ -332,9 +332,9 @@ class XJDFHelperTest extends JDFTestCaseBase
 	void testGetCreateSet4()
 	{
 		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
-		final SetHelper sh1 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(1));
+		final SetHelper sh1 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(1), true);
 		assertNotNull(sh1);
-		final SetHelper sh2 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2));
+		final SetHelper sh2 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2), true);
 		assertNotNull(sh2);
 		assertNotEquals(sh1, sh2);
 
@@ -348,11 +348,14 @@ class XJDFHelperTest extends JDFTestCaseBase
 	void testGetCreateSet5()
 	{
 		assertNull(theHelper.getSet(ElementName.RUNLIST, EnumUsage.Input));
-		final SetHelper sh1 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", null);
+		final SetHelper sh1 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", null, true);
 		assertNotNull(sh1);
-		final SetHelper sh2 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2));
+		final SetHelper sh2 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2), false);
 		assertNotNull(sh2);
 		assertEquals(sh1, sh2);
+		final SetHelper sh3 = theHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, "foo", new JDFIntegerList(2), true);
+		assertNotNull(sh3);
+		assertNotEquals(sh1, sh3);
 
 	}
 
