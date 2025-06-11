@@ -885,7 +885,7 @@ class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		final StorageHotFolder hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		hf.setMaxConcurrent(5);
-		hf.setStabilizeTime(100);
+		hf.setStabilizeTime(10);
 		File error = new File("error");
 		hf.setErrorStorage(error);
 		File ok = new File("ok");

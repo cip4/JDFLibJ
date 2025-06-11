@@ -350,7 +350,21 @@ class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.sprintf("%s", "\\,"), ",");
 		assertEquals(StringUtil.sprintf("%s", "\\\\,"), "\\,");
 		assertEquals(StringUtil.sprintf("%s_%s", "\\\\,,a"), "\\,_a");
+		assertEquals(StringUtil.sprintf("%s", "123"), "123");
+		assertEquals(StringUtil.sprintf("%d", "123"), "123");
 
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSprintfVString()
+	{
+		assertEquals("123", StringUtil.sprintf("%s", new StringArray("123")));
+		assertEquals("123", StringUtil.sprintf("%d", new StringArray("123")));
+		assertEquals("123.12", StringUtil.sprintf("%.2f", new StringArray("123.12")));
+		assertEquals("123.12", StringUtil.sprintf("%s", new StringArray("123.12")));
 	}
 
 	/**
@@ -389,6 +403,7 @@ class StringUtilTest extends JDFTestCaseBase
 		o = new Object[] { 5, "foobar" };
 		assertEquals(StringUtil.sprintf("abc %02d%7sdef", o), "abc 05 foobardef");
 		assertEquals(StringUtil.sprintf("%02d%7sdef", o), "05 foobardef");
+		assertEquals("123", StringUtil.sprintf("%d", new Object[] { Integer.valueOf("123") }));
 	}
 
 	/**

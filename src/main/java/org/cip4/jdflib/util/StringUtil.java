@@ -279,14 +279,19 @@ public class StringUtil
 	 */
 	public static String sprintf(final String format, String template)
 	{
-		if (template == null || format == null)
+		if (isEmpty(template) || isEmpty(format))
 		{
 			return null;
 		}
 		template = StringUtil.replaceString(template, "\\,", "__comma__äö-eher selten"); // quick hack ;-)
 
 		final VString vTemplate = tokenize(template, ",", false);
-		final Object[] vObj = new Object[vTemplate.size()];
+		return sprintf(format, vTemplate);
+	}
+
+	public static String sprintf(final String format, final List<String> vTemplate)
+	{
+		final Object[] vObj = new Object[ContainerUtil.size(vTemplate)];
 		for (int i = 0; i < vObj.length; i++)
 		{
 			final String s = vTemplate.get(i);
@@ -303,7 +308,7 @@ public class StringUtil
 				vObj[i] = StringUtil.replaceString(s, "__comma__äö-eher selten", ","); // undo quick hack ;-)
 			}
 		}
-		return intern(String.format(format, vObj));
+		return sprintf(format, vObj);
 	}
 
 	/**
@@ -319,10 +324,11 @@ public class StringUtil
 	 */
 	public static String sprintf(final String format, final Object[] objects)
 	{
-		if (objects == null || format == null)
+		if (objects == null || isEmpty(format))
 		{
 			return null;
 		}
+
 		return intern(String.format(format, objects));
 	}
 
