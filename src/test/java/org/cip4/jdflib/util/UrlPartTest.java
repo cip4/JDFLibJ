@@ -162,9 +162,9 @@ class UrlPartTest extends JDFTestCaseBase
 		when(c.getHeaderFields()).thenReturn(map);
 		final UrlPart p = new UrlPart(c);
 		assertTrue(p.getHeaders().isEmpty());
-		String val = "Basic a:b:b";
+		String val = "a:b:b";
 		val = Base64.getEncoder().encodeToString(val.getBytes());
-		map.putOne(UrlUtil.AUTHORIZATION, val);
+		map.putOne(UrlUtil.AUTHORIZATION, "Basic " + val);
 		assertEquals("a", p.getAuthorizationUser());
 		assertEquals("b:b", p.getAuthorizationPassword());
 	}
