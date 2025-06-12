@@ -124,8 +124,9 @@ public class UrlUtil
 		}
 	}
 
-	public static String getAuthorizationHeader(String authHeader)
+	public static String getAuthorizationHeader(final String authHeader0)
 	{
+		String authHeader = StringUtil.removeToken(authHeader0, 0, JDFConstants.BLANK);
 		if (authHeader != null)
 		{
 			try
@@ -137,7 +138,7 @@ public class UrlUtil
 				authHeader = null;
 			}
 		}
-		return StringUtil.removeToken(authHeader, 0, " ");
+		return authHeader;
 	}
 
 	/**

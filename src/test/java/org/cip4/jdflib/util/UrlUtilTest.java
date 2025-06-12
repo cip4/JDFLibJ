@@ -117,9 +117,9 @@ class UrlUtilTest extends JDFTestCaseBase
 	@Test
 	void testgetAuthentication() throws Exception
 	{
-		String val = "Basic a:b:b";
+		String val = "a:b:b";
 		val = Base64.getEncoder().encodeToString(val.getBytes());
-		assertEquals("a:b:b", UrlUtil.getAuthorizationHeader(val));
+		assertEquals("a:b:b", UrlUtil.getAuthorizationHeader("Basic " + val));
 	}
 
 	/**
