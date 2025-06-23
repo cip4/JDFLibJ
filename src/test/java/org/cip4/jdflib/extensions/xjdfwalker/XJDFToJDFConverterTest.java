@@ -817,6 +817,38 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 *
+	 */
+	@Test
+	void testActualColorNameMultiSep()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ImageSetting.getName());
+		final JDFColorantControl cc = (JDFColorantControl) h.getCreateSet(ElementName.COLORANTCONTROL, EnumUsage.Input).getCreatePartition(0, true).getResource();
+		cc.setAttribute(ElementName.COLORANTPARAMS, "Sep1 Sep2");
+		cc.setAttribute(ElementName.COLORANTORDER, "Sep1 Sep2");
+		h.getCreateSet(ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep1", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
+				"Sep");
+		h.getCreateSet(ElementName.COLOR, EnumUsage.Input).getCreatePartition(AttributeName.SEPARATION, "Sep2", true).getResource().setAttribute(AttributeName.ACTUALCOLORNAME,
+				"Sep");
+
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		final JDFDoc docjdf = conv.convert(h);
+		final JDFNode n = docjdf.getJDFRoot();
+
+		final JDFColorantControl ccNew = (JDFColorantControl) n.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, null, 0);
+		assertEquals(ccNew.getColorantOrder().getSeparations().get(0), "Sep1");
+		assertEquals(ccNew.getColorantOrder().getSeparations().get(1), "Sep2");
+		assertEquals(ccNew.getColorantParams().getSeparations().get(0), "Sep1");
+		assertEquals(ccNew.getColorantParams().getSeparations().get(1), "Sep2");
+
+		final JDFColorPool cpNew = (JDFColorPool) n.getResource(ElementName.COLORPOOL, EnumUsage.Input, null, 0);
+		assertNotNull(cpNew.getColorWithName("Sep1"));
+		assertNotNull(cpNew.getColorWithName("Sep2"));
+	}
+
+	/**
+	 *
 	 * @return
 	 */
 	@Test

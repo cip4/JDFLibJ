@@ -40,6 +40,7 @@
 package org.cip4.jdflib.extensions.xjdfwalker;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -136,9 +137,19 @@ public class XJDFToJDFConverter extends XJDFToJDFImpl
 		final KElement root = d.getRoot();
 
 		final Collection<JDFColor> vc = root.getChildArrayByClass(JDFColor.class, true, 0);
-		if (vc != null)
+		final HashSet<String> dup = new HashSet<>();
+		final HashSet<String> check = new HashSet<>();
+		for (final JDFColor c : vc)
 		{
-			for (final JDFColor c : vc)
+			if (!check.add(c.getActualColorName()))
+			{
+				dup.add(c.getActualColorName());
+			}
+		}
+
+		for (final JDFColor c : vc)
+		{
+			if (!dup.contains(c.getActualColorName()))
 			{
 				fixColor(root, c);
 			}

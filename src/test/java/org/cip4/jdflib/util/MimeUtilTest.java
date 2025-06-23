@@ -62,14 +62,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Vector;
 
-import jakarta.mail.BodyPart;
-import jakarta.mail.Message;
-import jakarta.mail.MessagingException;
-import jakarta.mail.Multipart;
-import jakarta.mail.Session;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
-
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
@@ -98,6 +90,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import jakarta.mail.BodyPart;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.Session;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
@@ -124,6 +124,36 @@ public class MimeUtilTest extends JDFTestCaseBase
 	synchronized void testBuildMimePackageDocJMF() throws MessagingException, IOException
 	{
 		// nop
+	}
+
+	@Test
+	public synchronized void testBuildManyMimePackageDocJMF() throws MessagingException, IOException
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		docJMF.setOriginalFileName("JMF.jmf");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+		com.appendQueueSubmissionParams().setURL("TheJDF");
+
+		final JDFDoc doc = new JDFDoc("JDF");
+		doc.setOriginalFileName("JDF.jdf");
+		final JDFNode n = fillCS(doc);
+
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
+		rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "page.pdf", false), 0, -1);
+		for (int i = 0; i < 2; i++)
+		{
+			rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url?.pdf", false), 0, -1);
+		}
+		for (int ii = 0; ii < 42; ii++)
+		{
+			final Multipart m = MimeUtil.buildMimePackage(docJMF, doc, false);
+			final ByteArrayIOStream bos = new ByteArrayIOStream();
+			m.writeTo(bos);
+			final String s = new String(bos.getBuf());
+			assertNotNull(m);
+			assertNotNull(s);
+		}
 	}
 
 	public static synchronized void testBuildMimePackageDocJMF(final Path tempDir) throws MessagingException, IOException
