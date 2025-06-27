@@ -1337,13 +1337,6 @@ public class JDFMessage extends JDFAutoMessage
 
 		if (family.equals(EnumFamily.Signal))
 		{
-			if (signalTypeObjString == null)
-			{
-				final VString v = new VString(queryTypeObjString);
-				v.addAll(responseTypeObjString);
-				v.unify();
-				signalTypeObjString = v.toArray(new String[v.size()]);
-			}
 			return signalTypeObjString;
 		}
 
@@ -1355,7 +1348,7 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] commandTypeObjString = { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.ABORTQUEUEENTRYPARAMS, ElementName.HOLDQUEUEENTRYPARAMS,
+	private final static String[] commandTypeObjString = { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.ABORTQUEUEENTRYPARAMS, ElementName.HOLDQUEUEENTRYPARAMS,
 			ElementName.RESUMEQUEUEENTRYPARAMS, ElementName.REMOVEQUEUEENTRYPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS, ElementName.GANGCMDFILTER,
 			ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFCMDPARAMS, ElementName.NODEINFOCMDPARAMS, ElementName.PIPEPARAMS, ElementName.QUEUEENTRYDEF,
 			ElementName.QUEUEENTRYPRIPARAMS, ElementName.QUEUEENTRYPOSPARAMS, ElementName.QUEUEFILTER, ElementName.QUEUESUBMISSIONPARAMS, ElementName.REQUESTQUEUEENTRYPARAMS,
@@ -1367,14 +1360,14 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] registrationTypeObjString = { ElementName.PIPEPARAMS, ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, };
+	private final static String[] registrationTypeObjString = { ElementName.PIPEPARAMS, ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, };
 
 	/**
 	 * Enumeration strings for list of QueryTypeObj
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.GANGQUFILTER,
+	private final static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.GANGQUFILTER,
 			ElementName.KNOWNMSGQUPARAMS, ElementName.MSGFILTER, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS, ElementName.NODEINFOQUPARAMS,
 			ElementName.NOTIFICATIONFILTER, ElementName.QUEUEENTRYDEFLIST, ElementName.QUEUEFILTER, ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS,
 			ElementName.SUBSCRIPTIONFILTER, ElementName.TRACKFILTER, ElementName.UPDATEJDFCMDPARAMS };
@@ -1384,13 +1377,22 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] responseTypeObjString = { ElementName.DEVICELIST, ElementName.DEVICEINFO, ElementName.FLUSHQUEUEINFO, ElementName.FLUSHEDRESOURCES,
+	private final static String[] responseTypeObjString = { ElementName.DEVICELIST, ElementName.DEVICEINFO, ElementName.FLUSHQUEUEINFO, ElementName.FLUSHEDRESOURCES,
 			ElementName.GANGINFO, ElementName.IDINFO, ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE, ElementName.NODEINFORESP,
-			ElementName.NOTIFICATIONDEF, ElementName.OCCUPATION, ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO, ElementName.SUBSCRIPTIONINFO,
-			ElementName.SUBMISSIONMETHODS, ElementName.TRACKRESULT, ElementName.COMMAND, ElementName.QUERY, ElementName.ACKNOWLEDGE, ElementName.RESPONSE, ElementName.SIGNAL,
-			ElementName.REGISTRATION };
+			ElementName.NOTIFICATIONDEF, ElementName.NOTIFICATION, ElementName.OCCUPATION, ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO,
+			ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS, ElementName.TRACKRESULT, ElementName.COMMAND, ElementName.QUERY, ElementName.ACKNOWLEDGE,
+			ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION };
 
-	private static String[] signalTypeObjString = null;
+	private static String[] signalTypeObjString = initSignal();
+
+	private static String[] initSignal()
+	{
+		final VString v = new VString(queryTypeObjString);
+		v.addAll(responseTypeObjString);
+		v.unify();
+		return v.toArray(new String[v.size()]);
+	}
+
 	private static String[] elemArray = null;
 
 	/**

@@ -296,7 +296,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 	}
 
 	/**
-	 * remove the value for key,also remove key if the vector is empty
+	 * remove the value for key, also remove key if the vector is empty
 	 *
 	 * @param key the key of the vector
 	 * @param val the vector element
@@ -307,7 +307,7 @@ public class ListMap<key, listObject> extends HashMap<key, List<listObject>>
 		if (v != null)
 		{
 			v.remove(val);
-			if (v.size() == 0)
+			if (v.isEmpty())
 			{
 				remove(key);
 			}

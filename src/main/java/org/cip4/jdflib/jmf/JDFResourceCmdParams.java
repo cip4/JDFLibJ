@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,6 +97,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
@@ -115,6 +116,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 
 	/**
 	 * container for applying resource commands to commands
+	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
@@ -141,7 +143,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 				applyNode(vNodes, i);
 		}
 
-		private void applyNode(final VElement vNodes, int i)
+		private void applyNode(final VElement vNodes, final int i)
 		{
 			{
 				final JDFNode node = (JDFNode) vNodes.elementAt(i);
@@ -222,14 +224,15 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 
 		/**
 		 * 
-		 * clean up the res cmd resource prior to merging it 
+		 * clean up the res cmd resource prior to merging it
+		 * 
 		 * @param resCmd
 		 * @param vsPartIDKeys
 		 * @param amParts
 		 * @param resTargetPart
 		 * @return
 		 */
-		private JDFResource cleanResCmdPart(final JDFResource resCmd, VString vsPartIDKeys, final JDFAttributeMap amParts, final JDFResource resTargetPart)
+		private JDFResource cleanResCmdPart(final JDFResource resCmd, final VString vsPartIDKeys, final JDFAttributeMap amParts, final JDFResource resTargetPart)
 		{
 			final JDFResource resCmdPart = (JDFResource) resCmd.getPartition(amParts, EnumPartUsage.Implicit).clone();
 			final JDFAttributeMap mapCmdAttribs = resCmdPart.getAttributeMap();
@@ -258,7 +261,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * @param node
 		 * @return the target resource
 		 */
-		private JDFResource getTargetResource(final JDFNode node)
+		JDFResource getTargetResource(final JDFNode node)
 		{
 			if (node == null)
 			{
@@ -269,29 +272,15 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			{
 				return null;
 			}
+
 			final String resID = getResourceID();
-			if (resID != null && !resID.equals(""))
+			if (!StringUtil.isEmpty(resID))
 			{
-				final VElement vRes = rlp.getLinkedResources(null, null, new JDFAttributeMap(AttributeName.ID, resID), false, null);
-				if (vRes.size() > 0)
-				{
-					return (JDFResource) vRes.elementAt(0);
-				}
+				final VElement vRes = rlp.getLinkedResources(getResourceName(), null, new JDFAttributeMap(AttributeName.ID, resID), false, null);
+				return vRes.isEmpty() ? null : (JDFResource) vRes.elementAt(0);
 			}
 
-			final String resName = getResourceName();
-			if (resName != null && !resName.equals(""))
-			{
-				final VElement vRes = rlp.getLinkedResources(resName, null, null, false, null);
-				if (vRes.size() > 0)
-				{
-					return (JDFResource) vRes.elementAt(0);
-				}
-
-				// TODO link usage, process usage etc.
-
-			}
-			return null;
+			return hasAttribute(AttributeName.RESOURCENAME) ? node.getResource(getResourceName(), getUsage(), EnumProcessUsage.getEnum(getProcessUsage()), 0) : null;
 		}
 
 		/**
@@ -564,8 +553,8 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	}
 
 	/**
-	 * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children if no matching resource exists in the node, Usage
-	 * MUST be set in this JDFResourceCmdParams, otherwise it is not possible to correctly link the newly created resource
+	 * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children if no matching resource exists in the node, Usage MUST be set in this
+	 * JDFResourceCmdParams, otherwise it is not possible to correctly link the newly created resource
 	 * 
 	 * @param parentNode the node to search in
 	 */
@@ -586,11 +575,11 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage
-	 * ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
+	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
 	@Override
@@ -601,6 +590,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 
 	/**
 	 * (9) get attribute Usage
+	 * 
 	 * @return the value of the attribute
 	 */
 	@Override

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,9 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.io.File;
 import java.util.Vector;
 
@@ -76,14 +79,21 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.jmf.JDFResourceCmdParams.ApplyCommand;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.NodeIdentifier;
@@ -116,6 +126,52 @@ class JMFResourceTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		KElement.setLongID(false);
+	}
+
+	/**
+	 * apply a resource cmd
+	 */
+	@Test
+	void testGetTargetResource()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+
+		final JDFCommand c = jmf.appendCommand();
+		jmf.setSenderID("DeviceSenderID");
+
+		c.setType(EnumType.Resource);
+		final JDFResourceCmdParams rqp = c.appendResourceCmdParams();
+		rqp.setJobID("JobID");
+		rqp.setJobPartID("JobPartID");
+		rqp.setResourceName("Media");
+
+		final JDFNode jdf = JDFNode.createRoot();
+		jdf.setType(JDFNode.EnumType.ConventionalPrinting);
+		final JDFMedia mediaJDF = (JDFMedia) jdf.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+		mediaJDF.setDimension(new JDFXYPair(40, 60));
+		rqp.setJobID(jdf.getJobID(true));
+		rqp.setJobPartID(jdf.getJobPartID(true));
+
+		final ApplyCommand ac = rqp.new ApplyCommand();
+		assertEquals(mediaJDF, ac.getTargetResource(jdf));
+
+		rqp.setResourceID(mediaJDF.getID());
+		assertEquals(mediaJDF, ac.getTargetResource(jdf));
+
+		rqp.setResourceName(null);
+		assertEquals(mediaJDF, ac.getTargetResource(jdf));
+
+		rqp.setResourceName("foo");
+		assertNull(ac.getTargetResource(jdf));
+
+		rqp.setResourceName("Media");
+		rqp.setResourceID("notthere");
+		assertNull(ac.getTargetResource(jdf));
+		rqp.setResourceName(null);
+		rqp.setResourceID(null);
+		assertNull(ac.getTargetResource(jdf));
+
 	}
 
 	/**
@@ -236,7 +292,9 @@ class JMFResourceTest extends JDFTestCaseBase
 
 		JDFResponse r = q.createResponse().getResponse(0);
 		r = (JDFResponse) jmf.moveElement(r, null);
-		r.setXMLComment("This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.", true);
+		r.setXMLComment(
+				"This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.",
+				true);
 
 		for (int i = 1; i < 5; i++)
 		{
@@ -277,7 +335,9 @@ class JMFResourceTest extends JDFTestCaseBase
 
 		final JDFSignal signal = q.createSignal().getSignal(0);
 		doc = signal.getOwnerDocument_JDFElement();
-		signal.setXMLComment("This is a signal based on the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.", true);
+		signal.setXMLComment(
+				"This is a signal based on the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.",
+				true);
 
 		for (int i = 1; i < 5; i++)
 		{
@@ -318,7 +378,9 @@ class JMFResourceTest extends JDFTestCaseBase
 
 		JDFResponse r = q.createResponse().getResponse(0);
 		r = (JDFResponse) jmf.moveElement(r, null);
-		r.setXMLComment("This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.", true);
+		r.setXMLComment(
+				"This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.",
+				true);
 
 		for (int i = 1; i < 5; i++)
 		{

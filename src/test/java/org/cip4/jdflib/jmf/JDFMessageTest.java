@@ -100,6 +100,9 @@ class JDFMessageTest
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertTrue(sig.isValidMessageElement(ElementName.UPDATEJDFCMDPARAMS, 0));
 		assertFalse(sig.isValidMessageElement(ElementName.MODIFYNODECMDPARAMS, 0));
+		assertTrue(sig.isValidMessageElement(ElementName.NOTIFICATION, 0));
+		assertTrue(sig.isValidMessageElement(ElementName.GENERALID, 0));
+		assertTrue(sig.isValidMessageElement(ElementName.COMMENT, 0));
 
 		final JDFResponse resp = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.RepeatMessages);
 		assertTrue(resp.isValidMessageElement(ElementName.SIGNAL, 3));
