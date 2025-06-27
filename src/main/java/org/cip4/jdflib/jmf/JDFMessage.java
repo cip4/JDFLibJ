@@ -763,12 +763,20 @@ public class JDFMessage extends JDFAutoMessage
 			return true;
 		}
 
+		if (elementName.equals(ElementName.GENERALID) || elementName.equals(ElementName.COMMENT))
+		{
+			return true;
+		}
 		// it aint even valid for any family
 		final String[] familyTypeObj = familyTypeObj();
 		final boolean isFamilyTypeString = (familyTypeObj == null) ? false : ArrayUtils.contains(familyTypeObj, elementName);
 		if (!isFamilyTypeString)
 		{
 			return false;
+		}
+		if (elementName.equals(ElementName.NOTIFICATION))
+		{
+			return true;
 		}
 
 		final EnumType typ = getEnumType();
