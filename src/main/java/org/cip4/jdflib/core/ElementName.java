@@ -1690,7 +1690,7 @@ public final class ElementName
 	public static final String SUBSCRIPTIONFILTER = "SubscriptionFilter";
 	/** */
 	public static final String SURFACE = "Surface";
-	/** */
+	public static final String SURFACEMARK = "SurfaceMark";
 	public static final String SURPLUSHANDLING = "SurplusHandling";
 	/** */
 	public static final String SUSPENDQUEUEENTRYPARAMS = "SuspendQueueEntryParams";

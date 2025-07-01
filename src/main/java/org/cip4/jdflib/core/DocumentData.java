@@ -836,7 +836,9 @@ class DocumentData
 		sm_PackageNames.put(ElementName.SUBSCRIPTIONINFO, JDFLIB + "jmf.JDFSubscriptionInfo");
 		sm_PackageNames.put(ElementName.SURPLUSHANDLING, JDFLIB + "span.JDFSpanSurplusHandling");
 		sm_PackageNames.put(ElementName.SUSPENDQUEUEENTRYPARAMS, JDFLIB + "jmf.JDFSuspendQueueEntryParams");
+		sm_PackageNames.put(ElementName.SURFACEMARK, JDFLIB + "resource.JDFSurfaceMark");
 		sm_PackageNames.put(ElementName.SYSTEMTIMESET, JDFLIB + "resource.JDFSystemTimeSet");
+
 		sm_PackageNames.put(ElementName.TABBINDMYLAR, OPTION_SPAN);
 		sm_PackageNames.put(ElementName.TABBODYCOPY, OPTION_SPAN);
 		sm_PackageNames.put(ElementName.TABBRAND, STRING_SPAN);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,15 +84,18 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComponent;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFSurfaceMark;
 import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * before June 3, 2009
+ *         before June 3, 2009
  */
 public class JDFComponent extends JDFAutoComponent
 {
@@ -100,6 +103,7 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * Constructor for JDFComponent
+	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -112,6 +116,7 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * Constructor for JDFComponent
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -125,6 +130,7 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * Constructor for JDFComponent
+	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -165,6 +171,34 @@ public class JDFComponent extends JDFAutoComponent
 	}
 
 	/**
+	 * sets the Dimension to X Y 0 convenience method to copy media dimension to component
+	 * 
+	 * @param dimension
+	 */
+	public JDFSurfaceMark getCreateSurfaceMark(final EnumFace face)
+	{
+		JDFSurfaceMark sm = getSurfaceMark(face);
+		if (sm == null)
+		{
+			sm = appendSurfaceMark(face);
+		}
+		return sm;
+	}
+
+	public JDFSurfaceMark getSurfaceMark(final EnumFace face)
+	{
+		return getChildWithAttribute(JDFSurfaceMark.class, AttributeName.FACE, face.getName());
+	}
+
+	public JDFSurfaceMark appendSurfaceMark(final EnumFace face)
+	{
+		JDFSurfaceMark sm;
+		sm = appendSurfaceMark();
+		sm.setFace(face);
+		return sm;
+	}
+
+	/**
 	 * @param partialFinal
 	 * @param sheetWebProof
 	 */
@@ -189,18 +223,20 @@ public class JDFComponent extends JDFAutoComponent
 	/**
 	 * 
 	 * return true if this component contains typ
+	 * 
 	 * @param typ
 	 * @return
 	 */
-	public boolean isComponentType(EnumComponentType typ)
+	public boolean isComponentType(final EnumComponentType typ)
 	{
-		Vector<? extends ValuedEnum> v = getComponentType();
+		final Vector<? extends ValuedEnum> v = getComponentType();
 		return (v != null && typ != null && v.contains(typ));
 
 	}
 
 	/**
 	 * get the media that is associated with this component, either directly or in the layout
+	 * 
 	 * @return the media, null if none there
 	 */
 	@Override

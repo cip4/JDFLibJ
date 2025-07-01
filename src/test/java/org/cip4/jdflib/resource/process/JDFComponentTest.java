@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,8 +70,15 @@
  */
 package org.cip4.jdflib.resource.process;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
+import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -79,7 +86,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.jupiter.api.Assertions;
+import org.cip4.jdflib.resource.JDFSurfaceMark;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -95,17 +102,11 @@ class JDFComponentTest extends JDFTestCaseBase
 	private JDFNode root;
 	private JDFDoc doc;
 
-	/**
-	 * tests the separationlist class
-	 *
-	 */
-	////////////////////////////////////////////////////////////////////////////
-	// /
 	@Test
 	public final void testSetDimensions()
 	{
 		c.setDimensions(new JDFXYPair(1, 2));
-		Assertions.assertEquals(new JDFShape(1, 2, 0), c.getDimensions());
+		assertEquals(new JDFShape(1, 2, 0), c.getDimensions());
 	}
 
 	/**
@@ -123,30 +124,45 @@ class JDFComponentTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 	@Test
+	 * @Test
 	 *
 	 */
+	@Test
 	void testSetComponentTypeAuto()
 	{
 		c.setComponentType(null);
-		Assertions.assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
+		assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
 	}
 
 	/**
-	 * 	@Test
+	 * @Test
 	 *
 	 */
+	@Test
+	void testGetCreateSurfaceMark()
+	{
+		assertNull(c.getSurfaceMark(EnumFace.Bottom));
+		final JDFSurfaceMark cr = c.getCreateSurfaceMark(EnumFace.Bottom);
+		assertNotNull(cr);
+		assertEquals(cr, c.getSurfaceMark(EnumFace.Bottom));
+	}
+
+	/**
+	 * @Test
+	 *
+	 */
+	@Test
 	void testIsComponentType()
 	{
 		c.setComponentType(EnumComponentType.FinalProduct, null);
-		Assertions.assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
-		Assertions.assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
-		Assertions.assertFalse(c.isComponentType(EnumComponentType.Web));
+		assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
+		assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
+		assertFalse(c.isComponentType(EnumComponentType.Web));
 		c.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
-		Assertions.assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
-		Assertions.assertTrue(c.isComponentType(EnumComponentType.Sheet));
-		Assertions.assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
-		Assertions.assertFalse(c.isComponentType(EnumComponentType.Web));
+		assertTrue(c.isComponentType(EnumComponentType.FinalProduct));
+		assertTrue(c.isComponentType(EnumComponentType.Sheet));
+		assertFalse(c.isComponentType(EnumComponentType.PartialProduct));
+		assertFalse(c.isComponentType(EnumComponentType.Web));
 	}
 
 	/**
@@ -156,11 +172,11 @@ class JDFComponentTest extends JDFTestCaseBase
 	void testGetMediaLayout()
 	{
 		c.setComponentType(null);
-		JDFLayout lo = c.appendLayout();
-		JDFMedia m = lo.appendMedia();
-		Assertions.assertEquals(m, c.getMedia());
+		final JDFLayout lo = c.appendLayout();
+		final JDFMedia m = lo.appendMedia();
+		assertEquals(m, c.getMedia());
 		lo.makeRootResource(null, null, true);
-		Assertions.assertEquals(m, c.getMedia());
+		assertEquals(m, c.getMedia());
 	}
 
 	/**
@@ -170,25 +186,25 @@ class JDFComponentTest extends JDFTestCaseBase
 	void testGetMedia()
 	{
 		c.setComponentType(null);
-		JDFMedia m = (JDFMedia) c.appendElement(ElementName.MEDIA);
-		Assertions.assertEquals(m, c.getMedia());
+		final JDFMedia m = (JDFMedia) c.appendElement(ElementName.MEDIA);
+		assertEquals(m, c.getMedia());
 	}
 
 	/**
-	 * 	@Test
+	 * @Test
 	 *
 	 */
 	@Test
 	void testSetComponentType()
 	{
 		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
-		Assertions.assertTrue(c.hasAttribute(AttributeName.COMPONENTTYPE));
-		Assertions.assertEquals(c.getComponentType().size(), 2);
-		Assertions.assertTrue(c.getComponentType().contains(EnumComponentType.PartialProduct));
+		assertTrue(c.hasAttribute(AttributeName.COMPONENTTYPE));
+		assertEquals(c.getComponentType().size(), 2);
+		assertTrue(c.getComponentType().contains(EnumComponentType.PartialProduct));
 	}
 
 	/**
-	 * 	@Override
+	 * @Override
 	 * @see JDFTestCaseBase#toString()
 	 */
 	@Override
@@ -198,7 +214,7 @@ class JDFComponentTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 	@Test
+	 * @Test
 	 */
 	@Test
 	void testComponentManifest()
