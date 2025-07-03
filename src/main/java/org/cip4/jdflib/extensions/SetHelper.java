@@ -922,6 +922,41 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 */
 	public void addTypeToCPI(final int pos, final boolean insert)
 	{
+		JDFIntegerList il = getCombinedProcessIndex();
+		if (insert && il == null)
+			il = new JDFIntegerList();
+		if (il != null)
+		{
+			boolean mod = false;
+			for (int i = 0; i < il.size(); i++)
+			{
+				final int iPos = il.getInt(i);
+				if (iPos >= pos)
+				{
+					il.setInt(i, iPos + 1);
+					mod = true;
+				}
+			}
+			if (!mod && insert)
+			{
+				il.add(pos);
+				mod = true;
+			}
+			if (mod)
+			{
+				setCombinedProcessIndex(il);
+			}
+		}
+	}
+
+	/**
+	 * add a CPI process
+	 *
+	 * @param typ
+	 * @param pos
+	 */
+	public void addCPI(final int pos, final boolean insert)
+	{
 		final JDFIntegerList il = getCombinedProcessIndex();
 		if (il != null)
 		{

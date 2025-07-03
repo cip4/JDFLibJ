@@ -432,6 +432,10 @@ class SetHelperTest extends JDFTestCaseBase
 		final SetHelper sh = new XJDFHelper(root).getCreateSet("FoldingParams", EnumUsage.Input);
 		sh.addTypeToCPI(0);
 		assertNull(sh.getCombinedProcessIndex());
+		sh.addTypeToCPI(0, true);
+		assertNotNull(sh.getCombinedProcessIndex());
+		sh.addTypeToCPI(0, true);
+		assertEquals(1, sh.getCombinedProcessIndex().size());
 		sh.setCombinedProcessIndex(JDFIntegerList.createIntegerList("1 3"));
 		sh.addTypeToCPI(2);
 		assertEquals(1, sh.getCombinedProcessIndex().getInt(0));

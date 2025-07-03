@@ -91,7 +91,7 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 		cSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true);
 		final SetHelper cuSet = h.appendResourceSet(ElementName.CUTTINGPARAMS, EnumUsage.Input);
 		cuSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true);
-		final SetHelper compSet = h.appendResourceSet(ElementName.COMPONENT, EnumUsage.Output);
+		final SetHelper compSet = h.appendResourceSet(ElementName.COMPONENT, null);
 		compSet.setCombinedProcessIndex(new JDFIntegerList("0 1"));
 		compSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true).setExternalID("i1");
 
@@ -100,7 +100,33 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 		assertEquals(3, c.size());
 		assertNotNull(c.get(1).getSet(ElementName.COMPONENT, EnumUsage.Output));
 		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Input));
-		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Output).getPartition(0));
+		assertNotNull(c.get(2).getSet(ElementName.COMPONENT, EnumUsage.Input).getPartition(0));
+	}
+
+	/**
+	 * @throws Throwable
+	 *
+	 */
+	@Test
+	void testSplitTypesCuttingParams() throws Throwable
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.setTypes("ConventionalPrinting Cutting");
+		final SetHelper cSet = h.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		cSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true);
+		final SetHelper cuSet = h.appendResourceSet(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		cuSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true);
+		final SetHelper compSet = h.appendResourceSet(ElementName.COMPONENT, null);
+		compSet.setCombinedProcessIndex(new JDFIntegerList("0 1"));
+		compSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true).setExternalID("i1");
+
+		final ProcessXJDFSplit splitter = new ProcessXJDFSplit();
+		final Vector<XJDFHelper> c = (Vector<XJDFHelper>) splitter.splitXJDF(h);
+		assertEquals(3, c.size());
+		assertNotNull(c.get(1).getSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input));
+		assertNull(c.get(2).getSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input));
+		assertNotNull(c.get(2).getSet(ElementName.CUTTINGPARAMS, EnumUsage.Input));
+		assertNull(c.get(1).getSet(ElementName.CUTTINGPARAMS, EnumUsage.Input));
 	}
 
 	/**

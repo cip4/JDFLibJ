@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -51,6 +51,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.node.LinkInfo;
 import org.cip4.jdflib.node.LinkInfoMap;
 import org.cip4.jdflib.node.LinkValidatorMap;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -91,16 +92,20 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 	 */
 	protected void fixInOutLinks(final XJDFHelper xjdf, final VString allTypes)
 	{
+
 		final LinkInfoMap map = getLinkInfoMap(xjdf);
-		if (map != null)
+		final Vector<SetHelper> sets = xjdf.getSets();
+		if (sets != null)
 		{
-			final Vector<SetHelper> sets = xjdf.getSets();
-			if (sets != null)
+			final VString types = xjdf.getTypes();
+			for (final SetHelper set : sets)
 			{
-				final VString types = xjdf.getTypes();
-				for (final SetHelper set : sets)
+				final EnumUsage usage = getExchangeUsage(set, types, allTypes);
+				if (usage != null)
+					set.setUsage(usage);
+				final SetHelper set2 = matchesType(set, types, allTypes);
+				if (map != null)
 				{
-					final SetHelper set2 = matchesType(set, types, allTypes);
 					fixInOutLink(set2, map);
 				}
 			}
@@ -190,6 +195,34 @@ public abstract class AbstractXJDFSplit implements IXJDFSplit
 
 		}
 		return set;
+	}
+
+	/**
+	 *
+	 * @param set
+	 * @param types
+	 * @param allTypes
+	 * @return
+	 */
+	protected EnumUsage getExchangeUsage(final SetHelper set, final VString types, final VString allTypes)
+	{
+		if (set != null && allTypes != null && set.getUsage() == null)
+		{
+			final JDFIntegerList cpi = set.getCombinedProcessIndex();
+			if (cpi != null)
+			{
+				for (int i = 0; i < cpi.size(); i++)
+				{
+					final int pos = cpi.getInt(i);
+					final String proc = allTypes.get(pos);
+					if (ContainerUtil.contains(types, proc))
+					{
+						return i == 0 ? EnumUsage.Output : EnumUsage.Input;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	/**

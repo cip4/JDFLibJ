@@ -79,6 +79,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.AuditPoolHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.MessageHelper;
+import org.cip4.jdflib.extensions.ProcessXJDFSplit;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -172,6 +173,28 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(h);
 		final JDFNode jdf = d.getJDFRoot();
 		assertEquals("d1", jdf.getResource(ElementName.LAYOUT).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testExchangePlates()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "jp1");
+		h.addType(EnumType.ImageSetting);
+		h.addType(EnumType.ConventionalPrinting);
+		final SetHelper xm = h.getCreateSet(ElementName.EXPOSEDMEDIA, null);
+		xm.addTypeToCPI(0, true);
+		xm.addTypeToCPI(1, true);
+		xm.getCreateResource().setDescriptiveName("pl1");
+		xCon.setSplitter(new ProcessXJDFSplit());
+		final JDFDoc d = xCon.convert(h);
+		final JDFNode jdf = d.getJDFRoot();
+		assertEquals("pl1", jdf.getJDF(0).getResource(ElementName.EXPOSEDMEDIA).getDescriptiveName());
+		assertEquals("pl1", jdf.getJDF(1).getResource(ElementName.EXPOSEDMEDIA).getDescriptiveName());
+		assertTrue(jdf.getJDF(0).getPredecessors(false, true).contains(jdf.getJDF(1)));
 	}
 
 	/**
