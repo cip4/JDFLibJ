@@ -187,14 +187,14 @@ public class JDFComponent extends JDFAutoComponent
 
 	public JDFSurfaceMark getSurfaceMark(final EnumFace face)
 	{
-		return getChildWithAttribute(JDFSurfaceMark.class, AttributeName.FACE, face.getName());
+		return getChildWithAttribute(JDFSurfaceMark.class, AttributeName.SURFACE, face.getName());
 	}
 
 	public JDFSurfaceMark appendSurfaceMark(final EnumFace face)
 	{
 		JDFSurfaceMark sm;
 		sm = appendSurfaceMark();
-		sm.setFace(face);
+		sm.setSurface(face);
 		return sm;
 	}
 

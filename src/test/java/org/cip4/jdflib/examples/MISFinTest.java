@@ -81,12 +81,14 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.auto.JDFAutoBoxFoldAction.EnumAction;
 import org.cip4.jdflib.auto.JDFAutoBoxFoldingParams.EnumBoxFoldingType;
 import org.cip4.jdflib.auto.JDFAutoBundle.EnumBundleType;
+import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -96,17 +98,20 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFBundle;
 import org.cip4.jdflib.resource.JDFBundleItem;
+import org.cip4.jdflib.resource.JDFCuttingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFSurfaceMark;
 import org.cip4.jdflib.resource.process.JDFBoxFoldAction;
 import org.cip4.jdflib.resource.process.JDFBoxFoldingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  *
- * Apr 1, 2009
+ *         Apr 1, 2009
  */
 class MISFinTest extends BaseGoldenTicketTest
 {
@@ -209,9 +214,6 @@ class MISFinTest extends BaseGoldenTicketTest
 		d.write2File(sm_dirTestDataTemp + File.separator + "MISFinAmountManifest.jdf", 2, false);
 	}
 
-	// ///////////////////////////////////////////////////////////////////////
-	// ///////////////////////////////////////////////////////////////////////
-
 	/**
 	 *
 	 */
@@ -227,6 +229,7 @@ class MISFinTest extends BaseGoldenTicketTest
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
+	 * 
 	 * @throws DataFormatException
 	 * @throws Exception
 	 */
@@ -257,6 +260,33 @@ class MISFinTest extends BaseGoldenTicketTest
 		bfa.setAction(EnumAction.LongFoldRightToLeft);
 
 		writeTest(n, "resources/boxFoldingParams_boxFoldAction.jdf", true, "ResourceSet[@Name=\"BoxFoldingParams\"]");
+	}
+
+	/**
+	 * tests the creation of the initial shapedefproduction (one up) process
+	 * 
+	 * @throws DataFormatException
+	 * @throws Exception
+	 */
+	@Test
+	void testCutMarks() throws DataFormatException
+	{
+		final JDFNode n = JDFNode.createRoot();
+		n.setType("Cutting", false);
+		n.setVersion(EnumVersion.Version_1_9);
+		final JDFCuttingParams cp = (JDFCuttingParams) n.addResource(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		final JDFCutBlock cb = cp.appendCutBlock();
+
+		final StringArray snippets = new StringArray();
+
+		final JDFComponent comp = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		comp.setDimensions((JDFXYPair) new JDFXYPair(50, 40).scaleFromCM(1));
+
+		final JDFSurfaceMark sm = comp.getCreateSurfaceMark(EnumFace.Front);
+
+		snippets.add("ResourceSet[@Name=\"CuttingParams\"]");
+		snippets.add("ResourceSet[@Name=\"Component\"]");
+		writeTestSnippets(n, "resources/cuttingParams_surfacemark.jdf", true, snippets);
 	}
 
 	/**

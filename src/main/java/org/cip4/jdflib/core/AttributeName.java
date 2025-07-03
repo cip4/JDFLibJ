@@ -3240,6 +3240,7 @@ public final class AttributeName
 	public static final String SURFACECONTENTSBOX = "SurfaceContentsBox";
 	/** */
 	public static final String SURFACECOUNT = "SurfaceCount";
+	public static final String SURFACE = "Surface";
 
 	/** */
 	public static final String TABBANKS = "TabBanks";

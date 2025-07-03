@@ -43,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -63,6 +64,7 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFParserFactory;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -82,6 +84,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
@@ -464,7 +467,21 @@ public abstract class JDFTestCaseBase
 	 * @param parseSchema
 	 * @param snippetPath TODO
 	 */
-	protected XMLDoc writeTest(final KElement e, String filename, final boolean parseSchema, final String snippetPath)
+	protected XMLDoc writeTest(final KElement e, final String filename, final boolean parseSchema, final String snippetPath)
+	{
+		return writeTestSnippets(e, filename, parseSchema, StringArray.getVString(snippetPath, snippetPath));
+	}
+
+	/**
+	 *
+	 * write an element to the standard test directory sm_dirTestDataTemp
+	 *
+	 * @param e
+	 * @param filename
+	 * @param parseSchema
+	 * @param snippetPath TODO
+	 */
+	protected XMLDoc writeTestSnippets(final KElement e, String filename, final boolean parseSchema, final List<String> snippetPaths)
 	{
 		String ext = UrlUtil.extension(filename);
 		int minor = 1;
@@ -480,9 +497,14 @@ public abstract class JDFTestCaseBase
 		}
 		else
 		{
-			final KElement snippet0 = e.getXPathElement(snippetPath);
-			setSnippet(snippet0, true);
-
+			if (snippetPaths != null)
+			{
+				for (final String snippetPath : snippetPaths)
+				{
+					final KElement snippet0 = e.getXPathElement(snippetPath);
+					setSnippet(snippet0, true);
+				}
+			}
 			if (e.getParentNode_KElement() == null)
 			{
 				e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "jdfexamples/" + filename, 2, false);
@@ -497,14 +519,17 @@ public abstract class JDFTestCaseBase
 			{
 				ext = "x" + ext;
 				final KElement x = convertToXJDF(e);
-				if (snippetPath == null)
+				if (ContainerUtil.isEmpty(snippetPaths))
 				{
 					cleanSnippets(XJDFHelper.getHelper(x));
 				}
 				else
 				{
-					final KElement snippet = x.getXPathElement(snippetPath);
-					setSnippet(snippet, true);
+					for (final String snippetPath : snippetPaths)
+					{
+						final KElement snippet = x.getXPathElement(snippetPath);
+						setSnippet(snippet, true);
+					}
 				}
 				filename = UrlUtil.newExtension(filename, ext);
 				final String xjdfFile = sm_dirTestDataTemp + "xjdfexamples/" + filename;
