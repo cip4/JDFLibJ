@@ -104,7 +104,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FACE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumFace.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SURFACE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumFace.getEnum(0), null);
 	}
 
 	@Override
@@ -247,9 +247,9 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setFace(final EnumFace enumVar)
+	public void setSurface(final EnumFace enumVar)
 	{
-		setAttribute(AttributeName.FACE, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.SURFACE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
@@ -257,9 +257,9 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * 
 	 * @return the value of the attribute
 	 */
-	public EnumFace getFace()
+	public EnumFace getSurfsetSuace()
 	{
-		return EnumFace.getEnum(getAttribute(AttributeName.FACE, null, null));
+		return EnumFace.getEnum(getAttribute(AttributeName.SURFACE, null, null));
 	}
 
 	/*
