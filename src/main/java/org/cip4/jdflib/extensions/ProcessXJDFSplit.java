@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -60,6 +61,20 @@ import org.cip4.jdflib.util.StringUtil;
 public class ProcessXJDFSplit extends AbstractXJDFSplit
 {
 	private final Vector<VString> groups;
+
+	public static ProcessXJDFSplit getICSSplit()
+	{
+		final ProcessXJDFSplit processXJDFSplit = new ProcessXJDFSplit();
+		processXJDFSplit.setICSGroups();
+		return processXJDFSplit;
+	}
+
+	public void setICSGroups()
+	{
+		groups.clear();
+		final VString mis_cp = new VString(new String[] { EnumType.InkZoneCalculation.getName(), EnumType.ConventionalPrinting.getName(), EnumType.Varnishing.getName() });
+		groups.add(mis_cp);
+	}
 
 	/**
 	 * @return the groups
@@ -290,8 +305,7 @@ public class ProcessXJDFSplit extends AbstractXJDFSplit
 	{
 		if (group != null && !group.isEmpty())
 		{
-			groups.add(group);
-			ContainerUtil.unify(groups);
+			ContainerUtil.appendUnique(groups, group);
 		}
 	}
 

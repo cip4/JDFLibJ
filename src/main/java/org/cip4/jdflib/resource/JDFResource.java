@@ -39,6 +39,7 @@
 package org.cip4.jdflib.resource;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -3404,7 +3405,7 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public void collapse(final boolean bCollapseToNode)
 	{
-		new Collapser().collapse(bCollapseToNode, true);
+		new Collapser().collapse(bCollapseToNode, true, null);
 	}
 
 	/**
@@ -3417,7 +3418,20 @@ public class JDFResource extends JDFElement
 	 */
 	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 	{
-		new Collapser().collapse(bCollapseToNode, bCollapseElements);
+		new Collapser().collapse(bCollapseToNode, bCollapseElements, null);
+	}
+
+	/**
+	 * collapse all redundant attributes and elements
+	 *
+	 * @param bCollapseToNode only collapse redundant attributes and elements that pre-exist in the nodes
+	 * @param bCollapseElements if true, collapse elements, else only collapse attributes
+	 *
+	 * @default Collapse(false)
+	 */
+	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements, final Collection<String> keepFilter)
+	{
+		new Collapser().collapse(bCollapseToNode, bCollapseElements, keepFilter);
 	}
 
 	/**
@@ -3638,6 +3652,19 @@ public class JDFResource extends JDFElement
 		 */
 		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 		{
+			collapse(bCollapseToNode, bCollapseElements, null);
+		}
+
+		/**
+		 * collapse all redundant attributes and elements
+		 *
+		 * @param bCollapseToNode only collapse redundant attributes and elements that pre-exist in the nodes
+		 * @param bCollapseElements if true, collapse elements, else only collapse attributes
+		 * @param keepFilter TODO
+		 * @default Collapse(false)
+		 */
+		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements, final Collection<String> keepFilter)
+		{
 			final boolean hasIdentical = getElementByClass(JDFIdentical.class, 0, true) != null;
 			final VElement leaves2 = getLeaves(false);
 			final VElement leaves = hasIdentical ? JDFIdentical.removeIdenticals(leaves2) : leaves2;
@@ -3645,13 +3672,15 @@ public class JDFResource extends JDFElement
 			{
 				return; // this is a non partitioned root node
 			}
-
+			final boolean hasFilter = !StringUtil.isEmpty(keepFilter);
 			final VString parts = getRootPartAtts();
 			for (final KElement l : leaves)
 			{
 				JDFResource leaf = (JDFResource) l;
 				final VString atts = leaf.getAttributeVector_JDFResource();
 				atts.removeStrings(parts, Integer.MAX_VALUE);
+				if (hasFilter)
+					atts.retainAll(keepFilter);
 				JDFResource parent = (JDFResource) leaf.getParentNode_KElement();
 
 				while (true)
@@ -3664,7 +3693,7 @@ public class JDFResource extends JDFElement
 					// since 190602 also collapse elements
 					if (bCollapseElements)
 					{
-						collapseElements(bCollapseToNode, leaf, parent, localLeaves);
+						collapseElements(bCollapseToNode, leaf, parent, localLeaves, keepFilter);
 					}
 					if (parent.isResourceRoot() || parent == JDFResource.this)
 					{
@@ -3724,10 +3753,7 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		// //////////////////////////////////////////////////////////////////////////
-		// /////////////////////////////////////////////
-
-		private void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves)
+		private void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves, final Collection<String> keepFilter)
 		{
 			final int localSize = localLeaves.size();
 			final List<KElement> vElm = leaf.getChildArray_KElement(null, null, null, true, 0);
@@ -3735,7 +3761,7 @@ public class JDFResource extends JDFElement
 			for (final KElement e : vElm)
 			{
 				final String nodeName = e.getNodeName();
-				if (resName.equals(nodeName))
+				if (resName.equals(nodeName) || !StringUtil.isEmpty(keepFilter) && !keepFilter.contains(nodeName) && !keepFilter.contains(JDFRefElement.getRefName(resName)))
 				{
 					continue; // don't collapse partitions
 				}

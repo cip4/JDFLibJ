@@ -130,6 +130,30 @@ class ProcessXJDFSplitTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Throwable
+	 *
+	 */
+	@Test
+	void testSplitTypesICS() throws Throwable
+	{
+		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
+		h.setTypes("ConventionalPrinting Varnishing");
+		final SetHelper cSet = h.appendResourceSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		cSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true);
+		final SetHelper cuSet = h.appendResourceSet(ElementName.VARNISHINGPARAMS, EnumUsage.Input);
+		cuSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true);
+		final SetHelper compSet = h.appendResourceSet(ElementName.COMPONENT, EnumUsage.Output);
+		compSet.setCombinedProcessIndex(new JDFIntegerList("0 1"));
+		compSet.appendPartition(new JDFAttributeMap("SheetName", "S1"), true).setExternalID("i1");
+
+		final ProcessXJDFSplit splitter = ProcessXJDFSplit.getICSSplit();
+
+		final Vector<XJDFHelper> c = (Vector<XJDFHelper>) splitter.splitXJDF(h);
+		assertEquals(1, c.size());
+
+	}
+
+	/**
 	 *
 	 */
 	@Test

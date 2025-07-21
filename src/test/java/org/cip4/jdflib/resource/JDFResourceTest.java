@@ -3105,6 +3105,78 @@ class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
+	void testCollapseFilter()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		f.setDescriptiveName("a");
+		b.setDescriptiveName("a");
+		f.setProductID("a");
+		b.setProductID("a");
+		dpp.collapse(false, false, new StringArray(AttributeName.DESCRIPTIVENAME));
+		assertFalse(f.hasAttribute_KElement(AttributeName.DESCRIPTIVENAME, null, false));
+		assertTrue(dpp.hasAttribute(AttributeName.DESCRIPTIVENAME));
+		assertFalse(dpp.hasAttribute_KElement(AttributeName.PRODUCTID, null, false));
+		assertTrue(f.hasAttribute(AttributeName.PRODUCTID));
+	}
+
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
+	void testCollapseFilterElem()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		f.appendElement(ElementName.MEDIA);
+		f.appendElement(ElementName.COMMENT);
+		b.appendElement(ElementName.MEDIA);
+		b.appendElement(ElementName.COMMENT);
+		dpp.collapse(false, true, new StringArray(ElementName.MEDIA));
+		assertNull(f.getElement_KElement(ElementName.MEDIA, null, 0));
+		assertNotNull(f.getElement_KElement(ElementName.COMMENT, null, 0));
+		assertNull(dpp.getElement_KElement(ElementName.COMMENT, null, 0));
+		assertNull(f.getElement_KElement(ElementName.MEDIA, null, 0));
+	}
+
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
+	void testCollapseFilterElemDif()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		f.appendElement(ElementName.MEDIA).setAttribute("A", "B");
+		f.appendElement(ElementName.COMMENT);
+		b.appendElement(ElementName.MEDIA);
+		b.appendElement(ElementName.COMMENT);
+		dpp.collapse(false, true, new StringArray(ElementName.MEDIA));
+		assertNotNull(f.getElement_KElement(ElementName.MEDIA, null, 0));
+		assertNotNull(f.getElement_KElement(ElementName.COMMENT, null, 0));
+		assertNull(dpp.getElement_KElement(ElementName.COMMENT, null, 0));
+		assertNull(dpp.getElement_KElement(ElementName.MEDIA, null, 0));
+	}
+
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
 	void testUnpartitionPartIDKeys()
 	{
 		final JDFNode n = JDFNode.createRoot();

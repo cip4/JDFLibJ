@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -52,6 +52,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -418,7 +419,7 @@ public class JDFRefElement extends JDFElement
 	 * delete this refElement and it's target
 	 *
 	 * @param bCheckRefCount if true, check that no other element refers to the target before deleting<br>
-	 *            if bCheckRefCount=false, the target is force deleted
+	 *        if bCheckRefCount=false, the target is force deleted
 	 * @return JDFElement the deleted targeelement
 	 * @since 290502
 	 */
@@ -458,6 +459,18 @@ public class JDFRefElement extends JDFElement
 	public static String getRefName(final String base)
 	{
 		return base + JDFConstants.REF;
+	}
+
+	/**
+	 *
+	 * @param ref the string to check
+	 * @return the string without ref if it ends with ref, else null
+	 */
+	public static String getRefLocalName(final String ref)
+	{
+		if (JDFConstants.REF.equals(StringUtil.rightStr(ref, 3)))
+			return StringUtil.leftStr(ref, -3);
+		return null;
 	}
 
 	/**

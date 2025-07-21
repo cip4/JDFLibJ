@@ -144,10 +144,10 @@ class PostConverter
 
 	void fixCSR()
 	{
-		JDFEmployee contact = (JDFEmployee) theNode.getResource(ElementName.EMPLOYEE, null, 0);
+		final JDFEmployee contact = (JDFEmployee) theNode.getResource(ElementName.EMPLOYEE, null, 0);
 		if (contact != null && contact.getRoles().contains("CSR"))
 		{
-			JDFNodeInfo ni = theNode.getNodeInfo();
+			final JDFNodeInfo ni = theNode.getNodeInfo();
 			if (ni != null)
 			{
 				contact.removeAttribute(AttributeName.ID);
@@ -231,7 +231,7 @@ class PostConverter
 
 		void cleanLink(final KElement e)
 		{
-			JDFResourceLink rl = (JDFResourceLink) e;
+			final JDFResourceLink rl = (JDFResourceLink) e;
 			if (ElementName.BINDERYSIGNATURE.equals(rl.getLinkedResourceName()))
 			{
 				cleanBinderySignatureLink(e, rl);
@@ -242,19 +242,19 @@ class PostConverter
 			}
 		}
 
-		void cleanBinderySignatureLink(final KElement e, JDFResourceLink rl)
+		void cleanBinderySignatureLink(final KElement e, final JDFResourceLink rl)
 		{
-			JDFStrippingParams sp = (JDFStrippingParams) theNode.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+			final JDFStrippingParams sp = (JDFStrippingParams) theNode.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 			if (sp != null)
 			{
-				List<JDFResource> targets = rl.getTargetList();
+				final List<JDFResource> targets = rl.getTargetList();
 				if (targets != null)
 				{
-					for (JDFResource l : targets)
+					for (final JDFResource l : targets)
 					{
-						for (JDFResource target : l.getLeafArray(false))
+						for (final JDFResource target : l.getLeafArray(false))
 						{
-							for (JDFResource sp1 : sp.getLeafArray(false))
+							for (final JDFResource sp1 : sp.getLeafArray(false))
 							{
 								cleanSingleStripping(target, (JDFStrippingParams) sp1);
 							}
@@ -265,12 +265,12 @@ class PostConverter
 			e.deleteNode();
 		}
 
-		void cleanSingleStripping(JDFResource binderySignature, JDFStrippingParams sp0)
+		void cleanSingleStripping(final JDFResource binderySignature, final JDFStrippingParams sp0)
 		{
-			JDFBinderySignature bs = sp0.getBinderySignature();
+			final JDFBinderySignature bs = sp0.getBinderySignature();
 			if (bs == null)
 			{
-				JDFBinderySignature bs0 = (JDFBinderySignature) binderySignature;
+				final JDFBinderySignature bs0 = (JDFBinderySignature) binderySignature;
 				JDFResource bs1 = bs0;
 				if (!bs0.isLeaf())
 				{
@@ -280,14 +280,14 @@ class PostConverter
 			}
 		}
 
-		JDFResource findLeaf(JDFBinderySignature bs0, JDFStrippingParams sp0)
+		JDFResource findLeaf(final JDFBinderySignature bs0, final JDFStrippingParams sp0)
 		{
 			JDFResource bs1 = null;
 			try
 			{
 				bs1 = bs0.getPartition(sp0.getPartMap(), EnumPartUsage.Implicit);
 			}
-			catch (JDFException x)
+			catch (final JDFException x)
 			{
 				bs1 = bs0.getResourceRoot().getPartition(sp0.getPartMap(), EnumPartUsage.Implicit);
 			}
@@ -420,8 +420,8 @@ class PostConverter
 	 */
 	class ResourceCleaner
 	{
-		private VElement products;
-		private HashSet<KElement> rootLinks;
+		private final VElement products;
+		private final HashSet<KElement> rootLinks;
 
 		public ResourceCleaner()
 		{
@@ -448,11 +448,11 @@ class PostConverter
 					cleanResource(rr);
 				}
 			}
-			for (KElement product : products)
+			for (final KElement product : products)
 			{
 				product.removeAttribute(XJDFConstants.ExternalID);
 			}
-			for (KElement link : rootLinks)
+			for (final KElement link : rootLinks)
 			{
 				link.deleteNode();
 			}
@@ -516,18 +516,17 @@ class PostConverter
 				{
 					checkParts(leaf);
 				}
-				EnumResourceClass c = resRoot.getResourceClass();
+				final EnumResourceClass c = resRoot.getResourceClass();
 				if (EnumResourceClass.Implementation.equals(c) || EnumResourceClass.Parameter.equals(c) && (resRoot.getNodeName().endsWith("Params")))
 				{
 					resRoot.setPartUsage(EnumPartUsage.Implicit);
 				}
-
 			}
 		}
 
 		void checkParts(final JDFResource leaf)
 		{
-			for (JDFPart part : leaf.getChildArrayByClass(JDFPart.class, false, 0))
+			for (final JDFPart part : leaf.getChildArrayByClass(JDFPart.class, false, 0))
 			{
 				String extID = part.getNonEmpty(XJDFConstants.Product);
 				if (extID == null)
@@ -536,11 +535,11 @@ class PostConverter
 				}
 				if (extID != null)
 				{
-					for (KElement product : products)
+					for (final KElement product : products)
 					{
 						if (product.getID().equals(extID) || extID.equals(product.getNonEmpty(XJDFConstants.ExternalID)))
 						{
-							JDFResourceLink baselink = theNode.getLink(leaf, null);
+							final JDFResourceLink baselink = theNode.getLink(leaf, null);
 							((JDFNode) product).ensureLinkPU(leaf, baselink == null ? null : baselink.getUsage(), baselink == null ? null : baselink.getProcessUsage());
 							ContainerUtil.add(rootLinks, baselink);
 						}
@@ -577,7 +576,7 @@ class PostConverter
 			}
 		}
 
-		private void splitSingleDrop(final VJDFAttributeMap partMapVector, final VElement copies, final VElement vl, final VElement vr, int i)
+		private void splitSingleDrop(final VJDFAttributeMap partMapVector, final VElement copies, final VElement vl, final VElement vr, final int i)
 		{
 			final JDFResource newRoot = (JDFResource) copies.get(i);
 			final JDFAttributeMap map = partMapVector.remove(0);
@@ -615,7 +614,7 @@ class PostConverter
 			newRoot.setPartIDKeys(partIDKeys2);
 		}
 
-		private void copyRefs(final VElement vr, final String currentDrop, String id)
+		private void copyRefs(final VElement vr, final String currentDrop, final String id)
 		{
 			for (final KElement r : vr)
 			{
@@ -631,7 +630,7 @@ class PostConverter
 			}
 		}
 
-		private void copyLinks(final VJDFAttributeMap partMapVector, final VElement vl, int i, final String currentDrop, String id)
+		private void copyLinks(final VJDFAttributeMap partMapVector, final VElement vl, final int i, final String currentDrop, final String id)
 		{
 			for (final KElement l : vl)
 			{
@@ -759,7 +758,7 @@ class PostConverter
 		 * @param bs
 		 * @return
 		 */
-		JDFAttributeMap moveToStripCell(final KElement signatureCell, final JDFResource sp, int i)
+		JDFAttributeMap moveToStripCell(final KElement signatureCell, final JDFResource sp, final int i)
 		{
 			final JDFStripCellParams stripCell = (JDFStripCellParams) sp.getCreateElement(ElementName.STRIPCELLPARAMS, null, i);
 			final VString stripCellKnown = stripCell.knownAttributes();

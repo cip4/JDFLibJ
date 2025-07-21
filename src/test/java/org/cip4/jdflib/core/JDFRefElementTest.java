@@ -70,6 +70,10 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -79,13 +83,12 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 /**
  * @author MuchaD
  * 
- *         This implements the first fixture with unit tests for class
- *         JDFElement.
+ *         This implements the first fixture with unit tests for class JDFElement.
  */
 class JDFRefElementTest extends JDFTestCaseBase
 {
@@ -96,28 +99,28 @@ class JDFRefElementTest extends JDFTestCaseBase
 	@Test
 	void testGetBadTarget()
 	{
-		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(this).buildMilestone("Foo", "1234");
-		JDFNotification notification = jmf.getSignal(0).getNotification();
-		KElement foo = notification.appendElement("Fooo");
-		String id = foo.appendAnchor(null);
-		JDFRefElement re = (JDFRefElement) notification.appendElement("FoooRef");
+		final JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(this).buildMilestone("Foo", "1234");
+		final JDFNotification notification = jmf.getSignal(0).getNotification();
+		final KElement foo = notification.appendElement("Fooo");
+		final String id = foo.appendAnchor(null);
+		final JDFRefElement re = (JDFRefElement) notification.appendElement("FoooRef");
 		re.setrRef(id);
-		Assertions.assertNull(re.getTarget(), "non resources are null rather than class casts...");
-		Assertions.assertNull(re.getTargetRoot(), "non resources are null rather than class casts...");
+		assertNull(re.getTarget(), "non resources are null rather than class casts...");
+		assertNull(re.getTargetRoot(), "non resources are null rather than class casts...");
 	}
 
 	/**
 	 * Method testGetTarget
 	 * 
-	 *  
+	 * 
 	 */
 	@Test
 	void testGetTarget()
 	{
-		JDFDoc d = JDFTestCaseBase.creatXMDoc();
-		JDFNode n = d.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
-		JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SignatureName", "S12234");
 		mPart.put("SheetName", "S12");
 		mPart.put("Side", "Front");
@@ -125,48 +128,62 @@ class JDFRefElementTest extends JDFTestCaseBase
 		JDFMedia m = xm.getMedia();
 		m = (JDFMedia) m.makeRootResource(null, null, true);
 		xmPart.refElement(m);
-		Assertions.assertEquals(xmPart.getMedia(), m);
+		assertEquals(xmPart.getMedia(), m);
 		mPart.put("Side", "Back");
 		xmPart = (JDFExposedMedia) xm.getCreatePartition(mPart, null);
-		JDFMedia medPart = (JDFMedia) m.getCreatePartition(mPart, xm.getPartIDKeys());
+		final JDFMedia medPart = (JDFMedia) m.getCreatePartition(mPart, xm.getPartIDKeys());
 		xmPart.refElement(medPart);
-		Assertions.assertEquals(xmPart.getMedia(), medPart);
-		JDFRefElement re = (JDFRefElement) xmPart.getElement("MediaRef");
-		Assertions.assertEquals(re.getPartMap(), mPart);
-		Assertions.assertEquals(re.getTarget(), medPart);
+		assertEquals(xmPart.getMedia(), medPart);
+		final JDFRefElement re = (JDFRefElement) xmPart.getElement("MediaRef");
+		assertEquals(re.getPartMap(), mPart);
+		assertEquals(re.getTarget(), medPart);
 	}
 
 	/**
-	* Method testGetTargetRoot
-	* 
-	*  
-	*/
+	 * Method testGetTargetRoot
+	 * 
+	 * 
+	 */
 	@Test
 	void testGetTargetRoot()
 	{
-		JDFDoc d = JDFTestCaseBase.creatXMDoc();
-		JDFNode n = d.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		JDFMedia m = xm.getMedia();
 		m = (JDFMedia) m.makeRootResource(null, null, true);
 		xm.refElement(m);
-		JDFRefElement re = (JDFRefElement) xm.getElement("MediaRef");
-		Assertions.assertEquals(re.getTargetRoot(), m);
+		final JDFRefElement re = (JDFRefElement) xm.getElement("MediaRef");
+		assertEquals(re.getTargetRoot(), m);
 	}
 
-	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * Method testGetTargetRoot
+	 * 
+	 * 
+	 */
+	@Test
+	void testGetRefName()
+	{
+
+		assertEquals("MediaRef", JDFRefElement.getRefName("Media"));
+		assertEquals("MediaRefRef", JDFRefElement.getRefName("MediaRef"));
+		assertEquals("Media", JDFRefElement.getRefLocalName("MediaRef"));
+		assertEquals(null, JDFRefElement.getRefLocalName("Media"));
+	}
+
 	/**
 	 * Method testInlineRefelement
 	 * 
-	 *  
+	 * 
 	 */
 	@Test
 	void testInlineRefelement()
 	{
-		JDFDoc d = JDFTestCaseBase.creatXMDoc();
-		JDFNode n = d.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
-		JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SignatureName", "S12234");
 		mPart.put("SheetName", "S12");
 		mPart.put("Side", "Front");
@@ -175,18 +192,18 @@ class JDFRefElementTest extends JDFTestCaseBase
 		m = (JDFMedia) m.makeRootResource(null, null, true);
 		m.setGrainDirection(EnumGrainDirection.XDirection);
 		xmPart.refElement(m);
-		Assertions.assertEquals(xmPart.getMedia(), m);
+		assertEquals(xmPart.getMedia(), m);
 		mPart.put("Side", "Back");
 		xmPart = (JDFExposedMedia) xm.getCreatePartition(mPart, null);
-		JDFMedia medPart = (JDFMedia) m.getCreatePartition(mPart, xm.getPartIDKeys());
+		final JDFMedia medPart = (JDFMedia) m.getCreatePartition(mPart, xm.getPartIDKeys());
 		xmPart.refElement(medPart);
-		Assertions.assertEquals(xmPart.getMedia(), medPart);
-		JDFRefElement re = (JDFRefElement) xmPart.getElement("MediaRef");
-		JDFMedia inlineMedia = (JDFMedia) re.inlineRef();
-		Assertions.assertNull(xmPart.getElement_KElement("MediaRef", null, 0));
-		Assertions.assertEquals(inlineMedia.getGrainDirection(), EnumGrainDirection.XDirection);
-		Assertions.assertEquals(inlineMedia, xmPart.getMedia());
-		Assertions.assertFalse(inlineMedia.hasAttribute("ID"));
+		assertEquals(xmPart.getMedia(), medPart);
+		final JDFRefElement re = (JDFRefElement) xmPart.getElement("MediaRef");
+		final JDFMedia inlineMedia = (JDFMedia) re.inlineRef();
+		assertNull(xmPart.getElement_KElement("MediaRef", null, 0));
+		assertEquals(inlineMedia.getGrainDirection(), EnumGrainDirection.XDirection);
+		assertEquals(inlineMedia, xmPart.getMedia());
+		assertFalse(inlineMedia.hasAttribute("ID"));
 
 	}
 }
