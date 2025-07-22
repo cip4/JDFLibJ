@@ -110,6 +110,7 @@ import org.cip4.jdflib.resource.process.JDFStation;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSewingParams;
+import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
@@ -2407,7 +2408,12 @@ class PostXJDFWalker extends BaseElementWalker
 				{
 					final SetHelper pcs = newRootHelper.getCreateSet(ElementName.PRINTCONDITION, is.getUsage());
 					final ResourceHelper ir = ResourceHelper.getHelper(xjdf);
-					pcs.getCreatePartition(ir.getPartMap(), true).getResource().moveAttribute(AttributeName.PRINTQUALITY, xjdf);
+					final JDFPrintCondition pc = (JDFPrintCondition) pcs.getCreatePartition(ir.getPartMap(), true).getResource();
+					pc.moveAttribute(AttributeName.PRINTQUALITY, xjdf);
+					if (!pc.hasAttribute(AttributeName.NAME))
+					{
+						pc.copyAttribute(AttributeName.NAME, pc, AttributeName.PRINTQUALITY, null, null);
+					}
 				}
 			}
 		}
