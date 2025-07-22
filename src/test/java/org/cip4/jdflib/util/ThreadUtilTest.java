@@ -91,7 +91,7 @@ class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	synchronized void testWaitTimeout()
 	{
-		assertEquals(new TestWait(1400, 10).getWaitedObject().intValue(), 42);
+		assertEquals(new TestWait(1400, 42).getWaitedObject().intValue(), 42);
 		assertNull(new TestWait(2, 5000).getWaitedObject());
 	}
 
@@ -101,7 +101,7 @@ class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	synchronized void testPeekWaitTimeout()
 	{
-		final TestWait testWait = new TestWait(1400, 2);
+		final TestWait testWait = new TestWait(1400, 42);
 		int n = 0;
 		while (testWait.peekWaitedObject() == null)
 		{
