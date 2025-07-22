@@ -57,6 +57,8 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDFDataCache;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
@@ -121,16 +123,18 @@ class XJDFPrepWalker extends BaseElementWalker
 			return super.walk(xjdf, dummy);
 		}
 
-		void moveToInterpreting(final JDFPrintCondition xjdf)
+		void moveToInterpreting(final JDFPrintCondition pc)
 		{
-			if (xjdf.hasAttribute(AttributeName.PRINTQUALITY) && (h instanceof XJDFHelper))
+			if (pc.hasAttribute(AttributeName.PRINTQUALITY) && (h instanceof XJDFHelper))
 			{
-				final SetHelper pcs = SetHelper.getHelper(xjdf);
+				final SetHelper pcs = SetHelper.getHelper(pc);
 				if (pcs != null)
 				{
 					final SetHelper is = ((XJDFHelper) h).getCreateSet(ElementName.INTERPRETINGPARAMS, pcs.getUsage());
-					final ResourceHelper pcr = ResourceHelper.getHelper(xjdf);
-					is.getCreatePartition(pcr.getPartMap(), true).getResource().moveAttribute(AttributeName.PRINTQUALITY, xjdf);
+					final ResourceHelper pcr = ResourceHelper.getHelper(pc);
+					final JDFInterpretingParams ip = (JDFInterpretingParams) is.getCreatePartition(pcr.getPartMap(), true).getResource();
+					ip.moveAttribute(AttributeName.PRINTQUALITY, pc);
+
 				}
 			}
 		}
@@ -416,6 +420,42 @@ class XJDFPrepWalker extends BaseElementWalker
 		{
 			return loRes.getPartKey(AttributeName.SIDE) == null && !VJDFAttributeMap.isEmpty(loRes.getPartMapList()) || loRes.getXPathElement("Layout/Position") != null
 					|| loRes.getXPathElement("Layout/FileSpec") != null;
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkPrintConditionSet extends WalkElement
+	{
+
+		@Override
+		public boolean matches(final KElement e)
+		{
+			return SetHelper.isSet(e) && ElementName.PRINTCONDITION.equals(SetHelper.getResourceName(e));
+		}
+
+		public WalkPrintConditionSet()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			final SetHelper sh = SetHelper.getHelper(xjdf);
+			if (!ContainerUtil.contains(sh.getXJDF().getTypes(), EnumType.DigitalPrinting.getName())
+					&& !ContainerUtil.contains(sh.getXJDF().getTypes(), EnumType.ConventionalPrinting.getName()))
+			{
+				sh.deleteNode();
+				return null;
+			}
+			return super.walk(xjdf, dummy);
 		}
 
 	}

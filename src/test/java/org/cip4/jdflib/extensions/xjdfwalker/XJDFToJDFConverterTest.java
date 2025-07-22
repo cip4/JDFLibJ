@@ -191,11 +191,13 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		h.setTypes(EnumType.Interpreting.getName());
 		final JDFPrintCondition pc = (JDFPrintCondition) h.getCreateResource(ElementName.PRINTCONDITION, EnumUsage.Input, null);
 		pc.setPrintQuality(ePrintQuality.High);
+		pc.setName(ePrintQuality.High.name());
 		final JDFDoc x = xCon.convert(h);
 		final JDFNode n = x.getJDFRoot();
 
 		final JDFInterpretingParams ip = (JDFInterpretingParams) n.getResource(ElementName.INTERPRETINGPARAMS);
 		assertEquals(EnumPrintQuality.High, ip.getPrintQuality());
+		assertNull(n.getResource(ElementName.PRINTCONDITION));
 	}
 
 	/**
