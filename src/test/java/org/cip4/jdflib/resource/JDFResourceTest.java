@@ -3129,6 +3129,31 @@ class JDFResourceTest extends JDFTestCaseBase
 	 * test expand and collapse methods
 	 */
 	@Test
+	void testCollapseFilterElemRef()
+	{
+		final JDFNode n = JDFNode.createRoot();
+
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
+		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource b = sh.addPartition(EnumPartIDKey.Side, "Back");
+		JDFResource m = (JDFResource) f.appendElement(ElementName.MEDIA);
+		m = m.makeRootResource();
+		f.appendElement(ElementName.COMMENT);
+		b.refElement(m);
+		b.appendElement(ElementName.COMMENT);
+		dpp.collapse(false, true, new StringArray(ElementName.MEDIA));
+		assertNull(f.getElement_KElement(ElementName.MEDIA, null, 0));
+		assertNotNull(f.getElement_KElement(ElementName.COMMENT, null, 0));
+		assertNull(dpp.getElement_KElement(ElementName.COMMENT, null, 0));
+		assertNull(f.getElement_KElement(ElementName.MEDIA, null, 0));
+	}
+
+	/**
+	 * test expand and collapse methods
+	 */
+	@Test
 	void testCollapseFilterElem()
 	{
 		final JDFNode n = JDFNode.createRoot();

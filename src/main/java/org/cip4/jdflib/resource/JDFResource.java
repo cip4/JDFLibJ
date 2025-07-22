@@ -3761,7 +3761,7 @@ public class JDFResource extends JDFElement
 			for (final KElement e : vElm)
 			{
 				final String nodeName = e.getNodeName();
-				if (resName.equals(nodeName) || !StringUtil.isEmpty(keepFilter) && !keepFilter.contains(nodeName) && !keepFilter.contains(JDFRefElement.getRefName(resName)))
+				if (resName.equals(nodeName) || !StringUtil.isEmpty(keepFilter) && !keepFilter.contains(nodeName) && !keepFilter.contains(JDFRefElement.getRefLocalName(nodeName)))
 				{
 					continue; // don't collapse partitions
 				}
