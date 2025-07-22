@@ -55,9 +55,11 @@ import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDFDataCache;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -85,6 +87,54 @@ class XJDFPrepWalker extends BaseElementWalker
 	public void convert()
 	{
 		walkTreeKidsFirst(h.getRoot());
+	}
+
+	/**
+	 * @author rainer prosi
+	 */
+	public class WalkPrintCondition extends WalkElement
+	{
+		/**
+		 *
+		 */
+		public WalkPrintCondition()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.PRINTCONDITION, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			moveToInterpreting((JDFPrintCondition) xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		void moveToInterpreting(final JDFPrintCondition xjdf)
+		{
+			if (xjdf.hasAttribute(AttributeName.PRINTQUALITY) && (h instanceof XJDFHelper))
+			{
+				final SetHelper pcs = SetHelper.getHelper(xjdf);
+				if (pcs != null)
+				{
+					final SetHelper is = ((XJDFHelper) h).getCreateSet(ElementName.INTERPRETINGPARAMS, pcs.getUsage());
+					final ResourceHelper pcr = ResourceHelper.getHelper(xjdf);
+					is.getCreatePartition(pcr.getPartMap(), true).getResource().moveAttribute(AttributeName.PRINTQUALITY, xjdf);
+				}
+			}
+		}
+
 	}
 
 	protected class WalkContact extends WalkElement

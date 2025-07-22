@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,11 +81,13 @@ package org.cip4.jdflib.resource.process.press;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPrintCondition;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 /**
  * 
- *  
+ * 
  * @author rainer prosi
  * @date Apr 30, 2014
  */
@@ -95,41 +97,65 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 
 	/**
 	 * Constructor for JDFPrintCondition
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 * 
 	 */
-	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFPrintCondition(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPrintCondition
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
 	 * 
 	 */
-	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPrintCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPrintCondition
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * @throws DOMException 
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 * @throws DOMException
 	 * 
 	 */
-	public JDFPrintCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFPrintCondition(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	public enum ePrintQuality
+	{
+		High, Normal, Draft;
+
+		static ePrintQuality getEnum(final String c)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ePrintQuality.class, c);
+		}
+	}
+
+	public ePrintQuality getPrintQuality()
+	{
+		final String c = getNonEmpty(AttributeName.PRINTQUALITY);
+		return ePrintQuality.getEnum(c);
+	}
+
+	public void setPrintQuality(final ePrintQuality c)
+	{
+		setAttribute(AttributeName.PRINTQUALITY, c, null);
 	}
 
 	/**

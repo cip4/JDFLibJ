@@ -84,6 +84,7 @@ import org.cip4.jdflib.jmf.JDFModuleInfo;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
+import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFLaminatingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFPart;
@@ -2350,6 +2351,65 @@ class PostXJDFWalker extends BaseElementWalker
 				}
 			}
 
+		}
+
+	}
+
+	/**
+	 * @author rainer prosi
+	 */
+	public class WalkInterpretingParams extends WalkResourceElement
+	{
+		/**
+		 *
+		 */
+		public WalkInterpretingParams()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !isRetainAll();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString(ElementName.INTERPRETINGPARAMS, null);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkResourceElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			moveToPrintCondition((JDFInterpretingParams) xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		void moveToPrintCondition(final JDFInterpretingParams xjdf)
+		{
+			if (xjdf.hasAttribute(AttributeName.PRINTQUALITY))
+			{
+				final SetHelper is = SetHelper.getHelper(xjdf);
+				if (is != null)
+				{
+					final SetHelper pcs = newRootHelper.getCreateSet(ElementName.PRINTCONDITION, is.getUsage());
+					final ResourceHelper ir = ResourceHelper.getHelper(xjdf);
+					pcs.getCreatePartition(ir.getPartMap(), true).getResource().moveAttribute(AttributeName.PRINTQUALITY, xjdf);
+				}
+			}
 		}
 
 	}

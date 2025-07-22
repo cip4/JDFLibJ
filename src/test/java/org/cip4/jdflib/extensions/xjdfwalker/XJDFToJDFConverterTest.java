@@ -49,6 +49,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
@@ -94,6 +95,7 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -130,6 +132,8 @@ import org.cip4.jdflib.resource.process.JDFRepeatDesc;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
+import org.cip4.jdflib.resource.process.press.JDFPrintCondition.ePrintQuality;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.util.JDFDate;
 import org.junit.jupiter.api.Test;
@@ -173,6 +177,25 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(h);
 		final JDFNode jdf = d.getJDFRoot();
 		assertEquals("d1", jdf.getResource(ElementName.LAYOUT).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testPrintQuality()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final XJDFHelper h = new XJDFHelper("j1", "jp1");
+		h.setTypes(EnumType.Interpreting.getName());
+		final JDFPrintCondition pc = (JDFPrintCondition) h.getCreateResource(ElementName.PRINTCONDITION, EnumUsage.Input, null);
+		pc.setPrintQuality(ePrintQuality.High);
+		final JDFDoc x = xCon.convert(h);
+		final JDFNode n = x.getJDFRoot();
+
+		final JDFInterpretingParams ip = (JDFInterpretingParams) n.getResource(ElementName.INTERPRETINGPARAMS);
+		assertEquals(EnumPrintQuality.High, ip.getPrintQuality());
 	}
 
 	/**

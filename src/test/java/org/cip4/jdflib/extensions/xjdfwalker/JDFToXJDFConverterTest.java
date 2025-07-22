@@ -64,6 +64,7 @@ import org.cip4.jdflib.auto.JDFAutoGlue.EnumWorkingDirection;
 import org.cip4.jdflib.auto.JDFAutoGlueApplication.EnumGluingTechnique;
 import org.cip4.jdflib.auto.JDFAutoInsertingParams.EnumMethod;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumCostType;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
@@ -182,6 +183,8 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlue;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
+import org.cip4.jdflib.resource.process.press.JDFPrintCondition.ePrintQuality;
 import org.cip4.jdflib.span.JDFSpanScreeningType.EnumSpanScreeningType;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
@@ -243,6 +246,26 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement x = conv.convert(n);
 		final XJDFHelper h = XJDFHelper.getHelper(x);
 		assertNotNull(h.getSet(ElementName.CONTACT, null));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testPrintQuality()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		final JDFNode node = new JDFDoc(ElementName.JDF).getJDFRoot();
+		node.setType(EnumType.Interpreting);
+		final JDFInterpretingParams ip = (JDFInterpretingParams) node.appendMatchingResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
+		ip.setPrintQuality(EnumPrintQuality.High);
+		final KElement x = conv.convert(node);
+		final XJDFHelper h = XJDFHelper.getHelper(x);
+		final SetHelper set = h.getSet(ElementName.PRINTCONDITION, EnumUsage.Input);
+		assertNotNull(set);
+		final JDFPrintCondition pc = (JDFPrintCondition) set.getResource(0).getResource();
+		assertEquals(ePrintQuality.High, pc.getPrintQuality());
 	}
 
 	/**
