@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<XJMF xmlns="http://www.CIP4.org/JDFSchema_2_0"
+      Version="2.1"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Header AgentName="JDF-JMF Controller"
+            AgentVersion="1.0.3108.1"
+            DeviceID="s192.168.1.012"
+            ID="l_250710_155057336_005017"
+            Time="2025-07-10T15:51:00.084-04:00"/>
+    <ResponseSubmitQueueEntry ReturnCode="0">
+        <Header Author="Administrator"
+                DeviceID="s192.168.1.001"
+                ID="R1"
+                PersonalID="username_id"
+                Time="2025-07-10T15:50:57.338-04:00"
+                refID="_00001_IDP-ICS1.5-L1_BaseJob-LTR-GRY-1F-12-1"/>
+        <QueueEntry Activation="Active"
+                    JobID="00001_IDP-ICS1.5-L1_BaseJob-LTR-GRY-1F-12-1"
+                    Priority="50"
+                    QueueEntryID="000000003"
+                    Status="Waiting"
+                    StatusDetails="JobInitializing"
+                    SubmissionTime="2025-07-10T15:51:00.077-04:00"/>
+    </ResponseSubmitQueueEntry>
+</XJMF>
