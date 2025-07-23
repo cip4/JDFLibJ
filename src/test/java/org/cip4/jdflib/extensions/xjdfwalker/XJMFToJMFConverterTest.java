@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -94,6 +94,19 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xc.convert(h.getRoot());
 		final JDFDeviceInfo dij = d.getJMFRoot().getSignal(0).getDeviceInfo(0);
 		assertEquals(EnumDeviceCondition.OffLine.getName(), dij.getAttribute(AttributeName.DEVICECONDITION));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testResponseSubmitQueueEntry()
+	{
+		final XJMFHelper h = XJMFHelper.parseFile(sm_dirTestData + "xjmf/SQE_response.xjmf");
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		final JDFJMF jmf = d.getJMFRoot();
+		assertNotNull(jmf);
 	}
 
 	/**

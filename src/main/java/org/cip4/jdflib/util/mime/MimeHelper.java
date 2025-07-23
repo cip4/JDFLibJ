@@ -40,15 +40,15 @@ package org.cip4.jdflib.util.mime;
 
 import java.util.Vector;
 
-import jakarta.mail.BodyPart;
-import jakarta.mail.MessagingException;
-import jakarta.mail.Multipart;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+
+import jakarta.mail.BodyPart;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
 
 /**
  * class to create and write mime files
@@ -205,7 +205,7 @@ public class MimeHelper
 		cid = StringUtil.getNonEmpty(cid);
 		if (UrlUtil.isNotCID(cid))
 		{
-			log.warn("incorrect CID format: cid=" + cid);
+			log.info("incorrect CID format: cid=" + cid);
 			return null;
 		}
 		try

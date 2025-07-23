@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -101,9 +102,9 @@ public class WalkQueueEntry extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
-		String status = elem.getAttribute(AttributeName.STATUS);
+		final String status = elem.getAttribute(AttributeName.STATUS);
 		if ("InProgress".equals(status))
 		{
 			elem.setAttribute(AttributeName.STATUS, "Running");
@@ -112,11 +113,12 @@ public class WalkQueueEntry extends WalkXElement
 	}
 
 	@Override
-	public KElement walk(KElement e, KElement trackElem)
+	public KElement walk(final KElement e, final KElement trackElem)
 	{
-		KElement parent = e == null ? null : e.getParentNode_KElement();
-		if (parent != null && EnumFamily.Response.getName().equals(parent.getLocalName())
-				&& ElementName.QUEUEENTRY.equals(StringUtil.rightStr(parent.getAttribute(AttributeName.TYPE), 10)))
+		final KElement parent = e == null ? null : e.getParentNode_KElement();
+		final String typ = parent == null ? null : parent.getAttribute(AttributeName.TYPE);
+		if (typ != null && EnumFamily.Response.getName().equals(parent.getLocalName()) && !EnumType.SubmitQueueEntry.getName().equals(typ)
+				&& ElementName.QUEUEENTRY.equals(StringUtil.rightStr(typ, 10)))
 		{
 			return null;
 		}

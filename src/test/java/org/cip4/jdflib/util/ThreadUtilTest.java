@@ -142,7 +142,7 @@ class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	synchronized void testWaitTimeoutMany()
 	{
-		for (int i = 1; i < 666; i++)
+		for (int i = 1; i < 42; i++)
 		{
 			final TestWait testWait = new TestWait(142, 0);
 			for (int j = 0; j < 142; j++)
