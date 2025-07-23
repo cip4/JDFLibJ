@@ -148,6 +148,26 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testMessageServiceModifyType()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, JDFMessage.EnumType.KnownMessages);
+		final JDFMessageService ms = jmf.getResponse(0).appendMessageService();
+		ms.setChannelMode(EnumChannelMode.FireAndForget);
+		ms.setType(XJDFConstants.ModifyQueueEntry);
+		ms.setQuery(true);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("QueryModifyQueueEntry", xjmf.getXPathAttribute("ResponseKnownMessages/MessageService/@Type", null));
+		final XJDFToJDFConverter xjdfConv = new XJDFToJDFConverter(null);
+		final JDFJMF jmf1 = xjdfConv.convert(xjmf).getJMFRoot();
+		assertEquals("AbortQueueEntry", jmf1.getXPathAttribute("Response/MessageService/@Type", null));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testScope()
 	{
 		final XJMFHelper h = new XJMFHelper();

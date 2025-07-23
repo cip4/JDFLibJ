@@ -52,11 +52,14 @@ import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
+import org.cip4.jdflib.extensions.MessageHelper.EFamily;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDFDataCache;
+import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkModifyQueueEntry;
+import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFStrippingParams;
@@ -351,6 +354,75 @@ class XJDFPrepWalker extends BaseElementWalker
 		public VString getElementNames()
 		{
 			return new VString(ElementName.STRIPMARK);
+		}
+
+	}
+
+	/**
+	 * class that ensures that we do not have signaturename partitions
+	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkKnownMessageResponse extends WalkElement
+	{
+
+		/**
+		 *
+		 */
+		public WalkKnownMessageResponse()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			splitMessageServices(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		void splitMessageServices(final KElement xjdf)
+		{
+			final List<JDFMessageService> v = xjdf.getChildArrayByClass(JDFMessageService.class, false, 0);
+			for (final JDFMessageService ms : v)
+			{
+				splitMessageService(xjdf, ms);
+			}
+		}
+
+		void splitMessageService(final KElement xjdf, final JDFMessageService ms)
+		{
+			int i = 0;
+			final String t = ms.getType();
+			if (t.endsWith(XJDFConstants.ModifyQueueEntry))
+			{
+				final EFamily prefix = EFamily.getEnum(t);
+
+				for (final String newType : WalkModifyQueueEntry.getQueueControl())
+				{
+					if (i++ == 0)
+					{
+						ms.setType(prefix + newType);
+					}
+					else
+					{
+						final JDFMessageService ms2 = (JDFMessageService) xjdf.copyElement(ms, null);
+						ms2.setType(prefix + newType);
+					}
+				}
+			}
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#getElementNames()
+		 */
+		@Override
+		public VString getElementNames()
+		{
+			return new VString("ResponseKnownMessages");
 		}
 
 	}

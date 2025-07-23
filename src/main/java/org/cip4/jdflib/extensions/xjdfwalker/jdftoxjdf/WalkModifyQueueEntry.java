@@ -36,10 +36,13 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import java.util.Collection;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.xjdfwalker.XJMFTypeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
@@ -49,7 +52,6 @@ import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams;
 import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams.eOperation;
 import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
@@ -57,6 +59,9 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class WalkModifyQueueEntry extends WalkMessage
 {
+	private static final StringArray QUEUE_CONTROL = new StringArray(
+			"AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetGangQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry", ",");
+
 	/**
 	 *
 	 */
@@ -88,7 +93,7 @@ public class WalkModifyQueueEntry extends WalkMessage
 		return m;
 	}
 
-	void updateMQP(JDFMessage m, final String id, final String originalType, final eOperation operation)
+	void updateMQP(final JDFMessage m, final String id, final String originalType, final eOperation operation)
 	{
 		XJMFTypeMap.getMap().put(id, originalType);
 		final JDFModifyQueueEntryParams modifyParams = (JDFModifyQueueEntryParams) m.getCreateElement(XJDFConstants.ModifyQueueEntryParams, null, 0);
@@ -121,7 +126,7 @@ public class WalkModifyQueueEntry extends WalkMessage
 		updateOP(m, operation, modifyParams, oldParams);
 	}
 
-	void updateOP(JDFMessage m, final eOperation operation, final JDFModifyQueueEntryParams modifyParams, final String oldParams)
+	void updateOP(final JDFMessage m, final eOperation operation, final JDFModifyQueueEntryParams modifyParams, final String oldParams)
 	{
 		final KElement op = m.getElement(oldParams);
 		if (op != null)
@@ -170,8 +175,17 @@ public class WalkModifyQueueEntry extends WalkMessage
 	 */
 	public static boolean isQueueControl(final String type)
 	{
-		return StringUtil.hasToken(
-				"AbortQueueEntry,HoldQueueEntry,RemoveQueueEntry,ResumeQueueEntry,SetGangQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,SuspendQueueEntry", type, ",", 0);
+		return QUEUE_CONTROL.contains(type);
+	}
+
+	/**
+	 *
+	 * @param type
+	 * @return
+	 */
+	public static Collection<String> getQueueControl()
+	{
+		return new StringArray(QUEUE_CONTROL);
 	}
 
 }
