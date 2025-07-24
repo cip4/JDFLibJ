@@ -378,32 +378,32 @@ class XJDFPrepWalker extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 */
 		@Override
-		public KElement walk(final KElement xjdf, final KElement dummy)
+		public KElement walk(final KElement resp, final KElement dummy)
 		{
-			splitMessageServices(xjdf);
-			return super.walk(xjdf, dummy);
+			splitModifyQueueEntry(resp);
+			return super.walk(resp, dummy);
 		}
 
-		void splitMessageServices(final KElement xjdf)
+		void splitModifyQueueEntry(final KElement xjdf)
 		{
 			final List<JDFMessageService> v = xjdf.getChildArrayByClass(JDFMessageService.class, false, 0);
 			for (final JDFMessageService ms : v)
 			{
-				splitMessageService(xjdf, ms);
+				splitModifyQueueEntry(xjdf, ms);
 			}
 		}
 
-		void splitMessageService(final KElement xjdf, final JDFMessageService ms)
+		void splitModifyQueueEntry(final KElement xjdf, final JDFMessageService ms)
 		{
-			int i = 0;
-			final String t = ms.getType();
-			if (t.endsWith(XJDFConstants.ModifyQueueEntry))
+			int n = 0;
+			final String typ = ms.getType();
+			if (typ.endsWith(XJDFConstants.ModifyQueueEntry))
 			{
-				final EFamily prefix = EFamily.getEnum(t);
+				final EFamily prefix = EFamily.getEnum(typ);
 
 				for (final String newType : WalkModifyQueueEntry.getQueueControl())
 				{
-					if (i++ == 0)
+					if (n++ == 0)
 					{
 						ms.setType(prefix + newType);
 					}
