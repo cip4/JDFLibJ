@@ -141,6 +141,78 @@ class JDFPageDataTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 */
+	@Test
+	void testGetPageIndex2()
+	{
+		final JDFPageData pd = pl.appendPageData();
+		pd.setPageIndex(3);
+		final JDFPageData pd4 = pl.appendPageData();
+		assertEquals(4, pd4.getPageIndex().getIntegerList().getInt(0));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetPageIndex3()
+	{
+		final JDFPageData pd = pl.appendPageData();
+		pd.setPageIndex(3);
+		for (int i = 0; i < 10000; i++)
+		{
+			pl.appendPageData();
+		}
+		final JDFPageData pd4 = pl.appendPageData();
+		assertEquals(10004, pd4.getPageIndex().getIntegerList().getInt(0));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetPageIndex4()
+	{
+		for (int i = 0; i < 1000; i++)
+		{
+			pl.appendPageData();
+		}
+		final JDFPageData pd = pl.appendPageData();
+		pd.setPageIndex(20000);
+		for (int i = 0; i < 10000; i++)
+		{
+			pl.appendPageData();
+		}
+		final JDFPageData pd4 = pl.appendPageData();
+		assertEquals(30001, pd4.getPageIndex().getIntegerList().getInt(0));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetPageIndex5()
+	{
+		for (int i = 0; i < 1000; i++)
+		{
+			pl.appendPageData();
+		}
+		final JDFPageData pd = pl.appendPageData();
+		pd.setPageIndex(1);
+		for (int i = 0; i < 10000; i++)
+		{
+			pl.appendPageData();
+		}
+		final JDFPageData pd4 = pl.appendPageData();
+		assertEquals(10002, pd4.getPageIndex().getIntegerList().getInt(0));
+
+	}
+
+	/**
 	*
 	*/
 	@Test
