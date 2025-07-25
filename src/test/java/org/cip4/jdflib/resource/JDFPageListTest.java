@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -114,34 +114,34 @@ class JDFPageListTest extends JDFTestCaseBase
 	@Test
 	void testContentData()
 	{
-		JDFContentData cd0 = cl.appendContentData();
+		final JDFContentData cd0 = cl.appendContentData();
 		// ToDo cd0.setAttribute(AttributeName.CONTENTLISTINDEX, "1 2 3");
-		KElement book = cd0.appendElement(ElementName.CONTENTMETADATA);
+		final KElement book = cd0.appendElement(ElementName.CONTENTMETADATA);
 		book.setAttribute("ISBN", "0123456789");
-		JDFComment abstrakt = (JDFComment) book.appendElement("Comment");
+		final JDFComment abstrakt = (JDFComment) book.appendElement("Comment");
 		abstrakt.setName("Abstract");
 		abstrakt.setText("Abstract of the book\nin english");
-		JDFEmployee editor = (JDFEmployee) book.appendElement(ElementName.EMPLOYEE);
+		final JDFEmployee editor = (JDFEmployee) book.appendElement(ElementName.EMPLOYEE);
 		editor.appendPerson().setFamilyName("authorName");
 		editor.setRoles(new VString("Editor", null));
 		book.setAttribute("Title", "book thing");
 		int p = 1;
 		for (int i = 1; i < 4; i++)
 		{
-			JDFContentData cd = cl.appendContentData();
+			final JDFContentData cd = cl.appendContentData();
 			cd.setAttribute("ID", "CD_" + i);
-			KElement chap = cd.appendElement(ElementName.CONTENTMETADATA);
+			final KElement chap = cd.appendElement(ElementName.CONTENTMETADATA);
 			chap.setAttribute("Title", "Chapter " + i);
-			JDFEmployee localAuthor = (JDFEmployee) chap.appendElement(ElementName.EMPLOYEE);
+			final JDFEmployee localAuthor = (JDFEmployee) chap.appendElement(ElementName.EMPLOYEE);
 			localAuthor.appendPerson().setFamilyName("authorName" + i);
 			localAuthor.setRoles(new VString("Author", null));
 
-			JDFPageData pd = pl.appendPageData();
-			JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
+			final JDFPageData pd = pl.appendPageData();
+			final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
 			integerRangeList.append(p, p + i);
 			p += i + 1;
 			pd.setAttribute("PageIndex", integerRangeList.toString());
-			JDFPageElement pe = pd.appendPageElement();
+			final JDFPageElement pe = pd.appendPageElement();
 			pe.setAttribute("ContentDataRefs", cd.getID());
 		}
 		pl.setXMLComment("Note that multiple page elements may but need not be specified\nit is also possible to reference only on pageEleemnt that spans the entire book", true);
@@ -158,9 +158,9 @@ class JDFPageListTest extends JDFTestCaseBase
 	void testContentDataFinishing() throws DataFormatException
 	{
 		testContentData();
-		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
-		JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.BlockName, "Stack1");
-		JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.BlockName, "Stack2");
+		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		final JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.BlockName, "Stack1");
+		final JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.BlockName, "Stack2");
 		c.refElement(pl);
 		c1.setPageListIndex(new JDFIntegerRangeList("0~8"));
 		c2.setPageListIndex(new JDFIntegerRangeList("9~16"));
@@ -176,9 +176,9 @@ class JDFPageListTest extends JDFTestCaseBase
 	void testGetNPage() throws Exception
 	{
 		assertEquals(pl.getNPage(), 0);
-		JDFPageData pd1 = pl.appendPageData();
+		final JDFPageData pd1 = pl.appendPageData();
 		assertEquals(pl.getNPage(), 1);
-		JDFPageData pd2 = pl.appendPageData();
+		final JDFPageData pd2 = pl.appendPageData();
 		assertEquals(pl.getNPage(), 2);
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 5"));
@@ -195,9 +195,9 @@ class JDFPageListTest extends JDFTestCaseBase
 	void testIsIndexed() throws Exception
 	{
 		assertTrue(pl.isIndexed());
-		JDFPageData pd1 = pl.appendPageData();
+		final JDFPageData pd1 = pl.appendPageData();
 		assertFalse(pl.isIndexed());
-		JDFPageData pd2 = pl.appendPageData();
+		final JDFPageData pd2 = pl.appendPageData();
 		assertFalse(pl.isIndexed());
 		pd1.setPageIndex(0);
 		assertFalse(pl.isIndexed());
@@ -216,9 +216,9 @@ class JDFPageListTest extends JDFTestCaseBase
 	void testIsNormal() throws Exception
 	{
 		assertTrue(pl.isNormal());
-		JDFPageData pd1 = pl.appendPageData();
+		final JDFPageData pd1 = pl.appendPageData();
 		assertFalse(pl.isNormal());
-		JDFPageData pd2 = pl.appendPageData();
+		final JDFPageData pd2 = pl.appendPageData();
 		assertFalse(pl.isNormal());
 		pd1.setPageIndex(0);
 		assertFalse(pl.isNormal());
@@ -237,9 +237,9 @@ class JDFPageListTest extends JDFTestCaseBase
 	void testUniqueIndex() throws Exception
 	{
 		assertTrue(pl.isNormal());
-		JDFPageData pd1 = pl.appendPageData();
+		final JDFPageData pd1 = pl.appendPageData();
 		assertFalse(pl.isNormal());
-		JDFPageData pd2 = pl.appendPageData();
+		final JDFPageData pd2 = pl.appendPageData();
 
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 3 4 5 "));
@@ -257,9 +257,9 @@ class JDFPageListTest extends JDFTestCaseBase
 	void testUniqueIndexMissing() throws Exception
 	{
 		assertTrue(pl.isNormal());
-		JDFPageData pd1 = pl.appendPageData();
+		final JDFPageData pd1 = pl.appendPageData();
 		assertFalse(pl.isNormal());
-		JDFPageData pd2 = pl.appendPageData();
+		final JDFPageData pd2 = pl.appendPageData();
 
 		pd1.setPageIndex(new JDFIntegerRangeList("0  4"));
 		pd2.setPageIndex(new JDFIntegerRangeList("1 8"));
@@ -280,8 +280,8 @@ class JDFPageListTest extends JDFTestCaseBase
 		assertTrue(pl.isNormal());
 		for (int i = 0; i <= 10000; i++)
 		{
-			JDFPageData pd = pl.appendPageData();
-			JDFIntegerRangeList irl = new JDFIntegerRangeList();
+			final JDFPageData pd = pl.appendPageData();
+			final JDFIntegerRangeList irl = new JDFIntegerRangeList();
 			irl.append(i);
 			irl.append(i * 4);
 			irl.append(i * 16);
@@ -302,8 +302,8 @@ class JDFPageListTest extends JDFTestCaseBase
 	void testGetPageDataByIndex() throws Exception
 	{
 		assertEquals(pl.getNPage(), 0);
-		JDFPageData pd1 = pl.appendPageData();
-		JDFPageData pd2 = pl.appendPageData();
+		final JDFPageData pd1 = pl.appendPageData();
+		final JDFPageData pd2 = pl.appendPageData();
 		assertEquals(pl.getPageDataByIndex(0), pd1);
 		assertEquals(pl.getPageDataByIndex(-2), pd1);
 		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
@@ -313,7 +313,33 @@ class JDFPageListTest extends JDFTestCaseBase
 		assertEquals(pl.getPageDataByIndex(-5), pd2);
 	}
 
-	// //////////////////////////////////////////////////////////////
+	/**
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	void testAssemblyIds() throws Exception
+	{
+		assertEquals("", pl.getAssemblyID());
+		assertEquals(new VString(), pl.getAssemblyIDs());
+		pl.setAssemblyID("a");
+		assertEquals("a", pl.getAssemblyID());
+		assertEquals(new VString("a"), pl.getAssemblyIDs());
+	}
+
+	/**
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	void testAssemblyId() throws Exception
+	{
+		assertEquals("", pl.getAssemblyID());
+		assertEquals(new VString(), pl.getAssemblyIDs());
+		pl.setAssemblyIDs(new VString("a"));
+		assertEquals("a", pl.getAssemblyID());
+		assertEquals(new VString("a"), pl.getAssemblyIDs());
+	}
 
 	@Override
 	@BeforeEach
@@ -323,7 +349,7 @@ class JDFPageListTest extends JDFTestCaseBase
 		d = new JDFDoc("JDF");
 		n = d.getJDFRoot();
 		n.setType(EnumType.Approval);
-		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		pl = rl.appendPageList();
 		pl.makeRootResource("PageList", null, true);
 

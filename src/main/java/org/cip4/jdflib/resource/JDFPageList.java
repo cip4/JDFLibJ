@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import java.util.Vector;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPageList;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.JDFPageData;
@@ -109,7 +110,7 @@ public class JDFPageList extends JDFAutoPageList
 	 * @throws DOMException
 	 * 
 	 */
-	public JDFPageList(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFPageList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -123,7 +124,7 @@ public class JDFPageList extends JDFAutoPageList
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPageList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPageList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -138,20 +139,41 @@ public class JDFPageList extends JDFAutoPageList
 	 * @throws DOMException
 	 * 
 	 */
-	public JDFPageList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFPageList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
-	 * toString
+	 * gets the AssemblyID but alse inherits from the parent PageList
 	 * 
-	 * @return String
+	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
 	 */
 	@Override
-	public String toString()
+	public VString getAssemblyIDs()
 	{
-		return "JDFPageList[  --> " + super.toString() + " ]";
+		if (!hasNonEmpty(AttributeName.ASSEMBLYIDS) && hasNonEmpty(AttributeName.ASSEMBLYID))
+		{
+			return new VString(super.getAssemblyID());
+		}
+		return super.getAssemblyIDs();
+	}
+
+	/**
+	 * gets the AssemblyID but alse inherits from the parent PageList
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
+	 */
+	@Override
+	public String getAssemblyID()
+	{
+		if (!hasNonEmpty(AttributeName.ASSEMBLYID) && hasNonEmpty(AttributeName.ASSEMBLYIDS))
+		{
+			final VString ids = super.getAssemblyIDs();
+			if (!StringUtil.isEmpty(ids))
+				return ids.get(0);
+		}
+		return super.getAssemblyID();
 	}
 
 	/**
@@ -162,18 +184,18 @@ public class JDFPageList extends JDFAutoPageList
 	 */
 	public int getNPage()
 	{
-		Vector<JDFPageData> vPages = getChildrenByClass(JDFPageData.class, false, 0);
-		if (vPages.size() > 0)
+		final List<JDFPageData> vPages = getChildArrayByClass(JDFPageData.class, false, 0);
+		if (!vPages.isEmpty())
 		{
-			JDFPageData pd0 = vPages.get(0);
+			final JDFPageData pd0 = vPages.get(0);
 			if (pd0.hasAttribute(AttributeName.PAGEINDEX))
 			{
 				int max = 0;
-				for (JDFPageData pd : vPages)
+				for (final JDFPageData pd : vPages)
 				{
-					JDFIntegerRangeList rl = pd.getPageIndex();
+					final JDFIntegerRangeList rl = pd.getPageIndex();
 					rl.normalize(true);
-					int n = rl.getElement(-1);
+					final int n = rl.getElement(-1);
 					if (n >= max)
 						max = n + 1;
 				}
@@ -204,15 +226,15 @@ public class JDFPageList extends JDFAutoPageList
 		if (index < 0)
 			return null;
 
-		Vector<JDFPageData> vPages = getChildrenByClass(JDFPageData.class, false, 0);
+		final Vector<JDFPageData> vPages = getChildrenByClass(JDFPageData.class, false, 0);
 		if (vPages.size() > 0)
 		{
-			JDFPageData pd0 = vPages.get(0);
+			final JDFPageData pd0 = vPages.get(0);
 			if (pd0.hasAttribute(AttributeName.PAGEINDEX))
 			{
-				for (JDFPageData pd : vPages)
+				for (final JDFPageData pd : vPages)
 				{
-					JDFIntegerRangeList rl = pd.getPageIndex();
+					final JDFIntegerRangeList rl = pd.getPageIndex();
 					if (rl.inRange(index))
 					{
 						return pd;
@@ -240,7 +262,7 @@ public class JDFPageList extends JDFAutoPageList
 	{
 		if (!isIndexed())
 		{
-			List<JDFPageData> v = getChildArrayByClass(JDFPageData.class, false, 0);
+			final List<JDFPageData> v = getChildArrayByClass(JDFPageData.class, false, 0);
 			if (v != null)
 			{
 				for (int i = 0; i < v.size(); i++)
@@ -251,24 +273,24 @@ public class JDFPageList extends JDFAutoPageList
 		}
 		else if (!isNormal())
 		{
-			List<JDFPageData> v = getChildArrayByClass(JDFPageData.class, false, 0);
+			final List<JDFPageData> v = getChildArrayByClass(JDFPageData.class, false, 0);
 			int lastEmpty = 0;
 			if (v != null)
 			{
-				int size = v.size();
+				final int size = v.size();
 				for (int i = 0; i < size; i++)
 				{
-					JDFPageData pageData = v.get(i);
-					JDFIntegerRangeList irl = pageData.getPageIndex();
+					final JDFPageData pageData = v.get(i);
+					final JDFIntegerRangeList irl = pageData.getPageIndex();
 					if (irl != null && irl.size() > 0)
 					{
-						JDFIntegerList il = irl.getIntegerList();
+						final JDFIntegerList il = irl.getIntegerList();
 						if (il.size() > 1)
 						{
 							pageData.setPageIndex(il.getInt(0));
 							for (int index = 1; index < il.size(); index++)
 							{
-								JDFPageData pd2 = (JDFPageData) copyElement(pageData, null);
+								final JDFPageData pd2 = (JDFPageData) copyElement(pageData, null);
 								pd2.setPageIndex(il.getInt(index));
 								v.add(pd2);
 							}
@@ -290,8 +312,8 @@ public class JDFPageList extends JDFAutoPageList
 				// bake in reordered list
 				for (int i = 0; i < v.size(); i++)
 				{
-					JDFPageData pd = v.get(i);
-					int index = StringUtil.parseInt(pd.getAttribute(AttributeName.PAGEINDEX), -1);
+					final JDFPageData pd = v.get(i);
+					final int index = StringUtil.parseInt(pd.getAttribute(AttributeName.PAGEINDEX), -1);
 
 					// remove any duplicates
 					if (index < i)
@@ -305,7 +327,7 @@ public class JDFPageList extends JDFAutoPageList
 						// insert missing dummies
 						while (index > i)
 						{
-							JDFPageData newPageData = appendPageData();
+							final JDFPageData newPageData = appendPageData();
 							v.add(i, newPageData);
 							newPageData.setPageIndex(i++);
 						}

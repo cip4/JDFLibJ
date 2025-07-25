@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,8 +83,10 @@ import org.cip4.jdflib.auto.JDFAutoPageData;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFPageList;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -104,7 +106,7 @@ public class JDFPageData extends JDFAutoPageData
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPageData(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFPageData(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -117,7 +119,7 @@ public class JDFPageData extends JDFAutoPageData
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFPageData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,30 +134,17 @@ public class JDFPageData extends JDFAutoPageData
 	 * @throws DOMException
 	 * 
 	 */
-	public JDFPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFPageData(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFPageData[  --> " + super.toString() + " ]";
 	}
 
 	/**
 	 * @param letter
 	 */
-	public void refContentData(JDFContentData letter)
+	public void refContentData(final JDFContentData letter)
 	{
-		JDFPageElement pe = appendPageElement();
+		final JDFPageElement pe = appendPageElement();
 		if (letter != null)
 			pe.setContentListIndex(letter.getIndex());
 	}
@@ -168,7 +157,7 @@ public class JDFPageData extends JDFAutoPageData
 	@Override
 	public JDFIntegerRangeList getPageIndex()
 	{
-		JDFIntegerRangeList pi = super.getPageIndex();
+		final JDFIntegerRangeList pi = super.getPageIndex();
 		if (pi != null && pi.size() > 0)
 			return pi;
 		KElement prev = getPreviousSiblingElement(ElementName.PAGEDATA, null);
@@ -178,7 +167,7 @@ public class JDFPageData extends JDFAutoPageData
 			n++;
 			prev = prev.getPreviousSiblingElement(ElementName.PAGEDATA, null);
 		}
-		JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
+		final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
 		integerRangeList.append(n);
 		return integerRangeList;
 	}
@@ -189,11 +178,37 @@ public class JDFPageData extends JDFAutoPageData
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
 	 */
 	@Override
+	public VString getAssemblyIDs()
+	{
+		if (hasNonEmpty(AttributeName.ASSEMBLYIDS))
+			return super.getAssemblyIDs();
+		if (hasNonEmpty(AttributeName.ASSEMBLYID))
+		{
+			return new VString(super.getAssemblyID());
+		}
+		final JDFPageList parent = getPageList();
+		if (parent != null)
+			return parent.getAssemblyIDs();
+		return super.getAssemblyIDs();
+	}
+
+	/**
+	 * gets the AssemblyID but alse inherits from the parent PageList
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
+	 */
+	@Override
 	public String getAssemblyID()
 	{
-		if (hasAttribute(AttributeName.ASSEMBLYID))
+		if (hasNonEmpty(AttributeName.ASSEMBLYID))
 			return super.getAssemblyID();
-		JDFPageList parent = getPageList();
+		if (hasNonEmpty(AttributeName.ASSEMBLYIDS))
+		{
+			final VString ids = super.getAssemblyIDs();
+			if (!StringUtil.isEmpty(ids))
+				return ids.get(0);
+		}
+		final JDFPageList parent = getPageList();
 		if (parent != null)
 			return parent.getAssemblyID();
 		return super.getAssemblyID();
@@ -206,7 +221,7 @@ public class JDFPageData extends JDFAutoPageData
 	 */
 	public JDFPageList getPageList()
 	{
-		KElement parent = getParentNode_KElement();
+		final KElement parent = getParentNode_KElement();
 		return (parent instanceof JDFPageList) ? (JDFPageList) parent : null;
 	}
 
@@ -217,7 +232,7 @@ public class JDFPageData extends JDFAutoPageData
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoPageData#setPageIndex(org.cip4.jdflib.datatypes.JDFIntegerRangeList)
 	 */
-	public void setPageIndex(int value)
+	public void setPageIndex(final int value)
 	{
 		setAttribute(AttributeName.PAGEINDEX, value, null);
 	}
