@@ -124,20 +124,20 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 *
 	 */
-	public static final String DATETIMEISO = "yyyy'-'MM'-'dd'T'HH:mm:ssZZ";
-	public static final String DATETIMEISO_MILLI = "yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ";
+	public static final String DATETIMEISO = "yyyy'-'MM'-'dd'T'HH:mm:ssZZZ";
+	public static final String DATETIMEISO_MILLI = "yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZZ";
 	/**
 	 * iso - seconds are 0
 	 */
-	public static final String DATETIMEISO_0 = "yyyy'-'MM'-'dd'T'HH:mm:'00'ZZ";
+	public static final String DATETIMEISO_0 = "yyyy'-'MM'-'dd'T'HH:mm:'00'ZZZ";
 	/**
 	 * iso - seconds + minutes are 0
 	 */
-	public static final String DATETIMEISO_00 = "yyyy'-'MM'-'dd'T'HH:'00':'00'ZZ";
+	public static final String DATETIMEISO_00 = "yyyy'-'MM'-'dd'T'HH:'00':'00'ZZZ";
 	/**
 	 * iso - seconds + minutes + hours are 0
 	 */
-	public static final String DATETIMEISO_000 = "yyyy'-'MM'-'dd'T00':'00':'00'ZZ";
+	public static final String DATETIMEISO_000 = "yyyy'-'MM'-'dd'T00':'00':'00'ZZZ";
 	/**
 	 *
 	 */

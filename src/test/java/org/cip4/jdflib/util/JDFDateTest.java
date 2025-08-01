@@ -903,8 +903,8 @@ class JDFDateTest extends JDFTestCaseBase
 		assertEquals("Nov 19 2008 - 20:00", date.getFormattedDateTime("MMM dd yyyy - HH:mm"));
 		assertEquals("300", date.getFormattedDateTime("SSS")); // test for milliseconds
 		assertEquals("300", date.getFormattedDateTime("S")); // test for milliseconds
-		assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
-		assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"));
+		assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZZ"));
+		assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"));
 		assertEquals("11 19-20:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));
 	}
 
