@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -152,6 +153,20 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 * Enumeration strings for PositionX
 	 */
 
+	public enum EPositionX
+	{
+		Center, Left, None, Right;
+
+		public static EPositionX getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPositionX.class, val, EPositionX.None);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PositionX
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPositionX extends ValuedEnum
 	{
@@ -213,6 +228,20 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		public static final EnumPositionX None = new EnumPositionX("None");
 		/**  */
 		public static final EnumPositionX Right = new EnumPositionX("Right");
+	}
+
+	/**
+	 * Enumeration strings for PositionY
+	 */
+
+	public enum EPositionY
+	{
+		Bottom, Center, None, Top;
+
+		public static EPositionY getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPositionY.class, val, EPositionY.None);
+		}
 	}
 
 	/**
@@ -294,6 +323,31 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPositionX(EPositionX enumVar)
+	{
+		setAttribute(AttributeName.POSITIONX, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PositionX
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPositionX getEPositionX()
+	{
+		return EPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, "None"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PositionX ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PositionX
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPositionX(EnumPositionX enumVar)
 	{
 		setAttribute(AttributeName.POSITIONX, enumVar == null ? null : enumVar.getName(), null);
@@ -317,6 +371,31 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPositionY(EPositionY enumVar)
+	{
+		setAttribute(AttributeName.POSITIONY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PositionY
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPositionY getEPositionY()
+	{
+		return EPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, "None"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PositionY ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PositionY
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPositionY(EnumPositionY enumVar)
 	{
 		setAttribute(AttributeName.POSITIONY, enumVar == null ? null : enumVar.getName(), null);

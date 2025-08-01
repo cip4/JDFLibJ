@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,7 @@ import org.cip4.jdflib.jmf.JDFTrigger;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -172,6 +173,20 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * Enumeration strings for ChannelMode
 	 */
 
+	public enum EChannelMode
+	{
+		FireAndForget, Reliable;
+
+		public static EChannelMode getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EChannelMode.class, val, EChannelMode.FireAndForget);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ChannelMode
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumChannelMode extends ValuedEnum
 	{
@@ -243,6 +258,31 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setChannelMode(EChannelMode enumVar)
+	{
+		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ChannelMode
+	 *
+	 * @return the value of the attribute
+	 */
+	public EChannelMode getEChannelMode()
+	{
+		return EChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ChannelMode
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setChannelMode(EnumChannelMode enumVar)
 	{
 		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);

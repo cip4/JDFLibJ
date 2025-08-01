@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -183,6 +184,20 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * Enumeration strings for Context
 	 */
 
+	public enum EContext
+	{
+		Resource, Link, JMF, Element;
+
+		public static EContext getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EContext.class, val, EContext.Resource);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Context
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumContext extends ValuedEnum
 	{
@@ -259,6 +274,32 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAvailability(JDFDeviceCap.EAvailability enumVar)
+	{
+		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Availability
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFDeviceCap.EAvailability getEAvailability()
+	{
+		return JDFDeviceCap.EAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, "Installed"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Availability
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Availability
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
 	{
 		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.getName(), null);
@@ -282,6 +323,31 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setContext(EContext enumVar)
+	{
+		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Context
+	 *
+	 * @return the value of the attribute
+	 */
+	public EContext getEContext()
+	{
+		return EContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "Resource"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Context
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setContext(EnumContext enumVar)
 	{
 		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.getName(), null);
@@ -379,6 +445,31 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setLinkUsage(JDFResourceLink.EUsage enumVar)
+	{
+		setAttribute(AttributeName.LINKUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute LinkUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFResourceLink.EUsage getELinkUsage()
+	{
+		return JDFResourceLink.EUsage.getEnum(getAttribute(AttributeName.LINKUSAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LinkUsage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute LinkUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setLinkUsage(JDFResourceLink.EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.LINKUSAGE, enumVar == null ? null : enumVar.getName(), null);

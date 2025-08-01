@@ -55,7 +55,7 @@ import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.time.FastDateFormat;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;

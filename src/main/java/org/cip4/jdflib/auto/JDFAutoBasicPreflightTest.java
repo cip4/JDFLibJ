@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPreflightArgument;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -163,6 +164,20 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	protected JDFAutoBasicPreflightTest(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for ListType
+	 */
+
+	public enum EListType
+	{
+		CompleteList, CompleteOrderedList, ContainedList, List, OrderedList, OrderedRangeList, Range, RangeList, SingleValue, Span, UniqueList, UniqueRangeList, UniqueOrderedList, UniqueOrderedRangeList;
+
+		public static EListType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EListType.class, val, EListType.SingleValue);
+		}
 	}
 
 	/**
@@ -336,6 +351,31 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setListType(EListType enumVar)
+	{
+		setAttribute(AttributeName.LISTTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ListType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EListType getEListType()
+	{
+		return EListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, "SingleValue"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ListType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ListType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setListType(EnumListType enumVar)
 	{
 		setAttribute(AttributeName.LISTTYPE, enumVar == null ? null : enumVar.getName(), null);

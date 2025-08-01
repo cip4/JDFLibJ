@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -143,6 +144,20 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	protected JDFAutoBoxArgument(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Box
+	 */
+
+	public enum EBox
+	{
+		ArtBox, BleedBox, CropBox, MarginsBox, MediaBox, SlugBox, TrimBox;
+
+		public static EBox getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBox.class, val, null);
+		}
 	}
 
 	/**
@@ -222,6 +237,20 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * Enumeration strings for MirrorMargins
 	 */
 
+	public enum EMirrorMargins
+	{
+		Vertical, Horizontal;
+
+		public static EMirrorMargins getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMirrorMargins.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MirrorMargins
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMirrorMargins extends ValuedEnum
 	{
@@ -293,6 +322,31 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBox(EBox enumVar)
+	{
+		setAttribute(AttributeName.BOX, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Box
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBox getEBox()
+	{
+		return EBox.getEnum(getAttribute(AttributeName.BOX, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Box
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBox(EnumBox enumVar)
 	{
 		setAttribute(AttributeName.BOX, enumVar == null ? null : enumVar.getName(), null);
@@ -317,6 +371,32 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMirrorMargins(EMirrorMargins enumVar)
+	{
+		setAttribute(AttributeName.MIRRORMARGINS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MirrorMargins
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMirrorMargins getEMirrorMargins()
+	{
+		return EMirrorMargins.getEnum(getAttribute(AttributeName.MIRRORMARGINS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MirrorMargins
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MirrorMargins
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMirrorMargins(EnumMirrorMargins enumVar)
 	{
 		setAttribute(AttributeName.MIRRORMARGINS, enumVar == null ? null : enumVar.getName(), null);

@@ -495,6 +495,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public static final EnumActivation Active = new EnumActivation(JDFConstants.ACTIVATION_ACTIVE);
 	}
 
+	public enum EActivation
+	{
+		Unknown, Inactive, Informativ, Held, TestRun, TestRunAndGo, Active;
+
+		public static EActivation getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(EActivation.class, name);
+		}
+	}
+
 	/**
 	 * Constants EnumActivation use EnumActivation.xxx instead of the deprecated constants EnumActivation.Activation_xxx
 	 */

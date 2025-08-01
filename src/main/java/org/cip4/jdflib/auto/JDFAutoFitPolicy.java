@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -150,6 +151,20 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * Enumeration strings for GutterPolicy
 	 */
 
+	public enum EGutterPolicy
+	{
+		Distribute, Fixed;
+
+		public static EGutterPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EGutterPolicy.class, val, EGutterPolicy.Fixed);
+		}
+	}
+
+	/**
+	 * Enumeration strings for GutterPolicy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumGutterPolicy extends ValuedEnum
 	{
@@ -207,6 +222,20 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 		public static final EnumGutterPolicy Distribute = new EnumGutterPolicy("Distribute");
 		/**  */
 		public static final EnumGutterPolicy Fixed = new EnumGutterPolicy("Fixed");
+	}
+
+	/**
+	 * Enumeration strings for RotatePolicy
+	 */
+
+	public enum ERotatePolicy
+	{
+		NoRotate, RotateOrthogonal, RotateClockwise, RotateCounterClockwise;
+
+		public static ERotatePolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ERotatePolicy.class, val, null);
+		}
 	}
 
 	/**
@@ -274,6 +303,20 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 		public static final EnumRotatePolicy RotateClockwise = new EnumRotatePolicy("RotateClockwise");
 		/**  */
 		public static final EnumRotatePolicy RotateCounterClockwise = new EnumRotatePolicy("RotateCounterClockwise");
+	}
+
+	/**
+	 * Enumeration strings for SizePolicy
+	 */
+
+	public enum ESizePolicy
+	{
+		ClipToMaxPage, Abort, FitToPage, ReduceToFit, Tile;
+
+		public static ESizePolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESizePolicy.class, val, null);
+		}
 	}
 
 	/**
@@ -383,6 +426,32 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setGutterPolicy(EGutterPolicy enumVar)
+	{
+		setAttribute(AttributeName.GUTTERPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute GutterPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EGutterPolicy getEGutterPolicy()
+	{
+		return EGutterPolicy.getEnum(getAttribute(AttributeName.GUTTERPOLICY, null, "Fixed"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GutterPolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute GutterPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setGutterPolicy(EnumGutterPolicy enumVar)
 	{
 		setAttribute(AttributeName.GUTTERPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -432,6 +501,32 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setRotatePolicy(ERotatePolicy enumVar)
+	{
+		setAttribute(AttributeName.ROTATEPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute RotatePolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public ERotatePolicy getERotatePolicy()
+	{
+		return ERotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RotatePolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute RotatePolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setRotatePolicy(EnumRotatePolicy enumVar)
 	{
 		setAttribute(AttributeName.ROTATEPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -455,6 +550,31 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSizePolicy(ESizePolicy enumVar)
+	{
+		setAttribute(AttributeName.SIZEPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SizePolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESizePolicy getESizePolicy()
+	{
+		return ESizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SizePolicy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SizePolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSizePolicy(EnumSizePolicy enumVar)
 	{
 		setAttribute(AttributeName.SIZEPOLICY, enumVar == null ? null : enumVar.getName(), null);

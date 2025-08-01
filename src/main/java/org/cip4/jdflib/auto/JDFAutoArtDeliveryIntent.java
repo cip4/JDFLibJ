@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.span.JDFSpanDeliveryCharge;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -184,6 +185,20 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * Enumeration strings for PreflightStatus
 	 */
 
+	public enum EPreflightStatus
+	{
+		NotPerformed, WithErrors, WithWarnings, WithoutErrors;
+
+		public static EPreflightStatus getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPreflightStatus.class, val, EPreflightStatus.NotPerformed);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PreflightStatus
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPreflightStatus extends ValuedEnum
 	{
@@ -260,6 +275,32 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPreflightStatus(EPreflightStatus enumVar)
+	{
+		setAttribute(AttributeName.PREFLIGHTSTATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PreflightStatus
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPreflightStatus getEPreflightStatus()
+	{
+		return EPreflightStatus.getEnum(getAttribute(AttributeName.PREFLIGHTSTATUS, null, "NotPerformed"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreflightStatus
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PreflightStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPreflightStatus(EnumPreflightStatus enumVar)
 	{
 		setAttribute(AttributeName.PREFLIGHTSTATUS, enumVar == null ? null : enumVar.getName(), null);

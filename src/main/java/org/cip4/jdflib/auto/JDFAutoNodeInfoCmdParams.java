@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -162,6 +163,20 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	protected JDFAutoNodeInfoCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for UpdateMethod
+	 */
+
+	public enum EUpdateMethod
+	{
+		Complete, Incremental, Remove;
+
+		public static EUpdateMethod getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EUpdateMethod.class, val, EUpdateMethod.Complete);
+		}
 	}
 
 	/**
@@ -312,6 +327,32 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setUpdateMethod(EUpdateMethod enumVar)
+	{
+		setAttribute(AttributeName.UPDATEMETHOD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute UpdateMethod
+	 *
+	 * @return the value of the attribute
+	 */
+	public EUpdateMethod getEUpdateMethod()
+	{
+		return EUpdateMethod.getEnum(getAttribute(AttributeName.UPDATEMETHOD, null, "Complete"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UpdateMethod
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute UpdateMethod
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setUpdateMethod(EnumUpdateMethod enumVar)
 	{
 		setAttribute(AttributeName.UPDATEMETHOD, enumVar == null ? null : enumVar.getName(), null);

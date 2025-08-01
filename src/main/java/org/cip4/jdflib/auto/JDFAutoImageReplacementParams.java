@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -194,6 +195,20 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * Enumeration strings for ImageReplacementStrategy
 	 */
 
+	public enum EImageReplacementStrategy
+	{
+		Omit, Proxy, Replace, AttemptReplacement;
+
+		public static EImageReplacementStrategy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EImageReplacementStrategy.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ImageReplacementStrategy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumImageReplacementStrategy extends ValuedEnum
 	{
@@ -255,6 +270,20 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 		public static final EnumImageReplacementStrategy Replace = new EnumImageReplacementStrategy("Replace");
 		/**  */
 		public static final EnumImageReplacementStrategy AttemptReplacement = new EnumImageReplacementStrategy("AttemptReplacement");
+	}
+
+	/**
+	 * Enumeration strings for ResolutionReductionStrategy
+	 */
+
+	public enum EResolutionReductionStrategy
+	{
+		Downsample, Subsample, Bicubic;
+
+		public static EResolutionReductionStrategy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EResolutionReductionStrategy.class, val, null);
+		}
 	}
 
 	/**
@@ -335,6 +364,32 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setImageReplacementStrategy(EImageReplacementStrategy enumVar)
+	{
+		setAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ImageReplacementStrategy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EImageReplacementStrategy getEImageReplacementStrategy()
+	{
+		return EImageReplacementStrategy.getEnum(getAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageReplacementStrategy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ImageReplacementStrategy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setImageReplacementStrategy(EnumImageReplacementStrategy enumVar)
 	{
 		setAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, enumVar == null ? null : enumVar.getName(), null);
@@ -431,6 +486,32 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setResolutionReductionStrategy(EResolutionReductionStrategy enumVar)
+	{
+		setAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ResolutionReductionStrategy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EResolutionReductionStrategy getEResolutionReductionStrategy()
+	{
+		return EResolutionReductionStrategy.getEnum(getAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ResolutionReductionStrategy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ResolutionReductionStrategy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setResolutionReductionStrategy(EnumResolutionReductionStrategy enumVar)
 	{
 		setAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -142,6 +143,20 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	protected JDFAutoRefAnchor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Anchor
+	 */
+
+	public enum EAnchor
+	{
+		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
+
+		public static EAnchor getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAnchor.class, val, null);
+		}
 	}
 
 	/**
@@ -225,6 +240,20 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * Enumeration strings for AnchorType
 	 */
 
+	public enum EAnchorType
+	{
+		Parent, Sibling;
+
+		public static EAnchorType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAnchorType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for AnchorType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAnchorType extends ValuedEnum
 	{
@@ -296,6 +325,31 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAnchor(EAnchor enumVar)
+	{
+		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Anchor
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAnchor getEAnchor()
+	{
+		return EAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Anchor
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
 	{
 		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
@@ -319,6 +373,31 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAnchorType(EAnchorType enumVar)
+	{
+		setAttribute(AttributeName.ANCHORTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute AnchorType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAnchorType getEAnchorType()
+	{
+		return EAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AnchorType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute AnchorType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAnchorType(EnumAnchorType enumVar)
 	{
 		setAttribute(AttributeName.ANCHORTYPE, enumVar == null ? null : enumVar.getName(), null);

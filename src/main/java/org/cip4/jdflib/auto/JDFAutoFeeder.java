@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFFeederQualityParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -173,6 +174,20 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 * Enumeration strings for FeederSynchronization
 	 */
 
+	public enum EFeederSynchronization
+	{
+		Alternate, Backup, Chain, Primary;
+
+		public static EFeederSynchronization getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFeederSynchronization.class, val, EFeederSynchronization.Primary);
+		}
+	}
+
+	/**
+	 * Enumeration strings for FeederSynchronization
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumFeederSynchronization extends ValuedEnum
 	{
@@ -234,6 +249,20 @@ public abstract class JDFAutoFeeder extends JDFElement
 		public static final EnumFeederSynchronization Chain = new EnumFeederSynchronization("Chain");
 		/**  */
 		public static final EnumFeederSynchronization Primary = new EnumFeederSynchronization("Primary");
+	}
+
+	/**
+	 * Enumeration strings for Opening
+	 */
+
+	public enum EOpening
+	{
+		Back, Front, None, Sucker;
+
+		public static EOpening getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOpening.class, val, EOpening.None);
+		}
 	}
 
 	/**
@@ -365,6 +394,32 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFeederSynchronization(EFeederSynchronization enumVar)
+	{
+		setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FeederSynchronization
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFeederSynchronization getEFeederSynchronization()
+	{
+		return EFeederSynchronization.getEnum(getAttribute(AttributeName.FEEDERSYNCHRONIZATION, null, "Primary"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FeederSynchronization
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FeederSynchronization
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFeederSynchronization(EnumFeederSynchronization enumVar)
 	{
 		setAttribute(AttributeName.FEEDERSYNCHRONIZATION, enumVar == null ? null : enumVar.getName(), null);
@@ -434,6 +489,31 @@ public abstract class JDFAutoFeeder extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOpening(EOpening enumVar)
+	{
+		setAttribute(AttributeName.OPENING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Opening
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOpening getEOpening()
+	{
+		return EOpening.getEnum(getAttribute(AttributeName.OPENING, null, "None"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Opening ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Opening
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOpening(EnumOpening enumVar)
 	{
 		setAttribute(AttributeName.OPENING, enumVar == null ? null : enumVar.getName(), null);

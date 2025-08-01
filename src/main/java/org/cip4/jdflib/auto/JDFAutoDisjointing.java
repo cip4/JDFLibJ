@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFInsertSheet;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -165,6 +166,20 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	protected JDFAutoDisjointing(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for OffsetDirection
+	 */
+
+	public enum EOffsetDirection
+	{
+		Alternate, Left, None, Right, Straight, SystemSpecified;
+
+		public static EOffsetDirection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOffsetDirection.class, val, null);
+		}
 	}
 
 	/**
@@ -323,6 +338,32 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOffsetDirection(EOffsetDirection enumVar)
+	{
+		setAttribute(AttributeName.OFFSETDIRECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute OffsetDirection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOffsetDirection getEOffsetDirection()
+	{
+		return EOffsetDirection.getEnum(getAttribute(AttributeName.OFFSETDIRECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OffsetDirection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute OffsetDirection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOffsetDirection(EnumOffsetDirection enumVar)
 	{
 		setAttribute(AttributeName.OFFSETDIRECTION, enumVar == null ? null : enumVar.getName(), null);

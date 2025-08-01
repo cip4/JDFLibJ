@@ -1083,6 +1083,7 @@ public final class AttributeName
 	public static final String FEEDERSYNCHRONIZATION = "FeederSynchronization";
 	/** */
 	public static final String FEEDERTYPE = "FeederType";
+	public static final String FEEDSHEETLAY = "FeedSheetLay";
 	/** */
 	public static final String FIELDRANGE = "FieldRange";
 	/** */

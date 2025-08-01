@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -141,6 +142,20 @@ public abstract class JDFAutoStack extends JDFElement
 	protected JDFAutoStack(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for LogicalStackSequence
+	 */
+
+	public enum ELogicalStackSequence
+	{
+		SheetIndex, DescendingSheetIndex;
+
+		public static ELogicalStackSequence getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ELogicalStackSequence.class, val, ELogicalStackSequence.SheetIndex);
+		}
 	}
 
 	/**
@@ -243,6 +258,32 @@ public abstract class JDFAutoStack extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setLogicalStackSequence(ELogicalStackSequence enumVar)
+	{
+		setAttribute(AttributeName.LOGICALSTACKSEQUENCE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute LogicalStackSequence
+	 *
+	 * @return the value of the attribute
+	 */
+	public ELogicalStackSequence getELogicalStackSequence()
+	{
+		return ELogicalStackSequence.getEnum(getAttribute(AttributeName.LOGICALSTACKSEQUENCE, null, "SheetIndex"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackSequence
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute LogicalStackSequence
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setLogicalStackSequence(EnumLogicalStackSequence enumVar)
 	{
 		setAttribute(AttributeName.LOGICALSTACKSEQUENCE, enumVar == null ? null : enumVar.getName(), null);

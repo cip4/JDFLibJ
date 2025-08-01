@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -169,6 +170,20 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * Enumeration strings for DefectType
 	 */
 
+	public enum EDefectType
+	{
+		FinishingDefect, ImageDefect, ImageFinishingDefect, Other, SheetDefect, SubstrateDefect;
+
+		public static EDefectType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDefectType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for DefectType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDefectType extends ValuedEnum
 	{
@@ -234,6 +249,20 @@ public abstract class JDFAutoDefect extends JDFElement
 		public static final EnumDefectType SheetDefect = new EnumDefectType("SheetDefect");
 		/**  */
 		public static final EnumDefectType SubstrateDefect = new EnumDefectType("SubstrateDefect");
+	}
+
+	/**
+	 * Enumeration strings for Face
+	 */
+
+	public enum EFace
+	{
+		Top, Bottom, Left, Right, Front, Back;
+
+		public static EFace getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFace.class, val, null);
+		}
 	}
 
 	/**
@@ -368,6 +397,31 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDefectType(EDefectType enumVar)
+	{
+		setAttribute(AttributeName.DEFECTTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DefectType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDefectType getEDefectType()
+	{
+		return EDefectType.getEnum(getAttribute(AttributeName.DEFECTTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefectType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DefectType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDefectType(EnumDefectType enumVar)
 	{
 		setAttribute(AttributeName.DEFECTTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -415,6 +469,31 @@ public abstract class JDFAutoDefect extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFace(EFace enumVar)
+	{
+		setAttribute(AttributeName.FACE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Face
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFace getEFace()
+	{
+		return EFace.getEnum(getAttribute(AttributeName.FACE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Face ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Face
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFace(EnumFace enumVar)
 	{
 		setAttribute(AttributeName.FACE, enumVar == null ? null : enumVar.getName(), null);

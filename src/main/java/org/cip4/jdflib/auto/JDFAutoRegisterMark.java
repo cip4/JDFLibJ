@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -182,6 +183,20 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for MarkUsage
+	 */
+
+	public enum EMarkUsage
+	{
+		Color, PaperPath, Tile;
+
+		public static EMarkUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMarkUsage.class, val, null);
+		}
 	}
 
 	/**
@@ -312,6 +327,31 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMarkUsage(EMarkUsage enumVar)
+	{
+		setAttribute(AttributeName.MARKUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MarkUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMarkUsage getEMarkUsage()
+	{
+		return EMarkUsage.getEnum(getAttribute(AttributeName.MARKUSAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkUsage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MarkUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMarkUsage(EnumMarkUsage enumVar)
 	{
 		setAttribute(AttributeName.MARKUSAGE, enumVar == null ? null : enumVar.getName(), null);

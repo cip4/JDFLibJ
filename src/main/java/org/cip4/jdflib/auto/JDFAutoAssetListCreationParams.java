@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -184,6 +185,20 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * Enumeration strings for ListPolicy
 	 */
 
+	public enum EListPolicy
+	{
+		All, Available;
+
+		public static EListPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EListPolicy.class, val, EListPolicy.All);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ListPolicy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumListPolicy extends ValuedEnum
 	{
@@ -255,6 +270,31 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setListPolicy(EListPolicy enumVar)
+	{
+		setAttribute(AttributeName.LISTPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ListPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EListPolicy getEListPolicy()
+	{
+		return EListPolicy.getEnum(getAttribute(AttributeName.LISTPOLICY, null, "All"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ListPolicy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ListPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setListPolicy(EnumListPolicy enumVar)
 	{
 		setAttribute(AttributeName.LISTPOLICY, enumVar == null ? null : enumVar.getName(), null);

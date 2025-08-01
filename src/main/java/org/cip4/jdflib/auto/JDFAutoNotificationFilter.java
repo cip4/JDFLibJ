@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,10 +71,11 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoNotification.EClass;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -348,9 +349,34 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	/**
 	 * (5.2) set attribute Classes
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setClasses(Vector<? extends ValuedEnum> v)
+	public void setEClasses(List<EClass> v)
+	{
+		setEnumsAttribute(AttributeName.CLASSES, v, null);
+	}
+
+	/**
+	 * (9.2) get Classes attribute Classes
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EClass> getEnumsClasses()
+	{
+		return getEnumerationsAttribute(AttributeName.CLASSES, null, EClass.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute Classes
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setClasses(List<EnumClass> v)
 	{
 		setEnumerationsAttribute(AttributeName.CLASSES, v, null);
 	}
@@ -360,7 +386,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getClasses()
+	public Vector<EnumClass> getClasses()
 	{
 		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClass.getEnum(0), false);
 	}

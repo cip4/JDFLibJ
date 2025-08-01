@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFDisposition;
 import org.cip4.jdflib.resource.process.JDFFileAlias;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -216,6 +217,20 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 * Enumeration strings for Disposition
 	 */
 
+	public enum EDisposition
+	{
+		Unlink, Delete, Retain;
+
+		public static EDisposition getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDisposition.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Disposition
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDisposition extends ValuedEnum
 	{
@@ -275,6 +290,20 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		public static final EnumDisposition Delete = new EnumDisposition("Delete");
 		/**  */
 		public static final EnumDisposition Retain = new EnumDisposition("Retain");
+	}
+
+	/**
+	 * Enumeration strings for OverwritePolicy
+	 */
+
+	public enum EOverwritePolicy
+	{
+		Overwrite, RenameNew, RenameOld, NewVersion, OperatorIntervention, Abort;
+
+		public static EOverwritePolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOverwritePolicy.class, val, null);
+		}
 	}
 
 	/**
@@ -346,6 +375,20 @@ public abstract class JDFAutoFileSpec extends JDFResource
 		public static final EnumOverwritePolicy OperatorIntervention = new EnumOverwritePolicy("OperatorIntervention");
 		/**  */
 		public static final EnumOverwritePolicy Abort = new EnumOverwritePolicy("Abort");
+	}
+
+	/**
+	 * Enumeration strings for PageOrder
+	 */
+
+	public enum EPageOrder
+	{
+		Ascending, Descending;
+
+		public static EPageOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPageOrder.class, val, null);
+		}
 	}
 
 	/**
@@ -538,6 +581,31 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDisposition(EDisposition enumVar)
+	{
+		setAttribute(AttributeName.DISPOSITION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Disposition
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDisposition getEDisposition()
+	{
+		return EDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Disposition ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Disposition
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDisposition(EnumDisposition enumVar)
 	{
 		setAttribute(AttributeName.DISPOSITION, enumVar == null ? null : enumVar.getName(), null);
@@ -796,6 +864,32 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOverwritePolicy(EOverwritePolicy enumVar)
+	{
+		setAttribute(AttributeName.OVERWRITEPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute OverwritePolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOverwritePolicy getEOverwritePolicy()
+	{
+		return EOverwritePolicy.getEnum(getAttribute(AttributeName.OVERWRITEPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverwritePolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute OverwritePolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOverwritePolicy(EnumOverwritePolicy enumVar)
 	{
 		setAttribute(AttributeName.OVERWRITEPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -842,6 +936,31 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPageOrder(EPageOrder enumVar)
+	{
+		setAttribute(AttributeName.PAGEORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PageOrder
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPageOrder getEPageOrder()
+	{
+		return EPageOrder.getEnum(getAttribute(AttributeName.PAGEORDER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageOrder ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PageOrder
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPageOrder(EnumPageOrder enumVar)
 	{
 		setAttribute(AttributeName.PAGEORDER, enumVar == null ? null : enumVar.getName(), null);

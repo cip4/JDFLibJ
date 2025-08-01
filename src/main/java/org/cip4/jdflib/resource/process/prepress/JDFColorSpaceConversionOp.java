@@ -81,7 +81,6 @@ package org.cip4.jdflib.resource.process.prepress;
 
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp;
 import org.cip4.jdflib.core.AttributeName;
@@ -224,7 +223,7 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	public void addSourceObject(final EnumSourceObjects val)
 	{
 		@SuppressWarnings("unchecked")
-		final Vector<ValuedEnum> v = (Vector<ValuedEnum>) getSourceObjects();
+		final Vector<EnumSourceObjects> v = getSourceObjects();
 		if (val != null && v == null)
 		{
 			setAttribute(AttributeName.SOURCEOBJECTS, val.getName());

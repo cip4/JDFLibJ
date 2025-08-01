@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -150,6 +151,20 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * Enumeration strings for CostType
 	 */
 
+	public enum ECostType
+	{
+		Chargeable, NonChargeable;
+
+		public static ECostType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECostType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for CostType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumCostType extends ValuedEnum
 	{
@@ -207,6 +222,20 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		public static final EnumCostType Chargeable = new EnumCostType("Chargeable");
 		/**  */
 		public static final EnumCostType NonChargeable = new EnumCostType("NonChargeable");
+	}
+
+	/**
+	 * Enumeration strings for DeviceOperationMode
+	 */
+
+	public enum EDeviceOperationMode
+	{
+		Productive, NonProductive, Maintenance;
+
+		public static EDeviceOperationMode getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDeviceOperationMode.class, val, null);
+		}
 	}
 
 	/**
@@ -272,6 +301,20 @@ public abstract class JDFAutoMISDetails extends JDFElement
 		public static final EnumDeviceOperationMode NonProductive = new EnumDeviceOperationMode("NonProductive");
 		/**  */
 		public static final EnumDeviceOperationMode Maintenance = new EnumDeviceOperationMode("Maintenance");
+	}
+
+	/**
+	 * Enumeration strings for WorkType
+	 */
+
+	public enum EWorkType
+	{
+		Original, Alteration, Rework;
+
+		public static EWorkType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EWorkType.class, val, null);
+		}
 	}
 
 	/**
@@ -374,6 +417,31 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCostType(ECostType enumVar)
+	{
+		setAttribute(AttributeName.COSTTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CostType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECostType getECostType()
+	{
+		return ECostType.getEnum(getAttribute(AttributeName.COSTTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CostType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CostType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCostType(EnumCostType enumVar)
 	{
 		setAttribute(AttributeName.COSTTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -398,6 +466,32 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDeviceOperationMode(EDeviceOperationMode enumVar)
+	{
+		setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DeviceOperationMode
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDeviceOperationMode getEDeviceOperationMode()
+	{
+		return EDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceOperationMode
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DeviceOperationMode
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
 	{
 		setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar == null ? null : enumVar.getName(), null);
@@ -421,6 +515,31 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setWorkType(EWorkType enumVar)
+	{
+		setAttribute(AttributeName.WORKTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute WorkType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EWorkType getEWorkType()
+	{
+		return EWorkType.getEnum(getAttribute(AttributeName.WORKTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute WorkType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setWorkType(EnumWorkType enumVar)
 	{
 		setAttribute(AttributeName.WORKTYPE, enumVar == null ? null : enumVar.getName(), null);

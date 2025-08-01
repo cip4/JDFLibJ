@@ -77,7 +77,7 @@ package org.cip4.jdflib.core;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class provides all version and build details of the library. Attention - this only works in case the library is built with maven

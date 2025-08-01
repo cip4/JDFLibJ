@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.resource.JDFBundleItem;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -190,6 +191,20 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * Enumeration strings for BundleType
 	 */
 
+	public enum EBundleType
+	{
+		BoundSet, Box, Carton, CollectedStack, CompensatedStack, Pallet, Roll, Sheet, SheetStream, Stack, StrappedStack, StrappedCompensatedStack, WrappedBundle;
+
+		public static EBundleType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBundleType.class, val, EBundleType.Stack);
+		}
+	}
+
+	/**
+	 * Enumeration strings for BundleType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBundleType extends ValuedEnum
 	{
@@ -283,6 +298,31 @@ public abstract class JDFAutoBundle extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBundleType(EBundleType enumVar)
+	{
+		setAttribute(AttributeName.BUNDLETYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BundleType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBundleType getEBundleType()
+	{
+		return EBundleType.getEnum(getAttribute(AttributeName.BUNDLETYPE, null, "Stack"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BundleType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BundleType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBundleType(EnumBundleType enumVar)
 	{
 		setAttribute(AttributeName.BUNDLETYPE, enumVar == null ? null : enumVar.getName(), null);

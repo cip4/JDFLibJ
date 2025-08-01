@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,7 @@ import org.cip4.jdflib.span.JDFShapeSpan;
 import org.cip4.jdflib.span.JDFSpanFinishedGrainDirection;
 import org.cip4.jdflib.span.JDFSpanSizePolicy;
 import org.cip4.jdflib.span.JDFXYPairSpan;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -183,6 +184,20 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 * Enumeration strings for FolioCount
 	 */
 
+	public enum EFolioCount
+	{
+		Booklet, Flat;
+
+		public static EFolioCount getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFolioCount.class, val, EFolioCount.Booklet);
+		}
+	}
+
+	/**
+	 * Enumeration strings for FolioCount
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumFolioCount extends ValuedEnum
 	{
@@ -246,6 +261,20 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 * Enumeration strings for FinishedPageOrientation
 	 */
 
+	public enum EFinishedPageOrientation
+	{
+		Portrait, Landscape;
+
+		public static EFinishedPageOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFinishedPageOrientation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for FinishedPageOrientation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumFinishedPageOrientation extends ValuedEnum
 	{
@@ -303,6 +332,20 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		public static final EnumFinishedPageOrientation Portrait = new EnumFinishedPageOrientation("Portrait");
 		/**  */
 		public static final EnumFinishedPageOrientation Landscape = new EnumFinishedPageOrientation("Landscape");
+	}
+
+	/**
+	 * Enumeration strings for Orientation
+	 */
+
+	public enum EOrientation
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, null);
+		}
 	}
 
 	/**
@@ -384,6 +427,20 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 * Enumeration strings for RotatePolicy
 	 */
 
+	public enum ERotatePolicy
+	{
+		NoRotate, RotateOrthogonal, RotateClockwise, RotateCounterClockwise;
+
+		public static ERotatePolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ERotatePolicy.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for RotatePolicy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumRotatePolicy extends ValuedEnum
 	{
@@ -451,6 +508,20 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 * Enumeration strings for SpreadType
 	 */
 
+	public enum ESpreadType
+	{
+		SinglePage, Spread;
+
+		public static ESpreadType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESpreadType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SpreadType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSpreadType extends ValuedEnum
 	{
@@ -508,6 +579,20 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 		public static final EnumSpreadType SinglePage = new EnumSpreadType("SinglePage");
 		/**  */
 		public static final EnumSpreadType Spread = new EnumSpreadType("Spread");
+	}
+
+	/**
+	 * Enumeration strings for Sides
+	 */
+
+	public enum ESides
+	{
+		OneSided, OneSidedBack, TwoSidedHeadToHead, TwoSidedHeadToFoot, Unprinted;
+
+		public static ESides getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESides.class, val, null);
+		}
 	}
 
 	/**
@@ -591,6 +676,31 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFolioCount(EFolioCount enumVar)
+	{
+		setAttribute(AttributeName.FOLIOCOUNT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FolioCount
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFolioCount getEFolioCount()
+	{
+		return EFolioCount.getEnum(getAttribute(AttributeName.FOLIOCOUNT, null, "Booklet"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FolioCount ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FolioCount
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFolioCount(EnumFolioCount enumVar)
 	{
 		setAttribute(AttributeName.FOLIOCOUNT, enumVar == null ? null : enumVar.getName(), null);
@@ -640,6 +750,32 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFinishedPageOrientation(EFinishedPageOrientation enumVar)
+	{
+		setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FinishedPageOrientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFinishedPageOrientation getEFinishedPageOrientation()
+	{
+		return EFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FinishedPageOrientation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FinishedPageOrientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
 	{
 		setAttribute(AttributeName.FINISHEDPAGEORIENTATION, enumVar == null ? null : enumVar.getName(), null);
@@ -663,6 +799,31 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrientation(EOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Orientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrientation getEOrientation()
+	{
+		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Orientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
@@ -687,6 +848,32 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setRotatePolicy(ERotatePolicy enumVar)
+	{
+		setAttribute(AttributeName.ROTATEPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute RotatePolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public ERotatePolicy getERotatePolicy()
+	{
+		return ERotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RotatePolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute RotatePolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setRotatePolicy(EnumRotatePolicy enumVar)
 	{
 		setAttribute(AttributeName.ROTATEPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -710,6 +897,31 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSpreadType(ESpreadType enumVar)
+	{
+		setAttribute(AttributeName.SPREADTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SpreadType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESpreadType getESpreadType()
+	{
+		return ESpreadType.getEnum(getAttribute(AttributeName.SPREADTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpreadType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SpreadType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSpreadType(EnumSpreadType enumVar)
 	{
 		setAttribute(AttributeName.SPREADTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -733,6 +945,31 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSides(ESides enumVar)
+	{
+		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Sides
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESides getESides()
+	{
+		return ESides.getEnum(getAttribute(AttributeName.SIDES, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Sides
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSides(EnumSides enumVar)
 	{
 		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);

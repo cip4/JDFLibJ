@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,10 +88,11 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDINGWIDTH, 0x2222222221l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDINGDISTANCE, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLDINGWIDTH, 0x2222222221l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
 	@Override
@@ -159,6 +160,30 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	/*
 	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldingDistance
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute FoldingDistance
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setFoldingDistance(double value)
+	{
+		setAttribute(AttributeName.FOLDINGDISTANCE, value, null);
+	}
+
+	/**
+	 * (17) get double attribute FoldingDistance
+	 *
+	 * @return double the value of the attribute
+	 */
+	public double getFoldingDistance()
+	{
+		return getRealAttribute(AttributeName.FOLDINGDISTANCE, null, 0.0);
+	}
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute FoldingWidth

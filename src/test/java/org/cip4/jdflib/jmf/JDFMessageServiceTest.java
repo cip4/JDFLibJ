@@ -76,7 +76,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -168,7 +167,7 @@ class JDFMessageServiceTest
 		final JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		final JDFMessageService ms = (JDFMessageService) doc.getRoot();
 		ms.setChannelMode(EnumChannelMode.FireAndForget);
-		final Vector<? extends ValuedEnum> channelMode = ms.getChannelMode();
+		final Vector<EnumChannelMode> channelMode = ms.getChannelMode();
 		ms.setChannelMode((EnumChannelMode) null);
 		ms.setChannelMode(channelMode);
 		assertEquals(EnumChannelMode.FireAndForget, channelMode.get(0));

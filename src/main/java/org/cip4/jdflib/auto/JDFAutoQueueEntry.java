@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,10 +86,12 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFGangSource;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -183,6 +185,20 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 * Enumeration strings for GangPolicy
 	 */
 
+	public enum EGangPolicy
+	{
+		Gang, GangAndForce, NoGang;
+
+		public static EGangPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EGangPolicy.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for GangPolicy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumGangPolicy extends ValuedEnum
 	{
@@ -242,6 +258,20 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 		public static final EnumGangPolicy GangAndForce = new EnumGangPolicy("GangAndForce");
 		/**  */
 		public static final EnumGangPolicy NoGang = new EnumGangPolicy("NoGang");
+	}
+
+	/**
+	 * Enumeration strings for QueueEntryStatus
+	 */
+
+	public enum EQueueEntryStatus
+	{
+		Running, Waiting, Held, Removed, Suspended, PendingReturn, Completed, Aborted;
+
+		public static EQueueEntryStatus getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EQueueEntryStatus.class, val, null);
+		}
 	}
 
 	/**
@@ -331,6 +361,31 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setActivation(EActivation enumVar)
+	{
+		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Activation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EActivation getEActivation()
+	{
+		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Activation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setActivation(EnumActivation enumVar)
 	{
 		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
@@ -430,6 +485,31 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setGangPolicy(EGangPolicy enumVar)
+	{
+		setAttribute(AttributeName.GANGPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute GangPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EGangPolicy getEGangPolicy()
+	{
+		return EGangPolicy.getEnum(getAttribute(AttributeName.GANGPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangPolicy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute GangPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setGangPolicy(EnumGangPolicy enumVar)
 	{
 		setAttribute(AttributeName.GANGPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -594,6 +674,31 @@ public abstract class JDFAutoQueueEntry extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setQueueEntryStatus(EQueueEntryStatus enumVar)
+	{
+		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Status
+	 *
+	 * @return the value of the attribute
+	 */
+	public EQueueEntryStatus getEQueueEntryStatus()
+	{
+		return EQueueEntryStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Status
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setQueueEntryStatus(EnumQueueEntryStatus enumVar)
 	{
 		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.getName(), null);

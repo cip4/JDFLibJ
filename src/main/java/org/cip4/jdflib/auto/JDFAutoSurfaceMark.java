@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.JDFScavengerArea;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -168,6 +169,20 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * Enumeration strings for Face
 	 */
 
+	public enum EFace
+	{
+		Top, Bottom, Left, Right, Front, Back;
+
+		public static EFace getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFace.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Face
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumFace extends ValuedEnum
 	{
@@ -240,24 +255,49 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Face ---------------------------------------------------------------------
+	 * --------------------------------------------------------------------- Methods for Attribute Surface ---------------------------------------------------------------------
 	 */
 	/**
-	 * (5) set attribute Face
+	 * (5) set attribute Surface
 	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSurface(final EFace enumVar)
+	{
+		setAttribute(AttributeName.SURFACE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Surface
+	 * 
+	 * @return the value of the attribute
+	 */
+	public EFace getESurface()
+	{
+		return EFace.getEnum(getAttribute(AttributeName.SURFACE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Surface ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Surface
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSurface(final EnumFace enumVar)
 	{
 		setAttribute(AttributeName.SURFACE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	 * (9) get attribute Face
+	 * (9) get attribute Surface
 	 * 
 	 * @return the value of the attribute
 	 */
-	public EnumFace getSurfsetSuace()
+	public EnumFace getSurface()
 	{
 		return EnumFace.getEnum(getAttribute(AttributeName.SURFACE, null, null));
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -158,6 +159,20 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for DueLevel
+	 */
+
+	public enum EDueLevel
+	{
+		Unknown, Trivial, Penalty, JobCancelled;
+
+		public static EDueLevel getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDueLevel.class, val, null);
+		}
 	}
 
 	/**
@@ -288,6 +303,31 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDueLevel(EDueLevel enumVar)
+	{
+		setAttribute(AttributeName.DUELEVEL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DueLevel
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDueLevel getEDueLevel()
+	{
+		return EDueLevel.getEnum(getAttribute(AttributeName.DUELEVEL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DueLevel ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DueLevel
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDueLevel(EnumDueLevel enumVar)
 	{
 		setAttribute(AttributeName.DUELEVEL, enumVar == null ? null : enumVar.getName(), null);
@@ -509,6 +549,31 @@ public abstract class JDFAutoNodeInfo extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setNodeStatus(EVersion enumVar)
+	{
+		setAttribute(AttributeName.NODESTATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute NodeStatus
+	 *
+	 * @return the value of the attribute
+	 */
+	public EVersion getENodeStatus()
+	{
+		return EVersion.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute NodeStatus ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute NodeStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setNodeStatus(EnumNodeStatus enumVar)
 	{
 		setAttribute(AttributeName.NODESTATUS, enumVar == null ? null : enumVar.getName(), null);

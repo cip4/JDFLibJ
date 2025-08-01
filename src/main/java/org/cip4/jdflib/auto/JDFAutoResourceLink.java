@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EUsage;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
@@ -95,6 +96,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLot;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -198,6 +200,20 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 * Enumeration strings for MinLateStatus
 	 */
 
+	public enum EMinLateStatus
+	{
+		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
+
+		public static EMinLateStatus getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMinLateStatus.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MinLateStatus
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMinLateStatus extends ValuedEnum
 	{
@@ -265,6 +281,20 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		public static final EnumMinLateStatus Complete = new EnumMinLateStatus("Complete");
 		/**  */
 		public static final EnumMinLateStatus Available = new EnumMinLateStatus("Available");
+	}
+
+	/**
+	 * Enumeration strings for MinStatus
+	 */
+
+	public enum EMinStatus
+	{
+		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
+
+		public static EMinStatus getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMinStatus.class, val, null);
+		}
 	}
 
 	/**
@@ -344,6 +374,20 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 * Enumeration strings for Orientation
 	 */
 
+	public enum EOrientation
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Orientation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
 	{
@@ -413,6 +457,20 @@ public abstract class JDFAutoResourceLink extends JDFElement
 		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
 		/**  */
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
+	}
+
+	/**
+	 * Enumeration strings for PipePartIDKeys
+	 */
+
+	public enum EPipePartIDKeys
+	{
+		BinderySignatureName, BinderySignaturePaginationIndex, BlockName, BundleItemIndex, CellIndex, Condition, DeliveryUnit0, DeliveryUnit1, DeliveryUnit2, DeliveryUnit3, DeliveryUnit4, DeliveryUnit5, DeliveryUnit6, DeliveryUnit7, DeliveryUnit8, DeliveryUnit9, DocCopies, DocIndex, DocRunIndex, DocSheetIndex, DocTags, Edition, EditionVersion, FountainNumber, ItemNames, LayerIDs, Location, Metadata0, Metadata1, Metadata2, Metadata3, Metadata4, Metadata5, Metadata6, Metadata7, Metadata8, Metadata9, Option, PageNumber, PageTags, PlateLayout, PartVersion, PreflightRule, ProductPart, PreviewType, RibbonName, Run, RunIndex, RunPage, RunTags, RunSet, SectionIndex, Separation, SetCopies, SetDocIndex, SetIndex, SetRunIndex, SetSheetIndex, SetTags, SheetIndex, SheetName, Side, SignatureName, StationName, SubRun, TileID, WebName, WebProduct, WebSetup;
+
+		public static EPipePartIDKeys getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPipePartIDKeys.class, val, null);
+		}
 	}
 
 	/**
@@ -816,6 +874,32 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMinLateStatus(JDFResource.EResourceClass enumVar)
+	{
+		setAttribute(AttributeName.MINLATESTATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MinLateStatus
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFResource.EResourceClass getEMinLateStatus()
+	{
+		return JDFResource.EResourceClass.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinLateStatus
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MinLateStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMinLateStatus(JDFResource.EnumResStatus enumVar)
 	{
 		setAttribute(AttributeName.MINLATESTATUS, enumVar == null ? null : enumVar.getName(), null);
@@ -839,6 +923,31 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMinStatus(JDFResource.EResourceClass enumVar)
+	{
+		setAttribute(AttributeName.MINSTATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MinStatus
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFResource.EResourceClass getEMinStatus()
+	{
+		return JDFResource.EResourceClass.getEnum(getAttribute(AttributeName.MINSTATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MinStatus ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MinStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMinStatus(JDFResource.EnumResStatus enumVar)
 	{
 		setAttribute(AttributeName.MINSTATUS, enumVar == null ? null : enumVar.getName(), null);
@@ -862,6 +971,31 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrientation(EOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Orientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrientation getEOrientation()
+	{
+		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Orientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
@@ -884,9 +1018,35 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	/**
 	 * (5.2) set attribute PipePartIDKeys
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setPipePartIDKeys(Vector<? extends ValuedEnum> v)
+	public void setEPipePartIDKeys(List<EPipePartIDKeys> v)
+	{
+		setEnumsAttribute(AttributeName.PIPEPARTIDKEYS, v, null);
+	}
+
+	/**
+	 * (9.2) get PipePartIDKeys attribute PipePartIDKeys
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EPipePartIDKeys> getEnumsPipePartIDKeys()
+	{
+		return getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EPipePartIDKeys.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PipePartIDKeys
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute PipePartIDKeys
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setPipePartIDKeys(List<EnumPipePartIDKeys> v)
 	{
 		setEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, v, null);
 	}
@@ -896,7 +1056,7 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getPipePartIDKeys()
+	public Vector<EnumPipePartIDKeys> getPipePartIDKeys()
 	{
 		return getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPipePartIDKeys.getEnum(0), false);
 	}
@@ -1199,6 +1359,31 @@ public abstract class JDFAutoResourceLink extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setUsage(EUsage enumVar)
+	{
+		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Usage
+	 *
+	 * @return the value of the attribute
+	 */
+	public EUsage getEUsage()
+	{
+		return EUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Usage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setUsage(EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);

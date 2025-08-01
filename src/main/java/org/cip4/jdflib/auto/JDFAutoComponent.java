@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,6 +102,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -229,6 +230,20 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * Enumeration strings for ComponentType
 	 */
 
+	public enum EComponentType
+	{
+		Block, Other, Ribbon, Sheet, Web, FinalProduct, PartialProduct, Proof;
+
+		public static EComponentType getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EComponentType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ComponentType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumComponentType extends ValuedEnum
 	{
@@ -304,6 +319,20 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * Enumeration strings for Automation
 	 */
 
+	public enum EAutomation
+	{
+		Static, Dynamic;
+
+		public static EAutomation getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAutomation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Automation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAutomation extends ValuedEnum
 	{
@@ -361,6 +390,20 @@ public abstract class JDFAutoComponent extends JDFResource
 		public static final EnumAutomation Static = new EnumAutomation("Static");
 		/**  */
 		public static final EnumAutomation Dynamic = new EnumAutomation("Dynamic");
+	}
+
+	/**
+	 * Enumeration strings for OverfoldSide
+	 */
+
+	public enum EOverfoldSide
+	{
+		Front, Back;
+
+		public static EOverfoldSide getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOverfoldSide.class, val, null);
+		}
 	}
 
 	/**
@@ -437,9 +480,35 @@ public abstract class JDFAutoComponent extends JDFResource
 	/**
 	 * (5.2) set attribute ComponentType
 	 * 
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setComponentType(final Vector<? extends ValuedEnum> v)
+	public void setEComponentType(final List<EComponentType> v)
+	{
+		setEnumsAttribute(AttributeName.COMPONENTTYPE, v, null);
+	}
+
+	/**
+	 * (9.2) get ComponentType attribute ComponentType
+	 * 
+	 * @return Vector of the enumerations
+	 */
+	public List<EComponentType> getEnumsComponentType()
+	{
+		return getEnumerationsAttribute(AttributeName.COMPONENTTYPE, null, EComponentType.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ComponentType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute ComponentType
+	 * 
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setComponentType(final List<EnumComponentType> v)
 	{
 		setEnumerationsAttribute(AttributeName.COMPONENTTYPE, v, null);
 	}
@@ -449,7 +518,7 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * 
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getComponentType()
+	public Vector<EnumComponentType> getComponentType()
 	{
 		return getEnumerationsAttribute(AttributeName.COMPONENTTYPE, null, EnumComponentType.getEnum(0), false);
 	}
@@ -488,6 +557,31 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAutomation(final EAutomation enumVar)
+	{
+		setAttribute(AttributeName.AUTOMATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Automation
+	 * 
+	 * @return the value of the attribute
+	 */
+	public EAutomation getEAutomation()
+	{
+		return EAutomation.getEnum(getAttribute(AttributeName.AUTOMATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Automation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Automation
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAutomation(final EnumAutomation enumVar)
 	{
 		setAttribute(AttributeName.AUTOMATION, enumVar == null ? null : enumVar.getName(), null);
@@ -655,6 +749,32 @@ public abstract class JDFAutoComponent extends JDFResource
 	 * 
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOverfoldSide(final EOverfoldSide enumVar)
+	{
+		setAttribute(AttributeName.OVERFOLDSIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute OverfoldSide
+	 * 
+	 * @return the value of the attribute
+	 */
+	public EOverfoldSide getEOverfoldSide()
+	{
+		return EOverfoldSide.getEnum(getAttribute(AttributeName.OVERFOLDSIDE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OverfoldSide
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute OverfoldSide
+	 * 
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOverfoldSide(final EnumOverfoldSide enumVar)
 	{
 		setAttribute(AttributeName.OVERFOLDSIDE, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFGangElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -184,6 +185,20 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * Enumeration strings for Policy
 	 */
 
+	public enum EPolicy
+	{
+		Gang, GangAndForce, NoGang;
+
+		public static EPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPolicy.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Policy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPolicy extends ValuedEnum
 	{
@@ -257,6 +272,31 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPolicy(EPolicy enumVar)
+	{
+		setAttribute(AttributeName.POLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Policy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPolicy getEPolicy()
+	{
+		return EPolicy.getEnum(getAttribute(AttributeName.POLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Policy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Policy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPolicy(EnumPolicy enumVar)
 	{
 		setAttribute(AttributeName.POLICY, enumVar == null ? null : enumVar.getName(), null);

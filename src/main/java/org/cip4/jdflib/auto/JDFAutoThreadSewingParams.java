@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -195,6 +196,20 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * Enumeration strings for CastingMaterial
 	 */
 
+	public enum ECastingMaterial
+	{
+		Cotton, Nylon, Polyester;
+
+		public static ECastingMaterial getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECastingMaterial.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for CastingMaterial
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumCastingMaterial extends ValuedEnum
 	{
@@ -260,6 +275,20 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * Enumeration strings for CoreMaterial
 	 */
 
+	public enum ECoreMaterial
+	{
+		Cotton, Nylon, Polyester;
+
+		public static ECoreMaterial getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECoreMaterial.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for CoreMaterial
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumCoreMaterial extends ValuedEnum
 	{
@@ -319,6 +348,20 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 		public static final EnumCoreMaterial Nylon = new EnumCoreMaterial("Nylon");
 		/**  */
 		public static final EnumCoreMaterial Polyester = new EnumCoreMaterial("Polyester");
+	}
+
+	/**
+	 * Enumeration strings for SewingPattern
+	 */
+
+	public enum ESewingPattern
+	{
+		Normal, Staggered, CombinedStaggered, Side;
+
+		public static ESewingPattern getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESewingPattern.class, val, null);
+		}
 	}
 
 	/**
@@ -424,6 +467,32 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCastingMaterial(ECastingMaterial enumVar)
+	{
+		setAttribute(AttributeName.CASTINGMATERIAL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CastingMaterial
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECastingMaterial getECastingMaterial()
+	{
+		return ECastingMaterial.getEnum(getAttribute(AttributeName.CASTINGMATERIAL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CastingMaterial
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CastingMaterial
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCastingMaterial(EnumCastingMaterial enumVar)
 	{
 		setAttribute(AttributeName.CASTINGMATERIAL, enumVar == null ? null : enumVar.getName(), null);
@@ -448,6 +517,32 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCoreMaterial(ECoreMaterial enumVar)
+	{
+		setAttribute(AttributeName.COREMATERIAL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CoreMaterial
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECoreMaterial getECoreMaterial()
+	{
+		return ECoreMaterial.getEnum(getAttribute(AttributeName.COREMATERIAL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CoreMaterial
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CoreMaterial
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCoreMaterial(EnumCoreMaterial enumVar)
 	{
 		setAttribute(AttributeName.COREMATERIAL, enumVar == null ? null : enumVar.getName(), null);
@@ -594,6 +689,32 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSewingPattern(ESewingPattern enumVar)
+	{
+		setAttribute(AttributeName.SEWINGPATTERN, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SewingPattern
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESewingPattern getESewingPattern()
+	{
+		return ESewingPattern.getEnum(getAttribute(AttributeName.SEWINGPATTERN, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SewingPattern
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SewingPattern
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSewingPattern(EnumSewingPattern enumVar)
 	{
 		setAttribute(AttributeName.SEWINGPATTERN, enumVar == null ? null : enumVar.getName(), null);

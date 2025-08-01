@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -167,6 +168,20 @@ public abstract class JDFAutoFontParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for CannotEmbedFontPolicy
+	 */
+
+	public enum ECannotEmbedFontPolicy
+	{
+		Warning, Error, OK;
+
+		public static ECannotEmbedFontPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECannotEmbedFontPolicy.class, val, ECannotEmbedFontPolicy.Warning);
+		}
 	}
 
 	/**
@@ -271,6 +286,32 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCannotEmbedFontPolicy(ECannotEmbedFontPolicy enumVar)
+	{
+		setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CannotEmbedFontPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECannotEmbedFontPolicy getECannotEmbedFontPolicy()
+	{
+		return ECannotEmbedFontPolicy.getEnum(getAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, null, "Warning"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CannotEmbedFontPolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CannotEmbedFontPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCannotEmbedFontPolicy(EnumCannotEmbedFontPolicy enumVar)
 	{
 		setAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, enumVar == null ? null : enumVar.getName(), null);

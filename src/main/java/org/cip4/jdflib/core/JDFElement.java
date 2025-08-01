@@ -119,6 +119,7 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
@@ -1598,6 +1599,26 @@ public class JDFElement extends KElement
 		public static final EnumPoolType AuditPool = new EnumPoolType(ElementName.AUDITPOOL);
 		/** * */
 		public static final EnumPoolType ProductionIntent = new EnumPoolType(ElementName.PRODUCTIONINTENT);
+	}
+
+	public enum ENodeStatus
+	{
+		Waiting, TestRunInProgress, Ready, FailedTestRun, Setup, InProgress, Cleanup, Spawned, Suspended, Stopped, Completed, Aborted, Part, Pool;
+
+		public static EVersion getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(EVersion.class, name);
+		}
+	}
+
+	public enum EVersion
+	{
+		Version_1_0, Version_1_1, Version_1_2, Version_1_3, Version_1_4, Version_1_5, Version_1_6, Version_1_7, Version_1_8, Version_1_9, Version_2_0, Version_2_1, Version_2_2, Version_2_3;
+
+		public static EVersion getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(EVersion.class, name);
+		}
 	}
 
 	/**
@@ -4361,10 +4382,10 @@ public class JDFElement extends KElement
 	 * @param bInherit if true, also recurse into parent elements when searching the attribute
 	 * @return Vector of ValuedEnum, null if no enum was set
 	 */
-	public Vector<? extends ValuedEnum> getEnumerationsAttribute(final String key, final String nameSpaceURI, final ValuedEnum enu, final boolean bInherit)
+	public <T extends ValuedEnum> Vector<T> getEnumerationsAttribute(final String key, final String nameSpaceURI, final T enu, final boolean bInherit)
 	{
 		String strAtt = null;
-		final Vector<ValuedEnum> vEnum = new Vector<>();
+		final Vector<T> vEnum = new Vector<>();
 
 		if (bInherit)
 		{
@@ -4388,7 +4409,7 @@ public class JDFElement extends KElement
 			for (int i = 0; i < vAtts.size(); i++)
 			{
 				final Object args[] = { vAtts.elementAt(i) };
-				final ValuedEnum ve = (ValuedEnum) m.invoke(null, args);
+				final T ve = (T) m.invoke(null, args);
 				// there was an invalid token
 				if (ve != null)
 				{
@@ -4406,24 +4427,59 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * defines an enumerated list of attributes; used by the automated code generator
+	 *
+	 * @param key the attribute local name
+	 * @param nameSpaceURI the namespace URI
+	 * @param enu a dummy enumeration of the correct type, typically EnumXYZ.getEnum(0)
+	 * @param bInherit if true, also recurse into parent elements when searching the attribute
+	 * @return Vector of ValuedEnum, null if no enum was set
+	 */
+	public <T extends Enum<T>> List<T> getEnumerationsAttribute(final String key, final T def, final Class<T> c)
+	{
+		final String val = getAttribute(key);
+		return JavaEnumUtil.getEnumList(c, val, false);
+	}
+
+	public <T extends Enum<T>> void setEnumsAttribute(final String key, final List<T> v, final String nameSpaceURI)
+	{
+		String s = null;
+		if (v != null)
+		{
+			for (final T o : v)
+			{
+				if (s != null)
+				{
+					s += JDFConstants.BLANK;
+				}
+				else
+				{
+					s = "";
+				}
+
+				s += o.name();
+			}
+		}
+		setAttribute(key, s, nameSpaceURI);
+
+	}
+
+	/**
 	 * set an enumerated list of attributes; used by the automated code generator
 	 *
 	 * @param key the attribute name
-	 * @param value the enumeration vector
+	 * @param values the enumeration vector
 	 * @param nameSpaceURI attribute namespace uri
 	 * @throws JDFException wrong data type in vector
 	 */
-	protected void setEnumerationsAttribute(final String key, final Vector<? extends ValuedEnum> value, final String nameSpaceURI)
+	protected void setEnumerationsAttribute(final String key, final List<? extends ValuedEnum> values, final String nameSpaceURI)
 	{
 		String s = null;
-		if (value != null)
+		if (values != null)
 		{
-			int n = 0;
-			final Iterator<? extends ValuedEnum> valueIterator = value.iterator();
-			while (valueIterator.hasNext())
+			for (final ValuedEnum o : values)
 			{
-				final ValuedEnum o = valueIterator.next();
-				if (n++ > 0)
+				if (s != null)
 				{
 					s += JDFConstants.BLANK;
 				}

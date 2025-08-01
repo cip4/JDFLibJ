@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -179,6 +180,19 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * Enumeration strings for AllowedValueList
 	 */
 
+	public enum EAllowedValueList
+	{
+		;
+		public static EAllowedValueList getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAllowedValueList.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for AllowedValueList
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAllowedValueList extends ValuedEnum
 	{
@@ -232,6 +246,19 @@ public abstract class JDFAutoBooleanState extends JDFResource
 			return iterator(EnumAllowedValueList.class);
 		}
 
+	}
+
+	/**
+	 * Enumeration strings for PresentValueList
+	 */
+
+	public enum EPresentValueList
+	{
+		;
+		public static EPresentValueList getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPresentValueList.class, val, null);
+		}
 	}
 
 	/**
@@ -304,9 +331,35 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	/**
 	 * (5.2) set attribute AllowedValueList
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setAllowedValueList(Vector<? extends ValuedEnum> v)
+	public void setEAllowedValueList(List<EAllowedValueList> v)
+	{
+		setEnumsAttribute(AttributeName.ALLOWEDVALUELIST, v, null);
+	}
+
+	/**
+	 * (9.2) get AllowedValueList attribute AllowedValueList
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EAllowedValueList> getEnumsAllowedValueList()
+	{
+		return getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EAllowedValueList.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute AllowedValueList
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setAllowedValueList(List<EnumAllowedValueList> v)
 	{
 		setEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, v, null);
 	}
@@ -316,7 +369,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getAllowedValueList()
+	public Vector<EnumAllowedValueList> getAllowedValueList()
 	{
 		return getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumAllowedValueList.getEnum(0), false);
 	}
@@ -376,9 +429,35 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	/**
 	 * (5.2) set attribute PresentValueList
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setPresentValueList(Vector<? extends ValuedEnum> v)
+	public void setEPresentValueList(List<EPresentValueList> v)
+	{
+		setEnumsAttribute(AttributeName.PRESENTVALUELIST, v, null);
+	}
+
+	/**
+	 * (9.2) get PresentValueList attribute PresentValueList
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EPresentValueList> getEnumsPresentValueList()
+	{
+		return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST, null, EPresentValueList.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute PresentValueList
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setPresentValueList(List<EnumPresentValueList> v)
 	{
 		setEnumerationsAttribute(AttributeName.PRESENTVALUELIST, v, null);
 	}
@@ -388,7 +467,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getPresentValueList()
+	public Vector<EnumPresentValueList> getPresentValueList()
 	{
 		return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST, null, EnumPresentValueList.getEnum(0), false);
 	}

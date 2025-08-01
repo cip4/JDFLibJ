@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,6 +96,7 @@ import org.cip4.jdflib.resource.process.JDFInsertSheet;
 import org.cip4.jdflib.resource.process.JDFInterpretedPDLData;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMetadataMap;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -228,6 +229,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * Enumeration strings for Automation
 	 */
 
+	public enum EAutomation
+	{
+		Static, Dynamic;
+
+		public static EAutomation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAutomation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Automation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAutomation extends ValuedEnum
 	{
@@ -285,6 +300,20 @@ public abstract class JDFAutoRunList extends JDFResource
 		public static final EnumAutomation Static = new EnumAutomation("Static");
 		/**  */
 		public static final EnumAutomation Dynamic = new EnumAutomation("Dynamic");
+	}
+
+	/**
+	 * Enumeration strings for ComponentGranularity
+	 */
+
+	public enum EComponentGranularity
+	{
+		Page, Document, Set, All, BundleItem;
+
+		public static EComponentGranularity getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EComponentGranularity.class, val, null);
+		}
 	}
 
 	/**
@@ -354,6 +383,20 @@ public abstract class JDFAutoRunList extends JDFResource
 		public static final EnumComponentGranularity All = new EnumComponentGranularity("All");
 		/**  */
 		public static final EnumComponentGranularity BundleItem = new EnumComponentGranularity("BundleItem");
+	}
+
+	/**
+	 * Enumeration strings for IgnoreContext
+	 */
+
+	public enum EIgnoreContext
+	{
+		BinderySignatureName, BinderySignaturePaginationIndex, BlockName, BundleItemIndex, CellIndex, Condition, DeliveryUnit0, DeliveryUnit1, DeliveryUnit2, DeliveryUnit3, DeliveryUnit4, DeliveryUnit5, DeliveryUnit6, DeliveryUnit7, DeliveryUnit8, DeliveryUnit9, DocCopies, DocIndex, DocRunIndex, DocSheetIndex, DocTags, Edition, EditionVersion, FountainNumber, ItemNames, LayerIDs, Location, Metadata0, Metadata1, Metadata2, Metadata3, Metadata4, Metadata5, Metadata6, Metadata7, Metadata8, Metadata9, Option, PageNumber, PageTags, PlateLayout, PartVersion, PreflightRule, ProductPart, PreviewType, RibbonName, Run, RunIndex, RunPage, RunTags, RunSet, SectionIndex, Separation, SetCopies, SetDocIndex, SetIndex, SetRunIndex, SetSheetIndex, SetTags, SheetIndex, SheetName, Side, SignatureName, StationName, SubRun, TileID, WebName, WebProduct, WebSetup;
+
+		public static EIgnoreContext getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EIgnoreContext.class, val, null);
+		}
 	}
 
 	/**
@@ -557,6 +600,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * Enumeration strings for SheetSides
 	 */
 
+	public enum ESheetSides
+	{
+		Front, Back, FrontBack, BackFront;
+
+		public static ESheetSides getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetSides.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SheetSides
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetSides extends ValuedEnum
 	{
@@ -701,6 +758,31 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAutomation(EAutomation enumVar)
+	{
+		setAttribute(AttributeName.AUTOMATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Automation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAutomation getEAutomation()
+	{
+		return EAutomation.getEnum(getAttribute(AttributeName.AUTOMATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Automation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Automation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAutomation(EnumAutomation enumVar)
 	{
 		setAttribute(AttributeName.AUTOMATION, enumVar == null ? null : enumVar.getName(), null);
@@ -725,6 +807,32 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setComponentGranularity(EComponentGranularity enumVar)
+	{
+		setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ComponentGranularity
+	 *
+	 * @return the value of the attribute
+	 */
+	public EComponentGranularity getEComponentGranularity()
+	{
+		return EComponentGranularity.getEnum(getAttribute(AttributeName.COMPONENTGRANULARITY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ComponentGranularity
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ComponentGranularity
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setComponentGranularity(EnumComponentGranularity enumVar)
 	{
 		setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar == null ? null : enumVar.getName(), null);
@@ -965,6 +1073,32 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setIgnoreContext(EIgnoreContext enumVar)
+	{
+		setAttribute(AttributeName.IGNORECONTEXT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute IgnoreContext
+	 *
+	 * @return the value of the attribute
+	 */
+	public EIgnoreContext getEIgnoreContext()
+	{
+		return EIgnoreContext.getEnum(getAttribute(AttributeName.IGNORECONTEXT, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IgnoreContext
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute IgnoreContext
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setIgnoreContext(EnumIgnoreContext enumVar)
 	{
 		setAttribute(AttributeName.IGNORECONTEXT, enumVar == null ? null : enumVar.getName(), null);
@@ -1229,6 +1363,31 @@ public abstract class JDFAutoRunList extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetSides(ESheetSides enumVar)
+	{
+		setAttribute(AttributeName.SHEETSIDES, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetSides
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetSides getESheetSides()
+	{
+		return ESheetSides.getEnum(getAttribute(AttributeName.SHEETSIDES, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetSides ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetSides
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetSides(EnumSheetSides enumVar)
 	{
 		setAttribute(AttributeName.SHEETSIDES, enumVar == null ? null : enumVar.getName(), null);

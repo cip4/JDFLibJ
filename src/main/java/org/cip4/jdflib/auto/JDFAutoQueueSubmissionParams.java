@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFDisposition;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -166,6 +167,20 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	protected JDFAutoQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for GangPolicy
+	 */
+
+	public enum EGangPolicy
+	{
+		Gang, GangAndForce, NoGang;
+
+		public static EGangPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EGangPolicy.class, val, null);
+		}
 	}
 
 	/**
@@ -268,6 +283,31 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setGangPolicy(EGangPolicy enumVar)
+	{
+		setAttribute(AttributeName.GANGPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute GangPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EGangPolicy getEGangPolicy()
+	{
+		return EGangPolicy.getEnum(getAttribute(AttributeName.GANGPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GangPolicy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute GangPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setGangPolicy(EnumGangPolicy enumVar)
 	{
 		setAttribute(AttributeName.GANGPOLICY, enumVar == null ? null : enumVar.getName(), null);

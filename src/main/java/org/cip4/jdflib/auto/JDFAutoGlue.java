@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -163,6 +164,20 @@ public abstract class JDFAutoGlue extends JDFElement
 	 * Enumeration strings for WorkingDirection
 	 */
 
+	public enum EWorkingDirection
+	{
+		Top, Bottom;
+
+		public static EWorkingDirection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EWorkingDirection.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for WorkingDirection
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumWorkingDirection extends ValuedEnum
 	{
@@ -235,6 +250,32 @@ public abstract class JDFAutoGlue extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setWorkingDirection(EWorkingDirection enumVar)
+	{
+		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute WorkingDirection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EWorkingDirection getEWorkingDirection()
+	{
+		return EWorkingDirection.getEnum(getAttribute(AttributeName.WORKINGDIRECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute WorkingDirection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setWorkingDirection(EnumWorkingDirection enumVar)
 	{
 		setAttribute(AttributeName.WORKINGDIRECTION, enumVar == null ? null : enumVar.getName(), null);

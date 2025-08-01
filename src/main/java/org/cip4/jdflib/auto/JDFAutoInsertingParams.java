@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -186,6 +187,20 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * Enumeration strings for InsertLocation
 	 */
 
+	public enum EInsertLocation
+	{
+		Front, Back, OverfoldLeft, OverfoldRight, Overfold, FinishedPage;
+
+		public static EInsertLocation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EInsertLocation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for InsertLocation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumInsertLocation extends ValuedEnum
 	{
@@ -251,6 +266,20 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 		public static final EnumInsertLocation Overfold = new EnumInsertLocation("Overfold");
 		/**  */
 		public static final EnumInsertLocation FinishedPage = new EnumInsertLocation("FinishedPage");
+	}
+
+	/**
+	 * Enumeration strings for Method
+	 */
+
+	public enum EMethod
+	{
+		BlowIn, BindIn;
+
+		public static EMethod getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMethod.class, val, EMethod.BlowIn);
+		}
 	}
 
 	/**
@@ -329,6 +358,32 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setInsertLocation(EInsertLocation enumVar)
+	{
+		setAttribute(AttributeName.INSERTLOCATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute InsertLocation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EInsertLocation getEInsertLocation()
+	{
+		return EInsertLocation.getEnum(getAttribute(AttributeName.INSERTLOCATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InsertLocation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute InsertLocation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setInsertLocation(EnumInsertLocation enumVar)
 	{
 		setAttribute(AttributeName.INSERTLOCATION, enumVar == null ? null : enumVar.getName(), null);
@@ -352,6 +407,31 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMethod(EMethod enumVar)
+	{
+		setAttribute(AttributeName.METHOD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Method
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMethod getEMethod()
+	{
+		return EMethod.getEnum(getAttribute(AttributeName.METHOD, null, "BlowIn"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Method
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMethod(EnumMethod enumVar)
 	{
 		setAttribute(AttributeName.METHOD, enumVar == null ? null : enumVar.getName(), null);

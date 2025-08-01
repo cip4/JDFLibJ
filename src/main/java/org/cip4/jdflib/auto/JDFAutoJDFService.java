@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -144,6 +145,20 @@ public abstract class JDFAutoJDFService extends JDFElement
 	protected JDFAutoJDFService(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for CombinedMethod
+	 */
+
+	public enum ECombinedMethod
+	{
+		Combined, CombinedProcessGroup, GrayBox, ProcessGroup, None;
+
+		public static ECombinedMethod getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECombinedMethod.class, val, null);
+		}
 	}
 
 	/**
@@ -213,6 +228,20 @@ public abstract class JDFAutoJDFService extends JDFElement
 		public static final EnumCombinedMethod ProcessGroup = new EnumCombinedMethod("ProcessGroup");
 		/**  */
 		public static final EnumCombinedMethod None = new EnumCombinedMethod("None");
+	}
+
+	/**
+	 * Enumeration strings for TypeOrder
+	 */
+
+	public enum ETypeOrder
+	{
+		Fixed, Unordered, Unrestricted;
+
+		public static ETypeOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETypeOrder.class, val, null);
+		}
 	}
 
 	/**
@@ -293,6 +322,32 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCombinedMethod(ECombinedMethod enumVar)
+	{
+		setAttribute(AttributeName.COMBINEDMETHOD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CombinedMethod
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECombinedMethod getECombinedMethod()
+	{
+		return ECombinedMethod.getEnum(getAttribute(AttributeName.COMBINEDMETHOD, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CombinedMethod
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CombinedMethod
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCombinedMethod(EnumCombinedMethod enumVar)
 	{
 		setAttribute(AttributeName.COMBINEDMETHOD, enumVar == null ? null : enumVar.getName(), null);
@@ -339,6 +394,31 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTypeOrder(ETypeOrder enumVar)
+	{
+		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute TypeOrder
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETypeOrder getETypeOrder()
+	{
+		return ETypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TypeOrder ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute TypeOrder
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTypeOrder(EnumTypeOrder enumVar)
 	{
 		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.getName(), null);

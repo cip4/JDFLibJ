@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -161,6 +162,20 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for Diffusion
+	 */
+
+	public enum EDiffusion
+	{
+		On, Off;
+
+		public static EDiffusion getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDiffusion.class, val, null);
+		}
 	}
 
 	/**
@@ -261,6 +276,31 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDiffusion(EDiffusion enumVar)
+	{
+		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Diffusion
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDiffusion getEDiffusion()
+	{
+		return EDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Diffusion ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Diffusion
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDiffusion(EnumDiffusion enumVar)
 	{
 		setAttribute(AttributeName.DIFFUSION, enumVar == null ? null : enumVar.getName(), null);

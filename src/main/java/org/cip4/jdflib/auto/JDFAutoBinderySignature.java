@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFDieLayout;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.postpress.JDFFold;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -212,6 +213,20 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * Enumeration strings for BinderySignatureType
 	 */
 
+	public enum EBinderySignatureType
+	{
+		Die, Fold, Grid;
+
+		public static EBinderySignatureType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBinderySignatureType.class, val, EBinderySignatureType.Fold);
+		}
+	}
+
+	/**
+	 * Enumeration strings for BinderySignatureType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBinderySignatureType extends ValuedEnum
 	{
@@ -271,6 +286,20 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		public static final EnumBinderySignatureType Fold = new EnumBinderySignatureType("Fold");
 		/**  */
 		public static final EnumBinderySignatureType Grid = new EnumBinderySignatureType("Grid");
+	}
+
+	/**
+	 * Enumeration strings for BindingEdge
+	 */
+
+	public enum EBindingEdge
+	{
+		Left, Right, Top, Bottom, None;
+
+		public static EBindingEdge getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBindingEdge.class, val, EBindingEdge.Left);
+		}
 	}
 
 	/**
@@ -346,6 +375,20 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * Enumeration strings for JogEdge
 	 */
 
+	public enum EJogEdge
+	{
+		Left, Right, Top, Bottom, None;
+
+		public static EJogEdge getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EJogEdge.class, val, EJogEdge.Top);
+		}
+	}
+
+	/**
+	 * Enumeration strings for JogEdge
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumJogEdge extends ValuedEnum
 	{
@@ -409,6 +452,20 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		public static final EnumJogEdge Bottom = new EnumJogEdge("Bottom");
 		/**  */
 		public static final EnumJogEdge None = new EnumJogEdge("None");
+	}
+
+	/**
+	 * Enumeration strings for BindingOrientation
+	 */
+
+	public enum EBindingOrientation
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EBindingOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBindingOrientation.class, val, null);
+		}
 	}
 
 	/**
@@ -490,6 +547,20 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * Enumeration strings for Bottling
 	 */
 
+	public enum EBottling
+	{
+		All, Last, None;
+
+		public static EBottling getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBottling.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Bottling
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBottling extends ValuedEnum
 	{
@@ -549,6 +620,20 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 		public static final EnumBottling Last = new EnumBottling("Last");
 		/**  */
 		public static final EnumBottling None = new EnumBottling("None");
+	}
+
+	/**
+	 * Enumeration strings for FoldLay
+	 */
+
+	public enum EFoldLay
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EFoldLay getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFoldLay.class, val, null);
+		}
 	}
 
 	/**
@@ -630,6 +715,20 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * Enumeration strings for SpreadType
 	 */
 
+	public enum ESpreadType
+	{
+		SinglePage, Spread;
+
+		public static ESpreadType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESpreadType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SpreadType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSpreadType extends ValuedEnum
 	{
@@ -702,6 +801,32 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBinderySignatureType(EBinderySignatureType enumVar)
+	{
+		setAttribute(AttributeName.BINDERYSIGNATURETYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BinderySignatureType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBinderySignatureType getEBinderySignatureType()
+	{
+		return EBinderySignatureType.getEnum(getAttribute(AttributeName.BINDERYSIGNATURETYPE, null, "Fold"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BinderySignatureType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BinderySignatureType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBinderySignatureType(EnumBinderySignatureType enumVar)
 	{
 		setAttribute(AttributeName.BINDERYSIGNATURETYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -725,6 +850,31 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBindingEdge(EBindingEdge enumVar)
+	{
+		setAttribute(AttributeName.BINDINGEDGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BindingEdge
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBindingEdge getEBindingEdge()
+	{
+		return EBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, "Left"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingEdge ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BindingEdge
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBindingEdge(EnumBindingEdge enumVar)
 	{
 		setAttribute(AttributeName.BINDINGEDGE, enumVar == null ? null : enumVar.getName(), null);
@@ -748,6 +898,31 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setJogEdge(EJogEdge enumVar)
+	{
+		setAttribute(AttributeName.JOGEDGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute JogEdge
+	 *
+	 * @return the value of the attribute
+	 */
+	public EJogEdge getEJogEdge()
+	{
+		return EJogEdge.getEnum(getAttribute(AttributeName.JOGEDGE, null, "Top"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JogEdge ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute JogEdge
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setJogEdge(EnumJogEdge enumVar)
 	{
 		setAttribute(AttributeName.JOGEDGE, enumVar == null ? null : enumVar.getName(), null);
@@ -821,6 +996,32 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBindingOrientation(EBindingOrientation enumVar)
+	{
+		setAttribute(AttributeName.BINDINGORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BindingOrientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBindingOrientation getEBindingOrientation()
+	{
+		return EBindingOrientation.getEnum(getAttribute(AttributeName.BINDINGORIENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingOrientation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BindingOrientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBindingOrientation(EnumBindingOrientation enumVar)
 	{
 		setAttribute(AttributeName.BINDINGORIENTATION, enumVar == null ? null : enumVar.getName(), null);
@@ -936,6 +1137,31 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBottling(EBottling enumVar)
+	{
+		setAttribute(AttributeName.BOTTLING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Bottling
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBottling getEBottling()
+	{
+		return EBottling.getEnum(getAttribute(AttributeName.BOTTLING, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Bottling ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Bottling
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBottling(EnumBottling enumVar)
 	{
 		setAttribute(AttributeName.BOTTLING, enumVar == null ? null : enumVar.getName(), null);
@@ -982,6 +1208,31 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFoldLay(EFoldLay enumVar)
+	{
+		setAttribute(AttributeName.FOLDLAY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FoldLay
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFoldLay getEFoldLay()
+	{
+		return EFoldLay.getEnum(getAttribute(AttributeName.FOLDLAY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldLay ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FoldLay
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFoldLay(EnumFoldLay enumVar)
 	{
 		setAttribute(AttributeName.FOLDLAY, enumVar == null ? null : enumVar.getName(), null);
@@ -1029,6 +1280,31 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSpreadType(ESpreadType enumVar)
+	{
+		setAttribute(AttributeName.SPREADTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SpreadType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESpreadType getESpreadType()
+	{
+		return ESpreadType.getEnum(getAttribute(AttributeName.SPREADTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpreadType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SpreadType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSpreadType(EnumSpreadType enumVar)
 	{
 		setAttribute(AttributeName.SPREADTYPE, enumVar == null ? null : enumVar.getName(), null);

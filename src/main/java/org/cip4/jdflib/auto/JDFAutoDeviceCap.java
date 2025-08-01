@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,6 +96,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFFeaturePool;
 import org.cip4.jdflib.resource.devicecapability.JDFMacroPool;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -189,6 +190,20 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * Enumeration strings for CombinedMethod
 	 */
 
+	public enum ECombinedMethod
+	{
+		Combined, CombinedProcessGroup, GrayBox, ProcessGroup, None;
+
+		public static ECombinedMethod getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECombinedMethod.class, val, ECombinedMethod.None);
+		}
+	}
+
+	/**
+	 * Enumeration strings for CombinedMethod
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumCombinedMethod extends ValuedEnum
 	{
@@ -258,6 +273,20 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * Enumeration strings for ExecutionPolicy
 	 */
 
+	public enum EExecutionPolicy
+	{
+		RootNode, FirstFound, AllFound;
+
+		public static EExecutionPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EExecutionPolicy.class, val, EExecutionPolicy.AllFound);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ExecutionPolicy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumExecutionPolicy extends ValuedEnum
 	{
@@ -317,6 +346,20 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 		public static final EnumExecutionPolicy FirstFound = new EnumExecutionPolicy("FirstFound");
 		/**  */
 		public static final EnumExecutionPolicy AllFound = new EnumExecutionPolicy("AllFound");
+	}
+
+	/**
+	 * Enumeration strings for TypeOrder
+	 */
+
+	public enum ETypeOrder
+	{
+		Fixed, Unordered, Unrestricted;
+
+		public static ETypeOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETypeOrder.class, val, null);
+		}
 	}
 
 	/**
@@ -395,9 +438,35 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (5.2) set attribute CombinedMethod
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setCombinedMethod(Vector<? extends ValuedEnum> v)
+	public void setECombinedMethod(List<ECombinedMethod> v)
+	{
+		setEnumsAttribute(AttributeName.COMBINEDMETHOD, v, null);
+	}
+
+	/**
+	 * (9.2) get CombinedMethod attribute CombinedMethod
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<ECombinedMethod> getEnumsCombinedMethod()
+	{
+		return getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, ECombinedMethod.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CombinedMethod
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute CombinedMethod
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setCombinedMethod(List<EnumCombinedMethod> v)
 	{
 		setEnumerationsAttribute(AttributeName.COMBINEDMETHOD, v, null);
 	}
@@ -407,7 +476,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getCombinedMethod()
+	public Vector<EnumCombinedMethod> getCombinedMethod()
 	{
 		return getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
 	}
@@ -421,6 +490,32 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setExecutionPolicy(EExecutionPolicy enumVar)
+	{
+		setAttribute(AttributeName.EXECUTIONPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ExecutionPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EExecutionPolicy getEExecutionPolicy()
+	{
+		return EExecutionPolicy.getEnum(getAttribute(AttributeName.EXECUTIONPOLICY, null, "AllFound"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ExecutionPolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ExecutionPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setExecutionPolicy(EnumExecutionPolicy enumVar)
 	{
 		setAttribute(AttributeName.EXECUTIONPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -571,6 +666,31 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTypeOrder(ETypeOrder enumVar)
+	{
+		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute TypeOrder
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETypeOrder getETypeOrder()
+	{
+		return ETypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TypeOrder ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute TypeOrder
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTypeOrder(EnumTypeOrder enumVar)
 	{
 		setAttribute(AttributeName.TYPEORDER, enumVar == null ? null : enumVar.getName(), null);

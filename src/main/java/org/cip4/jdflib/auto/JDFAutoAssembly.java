@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFPageAssignedList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -195,6 +196,20 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * Enumeration strings for JogSide
 	 */
 
+	public enum EJogSide
+	{
+		Left, Right, Top, Bottom, None;
+
+		public static EJogSide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EJogSide.class, val, EJogSide.Top);
+		}
+	}
+
+	/**
+	 * Enumeration strings for JogSide
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumJogSide extends ValuedEnum
 	{
@@ -264,6 +279,20 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * Enumeration strings for Order
 	 */
 
+	public enum EOrder
+	{
+		Collecting, Gathering, None, List;
+
+		public static EOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrder.class, val, EOrder.Gathering);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Order
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrder extends ValuedEnum
 	{
@@ -325,6 +354,20 @@ public abstract class JDFAutoAssembly extends JDFResource
 		public static final EnumOrder None = new EnumOrder("None");
 		/**  */
 		public static final EnumOrder List = new EnumOrder("List");
+	}
+
+	/**
+	 * Enumeration strings for BindingSide
+	 */
+
+	public enum EBindingSide
+	{
+		Left, Right, Top, Bottom;
+
+		public static EBindingSide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBindingSide.class, val, EBindingSide.Left);
+		}
 	}
 
 	/**
@@ -406,6 +449,31 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setJogSide(EJogSide enumVar)
+	{
+		setAttribute(AttributeName.JOGSIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute JogSide
+	 *
+	 * @return the value of the attribute
+	 */
+	public EJogSide getEJogSide()
+	{
+		return EJogSide.getEnum(getAttribute(AttributeName.JOGSIDE, null, "Top"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JogSide ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute JogSide
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setJogSide(EnumJogSide enumVar)
 	{
 		setAttribute(AttributeName.JOGSIDE, enumVar == null ? null : enumVar.getName(), null);
@@ -429,6 +497,31 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrder(EOrder enumVar)
+	{
+		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Order
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrder getEOrder()
+	{
+		return EOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Order ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Order
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrder(EnumOrder enumVar)
 	{
 		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);
@@ -452,6 +545,31 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBindingSide(EBindingSide enumVar)
+	{
+		setAttribute(AttributeName.BINDINGSIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BindingSide
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBindingSide getEBindingSide()
+	{
+		return EBindingSide.getEnum(getAttribute(AttributeName.BINDINGSIDE, null, "Left"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingSide ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BindingSide
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBindingSide(EnumBindingSide enumVar)
 	{
 		setAttribute(AttributeName.BINDINGSIDE, enumVar == null ? null : enumVar.getName(), null);

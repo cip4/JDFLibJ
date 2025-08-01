@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -178,6 +179,20 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * Enumeration strings for DensityStandard
 	 */
 
+	public enum EDensityStandard
+	{
+		ANSIA, ANSIE, ANSII, ANSIT, DIN16536, DIN16536NB;
+
+		public static EDensityStandard getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDensityStandard.class, val, EDensityStandard.ANSIT);
+		}
+	}
+
+	/**
+	 * Enumeration strings for DensityStandard
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDensityStandard extends ValuedEnum
 	{
@@ -249,6 +264,20 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * Enumeration strings for Illumination
 	 */
 
+	public enum EIllumination
+	{
+		D50, D65, Unknown;
+
+		public static EIllumination getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EIllumination.class, val, EIllumination.D50);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Illumination
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumIllumination extends ValuedEnum
 	{
@@ -308,6 +337,20 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		public static final EnumIllumination D65 = new EnumIllumination("D65");
 		/**  */
 		public static final EnumIllumination Unknown = new EnumIllumination("Unknown");
+	}
+
+	/**
+	 * Enumeration strings for InkState
+	 */
+
+	public enum EInkState
+	{
+		Dry, Wet, NA;
+
+		public static EInkState getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EInkState.class, val, null);
+		}
 	}
 
 	/**
@@ -379,6 +422,20 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * Enumeration strings for MeasurementFilter
 	 */
 
+	public enum EMeasurementFilter
+	{
+		None, Pol, UV;
+
+		public static EMeasurementFilter getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMeasurementFilter.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MeasurementFilter
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMeasurementFilter extends ValuedEnum
 	{
@@ -444,6 +501,20 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * Enumeration strings for SampleBacking
 	 */
 
+	public enum ESampleBacking
+	{
+		Black, White, NA;
+
+		public static ESampleBacking getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESampleBacking.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SampleBacking
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSampleBacking extends ValuedEnum
 	{
@@ -503,6 +574,20 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 		public static final EnumSampleBacking White = new EnumSampleBacking("White");
 		/**  */
 		public static final EnumSampleBacking NA = new EnumSampleBacking("NA");
+	}
+
+	/**
+	 * Enumeration strings for WhiteBase
+	 */
+
+	public enum EWhiteBase
+	{
+		Absolute, Paper, Substrate;
+
+		public static EWhiteBase getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EWhiteBase.class, val, null);
+		}
 	}
 
 	/**
@@ -583,6 +668,32 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDensityStandard(EDensityStandard enumVar)
+	{
+		setAttribute(AttributeName.DENSITYSTANDARD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DensityStandard
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDensityStandard getEDensityStandard()
+	{
+		return EDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, "ANSIT"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DensityStandard
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DensityStandard
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDensityStandard(EnumDensityStandard enumVar)
 	{
 		setAttribute(AttributeName.DENSITYSTANDARD, enumVar == null ? null : enumVar.getName(), null);
@@ -607,6 +718,32 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setIllumination(EIllumination enumVar)
+	{
+		setAttribute(AttributeName.ILLUMINATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Illumination
+	 *
+	 * @return the value of the attribute
+	 */
+	public EIllumination getEIllumination()
+	{
+		return EIllumination.getEnum(getAttribute(AttributeName.ILLUMINATION, null, "D50"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Illumination
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Illumination
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setIllumination(EnumIllumination enumVar)
 	{
 		setAttribute(AttributeName.ILLUMINATION, enumVar == null ? null : enumVar.getName(), null);
@@ -700,6 +837,31 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setInkState(EInkState enumVar)
+	{
+		setAttribute(AttributeName.INKSTATE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute InkState
+	 *
+	 * @return the value of the attribute
+	 */
+	public EInkState getEInkState()
+	{
+		return EInkState.getEnum(getAttribute(AttributeName.INKSTATE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InkState ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute InkState
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setInkState(EnumInkState enumVar)
 	{
 		setAttribute(AttributeName.INKSTATE, enumVar == null ? null : enumVar.getName(), null);
@@ -772,6 +934,32 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMeasurementFilter(EMeasurementFilter enumVar)
+	{
+		setAttribute(AttributeName.MEASUREMENTFILTER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MeasurementFilter
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMeasurementFilter getEMeasurementFilter()
+	{
+		return EMeasurementFilter.getEnum(getAttribute(AttributeName.MEASUREMENTFILTER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MeasurementFilter
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MeasurementFilter
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMeasurementFilter(EnumMeasurementFilter enumVar)
 	{
 		setAttribute(AttributeName.MEASUREMENTFILTER, enumVar == null ? null : enumVar.getName(), null);
@@ -820,6 +1008,32 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSampleBacking(ESampleBacking enumVar)
+	{
+		setAttribute(AttributeName.SAMPLEBACKING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SampleBacking
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESampleBacking getESampleBacking()
+	{
+		return ESampleBacking.getEnum(getAttribute(AttributeName.SAMPLEBACKING, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SampleBacking
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SampleBacking
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSampleBacking(EnumSampleBacking enumVar)
 	{
 		setAttribute(AttributeName.SAMPLEBACKING, enumVar == null ? null : enumVar.getName(), null);
@@ -867,6 +1081,31 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setWhiteBase(EWhiteBase enumVar)
+	{
+		setAttribute(AttributeName.WHITEBASE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute WhiteBase
+	 *
+	 * @return the value of the attribute
+	 */
+	public EWhiteBase getEWhiteBase()
+	{
+		return EWhiteBase.getEnum(getAttribute(AttributeName.WHITEBASE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WhiteBase ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute WhiteBase
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setWhiteBase(EnumWhiteBase enumVar)
 	{
 		setAttribute(AttributeName.WHITEBASE, enumVar == null ? null : enumVar.getName(), null);

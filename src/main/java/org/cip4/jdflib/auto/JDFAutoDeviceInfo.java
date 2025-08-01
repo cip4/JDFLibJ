@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,6 +77,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoMISDetails.EDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -95,6 +96,7 @@ import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -190,6 +192,20 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * Enumeration strings for DeviceCondition
 	 */
 
+	public enum EDeviceCondition
+	{
+		OK, NeedsAttention, Failure, OffLine;
+
+		public static EDeviceCondition getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDeviceCondition.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for DeviceCondition
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDeviceCondition extends ValuedEnum
 	{
@@ -251,6 +267,20 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 		public static final EnumDeviceCondition Failure = new EnumDeviceCondition("Failure");
 		/**  */
 		public static final EnumDeviceCondition OffLine = new EnumDeviceCondition("OffLine");
+	}
+
+	/**
+	 * Enumeration strings for DeviceStatus
+	 */
+
+	public enum EDeviceStatus
+	{
+		Unknown, Idle, Down, Setup, Running, Cleanup, Stopped;
+
+		public static EDeviceStatus getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDeviceStatus.class, val, null);
+		}
 	}
 
 	/**
@@ -362,6 +392,32 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDeviceCondition(EDeviceCondition enumVar)
+	{
+		setAttribute(AttributeName.DEVICECONDITION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DeviceCondition
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDeviceCondition getEDeviceCondition()
+	{
+		return EDeviceCondition.getEnum(getAttribute(AttributeName.DEVICECONDITION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceCondition
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DeviceCondition
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDeviceCondition(EnumDeviceCondition enumVar)
 	{
 		setAttribute(AttributeName.DEVICECONDITION, enumVar == null ? null : enumVar.getName(), null);
@@ -409,6 +465,32 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDeviceOperationMode(EDeviceOperationMode enumVar)
+	{
+		setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DeviceOperationMode
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDeviceOperationMode getEDeviceOperationMode()
+	{
+		return EDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceOperationMode
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DeviceOperationMode
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
 	{
 		setAttribute(AttributeName.DEVICEOPERATIONMODE, enumVar == null ? null : enumVar.getName(), null);
@@ -433,6 +515,32 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDeviceStatus(EDeviceStatus enumVar)
+	{
+		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DeviceStatus
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDeviceStatus getEDeviceStatus()
+	{
+		return EDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceStatus
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DeviceStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDeviceStatus(EnumDeviceStatus enumVar)
 	{
 		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.getName(), null);

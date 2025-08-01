@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColorantZoneDetails;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -197,6 +198,20 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for ImageTrapPlacement
+	 */
+
+	public enum EImageTrapPlacement
+	{
+		Center, Choke, Normal, Spread;
+
+		public static EImageTrapPlacement getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EImageTrapPlacement.class, val, null);
+		}
 	}
 
 	/**
@@ -589,6 +604,32 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setImageTrapPlacement(EImageTrapPlacement enumVar)
+	{
+		setAttribute(AttributeName.IMAGETRAPPLACEMENT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ImageTrapPlacement
+	 *
+	 * @return the value of the attribute
+	 */
+	public EImageTrapPlacement getEImageTrapPlacement()
+	{
+		return EImageTrapPlacement.getEnum(getAttribute(AttributeName.IMAGETRAPPLACEMENT, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapPlacement
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ImageTrapPlacement
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setImageTrapPlacement(EnumImageTrapPlacement enumVar)
 	{
 		setAttribute(AttributeName.IMAGETRAPPLACEMENT, enumVar == null ? null : enumVar.getName(), null);

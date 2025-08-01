@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCapPool;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -183,6 +184,20 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * Enumeration strings for ChannelMode
 	 */
 
+	public enum EChannelMode
+	{
+		FireAndForget, Reliable;
+
+		public static EChannelMode getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EChannelMode.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ChannelMode
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumChannelMode extends ValuedEnum
 	{
@@ -240,6 +255,20 @@ public abstract class JDFAutoMessageService extends JDFElement
 		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
 		/**  */
 		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
+	}
+
+	/**
+	 * Enumeration strings for JMFRole
+	 */
+
+	public enum EJMFRole
+	{
+		Receiver, Sender;
+
+		public static EJMFRole getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EJMFRole.class, val, null);
+		}
 	}
 
 	/**
@@ -338,9 +367,34 @@ public abstract class JDFAutoMessageService extends JDFElement
 	/**
 	 * (5.2) set attribute ChannelMode
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setChannelMode(Vector<? extends ValuedEnum> v)
+	public void setEChannelMode(List<EChannelMode> v)
+	{
+		setEnumsAttribute(AttributeName.CHANNELMODE, v, null);
+	}
+
+	/**
+	 * (9.2) get ChannelMode attribute ChannelMode
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EChannelMode> getEnumsChannelMode()
+	{
+		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EChannelMode.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute ChannelMode
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setChannelMode(List<EnumChannelMode> v)
 	{
 		setEnumerationsAttribute(AttributeName.CHANNELMODE, v, null);
 	}
@@ -350,7 +404,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getChannelMode()
+	public Vector<EnumChannelMode> getChannelMode()
 	{
 		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EnumChannelMode.getEnum(0), false);
 	}
@@ -413,6 +467,31 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setJMFRole(EJMFRole enumVar)
+	{
+		setAttribute(AttributeName.JMFROLE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute JMFRole
+	 *
+	 * @return the value of the attribute
+	 */
+	public EJMFRole getEJMFRole()
+	{
+		return EJMFRole.getEnum(getAttribute(AttributeName.JMFROLE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JMFRole ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute JMFRole
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setJMFRole(EnumJMFRole enumVar)
 	{
 		setAttribute(AttributeName.JMFROLE, enumVar == null ? null : enumVar.getName(), null);

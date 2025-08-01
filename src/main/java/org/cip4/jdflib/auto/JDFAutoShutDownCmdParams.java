@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFFlushQueueParams;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -155,6 +156,20 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	protected JDFAutoShutDownCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for ShutDownType
+	 */
+
+	public enum EShutDownType
+	{
+		StandBy, Full;
+
+		public static EShutDownType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EShutDownType.class, val, EShutDownType.StandBy);
+		}
 	}
 
 	/**
@@ -233,6 +248,32 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setShutDownType(EShutDownType enumVar)
+	{
+		setAttribute(AttributeName.SHUTDOWNTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ShutDownType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EShutDownType getEShutDownType()
+	{
+		return EShutDownType.getEnum(getAttribute(AttributeName.SHUTDOWNTYPE, null, "StandBy"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShutDownType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ShutDownType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setShutDownType(EnumShutDownType enumVar)
 	{
 		setAttribute(AttributeName.SHUTDOWNTYPE, enumVar == null ? null : enumVar.getName(), null);

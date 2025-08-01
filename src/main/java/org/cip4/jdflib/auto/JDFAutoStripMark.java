@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.JDFJobField;
 import org.cip4.jdflib.resource.JDFRefAnchor;
 import org.cip4.jdflib.resource.process.JDFMarkColor;
 import org.cip4.jdflib.resource.process.JDFPosition;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -186,6 +187,20 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * Enumeration strings for Anchor
 	 */
 
+	public enum EAnchor
+	{
+		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
+
+		public static EAnchor getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAnchor.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Anchor
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
 	{
@@ -263,6 +278,20 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * Enumeration strings for HorizontalFitPolicy
 	 */
 
+	public enum EHorizontalFitPolicy
+	{
+		NoRepeat, StretchToFit, UndistortedScaleToFit, RepeatToFill, RepeatUnclipped;
+
+		public static EHorizontalFitPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EHorizontalFitPolicy.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for HorizontalFitPolicy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumHorizontalFitPolicy extends ValuedEnum
 	{
@@ -326,6 +355,20 @@ public abstract class JDFAutoStripMark extends JDFElement
 		public static final EnumHorizontalFitPolicy RepeatToFill = new EnumHorizontalFitPolicy("RepeatToFill");
 		/**  */
 		public static final EnumHorizontalFitPolicy RepeatUnclipped = new EnumHorizontalFitPolicy("RepeatUnclipped");
+	}
+
+	/**
+	 * Enumeration strings for MarkContext
+	 */
+
+	public enum EMarkContext
+	{
+		BinderySignature, Cell, CellPair, Sheet, Tile;
+
+		public static EMarkContext getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMarkContext.class, val, null);
+		}
 	}
 
 	/**
@@ -401,6 +444,20 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * Enumeration strings for MarkSide
 	 */
 
+	public enum EMarkSide
+	{
+		Front, Back, TwoSidedBackToBack, TwoSidedIndependent;
+
+		public static EMarkSide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMarkSide.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MarkSide
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMarkSide extends ValuedEnum
 	{
@@ -462,6 +519,20 @@ public abstract class JDFAutoStripMark extends JDFElement
 		public static final EnumMarkSide TwoSidedBackToBack = new EnumMarkSide("TwoSidedBackToBack");
 		/**  */
 		public static final EnumMarkSide TwoSidedIndependent = new EnumMarkSide("TwoSidedIndependent");
+	}
+
+	/**
+	 * Enumeration strings for Orientation
+	 */
+
+	public enum EOrientation
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, null);
+		}
 	}
 
 	/**
@@ -537,6 +608,20 @@ public abstract class JDFAutoStripMark extends JDFElement
 		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
 		/**  */
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
+	}
+
+	/**
+	 * Enumeration strings for VerticalFitPolicy
+	 */
+
+	public enum EVerticalFitPolicy
+	{
+		NoRepeat, StretchToFit, UndistortedScaleToFit, RepeatToFill, RepeatUnclipped;
+
+		public static EVerticalFitPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EVerticalFitPolicy.class, val, null);
+		}
 	}
 
 	/**
@@ -668,6 +753,31 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAnchor(EAnchor enumVar)
+	{
+		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Anchor
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAnchor getEAnchor()
+	{
+		return EAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Anchor
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
 	{
 		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
@@ -738,6 +848,32 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setHorizontalFitPolicy(EHorizontalFitPolicy enumVar)
+	{
+		setAttribute(AttributeName.HORIZONTALFITPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute HorizontalFitPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EHorizontalFitPolicy getEHorizontalFitPolicy()
+	{
+		return EHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HorizontalFitPolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute HorizontalFitPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
 	{
 		setAttribute(AttributeName.HORIZONTALFITPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -786,6 +922,31 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMarkContext(EMarkContext enumVar)
+	{
+		setAttribute(AttributeName.MARKCONTEXT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MarkContext
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMarkContext getEMarkContext()
+	{
+		return EMarkContext.getEnum(getAttribute(AttributeName.MARKCONTEXT, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkContext ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MarkContext
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMarkContext(EnumMarkContext enumVar)
 	{
 		setAttribute(AttributeName.MARKCONTEXT, enumVar == null ? null : enumVar.getName(), null);
@@ -832,6 +993,31 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMarkSide(EMarkSide enumVar)
+	{
+		setAttribute(AttributeName.MARKSIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MarkSide
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMarkSide getEMarkSide()
+	{
+		return EMarkSide.getEnum(getAttribute(AttributeName.MARKSIDE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkSide ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MarkSide
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMarkSide(EnumMarkSide enumVar)
 	{
 		setAttribute(AttributeName.MARKSIDE, enumVar == null ? null : enumVar.getName(), null);
@@ -903,6 +1089,31 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrientation(EOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Orientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrientation getEOrientation()
+	{
+		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Orientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
@@ -999,6 +1210,32 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setVerticalFitPolicy(EVerticalFitPolicy enumVar)
+	{
+		setAttribute(AttributeName.VERTICALFITPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute VerticalFitPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EVerticalFitPolicy getEVerticalFitPolicy()
+	{
+		return EVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute VerticalFitPolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute VerticalFitPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
 	{
 		setAttribute(AttributeName.VERTICALFITPOLICY, enumVar == null ? null : enumVar.getName(), null);

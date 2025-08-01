@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAssembly;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -187,6 +188,20 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * Enumeration strings for MarkType
 	 */
 
+	public enum EMarkType
+	{
+		CrossCutMark, TopVerticalCutMark, BottomVerticalCutMark, LeftHorizontalCutMark, RightHorizontalCutMark, LowerLeftCutMark, UpperLeftCutMark, LowerRightCutMark, UpperRightCutMark;
+
+		public static EMarkType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMarkType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MarkType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMarkType extends ValuedEnum
 	{
@@ -272,6 +287,31 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMarkType(EMarkType enumVar)
+	{
+		setAttribute(AttributeName.MARKTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MarkType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMarkType getEMarkType()
+	{
+		return EMarkType.getEnum(getAttribute(AttributeName.MARKTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MarkType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MarkType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMarkType(EnumMarkType enumVar)
 	{
 		setAttribute(AttributeName.MARKTYPE, enumVar == null ? null : enumVar.getName(), null);

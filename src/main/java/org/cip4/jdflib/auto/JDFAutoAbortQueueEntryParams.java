@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -161,6 +162,20 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 * Enumeration strings for EndStatus
 	 */
 
+	public enum EEndStatus
+	{
+		Aborted, Completed;
+
+		public static EEndStatus getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EEndStatus.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for EndStatus
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumEndStatus extends ValuedEnum
 	{
@@ -232,6 +247,31 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setNodeStatus(EVersion enumVar)
+	{
+		setAttribute(AttributeName.ENDSTATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute EndStatus
+	 *
+	 * @return the value of the attribute
+	 */
+	public EVersion getENodeStatus()
+	{
+		return EVersion.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndStatus ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute EndStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setNodeStatus(EnumNodeStatus enumVar)
 	{
 		setAttribute(AttributeName.ENDSTATUS, enumVar == null ? null : enumVar.getName(), null);

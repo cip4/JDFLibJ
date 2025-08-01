@@ -654,6 +654,16 @@ public class JDFResource extends JDFElement
 		public static final EnumAmountMerge UpdateLink = new EnumAmountMerge("UpdateLink");
 	}
 
+	public enum EResourceClass
+	{
+		Consumable, Parameter, Intent, Implementation, Quantity, Handling, PlaceHolder;
+
+		public static EResourceClass getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(EResourceClass.class, name);
+		}
+	}
+
 	/**
 	 * Enumeration for attribute Class
 	 */
@@ -854,6 +864,16 @@ public class JDFResource extends JDFElement
 		 */
 		public static final EnumResStatus Available = new EnumResStatus(JDFConstants.AVAILABLE);
 
+	}
+
+	public enum EResStatus
+	{
+		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
+
+		public static EResourceClass getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(EResourceClass.class, name);
+		}
 	}
 
 	/**

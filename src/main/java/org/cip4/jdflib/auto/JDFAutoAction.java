@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.process.JDFPreflightAction;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -167,6 +168,20 @@ public abstract class JDFAutoAction extends JDFElement
 	 * Enumeration strings for Severity
 	 */
 
+	public enum ESeverity
+	{
+		Error, Warning, Information;
+
+		public static ESeverity getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESeverity.class, val, ESeverity.Error);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Severity
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSeverity extends ValuedEnum
 	{
@@ -240,6 +255,31 @@ public abstract class JDFAutoAction extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSeverity(ESeverity enumVar)
+	{
+		setAttribute(AttributeName.SEVERITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Severity
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESeverity getESeverity()
+	{
+		return ESeverity.getEnum(getAttribute(AttributeName.SEVERITY, null, "Error"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Severity ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Severity
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSeverity(EnumSeverity enumVar)
 	{
 		setAttribute(AttributeName.SEVERITY, enumVar == null ? null : enumVar.getName(), null);

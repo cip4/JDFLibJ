@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -167,6 +168,20 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * Enumeration strings for AuthenticationType
 	 */
 
+	public enum EAuthenticationType
+	{
+		AsClient, AsServer;
+
+		public static EAuthenticationType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAuthenticationType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for AuthenticationType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAuthenticationType extends ValuedEnum
 	{
@@ -224,6 +239,20 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 		public static final EnumAuthenticationType AsClient = new EnumAuthenticationType("AsClient");
 		/**  */
 		public static final EnumAuthenticationType AsServer = new EnumAuthenticationType("AsServer");
+	}
+
+	/**
+	 * Enumeration strings for Reason
+	 */
+
+	public enum EReason
+	{
+		InitiateConnection, ClientCertificateExpired, ServerCertificateExpired, ClientHostnameMismatch, ServerHostnameMismatch, ClientCertificateRevoked, ServerCertificateRevoked, Other;
+
+		public static EReason getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EReason.class, val, null);
+		}
 	}
 
 	/**
@@ -314,6 +343,32 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAuthenticationType(EAuthenticationType enumVar)
+	{
+		setAttribute(AttributeName.AUTHENTICATIONTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute AuthenticationType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAuthenticationType getEAuthenticationType()
+	{
+		return EAuthenticationType.getEnum(getAttribute(AttributeName.AUTHENTICATIONTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AuthenticationType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute AuthenticationType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAuthenticationType(EnumAuthenticationType enumVar)
 	{
 		setAttribute(AttributeName.AUTHENTICATIONTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -337,6 +392,31 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setReason(EReason enumVar)
+	{
+		setAttribute(AttributeName.REASON, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Reason
+	 *
+	 * @return the value of the attribute
+	 */
+	public EReason getEReason()
+	{
+		return EReason.getEnum(getAttribute(AttributeName.REASON, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Reason ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Reason
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setReason(EnumReason enumVar)
 	{
 		setAttribute(AttributeName.REASON, enumVar == null ? null : enumVar.getName(), null);

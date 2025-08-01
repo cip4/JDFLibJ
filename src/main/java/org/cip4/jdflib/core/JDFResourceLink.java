@@ -83,6 +83,7 @@ import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.resource.process.JDFLot;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -129,10 +130,19 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		return v;
 	}
 
+	public enum EUsage
+	{
+		Input, Output;
+
+		public static EUsage getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EUsage.class, val, null);
+		}
+	}
+
 	/**
 	 * Enumeration strings for Usage
 	 */
-
 	public static class EnumUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -184,6 +185,20 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for StripMaterial
+	 */
+
+	public enum EStripMaterial
+	{
+		Calico, Cardboard, CrepePaper, Gauze, Paper, PaperlinedMules, Tape;
+
+		public static EStripMaterial getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EStripMaterial.class, val, null);
+		}
 	}
 
 	/**
@@ -440,6 +455,32 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setStripMaterial(EStripMaterial enumVar)
+	{
+		setAttribute(AttributeName.STRIPMATERIAL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute StripMaterial
+	 *
+	 * @return the value of the attribute
+	 */
+	public EStripMaterial getEStripMaterial()
+	{
+		return EStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StripMaterial
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute StripMaterial
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setStripMaterial(EnumStripMaterial enumVar)
 	{
 		setAttribute(AttributeName.STRIPMATERIAL, enumVar == null ? null : enumVar.getName(), null);

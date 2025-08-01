@@ -223,7 +223,7 @@ public class JDFBooleanState extends JDFAbstractState
 	 */
 	public Vector getAllowedValueList()
 	{
-		final Vector<ValuedEnum> enumerationsAttribute = (Vector<ValuedEnum>) getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumBoolean.True, false);
+		final Vector<ValuedEnum> enumerationsAttribute = getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumBoolean.True, false);
 		return (Vector) ContainerUtil.getNonEmpty(enumerationsAttribute);
 	}
 

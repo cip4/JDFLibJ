@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -158,6 +159,20 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	protected JDFAutoIDPStitching(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for StitchingPosition
+	 */
+
+	public enum EStitchingPosition
+	{
+		None, TopLeft, BottomLeft, TopRight, BottomRight, LeftEdge, TopEdge, RightEdge, BottomEdge, DualLeftEdge, DualTopEdge, DualRightEdge, DualBottomEdge;
+
+		public static EStitchingPosition getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EStitchingPosition.class, val, null);
+		}
 	}
 
 	/**
@@ -249,6 +264,20 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 * Enumeration strings for StitchingReferenceEdge
 	 */
 
+	public enum EStitchingReferenceEdge
+	{
+		Bottom, Top, Left, Right;
+
+		public static EStitchingReferenceEdge getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EStitchingReferenceEdge.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for StitchingReferenceEdge
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumStitchingReferenceEdge extends ValuedEnum
 	{
@@ -325,6 +354,32 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setStitchingPosition(EStitchingPosition enumVar)
+	{
+		setAttribute(AttributeName.STITCHINGPOSITION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute StitchingPosition
+	 *
+	 * @return the value of the attribute
+	 */
+	public EStitchingPosition getEStitchingPosition()
+	{
+		return EStitchingPosition.getEnum(getAttribute(AttributeName.STITCHINGPOSITION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchingPosition
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute StitchingPosition
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setStitchingPosition(EnumStitchingPosition enumVar)
 	{
 		setAttribute(AttributeName.STITCHINGPOSITION, enumVar == null ? null : enumVar.getName(), null);
@@ -349,6 +404,32 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setStitchingReferenceEdge(EStitchingReferenceEdge enumVar)
+	{
+		setAttribute(AttributeName.STITCHINGREFERENCEEDGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute StitchingReferenceEdge
+	 *
+	 * @return the value of the attribute
+	 */
+	public EStitchingReferenceEdge getEStitchingReferenceEdge()
+	{
+		return EStitchingReferenceEdge.getEnum(getAttribute(AttributeName.STITCHINGREFERENCEEDGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchingReferenceEdge
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute StitchingReferenceEdge
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setStitchingReferenceEdge(EnumStitchingReferenceEdge enumVar)
 	{
 		setAttribute(AttributeName.STITCHINGREFERENCEEDGE, enumVar == null ? null : enumVar.getName(), null);

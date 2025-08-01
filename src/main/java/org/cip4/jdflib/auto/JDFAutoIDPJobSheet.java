@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
 import org.cip4.jdflib.resource.process.JDFIDPLayout;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -170,6 +171,20 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * Enumeration strings for SheetOccurrence
 	 */
 
+	public enum ESheetOccurrence
+	{
+		Always, End, OnError, Slip, Start, Both, None;
+
+		public static ESheetOccurrence getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetOccurrence.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SheetOccurrence
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetOccurrence extends ValuedEnum
 	{
@@ -237,6 +252,20 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 		public static final EnumSheetOccurrence Both = new EnumSheetOccurrence("Both");
 		/**  */
 		public static final EnumSheetOccurrence None = new EnumSheetOccurrence("None");
+	}
+
+	/**
+	 * Enumeration strings for SheetType
+	 */
+
+	public enum ESheetType
+	{
+		AccountingSheet, ErrorSheet, JobSheet, SeparatorSheet;
+
+		public static ESheetType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetType.class, val, null);
+		}
 	}
 
 	/**
@@ -342,6 +371,32 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetOccurrence(ESheetOccurrence enumVar)
+	{
+		setAttribute(AttributeName.SHEETOCCURRENCE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetOccurrence
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetOccurrence getESheetOccurrence()
+	{
+		return ESheetOccurrence.getEnum(getAttribute(AttributeName.SHEETOCCURRENCE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetOccurrence
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetOccurrence
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetOccurrence(EnumSheetOccurrence enumVar)
 	{
 		setAttribute(AttributeName.SHEETOCCURRENCE, enumVar == null ? null : enumVar.getName(), null);
@@ -365,6 +420,31 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetType(ESheetType enumVar)
+	{
+		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetType getESheetType()
+	{
+		return ESheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetType(EnumSheetType enumVar)
 	{
 		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.getName(), null);

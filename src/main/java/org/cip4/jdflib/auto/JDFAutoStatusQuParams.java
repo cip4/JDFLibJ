@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -169,6 +170,20 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * Enumeration strings for DeviceDetails
 	 */
 
+	public enum EDeviceDetails
+	{
+		None, Brief, Modules, Details, Capability, Full;
+
+		public static EDeviceDetails getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDeviceDetails.class, val, EDeviceDetails.None);
+		}
+	}
+
+	/**
+	 * Enumeration strings for DeviceDetails
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDeviceDetails extends ValuedEnum
 	{
@@ -234,6 +249,20 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 		public static final EnumDeviceDetails Capability = new EnumDeviceDetails("Capability");
 		/**  */
 		public static final EnumDeviceDetails Full = new EnumDeviceDetails("Full");
+	}
+
+	/**
+	 * Enumeration strings for JobDetails
+	 */
+
+	public enum EJobDetails
+	{
+		None, MIS, Brief, Full;
+
+		public static EJobDetails getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EJobDetails.class, val, EJobDetails.None);
+		}
 	}
 
 	/**
@@ -316,6 +345,32 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDeviceDetails(EDeviceDetails enumVar)
+	{
+		setAttribute(AttributeName.DEVICEDETAILS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DeviceDetails
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDeviceDetails getEDeviceDetails()
+	{
+		return EDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceDetails
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DeviceDetails
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDeviceDetails(EnumDeviceDetails enumVar)
 	{
 		setAttribute(AttributeName.DEVICEDETAILS, enumVar == null ? null : enumVar.getName(), null);
@@ -363,6 +418,31 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setJobDetails(EJobDetails enumVar)
+	{
+		setAttribute(AttributeName.JOBDETAILS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute JobDetails
+	 *
+	 * @return the value of the attribute
+	 */
+	public EJobDetails getEJobDetails()
+	{
+		return EJobDetails.getEnum(getAttribute(AttributeName.JOBDETAILS, null, "None"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute JobDetails ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute JobDetails
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setJobDetails(EnumJobDetails enumVar)
 	{
 		setAttribute(AttributeName.JOBDETAILS, enumVar == null ? null : enumVar.getName(), null);

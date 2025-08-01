@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -157,6 +158,20 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * Enumeration strings for BottleAxis
 	 */
 
+	public enum EBottleAxis
+	{
+		SpineHead, SpineFoot, FaceHead, FaceFoot;
+
+		public static EBottleAxis getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBottleAxis.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for BottleAxis
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBottleAxis extends ValuedEnum
 	{
@@ -218,6 +233,20 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		public static final EnumBottleAxis FaceHead = new EnumBottleAxis("FaceHead");
 		/**  */
 		public static final EnumBottleAxis FaceFoot = new EnumBottleAxis("FaceFoot");
+	}
+
+	/**
+	 * Enumeration strings for Orientation
+	 */
+
+	public enum EOrientation
+	{
+		Up, Down, Left, Right;
+
+		public static EOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, EOrientation.Up);
+		}
 	}
 
 	/**
@@ -398,6 +427,31 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBottleAxis(EBottleAxis enumVar)
+	{
+		setAttribute(AttributeName.BOTTLEAXIS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BottleAxis
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBottleAxis getEBottleAxis()
+	{
+		return EBottleAxis.getEnum(getAttribute(AttributeName.BOTTLEAXIS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BottleAxis ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BottleAxis
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBottleAxis(EnumBottleAxis enumVar)
 	{
 		setAttribute(AttributeName.BOTTLEAXIS, enumVar == null ? null : enumVar.getName(), null);
@@ -522,6 +576,31 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrientation(EOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Orientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrientation getEOrientation()
+	{
+		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, "Up"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Orientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);

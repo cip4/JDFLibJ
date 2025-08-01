@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -224,6 +225,20 @@ public abstract class JDFAutoPart extends JDFElement
 	 * Enumeration strings for PreviewType
 	 */
 
+	public enum EPreviewType
+	{
+		Animation, Identification, Separation, SeparatedThumbNail, SeparationRaw, ThumbNail, Static3D, Viewable;
+
+		public static EPreviewType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPreviewType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PreviewType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewType extends ValuedEnum
 	{
@@ -293,6 +308,20 @@ public abstract class JDFAutoPart extends JDFElement
 		public static final EnumPreviewType Static3D = new EnumPreviewType("Static3D");
 		/**  */
 		public static final EnumPreviewType Viewable = new EnumPreviewType("Viewable");
+	}
+
+	/**
+	 * Enumeration strings for Side
+	 */
+
+	public enum ESide
+	{
+		Front, Back;
+
+		public static ESide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESide.class, val, null);
+		}
 	}
 
 	/**
@@ -1486,6 +1515,31 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPreviewType(EPreviewType enumVar)
+	{
+		setAttribute(AttributeName.PREVIEWTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PreviewType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPreviewType getEPreviewType()
+	{
+		return EPreviewType.getEnum(getAttribute(AttributeName.PREVIEWTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PreviewType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPreviewType(EnumPreviewType enumVar)
 	{
 		setAttribute(AttributeName.PREVIEWTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -1989,6 +2043,31 @@ public abstract class JDFAutoPart extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSide(ESide enumVar)
+	{
+		setAttribute(AttributeName.SIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Side
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESide getESide()
+	{
+		return ESide.getEnum(getAttribute(AttributeName.SIDE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Side ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Side
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSide(EnumSide enumVar)
 	{
 		setAttribute(AttributeName.SIDE, enumVar == null ? null : enumVar.getName(), null);

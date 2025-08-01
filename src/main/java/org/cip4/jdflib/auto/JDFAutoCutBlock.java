@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -177,6 +178,20 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 * Enumeration strings for BlockType
 	 */
 
+	public enum EBlockType
+	{
+		CutBlock, SaveBlock, TempBlock, MarkBlock;
+
+		public static EBlockType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBlockType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for BlockType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBlockType extends ValuedEnum
 	{
@@ -238,6 +253,20 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		public static final EnumBlockType TempBlock = new EnumBlockType("TempBlock");
 		/**  */
 		public static final EnumBlockType MarkBlock = new EnumBlockType("MarkBlock");
+	}
+
+	/**
+	 * Enumeration strings for BlockElementType
+	 */
+
+	public enum EBlockElementType
+	{
+		CutElement, PunchElement;
+
+		public static EBlockElementType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBlockElementType.class, val, null);
+		}
 	}
 
 	/**
@@ -391,6 +420,31 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBlockType(EBlockType enumVar)
+	{
+		setAttribute(AttributeName.BLOCKTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BlockType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBlockType getEBlockType()
+	{
+		return EBlockType.getEnum(getAttribute(AttributeName.BLOCKTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BlockType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBlockType(EnumBlockType enumVar)
 	{
 		setAttribute(AttributeName.BLOCKTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -467,6 +521,32 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBlockElementType(EBlockElementType enumVar)
+	{
+		setAttribute(AttributeName.BLOCKELEMENTTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BlockElementType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBlockElementType getEBlockElementType()
+	{
+		return EBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BlockElementType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BlockElementType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBlockElementType(EnumBlockElementType enumVar)
 	{
 		setAttribute(AttributeName.BLOCKELEMENTTYPE, enumVar == null ? null : enumVar.getName(), null);

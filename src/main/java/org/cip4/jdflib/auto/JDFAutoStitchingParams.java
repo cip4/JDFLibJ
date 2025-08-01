@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -179,6 +180,20 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * Enumeration strings for StitchOrigin
 	 */
 
+	public enum EStitchOrigin
+	{
+		TrimBoxCenter, TrimBoxJogSide, UntrimmedJogSide;
+
+		public static EStitchOrigin getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EStitchOrigin.class, val, EStitchOrigin.UntrimmedJogSide);
+		}
+	}
+
+	/**
+	 * Enumeration strings for StitchOrigin
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumStitchOrigin extends ValuedEnum
 	{
@@ -238,6 +253,20 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		public static final EnumStitchOrigin TrimBoxJogSide = new EnumStitchOrigin("TrimBoxJogSide");
 		/**  */
 		public static final EnumStitchOrigin UntrimmedJogSide = new EnumStitchOrigin("UntrimmedJogSide");
+	}
+
+	/**
+	 * Enumeration strings for ReferenceEdge
+	 */
+
+	public enum EReferenceEdge
+	{
+		Top, Left, Right, Bottom;
+
+		public static EReferenceEdge getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EReferenceEdge.class, val, null);
+		}
 	}
 
 	/**
@@ -305,6 +334,20 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		public static final EnumReferenceEdge Right = new EnumReferenceEdge("Right");
 		/**  */
 		public static final EnumReferenceEdge Bottom = new EnumReferenceEdge("Bottom");
+	}
+
+	/**
+	 * Enumeration strings for StapleShape
+	 */
+
+	public enum EStapleShape
+	{
+		Crown, Overlap, Butted, ClinchOut, Eyelet;
+
+		public static EStapleShape getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EStapleShape.class, val, null);
+		}
 	}
 
 	/**
@@ -380,6 +423,20 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * Enumeration strings for StitchType
 	 */
 
+	public enum EStitchType
+	{
+		Saddle, Side, Corner;
+
+		public static EStitchType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EStitchType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for StitchType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumStitchType extends ValuedEnum
 	{
@@ -439,6 +496,20 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 		public static final EnumStitchType Side = new EnumStitchType("Side");
 		/**  */
 		public static final EnumStitchType Corner = new EnumStitchType("Corner");
+	}
+
+	/**
+	 * Enumeration strings for TightBacking
+	 */
+
+	public enum ETightBacking
+	{
+		Flat, Pressure;
+
+		public static ETightBacking getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETightBacking.class, val, null);
+		}
 	}
 
 	/**
@@ -517,6 +588,32 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setStitchOrigin(EStitchOrigin enumVar)
+	{
+		setAttribute(AttributeName.STITCHORIGIN, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute StitchOrigin
+	 *
+	 * @return the value of the attribute
+	 */
+	public EStitchOrigin getEStitchOrigin()
+	{
+		return EStitchOrigin.getEnum(getAttribute(AttributeName.STITCHORIGIN, null, "UntrimmedJogSide"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchOrigin
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute StitchOrigin
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setStitchOrigin(EnumStitchOrigin enumVar)
 	{
 		setAttribute(AttributeName.STITCHORIGIN, enumVar == null ? null : enumVar.getName(), null);
@@ -611,6 +708,32 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setReferenceEdge(EReferenceEdge enumVar)
+	{
+		setAttribute(AttributeName.REFERENCEEDGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ReferenceEdge
+	 *
+	 * @return the value of the attribute
+	 */
+	public EReferenceEdge getEReferenceEdge()
+	{
+		return EReferenceEdge.getEnum(getAttribute(AttributeName.REFERENCEEDGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ReferenceEdge
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ReferenceEdge
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setReferenceEdge(EnumReferenceEdge enumVar)
 	{
 		setAttribute(AttributeName.REFERENCEEDGE, enumVar == null ? null : enumVar.getName(), null);
@@ -634,6 +757,31 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setStapleShape(EStapleShape enumVar)
+	{
+		setAttribute(AttributeName.STAPLESHAPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute StapleShape
+	 *
+	 * @return the value of the attribute
+	 */
+	public EStapleShape getEStapleShape()
+	{
+		return EStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StapleShape ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute StapleShape
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setStapleShape(EnumStapleShape enumVar)
 	{
 		setAttribute(AttributeName.STAPLESHAPE, enumVar == null ? null : enumVar.getName(), null);
@@ -707,6 +855,31 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setStitchType(EStitchType enumVar)
+	{
+		setAttribute(AttributeName.STITCHTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute StitchType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EStitchType getEStitchType()
+	{
+		return EStitchType.getEnum(getAttribute(AttributeName.STITCHTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StitchType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute StitchType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setStitchType(EnumStitchType enumVar)
 	{
 		setAttribute(AttributeName.STITCHTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -754,6 +927,32 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTightBacking(ETightBacking enumVar)
+	{
+		setAttribute(AttributeName.TIGHTBACKING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute TightBacking
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETightBacking getETightBacking()
+	{
+		return ETightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TightBacking
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute TightBacking
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTightBacking(EnumTightBacking enumVar)
 	{
 		setAttribute(AttributeName.TIGHTBACKING, enumVar == null ? null : enumVar.getName(), null);

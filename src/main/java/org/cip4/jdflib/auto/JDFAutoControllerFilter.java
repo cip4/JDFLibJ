@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -142,6 +143,20 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	protected JDFAutoControllerFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for URLTypes
+	 */
+
+	public enum EURLTypes
+	{
+		JDFError, JDFInput, JDFOutput, JMF, SecureJMF;
+
+		public static EURLTypes getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EURLTypes.class, val, null);
+		}
 	}
 
 	/**
@@ -247,9 +262,34 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	/**
 	 * (5.2) set attribute URLTypes
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setURLTypes(Vector<? extends ValuedEnum> v)
+	public void setEURLTypes(List<EURLTypes> v)
+	{
+		setEnumsAttribute(AttributeName.URLTYPES, v, null);
+	}
+
+	/**
+	 * (9.2) get URLTypes attribute URLTypes
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EURLTypes> getEnumsURLTypes()
+	{
+		return getEnumerationsAttribute(AttributeName.URLTYPES, null, EURLTypes.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URLTypes ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute URLTypes
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setURLTypes(List<EnumURLTypes> v)
 	{
 		setEnumerationsAttribute(AttributeName.URLTYPES, v, null);
 	}
@@ -259,7 +299,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getURLTypes()
+	public Vector<EnumURLTypes> getURLTypes()
 	{
 		return getEnumerationsAttribute(AttributeName.URLTYPES, null, EnumURLTypes.getEnum(0), false);
 	}

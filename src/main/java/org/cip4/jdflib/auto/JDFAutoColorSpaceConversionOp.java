@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.process.JDFDeviceNSpace;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFScreenSelector;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -184,6 +185,20 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * Enumeration strings for Operation
 	 */
 
+	public enum EOperation
+	{
+		Convert, Tag, Untag, Retag, ConvertIgnore;
+
+		public static EOperation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOperation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Operation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumOperation extends ValuedEnum
 	{
@@ -253,6 +268,20 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * Enumeration strings for RenderingIntent
 	 */
 
+	public enum ERenderingIntent
+	{
+		ColorSpaceDependent, Perceptual, Saturation, RelativeColorimetric, AbsoluteColorimetric;
+
+		public static ERenderingIntent getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ERenderingIntent.class, val, ERenderingIntent.ColorSpaceDependent);
+		}
+	}
+
+	/**
+	 * Enumeration strings for RenderingIntent
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumRenderingIntent extends ValuedEnum
 	{
@@ -316,6 +345,20 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		public static final EnumRenderingIntent RelativeColorimetric = new EnumRenderingIntent("RelativeColorimetric");
 		/**  */
 		public static final EnumRenderingIntent AbsoluteColorimetric = new EnumRenderingIntent("AbsoluteColorimetric");
+	}
+
+	/**
+	 * Enumeration strings for SourceCS
+	 */
+
+	public enum ESourceCS
+	{
+		CalGray, CalRGB, Calibrated, CIEBased, CMYK, DeviceN, DevIndep, RGB, Gray, ICCBased, ICCCMYK, ICCGray, ICCLAB, ICCRGB, Lab, Separation, YUV, All;
+
+		public static ESourceCS getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESourceCS.class, val, null);
+		}
 	}
 
 	/**
@@ -417,6 +460,20 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * Enumeration strings for SourceObjects
 	 */
 
+	public enum ESourceObjects
+	{
+		All, ImagePhotographic, ImageScreenShot, LineArt, SmoothShades, Text;
+
+		public static ESourceObjects getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESourceObjects.class, val, ESourceObjects.All);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SourceObjects
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSourceObjects extends ValuedEnum
 	{
@@ -482,6 +539,20 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
 		/**  */
 		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
+	}
+
+	/**
+	 * Enumeration strings for SourceRenderingIntent
+	 */
+
+	public enum ESourceRenderingIntent
+	{
+		ColorSpaceDependent, Perceptual, Saturation, RelativeColorimetric, AbsoluteColorimetric;
+
+		public static ESourceRenderingIntent getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESourceRenderingIntent.class, val, null);
+		}
 	}
 
 	/**
@@ -663,6 +734,31 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOperation(EOperation enumVar)
+	{
+		setAttribute(AttributeName.OPERATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Operation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOperation getEOperation()
+	{
+		return EOperation.getEnum(getAttribute(AttributeName.OPERATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Operation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Operation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOperation(EnumOperation enumVar)
 	{
 		setAttribute(AttributeName.OPERATION, enumVar == null ? null : enumVar.getName(), null);
@@ -711,6 +807,32 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setRenderingIntent(ERenderingIntent enumVar)
+	{
+		setAttribute(AttributeName.RENDERINGINTENT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute RenderingIntent
+	 *
+	 * @return the value of the attribute
+	 */
+	public ERenderingIntent getERenderingIntent()
+	{
+		return ERenderingIntent.getEnum(getAttribute(AttributeName.RENDERINGINTENT, null, "ColorSpaceDependent"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RenderingIntent
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute RenderingIntent
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setRenderingIntent(EnumRenderingIntent enumVar)
 	{
 		setAttribute(AttributeName.RENDERINGINTENT, enumVar == null ? null : enumVar.getName(), null);
@@ -782,6 +904,31 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSourceCS(ESourceCS enumVar)
+	{
+		setAttribute(AttributeName.SOURCECS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SourceCS
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESourceCS getESourceCS()
+	{
+		return ESourceCS.getEnum(getAttribute(AttributeName.SOURCECS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceCS ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SourceCS
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSourceCS(EnumSourceCS enumVar)
 	{
 		setAttribute(AttributeName.SOURCECS, enumVar == null ? null : enumVar.getName(), null);
@@ -804,9 +951,35 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setSourceObjects(Vector<? extends ValuedEnum> v)
+	public void setESourceObjects(List<ESourceObjects> v)
+	{
+		setEnumsAttribute(AttributeName.SOURCEOBJECTS, v, null);
+	}
+
+	/**
+	 * (9.2) get SourceObjects attribute SourceObjects
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<ESourceObjects> getEnumsSourceObjects()
+	{
+		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, ESourceObjects.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute SourceObjects
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setSourceObjects(List<EnumSourceObjects> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
 	}
@@ -816,7 +989,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getSourceObjects()
+	public Vector<EnumSourceObjects> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
 	}
@@ -830,6 +1003,32 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSourceRenderingIntent(ESourceRenderingIntent enumVar)
+	{
+		setAttribute(AttributeName.SOURCERENDERINGINTENT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SourceRenderingIntent
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESourceRenderingIntent getESourceRenderingIntent()
+	{
+		return ESourceRenderingIntent.getEnum(getAttribute(AttributeName.SOURCERENDERINGINTENT, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceRenderingIntent
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SourceRenderingIntent
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSourceRenderingIntent(EnumSourceRenderingIntent enumVar)
 	{
 		setAttribute(AttributeName.SOURCERENDERINGINTENT, enumVar == null ? null : enumVar.getName(), null);

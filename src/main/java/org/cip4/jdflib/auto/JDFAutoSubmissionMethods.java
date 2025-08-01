@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -147,6 +148,20 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	protected JDFAutoSubmissionMethods(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Packaging
+	 */
+
+	public enum EPackaging
+	{
+		MIME, None;
+
+		public static EPackaging getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPackaging.class, val, null);
+		}
 	}
 
 	/**
@@ -291,9 +306,34 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	/**
 	 * (5.2) set attribute Packaging
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setPackaging(Vector<? extends ValuedEnum> v)
+	public void setEPackaging(List<EPackaging> v)
+	{
+		setEnumsAttribute(AttributeName.PACKAGING, v, null);
+	}
+
+	/**
+	 * (9.2) get Packaging attribute Packaging
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EPackaging> getEnumsPackaging()
+	{
+		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EPackaging.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Packaging ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute Packaging
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setPackaging(List<EnumPackaging> v)
 	{
 		setEnumerationsAttribute(AttributeName.PACKAGING, v, null);
 	}
@@ -303,7 +343,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getPackaging()
+	public Vector<EnumPackaging> getPackaging()
 	{
 		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.getEnum(0), false);
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFTIFFEmbeddedFile;
 import org.cip4.jdflib.resource.process.JDFTIFFtag;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -171,6 +172,20 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * Enumeration strings for ByteOrder
 	 */
 
+	public enum EByteOrder
+	{
+		II, MM;
+
+		public static EByteOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EByteOrder.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ByteOrder
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumByteOrder extends ValuedEnum
 	{
@@ -228,6 +243,20 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 		public static final EnumByteOrder II = new EnumByteOrder("II");
 		/**  */
 		public static final EnumByteOrder MM = new EnumByteOrder("MM");
+	}
+
+	/**
+	 * Enumeration strings for Segmentation
+	 */
+
+	public enum ESegmentation
+	{
+		SingleStrip, Stripped, Tiled;
+
+		public static ESegmentation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESegmentation.class, val, null);
+		}
 	}
 
 	/**
@@ -307,6 +336,31 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setByteOrder(EByteOrder enumVar)
+	{
+		setAttribute(AttributeName.BYTEORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ByteOrder
+	 *
+	 * @return the value of the attribute
+	 */
+	public EByteOrder getEByteOrder()
+	{
+		return EByteOrder.getEnum(getAttribute(AttributeName.BYTEORDER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ByteOrder ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ByteOrder
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setByteOrder(EnumByteOrder enumVar)
 	{
 		setAttribute(AttributeName.BYTEORDER, enumVar == null ? null : enumVar.getName(), null);
@@ -378,6 +432,32 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSegmentation(ESegmentation enumVar)
+	{
+		setAttribute(AttributeName.SEGMENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Segmentation
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESegmentation getESegmentation()
+	{
+		return ESegmentation.getEnum(getAttribute(AttributeName.SEGMENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Segmentation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Segmentation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSegmentation(EnumSegmentation enumVar)
 	{
 		setAttribute(AttributeName.SEGMENTATION, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -271,6 +271,16 @@ public abstract class JDFAutoLocation extends JDFElement
 	public JDFAddress appendAddress()
 	{
 		return (JDFAddress) appendElement(ElementName.ADDRESS, null);
+	}
+
+	/**
+	 * (31) create inter-resource link to refTarget
+	 *
+	 * @param refTarget the element that is referenced
+	 */
+	public void refAddress(JDFAddress refTarget)
+	{
+		refElement(refTarget);
 	}
 
 }

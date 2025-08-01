@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFFitPolicy;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -181,6 +182,20 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 * Enumeration strings for Sides
 	 */
 
+	public enum ESides
+	{
+		OneSided, OneSidedBack, TwoSidedHeadToHead, TwoSidedHeadToFoot, Unprinted;
+
+		public static ESides getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESides.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Sides
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSides extends ValuedEnum
 	{
@@ -244,6 +259,20 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 		public static final EnumSides TwoSidedHeadToFoot = new EnumSides("TwoSidedHeadToFoot");
 		/**  */
 		public static final EnumSides Unprinted = new EnumSides("Unprinted");
+	}
+
+	/**
+	 * Enumeration strings for Mask
+	 */
+
+	public enum EMask
+	{
+		None, TrimBox, BleedBox, SourceTrimBox, SourceBleedBox, PDL, DieCut, DieBleed;
+
+		public static EMask getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMask.class, val, null);
+		}
 	}
 
 	/**
@@ -687,6 +716,31 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSides(ESides enumVar)
+	{
+		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Sides
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESides getESides()
+	{
+		return ESides.getEnum(getAttribute(AttributeName.SIDES, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Sides
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSides(EnumSides enumVar)
 	{
 		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
@@ -757,6 +811,31 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMask(EMask enumVar)
+	{
+		setAttribute(AttributeName.MASK, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Mask
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMask getEMask()
+	{
+		return EMask.getEnum(getAttribute(AttributeName.MASK, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Mask ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Mask
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMask(EnumMask enumVar)
 	{
 		setAttribute(AttributeName.MASK, enumVar == null ? null : enumVar.getName(), null);

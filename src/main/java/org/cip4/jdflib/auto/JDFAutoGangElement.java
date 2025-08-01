@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -188,6 +189,20 @@ public abstract class JDFAutoGangElement extends JDFElement
 	protected JDFAutoGangElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for GrainDirection
+	 */
+
+	public enum EGrainDirection
+	{
+		Any, Both, ShortEdge, LongEdge, SameDirection, XDirection, YDirection;
+
+		public static EGrainDirection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EGrainDirection.class, val, null);
+		}
 	}
 
 	/**
@@ -452,6 +467,32 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setGrainDirection(EGrainDirection enumVar)
+	{
+		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute GrainDirection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EGrainDirection getEGrainDirection()
+	{
+		return EGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GrainDirection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute GrainDirection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setGrainDirection(EnumGrainDirection enumVar)
 	{
 		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -188,6 +189,20 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for RingSystem
+	 */
+
+	public enum ERingSystem
+	{
+		RingSystem_2HoleEuro, RingSystem_3HoleUS, RingSystem_4HoleEuro;
+
+		public static ERingSystem getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ERingSystem.class, val, null);
+		}
 	}
 
 	/**
@@ -436,6 +451,31 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setRingSystem(ERingSystem enumVar)
+	{
+		setAttribute(AttributeName.RINGSYSTEM, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute RingSystem
+	 *
+	 * @return the value of the attribute
+	 */
+	public ERingSystem getERingSystem()
+	{
+		return ERingSystem.getEnum(getAttribute(AttributeName.RINGSYSTEM, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RingSystem ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute RingSystem
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setRingSystem(EnumRingSystem enumVar)
 	{
 		setAttribute(AttributeName.RINGSYSTEM, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -189,6 +190,20 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for DensityStandard
+	 */
+
+	public enum EDensityStandard
+	{
+		ANSIA, ANSIE, ANSII, ANSIT, DIN16536, DIN16536NB;
+
+		public static EDensityStandard getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDensityStandard.class, val, null);
+		}
 	}
 
 	/**
@@ -325,6 +340,32 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDensityStandard(EDensityStandard enumVar)
+	{
+		setAttribute(AttributeName.DENSITYSTANDARD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DensityStandard
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDensityStandard getEDensityStandard()
+	{
+		return EDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DensityStandard
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DensityStandard
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDensityStandard(EnumDensityStandard enumVar)
 	{
 		setAttribute(AttributeName.DENSITYSTANDARD, enumVar == null ? null : enumVar.getName(), null);

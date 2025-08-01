@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAdvancedParams;
 import org.cip4.jdflib.resource.process.JDFPDFXParams;
 import org.cip4.jdflib.resource.process.JDFThinPDFParams;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -201,6 +202,20 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * Enumeration strings for Binding
 	 */
 
+	public enum EBinding
+	{
+		Left, Right;
+
+		public static EBinding getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBinding.class, val, EBinding.Left);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Binding
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBinding extends ValuedEnum
 	{
@@ -258,6 +273,20 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		public static final EnumBinding Left = new EnumBinding("Left");
 		/**  */
 		public static final EnumBinding Right = new EnumBinding("Right");
+	}
+
+	/**
+	 * Enumeration strings for AutoRotatePages
+	 */
+
+	public enum EAutoRotatePages
+	{
+		None, All, PageByPage;
+
+		public static EAutoRotatePages getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAutoRotatePages.class, val, null);
+		}
 	}
 
 	/**
@@ -323,6 +352,20 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		public static final EnumAutoRotatePages All = new EnumAutoRotatePages("All");
 		/**  */
 		public static final EnumAutoRotatePages PageByPage = new EnumAutoRotatePages("PageByPage");
+	}
+
+	/**
+	 * Enumeration strings for DefaultRenderingIntent
+	 */
+
+	public enum EDefaultRenderingIntent
+	{
+		Default, Perceptual, Saturation, RelativeColorimetric, AbsoluteColorimetric;
+
+		public static EDefaultRenderingIntent getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDefaultRenderingIntent.class, val, null);
+		}
 	}
 
 	/**
@@ -430,6 +473,31 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBinding(EBinding enumVar)
+	{
+		setAttribute(AttributeName.BINDING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Binding
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBinding getEBinding()
+	{
+		return EBinding.getEnum(getAttribute(AttributeName.BINDING, null, "Left"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Binding ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Binding
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBinding(EnumBinding enumVar)
 	{
 		setAttribute(AttributeName.BINDING, enumVar == null ? null : enumVar.getName(), null);
@@ -524,6 +592,32 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAutoRotatePages(EAutoRotatePages enumVar)
+	{
+		setAttribute(AttributeName.AUTOROTATEPAGES, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute AutoRotatePages
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAutoRotatePages getEAutoRotatePages()
+	{
+		return EAutoRotatePages.getEnum(getAttribute(AttributeName.AUTOROTATEPAGES, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AutoRotatePages
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute AutoRotatePages
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAutoRotatePages(EnumAutoRotatePages enumVar)
 	{
 		setAttribute(AttributeName.AUTOROTATEPAGES, enumVar == null ? null : enumVar.getName(), null);
@@ -572,6 +666,32 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDefaultRenderingIntent(EDefaultRenderingIntent enumVar)
+	{
+		setAttribute(AttributeName.DEFAULTRENDERINGINTENT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DefaultRenderingIntent
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDefaultRenderingIntent getEDefaultRenderingIntent()
+	{
+		return EDefaultRenderingIntent.getEnum(getAttribute(AttributeName.DEFAULTRENDERINGINTENT, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultRenderingIntent
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DefaultRenderingIntent
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDefaultRenderingIntent(EnumDefaultRenderingIntent enumVar)
 	{
 		setAttribute(AttributeName.DEFAULTRENDERINGINTENT, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -166,6 +167,20 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for StapleShape
+	 */
+
+	public enum EStapleShape
+	{
+		Crown, Overlap, Butted, ClinchOut, Eyelet;
+
+		public static EStapleShape getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EStapleShape.class, val, null);
+		}
 	}
 
 	/**
@@ -299,6 +314,31 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setStapleShape(EStapleShape enumVar)
+	{
+		setAttribute(AttributeName.STAPLESHAPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute StapleShape
+	 *
+	 * @return the value of the attribute
+	 */
+	public EStapleShape getEStapleShape()
+	{
+		return EStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StapleShape ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute StapleShape
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setStapleShape(EnumStapleShape enumVar)
 	{
 		setAttribute(AttributeName.STAPLESHAPE, enumVar == null ? null : enumVar.getName(), null);

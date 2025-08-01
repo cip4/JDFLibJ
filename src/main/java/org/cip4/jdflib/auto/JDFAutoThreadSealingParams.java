@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -165,6 +166,20 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for ThreadMaterial
+	 */
+
+	public enum EThreadMaterial
+	{
+		Cotton, Nylon, Polyester;
+
+		public static EThreadMaterial getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EThreadMaterial.class, val, null);
+		}
 	}
 
 	/**
@@ -268,6 +283,32 @@ public abstract class JDFAutoThreadSealingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setThreadMaterial(EThreadMaterial enumVar)
+	{
+		setAttribute(AttributeName.THREADMATERIAL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ThreadMaterial
+	 *
+	 * @return the value of the attribute
+	 */
+	public EThreadMaterial getEThreadMaterial()
+	{
+		return EThreadMaterial.getEnum(getAttribute(AttributeName.THREADMATERIAL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ThreadMaterial
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ThreadMaterial
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setThreadMaterial(EnumThreadMaterial enumVar)
 	{
 		setAttribute(AttributeName.THREADMATERIAL, enumVar == null ? null : enumVar.getName(), null);

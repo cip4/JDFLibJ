@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.cip4.jdflib.resource.process.JDFLot;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -199,6 +200,20 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * Enumeration strings for CommandResult
 	 */
 
+	public enum ECommandResult
+	{
+		Rejected, Removed, New, Merged, Replaced;
+
+		public static ECommandResult getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECommandResult.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for CommandResult
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumCommandResult extends ValuedEnum
 	{
@@ -262,6 +277,20 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 		public static final EnumCommandResult Merged = new EnumCommandResult("Merged");
 		/**  */
 		public static final EnumCommandResult Replaced = new EnumCommandResult("Replaced");
+	}
+
+	/**
+	 * Enumeration strings for Level
+	 */
+
+	public enum ELevel
+	{
+		Empty, Low, OK, High, Full;
+
+		public static ELevel getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ELevel.class, val, null);
+		}
 	}
 
 	/**
@@ -337,6 +366,20 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * Enumeration strings for Orientation
 	 */
 
+	public enum EOrientation
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Orientation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
 	{
@@ -406,6 +449,20 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
 		/**  */
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
+	}
+
+	/**
+	 * Enumeration strings for Scope
+	 */
+
+	public enum EScope
+	{
+		Allowed, Device, Present, Job, Estimate;
+
+		public static EScope getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EScope.class, val, null);
+		}
 	}
 
 	/**
@@ -561,6 +618,32 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCommandResult(ECommandResult enumVar)
+	{
+		setAttribute(AttributeName.COMMANDRESULT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CommandResult
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECommandResult getECommandResult()
+	{
+		return ECommandResult.getEnum(getAttribute(AttributeName.COMMANDRESULT, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CommandResult
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CommandResult
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCommandResult(EnumCommandResult enumVar)
 	{
 		setAttribute(AttributeName.COMMANDRESULT, enumVar == null ? null : enumVar.getName(), null);
@@ -607,6 +690,31 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setLevel(ELevel enumVar)
+	{
+		setAttribute(AttributeName.LEVEL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Level
+	 *
+	 * @return the value of the attribute
+	 */
+	public ELevel getELevel()
+	{
+		return ELevel.getEnum(getAttribute(AttributeName.LEVEL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Level ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Level
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setLevel(EnumLevel enumVar)
 	{
 		setAttribute(AttributeName.LEVEL, enumVar == null ? null : enumVar.getName(), null);
@@ -725,6 +833,31 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrientation(EOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Orientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrientation getEOrientation()
+	{
+		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Orientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
@@ -842,6 +975,31 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setScope(EScope enumVar)
+	{
+		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Scope
+	 *
+	 * @return the value of the attribute
+	 */
+	public EScope getEScope()
+	{
+		return EScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Scope
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setScope(EnumScope enumVar)
 	{
 		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.getName(), null);
@@ -888,6 +1046,31 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setResStatus(JDFResource.EResourceClass enumVar)
+	{
+		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Status
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFResource.EResourceClass getEResStatus()
+	{
+		return JDFResource.EResourceClass.getEnum(getAttribute(AttributeName.STATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Status
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setResStatus(JDFResource.EnumResStatus enumVar)
 	{
 		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.getName(), null);
@@ -983,6 +1166,31 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setUsage(JDFResourceLink.EUsage enumVar)
+	{
+		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Usage
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFResourceLink.EUsage getEUsage()
+	{
+		return JDFResourceLink.EUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Usage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setUsage(JDFResourceLink.EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);

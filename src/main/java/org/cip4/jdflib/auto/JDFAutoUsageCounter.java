@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -163,6 +164,20 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Consumable;
+	}
+
+	/**
+	 * Enumeration strings for Scope
+	 */
+
+	public enum EScope
+	{
+		Lifetime, PowerOn, Job;
+
+		public static EScope getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EScope.class, val, null);
+		}
 	}
 
 	/**
@@ -265,6 +280,31 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setScope(EScope enumVar)
+	{
+		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Scope
+	 *
+	 * @return the value of the attribute
+	 */
+	public EScope getEScope()
+	{
+		return EScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Scope
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setScope(EnumScope enumVar)
 	{
 		setAttribute(AttributeName.SCOPE, enumVar == null ? null : enumVar.getName(), null);

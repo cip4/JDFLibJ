@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -180,6 +181,20 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * Enumeration strings for BoxType
 	 */
 
+	public enum EBoxType
+	{
+		Box, Carton, Envelope;
+
+		public static EBoxType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBoxType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for BoxType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBoxType extends ValuedEnum
 	{
@@ -239,6 +254,20 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 		public static final EnumBoxType Carton = new EnumBoxType("Carton");
 		/**  */
 		public static final EnumBoxType Envelope = new EnumBoxType("Envelope");
+	}
+
+	/**
+	 * Enumeration strings for ComponentOrientation
+	 */
+
+	public enum EComponentOrientation
+	{
+		XY, XZ, YZ;
+
+		public static EComponentOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EComponentOrientation.class, val, null);
+		}
 	}
 
 	/**
@@ -318,6 +347,31 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBoxType(EBoxType enumVar)
+	{
+		setAttribute(AttributeName.BOXTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BoxType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBoxType getEBoxType()
+	{
+		return EBoxType.getEnum(getAttribute(AttributeName.BOXTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BoxType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BoxType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBoxType(EnumBoxType enumVar)
 	{
 		setAttribute(AttributeName.BOXTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -413,6 +467,32 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setComponentOrientation(EComponentOrientation enumVar)
+	{
+		setAttribute(AttributeName.COMPONENTORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ComponentOrientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EComponentOrientation getEComponentOrientation()
+	{
+		return EComponentOrientation.getEnum(getAttribute(AttributeName.COMPONENTORIENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ComponentOrientation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ComponentOrientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setComponentOrientation(EnumComponentOrientation enumVar)
 	{
 		setAttribute(AttributeName.COMPONENTORIENTATION, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -181,6 +182,20 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for SheetLay
+	 */
+
+	public enum ESheetLay
+	{
+		Left, Right, Center;
+
+		public static ESheetLay getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetLay.class, val, null);
+		}
 	}
 
 	/**
@@ -330,6 +345,31 @@ public abstract class JDFAutoMediaSource extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetLay(ESheetLay enumVar)
+	{
+		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetLay
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetLay getESheetLay()
+	{
+		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetLay
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
 	{
 		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);

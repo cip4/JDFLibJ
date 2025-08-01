@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,6 +97,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate;
 import org.cip4.jdflib.resource.process.JDFInsertSheet;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -224,6 +225,20 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * Enumeration strings for FinishingOrder
 	 */
 
+	public enum EFinishingOrder
+	{
+		FoldGather, FoldCollect, Gather, GatherFold;
+
+		public static EFinishingOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFinishingOrder.class, val, EFinishingOrder.GatherFold);
+		}
+	}
+
+	/**
+	 * Enumeration strings for FinishingOrder
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumFinishingOrder extends ValuedEnum
 	{
@@ -285,6 +300,20 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		public static final EnumFinishingOrder Gather = new EnumFinishingOrder("Gather");
 		/**  */
 		public static final EnumFinishingOrder GatherFold = new EnumFinishingOrder("GatherFold");
+	}
+
+	/**
+	 * Enumeration strings for FoldCatalogOrientation
+	 */
+
+	public enum EFoldCatalogOrientation
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EFoldCatalogOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFoldCatalogOrientation.class, val, EFoldCatalogOrientation.Rotate0);
+		}
 	}
 
 	/**
@@ -366,6 +395,20 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * Enumeration strings for Rotate
 	 */
 
+	public enum ERotate
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270;
+
+		public static ERotate getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ERotate.class, val, ERotate.Rotate0);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Rotate
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumRotate extends ValuedEnum
 	{
@@ -427,6 +470,20 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		public static final EnumRotate Rotate180 = new EnumRotate("Rotate180");
 		/**  */
 		public static final EnumRotate Rotate270 = new EnumRotate("Rotate270");
+	}
+
+	/**
+	 * Enumeration strings for Sides
+	 */
+
+	public enum ESides
+	{
+		OneSidedBackFlipX, OneSidedBackFlipY, OneSidedFront, TwoSidedFlipX, TwoSidedFlipY;
+
+		public static ESides getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESides.class, val, ESides.OneSidedFront);
+		}
 	}
 
 	/**
@@ -496,6 +553,20 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 		public static final EnumSides TwoSidedFlipX = new EnumSides("TwoSidedFlipX");
 		/**  */
 		public static final EnumSides TwoSidedFlipY = new EnumSides("TwoSidedFlipY");
+	}
+
+	/**
+	 * Enumeration strings for BindingEdge
+	 */
+
+	public enum EBindingEdge
+	{
+		Left, Right, Top, Bottom, None;
+
+		public static EBindingEdge getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBindingEdge.class, val, null);
+		}
 	}
 
 	/**
@@ -580,6 +651,32 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFinishingOrder(EFinishingOrder enumVar)
+	{
+		setAttribute(AttributeName.FINISHINGORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FinishingOrder
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFinishingOrder getEFinishingOrder()
+	{
+		return EFinishingOrder.getEnum(getAttribute(AttributeName.FINISHINGORDER, null, "GatherFold"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FinishingOrder
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FinishingOrder
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFinishingOrder(EnumFinishingOrder enumVar)
 	{
 		setAttribute(AttributeName.FINISHINGORDER, enumVar == null ? null : enumVar.getName(), null);
@@ -604,6 +701,32 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFoldCatalogOrientation(EFoldCatalogOrientation enumVar)
+	{
+		setAttribute(AttributeName.FOLDCATALOGORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FoldCatalogOrientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFoldCatalogOrientation getEFoldCatalogOrientation()
+	{
+		return EFoldCatalogOrientation.getEnum(getAttribute(AttributeName.FOLDCATALOGORIENTATION, null, "Rotate0"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FoldCatalogOrientation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FoldCatalogOrientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFoldCatalogOrientation(EnumFoldCatalogOrientation enumVar)
 	{
 		setAttribute(AttributeName.FOLDCATALOGORIENTATION, enumVar == null ? null : enumVar.getName(), null);
@@ -674,6 +797,31 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setRotate(ERotate enumVar)
+	{
+		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Rotate
+	 *
+	 * @return the value of the attribute
+	 */
+	public ERotate getERotate()
+	{
+		return ERotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Rotate
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setRotate(EnumRotate enumVar)
 	{
 		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.getName(), null);
@@ -697,6 +845,31 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSides(ESides enumVar)
+	{
+		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Sides
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESides getESides()
+	{
+		return ESides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Sides
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSides(EnumSides enumVar)
 	{
 		setAttribute(AttributeName.SIDES, enumVar == null ? null : enumVar.getName(), null);
@@ -720,6 +893,31 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBindingEdge(EBindingEdge enumVar)
+	{
+		setAttribute(AttributeName.BINDINGEDGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BindingEdge
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBindingEdge getEBindingEdge()
+	{
+		return EBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingEdge ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BindingEdge
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBindingEdge(EnumBindingEdge enumVar)
 	{
 		setAttribute(AttributeName.BINDINGEDGE, enumVar == null ? null : enumVar.getName(), null);

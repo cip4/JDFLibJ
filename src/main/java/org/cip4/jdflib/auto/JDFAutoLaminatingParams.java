@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -169,6 +170,20 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for LaminatingMethod
+	 */
+
+	public enum ELaminatingMethod
+	{
+		CompoundFoil, DispersionGlue, Fusing, Unknown;
+
+		public static ELaminatingMethod getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ELaminatingMethod.class, val, null);
+		}
 	}
 
 	/**
@@ -350,6 +365,32 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setLaminatingMethod(ELaminatingMethod enumVar)
+	{
+		setAttribute(AttributeName.LAMINATINGMETHOD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute LaminatingMethod
+	 *
+	 * @return the value of the attribute
+	 */
+	public ELaminatingMethod getELaminatingMethod()
+	{
+		return ELaminatingMethod.getEnum(getAttribute(AttributeName.LAMINATINGMETHOD, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute LaminatingMethod
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute LaminatingMethod
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setLaminatingMethod(EnumLaminatingMethod enumVar)
 	{
 		setAttribute(AttributeName.LAMINATINGMETHOD, enumVar == null ? null : enumVar.getName(), null);

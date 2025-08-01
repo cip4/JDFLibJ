@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -146,6 +147,20 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	protected JDFAutoJPEG2000Params(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for ProgressionOrder
+	 */
+
+	public enum EProgressionOrder
+	{
+		LRCP, RLCP, RPCL, PCRL, CPRL;
+
+		public static EProgressionOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EProgressionOrder.class, val, null);
+		}
 	}
 
 	/**
@@ -327,6 +342,32 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setProgressionOrder(EProgressionOrder enumVar)
+	{
+		setAttribute(AttributeName.PROGRESSIONORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ProgressionOrder
+	 *
+	 * @return the value of the attribute
+	 */
+	public EProgressionOrder getEProgressionOrder()
+	{
+		return EProgressionOrder.getEnum(getAttribute(AttributeName.PROGRESSIONORDER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProgressionOrder
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ProgressionOrder
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setProgressionOrder(EnumProgressionOrder enumVar)
 	{
 		setAttribute(AttributeName.PROGRESSIONORDER, enumVar == null ? null : enumVar.getName(), null);

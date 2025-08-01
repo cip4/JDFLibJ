@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFObjectResolution;
 import org.cip4.jdflib.resource.process.prepress.JDFInterpretingDetails;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -199,6 +200,20 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 * Enumeration strings for MirrorAround
 	 */
 
+	public enum EMirrorAround
+	{
+		None, FeedDirection, MediaWidth, Both;
+
+		public static EMirrorAround getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMirrorAround.class, val, EMirrorAround.None);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MirrorAround
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMirrorAround extends ValuedEnum
 	{
@@ -266,6 +281,20 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 * Enumeration strings for Polarity
 	 */
 
+	public enum EPolarity
+	{
+		Positive, Negative;
+
+		public static EPolarity getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPolarity.class, val, EPolarity.Positive);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Polarity
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPolarity extends ValuedEnum
 	{
@@ -323,6 +352,20 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 		public static final EnumPolarity Positive = new EnumPolarity("Positive");
 		/**  */
 		public static final EnumPolarity Negative = new EnumPolarity("Negative");
+	}
+
+	/**
+	 * Enumeration strings for PrintQuality
+	 */
+
+	public enum EPrintQuality
+	{
+		High, Normal, Draft;
+
+		public static EPrintQuality getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPrintQuality.class, val, EPrintQuality.Normal);
+		}
 	}
 
 	/**
@@ -426,6 +469,32 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMirrorAround(EMirrorAround enumVar)
+	{
+		setAttribute(AttributeName.MIRRORAROUND, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MirrorAround
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMirrorAround getEMirrorAround()
+	{
+		return EMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MirrorAround
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMirrorAround(EnumMirrorAround enumVar)
 	{
 		setAttribute(AttributeName.MIRRORAROUND, enumVar == null ? null : enumVar.getName(), null);
@@ -449,6 +518,31 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPolarity(EPolarity enumVar)
+	{
+		setAttribute(AttributeName.POLARITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Polarity
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPolarity getEPolarity()
+	{
+		return EPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Polarity
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPolarity(EnumPolarity enumVar)
 	{
 		setAttribute(AttributeName.POLARITY, enumVar == null ? null : enumVar.getName(), null);
@@ -473,6 +567,32 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPrintQuality(EPrintQuality enumVar)
+	{
+		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PrintQuality
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPrintQuality getEPrintQuality()
+	{
+		return EPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, "Normal"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrintQuality
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PrintQuality
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPrintQuality(EnumPrintQuality enumVar)
 	{
 		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.getName(), null);

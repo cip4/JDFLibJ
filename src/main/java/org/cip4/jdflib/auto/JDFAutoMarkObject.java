@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -103,6 +103,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -213,6 +214,20 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * Enumeration strings for Anchor
 	 */
 
+	public enum EAnchor
+	{
+		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
+
+		public static EAnchor getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAnchor.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Anchor
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
 	{
@@ -284,6 +299,20 @@ public abstract class JDFAutoMarkObject extends JDFElement
 		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
 		/**  */
 		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
+	}
+
+	/**
+	 * Enumeration strings for Type
+	 */
+
+	public enum EType
+	{
+		Content, Mark;
+
+		public static EType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EType.class, val, null);
+		}
 	}
 
 	/**
@@ -527,6 +556,31 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAnchor(EAnchor enumVar)
+	{
+		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Anchor
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAnchor getEAnchor()
+	{
+		return EAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Anchor
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
 	{
 		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
@@ -573,6 +627,31 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setType(EType enumVar)
+	{
+		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Type
+	 *
+	 * @return the value of the attribute
+	 */
+	public EType getEType()
+	{
+		return EType.getEnum(getAttribute(AttributeName.TYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Type
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setType(EnumType enumVar)
 	{
 		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.getName(), null);

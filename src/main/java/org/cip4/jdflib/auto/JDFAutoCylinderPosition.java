@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -149,6 +150,20 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 	 * Enumeration strings for PlateType
 	 */
 
+	public enum EPlateType
+	{
+		Exposed, Dummy;
+
+		public static EPlateType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPlateType.class, val, EPlateType.Exposed);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PlateType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPlateType extends ValuedEnum
 	{
@@ -206,6 +221,20 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 		public static final EnumPlateType Exposed = new EnumPlateType("Exposed");
 		/**  */
 		public static final EnumPlateType Dummy = new EnumPlateType("Dummy");
+	}
+
+	/**
+	 * Enumeration strings for PlateUsage
+	 */
+
+	public enum EPlateUsage
+	{
+		Original, Reuse;
+
+		public static EPlateUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPlateUsage.class, val, EPlateUsage.Original);
+		}
 	}
 
 	/**
@@ -309,6 +338,31 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPlateType(EPlateType enumVar)
+	{
+		setAttribute(AttributeName.PLATETYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PlateType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPlateType getEPlateType()
+	{
+		return EPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, "Exposed"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PlateType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PlateType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPlateType(EnumPlateType enumVar)
 	{
 		setAttribute(AttributeName.PLATETYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -332,6 +386,31 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPlateUsage(EPlateUsage enumVar)
+	{
+		setAttribute(AttributeName.PLATEUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PlateUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPlateUsage getEPlateUsage()
+	{
+		return EPlateUsage.getEnum(getAttribute(AttributeName.PLATEUSAGE, null, "Original"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PlateUsage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PlateUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPlateUsage(EnumPlateUsage enumVar)
 	{
 		setAttribute(AttributeName.PLATEUSAGE, enumVar == null ? null : enumVar.getName(), null);

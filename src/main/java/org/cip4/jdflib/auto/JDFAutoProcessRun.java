@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -165,6 +166,20 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	protected JDFAutoProcessRun(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for EndStatus
+	 */
+
+	public enum EEndStatus
+	{
+		Aborted, Completed, FailedTestRun, Ready, Stopped;
+
+		public static EEndStatus getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EEndStatus.class, val, null);
+		}
 	}
 
 	/**
@@ -303,6 +318,31 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setEndStatus(EVersion enumVar)
+	{
+		setAttribute(AttributeName.ENDSTATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute EndStatus
+	 *
+	 * @return the value of the attribute
+	 */
+	public EVersion getEEndStatus()
+	{
+		return EVersion.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute EndStatus ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute EndStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	@Override
 	public void setEndStatus(EnumNodeStatus enumVar)
 	{

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,6 +93,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -203,6 +204,20 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * Enumeration strings for ColorType
 	 */
 
+	public enum EColorType
+	{
+		Color, GrayScale, Monochrome;
+
+		public static EColorType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EColorType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ColorType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumColorType extends ValuedEnum
 	{
@@ -262,6 +277,20 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		public static final EnumColorType GrayScale = new EnumColorType("GrayScale");
 		/**  */
 		public static final EnumColorType Monochrome = new EnumColorType("Monochrome");
+	}
+
+	/**
+	 * Enumeration strings for PlateType
+	 */
+
+	public enum EPlateType
+	{
+		Exposed, Dummy;
+
+		public static EPlateType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPlateType.class, val, null);
+		}
 	}
 
 	/**
@@ -331,6 +360,20 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * Enumeration strings for ProofQuality
 	 */
 
+	public enum EProofQuality
+	{
+		None, Halftone, Contone, Conceptual;
+
+		public static EProofQuality getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EProofQuality.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ProofQuality
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumProofQuality extends ValuedEnum
 	{
@@ -392,6 +435,20 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		public static final EnumProofQuality Contone = new EnumProofQuality("Contone");
 		/**  */
 		public static final EnumProofQuality Conceptual = new EnumProofQuality("Conceptual");
+	}
+
+	/**
+	 * Enumeration strings for ProofType
+	 */
+
+	public enum EProofType
+	{
+		None, Imposition, Page;
+
+		public static EProofType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EProofType.class, val, null);
+		}
 	}
 
 	/**
@@ -494,6 +551,31 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setColorType(EColorType enumVar)
+	{
+		setAttribute(AttributeName.COLORTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ColorType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EColorType getEColorType()
+	{
+		return EColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ColorType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setColorType(EnumColorType enumVar)
 	{
 		setAttribute(AttributeName.COLORTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -543,6 +625,31 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPlateType(EPlateType enumVar)
+	{
+		setAttribute(AttributeName.PLATETYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PlateType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPlateType getEPlateType()
+	{
+		return EPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PlateType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PlateType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPlateType(EnumPlateType enumVar)
 	{
 		setAttribute(AttributeName.PLATETYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -590,6 +697,32 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setProofQuality(EProofQuality enumVar)
+	{
+		setAttribute(AttributeName.PROOFQUALITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ProofQuality
+	 *
+	 * @return the value of the attribute
+	 */
+	public EProofQuality getEProofQuality()
+	{
+		return EProofQuality.getEnum(getAttribute(AttributeName.PROOFQUALITY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofQuality
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ProofQuality
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setProofQuality(EnumProofQuality enumVar)
 	{
 		setAttribute(AttributeName.PROOFQUALITY, enumVar == null ? null : enumVar.getName(), null);
@@ -613,6 +746,31 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setProofType(EProofType enumVar)
+	{
+		setAttribute(AttributeName.PROOFTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ProofType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EProofType getEProofType()
+	{
+		return EProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProofType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ProofType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setProofType(EnumProofType enumVar)
 	{
 		setAttribute(AttributeName.PROOFTYPE, enumVar == null ? null : enumVar.getName(), null);

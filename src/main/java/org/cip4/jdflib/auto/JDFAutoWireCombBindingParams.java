@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -190,6 +191,20 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	 * Enumeration strings for Shape
 	 */
 
+	public enum EShape
+	{
+		Single, Twin;
+
+		public static EShape getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EShape.class, val, EShape.Single);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Shape
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumShape extends ValuedEnum
 	{
@@ -247,6 +262,20 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 		public static final EnumShape Single = new EnumShape("Single");
 		/**  */
 		public static final EnumShape Twin = new EnumShape("Twin");
+	}
+
+	/**
+	 * Enumeration strings for Material
+	 */
+
+	public enum EMaterial
+	{
+		LaqueredSteel, TinnedSteel, ZincsSteel;
+
+		public static EMaterial getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMaterial.class, val, null);
+		}
 	}
 
 	/**
@@ -350,6 +379,31 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setShape(EShape enumVar)
+	{
+		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Shape
+	 *
+	 * @return the value of the attribute
+	 */
+	public EShape getEShape()
+	{
+		return EShape.getEnum(getAttribute(AttributeName.SHAPE, null, "Single"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shape ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Shape
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setShape(EnumShape enumVar)
 	{
 		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.getName(), null);
@@ -495,6 +549,31 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMaterial(EMaterial enumVar)
+	{
+		setAttribute(AttributeName.MATERIAL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Material
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMaterial getEMaterial()
+	{
+		return EMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Material
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMaterial(EnumMaterial enumVar)
 	{
 		setAttribute(AttributeName.MATERIAL, enumVar == null ? null : enumVar.getName(), null);

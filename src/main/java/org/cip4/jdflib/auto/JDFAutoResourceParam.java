@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -142,6 +143,20 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	protected JDFAutoResourceParam(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for DefaultPriority
+	 */
+
+	public enum EDefaultPriority
+	{
+		Application, DefaultJDF;
+
+		public static EDefaultPriority getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDefaultPriority.class, val, null);
+		}
 	}
 
 	/**
@@ -266,6 +281,32 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDefaultPriority(EDefaultPriority enumVar)
+	{
+		setAttribute(AttributeName.DEFAULTPRIORITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DefaultPriority
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDefaultPriority getEDefaultPriority()
+	{
+		return EDefaultPriority.getEnum(getAttribute(AttributeName.DEFAULTPRIORITY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DefaultPriority
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DefaultPriority
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDefaultPriority(EnumDefaultPriority enumVar)
 	{
 		setAttribute(AttributeName.DEFAULTPRIORITY, enumVar == null ? null : enumVar.getName(), null);

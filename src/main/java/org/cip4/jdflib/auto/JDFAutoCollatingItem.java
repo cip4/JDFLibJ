@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -169,6 +170,20 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * Enumeration strings for Orientation
 	 */
 
+	public enum EOrientation
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
+
+		public static EOrientation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Orientation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrientation extends ValuedEnum
 	{
@@ -238,6 +253,20 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
 		/**  */
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
+	}
+
+	/**
+	 * Enumeration strings for TransformationContext
+	 */
+
+	public enum ETransformationContext
+	{
+		StackItem, Component, CollateItem;
+
+		public static ETransformationContext getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETransformationContext.class, val, ETransformationContext.StackItem);
+		}
 	}
 
 	/**
@@ -363,6 +392,31 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrientation(EOrientation enumVar)
+	{
+		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Orientation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrientation getEOrientation()
+	{
+		return EOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Orientation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
 	{
 		setAttribute(AttributeName.ORIENTATION, enumVar == null ? null : enumVar.getName(), null);
@@ -413,6 +467,32 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTransformationContext(ETransformationContext enumVar)
+	{
+		setAttribute(AttributeName.TRANSFORMATIONCONTEXT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute TransformationContext
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETransformationContext getETransformationContext()
+	{
+		return ETransformationContext.getEnum(getAttribute(AttributeName.TRANSFORMATIONCONTEXT, null, "StackItem"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransformationContext
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute TransformationContext
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTransformationContext(EnumTransformationContext enumVar)
 	{
 		setAttribute(AttributeName.TRANSFORMATIONCONTEXT, enumVar == null ? null : enumVar.getName(), null);

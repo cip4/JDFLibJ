@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFStringSpan;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -159,6 +160,20 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	protected JDFAutoHoleMakingIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for HoleReferenceEdge
+	 */
+
+	public enum EHoleReferenceEdge
+	{
+		Left, Right, Top, Bottom, Pattern;
+
+		public static EHoleReferenceEdge getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EHoleReferenceEdge.class, val, EHoleReferenceEdge.Left);
+		}
 	}
 
 	/**
@@ -243,6 +258,32 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setHoleReferenceEdge(EHoleReferenceEdge enumVar)
+	{
+		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute HoleReferenceEdge
+	 *
+	 * @return the value of the attribute
+	 */
+	public EHoleReferenceEdge getEHoleReferenceEdge()
+	{
+		return EHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, "Left"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HoleReferenceEdge
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute HoleReferenceEdge
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
 	{
 		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.getName(), null);

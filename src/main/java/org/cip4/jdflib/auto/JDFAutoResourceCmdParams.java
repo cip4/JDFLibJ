@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,10 +87,12 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -183,6 +185,20 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * Enumeration strings for UpdateMethod
 	 */
 
+	public enum EUpdateMethod
+	{
+		Complete, Incremental, Remove;
+
+		public static EUpdateMethod getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EUpdateMethod.class, val, EUpdateMethod.Complete);
+		}
+	}
+
+	/**
+	 * Enumeration strings for UpdateMethod
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumUpdateMethod extends ValuedEnum
 	{
@@ -256,6 +272,31 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setActivation(EActivation enumVar)
+	{
+		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Activation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EActivation getEActivation()
+	{
+		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, "Active"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Activation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setActivation(EnumActivation enumVar)
 	{
 		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
@@ -490,6 +531,31 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setResStatus(JDFResource.EResourceClass enumVar)
+	{
+		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Status
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFResource.EResourceClass getEResStatus()
+	{
+		return JDFResource.EResourceClass.getEnum(getAttribute(AttributeName.STATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Status
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setResStatus(JDFResource.EnumResStatus enumVar)
 	{
 		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.getName(), null);
@@ -540,6 +606,32 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setUpdateMethod(EUpdateMethod enumVar)
+	{
+		setAttribute(AttributeName.UPDATEMETHOD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute UpdateMethod
+	 *
+	 * @return the value of the attribute
+	 */
+	public EUpdateMethod getEUpdateMethod()
+	{
+		return EUpdateMethod.getEnum(getAttribute(AttributeName.UPDATEMETHOD, null, "Complete"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UpdateMethod
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute UpdateMethod
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setUpdateMethod(EnumUpdateMethod enumVar)
 	{
 		setAttribute(AttributeName.UPDATEMETHOD, enumVar == null ? null : enumVar.getName(), null);
@@ -563,6 +655,31 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setUsage(JDFResourceLink.EUsage enumVar)
+	{
+		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Usage
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFResourceLink.EUsage getEUsage()
+	{
+		return JDFResourceLink.EUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Usage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setUsage(JDFResourceLink.EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);

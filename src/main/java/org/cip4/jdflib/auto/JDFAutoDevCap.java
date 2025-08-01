@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -178,6 +178,32 @@ public abstract class JDFAutoDevCap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAvailability(JDFDeviceCap.EAvailability enumVar)
+	{
+		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Availability
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFDeviceCap.EAvailability getEAvailability()
+	{
+		return JDFDeviceCap.EAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Availability
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Availability
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
 	{
 		setAttribute(AttributeName.AVAILABILITY, enumVar == null ? null : enumVar.getName(), null);

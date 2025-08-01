@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -168,6 +169,20 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	 * Enumeration strings for ShrinkingMethod
 	 */
 
+	public enum EShrinkingMethod
+	{
+		ShrinkCool, ShrinkHot;
+
+		public static EShrinkingMethod getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EShrinkingMethod.class, val, EShrinkingMethod.ShrinkHot);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ShrinkingMethod
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumShrinkingMethod extends ValuedEnum
 	{
@@ -240,6 +255,32 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setShrinkingMethod(EShrinkingMethod enumVar)
+	{
+		setAttribute(AttributeName.SHRINKINGMETHOD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ShrinkingMethod
+	 *
+	 * @return the value of the attribute
+	 */
+	public EShrinkingMethod getEShrinkingMethod()
+	{
+		return EShrinkingMethod.getEnum(getAttribute(AttributeName.SHRINKINGMETHOD, null, "ShrinkHot"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShrinkingMethod
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ShrinkingMethod
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setShrinkingMethod(EnumShrinkingMethod enumVar)
 	{
 		setAttribute(AttributeName.SHRINKINGMETHOD, enumVar == null ? null : enumVar.getName(), null);

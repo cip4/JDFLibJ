@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.JDFDeviceMark;
 import org.cip4.jdflib.resource.JDFFitPolicy;
 import org.cip4.jdflib.resource.JDFImageShift;
 import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -169,6 +170,20 @@ public abstract class JDFAutoPageCell extends JDFElement
 	protected JDFAutoPageCell(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Rotate
+	 */
+
+	public enum ERotate
+	{
+		Rotate0, Rotate90, Rotate180, Rotate270;
+
+		public static ERotate getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ERotate.class, val, ERotate.Rotate0);
+		}
 	}
 
 	/**
@@ -324,6 +339,31 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setRotate(ERotate enumVar)
+	{
+		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Rotate
+	 *
+	 * @return the value of the attribute
+	 */
+	public ERotate getERotate()
+	{
+		return ERotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Rotate
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setRotate(EnumRotate enumVar)
 	{
 		setAttribute(AttributeName.ROTATE, enumVar == null ? null : enumVar.getName(), null);

@@ -117,6 +117,7 @@ import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFContentObject;
@@ -2702,6 +2703,34 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertEquals("Sig_sheet1", sp.getXPathAttribute("MediaRef/Part/@SignatureName", null));
 		assertNotNull(sp.getMedia(1));
 		assertEquals(EnumResStatus.Available, sp.getResStatus(false));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testComponentMedia()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(ElementName.LAYOUT, "3F-16", null);
+		xjdfHelper.setTypes("ConventionalPrinting");
+
+		final SetHelper shPap = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
+		final ResourceHelper rhPap = shPap.getCreatePartition(AttributeName.SHEETNAME, "sheet1", true);
+		rhPap.setID("idPaper");
+		final JDFMedia pap = (JDFMedia) rhPap.getResource();
+		pap.setMediaType(EnumMediaType.Paper);
+
+		final SetHelper shComp = xjdfHelper.appendResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper rhComp = shComp.getCreatePartition(AttributeName.SHEETNAME, "sheet1", true);
+		final JDFComponent comp = (JDFComponent) rhComp.getResource();
+		comp.setAttribute(XJDFConstants.MediaRef, "idPaper");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfHelper);
+		final JDFNode n = d.getJDFRoot();
+		final JDFComponent sp = (JDFComponent) n.getResource(ElementName.COMPONENT, EnumUsage.Input, 0).getLeaf(0);
+		assertNotNull(sp);
+		assertNotNull(sp.getMedia());
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -187,6 +188,20 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 * Enumeration strings for ICCProfileUsage
 	 */
 
+	public enum EICCProfileUsage
+	{
+		UsePDL, UseSupplied;
+
+		public static EICCProfileUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EICCProfileUsage.class, val, EICCProfileUsage.UsePDL);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ICCProfileUsage
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumICCProfileUsage extends ValuedEnum
 	{
@@ -259,6 +274,32 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setICCProfileUsage(EICCProfileUsage enumVar)
+	{
+		setAttribute(AttributeName.ICCPROFILEUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ICCProfileUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public EICCProfileUsage getEICCProfileUsage()
+	{
+		return EICCProfileUsage.getEnum(getAttribute(AttributeName.ICCPROFILEUSAGE, null, "UsePDL"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ICCProfileUsage
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ICCProfileUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setICCProfileUsage(EnumICCProfileUsage enumVar)
 	{
 		setAttribute(AttributeName.ICCPROFILEUSAGE, enumVar == null ? null : enumVar.getName(), null);

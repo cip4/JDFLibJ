@@ -86,8 +86,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoMessage;
 import org.cip4.jdflib.core.AtrInfoTable;

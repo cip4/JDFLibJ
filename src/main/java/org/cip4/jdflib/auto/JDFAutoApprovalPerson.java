@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -158,6 +159,20 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	protected JDFAutoApprovalPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for ApprovalRole
+	 */
+
+	public enum EApprovalRole
+	{
+		Approvinator, Group, Informative, Obligated;
+
+		public static EApprovalRole getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EApprovalRole.class, val, EApprovalRole.Obligated);
+		}
 	}
 
 	/**
@@ -263,6 +278,32 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setApprovalRole(EApprovalRole enumVar)
+	{
+		setAttribute(AttributeName.APPROVALROLE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ApprovalRole
+	 *
+	 * @return the value of the attribute
+	 */
+	public EApprovalRole getEApprovalRole()
+	{
+		return EApprovalRole.getEnum(getAttribute(AttributeName.APPROVALROLE, null, "Obligated"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ApprovalRole
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ApprovalRole
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setApprovalRole(EnumApprovalRole enumVar)
 	{
 		setAttribute(AttributeName.APPROVALROLE, enumVar == null ? null : enumVar.getName(), null);

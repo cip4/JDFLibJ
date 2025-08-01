@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,6 +98,7 @@ import org.cip4.jdflib.resource.process.JDFLogicalStackParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
 import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -221,6 +222,20 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * Enumeration strings for OrdReset
 	 */
 
+	public enum EOrdReset
+	{
+		Continue, PagePool, PagePoolList;
+
+		public static EOrdReset getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrdReset.class, val, EOrdReset.Continue);
+		}
+	}
+
+	/**
+	 * Enumeration strings for OrdReset
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumOrdReset extends ValuedEnum
 	{
@@ -280,6 +295,20 @@ public abstract class JDFAutoLayout extends JDFResource
 		public static final EnumOrdReset PagePool = new EnumOrdReset("PagePool");
 		/**  */
 		public static final EnumOrdReset PagePoolList = new EnumOrdReset("PagePoolList");
+	}
+
+	/**
+	 * Enumeration strings for SheetCountReset
+	 */
+
+	public enum ESheetCountReset
+	{
+		Continue, PagePool, PagePoolList;
+
+		public static ESheetCountReset getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetCountReset.class, val, ESheetCountReset.Continue);
+		}
 	}
 
 	/**
@@ -351,6 +380,20 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * Enumeration strings for BaseOrdReset
 	 */
 
+	public enum EBaseOrdReset
+	{
+		PagePool, PagePoolList;
+
+		public static EBaseOrdReset getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBaseOrdReset.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for BaseOrdReset
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBaseOrdReset extends ValuedEnum
 	{
@@ -408,6 +451,20 @@ public abstract class JDFAutoLayout extends JDFResource
 		public static final EnumBaseOrdReset PagePool = new EnumBaseOrdReset("PagePool");
 		/**  */
 		public static final EnumBaseOrdReset PagePoolList = new EnumBaseOrdReset("PagePoolList");
+	}
+
+	/**
+	 * Enumeration strings for SourceWorkStyle
+	 */
+
+	public enum ESourceWorkStyle
+	{
+		Simplex, Perfecting, WorkAndBack, WorkAndTurn, WorkAndTumble, WorkAndTwist;
+
+		public static ESourceWorkStyle getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESourceWorkStyle.class, val, null);
+		}
 	}
 
 	/**
@@ -479,6 +536,20 @@ public abstract class JDFAutoLayout extends JDFResource
 		public static final EnumSourceWorkStyle WorkAndTumble = new EnumSourceWorkStyle("WorkAndTumble");
 		/**  */
 		public static final EnumSourceWorkStyle WorkAndTwist = new EnumSourceWorkStyle("WorkAndTwist");
+	}
+
+	/**
+	 * Enumeration strings for TemplateType
+	 */
+
+	public enum ETemplateType
+	{
+		Normal, ConditionalSheets;
+
+		public static ETemplateType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETemplateType.class, val, null);
+		}
 	}
 
 	/**
@@ -648,6 +719,31 @@ public abstract class JDFAutoLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrdReset(EOrdReset enumVar)
+	{
+		setAttribute(AttributeName.ORDRESET, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute OrdReset
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrdReset getEOrdReset()
+	{
+		return EOrdReset.getEnum(getAttribute(AttributeName.ORDRESET, null, "Continue"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OrdReset ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute OrdReset
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrdReset(EnumOrdReset enumVar)
 	{
 		setAttribute(AttributeName.ORDRESET, enumVar == null ? null : enumVar.getName(), null);
@@ -672,6 +768,32 @@ public abstract class JDFAutoLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetCountReset(ESheetCountReset enumVar)
+	{
+		setAttribute(AttributeName.SHEETCOUNTRESET, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetCountReset
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetCountReset getESheetCountReset()
+	{
+		return ESheetCountReset.getEnum(getAttribute(AttributeName.SHEETCOUNTRESET, null, "Continue"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetCountReset
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetCountReset
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetCountReset(EnumSheetCountReset enumVar)
 	{
 		setAttribute(AttributeName.SHEETCOUNTRESET, enumVar == null ? null : enumVar.getName(), null);
@@ -719,6 +841,32 @@ public abstract class JDFAutoLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBaseOrdReset(EBaseOrdReset enumVar)
+	{
+		setAttribute(AttributeName.BASEORDRESET, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BaseOrdReset
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBaseOrdReset getEBaseOrdReset()
+	{
+		return EBaseOrdReset.getEnum(getAttribute(AttributeName.BASEORDRESET, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BaseOrdReset
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BaseOrdReset
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBaseOrdReset(EnumBaseOrdReset enumVar)
 	{
 		setAttribute(AttributeName.BASEORDRESET, enumVar == null ? null : enumVar.getName(), null);
@@ -886,6 +1034,32 @@ public abstract class JDFAutoLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSourceWorkStyle(ESourceWorkStyle enumVar)
+	{
+		setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SourceWorkStyle
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESourceWorkStyle getESourceWorkStyle()
+	{
+		return ESourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceWorkStyle
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SourceWorkStyle
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
 	{
 		setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar == null ? null : enumVar.getName(), null);
@@ -936,6 +1110,32 @@ public abstract class JDFAutoLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTemplateType(ETemplateType enumVar)
+	{
+		setAttribute(AttributeName.TEMPLATETYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute TemplateType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETemplateType getETemplateType()
+	{
+		return ETemplateType.getEnum(getAttribute(AttributeName.TEMPLATETYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TemplateType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute TemplateType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTemplateType(EnumTemplateType enumVar)
 	{
 		setAttribute(AttributeName.TEMPLATETYPE, enumVar == null ? null : enumVar.getName(), null);

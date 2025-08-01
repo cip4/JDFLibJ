@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,6 +94,7 @@ import org.cip4.jdflib.resource.process.JDFBindingQualityParams;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFQualityMeasurement;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -205,6 +206,20 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * Enumeration strings for MeasurementUsage
 	 */
 
+	public enum EMeasurementUsage
+	{
+		Master, Standard;
+
+		public static EMeasurementUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMeasurementUsage.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MeasurementUsage
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMeasurementUsage extends ValuedEnum
 	{
@@ -262,6 +277,20 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		public static final EnumMeasurementUsage Master = new EnumMeasurementUsage("Master");
 		/**  */
 		public static final EnumMeasurementUsage Standard = new EnumMeasurementUsage("Standard");
+	}
+
+	/**
+	 * Enumeration strings for Position
+	 */
+
+	public enum EPosition
+	{
+		Top, Bottom, Left, Right, Front, Back;
+
+		public static EPosition getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPosition.class, val, null);
+		}
 	}
 
 	/**
@@ -448,9 +477,35 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (5.2) set attribute MeasurementUsage
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setMeasurementUsage(Vector<? extends ValuedEnum> v)
+	public void setEMeasurementUsage(List<EMeasurementUsage> v)
+	{
+		setEnumsAttribute(AttributeName.MEASUREMENTUSAGE, v, null);
+	}
+
+	/**
+	 * (9.2) get MeasurementUsage attribute MeasurementUsage
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EMeasurementUsage> getEnumsMeasurementUsage()
+	{
+		return getEnumerationsAttribute(AttributeName.MEASUREMENTUSAGE, null, EMeasurementUsage.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MeasurementUsage
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute MeasurementUsage
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setMeasurementUsage(List<EnumMeasurementUsage> v)
 	{
 		setEnumerationsAttribute(AttributeName.MEASUREMENTUSAGE, v, null);
 	}
@@ -460,7 +515,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getMeasurementUsage()
+	public Vector<EnumMeasurementUsage> getMeasurementUsage()
 	{
 		return getEnumerationsAttribute(AttributeName.MEASUREMENTUSAGE, null, EnumMeasurementUsage.getEnum(0), false);
 	}
@@ -473,6 +528,31 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPosition(EPosition enumVar)
+	{
+		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Position
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPosition getEPosition()
+	{
+		return EPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Position
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPosition(EnumPosition enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);

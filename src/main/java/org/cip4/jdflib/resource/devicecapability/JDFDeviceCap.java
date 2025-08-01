@@ -85,6 +85,7 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.VectorMap;
 
@@ -247,6 +248,16 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 		public static final EnumAvailability Module = new EnumAvailability("Module");
 	}
 
+	public enum EAvailability
+	{
+		NotInstalled, NotLicensed, Disabled, Installed, Module;
+
+		public static EAvailability getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(EAvailability.class, name);
+		}
+	}
+
 	/**
 	 * Gets of this string attribute <code>TypeExpression</code> if it exists, otherwise returns the literal string defined in Types
 	 *
@@ -270,7 +281,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	@Override
 	public Vector getCombinedMethod()
 	{
-		Vector<ValuedEnum> v = (Vector<ValuedEnum>) getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
+		Vector<ValuedEnum> v = getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
 		if (v == null)
 		{
 			v = new Vector<>();
@@ -1225,17 +1236,6 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	public void setCombinedMethod(final EnumCombinedMethod method)
 	{
 		setAttribute(AttributeName.COMBINEDMETHOD, method == null ? null : method.getName(), null);
-	}
-
-	/**
-	 * set attribute <code>CombinedMethod</code> to an individual method
-	 *
-	 * @param method the individual combined method to set
-	 */
-	@Override
-	public void setCombinedMethod(final Vector vMethod)
-	{
-		setEnumerationsAttribute(AttributeName.COMBINEDMETHOD, vMethod, null);
 	}
 
 	/**

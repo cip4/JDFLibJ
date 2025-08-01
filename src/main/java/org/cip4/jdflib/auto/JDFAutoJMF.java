@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -285,6 +285,31 @@ public abstract class JDFAutoJMF extends JDFPool
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMaxVersion(EVersion enumVar)
+	{
+		setAttribute(AttributeName.MAXVERSION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MaxVersion
+	 *
+	 * @return the value of the attribute
+	 */
+	public EVersion getEMaxVersion()
+	{
+		return EVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MaxVersion ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MaxVersion
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMaxVersion(EnumVersion enumVar)
 	{
 		setAttribute(AttributeName.MAXVERSION, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -163,6 +164,20 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 * Enumeration strings for Type
 	 */
 
+	public enum EType
+	{
+		Folded, Flat;
+
+		public static EType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EType.class, val, EType.Folded);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Type
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumType extends ValuedEnum
 	{
@@ -234,6 +249,31 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setType(EType enumVar)
+	{
+		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Type
+	 *
+	 * @return the value of the attribute
+	 */
+	public EType getEType()
+	{
+		return EType.getEnum(getAttribute(AttributeName.TYPE, null, "Folded"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Type
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setType(EnumType enumVar)
 	{
 		setAttribute(AttributeName.TYPE, enumVar == null ? null : enumVar.getName(), null);

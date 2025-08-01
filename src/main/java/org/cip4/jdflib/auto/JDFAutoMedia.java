@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,6 +97,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFMediaLayers;
 import org.cip4.jdflib.resource.process.JDFTabDimensions;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -257,6 +258,20 @@ public abstract class JDFAutoMedia extends JDFResource
 	 * Enumeration strings for HoleType
 	 */
 
+	public enum EHoleType
+	{
+		None, S1_generic, S_generic, R2_generic, R2m_DIN, R2m_ISO, R2m_MIB, R2i_US_a, R2i_US_b, R3_generic, R3i_US, R4_generic, R4m_DIN_A4, R4m_DIN_A5, R4m_swedish, R4i_US, R5_generic, R5i_US_a, R5i_US_b, R5i_US_c, R6_generic, R6m_4h2s, R6m_DIN_A5, R7_generic, R7i_US_a, R7i_US_b, R7i_US_c, R11m_7h4s, P16_9i_rect_0t, P12m_rect_0t, W2_1i_round_0t, W2_1i_square_0t, W3_1i_square_0t, C9_5m_round_0t, Explicit;
+
+		public static EHoleType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EHoleType.class, val, EHoleType.None);
+		}
+	}
+
+	/**
+	 * Enumeration strings for HoleType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumHoleType extends ValuedEnum
 	{
@@ -386,6 +401,20 @@ public abstract class JDFAutoMedia extends JDFResource
 	 * Enumeration strings for MediaUnit
 	 */
 
+	public enum EMediaUnit
+	{
+		Continuous, Roll, Sheet;
+
+		public static EMediaUnit getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMediaUnit.class, val, EMediaUnit.Sheet);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MediaUnit
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMediaUnit extends ValuedEnum
 	{
@@ -445,6 +474,20 @@ public abstract class JDFAutoMedia extends JDFResource
 		public static final EnumMediaUnit Roll = new EnumMediaUnit("Roll");
 		/**  */
 		public static final EnumMediaUnit Sheet = new EnumMediaUnit("Sheet");
+	}
+
+	/**
+	 * Enumeration strings for BackCoatings
+	 */
+
+	public enum EBackCoatings
+	{
+		None, Coated, Glossy, HighGloss, InkJet, Matte, Polymer, Silver, Satin, Semigloss;
+
+		public static EBackCoatings getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBackCoatings.class, val, null);
+		}
 	}
 
 	/**
@@ -524,6 +567,20 @@ public abstract class JDFAutoMedia extends JDFResource
 		public static final EnumBackCoatings Satin = new EnumBackCoatings("Satin");
 		/**  */
 		public static final EnumBackCoatings Semigloss = new EnumBackCoatings("Semigloss");
+	}
+
+	/**
+	 * Enumeration strings for BackISOPaperSubstrate
+	 */
+
+	public enum EBackISOPaperSubstrate
+	{
+		LWCPlus, LWCStandard, NewsPlus, PS1, PS2, PS3, PS4, PS5, PS6, PS7, PS8, SCPlus, SCStandard, SNP;
+
+		public static EBackISOPaperSubstrate getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBackISOPaperSubstrate.class, val, null);
+		}
 	}
 
 	/**
@@ -617,6 +674,20 @@ public abstract class JDFAutoMedia extends JDFResource
 	 * Enumeration strings for FluteDirection
 	 */
 
+	public enum EFluteDirection
+	{
+		Any, Both, ShortEdge, LongEdge, SameDirection, XDirection, YDirection;
+
+		public static EFluteDirection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFluteDirection.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for FluteDirection
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumFluteDirection extends ValuedEnum
 	{
@@ -684,6 +755,20 @@ public abstract class JDFAutoMedia extends JDFResource
 		public static final EnumFluteDirection XDirection = new EnumFluteDirection("XDirection");
 		/**  */
 		public static final EnumFluteDirection YDirection = new EnumFluteDirection("YDirection");
+	}
+
+	/**
+	 * Enumeration strings for FrontCoatings
+	 */
+
+	public enum EFrontCoatings
+	{
+		None, Coated, Glossy, HighGloss, InkJet, Matte, Polymer, Silver, Satin, Semigloss;
+
+		public static EFrontCoatings getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFrontCoatings.class, val, null);
+		}
 	}
 
 	/**
@@ -769,6 +854,20 @@ public abstract class JDFAutoMedia extends JDFResource
 	 * Enumeration strings for GrainDirection
 	 */
 
+	public enum EGrainDirection
+	{
+		Any, Both, ShortEdge, LongEdge, SameDirection, XDirection, YDirection;
+
+		public static EGrainDirection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EGrainDirection.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for GrainDirection
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumGrainDirection extends ValuedEnum
 	{
@@ -842,6 +941,20 @@ public abstract class JDFAutoMedia extends JDFResource
 	 * Enumeration strings for ImagableSide
 	 */
 
+	public enum EImagableSide
+	{
+		Front, Back, Both, Neither;
+
+		public static EImagableSide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EImagableSide.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ImagableSide
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumImagableSide extends ValuedEnum
 	{
@@ -903,6 +1016,20 @@ public abstract class JDFAutoMedia extends JDFResource
 		public static final EnumImagableSide Both = new EnumImagableSide("Both");
 		/**  */
 		public static final EnumImagableSide Neither = new EnumImagableSide("Neither");
+	}
+
+	/**
+	 * Enumeration strings for ISOPaperSubstrate
+	 */
+
+	public enum EISOPaperSubstrate
+	{
+		LWCPlus, LWCStandard, NewsPlus, PS1, PS2, PS3, PS4, PS5, PS6, PS7, PS8, SCPlus, SCStandard, SNP;
+
+		public static EISOPaperSubstrate getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EISOPaperSubstrate.class, val, null);
+		}
 	}
 
 	/**
@@ -990,6 +1117,20 @@ public abstract class JDFAutoMedia extends JDFResource
 		public static final EnumISOPaperSubstrate SCStandard = new EnumISOPaperSubstrate("SCStandard");
 		/**  */
 		public static final EnumISOPaperSubstrate SNP = new EnumISOPaperSubstrate("SNP");
+	}
+
+	/**
+	 * Enumeration strings for MediaType
+	 */
+
+	public enum EMediaType
+	{
+		Blanket, CorrugatedBoard, Disc, EndBoard, EmbossingFoil, Film, Foil, GravureCylinder, ImagingCylinder, LaminatingFoil, MountingTape, Other, Paper, Plate, Screen, SelfAdhesive, Sleeve, ShrinkFoil, Synthetic, Textile, Transparency, Unknown, Vinyl;
+
+		public static EMediaType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMediaType.class, val, null);
+		}
 	}
 
 	/**
@@ -1101,6 +1242,20 @@ public abstract class JDFAutoMedia extends JDFResource
 	 * Enumeration strings for Opacity
 	 */
 
+	public enum EOpacity
+	{
+		Opaque, Translucent, Transparent;
+
+		public static EOpacity getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOpacity.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Opacity
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumOpacity extends ValuedEnum
 	{
@@ -1160,6 +1315,20 @@ public abstract class JDFAutoMedia extends JDFResource
 		public static final EnumOpacity Translucent = new EnumOpacity("Translucent");
 		/**  */
 		public static final EnumOpacity Transparent = new EnumOpacity("Transparent");
+	}
+
+	/**
+	 * Enumeration strings for PlateTechnology
+	 */
+
+	public enum EPlateTechnology
+	{
+		FlexoAnalogSolvent, FlexoAnalogThermal, FlexoDigitalSolvent, FlexoDigitalThermal, FlexoDirectEngraving, InkJet, Thermal, UV, Visible;
+
+		public static EPlateTechnology getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPlateTechnology.class, val, null);
+		}
 	}
 
 	/**
@@ -1243,6 +1412,20 @@ public abstract class JDFAutoMedia extends JDFResource
 	 * Enumeration strings for Polarity
 	 */
 
+	public enum EPolarity
+	{
+		Positive, Negative;
+
+		public static EPolarity getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPolarity.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Polarity
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPolarity extends ValuedEnum
 	{
@@ -1312,9 +1495,34 @@ public abstract class JDFAutoMedia extends JDFResource
 	/**
 	 * (5.2) set attribute HoleType
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setHoleType(Vector<? extends ValuedEnum> v)
+	public void setEHoleType(List<EHoleType> v)
+	{
+		setEnumsAttribute(AttributeName.HOLETYPE, v, null);
+	}
+
+	/**
+	 * (9.2) get HoleType attribute HoleType
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EHoleType> getEnumsHoleType()
+	{
+		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, EHoleType.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HoleType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute HoleType
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setHoleType(List<EnumHoleType> v)
 	{
 		setEnumerationsAttribute(AttributeName.HOLETYPE, v, null);
 	}
@@ -1324,7 +1532,7 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getHoleType()
+	public Vector<EnumHoleType> getHoleType()
 	{
 		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, EnumHoleType.None, false);
 	}
@@ -1337,6 +1545,31 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMediaUnit(EMediaUnit enumVar)
+	{
+		setAttribute(AttributeName.MEDIAUNIT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MediaUnit
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMediaUnit getEMediaUnit()
+	{
+		return EMediaUnit.getEnum(getAttribute(AttributeName.MEDIAUNIT, null, "Sheet"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaUnit ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MediaUnit
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMediaUnit(EnumMediaUnit enumVar)
 	{
 		setAttribute(AttributeName.MEDIAUNIT, enumVar == null ? null : enumVar.getName(), null);
@@ -1432,6 +1665,32 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBackCoatings(EBackCoatings enumVar)
+	{
+		setAttribute(AttributeName.BACKCOATINGS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BackCoatings
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBackCoatings getEBackCoatings()
+	{
+		return EBackCoatings.getEnum(getAttribute(AttributeName.BACKCOATINGS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BackCoatings
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BackCoatings
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBackCoatings(EnumBackCoatings enumVar)
 	{
 		setAttribute(AttributeName.BACKCOATINGS, enumVar == null ? null : enumVar.getName(), null);
@@ -1480,6 +1739,32 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBackISOPaperSubstrate(EBackISOPaperSubstrate enumVar)
+	{
+		setAttribute(AttributeName.BACKISOPAPERSUBSTRATE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BackISOPaperSubstrate
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBackISOPaperSubstrate getEBackISOPaperSubstrate()
+	{
+		return EBackISOPaperSubstrate.getEnum(getAttribute(AttributeName.BACKISOPAPERSUBSTRATE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BackISOPaperSubstrate
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BackISOPaperSubstrate
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBackISOPaperSubstrate(EnumBackISOPaperSubstrate enumVar)
 	{
 		setAttribute(AttributeName.BACKISOPAPERSUBSTRATE, enumVar == null ? null : enumVar.getName(), null);
@@ -1718,6 +2003,32 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFluteDirection(EFluteDirection enumVar)
+	{
+		setAttribute(AttributeName.FLUTEDIRECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FluteDirection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFluteDirection getEFluteDirection()
+	{
+		return EFluteDirection.getEnum(getAttribute(AttributeName.FLUTEDIRECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FluteDirection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FluteDirection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFluteDirection(EnumFluteDirection enumVar)
 	{
 		setAttribute(AttributeName.FLUTEDIRECTION, enumVar == null ? null : enumVar.getName(), null);
@@ -1766,6 +2077,32 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFrontCoatings(EFrontCoatings enumVar)
+	{
+		setAttribute(AttributeName.FRONTCOATINGS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FrontCoatings
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFrontCoatings getEFrontCoatings()
+	{
+		return EFrontCoatings.getEnum(getAttribute(AttributeName.FRONTCOATINGS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FrontCoatings
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FrontCoatings
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFrontCoatings(EnumFrontCoatings enumVar)
 	{
 		setAttribute(AttributeName.FRONTCOATINGS, enumVar == null ? null : enumVar.getName(), null);
@@ -1837,6 +2174,32 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setGrainDirection(EGrainDirection enumVar)
+	{
+		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute GrainDirection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EGrainDirection getEGrainDirection()
+	{
+		return EGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GrainDirection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute GrainDirection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setGrainDirection(EnumGrainDirection enumVar)
 	{
 		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.getName(), null);
@@ -1884,6 +2247,32 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setImagableSide(EImagableSide enumVar)
+	{
+		setAttribute(AttributeName.IMAGABLESIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ImagableSide
+	 *
+	 * @return the value of the attribute
+	 */
+	public EImagableSide getEImagableSide()
+	{
+		return EImagableSide.getEnum(getAttribute(AttributeName.IMAGABLESIDE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ImagableSide
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ImagableSide
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setImagableSide(EnumImagableSide enumVar)
 	{
 		setAttribute(AttributeName.IMAGABLESIDE, enumVar == null ? null : enumVar.getName(), null);
@@ -1955,6 +2344,32 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setISOPaperSubstrate(EISOPaperSubstrate enumVar)
+	{
+		setAttribute(AttributeName.ISOPAPERSUBSTRATE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ISOPaperSubstrate
+	 *
+	 * @return the value of the attribute
+	 */
+	public EISOPaperSubstrate getEISOPaperSubstrate()
+	{
+		return EISOPaperSubstrate.getEnum(getAttribute(AttributeName.ISOPAPERSUBSTRATE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ISOPaperSubstrate
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ISOPaperSubstrate
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setISOPaperSubstrate(EnumISOPaperSubstrate enumVar)
 	{
 		setAttribute(AttributeName.ISOPAPERSUBSTRATE, enumVar == null ? null : enumVar.getName(), null);
@@ -2104,6 +2519,31 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMediaType(EMediaType enumVar)
+	{
+		setAttribute(AttributeName.MEDIATYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MediaType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMediaType getEMediaType()
+	{
+		return EMediaType.getEnum(getAttribute(AttributeName.MEDIATYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MediaType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMediaType(EnumMediaType enumVar)
 	{
 		setAttribute(AttributeName.MEDIATYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -2151,6 +2591,31 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOpacity(EOpacity enumVar)
+	{
+		setAttribute(AttributeName.OPACITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Opacity
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOpacity getEOpacity()
+	{
+		return EOpacity.getEnum(getAttribute(AttributeName.OPACITY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Opacity ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Opacity
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOpacity(EnumOpacity enumVar)
 	{
 		setAttribute(AttributeName.OPACITY, enumVar == null ? null : enumVar.getName(), null);
@@ -2270,6 +2735,32 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPlateTechnology(EPlateTechnology enumVar)
+	{
+		setAttribute(AttributeName.PLATETECHNOLOGY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PlateTechnology
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPlateTechnology getEPlateTechnology()
+	{
+		return EPlateTechnology.getEnum(getAttribute(AttributeName.PLATETECHNOLOGY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PlateTechnology
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PlateTechnology
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPlateTechnology(EnumPlateTechnology enumVar)
 	{
 		setAttribute(AttributeName.PLATETECHNOLOGY, enumVar == null ? null : enumVar.getName(), null);
@@ -2293,6 +2784,31 @@ public abstract class JDFAutoMedia extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPolarity(EPolarity enumVar)
+	{
+		setAttribute(AttributeName.POLARITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Polarity
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPolarity getEPolarity()
+	{
+		return EPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Polarity
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPolarity(EnumPolarity enumVar)
 	{
 		setAttribute(AttributeName.POLARITY, enumVar == null ? null : enumVar.getName(), null);

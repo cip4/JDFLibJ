@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
 import org.cip4.jdflib.resource.process.JDFIDPLayout;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -164,6 +165,20 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	protected JDFAutoIDPCover(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for CoverType
+	 */
+
+	public enum ECoverType
+	{
+		Front, Back;
+
+		public static ECoverType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECoverType.class, val, ECoverType.Front);
+		}
 	}
 
 	/**
@@ -264,6 +279,31 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCoverType(ECoverType enumVar)
+	{
+		setAttribute(AttributeName.COVERTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CoverType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECoverType getECoverType()
+	{
+		return ECoverType.getEnum(getAttribute(AttributeName.COVERTYPE, null, "Front"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CoverType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CoverType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCoverType(EnumCoverType enumVar)
 	{
 		setAttribute(AttributeName.COVERTYPE, enumVar == null ? null : enumVar.getName(), null);

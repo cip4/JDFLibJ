@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -167,6 +168,20 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 * Enumeration strings for StrappingType
 	 */
 
+	public enum EStrappingType
+	{
+		Single, Double, Cross, DoubleCross;
+
+		public static EStrappingType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EStrappingType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for StrappingType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumStrappingType extends ValuedEnum
 	{
@@ -243,6 +258,32 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setStrappingType(EStrappingType enumVar)
+	{
+		setAttribute(AttributeName.STRAPPINGTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute StrappingType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EStrappingType getEStrappingType()
+	{
+		return EStrappingType.getEnum(getAttribute(AttributeName.STRAPPINGTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute StrappingType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute StrappingType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setStrappingType(EnumStrappingType enumVar)
 	{
 		setAttribute(AttributeName.STRAPPINGTYPE, enumVar == null ? null : enumVar.getName(), null);

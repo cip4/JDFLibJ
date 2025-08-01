@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -146,6 +147,20 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	protected JDFAutoKnownMsgQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for ChannelMode
+	 */
+
+	public enum EChannelMode
+	{
+		FireAndForget, Reliable;
+
+		public static EChannelMode getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EChannelMode.class, val, null);
+		}
 	}
 
 	/**
@@ -221,9 +236,34 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	/**
 	 * (5.2) set attribute ChannelMode
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setChannelMode(Vector<? extends ValuedEnum> v)
+	public void setEChannelMode(List<EChannelMode> v)
+	{
+		setEnumsAttribute(AttributeName.CHANNELMODE, v, null);
+	}
+
+	/**
+	 * (9.2) get ChannelMode attribute ChannelMode
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EChannelMode> getEnumsChannelMode()
+	{
+		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EChannelMode.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute ChannelMode
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setChannelMode(List<EnumChannelMode> v)
 	{
 		setEnumerationsAttribute(AttributeName.CHANNELMODE, v, null);
 	}
@@ -233,7 +273,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getChannelMode()
+	public Vector<EnumChannelMode> getChannelMode()
 	{
 		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EnumChannelMode.getEnum(0), false);
 	}

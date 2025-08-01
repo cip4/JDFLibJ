@@ -74,7 +74,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams.EnumChannelMode;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -93,8 +92,8 @@ class JDFKnownMsgQuParamsTest
 	@Test
 	void testsetChannelMode()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
-		JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
+		final JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
 		ms.setChannelMode((EnumChannelMode) null);
 		ms.setChannelMode(EnumChannelMode.FireAndForget);
 		assertEquals(EnumChannelMode.FireAndForget, ms.getChannelMode().get(0));
@@ -106,10 +105,10 @@ class JDFKnownMsgQuParamsTest
 	@Test
 	void testsetChannelMode2()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
-		JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.KNOWNMSGQUPARAMS);
+		final JDFKnownMsgQuParams ms = (JDFKnownMsgQuParams) doc.getRoot();
 		ms.setChannelMode(EnumChannelMode.FireAndForget);
-		Vector<? extends ValuedEnum> channelMode = ms.getChannelMode();
+		final Vector<EnumChannelMode> channelMode = ms.getChannelMode();
 		ms.setChannelMode((EnumChannelMode) null);
 		ms.setChannelMode(channelMode);
 		assertEquals(EnumChannelMode.FireAndForget, channelMode.get(0));

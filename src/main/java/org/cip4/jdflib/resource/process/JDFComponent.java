@@ -204,7 +204,7 @@ public class JDFComponent extends JDFAutoComponent
 	 */
 	public void setComponentType(final EnumComponentType partialFinal, final EnumComponentType sheetWebProof)
 	{
-		Vector<ValuedEnum> v = new Vector<ValuedEnum>();
+		Vector<EnumComponentType> v = new Vector<>();
 		if (partialFinal != null)
 		{
 			v.add(partialFinal);

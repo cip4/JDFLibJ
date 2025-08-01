@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -142,6 +143,20 @@ public abstract class JDFAutoJDFController extends JDFElement
 	protected JDFAutoJDFController(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for URLType
+	 */
+
+	public enum EURLType
+	{
+		JDFError, JDFInput, JDFOutput, JMF, SecureJMF;
+
+		public static EURLType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EURLType.class, val, null);
+		}
 	}
 
 	/**
@@ -272,6 +287,31 @@ public abstract class JDFAutoJDFController extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setURLType(EURLType enumVar)
+	{
+		setAttribute(AttributeName.URLTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute URLType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EURLType getEURLType()
+	{
+		return EURLType.getEnum(getAttribute(AttributeName.URLTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute URLType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute URLType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setURLType(EnumURLType enumVar)
 	{
 		setAttribute(AttributeName.URLTYPE, enumVar == null ? null : enumVar.getName(), null);

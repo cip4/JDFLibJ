@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFExpr;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -161,6 +162,20 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	protected JDFAutoMetadataMap(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Context
+	 */
+
+	public enum EContext
+	{
+		Set, Document, SubDoc0, SubDoc1, SubDoc2, SubDoc3, SubDoc4, SubDoc5, SubDoc6, SubDoc7, SubDoc8, SubDoc9, PagePool, Page, Object;
+
+		public static EContext getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EContext.class, val, EContext.PagePool);
+		}
 	}
 
 	/**
@@ -256,6 +271,20 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * Enumeration strings for DataType
 	 */
 
+	public enum EDataType
+	{
+		string, integer, double_, NMTOKEN, boolean_, dateTime, duration, PartIDKeys;
+
+		public static EDataType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDataType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for DataType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDataType extends ValuedEnum
 	{
@@ -339,6 +368,31 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setContext(EContext enumVar)
+	{
+		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Context
+	 *
+	 * @return the value of the attribute
+	 */
+	public EContext getEContext()
+	{
+		return EContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "PagePool"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Context
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setContext(EnumContext enumVar)
 	{
 		setAttribute(AttributeName.CONTEXT, enumVar == null ? null : enumVar.getName(), null);
@@ -362,6 +416,31 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDataType(EDataType enumVar)
+	{
+		setAttribute(AttributeName.DATATYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DataType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDataType getEDataType()
+	{
+		return EDataType.getEnum(getAttribute(AttributeName.DATATYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DataType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DataType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDataType(EnumDataType enumVar)
 	{
 		setAttribute(AttributeName.DATATYPE, enumVar == null ? null : enumVar.getName(), null);

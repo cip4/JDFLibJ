@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,6 +98,7 @@ import org.cip4.jdflib.span.JDFSpanSurplusHandling;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -189,6 +190,20 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	protected JDFAutoDeliveryIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Ownership
+	 */
+
+	public enum EOwnership
+	{
+		Origin, Destination;
+
+		public static EOwnership getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOwnership.class, val, EOwnership.Origin);
+		}
 	}
 
 	/**
@@ -313,6 +328,31 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOwnership(EOwnership enumVar)
+	{
+		setAttribute(AttributeName.OWNERSHIP, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Ownership
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOwnership getEOwnership()
+	{
+		return EOwnership.getEnum(getAttribute(AttributeName.OWNERSHIP, null, "Origin"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Ownership ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Ownership
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOwnership(EnumOwnership enumVar)
 	{
 		setAttribute(AttributeName.OWNERSHIP, enumVar == null ? null : enumVar.getName(), null);

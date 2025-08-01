@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -229,6 +229,32 @@ public abstract class JDFAutoModulePhase extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDeviceStatus(JDFDeviceInfo.EDeviceStatus enumVar)
+	{
+		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DeviceStatus
+	 *
+	 * @return the value of the attribute
+	 */
+	public JDFDeviceInfo.EDeviceStatus getEDeviceStatus()
+	{
+		return JDFDeviceInfo.EDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeviceStatus
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DeviceStatus
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDeviceStatus(JDFDeviceInfo.EnumDeviceStatus enumVar)
 	{
 		setAttribute(AttributeName.DEVICESTATUS, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -159,6 +160,20 @@ public abstract class JDFAutoIcon extends JDFElement
 	protected JDFAutoIcon(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for IconUsage
+	 */
+
+	public enum EIconUsage
+	{
+		Unknown, Idle, Down, Setup, Running, Cleanup, Stopped;
+
+		public static EIconUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EIconUsage.class, val, null);
+		}
 	}
 
 	/**
@@ -292,9 +307,34 @@ public abstract class JDFAutoIcon extends JDFElement
 	/**
 	 * (5.2) set attribute IconUsage
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setIconUsage(Vector<? extends ValuedEnum> v)
+	public void setEIconUsage(List<EIconUsage> v)
+	{
+		setEnumsAttribute(AttributeName.ICONUSAGE, v, null);
+	}
+
+	/**
+	 * (9.2) get IconUsage attribute IconUsage
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EIconUsage> getEnumsIconUsage()
+	{
+		return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EIconUsage.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IconUsage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute IconUsage
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setIconUsage(List<EnumIconUsage> v)
 	{
 		setEnumerationsAttribute(AttributeName.ICONUSAGE, v, null);
 	}
@@ -304,7 +344,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getIconUsage()
+	public Vector<EnumIconUsage> getIconUsage()
 	{
 		return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EnumIconUsage.getEnum(0), false);
 	}

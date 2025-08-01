@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFShapeElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -193,6 +194,20 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * Enumeration strings for CutType
 	 */
 
+	public enum ECutType
+	{
+		Cut, Perforate;
+
+		public static ECutType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECutType.class, val, ECutType.Cut);
+		}
+	}
+
+	/**
+	 * Enumeration strings for CutType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumCutType extends ValuedEnum
 	{
@@ -250,6 +265,20 @@ public abstract class JDFAutoShapeElement extends JDFResource
 		public static final EnumCutType Cut = new EnumCutType("Cut");
 		/**  */
 		public static final EnumCutType Perforate = new EnumCutType("Perforate");
+	}
+
+	/**
+	 * Enumeration strings for ShapeType
+	 */
+
+	public enum EShapeType
+	{
+		Rectangular, Round, Path, RoundedRectangle;
+
+		public static EShapeType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EShapeType.class, val, null);
+		}
 	}
 
 	/**
@@ -425,6 +454,31 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCutType(ECutType enumVar)
+	{
+		setAttribute(AttributeName.CUTTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CutType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECutType getECutType()
+	{
+		return ECutType.getEnum(getAttribute(AttributeName.CUTTYPE, null, "Cut"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CutType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CutType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCutType(EnumCutType enumVar)
 	{
 		setAttribute(AttributeName.CUTTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -517,6 +571,31 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setShapeType(EShapeType enumVar)
+	{
+		setAttribute(AttributeName.SHAPETYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ShapeType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EShapeType getEShapeType()
+	{
+		return EShapeType.getEnum(getAttribute(AttributeName.SHAPETYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ShapeType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ShapeType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setShapeType(EnumShapeType enumVar)
 	{
 		setAttribute(AttributeName.SHAPETYPE, enumVar == null ? null : enumVar.getName(), null);

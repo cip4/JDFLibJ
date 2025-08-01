@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,7 @@ import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFObjectResolution;
 import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -194,6 +195,20 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 * Enumeration strings for BandOrdering
 	 */
 
+	public enum EBandOrdering
+	{
+		BandMajor, ColorMajor;
+
+		public static EBandOrdering getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBandOrdering.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for BandOrdering
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBandOrdering extends ValuedEnum
 	{
@@ -289,6 +304,32 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBandOrdering(EBandOrdering enumVar)
+	{
+		setAttribute(AttributeName.BANDORDERING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BandOrdering
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBandOrdering getEBandOrdering()
+	{
+		return EBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BandOrdering
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BandOrdering
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBandOrdering(EnumBandOrdering enumVar)
 	{
 		setAttribute(AttributeName.BANDORDERING, enumVar == null ? null : enumVar.getName(), null);

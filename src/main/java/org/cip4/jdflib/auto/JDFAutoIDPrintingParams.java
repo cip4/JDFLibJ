@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.process.JDFCover;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
 import org.cip4.jdflib.resource.process.JDFIDPLayout;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -201,6 +202,20 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * Enumeration strings for PageDelivery
 	 */
 
+	public enum EPageDelivery
+	{
+		SameOrderFaceUp, SameOrderFaceDown, ReverseOrderFaceUp, ReverseOrderFaceDown, SystemSpecified;
+
+		public static EPageDelivery getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPageDelivery.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PageDelivery
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPageDelivery extends ValuedEnum
 	{
@@ -264,6 +279,20 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		public static final EnumPageDelivery ReverseOrderFaceDown = new EnumPageDelivery("ReverseOrderFaceDown");
 		/**  */
 		public static final EnumPageDelivery SystemSpecified = new EnumPageDelivery("SystemSpecified");
+	}
+
+	/**
+	 * Enumeration strings for PrintQuality
+	 */
+
+	public enum EPrintQuality
+	{
+		High, Normal, Draft;
+
+		public static EPrintQuality getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPrintQuality.class, val, null);
+		}
 	}
 
 	/**
@@ -464,6 +493,32 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPageDelivery(EPageDelivery enumVar)
+	{
+		setAttribute(AttributeName.PAGEDELIVERY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PageDelivery
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPageDelivery getEPageDelivery()
+	{
+		return EPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PageDelivery
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PageDelivery
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPageDelivery(EnumPageDelivery enumVar)
 	{
 		setAttribute(AttributeName.PAGEDELIVERY, enumVar == null ? null : enumVar.getName(), null);
@@ -488,6 +543,32 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPrintQuality(EPrintQuality enumVar)
+	{
+		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PrintQuality
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPrintQuality getEPrintQuality()
+	{
+		return EPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PrintQuality
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PrintQuality
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPrintQuality(EnumPrintQuality enumVar)
 	{
 		setAttribute(AttributeName.PRINTQUALITY, enumVar == null ? null : enumVar.getName(), null);

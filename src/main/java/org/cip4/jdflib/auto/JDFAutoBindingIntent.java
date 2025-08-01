@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -109,6 +109,7 @@ import org.cip4.jdflib.span.JDFSpanBindingSide;
 import org.cip4.jdflib.span.JDFSpanBindingType;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFStringSpan;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -214,6 +215,20 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * Enumeration strings for BindingOrder
 	 */
 
+	public enum EBindingOrder
+	{
+		Collecting, Gathering, List, None;
+
+		public static EBindingOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EBindingOrder.class, val, EBindingOrder.Gathering);
+		}
+	}
+
+	/**
+	 * Enumeration strings for BindingOrder
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumBindingOrder extends ValuedEnum
 	{
@@ -290,6 +305,32 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setBindingOrder(EBindingOrder enumVar)
+	{
+		setAttribute(AttributeName.BINDINGORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute BindingOrder
+	 *
+	 * @return the value of the attribute
+	 */
+	public EBindingOrder getEBindingOrder()
+	{
+		return EBindingOrder.getEnum(getAttribute(AttributeName.BINDINGORDER, null, "Gathering"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute BindingOrder
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute BindingOrder
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setBindingOrder(EnumBindingOrder enumVar)
 	{
 		setAttribute(AttributeName.BINDINGORDER, enumVar == null ? null : enumVar.getName(), null);

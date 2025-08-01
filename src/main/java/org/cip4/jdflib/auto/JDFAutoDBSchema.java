@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -165,6 +166,20 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 * Enumeration strings for DBSchemaType
 	 */
 
+	public enum EDBSchemaType
+	{
+		CommaDelimited, SQL, XML;
+
+		public static EDBSchemaType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDBSchemaType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for DBSchemaType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDBSchemaType extends ValuedEnum
 	{
@@ -239,6 +254,32 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDBSchemaType(EDBSchemaType enumVar)
+	{
+		setAttribute(AttributeName.DBSCHEMATYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DBSchemaType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDBSchemaType getEDBSchemaType()
+	{
+		return EDBSchemaType.getEnum(getAttribute(AttributeName.DBSCHEMATYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DBSchemaType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DBSchemaType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDBSchemaType(EnumDBSchemaType enumVar)
 	{
 		setAttribute(AttributeName.DBSCHEMATYPE, enumVar == null ? null : enumVar.getName(), null);

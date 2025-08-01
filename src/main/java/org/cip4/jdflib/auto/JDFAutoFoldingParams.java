@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFFold;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -188,6 +189,20 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * Enumeration strings for SheetLay
 	 */
 
+	public enum ESheetLay
+	{
+		Left, Right;
+
+		public static ESheetLay getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetLay.class, val, ESheetLay.Left);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SheetLay
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetLay extends ValuedEnum
 	{
@@ -245,6 +260,20 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 		public static final EnumSheetLay Left = new EnumSheetLay("Left");
 		/**  */
 		public static final EnumSheetLay Right = new EnumSheetLay("Right");
+	}
+
+	/**
+	 * Enumeration strings for DescriptionType
+	 */
+
+	public enum EDescriptionType
+	{
+		FoldProc, FoldCatalog;
+
+		public static EDescriptionType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDescriptionType.class, val, null);
+		}
 	}
 
 	/**
@@ -322,6 +351,31 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetLay(ESheetLay enumVar)
+	{
+		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetLay
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetLay getESheetLay()
+	{
+		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, "Left"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetLay
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
 	{
 		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
@@ -346,6 +400,32 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDescriptionType(EDescriptionType enumVar)
+	{
+		setAttribute(AttributeName.DESCRIPTIONTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DescriptionType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDescriptionType getEDescriptionType()
+	{
+		return EDescriptionType.getEnum(getAttribute(AttributeName.DESCRIPTIONTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DescriptionType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DescriptionType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDescriptionType(EnumDescriptionType enumVar)
 	{
 		setAttribute(AttributeName.DESCRIPTIONTYPE, enumVar == null ? null : enumVar.getName(), null);

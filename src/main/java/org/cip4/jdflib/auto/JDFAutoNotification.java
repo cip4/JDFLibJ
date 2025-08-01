@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -176,6 +177,20 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * Enumeration strings for Class
 	 */
 
+	public enum EClass
+	{
+		Event, Information, Warning, Error, Fatal;
+
+		public static EClass getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EClass.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Class
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumClass extends ValuedEnum
 	{
@@ -253,6 +268,31 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setClass(EClass enumVar)
+	{
+		setAttribute(AttributeName.CLASS, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (6) get EClass attribute Class
+	 *
+	 * @return EClass the value of the attribute
+	 */
+	public EClass getEClass()
+	{
+		return EClass.getEnum(getAttribute(AttributeName.CLASS, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Class ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Class
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setClass(EnumClass enumVar)
 	{
 		setAttribute(AttributeName.CLASS, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -183,6 +184,20 @@ public abstract class JDFAutoPreview extends JDFResource
 	 * Enumeration strings for PreviewUsage
 	 */
 
+	public enum EPreviewUsage
+	{
+		Animation, Identification, Separation, SeparatedThumbNail, SeparationRaw, ThumbNail, Static3D, Viewable;
+
+		public static EPreviewUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPreviewUsage.class, val, EPreviewUsage.Separation);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PreviewUsage
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewUsage extends ValuedEnum
 	{
@@ -252,6 +267,20 @@ public abstract class JDFAutoPreview extends JDFResource
 		public static final EnumPreviewUsage Static3D = new EnumPreviewUsage("Static3D");
 		/**  */
 		public static final EnumPreviewUsage Viewable = new EnumPreviewUsage("Viewable");
+	}
+
+	/**
+	 * Enumeration strings for Compensation
+	 */
+
+	public enum ECompensation
+	{
+		Unknown, None, Film, Plate, Press;
+
+		public static ECompensation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECompensation.class, val, null);
+		}
 	}
 
 	/**
@@ -360,6 +389,32 @@ public abstract class JDFAutoPreview extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPreviewUsage(EPreviewUsage enumVar)
+	{
+		setAttribute(AttributeName.PREVIEWUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PreviewUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPreviewUsage getEPreviewUsage()
+	{
+		return EPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PreviewUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPreviewUsage(EnumPreviewUsage enumVar)
 	{
 		setAttribute(AttributeName.PREVIEWUSAGE, enumVar == null ? null : enumVar.getName(), null);
@@ -407,6 +462,32 @@ public abstract class JDFAutoPreview extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCompensation(ECompensation enumVar)
+	{
+		setAttribute(AttributeName.COMPENSATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Compensation
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECompensation getECompensation()
+	{
+		return ECompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Compensation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Compensation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCompensation(EnumCompensation enumVar)
 	{
 		setAttribute(AttributeName.COMPENSATION, enumVar == null ? null : enumVar.getName(), null);

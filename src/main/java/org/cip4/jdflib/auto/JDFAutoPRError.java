@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -141,6 +142,20 @@ public abstract class JDFAutoPRError extends JDFElement
 	protected JDFAutoPRError(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for ErrorType
+	 */
+
+	public enum EErrorType
+	{
+		TestNotSupported, TestWrongPDL;
+
+		public static EErrorType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EErrorType.class, val, null);
+		}
 	}
 
 	/**
@@ -218,6 +233,31 @@ public abstract class JDFAutoPRError extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setErrorType(EErrorType enumVar)
+	{
+		setAttribute(AttributeName.ERRORTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ErrorType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EErrorType getEErrorType()
+	{
+		return EErrorType.getEnum(getAttribute(AttributeName.ERRORTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ErrorType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setErrorType(EnumErrorType enumVar)
 	{
 		setAttribute(AttributeName.ERRORTYPE, enumVar == null ? null : enumVar.getName(), null);

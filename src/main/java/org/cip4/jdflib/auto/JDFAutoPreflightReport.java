@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,7 @@ import org.cip4.jdflib.resource.process.JDFPRItem;
 import org.cip4.jdflib.resource.process.JDFPreflightParams;
 import org.cip4.jdflib.resource.process.JDFPreflightReportRulePool;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -192,6 +193,20 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * Enumeration strings for ErrorState
 	 */
 
+	public enum EErrorState
+	{
+		TestNotSupported, TestWrongPDL;
+
+		public static EErrorState getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EErrorState.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ErrorState
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumErrorState extends ValuedEnum
 	{
@@ -286,6 +301,31 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setErrorState(EErrorState enumVar)
+	{
+		setAttribute(AttributeName.ERRORSTATE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ErrorState
+	 *
+	 * @return the value of the attribute
+	 */
+	public EErrorState getEErrorState()
+	{
+		return EErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ErrorState ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ErrorState
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setErrorState(EnumErrorState enumVar)
 	{
 		setAttribute(AttributeName.ERRORSTATE, enumVar == null ? null : enumVar.getName(), null);

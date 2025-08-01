@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -167,6 +168,20 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	protected JDFAutoColorCorrectionOp(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for SourceObjects
+	 */
+
+	public enum ESourceObjects
+	{
+		All, ImagePhotographic, ImageScreenShot, LineArt, SmoothShades, Text;
+
+		public static ESourceObjects getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESourceObjects.class, val, ESourceObjects.All);
+		}
 	}
 
 	/**
@@ -444,9 +459,35 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setSourceObjects(Vector<? extends ValuedEnum> v)
+	public void setESourceObjects(List<ESourceObjects> v)
+	{
+		setEnumsAttribute(AttributeName.SOURCEOBJECTS, v, null);
+	}
+
+	/**
+	 * (9.2) get SourceObjects attribute SourceObjects
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<ESourceObjects> getEnumsSourceObjects()
+	{
+		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, ESourceObjects.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute SourceObjects
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setSourceObjects(List<EnumSourceObjects> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
 	}
@@ -456,7 +497,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getSourceObjects()
+	public Vector<EnumSourceObjects> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
 	}

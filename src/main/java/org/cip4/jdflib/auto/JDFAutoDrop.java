@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -171,6 +172,20 @@ public abstract class JDFAutoDrop extends JDFElement
 	protected JDFAutoDrop(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Transfer
+	 */
+
+	public enum ETransfer
+	{
+		BuyerToPrinterDeliver, BuyerToPrinterPickup, PrinterToBuyerDeliver, PrinterToBuyerPickup;
+
+		public static ETransfer getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETransfer.class, val, null);
+		}
 	}
 
 	/**
@@ -428,6 +443,31 @@ public abstract class JDFAutoDrop extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTransfer(ETransfer enumVar)
+	{
+		setAttribute(AttributeName.TRANSFER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Transfer
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETransfer getETransfer()
+	{
+		return ETransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Transfer ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Transfer
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTransfer(EnumTransfer enumVar)
 	{
 		setAttribute(AttributeName.TRANSFER, enumVar == null ? null : enumVar.getName(), null);

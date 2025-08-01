@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,7 @@ import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -188,6 +189,20 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * Enumeration strings for AllowedXYRelation
 	 */
 
+	public enum EAllowedXYRelation
+	{
+		gt, ge, eq, le, lt, ne;
+
+		public static EAllowedXYRelation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAllowedXYRelation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for AllowedXYRelation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAllowedXYRelation extends ValuedEnum
 	{
@@ -253,6 +268,20 @@ public abstract class JDFAutoXYPairState extends JDFResource
 		public static final EnumAllowedXYRelation lt = new EnumAllowedXYRelation("lt");
 		/**  */
 		public static final EnumAllowedXYRelation ne = new EnumAllowedXYRelation("ne");
+	}
+
+	/**
+	 * Enumeration strings for PresentXYRelation
+	 */
+
+	public enum EPresentXYRelation
+	{
+		gt, ge, eq, le, lt, ne;
+
+		public static EPresentXYRelation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPresentXYRelation.class, val, null);
+		}
 	}
 
 	/**
@@ -469,6 +498,32 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAllowedXYRelation(EAllowedXYRelation enumVar)
+	{
+		setAttribute(AttributeName.ALLOWEDXYRELATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute AllowedXYRelation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAllowedXYRelation getEAllowedXYRelation()
+	{
+		return EAllowedXYRelation.getEnum(getAttribute(AttributeName.ALLOWEDXYRELATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedXYRelation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute AllowedXYRelation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAllowedXYRelation(EnumAllowedXYRelation enumVar)
 	{
 		setAttribute(AttributeName.ALLOWEDXYRELATION, enumVar == null ? null : enumVar.getName(), null);
@@ -571,6 +626,32 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPresentXYRelation(EPresentXYRelation enumVar)
+	{
+		setAttribute(AttributeName.PRESENTXYRELATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PresentXYRelation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPresentXYRelation getEPresentXYRelation()
+	{
+		return EPresentXYRelation.getEnum(getAttribute(AttributeName.PRESENTXYRELATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentXYRelation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PresentXYRelation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPresentXYRelation(EnumPresentXYRelation enumVar)
 	{
 		setAttribute(AttributeName.PRESENTXYRELATION, enumVar == null ? null : enumVar.getName(), null);

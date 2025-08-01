@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.datatypes.JDFRectangleRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -177,6 +178,20 @@ public abstract class JDFAutoRectangleEvaluation extends JDFResource
 	 * Enumeration strings for HWRelation
 	 */
 
+	public enum EHWRelation
+	{
+		gt, ge, eq, le, lt, ne;
+
+		public static EHWRelation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EHWRelation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for HWRelation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumHWRelation extends ValuedEnum
 	{
@@ -256,6 +271,31 @@ public abstract class JDFAutoRectangleEvaluation extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setHWRelation(EHWRelation enumVar)
+	{
+		setAttribute(AttributeName.HWRELATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute HWRelation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EHWRelation getEHWRelation()
+	{
+		return EHWRelation.getEnum(getAttribute(AttributeName.HWRELATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HWRelation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute HWRelation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setHWRelation(EnumHWRelation enumVar)
 	{
 		setAttribute(AttributeName.HWRELATION, enumVar == null ? null : enumVar.getName(), null);

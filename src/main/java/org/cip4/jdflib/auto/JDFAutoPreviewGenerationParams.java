@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFImageSetterParams;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -187,6 +188,20 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 * Enumeration strings for AspectRatio
 	 */
 
+	public enum EAspectRatio
+	{
+		Ignore, CenterMax, CenterMin, Crop, Expand;
+
+		public static EAspectRatio getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAspectRatio.class, val, EAspectRatio.Ignore);
+		}
+	}
+
+	/**
+	 * Enumeration strings for AspectRatio
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAspectRatio extends ValuedEnum
 	{
@@ -256,6 +271,20 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 * Enumeration strings for PreviewFileType
 	 */
 
+	public enum EPreviewFileType
+	{
+		PNG, CIP3Multiple, CIP3Single;
+
+		public static EPreviewFileType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPreviewFileType.class, val, EPreviewFileType.PNG);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PreviewFileType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPreviewFileType extends ValuedEnum
 	{
@@ -315,6 +344,20 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 		public static final EnumPreviewFileType CIP3Multiple = new EnumPreviewFileType("CIP3Multiple");
 		/**  */
 		public static final EnumPreviewFileType CIP3Single = new EnumPreviewFileType("CIP3Single");
+	}
+
+	/**
+	 * Enumeration strings for PreviewUsage
+	 */
+
+	public enum EPreviewUsage
+	{
+		Animation, Identification, Separation, SeparatedThumbNail, SeparationRaw, ThumbNail, Static3D, Viewable;
+
+		public static EPreviewUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPreviewUsage.class, val, EPreviewUsage.Separation);
+		}
 	}
 
 	/**
@@ -396,6 +439,20 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 * Enumeration strings for Compensation
 	 */
 
+	public enum ECompensation
+	{
+		None, Film, Plate, Press;
+
+		public static ECompensation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECompensation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Compensation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumCompensation extends ValuedEnum
 	{
@@ -471,6 +528,31 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAspectRatio(EAspectRatio enumVar)
+	{
+		setAttribute(AttributeName.ASPECTRATIO, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute AspectRatio
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAspectRatio getEAspectRatio()
+	{
+		return EAspectRatio.getEnum(getAttribute(AttributeName.ASPECTRATIO, null, "Ignore"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AspectRatio ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute AspectRatio
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAspectRatio(EnumAspectRatio enumVar)
 	{
 		setAttribute(AttributeName.ASPECTRATIO, enumVar == null ? null : enumVar.getName(), null);
@@ -495,6 +577,32 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPreviewFileType(EPreviewFileType enumVar)
+	{
+		setAttribute(AttributeName.PREVIEWFILETYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PreviewFileType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPreviewFileType getEPreviewFileType()
+	{
+		return EPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewFileType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PreviewFileType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPreviewFileType(EnumPreviewFileType enumVar)
 	{
 		setAttribute(AttributeName.PREVIEWFILETYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -519,6 +627,32 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPreviewUsage(EPreviewUsage enumVar)
+	{
+		setAttribute(AttributeName.PREVIEWUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PreviewUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPreviewUsage getEPreviewUsage()
+	{
+		return EPreviewUsage.getEnum(getAttribute(AttributeName.PREVIEWUSAGE, null, "Separation"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PreviewUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPreviewUsage(EnumPreviewUsage enumVar)
 	{
 		setAttribute(AttributeName.PREVIEWUSAGE, enumVar == null ? null : enumVar.getName(), null);
@@ -543,6 +677,32 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCompensation(ECompensation enumVar)
+	{
+		setAttribute(AttributeName.COMPENSATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Compensation
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECompensation getECompensation()
+	{
+		return ECompensation.getEnum(getAttribute(AttributeName.COMPENSATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Compensation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Compensation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCompensation(EnumCompensation enumVar)
 	{
 		setAttribute(AttributeName.COMPENSATION, enumVar == null ? null : enumVar.getName(), null);

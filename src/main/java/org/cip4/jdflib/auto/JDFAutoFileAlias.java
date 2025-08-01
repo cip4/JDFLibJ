@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -160,6 +161,20 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	protected JDFAutoFileAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Disposition
+	 */
+
+	public enum EDisposition
+	{
+		Unlink, Delete, Retain;
+
+		public static EDisposition getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDisposition.class, val, null);
+		}
 	}
 
 	/**
@@ -262,6 +277,31 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDisposition(EDisposition enumVar)
+	{
+		setAttribute(AttributeName.DISPOSITION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Disposition
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDisposition getEDisposition()
+	{
+		return EDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Disposition ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Disposition
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDisposition(EnumDisposition enumVar)
 	{
 		setAttribute(AttributeName.DISPOSITION, enumVar == null ? null : enumVar.getName(), null);

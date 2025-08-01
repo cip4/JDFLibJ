@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -180,6 +181,20 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	 * Enumeration strings for PalletWrapping
 	 */
 
+	public enum EPalletWrapping
+	{
+		StretchWrap, Banding, None;
+
+		public static EPalletWrapping getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPalletWrapping.class, val, EPalletWrapping.None);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PalletWrapping
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPalletWrapping extends ValuedEnum
 	{
@@ -239,6 +254,20 @@ public abstract class JDFAutoPackingParams extends JDFResource
 		public static final EnumPalletWrapping Banding = new EnumPalletWrapping("Banding");
 		/**  */
 		public static final EnumPalletWrapping None = new EnumPalletWrapping("None");
+	}
+
+	/**
+	 * Enumeration strings for PalletType
+	 */
+
+	public enum EPalletType
+	{
+		PalletType_2Way, PalletType_4Way, Euro;
+
+		public static EPalletType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPalletType.class, val, null);
+		}
 	}
 
 	/**
@@ -319,6 +348,32 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPalletWrapping(EPalletWrapping enumVar)
+	{
+		setAttribute(AttributeName.PALLETWRAPPING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PalletWrapping
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPalletWrapping getEPalletWrapping()
+	{
+		return EPalletWrapping.getEnum(getAttribute(AttributeName.PALLETWRAPPING, null, "None"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PalletWrapping
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PalletWrapping
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPalletWrapping(EnumPalletWrapping enumVar)
 	{
 		setAttribute(AttributeName.PALLETWRAPPING, enumVar == null ? null : enumVar.getName(), null);
@@ -609,6 +664,31 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPalletType(EPalletType enumVar)
+	{
+		setAttribute(AttributeName.PALLETTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PalletType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPalletType getEPalletType()
+	{
+		return EPalletType.getEnum(getAttribute(AttributeName.PALLETTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PalletType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PalletType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPalletType(EnumPalletType enumVar)
 	{
 		setAttribute(AttributeName.PALLETTYPE, enumVar == null ? null : enumVar.getName(), null);

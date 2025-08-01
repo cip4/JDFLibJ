@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -198,6 +199,20 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * Enumeration strings for CenterReference
 	 */
 
+	public enum ECenterReference
+	{
+		TrailingEdge, RegistrationMark;
+
+		public static ECenterReference getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECenterReference.class, val, ECenterReference.TrailingEdge);
+		}
+	}
+
+	/**
+	 * Enumeration strings for CenterReference
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumCenterReference extends ValuedEnum
 	{
@@ -255,6 +270,20 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		public static final EnumCenterReference TrailingEdge = new EnumCenterReference("TrailingEdge");
 		/**  */
 		public static final EnumCenterReference RegistrationMark = new EnumCenterReference("RegistrationMark");
+	}
+
+	/**
+	 * Enumeration strings for HoleReferenceEdge
+	 */
+
+	public enum EHoleReferenceEdge
+	{
+		Left, Right, Top, Bottom, Pattern;
+
+		public static EHoleReferenceEdge getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EHoleReferenceEdge.class, val, null);
+		}
 	}
 
 	/**
@@ -324,6 +353,20 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 		public static final EnumHoleReferenceEdge Bottom = new EnumHoleReferenceEdge("Bottom");
 		/**  */
 		public static final EnumHoleReferenceEdge Pattern = new EnumHoleReferenceEdge("Pattern");
+	}
+
+	/**
+	 * Enumeration strings for Shape
+	 */
+
+	public enum EShape
+	{
+		Eliptical, Round, Rectangular;
+
+		public static EShape getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EShape.class, val, null);
+		}
 	}
 
 	/**
@@ -404,6 +447,32 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCenterReference(ECenterReference enumVar)
+	{
+		setAttribute(AttributeName.CENTERREFERENCE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CenterReference
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECenterReference getECenterReference()
+	{
+		return ECenterReference.getEnum(getAttribute(AttributeName.CENTERREFERENCE, null, "TrailingEdge"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CenterReference
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CenterReference
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCenterReference(EnumCenterReference enumVar)
 	{
 		setAttribute(AttributeName.CENTERREFERENCE, enumVar == null ? null : enumVar.getName(), null);
@@ -425,9 +494,34 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	/**
 	 * (5.2) set attribute HoleType
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setHoleType(Vector<? extends ValuedEnum> v)
+	public void setEHoleType(List<JDFMedia.EHoleType> v)
+	{
+		setEnumsAttribute(AttributeName.HOLETYPE, v, null);
+	}
+
+	/**
+	 * (9.2) get HoleType attribute HoleType
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<JDFMedia.EHoleType> getEnumsHoleType()
+	{
+		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EHoleType.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HoleType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute HoleType
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setHoleType(List<JDFMedia.EnumHoleType> v)
 	{
 		setEnumerationsAttribute(AttributeName.HOLETYPE, v, null);
 	}
@@ -437,7 +531,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getHoleType()
+	public Vector<JDFMedia.EnumHoleType> getHoleType()
 	{
 		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EnumHoleType.getEnum(0), false);
 	}
@@ -526,6 +620,32 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setHoleReferenceEdge(EHoleReferenceEdge enumVar)
+	{
+		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute HoleReferenceEdge
+	 *
+	 * @return the value of the attribute
+	 */
+	public EHoleReferenceEdge getEHoleReferenceEdge()
+	{
+		return EHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute HoleReferenceEdge
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute HoleReferenceEdge
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
 	{
 		setAttribute(AttributeName.HOLEREFERENCEEDGE, enumVar == null ? null : enumVar.getName(), null);
@@ -549,6 +669,31 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setShape(EShape enumVar)
+	{
+		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Shape
+	 *
+	 * @return the value of the attribute
+	 */
+	public EShape getEShape()
+	{
+		return EShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Shape ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Shape
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setShape(EnumShape enumVar)
 	{
 		setAttribute(AttributeName.SHAPE, enumVar == null ? null : enumVar.getName(), null);

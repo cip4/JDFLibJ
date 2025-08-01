@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -139,6 +140,20 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	protected JDFAutoPreflightItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for PreflightLevel
+	 */
+
+	public enum EPreflightLevel
+	{
+		Basic, Extended, Premium;
+
+		public static EPreflightLevel getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPreflightLevel.class, val, null);
+		}
 	}
 
 	/**
@@ -219,6 +234,32 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPreflightLevel(EPreflightLevel enumVar)
+	{
+		setAttribute(AttributeName.PREFLIGHTLEVEL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PreflightLevel
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPreflightLevel getEPreflightLevel()
+	{
+		return EPreflightLevel.getEnum(getAttribute(AttributeName.PREFLIGHTLEVEL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreflightLevel
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PreflightLevel
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPreflightLevel(EnumPreflightLevel enumVar)
 	{
 		setAttribute(AttributeName.PREFLIGHTLEVEL, enumVar == null ? null : enumVar.getName(), null);

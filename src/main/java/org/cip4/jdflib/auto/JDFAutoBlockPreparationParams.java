@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.JDFRegisterRibbon;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -178,6 +179,20 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for TightBacking
+	 */
+
+	public enum ETightBacking
+	{
+		Flat, Round, FlatBacked, RoundBacked;
+
+		public static ETightBacking getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETightBacking.class, val, null);
+		}
 	}
 
 	/**
@@ -306,6 +321,32 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTightBacking(ETightBacking enumVar)
+	{
+		setAttribute(AttributeName.TIGHTBACKING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute TightBacking
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETightBacking getETightBacking()
+	{
+		return ETightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TightBacking
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute TightBacking
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTightBacking(EnumTightBacking enumVar)
 	{
 		setAttribute(AttributeName.TIGHTBACKING, enumVar == null ? null : enumVar.getName(), null);

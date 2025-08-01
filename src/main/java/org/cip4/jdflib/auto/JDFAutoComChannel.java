@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -164,6 +165,20 @@ public abstract class JDFAutoComChannel extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for ChannelType
+	 */
+
+	public enum EChannelType
+	{
+		ComputerName, Email, Fax, InstantMessaging, JMF, Mobile, Phone, PrivateDirectory, WWW;
+
+		public static EChannelType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EChannelType.class, val, null);
+		}
 	}
 
 	/**
@@ -255,6 +270,31 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setChannelType(EChannelType enumVar)
+	{
+		setAttribute(AttributeName.CHANNELTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ChannelType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EChannelType getEChannelType()
+	{
+		return EChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ChannelType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setChannelType(EnumChannelType enumVar)
 	{
 		setAttribute(AttributeName.CHANNELTYPE, enumVar == null ? null : enumVar.getName(), null);

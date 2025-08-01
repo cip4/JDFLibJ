@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -195,6 +196,20 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * Enumeration strings for OutputColorSpace
 	 */
 
+	public enum EOutputColorSpace
+	{
+		LAB, RGB, CMYK, GrayScale;
+
+		public static EOutputColorSpace getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOutputColorSpace.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for OutputColorSpace
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumOutputColorSpace extends ValuedEnum
 	{
@@ -256,6 +271,20 @@ public abstract class JDFAutoScanParams extends JDFResource
 		public static final EnumOutputColorSpace CMYK = new EnumOutputColorSpace("CMYK");
 		/**  */
 		public static final EnumOutputColorSpace GrayScale = new EnumOutputColorSpace("GrayScale");
+	}
+
+	/**
+	 * Enumeration strings for CompressionFilter
+	 */
+
+	public enum ECompressionFilter
+	{
+		CCITTFaxEncode, DCTEncode, FlateEncode, WaveletEncode, JBIG2Encode;
+
+		public static ECompressionFilter getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ECompressionFilter.class, val, null);
+		}
 	}
 
 	/**
@@ -325,6 +354,20 @@ public abstract class JDFAutoScanParams extends JDFResource
 		public static final EnumCompressionFilter WaveletEncode = new EnumCompressionFilter("WaveletEncode");
 		/**  */
 		public static final EnumCompressionFilter JBIG2Encode = new EnumCompressionFilter("JBIG2Encode");
+	}
+
+	/**
+	 * Enumeration strings for Mounting
+	 */
+
+	public enum EMounting
+	{
+		Unfixed, Fixed, Wet, Registered;
+
+		public static EMounting getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMounting.class, val, null);
+		}
 	}
 
 	/**
@@ -456,6 +499,32 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOutputColorSpace(EOutputColorSpace enumVar)
+	{
+		setAttribute(AttributeName.OUTPUTCOLORSPACE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute OutputColorSpace
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOutputColorSpace getEOutputColorSpace()
+	{
+		return EOutputColorSpace.getEnum(getAttribute(AttributeName.OUTPUTCOLORSPACE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute OutputColorSpace
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute OutputColorSpace
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOutputColorSpace(EnumOutputColorSpace enumVar)
 	{
 		setAttribute(AttributeName.OUTPUTCOLORSPACE, enumVar == null ? null : enumVar.getName(), null);
@@ -480,6 +549,32 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setCompressionFilter(ECompressionFilter enumVar)
+	{
+		setAttribute(AttributeName.COMPRESSIONFILTER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute CompressionFilter
+	 *
+	 * @return the value of the attribute
+	 */
+	public ECompressionFilter getECompressionFilter()
+	{
+		return ECompressionFilter.getEnum(getAttribute(AttributeName.COMPRESSIONFILTER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute CompressionFilter
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute CompressionFilter
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setCompressionFilter(EnumCompressionFilter enumVar)
 	{
 		setAttribute(AttributeName.COMPRESSIONFILTER, enumVar == null ? null : enumVar.getName(), null);
@@ -574,6 +669,31 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMounting(EMounting enumVar)
+	{
+		setAttribute(AttributeName.MOUNTING, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Mounting
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMounting getEMounting()
+	{
+		return EMounting.getEnum(getAttribute(AttributeName.MOUNTING, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Mounting ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Mounting
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMounting(EnumMounting enumVar)
 	{
 		setAttribute(AttributeName.MOUNTING, enumVar == null ? null : enumVar.getName(), null);

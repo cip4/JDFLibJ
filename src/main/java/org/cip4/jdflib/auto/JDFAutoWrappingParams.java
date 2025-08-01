@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -165,6 +166,20 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 * Enumeration strings for WrappingKind
 	 */
 
+	public enum EWrappingKind
+	{
+		Band, LooseWrap, ShrinkWrap;
+
+		public static EWrappingKind getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EWrappingKind.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for WrappingKind
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumWrappingKind extends ValuedEnum
 	{
@@ -239,6 +254,32 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setWrappingKind(EWrappingKind enumVar)
+	{
+		setAttribute(AttributeName.WRAPPINGKIND, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute WrappingKind
+	 *
+	 * @return the value of the attribute
+	 */
+	public EWrappingKind getEWrappingKind()
+	{
+		return EWrappingKind.getEnum(getAttribute(AttributeName.WRAPPINGKIND, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WrappingKind
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute WrappingKind
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setWrappingKind(EnumWrappingKind enumVar)
 	{
 		setAttribute(AttributeName.WRAPPINGKIND, enumVar == null ? null : enumVar.getName(), null);

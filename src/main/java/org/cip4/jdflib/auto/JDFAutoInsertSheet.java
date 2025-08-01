@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -193,6 +194,20 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * Enumeration strings for SheetType
 	 */
 
+	public enum ESheetType
+	{
+		AccountingSheet, ErrorSheet, FillSheet, InsertSheet, JobSheet, SeparatorSheet;
+
+		public static ESheetType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SheetType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetType extends ValuedEnum
 	{
@@ -258,6 +273,20 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 		public static final EnumSheetType JobSheet = new EnumSheetType("JobSheet");
 		/**  */
 		public static final EnumSheetType SeparatorSheet = new EnumSheetType("SeparatorSheet");
+	}
+
+	/**
+	 * Enumeration strings for SheetUsage
+	 */
+
+	public enum ESheetUsage
+	{
+		FillForceBack, FillForceFront, FillSheet, FillSignature, FillSurface, Header, Interleaved, InterleavedBefore, OnError, Slip, SlipCopy, Trailer;
+
+		public static ESheetUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetUsage.class, val, null);
+		}
 	}
 
 	/**
@@ -347,6 +376,20 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * Enumeration strings for IncludeInBundleItem
 	 */
 
+	public enum EIncludeInBundleItem
+	{
+		After, Before, None, New;
+
+		public static EIncludeInBundleItem getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EIncludeInBundleItem.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for IncludeInBundleItem
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumIncludeInBundleItem extends ValuedEnum
 	{
@@ -422,6 +465,31 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetType(ESheetType enumVar)
+	{
+		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetType getESheetType()
+	{
+		return ESheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetType(EnumSheetType enumVar)
 	{
 		setAttribute(AttributeName.SHEETTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -445,6 +513,31 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetUsage(ESheetUsage enumVar)
+	{
+		setAttribute(AttributeName.SHEETUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetUsage getESheetUsage()
+	{
+		return ESheetUsage.getEnum(getAttribute(AttributeName.SHEETUSAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetUsage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetUsage(EnumSheetUsage enumVar)
 	{
 		setAttribute(AttributeName.SHEETUSAGE, enumVar == null ? null : enumVar.getName(), null);
@@ -469,6 +562,32 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setIncludeInBundleItem(EIncludeInBundleItem enumVar)
+	{
+		setAttribute(AttributeName.INCLUDEINBUNDLEITEM, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute IncludeInBundleItem
+	 *
+	 * @return the value of the attribute
+	 */
+	public EIncludeInBundleItem getEIncludeInBundleItem()
+	{
+		return EIncludeInBundleItem.getEnum(getAttribute(AttributeName.INCLUDEINBUNDLEITEM, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute IncludeInBundleItem
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute IncludeInBundleItem
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setIncludeInBundleItem(EnumIncludeInBundleItem enumVar)
 	{
 		setAttribute(AttributeName.INCLUDEINBUNDLEITEM, enumVar == null ? null : enumVar.getName(), null);
@@ -564,6 +683,31 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setUsage(ESheetUsage enumVar)
+	{
+		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Usage
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetUsage getEUsage()
+	{
+		return ESheetUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Usage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setUsage(EnumSheetUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);

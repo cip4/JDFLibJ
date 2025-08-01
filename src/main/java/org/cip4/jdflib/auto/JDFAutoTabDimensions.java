@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -145,6 +146,20 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	protected JDFAutoTabDimensions(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for TabEdge
+	 */
+
+	public enum ETabEdge
+	{
+		Left, Rigth, Top, Bottom;
+
+		public static ETabEdge getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETabEdge.class, val, null);
+		}
 	}
 
 	/**
@@ -226,6 +241,31 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTabEdge(ETabEdge enumVar)
+	{
+		setAttribute(AttributeName.TABEDGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute TabEdge
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETabEdge getETabEdge()
+	{
+		return ETabEdge.getEnum(getAttribute(AttributeName.TABEDGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TabEdge ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute TabEdge
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTabEdge(EnumTabEdge enumVar)
 	{
 		setAttribute(AttributeName.TABEDGE, enumVar == null ? null : enumVar.getName(), null);

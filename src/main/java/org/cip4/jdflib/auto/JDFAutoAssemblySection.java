@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPageAssignedList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -162,6 +163,20 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	protected JDFAutoAssemblySection(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Order
+	 */
+
+	public enum EOrder
+	{
+		Collecting, Gathering;
+
+		public static EOrder getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EOrder.class, val, null);
+		}
 	}
 
 	/**
@@ -334,6 +349,31 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setOrder(EOrder enumVar)
+	{
+		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Order
+	 *
+	 * @return the value of the attribute
+	 */
+	public EOrder getEOrder()
+	{
+		return EOrder.getEnum(getAttribute(AttributeName.ORDER, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Order ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Order
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setOrder(EnumOrder enumVar)
 	{
 		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);

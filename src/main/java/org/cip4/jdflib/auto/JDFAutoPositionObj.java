@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFRefAnchor;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -171,6 +172,20 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * Enumeration strings for Anchor
 	 */
 
+	public enum EAnchor
+	{
+		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
+
+		public static EAnchor getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAnchor.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for Anchor
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAnchor extends ValuedEnum
 	{
@@ -248,6 +263,20 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * Enumeration strings for PositionPolicy
 	 */
 
+	public enum EPositionPolicy
+	{
+		Exact, Free;
+
+		public static EPositionPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPositionPolicy.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PositionPolicy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPositionPolicy extends ValuedEnum
 	{
@@ -311,6 +340,20 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * Enumeration strings for RotationPolicy
 	 */
 
+	public enum ERotationPolicy
+	{
+		Exact, Free;
+
+		public static ERotationPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ERotationPolicy.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for RotationPolicy
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumRotationPolicy extends ValuedEnum
 	{
@@ -368,6 +411,20 @@ public abstract class JDFAutoPositionObj extends JDFElement
 		public static final EnumRotationPolicy Exact = new EnumRotationPolicy("Exact");
 		/**  */
 		public static final EnumRotationPolicy Free = new EnumRotationPolicy("Free");
+	}
+
+	/**
+	 * Enumeration strings for SizePolicy
+	 */
+
+	public enum ESizePolicy
+	{
+		Exact, Free;
+
+		public static ESizePolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESizePolicy.class, val, null);
+		}
 	}
 
 	/**
@@ -445,6 +502,31 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAnchor(EAnchor enumVar)
+	{
+		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Anchor
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAnchor getEAnchor()
+	{
+		return EAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Anchor
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
 	{
 		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
@@ -519,6 +601,32 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPositionPolicy(EPositionPolicy enumVar)
+	{
+		setAttribute(AttributeName.POSITIONPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PositionPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPositionPolicy getEPositionPolicy()
+	{
+		return EPositionPolicy.getEnum(getAttribute(AttributeName.POSITIONPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PositionPolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PositionPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPositionPolicy(EnumPositionPolicy enumVar)
 	{
 		setAttribute(AttributeName.POSITIONPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -569,6 +677,32 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setRotationPolicy(ERotationPolicy enumVar)
+	{
+		setAttribute(AttributeName.ROTATIONPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute RotationPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public ERotationPolicy getERotationPolicy()
+	{
+		return ERotationPolicy.getEnum(getAttribute(AttributeName.ROTATIONPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RotationPolicy
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute RotationPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setRotationPolicy(EnumRotationPolicy enumVar)
 	{
 		setAttribute(AttributeName.ROTATIONPOLICY, enumVar == null ? null : enumVar.getName(), null);
@@ -617,6 +751,31 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSizePolicy(ESizePolicy enumVar)
+	{
+		setAttribute(AttributeName.SIZEPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SizePolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESizePolicy getESizePolicy()
+	{
+		return ESizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SizePolicy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SizePolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSizePolicy(EnumSizePolicy enumVar)
 	{
 		setAttribute(AttributeName.SIZEPOLICY, enumVar == null ? null : enumVar.getName(), null);

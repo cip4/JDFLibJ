@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRuleLength;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -201,6 +202,20 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * Enumeration strings for FluteDirection
 	 */
 
+	public enum EFluteDirection
+	{
+		Any, Both, ShortEdge, LongEdge, SameDirection, XDirection, YDirection;
+
+		public static EFluteDirection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFluteDirection.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for FluteDirection
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumFluteDirection extends ValuedEnum
 	{
@@ -274,6 +289,20 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * Enumeration strings for GrainDirection
 	 */
 
+	public enum EGrainDirection
+	{
+		Any, Both, ShortEdge, LongEdge, SameDirection, XDirection, YDirection;
+
+		public static EGrainDirection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EGrainDirection.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for GrainDirection
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumGrainDirection extends ValuedEnum
 	{
@@ -341,6 +370,20 @@ public abstract class JDFAutoShapeDef extends JDFResource
 		public static final EnumGrainDirection XDirection = new EnumGrainDirection("XDirection");
 		/**  */
 		public static final EnumGrainDirection YDirection = new EnumGrainDirection("YDirection");
+	}
+
+	/**
+	 * Enumeration strings for MediaSide
+	 */
+
+	public enum EMediaSide
+	{
+		Front, Back, Both;
+
+		public static EMediaSide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMediaSide.class, val, null);
+		}
 	}
 
 	/**
@@ -520,6 +563,32 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFluteDirection(EFluteDirection enumVar)
+	{
+		setAttribute(AttributeName.FLUTEDIRECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FluteDirection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFluteDirection getEFluteDirection()
+	{
+		return EFluteDirection.getEnum(getAttribute(AttributeName.FLUTEDIRECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FluteDirection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FluteDirection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFluteDirection(EnumFluteDirection enumVar)
 	{
 		setAttribute(AttributeName.FLUTEDIRECTION, enumVar == null ? null : enumVar.getName(), null);
@@ -544,6 +613,32 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setGrainDirection(EGrainDirection enumVar)
+	{
+		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute GrainDirection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EGrainDirection getEGrainDirection()
+	{
+		return EGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute GrainDirection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute GrainDirection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setGrainDirection(EnumGrainDirection enumVar)
 	{
 		setAttribute(AttributeName.GRAINDIRECTION, enumVar == null ? null : enumVar.getName(), null);
@@ -567,6 +662,31 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMediaSide(EMediaSide enumVar)
+	{
+		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MediaSide
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMediaSide getEMediaSide()
+	{
+		return EMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaSide ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MediaSide
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMediaSide(EnumMediaSide enumVar)
 	{
 		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.getName(), null);

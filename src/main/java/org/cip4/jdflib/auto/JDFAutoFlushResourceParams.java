@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -155,6 +156,20 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	protected JDFAutoFlushResourceParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for FlushPolicy
+	 */
+
+	public enum EFlushPolicy
+	{
+		Complete, QueueEntry, Intermediate;
+
+		public static EFlushPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFlushPolicy.class, val, EFlushPolicy.QueueEntry);
+		}
 	}
 
 	/**
@@ -234,6 +249,31 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFlushPolicy(EFlushPolicy enumVar)
+	{
+		setAttribute(AttributeName.FLUSHPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FlushPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFlushPolicy getEFlushPolicy()
+	{
+		return EFlushPolicy.getEnum(getAttribute(AttributeName.FLUSHPOLICY, null, "QueueEntry"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FlushPolicy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FlushPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFlushPolicy(EnumFlushPolicy enumVar)
 	{
 		setAttribute(AttributeName.FLUSHPOLICY, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFStripCellParams;
 import org.cip4.jdflib.resource.process.JDFStripMark;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -108,7 +109,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x4444444311l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -120,10 +121,11 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.OUTERMOSTSHINGLING, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SECTIONLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.FEEDSHEETLAY, 0x3111111111l, AttributeInfo.EnumAttributeType.enumeration, EnumFeedSheetLay.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
 	}
 
 	@Override
@@ -211,6 +213,20 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 * Enumeration strings for SheetLay
 	 */
 
+	public enum ESheetLay
+	{
+		Left, Right, Center;
+
+		public static ESheetLay getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESheetLay.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for SheetLay
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumSheetLay extends ValuedEnum
 	{
@@ -270,6 +286,97 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 		public static final EnumSheetLay Right = new EnumSheetLay("Right");
 		/**  */
 		public static final EnumSheetLay Center = new EnumSheetLay("Center");
+	}
+
+	/**
+	 * Enumeration strings for FeedSheetLay
+	 */
+
+	public enum EFeedSheetLay
+	{
+		Leading, Trailing;
+
+		public static EFeedSheetLay getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFeedSheetLay.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for FeedSheetLay
+	 */
+
+	@SuppressWarnings("rawtypes")
+	public static class EnumFeedSheetLay extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		protected EnumFeedSheetLay(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName the string to convert
+		 * @return the enum
+		 */
+		public static EnumFeedSheetLay getEnum(String enumName)
+		{
+			return (EnumFeedSheetLay) getEnum(EnumFeedSheetLay.class, enumName);
+		}
+
+		/**
+		 * @param enumValue the integer to convert
+		 * @return the enum
+		 */
+		public static EnumFeedSheetLay getEnum(int enumValue)
+		{
+			return (EnumFeedSheetLay) getEnum(EnumFeedSheetLay.class, enumValue);
+		}
+
+		/**
+		 * @return the map of enums
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumFeedSheetLay.class);
+		}
+
+		/**
+		 * @return the list of enums
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumFeedSheetLay.class);
+		}
+
+		/**
+		 * @return the iterator
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumFeedSheetLay.class);
+		}
+
+		/**  */
+		public static final EnumFeedSheetLay Leading = new EnumFeedSheetLay("Leading");
+		/**  */
+		public static final EnumFeedSheetLay Trailing = new EnumFeedSheetLay("Trailing");
+	}
+
+	/**
+	 * Enumeration strings for WorkStyle
+	 */
+
+	public enum EWorkStyle
+	{
+		Simplex, Perfecting, WorkAndBack, WorkAndTurn, WorkAndTumble, WorkAndTwist;
+
+		public static EWorkStyle getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EWorkStyle.class, val, null);
+		}
 	}
 
 	/**
@@ -547,6 +654,31 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSheetLay(ESheetLay enumVar)
+	{
+		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SheetLay
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESheetLay getESheetLay()
+	{
+		return ESheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SheetLay
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
 	{
 		setAttribute(AttributeName.SHEETLAY, enumVar == null ? null : enumVar.getName(), null);
@@ -560,6 +692,56 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FeedSheetLay
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FeedSheetLay
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setFeedSheetLay(EFeedSheetLay enumVar)
+	{
+		setAttribute(AttributeName.FEEDSHEETLAY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute FeedSheetLay
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFeedSheetLay getEFeedSheetLay()
+	{
+		return EFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute FeedSheetLay
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute FeedSheetLay
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setFeedSheetLay(EnumFeedSheetLay enumVar)
+	{
+		setAttribute(AttributeName.FEEDSHEETLAY, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	 * (9) get attribute FeedSheetLay
+	 *
+	 * @return the value of the attribute
+	 */
+	public EnumFeedSheetLay getFeedSheetLay()
+	{
+		return EnumFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
 	}
 
 	/*
@@ -641,6 +823,31 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setWorkStyle(EWorkStyle enumVar)
+	{
+		setAttribute(AttributeName.WORKSTYLE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute WorkStyle
+	 *
+	 * @return the value of the attribute
+	 */
+	public EWorkStyle getEWorkStyle()
+	{
+		return EWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute WorkStyle ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute WorkStyle
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setWorkStyle(EnumWorkStyle enumVar)
 	{
 		setAttribute(AttributeName.WORKSTYLE, enumVar == null ? null : enumVar.getName(), null);

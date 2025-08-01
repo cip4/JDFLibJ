@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -160,6 +161,20 @@ public abstract class JDFAutoValue extends JDFElement
 	protected JDFAutoValue(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for ValueUsage
+	 */
+
+	public enum EValueUsage
+	{
+		Allowed, Device, Present, Job, Estimate;
+
+		public static EValueUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EValueUsage.class, val, null);
+		}
 	}
 
 	/**
@@ -291,6 +306,31 @@ public abstract class JDFAutoValue extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setValueUsage(EValueUsage enumVar)
+	{
+		setAttribute(AttributeName.VALUEUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ValueUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public EValueUsage getEValueUsage()
+	{
+		return EValueUsage.getEnum(getAttribute(AttributeName.VALUEUSAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ValueUsage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ValueUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setValueUsage(EnumValueUsage enumVar)
 	{
 		setAttribute(AttributeName.VALUEUSAGE, enumVar == null ? null : enumVar.getName(), null);

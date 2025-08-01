@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFDisjointing;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -194,6 +195,20 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
+	}
+
+	/**
+	 * Enumeration strings for PreStackMethod
+	 */
+
+	public enum EPreStackMethod
+	{
+		All, First, None;
+
+		public static EPreStackMethod getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPreStackMethod.class, val, null);
+		}
 	}
 
 	/**
@@ -557,6 +572,32 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPreStackMethod(EPreStackMethod enumVar)
+	{
+		setAttribute(AttributeName.PRESTACKMETHOD, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PreStackMethod
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPreStackMethod getEPreStackMethod()
+	{
+		return EPreStackMethod.getEnum(getAttribute(AttributeName.PRESTACKMETHOD, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PreStackMethod
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PreStackMethod
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPreStackMethod(EnumPreStackMethod enumVar)
 	{
 		setAttribute(AttributeName.PRESTACKMETHOD, enumVar == null ? null : enumVar.getName(), null);

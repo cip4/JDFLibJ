@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -159,6 +160,20 @@ public abstract class JDFAutoNewComment extends JDFElement
 	protected JDFAutoNewComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for Action
+	 */
+
+	public enum EAction
+	{
+		Add, Concat, Replace, Remove;
+
+		public static EAction getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAction.class, val, null);
+		}
 	}
 
 	/**
@@ -240,6 +255,31 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAction(EAction enumVar)
+	{
+		setAttribute(AttributeName.ACTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Action
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAction getEAction()
+	{
+		return EAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Action ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Action
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAction(EnumAction enumVar)
 	{
 		setAttribute(AttributeName.ACTION, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberList;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -148,6 +149,20 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	protected JDFAutoDCTParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for SourceCSs
+	 */
+
+	public enum ESourceCSs
+	{
+		CalGray, CalRGB, Calibrated, CIEBased, CMYK, DeviceN, DevIndep, RGB, Gray, ICCBased, ICCCMYK, ICCGray, ICCLAB, ICCRGB, Lab, Separation, YUV, All;
+
+		public static ESourceCSs getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESourceCSs.class, val, null);
+		}
 	}
 
 	/**
@@ -249,6 +264,20 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * Enumeration strings for ColorTransform
 	 */
 
+	public enum EColorTransform
+	{
+		YUV, None, Automatic;
+
+		public static EColorTransform getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EColorTransform.class, val, EColorTransform.Automatic);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ColorTransform
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumColorTransform extends ValuedEnum
 	{
@@ -320,9 +349,34 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	/**
 	 * (5.2) set attribute SourceCSs
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setSourceCSs(Vector<? extends ValuedEnum> v)
+	public void setESourceCSs(List<ESourceCSs> v)
+	{
+		setEnumsAttribute(AttributeName.SOURCECSS, v, null);
+	}
+
+	/**
+	 * (9.2) get SourceCSs attribute SourceCSs
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<ESourceCSs> getEnumsSourceCSs()
+	{
+		return getEnumerationsAttribute(AttributeName.SOURCECSS, null, ESourceCSs.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceCSs ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute SourceCSs
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setSourceCSs(List<EnumSourceCSs> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCECSS, v, null);
 	}
@@ -332,7 +386,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getSourceCSs()
+	public Vector<EnumSourceCSs> getSourceCSs()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCECSS, null, EnumSourceCSs.getEnum(0), false);
 	}
@@ -469,6 +523,32 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setColorTransform(EColorTransform enumVar)
+	{
+		setAttribute(AttributeName.COLORTRANSFORM, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ColorTransform
+	 *
+	 * @return the value of the attribute
+	 */
+	public EColorTransform getEColorTransform()
+	{
+		return EColorTransform.getEnum(getAttribute(AttributeName.COLORTRANSFORM, null, "Automatic"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorTransform
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ColorTransform
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setColorTransform(EnumColorTransform enumVar)
 	{
 		setAttribute(AttributeName.COLORTRANSFORM, enumVar == null ? null : enumVar.getName(), null);

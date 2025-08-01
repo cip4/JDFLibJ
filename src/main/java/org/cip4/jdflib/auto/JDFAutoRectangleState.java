@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.datatypes.JDFRectangleRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -182,6 +183,20 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * Enumeration strings for AllowedHWRelation
 	 */
 
+	public enum EAllowedHWRelation
+	{
+		gt, ge, eq, le, lt, ne;
+
+		public static EAllowedHWRelation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAllowedHWRelation.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for AllowedHWRelation
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumAllowedHWRelation extends ValuedEnum
 	{
@@ -247,6 +262,20 @@ public abstract class JDFAutoRectangleState extends JDFResource
 		public static final EnumAllowedHWRelation lt = new EnumAllowedHWRelation("lt");
 		/**  */
 		public static final EnumAllowedHWRelation ne = new EnumAllowedHWRelation("ne");
+	}
+
+	/**
+	 * Enumeration strings for PresentHWRelation
+	 */
+
+	public enum EPresentHWRelation
+	{
+		gt, ge, eq, le, lt, ne;
+
+		public static EPresentHWRelation getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPresentHWRelation.class, val, null);
+		}
 	}
 
 	/**
@@ -385,6 +414,32 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setAllowedHWRelation(EAllowedHWRelation enumVar)
+	{
+		setAttribute(AttributeName.ALLOWEDHWRELATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute AllowedHWRelation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EAllowedHWRelation getEAllowedHWRelation()
+	{
+		return EAllowedHWRelation.getEnum(getAttribute(AttributeName.ALLOWEDHWRELATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AllowedHWRelation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute AllowedHWRelation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setAllowedHWRelation(EnumAllowedHWRelation enumVar)
 	{
 		setAttribute(AttributeName.ALLOWEDHWRELATION, enumVar == null ? null : enumVar.getName(), null);
@@ -435,6 +490,32 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPresentHWRelation(EPresentHWRelation enumVar)
+	{
+		setAttribute(AttributeName.PRESENTHWRELATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PresentHWRelation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPresentHWRelation getEPresentHWRelation()
+	{
+		return EPresentHWRelation.getEnum(getAttribute(AttributeName.PRESENTHWRELATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PresentHWRelation
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PresentHWRelation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPresentHWRelation(EnumPresentHWRelation enumVar)
 	{
 		setAttribute(AttributeName.PRESENTHWRELATION, enumVar == null ? null : enumVar.getName(), null);

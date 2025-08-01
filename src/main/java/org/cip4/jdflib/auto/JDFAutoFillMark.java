@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFMarkColor;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -160,6 +161,20 @@ public abstract class JDFAutoFillMark extends JDFElement
 	protected JDFAutoFillMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for KnockoutSource
+	 */
+
+	public enum EKnockoutSource
+	{
+		ClipPath, SourceClipPath, TrimClipPath, TrimBox;
+
+		public static EKnockoutSource getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EKnockoutSource.class, val, null);
+		}
 	}
 
 	/**
@@ -293,6 +308,32 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setKnockoutSource(EKnockoutSource enumVar)
+	{
+		setAttribute(AttributeName.KNOCKOUTSOURCE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute KnockoutSource
+	 *
+	 * @return the value of the attribute
+	 */
+	public EKnockoutSource getEKnockoutSource()
+	{
+		return EKnockoutSource.getEnum(getAttribute(AttributeName.KNOCKOUTSOURCE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute KnockoutSource
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute KnockoutSource
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setKnockoutSource(EnumKnockoutSource enumVar)
 	{
 		setAttribute(AttributeName.KNOCKOUTSOURCE, enumVar == null ? null : enumVar.getName(), null);

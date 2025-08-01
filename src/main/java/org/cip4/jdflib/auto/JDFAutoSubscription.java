@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFObservationTarget;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -173,6 +174,20 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * Enumeration strings for ChannelMode
 	 */
 
+	public enum EChannelMode
+	{
+		FireAndForget, Reliable;
+
+		public static EChannelMode getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EChannelMode.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ChannelMode
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumChannelMode extends ValuedEnum
 	{
@@ -230,6 +245,20 @@ public abstract class JDFAutoSubscription extends JDFElement
 		public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
 		/**  */
 		public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
+	}
+
+	/**
+	 * Enumeration strings for RetryPolicy
+	 */
+
+	public enum ERetryPolicy
+	{
+		DiscardAtNextSignal, RetryForever;
+
+		public static ERetryPolicy getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ERetryPolicy.class, val, null);
+		}
 	}
 
 	/**
@@ -307,6 +336,31 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setChannelMode(EChannelMode enumVar)
+	{
+		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ChannelMode
+	 *
+	 * @return the value of the attribute
+	 */
+	public EChannelMode getEChannelMode()
+	{
+		return EChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ChannelMode
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setChannelMode(EnumChannelMode enumVar)
 	{
 		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
@@ -451,6 +505,31 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setRetryPolicy(ERetryPolicy enumVar)
+	{
+		setAttribute(AttributeName.RETRYPOLICY, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute RetryPolicy
+	 *
+	 * @return the value of the attribute
+	 */
+	public ERetryPolicy getERetryPolicy()
+	{
+		return ERetryPolicy.getEnum(getAttribute(AttributeName.RETRYPOLICY, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute RetryPolicy ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute RetryPolicy
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setRetryPolicy(EnumRetryPolicy enumVar)
 	{
 		setAttribute(AttributeName.RETRYPOLICY, enumVar == null ? null : enumVar.getName(), null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -159,6 +160,20 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	 * Enumeration strings for ScreeningType
 	 */
 
+	public enum EScreeningType
+	{
+		AM, FM, Adaptive, ErrorDiffusion, HybridAM_FM, HybridAMline_dot;
+
+		public static EScreeningType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EScreeningType.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for ScreeningType
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumScreeningType extends ValuedEnum
 	{
@@ -224,6 +239,20 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 		public static final EnumScreeningType HybridAM_FM = new EnumScreeningType("HybridAM-FM");
 		/**  */
 		public static final EnumScreeningType HybridAMline_dot = new EnumScreeningType("HybridAMline-dot");
+	}
+
+	/**
+	 * Enumeration strings for SourceObjects
+	 */
+
+	public enum ESourceObjects
+	{
+		All, ImagePhotographic, ImageScreenShot, LineArt, SmoothShades, Text;
+
+		public static ESourceObjects getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESourceObjects.class, val, null);
+		}
 	}
 
 	/**
@@ -452,6 +481,32 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setScreeningType(EScreeningType enumVar)
+	{
+		setAttribute(AttributeName.SCREENINGTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ScreeningType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EScreeningType getEScreeningType()
+	{
+		return EScreeningType.getEnum(getAttribute(AttributeName.SCREENINGTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ScreeningType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ScreeningType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setScreeningType(EnumScreeningType enumVar)
 	{
 		setAttribute(AttributeName.SCREENINGTYPE, enumVar == null ? null : enumVar.getName(), null);
@@ -523,9 +578,35 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setSourceObjects(Vector<? extends ValuedEnum> v)
+	public void setESourceObjects(List<ESourceObjects> v)
+	{
+		setEnumsAttribute(AttributeName.SOURCEOBJECTS, v, null);
+	}
+
+	/**
+	 * (9.2) get SourceObjects attribute SourceObjects
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<ESourceObjects> getEnumsSourceObjects()
+	{
+		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, ESourceObjects.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute SourceObjects
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setSourceObjects(List<EnumSourceObjects> v)
 	{
 		setEnumerationsAttribute(AttributeName.SOURCEOBJECTS, v, null);
 	}
@@ -535,7 +616,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getSourceObjects()
+	public Vector<EnumSourceObjects> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.getEnum(0), false);
 	}

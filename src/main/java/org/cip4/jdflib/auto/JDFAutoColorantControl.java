@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFDeviceNSpace;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -197,6 +198,20 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * Enumeration strings for InternalColorModel
 	 */
 
+	public enum EInternalColorModel
+	{
+		Basic, Enhanced, Explicit;
+
+		public static EInternalColorModel getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EInternalColorModel.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for InternalColorModel
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumInternalColorModel extends ValuedEnum
 	{
@@ -256,6 +271,20 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		public static final EnumInternalColorModel Enhanced = new EnumInternalColorModel("Enhanced");
 		/**  */
 		public static final EnumInternalColorModel Explicit = new EnumInternalColorModel("Explicit");
+	}
+
+	/**
+	 * Enumeration strings for MappingSelection
+	 */
+
+	public enum EMappingSelection
+	{
+		UsePDLValues, UseLocalPrinterValues, UseProcessColorValues;
+
+		public static EMappingSelection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMappingSelection.class, val, null);
+		}
 	}
 
 	/**
@@ -360,6 +389,32 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setInternalColorModel(EInternalColorModel enumVar)
+	{
+		setAttribute(AttributeName.INTERNALCOLORMODEL, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute InternalColorModel
+	 *
+	 * @return the value of the attribute
+	 */
+	public EInternalColorModel getEInternalColorModel()
+	{
+		return EInternalColorModel.getEnum(getAttribute(AttributeName.INTERNALCOLORMODEL, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute InternalColorModel
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute InternalColorModel
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setInternalColorModel(EnumInternalColorModel enumVar)
 	{
 		setAttribute(AttributeName.INTERNALCOLORMODEL, enumVar == null ? null : enumVar.getName(), null);
@@ -384,6 +439,32 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMappingSelection(EMappingSelection enumVar)
+	{
+		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MappingSelection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMappingSelection getEMappingSelection()
+	{
+		return EMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MappingSelection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMappingSelection(EnumMappingSelection enumVar)
 	{
 		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.getName(), null);

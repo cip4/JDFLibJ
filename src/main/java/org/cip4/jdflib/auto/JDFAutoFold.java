@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -148,6 +149,20 @@ public abstract class JDFAutoFold extends JDFElement
 	 * Enumeration strings for From
 	 */
 
+	public enum EFrom
+	{
+		Front, Left;
+
+		public static EFrom getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EFrom.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for From
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumFrom extends ValuedEnum
 	{
@@ -205,6 +220,20 @@ public abstract class JDFAutoFold extends JDFElement
 		public static final EnumFrom Front = new EnumFrom("Front");
 		/**  */
 		public static final EnumFrom Left = new EnumFrom("Left");
+	}
+
+	/**
+	 * Enumeration strings for To
+	 */
+
+	public enum ETo
+	{
+		Up, Down;
+
+		public static ETo getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETo.class, val, null);
+		}
 	}
 
 	/**
@@ -282,6 +311,31 @@ public abstract class JDFAutoFold extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setFrom(EFrom enumVar)
+	{
+		setAttribute(AttributeName.FROM, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute From
+	 *
+	 * @return the value of the attribute
+	 */
+	public EFrom getEFrom()
+	{
+		return EFrom.getEnum(getAttribute(AttributeName.FROM, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute From ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute From
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setFrom(EnumFrom enumVar)
 	{
 		setAttribute(AttributeName.FROM, enumVar == null ? null : enumVar.getName(), null);
@@ -329,6 +383,31 @@ public abstract class JDFAutoFold extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTo(ETo enumVar)
+	{
+		setAttribute(AttributeName.TO, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute To
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETo getETo()
+	{
+		return ETo.getEnum(getAttribute(AttributeName.TO, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute To ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute To
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTo(EnumTo enumVar)
 	{
 		setAttribute(AttributeName.TO, enumVar == null ? null : enumVar.getName(), null);

@@ -75,7 +75,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

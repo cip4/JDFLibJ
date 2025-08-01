@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -162,6 +163,20 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * Enumeration strings for TransferFunctionInfo
 	 */
 
+	public enum ETransferFunctionInfo
+	{
+		Preserve, Remove, Apply;
+
+		public static ETransferFunctionInfo getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ETransferFunctionInfo.class, val, ETransferFunctionInfo.Preserve);
+		}
+	}
+
+	/**
+	 * Enumeration strings for TransferFunctionInfo
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumTransferFunctionInfo extends ValuedEnum
 	{
@@ -221,6 +236,20 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		public static final EnumTransferFunctionInfo Remove = new EnumTransferFunctionInfo("Remove");
 		/**  */
 		public static final EnumTransferFunctionInfo Apply = new EnumTransferFunctionInfo("Apply");
+	}
+
+	/**
+	 * Enumeration strings for UCRandBGInfo
+	 */
+
+	public enum EUCRandBGInfo
+	{
+		Preserve, Remove;
+
+		public static EUCRandBGInfo getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EUCRandBGInfo.class, val, EUCRandBGInfo.Preserve);
+		}
 	}
 
 	/**
@@ -635,6 +664,32 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setTransferFunctionInfo(ETransferFunctionInfo enumVar)
+	{
+		setAttribute(AttributeName.TRANSFERFUNCTIONINFO, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute TransferFunctionInfo
+	 *
+	 * @return the value of the attribute
+	 */
+	public ETransferFunctionInfo getETransferFunctionInfo()
+	{
+		return ETransferFunctionInfo.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONINFO, null, "Preserve"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute TransferFunctionInfo
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute TransferFunctionInfo
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setTransferFunctionInfo(EnumTransferFunctionInfo enumVar)
 	{
 		setAttribute(AttributeName.TRANSFERFUNCTIONINFO, enumVar == null ? null : enumVar.getName(), null);
@@ -659,6 +714,32 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setUCRandBGInfo(EUCRandBGInfo enumVar)
+	{
+		setAttribute(AttributeName.UCRANDBGINFO, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute UCRandBGInfo
+	 *
+	 * @return the value of the attribute
+	 */
+	public EUCRandBGInfo getEUCRandBGInfo()
+	{
+		return EUCRandBGInfo.getEnum(getAttribute(AttributeName.UCRANDBGINFO, null, "Preserve"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute UCRandBGInfo
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute UCRandBGInfo
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setUCRandBGInfo(EnumUCRandBGInfo enumVar)
 	{
 		setAttribute(AttributeName.UCRANDBGINFO, enumVar == null ? null : enumVar.getName(), null);

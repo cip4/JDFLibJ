@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,6 +94,7 @@ import org.cip4.jdflib.resource.process.JDFDeviceNColor;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFPrintConditionColor;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -217,6 +218,20 @@ public abstract class JDFAutoColor extends JDFResource
 	 * Enumeration strings for MappingSelection
 	 */
 
+	public enum EMappingSelection
+	{
+		UsePDLValues, UseLocalPrinterValues, UseProcessColorValues;
+
+		public static EMappingSelection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMappingSelection.class, val, EMappingSelection.UsePDLValues);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MappingSelection
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMappingSelection extends ValuedEnum
 	{
@@ -276,6 +291,20 @@ public abstract class JDFAutoColor extends JDFResource
 		public static final EnumMappingSelection UseLocalPrinterValues = new EnumMappingSelection("UseLocalPrinterValues");
 		/**  */
 		public static final EnumMappingSelection UseProcessColorValues = new EnumMappingSelection("UseProcessColorValues");
+	}
+
+	/**
+	 * Enumeration strings for ColorType
+	 */
+
+	public enum EColorType
+	{
+		DieLine, Normal, Opaque, OpaqueIgnore, Primer, Transparent;
+
+		public static EColorType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EColorType.class, val, null);
+		}
 	}
 
 	/**
@@ -362,6 +391,32 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMappingSelection(EMappingSelection enumVar)
+	{
+		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MappingSelection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMappingSelection getEMappingSelection()
+	{
+		return EMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, "UsePDLValues"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MappingSelection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMappingSelection(EnumMappingSelection enumVar)
 	{
 		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.getName(), null);
@@ -603,6 +658,31 @@ public abstract class JDFAutoColor extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setColorType(EColorType enumVar)
+	{
+		setAttribute(AttributeName.COLORTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ColorType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EColorType getEColorType()
+	{
+		return EColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ColorType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setColorType(EnumColorType enumVar)
 	{
 		setAttribute(AttributeName.COLORTYPE, enumVar == null ? null : enumVar.getName(), null);

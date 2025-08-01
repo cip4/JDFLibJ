@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,7 @@ import org.cip4.jdflib.datatypes.JDFRGBColor;
 import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFSeparationTint;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -174,6 +175,20 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * Enumeration strings for PatchUsage
 	 */
 
+	public enum EPatchUsage
+	{
+		Color, Image, Technical, Ignore;
+
+		public static EPatchUsage getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPatchUsage.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for PatchUsage
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumPatchUsage extends ValuedEnum
 	{
@@ -235,6 +250,20 @@ public abstract class JDFAutoPatch extends JDFElement
 		public static final EnumPatchUsage Technical = new EnumPatchUsage("Technical");
 		/**  */
 		public static final EnumPatchUsage Ignore = new EnumPatchUsage("Ignore");
+	}
+
+	/**
+	 * Enumeration strings for SpotType
+	 */
+
+	public enum ESpotType
+	{
+		Emulated, Spot;
+
+		public static ESpotType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(ESpotType.class, val, null);
+		}
 	}
 
 	/**
@@ -409,6 +438,31 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setPatchUsage(EPatchUsage enumVar)
+	{
+		setAttribute(AttributeName.PATCHUSAGE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute PatchUsage
+	 *
+	 * @return the value of the attribute
+	 */
+	public EPatchUsage getEPatchUsage()
+	{
+		return EPatchUsage.getEnum(getAttribute(AttributeName.PATCHUSAGE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute PatchUsage ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute PatchUsage
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setPatchUsage(EnumPatchUsage enumVar)
 	{
 		setAttribute(AttributeName.PATCHUSAGE, enumVar == null ? null : enumVar.getName(), null);
@@ -507,6 +561,31 @@ public abstract class JDFAutoPatch extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setSpotType(ESpotType enumVar)
+	{
+		setAttribute(AttributeName.SPOTTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute SpotType
+	 *
+	 * @return the value of the attribute
+	 */
+	public ESpotType getESpotType()
+	{
+		return ESpotType.getEnum(getAttribute(AttributeName.SPOTTYPE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute SpotType ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute SpotType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setSpotType(EnumSpotType enumVar)
 	{
 		setAttribute(AttributeName.SPOTTYPE, enumVar == null ? null : enumVar.getName(), null);

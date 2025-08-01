@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -140,6 +141,20 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	protected JDFAutoFolderProduction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for ProductionType
+	 */
+
+	public enum EProductionType
+	{
+		Collect, NonCollect;
+
+		public static EProductionType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EProductionType.class, val, EProductionType.NonCollect);
+		}
 	}
 
 	/**
@@ -242,6 +257,32 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setProductionType(EProductionType enumVar)
+	{
+		setAttribute(AttributeName.PRODUCTIONTYPE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute ProductionType
+	 *
+	 * @return the value of the attribute
+	 */
+	public EProductionType getEProductionType()
+	{
+		return EProductionType.getEnum(getAttribute(AttributeName.PRODUCTIONTYPE, null, "NonCollect"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute ProductionType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute ProductionType
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setProductionType(EnumProductionType enumVar)
 	{
 		setAttribute(AttributeName.PRODUCTIONTYPE, enumVar == null ? null : enumVar.getName(), null);

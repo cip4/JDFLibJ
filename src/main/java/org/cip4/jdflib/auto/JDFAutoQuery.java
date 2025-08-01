@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -165,6 +166,20 @@ public abstract class JDFAutoQuery extends JDFMessage
 	protected JDFAutoQuery(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * Enumeration strings for AcknowledgeType
+	 */
+
+	public enum EAcknowledgeType
+	{
+		Received, Applied, Completed;
+
+		public static EAcknowledgeType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EAcknowledgeType.class, val, EAcknowledgeType.Completed);
+		}
 	}
 
 	/**
@@ -315,9 +330,35 @@ public abstract class JDFAutoQuery extends JDFMessage
 	/**
 	 * (5.2) set attribute AcknowledgeType
 	 *
-	 * @param v vector of the enumeration values
+	 * @param v List of the enumeration values
 	 */
-	public void setAcknowledgeType(Vector<? extends ValuedEnum> v)
+	public void setEAcknowledgeType(List<EAcknowledgeType> v)
+	{
+		setEnumsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
+	}
+
+	/**
+	 * (9.2) get AcknowledgeType attribute AcknowledgeType
+	 *
+	 * @return Vector of the enumerations
+	 */
+	public List<EAcknowledgeType> getEnumsAcknowledgeType()
+	{
+		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EAcknowledgeType.class);
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeType
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5.2) set attribute AcknowledgeType
+	 *
+	 * @param v List of the enumeration values
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
+	public void setAcknowledgeType(List<EnumAcknowledgeType> v)
 	{
 		setEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, v, null);
 	}
@@ -327,7 +368,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 *
 	 * @return Vector of the enumerations
 	 */
-	public Vector<? extends ValuedEnum> getAcknowledgeType()
+	public Vector<EnumAcknowledgeType> getAcknowledgeType()
 	{
 		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
 	}

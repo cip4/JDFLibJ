@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRuleLength;
 import org.cip4.jdflib.resource.process.JDFStation;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -197,6 +198,20 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * Enumeration strings for DieSide
 	 */
 
+	public enum EDieSide
+	{
+		Up, Down;
+
+		public static EDieSide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDieSide.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for DieSide
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDieSide extends ValuedEnum
 	{
@@ -254,6 +269,20 @@ public abstract class JDFAutoDieLayout extends JDFResource
 		public static final EnumDieSide Up = new EnumDieSide("Up");
 		/**  */
 		public static final EnumDieSide Down = new EnumDieSide("Down");
+	}
+
+	/**
+	 * Enumeration strings for MediaSide
+	 */
+
+	public enum EMediaSide
+	{
+		Front, Back, Both;
+
+		public static EMediaSide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMediaSide.class, val, null);
+		}
 	}
 
 	/**
@@ -358,6 +387,31 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDieSide(EDieSide enumVar)
+	{
+		setAttribute(AttributeName.DIESIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DieSide
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDieSide getEDieSide()
+	{
+		return EDieSide.getEnum(getAttribute(AttributeName.DIESIDE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DieSide ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DieSide
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDieSide(EnumDieSide enumVar)
 	{
 		setAttribute(AttributeName.DIESIDE, enumVar == null ? null : enumVar.getName(), null);
@@ -381,6 +435,31 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMediaSide(EMediaSide enumVar)
+	{
+		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MediaSide
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMediaSide getEMediaSide()
+	{
+		return EMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaSide ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MediaSide
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMediaSide(EnumMediaSide enumVar)
 	{
 		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.getName(), null);

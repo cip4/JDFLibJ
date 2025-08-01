@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.node.JDFActivity;
+import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.resource.JDFGangSource;
 import org.cip4.jdflib.resource.JDFModuleStatus;
@@ -95,6 +96,7 @@ import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -200,6 +202,20 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * Enumeration strings for DeadLine
 	 */
 
+	public enum EDeadLine
+	{
+		InTime, Warning, Late;
+
+		public static EDeadLine getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EDeadLine.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for DeadLine
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumDeadLine extends ValuedEnum
 	{
@@ -273,6 +289,31 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setActivation(EActivation enumVar)
+	{
+		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute Activation
+	 *
+	 * @return the value of the attribute
+	 */
+	public EActivation getEActivation()
+	{
+		return EActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute Activation
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setActivation(EnumActivation enumVar)
 	{
 		setAttribute(AttributeName.ACTIVATION, enumVar == null ? null : enumVar.getName(), null);
@@ -319,6 +360,31 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setDeadLine(EDeadLine enumVar)
+	{
+		setAttribute(AttributeName.DEADLINE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute DeadLine
+	 *
+	 * @return the value of the attribute
+	 */
+	public EDeadLine getEDeadLine()
+	{
+		return EDeadLine.getEnum(getAttribute(AttributeName.DEADLINE, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute DeadLine ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute DeadLine
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setDeadLine(EnumDeadLine enumVar)
 	{
 		setAttribute(AttributeName.DEADLINE, enumVar == null ? null : enumVar.getName(), null);

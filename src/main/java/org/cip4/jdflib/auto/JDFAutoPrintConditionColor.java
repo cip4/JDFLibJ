@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.process.JDFDeviceNColor;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
+import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
  *****************************************************************************
@@ -183,6 +184,20 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 * Enumeration strings for MappingSelection
 	 */
 
+	public enum EMappingSelection
+	{
+		UsePDLValues, UseLocalPrinterValues, UseProcessColorValues;
+
+		public static EMappingSelection getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMappingSelection.class, val, null);
+		}
+	}
+
+	/**
+	 * Enumeration strings for MappingSelection
+	 */
+
 	@SuppressWarnings("rawtypes")
 	public static class EnumMappingSelection extends ValuedEnum
 	{
@@ -242,6 +257,20 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 		public static final EnumMappingSelection UseLocalPrinterValues = new EnumMappingSelection("UseLocalPrinterValues");
 		/**  */
 		public static final EnumMappingSelection UseProcessColorValues = new EnumMappingSelection("UseProcessColorValues");
+	}
+
+	/**
+	 * Enumeration strings for MediaSide
+	 */
+
+	public enum EMediaSide
+	{
+		Front, Back, Both;
+
+		public static EMediaSide getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EMediaSide.class, val, EMediaSide.Both);
+		}
 	}
 
 	/**
@@ -490,6 +519,32 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMappingSelection(EMappingSelection enumVar)
+	{
+		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MappingSelection
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMappingSelection getEMappingSelection()
+	{
+		return EMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MappingSelection
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMappingSelection(EnumMappingSelection enumVar)
 	{
 		setAttribute(AttributeName.MAPPINGSELECTION, enumVar == null ? null : enumVar.getName(), null);
@@ -513,6 +568,31 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	public void setMediaSide(EMediaSide enumVar)
+	{
+		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.name(), null);
+	}
+
+	/**
+	 * (9) get attribute MediaSide
+	 *
+	 * @return the value of the attribute
+	 */
+	public EMediaSide getEMediaSide()
+	{
+		return EMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, "Both"));
+	}
+
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute MediaSide ---------------------------------------------------------------------
+	 */
+	/**
+	 * (5) set attribute MediaSide
+	 *
+	 * @param enumVar the enumVar to set the attribute to
+	 * @deprecated use java.lang.enum
+	 */
+	@Deprecated
 	public void setMediaSide(EnumMediaSide enumVar)
 	{
 		setAttribute(AttributeName.MEDIASIDE, enumVar == null ? null : enumVar.getName(), null);
