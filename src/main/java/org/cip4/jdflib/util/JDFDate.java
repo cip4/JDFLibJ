@@ -894,7 +894,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public String getTimeZoneISO()
 	{
-		final String timePattern = "ZZ";
+		final String timePattern = "ZZZ";
 		long t = lTimeInMillis;
 		if (t < 5000)
 			t = System.currentTimeMillis();
