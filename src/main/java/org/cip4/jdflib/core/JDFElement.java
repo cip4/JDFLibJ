@@ -1605,9 +1605,9 @@ public class JDFElement extends KElement
 	{
 		Waiting, TestRunInProgress, Ready, FailedTestRun, Setup, InProgress, Cleanup, Spawned, Suspended, Stopped, Completed, Aborted, Part, Pool;
 
-		public static EVersion getEnum(final String name)
+		public static ENodeStatus getEnum(final String name)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(EVersion.class, name);
+			return EnumUtil.getJavaEnumIgnoreCase(ENodeStatus.class, name);
 		}
 	}
 
