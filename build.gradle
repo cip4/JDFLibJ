@@ -133,7 +133,7 @@ dependencies {
     api ('xerces:xercesImpl:2.12.2'){
 	// exclude group: 'xml-apis'
 	}
- 	api 'com.sun.mail:jakarta.mail:2.0.1'
+ 	api 'com.sun.mail:jakarta.mail:2.0.2'
 
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
