@@ -322,7 +322,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * (5) set attribute SheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetLay(ESheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -334,7 +334,9 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * (9) get attribute SheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetLay getESheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));

@@ -388,7 +388,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 * (5) set attribute LaminatingMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setLaminatingMethod(ELaminatingMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLaminatingMethod(EnumLaminatingMethod enumVar)
@@ -400,7 +400,9 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 	 * (9) get attribute LaminatingMethod
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ELaminatingMethod getELaminatingMethod() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumLaminatingMethod getLaminatingMethod()
 	{
 		return EnumLaminatingMethod.getEnum(getAttribute(AttributeName.LAMINATINGMETHOD, null, null));

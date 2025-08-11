@@ -331,7 +331,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * (5) set attribute KnockoutSource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setKnockoutSource(EKnockoutSource) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setKnockoutSource(EnumKnockoutSource enumVar)
@@ -343,7 +343,9 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * (9) get attribute KnockoutSource
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EKnockoutSource getEKnockoutSource() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumKnockoutSource getKnockoutSource()
 	{
 		return EnumKnockoutSource.getEnum(getAttribute(AttributeName.KNOCKOUTSOURCE, null, null));

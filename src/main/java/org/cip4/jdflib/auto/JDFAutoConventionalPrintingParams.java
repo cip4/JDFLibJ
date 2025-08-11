@@ -986,7 +986,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute Drying
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDrying(EDrying) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDrying(EnumDrying enumVar)
@@ -998,7 +998,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute Drying
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDrying getEDrying() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDrying getDrying()
 	{
 		return EnumDrying.getEnum(getAttribute(AttributeName.DRYING, null, null));
@@ -1036,7 +1038,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute FeedSheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFeedSheetLay(EFeedSheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFeedSheetLay(EnumFeedSheetLay enumVar)
@@ -1048,7 +1050,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute FeedSheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFeedSheetLay getEFeedSheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFeedSheetLay getFeedSheetLay()
 	{
 		return EnumFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
@@ -1086,7 +1090,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute FirstSurface
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFirstSurface(EFirstSurface) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFirstSurface(EnumFirstSurface enumVar)
@@ -1098,7 +1102,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute FirstSurface
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFirstSurface getEFirstSurface() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFirstSurface getFirstSurface()
 	{
 		return EnumFirstSurface.getEnum(getAttribute(AttributeName.FIRSTSURFACE, null, null));
@@ -1136,7 +1142,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute FountainSolution
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFountainSolution(EFountainSolution) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFountainSolution(EnumFountainSolution enumVar)
@@ -1148,7 +1154,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute FountainSolution
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFountainSolution getEFountainSolution() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFountainSolution getFountainSolution()
 	{
 		return EnumFountainSolution.getEnum(getAttribute(AttributeName.FOUNTAINSOLUTION, null, null));
@@ -1236,7 +1244,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute ModuleDrying
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setModuleDrying(EModuleDrying) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setModuleDrying(EnumModuleDrying enumVar)
@@ -1248,7 +1256,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute ModuleDrying
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EModuleDrying getEModuleDrying() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumModuleDrying getModuleDrying()
 	{
 		return EnumModuleDrying.getEnum(getAttribute(AttributeName.MODULEDRYING, null, null));
@@ -1454,7 +1464,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute PrintingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPrintingType(EPrintingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintingType(EnumPrintingType enumVar)
@@ -1466,7 +1476,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute PrintingType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPrintingType getEPrintingType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPrintingType getPrintingType()
 	{
 		return EnumPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
@@ -1504,7 +1516,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute PrintingTechnology
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPrintingTechnology(EPrintingTechnology) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintingTechnology(EnumPrintingTechnology enumVar)
@@ -1516,7 +1528,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute PrintingTechnology
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPrintingTechnology getEPrintingTechnology() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPrintingTechnology getPrintingTechnology()
 	{
 		return EnumPrintingTechnology.getEnum(getAttribute(AttributeName.PRINTINGTECHNOLOGY, null, null));
@@ -1552,7 +1566,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute SheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetLay(ESheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -1564,7 +1578,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute SheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetLay getESheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
@@ -1623,7 +1639,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (5) set attribute WorkStyle
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setWorkStyle(EWorkStyle) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWorkStyle(EnumWorkStyle enumVar)
@@ -1635,7 +1651,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute WorkStyle
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EWorkStyle getEWorkStyle() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumWorkStyle getWorkStyle()
 	{
 		return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));

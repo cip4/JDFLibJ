@@ -627,7 +627,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * (5) set attribute ImageTrapPlacement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setImageTrapPlacement(EImageTrapPlacement) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setImageTrapPlacement(EnumImageTrapPlacement enumVar)
@@ -639,7 +639,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * (9) get attribute ImageTrapPlacement
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EImageTrapPlacement getEImageTrapPlacement() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumImageTrapPlacement getImageTrapPlacement()
 	{
 		return EnumImageTrapPlacement.getEnum(getAttribute(AttributeName.IMAGETRAPPLACEMENT, null, null));

@@ -282,7 +282,7 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 * (5) set attribute Policy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPolicy(EPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPolicy(EnumPolicy enumVar)
@@ -294,7 +294,9 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 * (9) get attribute Policy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPolicy getEPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPolicy getPolicy()
 	{
 		return EnumPolicy.getEnum(getAttribute(AttributeName.POLICY, null, null));

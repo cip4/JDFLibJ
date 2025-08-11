@@ -387,7 +387,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * (5) set attribute ImageReplacementStrategy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setImageReplacementStrategy(EImageReplacementStrategy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setImageReplacementStrategy(EnumImageReplacementStrategy enumVar)
@@ -399,7 +399,9 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * (9) get attribute ImageReplacementStrategy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EImageReplacementStrategy getEImageReplacementStrategy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumImageReplacementStrategy getImageReplacementStrategy()
 	{
 		return EnumImageReplacementStrategy.getEnum(getAttribute(AttributeName.IMAGEREPLACEMENTSTRATEGY, null, null));
@@ -509,7 +511,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * (5) set attribute ResolutionReductionStrategy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setResolutionReductionStrategy(EResolutionReductionStrategy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResolutionReductionStrategy(EnumResolutionReductionStrategy enumVar)
@@ -521,7 +523,9 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * (9) get attribute ResolutionReductionStrategy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EResolutionReductionStrategy getEResolutionReductionStrategy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumResolutionReductionStrategy getResolutionReductionStrategy()
 	{
 		return EnumResolutionReductionStrategy.getEnum(getAttribute(AttributeName.RESOLUTIONREDUCTIONSTRATEGY, null, null));

@@ -332,7 +332,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPosition(EPosition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPosition(EnumPosition enumVar)
@@ -344,7 +344,9 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * (9) get attribute Position
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPosition getEPosition() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPosition getPosition()
 	{
 		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));

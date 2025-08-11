@@ -277,7 +277,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 * (5) set attribute DBSchemaType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDBSchemaType(EDBSchemaType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDBSchemaType(EnumDBSchemaType enumVar)
@@ -289,7 +289,9 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 * (9) get attribute DBSchemaType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDBSchemaType getEDBSchemaType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDBSchemaType getDBSchemaType()
 	{
 		return EnumDBSchemaType.getEnum(getAttribute(AttributeName.DBSCHEMATYPE, null, null));

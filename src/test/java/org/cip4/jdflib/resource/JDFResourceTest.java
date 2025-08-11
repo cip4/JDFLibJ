@@ -93,6 +93,9 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFResource.ELotControl;
+import org.cip4.jdflib.resource.JDFResource.EPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -458,6 +461,42 @@ class JDFResourceTest extends JDFTestCaseBase
 				n++;
 		}
 		assertEquals(5, n);
+	}
+
+	/**
+	 * test the the generalized partition matching
+	 */
+	@Test
+	void testLotControl()
+	{
+		for (final ELotControl k : ELotControl.values())
+		{
+			assertEquals(k, ELotControl.getEnum(k.name()));
+		}
+	}
+
+	/**
+	 * test the the generalized partition matching
+	 */
+	@Test
+	void testPartUsage()
+	{
+		for (final EPartUsage k : EPartUsage.values())
+		{
+			assertEquals(k, EPartUsage.getEnum(k.name()));
+		}
+	}
+
+	/**
+	 * test the the generalized partition matching
+	 */
+	@Test
+	void testPartIDKey()
+	{
+		for (final EPartIDKey k : EPartIDKey.values())
+		{
+			assertEquals(k, EPartIDKey.getEnum(k.name()));
+		}
 	}
 
 	/**

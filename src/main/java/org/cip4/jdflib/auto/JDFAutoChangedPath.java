@@ -284,7 +284,7 @@ public abstract class JDFAutoChangedPath extends JDFElement
 	 * (5) set attribute Modification
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setModification(EModification) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setModification(EnumModification enumVar)
@@ -296,7 +296,9 @@ public abstract class JDFAutoChangedPath extends JDFElement
 	 * (9) get attribute Modification
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EModification getEModification() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumModification getModification()
 	{
 		return EnumModification.getEnum(getAttribute(AttributeName.MODIFICATION, null, null));

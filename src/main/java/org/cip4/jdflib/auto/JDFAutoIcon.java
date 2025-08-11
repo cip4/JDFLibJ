@@ -317,7 +317,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	/**
 	 * (9.2) get IconUsage attribute IconUsage
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EIconUsage> getEnumsIconUsage()
 	{
@@ -331,7 +331,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	 * (5.2) set attribute IconUsage
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEIconUsage(List<EIconUsage>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIconUsage(List<EnumIconUsage> v)
@@ -343,7 +343,9 @@ public abstract class JDFAutoIcon extends JDFElement
 	 * (9.2) get IconUsage attribute IconUsage
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EIconUsage> getEnumsIconUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumIconUsage> getIconUsage()
 	{
 		return getEnumerationsAttribute(AttributeName.ICONUSAGE, null, EnumIconUsage.getEnum(0), false);

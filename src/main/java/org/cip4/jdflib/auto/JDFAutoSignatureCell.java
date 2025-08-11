@@ -449,7 +449,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * (5) set attribute BottleAxis
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBottleAxis(EBottleAxis) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBottleAxis(EnumBottleAxis enumVar)
@@ -461,7 +461,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * (9) get attribute BottleAxis
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBottleAxis getEBottleAxis() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBottleAxis getBottleAxis()
 	{
 		return EnumBottleAxis.getEnum(getAttribute(AttributeName.BOTTLEAXIS, null, null));
@@ -598,7 +600,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * (5) set attribute Orientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOrientation(EOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
@@ -610,7 +612,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * (9) get attribute Orientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOrientation getEOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, "Up"));

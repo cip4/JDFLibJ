@@ -524,7 +524,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * (5) set attribute Anchor
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAnchor(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
@@ -536,7 +536,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * (9) get attribute Anchor
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAnchor getEAnchor() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
@@ -624,7 +626,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * (5) set attribute PositionPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPositionPolicy(EPositionPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPositionPolicy(EnumPositionPolicy enumVar)
@@ -636,7 +638,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * (9) get attribute PositionPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPositionPolicy getEPositionPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPositionPolicy getPositionPolicy()
 	{
 		return EnumPositionPolicy.getEnum(getAttribute(AttributeName.POSITIONPOLICY, null, null));
@@ -700,7 +704,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * (5) set attribute RotationPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setRotationPolicy(ERotationPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRotationPolicy(EnumRotationPolicy enumVar)
@@ -712,7 +716,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * (9) get attribute RotationPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ERotationPolicy getERotationPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumRotationPolicy getRotationPolicy()
 	{
 		return EnumRotationPolicy.getEnum(getAttribute(AttributeName.ROTATIONPOLICY, null, null));
@@ -773,7 +779,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * (5) set attribute SizePolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSizePolicy(ESizePolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSizePolicy(EnumSizePolicy enumVar)
@@ -785,7 +791,9 @@ public abstract class JDFAutoPositionObj extends JDFElement
 	 * (9) get attribute SizePolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESizePolicy getESizePolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSizePolicy getSizePolicy()
 	{
 		return EnumSizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));

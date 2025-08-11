@@ -296,7 +296,7 @@ public abstract class JDFAutoError extends JDFElement
 	 * (5) set attribute Resend
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setResend(EResend) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResend(EnumResend enumVar)
@@ -308,7 +308,9 @@ public abstract class JDFAutoError extends JDFElement
 	 * (9) get attribute Resend
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EResend getEResend() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumResend getResend()
 	{
 		return EnumResend.getEnum(getAttribute(AttributeName.RESEND, null, null));

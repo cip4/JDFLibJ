@@ -384,7 +384,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 * (5) set attribute FinishedPageOrientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFinishedPageOrientation(EFinishedPageOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
@@ -396,7 +396,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 * (9) get attribute FinishedPageOrientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFinishedPageOrientation getEFinishedPageOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFinishedPageOrientation getFinishedPageOrientation()
 	{
 		return EnumFinishedPageOrientation.getEnum(getAttribute(AttributeName.FINISHEDPAGEORIENTATION, null, "Portrait"));
@@ -530,7 +532,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 * (5) set attribute Sides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSides(ESides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSides(EnumSides enumVar)
@@ -542,7 +544,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 * (9) get attribute Sides
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESides getESides() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSided"));

@@ -305,7 +305,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	 * (5) set attribute UserDisplay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setUserDisplay(EUserDisplay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUserDisplay(EnumUserDisplay enumVar)
@@ -317,7 +317,9 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	 * (9) get attribute UserDisplay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EUserDisplay getEUserDisplay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumUserDisplay getUserDisplay()
 	{
 		return EnumUserDisplay.getEnum(getAttribute(AttributeName.USERDISPLAY, null, null));

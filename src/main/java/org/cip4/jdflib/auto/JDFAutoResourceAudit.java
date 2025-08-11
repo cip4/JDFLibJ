@@ -280,7 +280,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setNodeStatus(EVersion enumVar)
+	public void setNodeStatus(ENodeStatus enumVar)
 	{
 		setAttribute(AttributeName.NODESTATUS, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -290,9 +290,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 *
 	 * @return the value of the attribute
 	 */
-	public EVersion getENodeStatus()
+	public ENodeStatus getENodeStatus()
 	{
-		return EVersion.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
+		return ENodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
 	}
 
 	/*
@@ -302,7 +302,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * (5) set attribute NodeStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setNodeStatus(ENodeStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setNodeStatus(EnumNodeStatus enumVar)
@@ -314,7 +314,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * (9) get attribute NodeStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ENodeStatus getENodeStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumNodeStatus getNodeStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.NODESTATUS, null, null));
@@ -350,7 +352,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * (5) set attribute Reason
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setReason(EReason) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setReason(EnumReason enumVar)
@@ -362,7 +364,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * (9) get attribute Reason
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EReason getEReason() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumReason getReason()
 	{
 		return EnumReason.getEnum(getAttribute(AttributeName.REASON, null, "ProcessResult"));

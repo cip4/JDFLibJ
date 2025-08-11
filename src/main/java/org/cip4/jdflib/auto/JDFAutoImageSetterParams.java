@@ -643,7 +643,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (5) set attribute MirrorAround
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMirrorAround(EMirrorAround) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMirrorAround(EnumMirrorAround enumVar)
@@ -655,7 +655,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute MirrorAround
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMirrorAround getEMirrorAround() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMirrorAround getMirrorAround()
 	{
 		return EnumMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
@@ -691,7 +693,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (5) set attribute Polarity
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPolarity(EPolarity) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPolarity(EnumPolarity enumVar)
@@ -703,7 +705,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute Polarity
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPolarity getEPolarity() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPolarity getPolarity()
 	{
 		return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));
@@ -739,7 +743,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (5) set attribute Sides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSides(ESides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSides(EnumSides enumVar)
@@ -751,7 +755,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute Sides
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESides getESides() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
@@ -838,7 +844,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (5) set attribute CenterAcross
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCenterAcross(ECenterAcross) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCenterAcross(EnumCenterAcross enumVar)
@@ -850,7 +856,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute CenterAcross
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECenterAcross getECenterAcross() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCenterAcross getCenterAcross()
 	{
 		return EnumCenterAcross.getEnum(getAttribute(AttributeName.CENTERACROSS, null, null));
@@ -1124,7 +1132,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (5) set attribute SourceWorkStyle
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSourceWorkStyle(ESourceWorkStyle) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
@@ -1136,7 +1144,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute SourceWorkStyle
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESourceWorkStyle getESourceWorkStyle() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSourceWorkStyle getSourceWorkStyle()
 	{
 		return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));

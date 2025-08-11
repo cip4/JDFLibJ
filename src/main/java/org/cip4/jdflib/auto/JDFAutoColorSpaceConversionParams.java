@@ -297,7 +297,7 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 * (5) set attribute ICCProfileUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setICCProfileUsage(EICCProfileUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setICCProfileUsage(EnumICCProfileUsage enumVar)
@@ -309,7 +309,9 @@ public abstract class JDFAutoColorSpaceConversionParams extends JDFResource
 	 * (9) get attribute ICCProfileUsage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EICCProfileUsage getEICCProfileUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumICCProfileUsage getICCProfileUsage()
 	{
 		return EnumICCProfileUsage.getEnum(getAttribute(AttributeName.ICCPROFILEUSAGE, null, "UsePDL"));

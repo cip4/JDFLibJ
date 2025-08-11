@@ -247,7 +247,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setNodeStatus(EVersion enumVar)
+	public void setNodeStatus(ENodeStatus enumVar)
 	{
 		setAttribute(AttributeName.ENDSTATUS, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -257,9 +257,9 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EVersion getENodeStatus()
+	public ENodeStatus getENodeStatus()
 	{
-		return EVersion.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
+		return ENodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
 	}
 
 	/*
@@ -269,7 +269,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 * (5) set attribute EndStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setNodeStatus(ENodeStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setNodeStatus(EnumNodeStatus enumVar)
@@ -281,7 +281,9 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 * (9) get attribute EndStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ENodeStatus getENodeStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumNodeStatus getNodeStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));

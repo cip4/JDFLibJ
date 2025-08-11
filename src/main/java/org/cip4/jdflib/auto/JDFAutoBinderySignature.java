@@ -824,7 +824,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (5) set attribute BinderySignatureType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBinderySignatureType(EBinderySignatureType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBinderySignatureType(EnumBinderySignatureType enumVar)
@@ -836,7 +836,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (9) get attribute BinderySignatureType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBinderySignatureType getEBinderySignatureType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBinderySignatureType getBinderySignatureType()
 	{
 		return EnumBinderySignatureType.getEnum(getAttribute(AttributeName.BINDERYSIGNATURETYPE, null, "Fold"));
@@ -872,7 +874,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (5) set attribute BindingEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBindingEdge(EBindingEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBindingEdge(EnumBindingEdge enumVar)
@@ -884,7 +886,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (9) get attribute BindingEdge
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBindingEdge getEBindingEdge() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBindingEdge getBindingEdge()
 	{
 		return EnumBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, "Left"));
@@ -920,7 +924,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (5) set attribute JogEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setJogEdge(EJogEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setJogEdge(EnumJogEdge enumVar)
@@ -932,7 +936,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (9) get attribute JogEdge
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EJogEdge getEJogEdge() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumJogEdge getJogEdge()
 	{
 		return EnumJogEdge.getEnum(getAttribute(AttributeName.JOGEDGE, null, "Top"));
@@ -1019,7 +1025,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (5) set attribute BindingOrientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBindingOrientation(EBindingOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBindingOrientation(EnumBindingOrientation enumVar)
@@ -1031,7 +1037,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (9) get attribute BindingOrientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBindingOrientation getEBindingOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBindingOrientation getBindingOrientation()
 	{
 		return EnumBindingOrientation.getEnum(getAttribute(AttributeName.BINDINGORIENTATION, null, null));
@@ -1159,7 +1167,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (5) set attribute Bottling
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBottling(EBottling) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBottling(EnumBottling enumVar)
@@ -1171,7 +1179,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (9) get attribute Bottling
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBottling getEBottling() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBottling getBottling()
 	{
 		return EnumBottling.getEnum(getAttribute(AttributeName.BOTTLING, null, null));
@@ -1230,7 +1240,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (5) set attribute FoldLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFoldLay(EFoldLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFoldLay(EnumFoldLay enumVar)
@@ -1242,7 +1252,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (9) get attribute FoldLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFoldLay getEFoldLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFoldLay getFoldLay()
 	{
 		return EnumFoldLay.getEnum(getAttribute(AttributeName.FOLDLAY, null, null));
@@ -1302,7 +1314,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (5) set attribute SpreadType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSpreadType(ESpreadType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSpreadType(EnumSpreadType enumVar)
@@ -1314,7 +1326,9 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 	 * (9) get attribute SpreadType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESpreadType getESpreadType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSpreadType getSpreadType()
 	{
 		return EnumSpreadType.getEnum(getAttribute(AttributeName.SPREADTYPE, null, null));

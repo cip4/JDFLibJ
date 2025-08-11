@@ -453,7 +453,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * (5) set attribute RepeatPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setRepeatPolicy(ERepeatPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRepeatPolicy(EnumRepeatPolicy enumVar)
@@ -465,7 +465,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * (9) get attribute RepeatPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ERepeatPolicy getERepeatPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumRepeatPolicy getRepeatPolicy()
 	{
 		return EnumRepeatPolicy.getEnum(getAttribute(AttributeName.REPEATPOLICY, null, null));

@@ -674,7 +674,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (5) set attribute FinishingOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFinishingOrder(EFinishingOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFinishingOrder(EnumFinishingOrder enumVar)
@@ -686,7 +686,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (9) get attribute FinishingOrder
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFinishingOrder getEFinishingOrder() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFinishingOrder getFinishingOrder()
 	{
 		return EnumFinishingOrder.getEnum(getAttribute(AttributeName.FINISHINGORDER, null, "GatherFold"));
@@ -724,7 +726,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (5) set attribute FoldCatalogOrientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFoldCatalogOrientation(EFoldCatalogOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFoldCatalogOrientation(EnumFoldCatalogOrientation enumVar)
@@ -736,7 +738,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (9) get attribute FoldCatalogOrientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFoldCatalogOrientation getEFoldCatalogOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFoldCatalogOrientation getFoldCatalogOrientation()
 	{
 		return EnumFoldCatalogOrientation.getEnum(getAttribute(AttributeName.FOLDCATALOGORIENTATION, null, "Rotate0"));
@@ -819,7 +823,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (5) set attribute Rotate
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setRotate(ERotate) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRotate(EnumRotate enumVar)
@@ -831,7 +835,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (9) get attribute Rotate
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ERotate getERotate() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumRotate getRotate()
 	{
 		return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));
@@ -867,7 +873,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (5) set attribute Sides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSides(ESides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSides(EnumSides enumVar)
@@ -879,7 +885,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (9) get attribute Sides
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESides getESides() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, "OneSidedFront"));
@@ -915,7 +923,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (5) set attribute BindingEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBindingEdge(EBindingEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBindingEdge(EnumBindingEdge enumVar)
@@ -927,7 +935,9 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 	 * (9) get attribute BindingEdge
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBindingEdge getEBindingEdge() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBindingEdge getBindingEdge()
 	{
 		return EnumBindingEdge.getEnum(getAttribute(AttributeName.BINDINGEDGE, null, null));

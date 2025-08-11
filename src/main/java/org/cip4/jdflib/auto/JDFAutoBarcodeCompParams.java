@@ -256,7 +256,7 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 	 * (5) set attribute CompensationProcess
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCompensationProcess(ECompensationProcess) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCompensationProcess(EnumCompensationProcess enumVar)
@@ -268,7 +268,9 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 	 * (9) get attribute CompensationProcess
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECompensationProcess getECompensationProcess() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCompensationProcess getCompensationProcess()
 	{
 		return EnumCompensationProcess.getEnum(getAttribute(AttributeName.COMPENSATIONPROCESS, null, null));

@@ -328,7 +328,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * (5) set attribute BindingOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBindingOrder(EBindingOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBindingOrder(EnumBindingOrder enumVar)
@@ -340,7 +340,9 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * (9) get attribute BindingOrder
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBindingOrder getEBindingOrder() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBindingOrder getBindingOrder()
 	{
 		return EnumBindingOrder.getEnum(getAttribute(AttributeName.BINDINGORDER, null, "Gathering"));

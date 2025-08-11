@@ -515,7 +515,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	/**
 	 * (9.2) get Classes attribute Classes
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<JDFResource.EResourceClass> getEnumsClasses()
 	{
@@ -529,7 +529,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (5.2) set attribute Classes
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEClasses(List<JDFResource.EResourceClass>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setClasses(List<JDFResource.EnumResourceClass> v)
@@ -541,7 +541,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9.2) get Classes attribute Classes
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<JDFResource.EResourceClass> getEnumsClasses() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<JDFResource.EnumResourceClass> getClasses()
 	{
 		return getEnumerationsAttribute(AttributeName.CLASSES, null, JDFResource.EnumResourceClass.getEnum(0), false);
@@ -577,7 +579,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (5) set attribute Context
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setContext(EContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setContext(EnumContext enumVar)
@@ -589,7 +591,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute Context
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EContext getEContext() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumContext getContext()
 	{
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, null));
@@ -717,7 +721,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (5) set attribute LotDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setLotDetails(ELotDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLotDetails(EnumLotDetails enumVar)
@@ -729,7 +733,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute LotDetails
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ELotDetails getELotDetails() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumLotDetails getLotDetails()
 	{
 		return EnumLotDetails.getEnum(getAttribute(AttributeName.LOTDETAILS, null, "Brief"));
@@ -861,7 +867,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (5) set attribute ResourceDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setResourceDetails(EResourceDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResourceDetails(EnumResourceDetails enumVar)
@@ -873,7 +879,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute ResourceDetails
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EResourceDetails getEResourceDetails() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumResourceDetails getResourceDetails()
 	{
 		return EnumResourceDetails.getEnum(getAttribute(AttributeName.RESOURCEDETAILS, null, "Full"));
@@ -959,7 +967,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (5) set attribute Scope
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setScope(EScope) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setScope(EnumScope enumVar)
@@ -971,7 +979,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute Scope
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EScope getEScope() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumScope getScope()
 	{
 		return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
@@ -1007,7 +1017,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setUsage(JDFResourceLink.EUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUsage(JDFResourceLink.EnumUsage enumVar)
@@ -1019,7 +1029,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute Usage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFResourceLink.EUsage getEUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFResourceLink.EnumUsage getUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));

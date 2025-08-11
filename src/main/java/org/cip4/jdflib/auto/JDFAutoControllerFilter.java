@@ -272,7 +272,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	/**
 	 * (9.2) get URLTypes attribute URLTypes
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EURLTypes> getEnumsURLTypes()
 	{
@@ -286,7 +286,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	 * (5.2) set attribute URLTypes
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEURLTypes(List<EURLTypes>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setURLTypes(List<EnumURLTypes> v)
@@ -298,7 +298,9 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	 * (9.2) get URLTypes attribute URLTypes
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EURLTypes> getEnumsURLTypes() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumURLTypes> getURLTypes()
 	{
 		return getEnumerationsAttribute(AttributeName.URLTYPES, null, EnumURLTypes.getEnum(0), false);

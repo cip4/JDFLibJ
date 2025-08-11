@@ -292,7 +292,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 * (5) set attribute ChannelType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setChannelType(EChannelType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setChannelType(EnumChannelType enumVar)
@@ -304,7 +304,9 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 * (9) get attribute ChannelType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EChannelType getEChannelType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumChannelType getChannelType()
 	{
 		return EnumChannelType.getEnum(getAttribute(AttributeName.CHANNELTYPE, null, null));

@@ -487,7 +487,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (9.2) get MeasurementUsage attribute MeasurementUsage
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EMeasurementUsage> getEnumsMeasurementUsage()
 	{
@@ -502,7 +502,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * (5.2) set attribute MeasurementUsage
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEMeasurementUsage(List<EMeasurementUsage>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMeasurementUsage(List<EnumMeasurementUsage> v)
@@ -514,7 +514,9 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * (9.2) get MeasurementUsage attribute MeasurementUsage
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EMeasurementUsage> getEnumsMeasurementUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumMeasurementUsage> getMeasurementUsage()
 	{
 		return getEnumerationsAttribute(AttributeName.MEASUREMENTUSAGE, null, EnumMeasurementUsage.getEnum(0), false);
@@ -550,7 +552,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPosition(EPosition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPosition(EnumPosition enumVar)
@@ -562,7 +564,9 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * (9) get attribute Position
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPosition getEPosition() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPosition getPosition()
 	{
 		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));

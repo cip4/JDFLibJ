@@ -449,7 +449,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * (5) set attribute ElementType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setElementType(EElementType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setElementType(EnumElementType enumVar)
@@ -461,7 +461,9 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 	 * (9) get attribute ElementType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EElementType getEElementType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumElementType getElementType()
 	{
 		return EnumElementType.getEnum(getAttribute(AttributeName.ELEMENTTYPE, null, null));

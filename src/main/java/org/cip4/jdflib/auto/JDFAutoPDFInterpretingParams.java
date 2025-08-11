@@ -429,7 +429,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * (5) set attribute OCGDefault
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOCGDefault(EOCGDefault) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOCGDefault(EnumOCGDefault enumVar)
@@ -441,7 +441,9 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * (9) get attribute OCGDefault
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOCGDefault getEOCGDefault() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOCGDefault getOCGDefault()
 	{
 		return EnumOCGDefault.getEnum(getAttribute(AttributeName.OCGDEFAULT, null, "FromPDF"));

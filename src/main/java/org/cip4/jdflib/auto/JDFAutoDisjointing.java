@@ -361,7 +361,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * (5) set attribute OffsetDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOffsetDirection(EOffsetDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOffsetDirection(EnumOffsetDirection enumVar)
@@ -373,7 +373,9 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * (9) get attribute OffsetDirection
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOffsetDirection getEOffsetDirection() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOffsetDirection getOffsetDirection()
 	{
 		return EnumOffsetDirection.getEnum(getAttribute(AttributeName.OFFSETDIRECTION, null, null));

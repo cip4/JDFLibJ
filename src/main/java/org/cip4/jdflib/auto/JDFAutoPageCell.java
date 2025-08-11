@@ -361,7 +361,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 * (5) set attribute Rotate
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setRotate(ERotate) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRotate(EnumRotate enumVar)
@@ -373,7 +373,9 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 * (9) get attribute Rotate
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ERotate getERotate() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumRotate getRotate()
 	{
 		return EnumRotate.getEnum(getAttribute(AttributeName.ROTATE, null, "Rotate0"));

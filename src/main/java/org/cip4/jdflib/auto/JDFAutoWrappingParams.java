@@ -277,7 +277,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 * (5) set attribute WrappingKind
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setWrappingKind(EWrappingKind) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWrappingKind(EnumWrappingKind enumVar)
@@ -289,7 +289,9 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 * (9) get attribute WrappingKind
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EWrappingKind getEWrappingKind() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumWrappingKind getWrappingKind()
 	{
 		return EnumWrappingKind.getEnum(getAttribute(AttributeName.WRAPPINGKIND, null, null));

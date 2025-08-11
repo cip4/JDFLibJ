@@ -267,7 +267,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setUpdatedStatus(JDFResource.EResourceClass enumVar)
+	public void setUpdatedStatus(JDFResource.EResStatus enumVar)
 	{
 		setAttribute(AttributeName.UPDATEDSTATUS, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -277,9 +277,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFResource.EResourceClass getEUpdatedStatus()
+	public JDFResource.EResStatus getEUpdatedStatus()
 	{
-		return JDFResource.EResourceClass.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));
+		return JDFResource.EResStatus.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));
 	}
 
 	/*
@@ -290,7 +290,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * (5) set attribute UpdatedStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setUpdatedStatus(JDFResource.EResStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUpdatedStatus(JDFResource.EnumResStatus enumVar)
@@ -302,7 +302,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * (9) get attribute UpdatedStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFResource.EResStatus getEUpdatedStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFResource.EnumResStatus getUpdatedStatus()
 	{
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.UPDATEDSTATUS, null, null));

@@ -318,7 +318,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setEndStatus(EVersion enumVar)
+	public void setEndStatus(ENodeStatus enumVar)
 	{
 		setAttribute(AttributeName.ENDSTATUS, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -328,9 +328,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 *
 	 * @return the value of the attribute
 	 */
-	public EVersion getEEndStatus()
+	public ENodeStatus getEEndStatus()
 	{
-		return EVersion.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
+		return ENodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
 	}
 
 	/*
@@ -340,7 +340,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 * (5) set attribute EndStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEndStatus(ENodeStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	@Override
@@ -353,7 +353,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 * (9) get attribute EndStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ENodeStatus getEEndStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	@Override
 	public EnumNodeStatus getEndStatus()
 	{

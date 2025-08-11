@@ -449,7 +449,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (5) set attribute GutterPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setGutterPolicy(EGutterPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGutterPolicy(EnumGutterPolicy enumVar)
@@ -461,7 +461,9 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (9) get attribute GutterPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EGutterPolicy getEGutterPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumGutterPolicy getGutterPolicy()
 	{
 		return EnumGutterPolicy.getEnum(getAttribute(AttributeName.GUTTERPOLICY, null, "Fixed"));
@@ -524,7 +526,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (5) set attribute RotatePolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setRotatePolicy(ERotatePolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRotatePolicy(EnumRotatePolicy enumVar)
@@ -536,7 +538,9 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (9) get attribute RotatePolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ERotatePolicy getERotatePolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumRotatePolicy getRotatePolicy()
 	{
 		return EnumRotatePolicy.getEnum(getAttribute(AttributeName.ROTATEPOLICY, null, null));
@@ -572,7 +576,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (5) set attribute SizePolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSizePolicy(ESizePolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSizePolicy(EnumSizePolicy enumVar)
@@ -584,7 +588,9 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (9) get attribute SizePolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESizePolicy getESizePolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSizePolicy getSizePolicy()
 	{
 		return EnumSizePolicy.getEnum(getAttribute(AttributeName.SIZEPOLICY, null, null));

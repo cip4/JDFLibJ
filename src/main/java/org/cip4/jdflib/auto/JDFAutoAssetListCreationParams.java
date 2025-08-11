@@ -292,7 +292,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * (5) set attribute ListPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setListPolicy(EListPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setListPolicy(EnumListPolicy enumVar)
@@ -304,7 +304,9 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * (9) get attribute ListPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EListPolicy getEListPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumListPolicy getListPolicy()
 	{
 		return EnumListPolicy.getEnum(getAttribute(AttributeName.LISTPOLICY, null, "All"));

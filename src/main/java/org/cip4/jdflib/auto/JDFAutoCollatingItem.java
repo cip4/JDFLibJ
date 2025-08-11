@@ -414,7 +414,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * (5) set attribute Orientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOrientation(EOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
@@ -426,7 +426,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * (9) get attribute Orientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOrientation getEOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
@@ -490,7 +492,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * (5) set attribute TransformationContext
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTransformationContext(ETransformationContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransformationContext(EnumTransformationContext enumVar)
@@ -502,7 +504,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * (9) get attribute TransformationContext
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETransformationContext getETransformationContext() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTransformationContext getTransformationContext()
 	{
 		return EnumTransformationContext.getEnum(getAttribute(AttributeName.TRANSFORMATIONCONTEXT, null, "StackItem"));

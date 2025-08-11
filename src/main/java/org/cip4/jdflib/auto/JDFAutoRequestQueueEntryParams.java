@@ -281,7 +281,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * (5) set attribute Activation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setActivation(EActivation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setActivation(EnumActivation enumVar)
@@ -293,7 +293,9 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * (9) get attribute Activation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EActivation getEActivation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
@@ -400,7 +402,7 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * (5) set attribute SubmitPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSubmitPolicy(ESubmitPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSubmitPolicy(EnumSubmitPolicy enumVar)
@@ -412,7 +414,9 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
 	 * (9) get attribute SubmitPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESubmitPolicy getESubmitPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSubmitPolicy getSubmitPolicy()
 	{
 		return EnumSubmitPolicy.getEnum(getAttribute(AttributeName.SUBMITPOLICY, null, null));

@@ -323,7 +323,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * (5) set attribute ErrorState
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setErrorState(EErrorState) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setErrorState(EnumErrorState enumVar)
@@ -335,7 +335,9 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * (9) get attribute ErrorState
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EErrorState getEErrorState() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumErrorState getErrorState()
 	{
 		return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));

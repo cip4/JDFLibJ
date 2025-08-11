@@ -302,7 +302,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 * (5) set attribute Scope
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setScope(EScope) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setScope(EnumScope enumVar)
@@ -314,7 +314,9 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 * (9) get attribute Scope
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EScope getEScope() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumScope getScope()
 	{
 		return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));

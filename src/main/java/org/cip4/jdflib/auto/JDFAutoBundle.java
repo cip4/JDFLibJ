@@ -320,7 +320,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * (5) set attribute BundleType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBundleType(EBundleType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBundleType(EnumBundleType enumVar)
@@ -332,7 +332,9 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * (9) get attribute BundleType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBundleType getEBundleType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBundleType getBundleType()
 	{
 		return EnumBundleType.getEnum(getAttribute(AttributeName.BUNDLETYPE, null, "Stack"));

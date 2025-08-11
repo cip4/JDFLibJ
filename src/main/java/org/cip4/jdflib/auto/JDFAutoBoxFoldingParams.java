@@ -369,7 +369,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * (5) set attribute BoxFoldingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBoxFoldingType(EBoxFoldingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBoxFoldingType(EnumBoxFoldingType enumVar)
@@ -381,7 +381,9 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * (9) get attribute BoxFoldingType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBoxFoldingType getEBoxFoldingType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBoxFoldingType getBoxFoldingType()
 	{
 		return EnumBoxFoldingType.getEnum(getAttribute(AttributeName.BOXFOLDINGTYPE, null, null));

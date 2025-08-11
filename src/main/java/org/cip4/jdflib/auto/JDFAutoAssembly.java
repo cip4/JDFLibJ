@@ -471,7 +471,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * (5) set attribute JogSide
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setJogSide(EJogSide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setJogSide(EnumJogSide enumVar)
@@ -483,7 +483,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * (9) get attribute JogSide
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EJogSide getEJogSide() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumJogSide getJogSide()
 	{
 		return EnumJogSide.getEnum(getAttribute(AttributeName.JOGSIDE, null, "Top"));
@@ -519,7 +521,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * (5) set attribute Order
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOrder(EOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrder(EnumOrder enumVar)
@@ -531,7 +533,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * (9) get attribute Order
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOrder getEOrder() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOrder getOrder()
 	{
 		return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
@@ -567,7 +571,7 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * (5) set attribute BindingSide
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBindingSide(EBindingSide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBindingSide(EnumBindingSide enumVar)
@@ -579,7 +583,9 @@ public abstract class JDFAutoAssembly extends JDFResource
 	 * (9) get attribute BindingSide
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBindingSide getEBindingSide() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBindingSide getBindingSide()
 	{
 		return EnumBindingSide.getEnum(getAttribute(AttributeName.BINDINGSIDE, null, "Left"));

@@ -316,7 +316,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	/**
 	 * (9.2) get Packaging attribute Packaging
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EPackaging> getEnumsPackaging()
 	{
@@ -330,7 +330,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 * (5.2) set attribute Packaging
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEPackaging(List<EPackaging>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPackaging(List<EnumPackaging> v)
@@ -342,7 +342,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 * (9.2) get Packaging attribute Packaging
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EPackaging> getEnumsPackaging() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumPackaging> getPackaging()
 	{
 		return getEnumerationsAttribute(AttributeName.PACKAGING, null, EnumPackaging.getEnum(0), false);

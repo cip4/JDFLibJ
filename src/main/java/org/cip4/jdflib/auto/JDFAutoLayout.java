@@ -741,7 +741,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (5) set attribute OrdReset
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOrdReset(EOrdReset) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrdReset(EnumOrdReset enumVar)
@@ -753,7 +753,9 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (9) get attribute OrdReset
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOrdReset getEOrdReset() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOrdReset getOrdReset()
 	{
 		return EnumOrdReset.getEnum(getAttribute(AttributeName.ORDRESET, null, "Continue"));
@@ -791,7 +793,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (5) set attribute SheetCountReset
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetCountReset(ESheetCountReset) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetCountReset(EnumSheetCountReset enumVar)
@@ -803,7 +805,9 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (9) get attribute SheetCountReset
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetCountReset getESheetCountReset() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetCountReset getSheetCountReset()
 	{
 		return EnumSheetCountReset.getEnum(getAttribute(AttributeName.SHEETCOUNTRESET, null, "Continue"));
@@ -864,7 +868,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (5) set attribute BaseOrdReset
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBaseOrdReset(EBaseOrdReset) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBaseOrdReset(EnumBaseOrdReset enumVar)
@@ -876,7 +880,9 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (9) get attribute BaseOrdReset
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBaseOrdReset getEBaseOrdReset() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBaseOrdReset getBaseOrdReset()
 	{
 		return EnumBaseOrdReset.getEnum(getAttribute(AttributeName.BASEORDRESET, null, null));
@@ -1057,7 +1063,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (5) set attribute SourceWorkStyle
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSourceWorkStyle(ESourceWorkStyle) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
@@ -1069,7 +1075,9 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (9) get attribute SourceWorkStyle
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESourceWorkStyle getESourceWorkStyle() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSourceWorkStyle getSourceWorkStyle()
 	{
 		return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
@@ -1133,7 +1141,7 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (5) set attribute TemplateType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTemplateType(ETemplateType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTemplateType(EnumTemplateType enumVar)
@@ -1145,7 +1153,9 @@ public abstract class JDFAutoLayout extends JDFResource
 	 * (9) get attribute TemplateType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETemplateType getETemplateType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTemplateType getTemplateType()
 	{
 		return EnumTemplateType.getEnum(getAttribute(AttributeName.TEMPLATETYPE, null, null));

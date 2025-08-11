@@ -738,7 +738,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 * (5) set attribute Sides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSides(ESides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSides(EnumSides enumVar)
@@ -750,7 +750,9 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 * (9) get attribute Sides
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESides getESides() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));
@@ -833,7 +835,7 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 * (5) set attribute Mask
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMask(EMask) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMask(EnumMask enumVar)
@@ -845,7 +847,9 @@ public abstract class JDFAutoStripCellParams extends JDFElement
 	 * (9) get attribute Mask
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMask getEMask() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMask getMask()
 	{
 		return EnumMask.getEnum(getAttribute(AttributeName.MASK, null, null));

@@ -344,7 +344,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * (5) set attribute TightBacking
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTightBacking(ETightBacking) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTightBacking(EnumTightBacking enumVar)
@@ -356,7 +356,9 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * (9) get attribute TightBacking
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETightBacking getETightBacking() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTightBacking getTightBacking()
 	{
 		return EnumTightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));

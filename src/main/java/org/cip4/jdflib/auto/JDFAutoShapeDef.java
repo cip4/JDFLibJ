@@ -586,7 +586,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * (5) set attribute FluteDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFluteDirection(EFluteDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFluteDirection(EnumFluteDirection enumVar)
@@ -598,7 +598,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * (9) get attribute FluteDirection
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFluteDirection getEFluteDirection() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFluteDirection getFluteDirection()
 	{
 		return EnumFluteDirection.getEnum(getAttribute(AttributeName.FLUTEDIRECTION, null, null));
@@ -636,7 +638,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * (5) set attribute GrainDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setGrainDirection(EGrainDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGrainDirection(EnumGrainDirection enumVar)
@@ -648,7 +650,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * (9) get attribute GrainDirection
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EGrainDirection getEGrainDirection() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumGrainDirection getGrainDirection()
 	{
 		return EnumGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));
@@ -684,7 +688,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * (5) set attribute MediaSide
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMediaSide(EMediaSide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMediaSide(EnumMediaSide enumVar)
@@ -696,7 +700,9 @@ public abstract class JDFAutoShapeDef extends JDFResource
 	 * (9) get attribute MediaSide
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMediaSide getEMediaSide() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMediaSide getMediaSide()
 	{
 		return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));

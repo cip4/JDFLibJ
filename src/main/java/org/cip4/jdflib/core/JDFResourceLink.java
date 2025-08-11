@@ -215,31 +215,6 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		}
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Usage
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	@Override
-	public void setUsage(final EnumUsage enumVar)
-	{
-		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Usage
-	 *
-	 * @return the value of the attribute
-	 */
-	@Override
-	public EnumUsage getUsage()
-	{
-		return EnumUsage.getEnum(getAttributeRaw(AttributeName.USAGE));
-	}
-
 	/**
 	 *
 	 */
@@ -1804,7 +1779,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		final VString vPartIDKeys = res.getPartIDKeys();
 		if (hasAttribute(AttributeName.PIPEPARTIDKEYS))
 		{
-			v = (Vector<EnumPartIDKey>) getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
+			v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
 		}
 		else
 		{

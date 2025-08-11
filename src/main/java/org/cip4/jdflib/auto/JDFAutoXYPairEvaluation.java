@@ -343,7 +343,7 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 	 * (5) set attribute XYRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setXYRelation(EXYRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setXYRelation(EnumXYRelation enumVar)
@@ -355,7 +355,9 @@ public abstract class JDFAutoXYPairEvaluation extends JDFResource
 	 * (9) get attribute XYRelation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EXYRelation getEXYRelation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumXYRelation getXYRelation()
 	{
 		return EnumXYRelation.getEnum(getAttribute(AttributeName.XYRELATION, null, null));

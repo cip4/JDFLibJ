@@ -394,7 +394,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * (5) set attribute SheetOccurrence
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetOccurrence(ESheetOccurrence) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetOccurrence(EnumSheetOccurrence enumVar)
@@ -406,7 +406,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * (9) get attribute SheetOccurrence
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetOccurrence getESheetOccurrence() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetOccurrence getSheetOccurrence()
 	{
 		return EnumSheetOccurrence.getEnum(getAttribute(AttributeName.SHEETOCCURRENCE, null, null));
@@ -442,7 +444,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * (5) set attribute SheetType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetType(ESheetType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetType(EnumSheetType enumVar)
@@ -454,7 +456,9 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 	 * (9) get attribute SheetType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetType getESheetType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetType getSheetType()
 	{
 		return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));

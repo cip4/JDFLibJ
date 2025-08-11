@@ -513,7 +513,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (5) set attribute Encoding
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEncoding(EEncoding) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setEncoding(EnumEncoding enumVar)
@@ -525,7 +525,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (9) get attribute Encoding
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EEncoding getEEncoding() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumEncoding getEncoding()
 	{
 		return EnumEncoding.getEnum(getAttribute(AttributeName.ENCODING, null, null));
@@ -656,7 +658,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPosition(EPosition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPosition(EnumPosition enumVar)
@@ -668,7 +670,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (9) get attribute Position
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPosition getEPosition() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPosition getPosition()
 	{
 		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
@@ -704,7 +708,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (5) set attribute Purpose
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPurpose(EPurpose) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPurpose(EnumPurpose enumVar)
@@ -716,7 +720,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (9) get attribute Purpose
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPurpose getEPurpose() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPurpose getPurpose()
 	{
 		return EnumPurpose.getEnum(getAttribute(AttributeName.PURPOSE, null, null));

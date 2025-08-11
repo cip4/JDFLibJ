@@ -676,7 +676,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 * (5) set attribute SheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetLay(ESheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -688,7 +688,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 * (9) get attribute SheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetLay getESheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
@@ -726,7 +728,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 * (5) set attribute FeedSheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFeedSheetLay(EFeedSheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFeedSheetLay(EnumFeedSheetLay enumVar)
@@ -738,7 +740,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 * (9) get attribute FeedSheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFeedSheetLay getEFeedSheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFeedSheetLay getFeedSheetLay()
 	{
 		return EnumFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
@@ -845,7 +849,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 * (5) set attribute WorkStyle
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setWorkStyle(EWorkStyle) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWorkStyle(EnumWorkStyle enumVar)
@@ -857,7 +861,9 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 	 * (9) get attribute WorkStyle
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EWorkStyle getEWorkStyle() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumWorkStyle getWorkStyle()
 	{
 		return EnumWorkStyle.getEnum(getAttribute(AttributeName.WORKSTYLE, null, null));

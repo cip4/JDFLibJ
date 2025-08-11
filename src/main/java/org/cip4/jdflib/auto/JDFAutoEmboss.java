@@ -613,7 +613,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (5) set attribute Direction
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDirection(EDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDirection(EnumDirection enumVar)
@@ -625,7 +625,9 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (9) get attribute Direction
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDirection getEDirection() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDirection getDirection()
 	{
 		return EnumDirection.getEnum(getAttribute(AttributeName.DIRECTION, null, null));
@@ -684,7 +686,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (5) set attribute EdgeShape
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEdgeShape(EEdgeShape) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setEdgeShape(EnumEdgeShape enumVar)
@@ -696,7 +698,9 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (9) get attribute EdgeShape
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EEdgeShape getEEdgeShape() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumEdgeShape getEdgeShape()
 	{
 		return EnumEdgeShape.getEnum(getAttribute(AttributeName.EDGESHAPE, null, "Rounded"));
@@ -734,7 +738,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (5) set attribute EmbossingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEmbossingType(EEmbossingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setEmbossingType(EnumEmbossingType enumVar)
@@ -746,7 +750,9 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (9) get attribute EmbossingType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EEmbossingType getEEmbossingType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumEmbossingType getEmbossingType()
 	{
 		return EnumEmbossingType.getEnum(getAttribute(AttributeName.EMBOSSINGTYPE, null, null));
@@ -782,7 +788,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (5) set attribute Face
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFace(EFace) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFace(EnumFace enumVar)
@@ -794,7 +800,9 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (9) get attribute Face
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFace getEFace() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFace getFace()
 	{
 		return EnumFace.getEnum(getAttribute(AttributeName.FACE, null, null));
@@ -878,7 +886,7 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (5) set attribute Level
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setLevel(ELevel) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLevel(EnumLevel enumVar)
@@ -890,7 +898,9 @@ public abstract class JDFAutoEmboss extends JDFElement
 	 * (9) get attribute Level
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ELevel getELevel() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumLevel getLevel()
 	{
 		return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, null));

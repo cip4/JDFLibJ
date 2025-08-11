@@ -780,7 +780,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (5) set attribute Automation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAutomation(EAutomation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAutomation(EnumAutomation enumVar)
@@ -792,7 +792,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (9) get attribute Automation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAutomation getEAutomation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAutomation getAutomation()
 	{
 		return EnumAutomation.getEnum(getAttribute(AttributeName.AUTOMATION, null, null));
@@ -830,7 +832,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (5) set attribute ComponentGranularity
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setComponentGranularity(EComponentGranularity) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setComponentGranularity(EnumComponentGranularity enumVar)
@@ -842,7 +844,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (9) get attribute ComponentGranularity
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EComponentGranularity getEComponentGranularity() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumComponentGranularity getComponentGranularity()
 	{
 		return EnumComponentGranularity.getEnum(getAttribute(AttributeName.COMPONENTGRANULARITY, null, null));
@@ -1096,7 +1100,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (5) set attribute IgnoreContext
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setIgnoreContext(EIgnoreContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIgnoreContext(EnumIgnoreContext enumVar)
@@ -1108,7 +1112,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (9) get attribute IgnoreContext
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EIgnoreContext getEIgnoreContext() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumIgnoreContext getIgnoreContext()
 	{
 		return EnumIgnoreContext.getEnum(getAttribute(AttributeName.IGNORECONTEXT, null, null));
@@ -1385,7 +1391,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (5) set attribute SheetSides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetSides(ESheetSides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetSides(EnumSheetSides enumVar)
@@ -1397,7 +1403,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (9) get attribute SheetSides
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetSides getESheetSides() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetSides getSheetSides()
 	{
 		return EnumSheetSides.getEnum(getAttribute(AttributeName.SHEETSIDES, null, null));

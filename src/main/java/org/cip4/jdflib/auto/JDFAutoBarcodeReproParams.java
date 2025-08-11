@@ -357,7 +357,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * (5) set attribute BearerBars
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBearerBars(EBearerBars) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBearerBars(EnumBearerBars enumVar)
@@ -369,7 +369,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * (9) get attribute BearerBars
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBearerBars getEBearerBars() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBearerBars getBearerBars()
 	{
 		return EnumBearerBars.getEnum(getAttribute(AttributeName.BEARERBARS, null, null));
@@ -452,7 +454,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * (5) set attribute Masking
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMasking(EMasking) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMasking(EnumMasking enumVar)
@@ -464,7 +466,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * (9) get attribute Masking
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMasking getEMasking() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMasking getMasking()
 	{
 		return EnumMasking.getEnum(getAttribute(AttributeName.MASKING, null, null));

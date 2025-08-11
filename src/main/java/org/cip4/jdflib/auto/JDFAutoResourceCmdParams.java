@@ -294,7 +294,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (5) set attribute Activation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setActivation(EActivation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setActivation(EnumActivation enumVar)
@@ -306,7 +306,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (9) get attribute Activation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EActivation getEActivation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, "Active"));
@@ -531,7 +533,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setResStatus(JDFResource.EResourceClass enumVar)
+	public void setResStatus(JDFResource.EResStatus enumVar)
 	{
 		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -541,9 +543,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFResource.EResourceClass getEResStatus()
+	public JDFResource.EResStatus getEResStatus()
 	{
-		return JDFResource.EResourceClass.getEnum(getAttribute(AttributeName.STATUS, null, null));
+		return JDFResource.EResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
 	}
 
 	/*
@@ -553,7 +555,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (5) set attribute Status
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setResStatus(JDFResource.EResStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResStatus(JDFResource.EnumResStatus enumVar)
@@ -565,7 +567,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (9) get attribute Status
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFResource.EResStatus getEResStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFResource.EnumResStatus getResStatus()
 	{
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
@@ -629,7 +633,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (5) set attribute UpdateMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setUpdateMethod(EUpdateMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUpdateMethod(EnumUpdateMethod enumVar)
@@ -641,7 +645,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (9) get attribute UpdateMethod
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EUpdateMethod getEUpdateMethod() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumUpdateMethod getUpdateMethod()
 	{
 		return EnumUpdateMethod.getEnum(getAttribute(AttributeName.UPDATEMETHOD, null, "Complete"));
@@ -677,7 +683,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setUsage(JDFResourceLink.EUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUsage(JDFResourceLink.EnumUsage enumVar)
@@ -689,7 +695,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (9) get attribute Usage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFResourceLink.EUsage getEUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFResourceLink.EnumUsage getUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));

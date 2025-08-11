@@ -412,7 +412,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (5) set attribute InternalColorModel
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setInternalColorModel(EInternalColorModel) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setInternalColorModel(EnumInternalColorModel enumVar)
@@ -424,7 +424,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (9) get attribute InternalColorModel
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EInternalColorModel getEInternalColorModel() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumInternalColorModel getInternalColorModel()
 	{
 		return EnumInternalColorModel.getEnum(getAttribute(AttributeName.INTERNALCOLORMODEL, null, null));
@@ -462,7 +464,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (5) set attribute MappingSelection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMappingSelection(EMappingSelection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMappingSelection(EnumMappingSelection enumVar)
@@ -474,7 +476,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (9) get attribute MappingSelection
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMappingSelection getEMappingSelection() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMappingSelection getMappingSelection()
 	{
 		return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, null));

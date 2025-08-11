@@ -414,7 +414,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (5) set attribute MappingSelection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMappingSelection(EMappingSelection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMappingSelection(EnumMappingSelection enumVar)
@@ -426,7 +426,9 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (9) get attribute MappingSelection
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMappingSelection getEMappingSelection() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMappingSelection getMappingSelection()
 	{
 		return EnumMappingSelection.getEnum(getAttribute(AttributeName.MAPPINGSELECTION, null, "UsePDLValues"));
@@ -680,7 +682,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (5) set attribute ColorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setColorType(EColorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setColorType(EnumColorType enumVar)
@@ -692,7 +694,9 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (9) get attribute ColorType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EColorType getEColorType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumColorType getColorType()
 	{
 		return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));

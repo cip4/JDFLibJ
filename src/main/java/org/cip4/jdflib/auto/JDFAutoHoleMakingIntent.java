@@ -281,7 +281,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 * (5) set attribute HoleReferenceEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setHoleReferenceEdge(EHoleReferenceEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
@@ -293,7 +293,9 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 * (9) get attribute HoleReferenceEdge
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EHoleReferenceEdge getEHoleReferenceEdge() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumHoleReferenceEdge getHoleReferenceEdge()
 	{
 		return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, "Left"));

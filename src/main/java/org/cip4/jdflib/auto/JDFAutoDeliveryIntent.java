@@ -350,7 +350,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * (5) set attribute Ownership
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOwnership(EOwnership) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOwnership(EnumOwnership enumVar)
@@ -362,7 +362,9 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 	 * (9) get attribute Ownership
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOwnership getEOwnership() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOwnership getOwnership()
 	{
 		return EnumOwnership.getEnum(getAttribute(AttributeName.OWNERSHIP, null, "Origin"));

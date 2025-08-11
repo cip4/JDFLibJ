@@ -293,7 +293,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 * (5) set attribute GluingTechnique
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setGluingTechnique(EGluingTechnique) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGluingTechnique(EnumGluingTechnique enumVar)
@@ -305,7 +305,9 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 * (9) get attribute GluingTechnique
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EGluingTechnique getEGluingTechnique() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumGluingTechnique getGluingTechnique()
 	{
 		return EnumGluingTechnique.getEnum(getAttribute(AttributeName.GLUINGTECHNIQUE, null, null));

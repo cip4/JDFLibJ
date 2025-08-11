@@ -617,7 +617,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * (5) set attribute ImageDownsampleType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setImageDownsampleType(EImageDownsampleType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setImageDownsampleType(EnumImageDownsampleType enumVar)
@@ -629,7 +629,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * (9) get attribute ImageDownsampleType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EImageDownsampleType getEImageDownsampleType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumImageDownsampleType getImageDownsampleType()
 	{
 		return EnumImageDownsampleType.getEnum(getAttribute(AttributeName.IMAGEDOWNSAMPLETYPE, null, null));
@@ -712,7 +714,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * (5) set attribute ImageType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setImageType(EImageType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setImageType(EnumImageType enumVar)
@@ -724,7 +726,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * (9) get attribute ImageType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EImageType getEImageType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumImageType getImageType()
 	{
 		return EnumImageType.getEnum(getAttribute(AttributeName.IMAGETYPE, null, null));

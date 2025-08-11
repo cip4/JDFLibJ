@@ -481,7 +481,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 * (5) set attribute Type
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setType(EType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setType(EnumType enumVar)
@@ -493,7 +493,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 * (9) get attribute Type
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EType getEType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumType getType()
 	{
 		return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));

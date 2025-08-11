@@ -263,7 +263,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 * (5) set attribute TabEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTabEdge(ETabEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTabEdge(EnumTabEdge enumVar)
@@ -275,7 +275,9 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 * (9) get attribute TabEdge
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETabEdge getETabEdge() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTabEdge getTabEdge()
 	{
 		return EnumTabEdge.getEnum(getAttribute(AttributeName.TABEDGE, null, null));

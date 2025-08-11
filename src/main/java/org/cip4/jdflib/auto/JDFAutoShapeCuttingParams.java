@@ -377,7 +377,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * (5) set attribute DeliveryMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDeliveryMode(EDeliveryMode) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeliveryMode(EnumDeliveryMode enumVar)
@@ -389,7 +389,9 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * (9) get attribute DeliveryMode
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDeliveryMode getEDeliveryMode() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDeliveryMode getDeliveryMode()
 	{
 		return EnumDeliveryMode.getEnum(getAttribute(AttributeName.DELIVERYMODE, null, null));
@@ -448,7 +450,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * (5) set attribute SheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetLay(ESheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -460,7 +462,9 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 	 * (9) get attribute SheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetLay getESheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));

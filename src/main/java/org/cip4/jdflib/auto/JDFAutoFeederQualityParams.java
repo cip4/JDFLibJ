@@ -433,7 +433,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * (5) set attribute IncorrectComponentQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setIncorrectComponentQuality(EIncorrectComponentQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncorrectComponentQuality(EnumIncorrectComponentQuality enumVar)
@@ -445,7 +445,9 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * (9) get attribute IncorrectComponentQuality
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EIncorrectComponentQuality getEIncorrectComponentQuality() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumIncorrectComponentQuality getIncorrectComponentQuality()
 	{
 		return EnumIncorrectComponentQuality.getEnum(getAttribute(AttributeName.INCORRECTCOMPONENTQUALITY, null, null));
@@ -507,7 +509,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * (5) set attribute DoubleFeedQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDoubleFeedQuality(EDoubleFeedQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDoubleFeedQuality(EnumDoubleFeedQuality enumVar)
@@ -519,7 +521,9 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * (9) get attribute DoubleFeedQuality
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDoubleFeedQuality getEDoubleFeedQuality() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDoubleFeedQuality getDoubleFeedQuality()
 	{
 		return EnumDoubleFeedQuality.getEnum(getAttribute(AttributeName.DOUBLEFEEDQUALITY, null, null));
@@ -580,7 +584,7 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * (5) set attribute BadFeedQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBadFeedQuality(EBadFeedQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBadFeedQuality(EnumBadFeedQuality enumVar)
@@ -592,7 +596,9 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
 	 * (9) get attribute BadFeedQuality
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBadFeedQuality getEBadFeedQuality() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBadFeedQuality getBadFeedQuality()
 	{
 		return EnumBadFeedQuality.getEnum(getAttribute(AttributeName.BADFEEDQUALITY, null, null));

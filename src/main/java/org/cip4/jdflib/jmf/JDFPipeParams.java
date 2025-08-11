@@ -85,7 +85,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.JDFResourceLink.EUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -97,7 +97,7 @@ import org.cip4.jdflib.resource.JDFResource;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * before June 11, 2009
+ *         before June 11, 2009
  */
 public class JDFPipeParams extends JDFAutoPipeParams
 {
@@ -321,7 +321,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 		if (JDFResourceLink.isResourceLink(e))
 		{
 			rl = (JDFResourceLink) e;
-			rl.setUsage(bInput ? EnumUsage.Input : EnumUsage.Output);
+			rl.setUsage(bInput ? EUsage.Input : EUsage.Output);
 		}
 		else
 		{

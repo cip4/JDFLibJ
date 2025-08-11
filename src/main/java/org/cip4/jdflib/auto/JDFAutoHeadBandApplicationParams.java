@@ -507,7 +507,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 * (5) set attribute StripMaterial
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setStripMaterial(EStripMaterial) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStripMaterial(EnumStripMaterial enumVar)
@@ -519,7 +519,9 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 	 * (9) get attribute StripMaterial
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EStripMaterial getEStripMaterial() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumStripMaterial getStripMaterial()
 	{
 		return EnumStripMaterial.getEnum(getAttribute(AttributeName.STRIPMATERIAL, null, null));

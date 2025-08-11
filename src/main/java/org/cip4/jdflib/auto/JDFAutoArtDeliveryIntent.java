@@ -298,7 +298,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * (5) set attribute PreflightStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPreflightStatus(EPreflightStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreflightStatus(EnumPreflightStatus enumVar)
@@ -310,7 +310,9 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * (9) get attribute PreflightStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPreflightStatus getEPreflightStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPreflightStatus getPreflightStatus()
 	{
 		return EnumPreflightStatus.getEnum(getAttribute(AttributeName.PREFLIGHTSTATUS, null, "NotPerformed"));

@@ -336,7 +336,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 * (5) set attribute GlueType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setGlueType(EGlueType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGlueType(EnumGlueType enumVar)
@@ -348,7 +348,9 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 * (9) get attribute GlueType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EGlueType getEGlueType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumGlueType getGlueType()
 	{
 		return EnumGlueType.getEnum(getAttribute(AttributeName.GLUETYPE, null, null));

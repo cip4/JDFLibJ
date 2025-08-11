@@ -522,7 +522,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * (5) set attribute OutputColorSpace
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOutputColorSpace(EOutputColorSpace) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOutputColorSpace(EnumOutputColorSpace enumVar)
@@ -534,7 +534,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * (9) get attribute OutputColorSpace
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOutputColorSpace getEOutputColorSpace() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOutputColorSpace getOutputColorSpace()
 	{
 		return EnumOutputColorSpace.getEnum(getAttribute(AttributeName.OUTPUTCOLORSPACE, null, null));
@@ -572,7 +574,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * (5) set attribute CompressionFilter
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCompressionFilter(ECompressionFilter) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCompressionFilter(EnumCompressionFilter enumVar)
@@ -584,7 +586,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * (9) get attribute CompressionFilter
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECompressionFilter getECompressionFilter() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCompressionFilter getCompressionFilter()
 	{
 		return EnumCompressionFilter.getEnum(getAttribute(AttributeName.COMPRESSIONFILTER, null, null));
@@ -691,7 +695,7 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * (5) set attribute Mounting
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMounting(EMounting) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMounting(EnumMounting enumVar)
@@ -703,7 +707,9 @@ public abstract class JDFAutoScanParams extends JDFResource
 	 * (9) get attribute Mounting
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMounting getEMounting() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMounting getMounting()
 	{
 		return EnumMounting.getEnum(getAttribute(AttributeName.MOUNTING, null, null));

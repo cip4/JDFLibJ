@@ -329,7 +329,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * (5) set attribute ICCOutputProfileUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setICCOutputProfileUsage(EICCOutputProfileUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setICCOutputProfileUsage(EnumICCOutputProfileUsage enumVar)
@@ -341,7 +341,9 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * (9) get attribute ICCOutputProfileUsage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EICCOutputProfileUsage getEICCOutputProfileUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumICCOutputProfileUsage getICCOutputProfileUsage()
 	{
 		return EnumICCOutputProfileUsage.getEnum(getAttribute(AttributeName.ICCOUTPUTPROFILEUSAGE, null, null));

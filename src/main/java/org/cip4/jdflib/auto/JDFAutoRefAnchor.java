@@ -347,7 +347,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * (5) set attribute Anchor
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAnchor(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
@@ -359,7 +359,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * (9) get attribute Anchor
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAnchor getEAnchor() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
@@ -395,7 +397,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * (5) set attribute AnchorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAnchorType(EAnchorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchorType(EnumAnchorType enumVar)
@@ -407,7 +409,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * (9) get attribute AnchorType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAnchorType getEAnchorType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAnchorType getAnchorType()
 	{
 		return EnumAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));

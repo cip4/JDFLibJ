@@ -573,7 +573,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (5) set attribute ColorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setColorType(EColorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setColorType(EnumColorType enumVar)
@@ -585,7 +585,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (9) get attribute ColorType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EColorType getEColorType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumColorType getColorType()
 	{
 		return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));
@@ -647,7 +649,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (5) set attribute PlateType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPlateType(EPlateType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPlateType(EnumPlateType enumVar)
@@ -659,7 +661,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (9) get attribute PlateType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPlateType getEPlateType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPlateType getPlateType()
 	{
 		return EnumPlateType.getEnum(getAttribute(AttributeName.PLATETYPE, null, null));
@@ -720,7 +724,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (5) set attribute ProofQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setProofQuality(EProofQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProofQuality(EnumProofQuality enumVar)
@@ -732,7 +736,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (9) get attribute ProofQuality
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EProofQuality getEProofQuality() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumProofQuality getProofQuality()
 	{
 		return EnumProofQuality.getEnum(getAttribute(AttributeName.PROOFQUALITY, null, null));
@@ -768,7 +774,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (5) set attribute ProofType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setProofType(EProofType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProofType(EnumProofType enumVar)
@@ -780,7 +786,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (9) get attribute ProofType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EProofType getEProofType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumProofType getProofType()
 	{
 		return EnumProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, null));

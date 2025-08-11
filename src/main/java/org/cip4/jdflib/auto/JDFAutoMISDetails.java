@@ -439,7 +439,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (5) set attribute CostType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCostType(ECostType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCostType(EnumCostType enumVar)
@@ -451,7 +451,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (9) get attribute CostType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECostType getECostType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCostType getCostType()
 	{
 		return EnumCostType.getEnum(getAttribute(AttributeName.COSTTYPE, null, null));
@@ -489,7 +491,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (5) set attribute DeviceOperationMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDeviceOperationMode(EDeviceOperationMode) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
@@ -501,7 +503,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (9) get attribute DeviceOperationMode
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDeviceOperationMode getEDeviceOperationMode() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDeviceOperationMode getDeviceOperationMode()
 	{
 		return EnumDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
@@ -537,7 +541,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (5) set attribute WorkType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setWorkType(EWorkType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWorkType(EnumWorkType enumVar)
@@ -549,7 +553,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (9) get attribute WorkType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EWorkType getEWorkType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumWorkType getWorkType()
 	{
 		return EnumWorkType.getEnum(getAttribute(AttributeName.WORKTYPE, null, null));

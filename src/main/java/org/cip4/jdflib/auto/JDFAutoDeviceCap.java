@@ -448,7 +448,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (9.2) get CombinedMethod attribute CombinedMethod
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<ECombinedMethod> getEnumsCombinedMethod()
 	{
@@ -463,7 +463,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (5.2) set attribute CombinedMethod
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setECombinedMethod(List<ECombinedMethod>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCombinedMethod(List<EnumCombinedMethod> v)
@@ -475,7 +475,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (9.2) get CombinedMethod attribute CombinedMethod
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<ECombinedMethod> getEnumsCombinedMethod() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumCombinedMethod> getCombinedMethod()
 	{
 		return getEnumerationsAttribute(AttributeName.COMBINEDMETHOD, null, EnumCombinedMethod.None, false);
@@ -513,7 +515,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (5) set attribute ExecutionPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setExecutionPolicy(EExecutionPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setExecutionPolicy(EnumExecutionPolicy enumVar)
@@ -525,7 +527,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (9) get attribute ExecutionPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EExecutionPolicy getEExecutionPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumExecutionPolicy getExecutionPolicy()
 	{
 		return EnumExecutionPolicy.getEnum(getAttribute(AttributeName.EXECUTIONPOLICY, null, "AllFound"));
@@ -688,7 +692,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (5) set attribute TypeOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTypeOrder(ETypeOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTypeOrder(EnumTypeOrder enumVar)
@@ -700,7 +704,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (9) get attribute TypeOrder
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETypeOrder getETypeOrder() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTypeOrder getTypeOrder()
 	{
 		return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));

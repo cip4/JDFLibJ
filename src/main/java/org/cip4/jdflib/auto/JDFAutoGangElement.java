@@ -490,7 +490,7 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * (5) set attribute GrainDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setGrainDirection(EGrainDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGrainDirection(EnumGrainDirection enumVar)
@@ -502,7 +502,9 @@ public abstract class JDFAutoGangElement extends JDFElement
 	 * (9) get attribute GrainDirection
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EGrainDirection getEGrainDirection() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumGrainDirection getGrainDirection()
 	{
 		return EnumGrainDirection.getEnum(getAttribute(AttributeName.GRAINDIRECTION, null, null));

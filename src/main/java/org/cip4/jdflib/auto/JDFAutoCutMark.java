@@ -309,7 +309,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * (5) set attribute MarkType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMarkType(EMarkType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkType(EnumMarkType enumVar)
@@ -321,7 +321,9 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * (9) get attribute MarkType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMarkType getEMarkType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMarkType getMarkType()
 	{
 		return EnumMarkType.getEnum(getAttribute(AttributeName.MARKTYPE, null, null));

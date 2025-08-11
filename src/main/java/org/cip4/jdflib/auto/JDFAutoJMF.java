@@ -307,7 +307,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (5) set attribute MaxVersion
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMaxVersion(EVersion) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMaxVersion(EnumVersion enumVar)
@@ -319,7 +319,9 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (9) get attribute MaxVersion
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EVersion getEMaxVersion() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumVersion getMaxVersion()
 	{
 		return EnumVersion.getEnum(getAttribute(AttributeName.MAXVERSION, null, null));

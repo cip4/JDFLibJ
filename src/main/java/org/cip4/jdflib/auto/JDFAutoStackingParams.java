@@ -595,7 +595,7 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 * (5) set attribute PreStackMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPreStackMethod(EPreStackMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreStackMethod(EnumPreStackMethod enumVar)
@@ -607,7 +607,9 @@ public abstract class JDFAutoStackingParams extends JDFResource
 	 * (9) get attribute PreStackMethod
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPreStackMethod getEPreStackMethod() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPreStackMethod getPreStackMethod()
 	{
 		return EnumPreStackMethod.getEnum(getAttribute(AttributeName.PRESTACKMETHOD, null, null));

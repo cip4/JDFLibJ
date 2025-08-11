@@ -271,7 +271,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 * (5) set attribute FlushPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFlushPolicy(EFlushPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFlushPolicy(EnumFlushPolicy enumVar)
@@ -283,7 +283,9 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 * (9) get attribute FlushPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFlushPolicy getEFlushPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFlushPolicy getFlushPolicy()
 	{
 		return EnumFlushPolicy.getEnum(getAttribute(AttributeName.FLUSHPOLICY, null, "QueueEntry"));

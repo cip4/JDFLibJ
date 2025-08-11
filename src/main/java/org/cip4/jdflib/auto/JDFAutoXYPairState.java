@@ -521,7 +521,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * (5) set attribute AllowedXYRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAllowedXYRelation(EAllowedXYRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAllowedXYRelation(EnumAllowedXYRelation enumVar)
@@ -533,7 +533,9 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * (9) get attribute AllowedXYRelation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAllowedXYRelation getEAllowedXYRelation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAllowedXYRelation getAllowedXYRelation()
 	{
 		return EnumAllowedXYRelation.getEnum(getAttribute(AttributeName.ALLOWEDXYRELATION, null, null));
@@ -649,7 +651,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * (5) set attribute PresentXYRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPresentXYRelation(EPresentXYRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPresentXYRelation(EnumPresentXYRelation enumVar)
@@ -661,7 +663,9 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * (9) get attribute PresentXYRelation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPresentXYRelation getEPresentXYRelation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPresentXYRelation getPresentXYRelation()
 	{
 		return EnumPresentXYRelation.getEnum(getAttribute(AttributeName.PRESENTXYRELATION, null, null));

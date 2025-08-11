@@ -470,7 +470,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * (5) set attribute CenterReference
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCenterReference(ECenterReference) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCenterReference(EnumCenterReference enumVar)
@@ -482,7 +482,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * (9) get attribute CenterReference
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECenterReference getECenterReference() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCenterReference getCenterReference()
 	{
 		return EnumCenterReference.getEnum(getAttribute(AttributeName.CENTERREFERENCE, null, "TrailingEdge"));
@@ -504,7 +506,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	/**
 	 * (9.2) get HoleType attribute HoleType
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<JDFMedia.EHoleType> getEnumsHoleType()
 	{
@@ -518,7 +520,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * (5.2) set attribute HoleType
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEHoleType(List<JDFMedia.EHoleType>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setHoleType(List<JDFMedia.EnumHoleType> v)
@@ -530,7 +532,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * (9.2) get HoleType attribute HoleType
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<JDFMedia.EHoleType> getEnumsHoleType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<JDFMedia.EnumHoleType> getHoleType()
 	{
 		return getEnumerationsAttribute(AttributeName.HOLETYPE, null, JDFMedia.EnumHoleType.getEnum(0), false);
@@ -643,7 +647,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * (5) set attribute HoleReferenceEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setHoleReferenceEdge(EHoleReferenceEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
@@ -655,7 +659,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * (9) get attribute HoleReferenceEdge
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EHoleReferenceEdge getEHoleReferenceEdge() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumHoleReferenceEdge getHoleReferenceEdge()
 	{
 		return EnumHoleReferenceEdge.getEnum(getAttribute(AttributeName.HOLEREFERENCEEDGE, null, null));
@@ -691,7 +697,7 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * (5) set attribute Shape
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setShape(EShape) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setShape(EnumShape enumVar)
@@ -703,7 +709,9 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
 	 * (9) get attribute Shape
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EShape getEShape() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumShape getShape()
 	{
 		return EnumShape.getEnum(getAttribute(AttributeName.SHAPE, null, null));

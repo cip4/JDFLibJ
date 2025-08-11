@@ -516,7 +516,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * (5) set attribute Transfer
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTransfer(ETransfer) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransfer(EnumTransfer enumVar)
@@ -528,7 +528,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * (9) get attribute Transfer
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETransfer getETransfer() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTransfer getTransfer()
 	{
 		return EnumTransfer.getEnum(getAttribute(AttributeName.TRANSFER, null, null));

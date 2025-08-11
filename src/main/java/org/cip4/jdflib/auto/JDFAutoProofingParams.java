@@ -558,7 +558,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (5) set attribute ProofRenderingIntent
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setProofRenderingIntent(EProofRenderingIntent) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProofRenderingIntent(EnumProofRenderingIntent enumVar)
@@ -570,7 +570,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (9) get attribute ProofRenderingIntent
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EProofRenderingIntent getEProofRenderingIntent() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumProofRenderingIntent getProofRenderingIntent()
 	{
 		return EnumProofRenderingIntent.getEnum(getAttribute(AttributeName.PROOFRENDERINGINTENT, null, "Perceptual"));
@@ -606,7 +608,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (5) set attribute ProofType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setProofType(EProofType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProofType(EnumProofType enumVar)
@@ -618,7 +620,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (9) get attribute ProofType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EProofType getEProofType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumProofType getProofType()
 	{
 		return EnumProofType.getEnum(getAttribute(AttributeName.PROOFTYPE, null, "None"));
@@ -654,7 +658,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (5) set attribute ColorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setColorType(EColorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setColorType(EnumColorType enumVar)
@@ -666,7 +670,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (9) get attribute ColorType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EColorType getEColorType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumColorType getColorType()
 	{
 		return EnumColorType.getEnum(getAttribute(AttributeName.COLORTYPE, null, null));

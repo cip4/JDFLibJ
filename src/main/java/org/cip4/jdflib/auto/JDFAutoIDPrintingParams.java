@@ -516,7 +516,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * (5) set attribute PageDelivery
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPageDelivery(EPageDelivery) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPageDelivery(EnumPageDelivery enumVar)
@@ -528,7 +528,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * (9) get attribute PageDelivery
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPageDelivery getEPageDelivery() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPageDelivery getPageDelivery()
 	{
 		return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
@@ -566,7 +568,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * (5) set attribute PrintQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPrintQuality(EPrintQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintQuality(EnumPrintQuality enumVar)
@@ -578,7 +580,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * (9) get attribute PrintQuality
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPrintQuality getEPrintQuality() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPrintQuality getPrintQuality()
 	{
 		return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));

@@ -296,7 +296,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	 * (5) set attribute DigitalDeliveryDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDigitalDeliveryDirection(EDigitalDeliveryDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDigitalDeliveryDirection(EnumDigitalDeliveryDirection enumVar)
@@ -308,7 +308,9 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	 * (9) get attribute DigitalDeliveryDirection
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDigitalDeliveryDirection getEDigitalDeliveryDirection() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDigitalDeliveryDirection getDigitalDeliveryDirection()
 	{
 		return EnumDigitalDeliveryDirection.getEnum(getAttribute(AttributeName.DIGITALDELIVERYDIRECTION, null, null));

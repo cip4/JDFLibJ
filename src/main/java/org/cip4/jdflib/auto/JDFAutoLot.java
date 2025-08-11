@@ -327,7 +327,7 @@ public abstract class JDFAutoLot extends JDFElement
 	 * (5) set attribute Consumption
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setConsumption(EConsumption) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setConsumption(EnumConsumption enumVar)
@@ -339,7 +339,9 @@ public abstract class JDFAutoLot extends JDFElement
 	 * (9) get attribute Consumption
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EConsumption getEConsumption() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumConsumption getConsumption()
 	{
 		return EnumConsumption.getEnum(getAttribute(AttributeName.CONSUMPTION, null, null));

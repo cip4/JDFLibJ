@@ -402,7 +402,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	 * (5) set attribute VarnishArea
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setVarnishArea(EVarnishArea) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setVarnishArea(EnumVarnishArea enumVar)
@@ -414,7 +414,9 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	 * (9) get attribute VarnishArea
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EVarnishArea getEVarnishArea() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumVarnishArea getVarnishArea()
 	{
 		return EnumVarnishArea.getEnum(getAttribute(AttributeName.VARNISHAREA, null, null));
@@ -452,7 +454,7 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	 * (5) set attribute VarnishMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setVarnishMethod(EVarnishMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setVarnishMethod(EnumVarnishMethod enumVar)
@@ -464,7 +466,9 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 	 * (9) get attribute VarnishMethod
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EVarnishMethod getEVarnishMethod() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumVarnishMethod getVarnishMethod()
 	{
 		return EnumVarnishMethod.getEnum(getAttribute(AttributeName.VARNISHMETHOD, null, null));

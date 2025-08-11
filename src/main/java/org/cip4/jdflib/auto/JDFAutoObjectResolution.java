@@ -330,7 +330,7 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	/**
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<ESourceObjects> getEnumsSourceObjects()
 	{
@@ -345,7 +345,7 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	 * (5.2) set attribute SourceObjects
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceObjects(List<EnumSourceObjects> v)
@@ -357,7 +357,9 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<ESourceObjects> getEnumsSourceObjects() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumSourceObjects> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.getEnum(0), false);

@@ -278,7 +278,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	 * (5) set attribute ShrinkingMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setShrinkingMethod(EShrinkingMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setShrinkingMethod(EnumShrinkingMethod enumVar)
@@ -290,7 +290,9 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	 * (9) get attribute ShrinkingMethod
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EShrinkingMethod getEShrinkingMethod() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumShrinkingMethod getShrinkingMethod()
 	{
 		return EnumShrinkingMethod.getEnum(getAttribute(AttributeName.SHRINKINGMETHOD, null, "ShrinkHot"));

@@ -391,7 +391,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 * (5) set attribute Diffusion
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDiffusion(EDiffusion) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDiffusion(EnumDiffusion enumVar)
@@ -403,7 +403,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 * (9) get attribute Diffusion
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDiffusion getEDiffusion() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDiffusion getDiffusion()
 	{
 		return EnumDiffusion.getEnum(getAttribute(AttributeName.DIFFUSION, null, null));

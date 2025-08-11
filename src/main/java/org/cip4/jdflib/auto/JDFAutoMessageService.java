@@ -377,7 +377,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	/**
 	 * (9.2) get ChannelMode attribute ChannelMode
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EChannelMode> getEnumsChannelMode()
 	{
@@ -391,7 +391,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * (5.2) set attribute ChannelMode
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEChannelMode(List<EChannelMode>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setChannelMode(List<EnumChannelMode> v)
@@ -403,7 +403,9 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * (9.2) get ChannelMode attribute ChannelMode
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EChannelMode> getEnumsChannelMode() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumChannelMode> getChannelMode()
 	{
 		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EnumChannelMode.getEnum(0), false);
@@ -489,7 +491,7 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * (5) set attribute JMFRole
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setJMFRole(EJMFRole) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setJMFRole(EnumJMFRole enumVar)
@@ -501,7 +503,9 @@ public abstract class JDFAutoMessageService extends JDFElement
 	 * (9) get attribute JMFRole
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EJMFRole getEJMFRole() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumJMFRole getJMFRole()
 	{
 		return EnumJMFRole.getEnum(getAttribute(AttributeName.JMFROLE, null, null));

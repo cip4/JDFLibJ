@@ -271,7 +271,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 * (5) set attribute ShutDownType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setShutDownType(EShutDownType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setShutDownType(EnumShutDownType enumVar)
@@ -283,7 +283,9 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 * (9) get attribute ShutDownType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EShutDownType getEShutDownType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumShutDownType getShutDownType()
 	{
 		return EnumShutDownType.getEnum(getAttribute(AttributeName.SHUTDOWNTYPE, null, "StandBy"));

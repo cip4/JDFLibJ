@@ -487,7 +487,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (5) set attribute SheetType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetType(ESheetType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetType(EnumSheetType enumVar)
@@ -499,7 +499,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (9) get attribute SheetType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetType getESheetType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetType getSheetType()
 	{
 		return EnumSheetType.getEnum(getAttribute(AttributeName.SHEETTYPE, null, null));
@@ -535,7 +537,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (5) set attribute SheetUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetUsage(ESheetUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetUsage(EnumSheetUsage enumVar)
@@ -547,7 +549,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (9) get attribute SheetUsage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetUsage getESheetUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetUsage getSheetUsage()
 	{
 		return EnumSheetUsage.getEnum(getAttribute(AttributeName.SHEETUSAGE, null, null));
@@ -585,7 +589,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (5) set attribute IncludeInBundleItem
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setIncludeInBundleItem(EIncludeInBundleItem) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeInBundleItem(EnumIncludeInBundleItem enumVar)
@@ -597,7 +601,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (9) get attribute IncludeInBundleItem
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EIncludeInBundleItem getEIncludeInBundleItem() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumIncludeInBundleItem getIncludeInBundleItem()
 	{
 		return EnumIncludeInBundleItem.getEnum(getAttribute(AttributeName.INCLUDEINBUNDLEITEM, null, null));
@@ -705,7 +711,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setUsage(ESheetUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUsage(EnumSheetUsage enumVar)
@@ -717,7 +723,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (9) get attribute Usage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetUsage getEUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetUsage getUsage()
 	{
 		return EnumSheetUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));

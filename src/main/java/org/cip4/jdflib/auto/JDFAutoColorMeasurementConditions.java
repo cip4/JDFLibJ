@@ -691,7 +691,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (5) set attribute DensityStandard
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDensityStandard(EDensityStandard) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDensityStandard(EnumDensityStandard enumVar)
@@ -703,7 +703,9 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (9) get attribute DensityStandard
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDensityStandard getEDensityStandard() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDensityStandard getDensityStandard()
 	{
 		return EnumDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, "ANSIT"));
@@ -741,7 +743,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (5) set attribute Illumination
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setIllumination(EIllumination) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIllumination(EnumIllumination enumVar)
@@ -753,7 +755,9 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (9) get attribute Illumination
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EIllumination getEIllumination() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumIllumination getIllumination()
 	{
 		return EnumIllumination.getEnum(getAttribute(AttributeName.ILLUMINATION, null, "D50"));
@@ -859,7 +863,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (5) set attribute InkState
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setInkState(EInkState) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setInkState(EnumInkState enumVar)
@@ -871,7 +875,9 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (9) get attribute InkState
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EInkState getEInkState() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumInkState getInkState()
 	{
 		return EnumInkState.getEnum(getAttribute(AttributeName.INKSTATE, null, null));
@@ -957,7 +963,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (5) set attribute MeasurementFilter
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMeasurementFilter(EMeasurementFilter) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMeasurementFilter(EnumMeasurementFilter enumVar)
@@ -969,7 +975,9 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (9) get attribute MeasurementFilter
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMeasurementFilter getEMeasurementFilter() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMeasurementFilter getMeasurementFilter()
 	{
 		return EnumMeasurementFilter.getEnum(getAttribute(AttributeName.MEASUREMENTFILTER, null, null));
@@ -1031,7 +1039,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (5) set attribute SampleBacking
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSampleBacking(ESampleBacking) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSampleBacking(EnumSampleBacking enumVar)
@@ -1043,7 +1051,9 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (9) get attribute SampleBacking
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESampleBacking getESampleBacking() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSampleBacking getSampleBacking()
 	{
 		return EnumSampleBacking.getEnum(getAttribute(AttributeName.SAMPLEBACKING, null, null));
@@ -1103,7 +1113,7 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (5) set attribute WhiteBase
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setWhiteBase(EWhiteBase) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWhiteBase(EnumWhiteBase enumVar)
@@ -1115,7 +1125,9 @@ public abstract class JDFAutoColorMeasurementConditions extends JDFResource
 	 * (9) get attribute WhiteBase
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EWhiteBase getEWhiteBase() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumWhiteBase getWhiteBase()
 	{
 		return EnumWhiteBase.getEnum(getAttribute(AttributeName.WHITEBASE, null, null));

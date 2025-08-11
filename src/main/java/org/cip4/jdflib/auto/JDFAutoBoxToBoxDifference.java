@@ -351,7 +351,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	 * (5) set attribute FromBox
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFromBox(EFromBox) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFromBox(EnumFromBox enumVar)
@@ -363,7 +363,9 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	 * (9) get attribute FromBox
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFromBox getEFromBox() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFromBox getFromBox()
 	{
 		return EnumFromBox.getEnum(getAttribute(AttributeName.FROMBOX, null, null));
@@ -399,7 +401,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	 * (5) set attribute ToBox
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setToBox(EToBox) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setToBox(EnumToBox enumVar)
@@ -411,7 +413,9 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	 * (9) get attribute ToBox
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EToBox getEToBox() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumToBox getToBox()
 	{
 		return EnumToBox.getEnum(getAttribute(AttributeName.TOBOX, null, null));

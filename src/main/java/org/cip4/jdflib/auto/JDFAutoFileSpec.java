@@ -603,7 +603,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 * (5) set attribute Disposition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDisposition(EDisposition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDisposition(EnumDisposition enumVar)
@@ -615,7 +615,9 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 * (9) get attribute Disposition
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDisposition getEDisposition() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDisposition getDisposition()
 	{
 		return EnumDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));
@@ -887,7 +889,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 * (5) set attribute OverwritePolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOverwritePolicy(EOverwritePolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOverwritePolicy(EnumOverwritePolicy enumVar)
@@ -899,7 +901,9 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 * (9) get attribute OverwritePolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOverwritePolicy getEOverwritePolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOverwritePolicy getOverwritePolicy()
 	{
 		return EnumOverwritePolicy.getEnum(getAttribute(AttributeName.OVERWRITEPOLICY, null, null));
@@ -958,7 +962,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 * (5) set attribute PageOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPageOrder(EPageOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPageOrder(EnumPageOrder enumVar)
@@ -970,7 +974,9 @@ public abstract class JDFAutoFileSpec extends JDFResource
 	 * (9) get attribute PageOrder
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPageOrder getEPageOrder() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPageOrder getPageOrder()
 	{
 		return EnumPageOrder.getEnum(getAttribute(AttributeName.PAGEORDER, null, null));

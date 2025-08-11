@@ -460,7 +460,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * (5) set attribute PatchUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPatchUsage(EPatchUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPatchUsage(EnumPatchUsage enumVar)
@@ -472,7 +472,9 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * (9) get attribute PatchUsage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPatchUsage getEPatchUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPatchUsage getPatchUsage()
 	{
 		return EnumPatchUsage.getEnum(getAttribute(AttributeName.PATCHUSAGE, null, null));
@@ -583,7 +585,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * (5) set attribute SpotType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSpotType(ESpotType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSpotType(EnumSpotType enumVar)
@@ -595,7 +597,9 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * (9) get attribute SpotType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESpotType getESpotType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSpotType getSpotType()
 	{
 		return EnumSpotType.getEnum(getAttribute(AttributeName.SPOTTYPE, null, null));

@@ -311,7 +311,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (5) set attribute Activation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setActivation(EActivation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setActivation(EnumActivation enumVar)
@@ -323,7 +323,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (9) get attribute Activation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EActivation getEActivation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumActivation getActivation()
 	{
 		return EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
@@ -382,7 +384,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (5) set attribute DeadLine
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDeadLine(EDeadLine) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeadLine(EnumDeadLine enumVar)
@@ -394,7 +396,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (9) get attribute DeadLine
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDeadLine getEDeadLine() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDeadLine getDeadLine()
 	{
 		return EnumDeadLine.getEnum(getAttribute(AttributeName.DEADLINE, null, null));

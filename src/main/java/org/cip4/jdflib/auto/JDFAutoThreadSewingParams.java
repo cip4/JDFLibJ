@@ -490,7 +490,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * (5) set attribute CastingMaterial
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCastingMaterial(ECastingMaterial) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCastingMaterial(EnumCastingMaterial enumVar)
@@ -502,7 +502,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * (9) get attribute CastingMaterial
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECastingMaterial getECastingMaterial() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCastingMaterial getCastingMaterial()
 	{
 		return EnumCastingMaterial.getEnum(getAttribute(AttributeName.CASTINGMATERIAL, null, null));
@@ -540,7 +542,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * (5) set attribute CoreMaterial
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCoreMaterial(ECoreMaterial) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCoreMaterial(EnumCoreMaterial enumVar)
@@ -552,7 +554,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * (9) get attribute CoreMaterial
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECoreMaterial getECoreMaterial() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCoreMaterial getCoreMaterial()
 	{
 		return EnumCoreMaterial.getEnum(getAttribute(AttributeName.COREMATERIAL, null, null));
@@ -712,7 +716,7 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * (5) set attribute SewingPattern
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSewingPattern(ESewingPattern) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSewingPattern(EnumSewingPattern enumVar)
@@ -724,7 +728,9 @@ public abstract class JDFAutoThreadSewingParams extends JDFResource
 	 * (9) get attribute SewingPattern
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESewingPattern getESewingPattern() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSewingPattern getSewingPattern()
 	{
 		return EnumSewingPattern.getEnum(getAttribute(AttributeName.SEWINGPATTERN, null, null));

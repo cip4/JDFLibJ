@@ -687,7 +687,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * (5) set attribute TransferFunctionInfo
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTransferFunctionInfo(ETransferFunctionInfo) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransferFunctionInfo(EnumTransferFunctionInfo enumVar)
@@ -699,7 +699,9 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * (9) get attribute TransferFunctionInfo
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETransferFunctionInfo getETransferFunctionInfo() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTransferFunctionInfo getTransferFunctionInfo()
 	{
 		return EnumTransferFunctionInfo.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONINFO, null, "Preserve"));
@@ -737,7 +739,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * (5) set attribute UCRandBGInfo
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setUCRandBGInfo(EUCRandBGInfo) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUCRandBGInfo(EnumUCRandBGInfo enumVar)
@@ -749,7 +751,9 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * (9) get attribute UCRandBGInfo
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EUCRandBGInfo getEUCRandBGInfo() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumUCRandBGInfo getUCRandBGInfo()
 	{
 		return EnumUCRandBGInfo.getEnum(getAttribute(AttributeName.UCRANDBGINFO, null, "Preserve"));

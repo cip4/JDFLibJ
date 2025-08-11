@@ -294,7 +294,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 * (5) set attribute TransferFunctionSource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTransferFunctionSource(ETransferFunctionSource) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransferFunctionSource(EnumTransferFunctionSource enumVar)
@@ -306,7 +306,9 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 * (9) get attribute TransferFunctionSource
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETransferFunctionSource getETransferFunctionSource() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTransferFunctionSource getTransferFunctionSource()
 	{
 		return EnumTransferFunctionSource.getEnum(getAttribute(AttributeName.TRANSFERFUNCTIONSOURCE, null, null));

@@ -299,7 +299,7 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	 * (5) set attribute Disposition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDisposition(EDisposition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDisposition(EnumDisposition enumVar)
@@ -311,7 +311,9 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	 * (9) get attribute Disposition
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDisposition getEDisposition() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDisposition getDisposition()
 	{
 		return EnumDisposition.getEnum(getAttribute(AttributeName.DISPOSITION, null, null));

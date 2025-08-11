@@ -293,7 +293,7 @@ public abstract class JDFAutoRectangleEvaluation extends JDFResource
 	 * (5) set attribute HWRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setHWRelation(EHWRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setHWRelation(EnumHWRelation enumVar)
@@ -305,7 +305,9 @@ public abstract class JDFAutoRectangleEvaluation extends JDFResource
 	 * (9) get attribute HWRelation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EHWRelation getEHWRelation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumHWRelation getHWRelation()
 	{
 		return EnumHWRelation.getEnum(getAttribute(AttributeName.HWRELATION, null, null));

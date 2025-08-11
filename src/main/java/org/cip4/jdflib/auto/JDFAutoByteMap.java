@@ -409,7 +409,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 * (5) set attribute BandOrdering
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBandOrdering(EBandOrdering) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBandOrdering(EnumBandOrdering enumVar)
@@ -421,7 +421,9 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 * (9) get attribute BandOrdering
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBandOrdering getEBandOrdering() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBandOrdering getBandOrdering()
 	{
 		return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
@@ -457,7 +459,7 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 * (5) set attribute ElementType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setElementType(EElementType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setElementType(EnumElementType enumVar)
@@ -469,7 +471,9 @@ public abstract class JDFAutoByteMap extends JDFResource
 	 * (9) get attribute ElementType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EElementType getEElementType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumElementType getElementType()
 	{
 		return EnumElementType.getEnum(getAttribute(AttributeName.ELEMENTTYPE, null, null));

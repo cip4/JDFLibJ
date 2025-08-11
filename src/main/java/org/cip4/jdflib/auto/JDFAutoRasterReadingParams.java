@@ -405,7 +405,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	 * (5) set attribute MirrorAround
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMirrorAround(EMirrorAround) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMirrorAround(EnumMirrorAround enumVar)
@@ -417,7 +417,9 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	 * (9) get attribute MirrorAround
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMirrorAround getEMirrorAround() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMirrorAround getMirrorAround()
 	{
 		return EnumMirrorAround.getEnum(getAttribute(AttributeName.MIRRORAROUND, null, "None"));
@@ -453,7 +455,7 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	 * (5) set attribute Polarity
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPolarity(EPolarity) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPolarity(EnumPolarity enumVar)
@@ -465,7 +467,9 @@ public abstract class JDFAutoRasterReadingParams extends JDFResource
 	 * (9) get attribute Polarity
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPolarity getEPolarity() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPolarity getPolarity()
 	{
 		return EnumPolarity.getEnum(getAttribute(AttributeName.POLARITY, null, "Positive"));

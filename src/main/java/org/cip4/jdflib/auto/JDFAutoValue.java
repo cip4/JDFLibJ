@@ -328,7 +328,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 * (5) set attribute ValueUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setValueUsage(EValueUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setValueUsage(EnumValueUsage enumVar)
@@ -340,7 +340,9 @@ public abstract class JDFAutoValue extends JDFElement
 	 * (9) get attribute ValueUsage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EValueUsage getEValueUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumValueUsage getValueUsage()
 	{
 		return EnumValueUsage.getEnum(getAttribute(AttributeName.VALUEUSAGE, null, null));

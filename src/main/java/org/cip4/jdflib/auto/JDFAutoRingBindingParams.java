@@ -473,7 +473,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 * (5) set attribute RingSystem
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setRingSystem(ERingSystem) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRingSystem(EnumRingSystem enumVar)
@@ -485,7 +485,9 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 	 * (9) get attribute RingSystem
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ERingSystem getERingSystem() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumRingSystem getRingSystem()
 	{
 		return EnumRingSystem.getEnum(getAttribute(AttributeName.RINGSYSTEM, null, null));

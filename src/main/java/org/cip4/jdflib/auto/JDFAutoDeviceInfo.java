@@ -415,7 +415,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (5) set attribute DeviceCondition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDeviceCondition(EDeviceCondition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceCondition(EnumDeviceCondition enumVar)
@@ -427,7 +427,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (9) get attribute DeviceCondition
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDeviceCondition getEDeviceCondition() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDeviceCondition getDeviceCondition()
 	{
 		return EnumDeviceCondition.getEnum(getAttribute(AttributeName.DEVICECONDITION, null, null));
@@ -488,7 +490,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (5) set attribute DeviceOperationMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDeviceOperationMode(EDeviceOperationMode) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
@@ -500,7 +502,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (9) get attribute DeviceOperationMode
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDeviceOperationMode getEDeviceOperationMode() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDeviceOperationMode getDeviceOperationMode()
 	{
 		return EnumDeviceOperationMode.getEnum(getAttribute(AttributeName.DEVICEOPERATIONMODE, null, null));
@@ -538,7 +542,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (5) set attribute DeviceStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDeviceStatus(EDeviceStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceStatus(EnumDeviceStatus enumVar)
@@ -550,7 +554,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (9) get attribute DeviceStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDeviceStatus getEDeviceStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDeviceStatus getDeviceStatus()
 	{
 		return EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));

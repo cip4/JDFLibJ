@@ -381,7 +381,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * (5) set attribute InsertLocation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setInsertLocation(EInsertLocation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setInsertLocation(EnumInsertLocation enumVar)
@@ -393,7 +393,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * (9) get attribute InsertLocation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EInsertLocation getEInsertLocation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumInsertLocation getInsertLocation()
 	{
 		return EnumInsertLocation.getEnum(getAttribute(AttributeName.INSERTLOCATION, null, null));
@@ -429,7 +431,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * (5) set attribute Method
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMethod(EMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMethod(EnumMethod enumVar)
@@ -441,7 +443,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * (9) get attribute Method
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMethod getEMethod() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMethod getMethod()
 	{
 		return EnumMethod.getEnum(getAttribute(AttributeName.METHOD, null, "BlowIn"));

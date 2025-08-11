@@ -181,180 +181,6 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	}
 
 	/**
-	 * Enumeration strings for MinLateStatus
-	 */
-
-	public enum EMinLateStatus
-	{
-		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
-
-		public static EMinLateStatus getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMinLateStatus.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for MinLateStatus
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMinLateStatus extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMinLateStatus(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMinLateStatus getEnum(String enumName)
-		{
-			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMinLateStatus getEnum(int enumValue)
-		{
-			return (EnumMinLateStatus) getEnum(EnumMinLateStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMinLateStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMinLateStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMinLateStatus.class);
-		}
-
-		/**  */
-		public static final EnumMinLateStatus Incomplete = new EnumMinLateStatus("Incomplete");
-		/**  */
-		public static final EnumMinLateStatus Rejected = new EnumMinLateStatus("Rejected");
-		/**  */
-		public static final EnumMinLateStatus Unavailable = new EnumMinLateStatus("Unavailable");
-		/**  */
-		public static final EnumMinLateStatus InUse = new EnumMinLateStatus("InUse");
-		/**  */
-		public static final EnumMinLateStatus Draft = new EnumMinLateStatus("Draft");
-		/**  */
-		public static final EnumMinLateStatus Complete = new EnumMinLateStatus("Complete");
-		/**  */
-		public static final EnumMinLateStatus Available = new EnumMinLateStatus("Available");
-	}
-
-	/**
-	 * Enumeration strings for MinStatus
-	 */
-
-	public enum EMinStatus
-	{
-		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
-
-		public static EMinStatus getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMinStatus.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for MinStatus
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMinStatus extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMinStatus(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMinStatus getEnum(String enumName)
-		{
-			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMinStatus getEnum(int enumValue)
-		{
-			return (EnumMinStatus) getEnum(EnumMinStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMinStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMinStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMinStatus.class);
-		}
-
-		/**  */
-		public static final EnumMinStatus Incomplete = new EnumMinStatus("Incomplete");
-		/**  */
-		public static final EnumMinStatus Rejected = new EnumMinStatus("Rejected");
-		/**  */
-		public static final EnumMinStatus Unavailable = new EnumMinStatus("Unavailable");
-		/**  */
-		public static final EnumMinStatus InUse = new EnumMinStatus("InUse");
-		/**  */
-		public static final EnumMinStatus Draft = new EnumMinStatus("Draft");
-		/**  */
-		public static final EnumMinStatus Complete = new EnumMinStatus("Complete");
-		/**  */
-		public static final EnumMinStatus Available = new EnumMinStatus("Available");
-	}
-
-	/**
 	 * Enumeration strings for Orientation
 	 */
 
@@ -597,7 +423,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMinLateStatus(EVersion enumVar)
+	public void setMinLateStatus(ENodeStatus enumVar)
 	{
 		setAttribute(AttributeName.MINLATESTATUS, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -607,9 +433,9 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EVersion getEMinLateStatus()
+	public ENodeStatus getEMinLateStatus()
 	{
-		return EVersion.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
+		return ENodeStatus.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
 	}
 
 	/*
@@ -620,7 +446,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * (5) set attribute MinLateStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMinLateStatus(ENodeStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMinLateStatus(EnumNodeStatus enumVar)
@@ -632,7 +458,9 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * (9) get attribute MinLateStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ENodeStatus getEMinLateStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumNodeStatus getMinLateStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
@@ -646,7 +474,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setMinStatus(EVersion enumVar)
+	public void setMinStatus(ENodeStatus enumVar)
 	{
 		setAttribute(AttributeName.MINSTATUS, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -656,9 +484,9 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public EVersion getEMinStatus()
+	public ENodeStatus getEMinStatus()
 	{
-		return EVersion.getEnum(getAttribute(AttributeName.MINSTATUS, null, null));
+		return ENodeStatus.getEnum(getAttribute(AttributeName.MINSTATUS, null, null));
 	}
 
 	/*
@@ -668,7 +496,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * (5) set attribute MinStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMinStatus(ENodeStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMinStatus(EnumNodeStatus enumVar)
@@ -680,7 +508,9 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * (9) get attribute MinStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ENodeStatus getEMinStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumNodeStatus getMinStatus()
 	{
 		return EnumNodeStatus.getEnum(getAttribute(AttributeName.MINSTATUS, null, null));
@@ -716,7 +546,7 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * (5) set attribute Orientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOrientation(EOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
@@ -728,7 +558,9 @@ public abstract class JDFAutoPartAmount extends JDFElement
 	 * (9) get attribute Orientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOrientation getEOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));

@@ -225,7 +225,7 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 * (5) set attribute DeviceStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDeviceStatus(JDFDeviceInfo.EDeviceStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceStatus(JDFDeviceInfo.EnumDeviceStatus enumVar)
@@ -237,7 +237,9 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 * (9) get attribute DeviceStatus
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFDeviceInfo.EDeviceStatus getEDeviceStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFDeviceInfo.EnumDeviceStatus getDeviceStatus()
 	{
 		return JDFDeviceInfo.EnumDeviceStatus.getEnum(getAttribute(AttributeName.DEVICESTATUS, null, null));

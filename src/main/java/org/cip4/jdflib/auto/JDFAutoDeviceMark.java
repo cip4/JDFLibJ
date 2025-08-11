@@ -697,7 +697,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (5) set attribute Anchor
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAnchor(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
@@ -709,7 +709,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute Anchor
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAnchor getEAnchor() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
@@ -793,7 +795,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (5) set attribute HorizontalFitPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setHorizontalFitPolicy(EHorizontalFitPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
@@ -805,7 +807,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute HorizontalFitPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EHorizontalFitPolicy getEHorizontalFitPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumHorizontalFitPolicy getHorizontalFitPolicy()
 	{
 		return EnumHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
@@ -843,7 +847,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (5) set attribute MarkJustification
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMarkJustification(EMarkJustification) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkJustification(EnumMarkJustification enumVar)
@@ -855,7 +859,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute MarkJustification
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMarkJustification getEMarkJustification() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMarkJustification getMarkJustification()
 	{
 		return EnumMarkJustification.getEnum(getAttribute(AttributeName.MARKJUSTIFICATION, null, null));
@@ -918,7 +924,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (5) set attribute MarkOrientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMarkOrientation(EMarkOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkOrientation(EnumMarkOrientation enumVar)
@@ -930,7 +936,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute MarkOrientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMarkOrientation getEMarkOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMarkOrientation getMarkOrientation()
 	{
 		return EnumMarkOrientation.getEnum(getAttribute(AttributeName.MARKORIENTATION, null, null));
@@ -968,7 +976,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (5) set attribute MarkPosition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMarkPosition(EMarkPosition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkPosition(EnumMarkPosition enumVar)
@@ -980,7 +988,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute MarkPosition
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMarkPosition getEMarkPosition() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMarkPosition getMarkPosition()
 	{
 		return EnumMarkPosition.getEnum(getAttribute(AttributeName.MARKPOSITION, null, null));
@@ -1018,7 +1028,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (5) set attribute VerticalFitPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setVerticalFitPolicy(EVerticalFitPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
@@ -1030,7 +1040,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute VerticalFitPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EVerticalFitPolicy getEVerticalFitPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumVerticalFitPolicy getVerticalFitPolicy()
 	{
 		return EnumVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));

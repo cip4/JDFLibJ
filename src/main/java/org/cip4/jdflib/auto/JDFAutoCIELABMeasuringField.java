@@ -363,7 +363,7 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 	 * (5) set attribute DensityStandard
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDensityStandard(EDensityStandard) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDensityStandard(EnumDensityStandard enumVar)
@@ -375,7 +375,9 @@ public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 	 * (9) get attribute DensityStandard
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDensityStandard getEDensityStandard() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDensityStandard getDensityStandard()
 	{
 		return EnumDensityStandard.getEnum(getAttribute(AttributeName.DENSITYSTANDARD, null, null));

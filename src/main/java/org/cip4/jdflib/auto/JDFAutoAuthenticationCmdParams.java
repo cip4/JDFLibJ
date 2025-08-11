@@ -366,7 +366,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * (5) set attribute AuthenticationType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAuthenticationType(EAuthenticationType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAuthenticationType(EnumAuthenticationType enumVar)
@@ -378,7 +378,9 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * (9) get attribute AuthenticationType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAuthenticationType getEAuthenticationType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAuthenticationType getAuthenticationType()
 	{
 		return EnumAuthenticationType.getEnum(getAttribute(AttributeName.AUTHENTICATIONTYPE, null, null));
@@ -414,7 +416,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * (5) set attribute Reason
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setReason(EReason) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setReason(EnumReason enumVar)
@@ -426,7 +428,9 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * (9) get attribute Reason
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EReason getEReason() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumReason getReason()
 	{
 		return EnumReason.getEnum(getAttribute(AttributeName.REASON, null, null));

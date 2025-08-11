@@ -92,6 +92,7 @@ import org.cip4.jdflib.resource.process.JDFSourceResource;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFMerge;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
@@ -870,9 +871,9 @@ public class JDFResource extends JDFElement
 	{
 		Incomplete, Rejected, Unavailable, InUse, Draft, Complete, Available;
 
-		public static EResourceClass getEnum(final String name)
+		public static EResStatus getEnum(final String name)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(EResourceClass.class, name);
+			return EnumUtil.getJavaEnumIgnoreCase(EResStatus.class, name);
 		}
 	}
 
@@ -942,6 +943,26 @@ public class JDFResource extends JDFElement
 		public static final EnumLotControl NotControlled = new EnumLotControl(JDFConstants.LOTCONTROL_NOTCONTROLLED);
 	}
 
+	public enum ELotControl
+	{
+		Controlled, NotControlled;
+
+		public static ELotControl getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(ELotControl.class, name);
+		}
+	}
+
+	public enum EPartUsage
+	{
+		Explicit, Sparse, Implicit;
+
+		public static EPartUsage getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(EPartUsage.class, name);
+		}
+	}
+
 	/**
 	 * Enumeration for attribute PartUsage
 	 */
@@ -961,13 +982,7 @@ public class JDFResource extends JDFElement
 		 */
 		public static EnumPartUsage getEnum(final String enumName)
 		{
-			if ("Implicit".equals(enumName))
-				return EnumPartUsage.Implicit;
-			else if ("Explicit".equals(enumName))
-				return EnumPartUsage.Explicit;
-			else if ("Sparse".equals(enumName))
-				return EnumPartUsage.Sparse;
-			return null;
+			return (EnumPartUsage) EnumUtil.getEnumIgnoreCase(EnumPartUsage.class, enumName);
 		}
 
 		/**
@@ -1017,6 +1032,16 @@ public class JDFResource extends JDFElement
 		 *
 		 */
 		public static final EnumPartUsage Implicit = new EnumPartUsage(JDFConstants.PARTUSAGE_IMPLICIT);
+	}
+
+	public enum EPartIDKey
+	{
+		BinderySignatureName, BinderySignaturePaginationIndex, BlockName, BundleItemIndex, CellIndex, Condition, DeliveryUnit0, DeliveryUnit1, DeliveryUnit2, DeliveryUnit3, DeliveryUnit4, DeliveryUnit5, DeliveryUnit6, DeliveryUnit7, DeliveryUnit8, DeliveryUnit9, DocCopies, DocIndex, DocRunIndex, DocSheetIndex, DocTags, Edition, EditionVersion, FountainNumber, ItemNames, LayerIDs, Location, Metadata0, Metadata1, Metadata2, Metadata3, Metadata4, Metadata5, Metadata6, Metadata7, Metadata8, Metadata9, Option, PageNumber, PageTags, PlateLayout, PartVersion, PreflightRule, ProductPart, PreviewType, RibbonName, Run, RunIndex, RunPage, RunTags, RunSet, SectionIndex, Separation, SetCopies, SetDocIndex, SetIndex, SetRunIndex, SetSheetIndex, SetTags, SheetIndex, SheetName, Side, SignatureName, StationName, SubRun, TileID, WebName, WebProduct, WebSetup;
+
+		public static EPartIDKey getEnum(final String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPartIDKey.class, val, null);
+		}
 	}
 
 	/**
@@ -6240,7 +6265,7 @@ public class JDFResource extends JDFElement
 	public Vector<EnumPartIDKey> getPipePartIDKeysEnum()
 	{
 		final VString vPartIDKeys = getPartIDKeys();
-		final Vector<EnumPartIDKey> v = (Vector<EnumPartIDKey>) getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
+		final Vector<EnumPartIDKey> v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
 		if (v != null)
 		{
 			for (final EnumPartIDKey p : v)

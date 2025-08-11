@@ -339,7 +339,7 @@ public abstract class JDFAutoCommand extends JDFMessage
 	/**
 	 * (9.2) get AcknowledgeType attribute AcknowledgeType
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EAcknowledgeType> getEnumsAcknowledgeType()
 	{
@@ -354,7 +354,7 @@ public abstract class JDFAutoCommand extends JDFMessage
 	 * (5.2) set attribute AcknowledgeType
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEAcknowledgeType(List<EAcknowledgeType>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAcknowledgeType(List<EnumAcknowledgeType> v)
@@ -366,7 +366,9 @@ public abstract class JDFAutoCommand extends JDFMessage
 	 * (9.2) get AcknowledgeType attribute AcknowledgeType
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EAcknowledgeType> getEnumsAcknowledgeType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumAcknowledgeType> getAcknowledgeType()
 	{
 		return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);

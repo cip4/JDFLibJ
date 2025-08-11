@@ -339,7 +339,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * (5) set attribute DispositionAction
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDispositionAction(EDispositionAction) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDispositionAction(EnumDispositionAction enumVar)
@@ -351,7 +351,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * (9) get attribute DispositionAction
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDispositionAction getEDispositionAction() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDispositionAction getDispositionAction()
 	{
 		return EnumDispositionAction.getEnum(getAttribute(AttributeName.DISPOSITIONACTION, null, "Delete"));
@@ -389,7 +391,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * (5) set attribute DispositionUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDispositionUsage(EDispositionUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDispositionUsage(EnumDispositionUsage enumVar)
@@ -401,7 +403,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * (9) get attribute DispositionUsage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDispositionUsage getEDispositionUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDispositionUsage getDispositionUsage()
 	{
 		return EnumDispositionUsage.getEnum(getAttribute(AttributeName.DISPOSITIONUSAGE, null, null));

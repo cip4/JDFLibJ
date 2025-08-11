@@ -309,7 +309,7 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 * (5) set attribute CannotEmbedFontPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCannotEmbedFontPolicy(ECannotEmbedFontPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCannotEmbedFontPolicy(EnumCannotEmbedFontPolicy enumVar)
@@ -321,7 +321,9 @@ public abstract class JDFAutoFontParams extends JDFResource
 	 * (9) get attribute CannotEmbedFontPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECannotEmbedFontPolicy getECannotEmbedFontPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCannotEmbedFontPolicy getCannotEmbedFontPolicy()
 	{
 		return EnumCannotEmbedFontPolicy.getEnum(getAttribute(AttributeName.CANNOTEMBEDFONTPOLICY, null, "Warning"));

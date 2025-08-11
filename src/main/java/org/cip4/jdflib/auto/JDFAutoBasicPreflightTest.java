@@ -373,7 +373,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	 * (5) set attribute ListType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setListType(EListType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setListType(EnumListType enumVar)
@@ -385,7 +385,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	 * (9) get attribute ListType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EListType getEListType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumListType getListType()
 	{
 		return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, "SingleValue"));

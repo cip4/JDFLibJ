@@ -390,7 +390,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * (5) set attribute Context
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setContext(EContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setContext(EnumContext enumVar)
@@ -402,7 +402,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * (9) get attribute Context
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EContext getEContext() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumContext getContext()
 	{
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "PagePool"));
@@ -438,7 +440,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * (5) set attribute DataType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDataType(EDataType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDataType(EnumDataType enumVar)
@@ -450,7 +452,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * (9) get attribute DataType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDataType getEDataType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDataType getDataType()
 	{
 		return EnumDataType.getEnum(getAttribute(AttributeName.DATATYPE, null, null));

@@ -255,7 +255,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	 * (5) set attribute AuthenticationType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAuthenticationType(EAuthenticationType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAuthenticationType(EnumAuthenticationType enumVar)
@@ -267,7 +267,9 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	 * (9) get attribute AuthenticationType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAuthenticationType getEAuthenticationType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAuthenticationType getAuthenticationType()
 	{
 		return EnumAuthenticationType.getEnum(getAttribute(AttributeName.AUTHENTICATIONTYPE, null, null));

@@ -336,7 +336,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 * (5) set attribute StapleShape
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setStapleShape(EStapleShape) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStapleShape(EnumStapleShape enumVar)
@@ -348,7 +348,9 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 * (9) get attribute StapleShape
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EStapleShape getEStapleShape() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumStapleShape getStapleShape()
 	{
 		return EnumStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));

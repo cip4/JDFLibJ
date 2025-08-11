@@ -371,7 +371,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	 * (5) set attribute PalletWrapping
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPalletWrapping(EPalletWrapping) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPalletWrapping(EnumPalletWrapping enumVar)
@@ -383,7 +383,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	 * (9) get attribute PalletWrapping
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPalletWrapping getEPalletWrapping() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPalletWrapping getPalletWrapping()
 	{
 		return EnumPalletWrapping.getEnum(getAttribute(AttributeName.PALLETWRAPPING, null, "None"));
@@ -686,7 +688,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	 * (5) set attribute PalletType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPalletType(EPalletType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPalletType(EnumPalletType enumVar)
@@ -698,7 +700,9 @@ public abstract class JDFAutoPackingParams extends JDFResource
 	 * (9) get attribute PalletType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPalletType getEPalletType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPalletType getPalletType()
 	{
 		return EnumPalletType.getEnum(getAttribute(AttributeName.PALLETTYPE, null, null));

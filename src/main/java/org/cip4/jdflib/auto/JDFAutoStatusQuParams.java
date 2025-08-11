@@ -368,7 +368,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * (5) set attribute DeviceDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDeviceDetails(EDeviceDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceDetails(EnumDeviceDetails enumVar)
@@ -380,7 +380,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * (9) get attribute DeviceDetails
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDeviceDetails getEDeviceDetails() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDeviceDetails getDeviceDetails()
 	{
 		return EnumDeviceDetails.getEnum(getAttribute(AttributeName.DEVICEDETAILS, null, "None"));
@@ -440,7 +442,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * (5) set attribute JobDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setJobDetails(EJobDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setJobDetails(EnumJobDetails enumVar)
@@ -452,7 +454,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * (9) get attribute JobDetails
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EJobDetails getEJobDetails() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumJobDetails getJobDetails()
 	{
 		return EnumJobDetails.getEnum(getAttribute(AttributeName.JOBDETAILS, null, "None"));

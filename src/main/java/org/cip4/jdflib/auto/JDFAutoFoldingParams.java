@@ -373,7 +373,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * (5) set attribute SheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetLay(ESheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -385,7 +385,9 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * (9) get attribute SheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetLay getESheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, "Left"));
@@ -423,7 +425,7 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * (5) set attribute DescriptionType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDescriptionType(EDescriptionType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDescriptionType(EnumDescriptionType enumVar)
@@ -435,7 +437,9 @@ public abstract class JDFAutoFoldingParams extends JDFResource
 	 * (9) get attribute DescriptionType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDescriptionType getEDescriptionType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDescriptionType getDescriptionType()
 	{
 		return EnumDescriptionType.getEnum(getAttribute(AttributeName.DESCRIPTIONTYPE, null, null));

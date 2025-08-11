@@ -425,7 +425,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	 * (5) set attribute Material
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMaterial(EMaterial) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMaterial(EnumMaterial enumVar)
@@ -437,7 +437,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	 * (9) get attribute Material
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMaterial getEMaterial() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMaterial getMaterial()
 	{
 		return EnumMaterial.getEnum(getAttribute(AttributeName.MATERIAL, null, null));

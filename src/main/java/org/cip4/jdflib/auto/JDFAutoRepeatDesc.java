@@ -268,7 +268,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 * (5) set attribute AllowedRotate
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAllowedRotate(EAllowedRotate) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAllowedRotate(EnumAllowedRotate enumVar)
@@ -280,7 +280,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 * (9) get attribute AllowedRotate
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAllowedRotate getEAllowedRotate() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAllowedRotate getAllowedRotate()
 	{
 		return EnumAllowedRotate.getEnum(getAttribute(AttributeName.ALLOWEDROTATE, null, null));

@@ -281,7 +281,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 * (5) set attribute StrappingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setStrappingType(EStrappingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStrappingType(EnumStrappingType enumVar)
@@ -293,7 +293,9 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 * (9) get attribute StrappingType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EStrappingType getEStrappingType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumStrappingType getStrappingType()
 	{
 		return EnumStrappingType.getEnum(getAttribute(AttributeName.STRAPPINGTYPE, null, null));

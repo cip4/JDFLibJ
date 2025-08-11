@@ -409,7 +409,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (5) set attribute DieSide
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDieSide(EDieSide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDieSide(EnumDieSide enumVar)
@@ -421,7 +421,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (9) get attribute DieSide
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDieSide getEDieSide() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDieSide getDieSide()
 	{
 		return EnumDieSide.getEnum(getAttribute(AttributeName.DIESIDE, null, null));
@@ -457,7 +459,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (5) set attribute MediaSide
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMediaSide(EMediaSide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMediaSide(EnumMediaSide enumVar)
@@ -469,7 +471,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (9) get attribute MediaSide
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMediaSide getEMediaSide() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMediaSide getMediaSide()
 	{
 		return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));

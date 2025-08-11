@@ -495,7 +495,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (5) set attribute Binding
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBinding(EBinding) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBinding(EnumBinding enumVar)
@@ -507,7 +507,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (9) get attribute Binding
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBinding getEBinding() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBinding getBinding()
 	{
 		return EnumBinding.getEnum(getAttribute(AttributeName.BINDING, null, "Left"));
@@ -615,7 +617,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (5) set attribute AutoRotatePages
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAutoRotatePages(EAutoRotatePages) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAutoRotatePages(EnumAutoRotatePages enumVar)
@@ -627,7 +629,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (9) get attribute AutoRotatePages
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAutoRotatePages getEAutoRotatePages() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAutoRotatePages getAutoRotatePages()
 	{
 		return EnumAutoRotatePages.getEnum(getAttribute(AttributeName.AUTOROTATEPAGES, null, null));
@@ -689,7 +693,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (5) set attribute DefaultRenderingIntent
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDefaultRenderingIntent(EDefaultRenderingIntent) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDefaultRenderingIntent(EnumDefaultRenderingIntent enumVar)
@@ -701,7 +705,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (9) get attribute DefaultRenderingIntent
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDefaultRenderingIntent getEDefaultRenderingIntent() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDefaultRenderingIntent getDefaultRenderingIntent()
 	{
 		return EnumDefaultRenderingIntent.getEnum(getAttribute(AttributeName.DEFAULTRENDERINGINTENT, null, null));

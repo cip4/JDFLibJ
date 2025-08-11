@@ -476,7 +476,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * (5) set attribute CutType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCutType(ECutType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCutType(EnumCutType enumVar)
@@ -488,7 +488,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * (9) get attribute CutType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECutType getECutType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCutType getCutType()
 	{
 		return EnumCutType.getEnum(getAttribute(AttributeName.CUTTYPE, null, "Cut"));
@@ -593,7 +595,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * (5) set attribute ShapeType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setShapeType(EShapeType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setShapeType(EnumShapeType enumVar)
@@ -605,7 +607,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * (9) get attribute ShapeType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EShapeType getEShapeType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumShapeType getShapeType()
 	{
 		return EnumShapeType.getEnum(getAttribute(AttributeName.SHAPETYPE, null, null));

@@ -297,7 +297,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * (5) set attribute Availability
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAvailability(JDFDeviceCap.EAvailability) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
@@ -309,7 +309,9 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * (9) get attribute Availability
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFDeviceCap.EAvailability getEAvailability() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFDeviceCap.EnumAvailability getAvailability()
 	{
 		return JDFDeviceCap.EnumAvailability.getEnum(getAttribute(AttributeName.AVAILABILITY, null, "Installed"));
@@ -345,7 +347,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * (5) set attribute Context
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setContext(EContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setContext(EnumContext enumVar)
@@ -357,7 +359,9 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * (9) get attribute Context
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EContext getEContext() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumContext getContext()
 	{
 		return EnumContext.getEnum(getAttribute(AttributeName.CONTEXT, null, "Resource"));
@@ -467,7 +471,7 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * (5) set attribute LinkUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setLinkUsage(JDFResourceLink.EUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLinkUsage(JDFResourceLink.EnumUsage enumVar)
@@ -479,7 +483,9 @@ public abstract class JDFAutoDevCaps extends JDFElement
 	 * (9) get attribute LinkUsage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFResourceLink.EUsage getELinkUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFResourceLink.EnumUsage getLinkUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.LINKUSAGE, null, null));

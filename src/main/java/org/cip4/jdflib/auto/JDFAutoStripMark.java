@@ -775,7 +775,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (5) set attribute Anchor
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAnchor(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
@@ -787,7 +787,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (9) get attribute Anchor
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAnchor getEAnchor() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAnchor getAnchor()
 	{
 		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
@@ -871,7 +873,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (5) set attribute HorizontalFitPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setHorizontalFitPolicy(EHorizontalFitPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
@@ -883,7 +885,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (9) get attribute HorizontalFitPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EHorizontalFitPolicy getEHorizontalFitPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumHorizontalFitPolicy getHorizontalFitPolicy()
 	{
 		return EnumHorizontalFitPolicy.getEnum(getAttribute(AttributeName.HORIZONTALFITPOLICY, null, null));
@@ -944,7 +948,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (5) set attribute MarkContext
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMarkContext(EMarkContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkContext(EnumMarkContext enumVar)
@@ -956,7 +960,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (9) get attribute MarkContext
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMarkContext getEMarkContext() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMarkContext getMarkContext()
 	{
 		return EnumMarkContext.getEnum(getAttribute(AttributeName.MARKCONTEXT, null, null));
@@ -1015,7 +1021,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (5) set attribute MarkSide
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMarkSide(EMarkSide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkSide(EnumMarkSide enumVar)
@@ -1027,7 +1033,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (9) get attribute MarkSide
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMarkSide getEMarkSide() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMarkSide getMarkSide()
 	{
 		return EnumMarkSide.getEnum(getAttribute(AttributeName.MARKSIDE, null, null));
@@ -1111,7 +1119,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (5) set attribute Orientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOrientation(EOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
@@ -1123,7 +1131,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (9) get attribute Orientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOrientation getEOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
@@ -1233,7 +1243,7 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (5) set attribute VerticalFitPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setVerticalFitPolicy(EVerticalFitPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
@@ -1245,7 +1255,9 @@ public abstract class JDFAutoStripMark extends JDFElement
 	 * (9) get attribute VerticalFitPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EVerticalFitPolicy getEVerticalFitPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumVerticalFitPolicy getVerticalFitPolicy()
 	{
 		return EnumVerticalFitPolicy.getEnum(getAttribute(AttributeName.VERTICALFITPOLICY, null, null));

@@ -295,7 +295,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * (5) set attribute DefaultPriority
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDefaultPriority(EDefaultPriority) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDefaultPriority(EnumDefaultPriority enumVar)
@@ -307,7 +307,9 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * (9) get attribute DefaultPriority
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDefaultPriority getEDefaultPriority() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDefaultPriority getDefaultPriority()
 	{
 		return EnumDefaultPriority.getEnum(getAttribute(AttributeName.DEFAULTPRIORITY, null, "DefaultJDF"));

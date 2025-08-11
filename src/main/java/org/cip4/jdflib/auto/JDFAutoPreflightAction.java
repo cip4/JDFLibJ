@@ -257,7 +257,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 * (5) set attribute SetSplitBy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSetSplitBy(ESetSplitBy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSetSplitBy(EnumSetSplitBy enumVar)
@@ -269,7 +269,9 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 * (9) get attribute SetSplitBy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESetSplitBy getESetSplitBy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSetSplitBy getSetSplitBy()
 	{
 		return EnumSetSplitBy.getEnum(getAttribute(AttributeName.SETSPLITBY, null, "RunList"));

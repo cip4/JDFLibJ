@@ -442,7 +442,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 * (5) set attribute BlockType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBlockType(EBlockType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBlockType(EnumBlockType enumVar)
@@ -454,7 +454,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 * (9) get attribute BlockType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBlockType getEBlockType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBlockType getBlockType()
 	{
 		return EnumBlockType.getEnum(getAttribute(AttributeName.BLOCKTYPE, null, null));
@@ -544,7 +546,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 * (5) set attribute BlockElementType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBlockElementType(EBlockElementType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBlockElementType(EnumBlockElementType enumVar)
@@ -556,7 +558,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 * (9) get attribute BlockElementType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBlockElementType getEBlockElementType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBlockElementType getBlockElementType()
 	{
 		return EnumBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));

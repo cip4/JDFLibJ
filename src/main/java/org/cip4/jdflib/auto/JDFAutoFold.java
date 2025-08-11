@@ -333,7 +333,7 @@ public abstract class JDFAutoFold extends JDFElement
 	 * (5) set attribute From
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFrom(EFrom) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFrom(EnumFrom enumVar)
@@ -345,7 +345,9 @@ public abstract class JDFAutoFold extends JDFElement
 	 * (9) get attribute From
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFrom getEFrom() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFrom getFrom()
 	{
 		return EnumFrom.getEnum(getAttribute(AttributeName.FROM, null, null));
@@ -405,7 +407,7 @@ public abstract class JDFAutoFold extends JDFElement
 	 * (5) set attribute To
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTo(ETo) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTo(EnumTo enumVar)
@@ -417,7 +419,9 @@ public abstract class JDFAutoFold extends JDFElement
 	 * (9) get attribute To
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETo getETo() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTo getTo()
 	{
 		return EnumTo.getEnum(getAttribute(AttributeName.TO, null, null));

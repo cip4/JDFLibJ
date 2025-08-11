@@ -346,7 +346,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * (5) set attribute PositionX
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPositionX(EPositionX) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPositionX(EnumPositionX enumVar)
@@ -358,7 +358,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * (9) get attribute PositionX
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPositionX getEPositionX() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPositionX getPositionX()
 	{
 		return EnumPositionX.getEnum(getAttribute(AttributeName.POSITIONX, null, null));
@@ -394,7 +396,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * (5) set attribute PositionY
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPositionY(EPositionY) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPositionY(EnumPositionY enumVar)
@@ -406,7 +408,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * (9) get attribute PositionY
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPositionY getEPositionY() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPositionY getPositionY()
 	{
 		return EnumPositionY.getEnum(getAttribute(AttributeName.POSITIONY, null, null));

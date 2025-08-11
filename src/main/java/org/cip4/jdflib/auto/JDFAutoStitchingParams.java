@@ -611,7 +611,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (5) set attribute StitchOrigin
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setStitchOrigin(EStitchOrigin) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStitchOrigin(EnumStitchOrigin enumVar)
@@ -623,7 +623,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute StitchOrigin
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EStitchOrigin getEStitchOrigin() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumStitchOrigin getStitchOrigin()
 	{
 		return EnumStitchOrigin.getEnum(getAttribute(AttributeName.STITCHORIGIN, null, "UntrimmedJogSide"));
@@ -731,7 +733,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (5) set attribute ReferenceEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setReferenceEdge(EReferenceEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setReferenceEdge(EnumReferenceEdge enumVar)
@@ -743,7 +745,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute ReferenceEdge
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EReferenceEdge getEReferenceEdge() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumReferenceEdge getReferenceEdge()
 	{
 		return EnumReferenceEdge.getEnum(getAttribute(AttributeName.REFERENCEEDGE, null, null));
@@ -779,7 +783,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (5) set attribute StapleShape
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setStapleShape(EStapleShape) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStapleShape(EnumStapleShape enumVar)
@@ -791,7 +795,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute StapleShape
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EStapleShape getEStapleShape() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumStapleShape getStapleShape()
 	{
 		return EnumStapleShape.getEnum(getAttribute(AttributeName.STAPLESHAPE, null, null));
@@ -877,7 +883,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (5) set attribute StitchType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setStitchType(EStitchType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStitchType(EnumStitchType enumVar)
@@ -889,7 +895,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute StitchType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EStitchType getEStitchType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumStitchType getStitchType()
 	{
 		return EnumStitchType.getEnum(getAttribute(AttributeName.STITCHTYPE, null, null));
@@ -950,7 +958,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (5) set attribute TightBacking
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTightBacking(ETightBacking) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTightBacking(EnumTightBacking enumVar)
@@ -962,7 +970,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute TightBacking
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETightBacking getETightBacking() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTightBacking getTightBacking()
 	{
 		return EnumTightBacking.getEnum(getAttribute(AttributeName.TIGHTBACKING, null, null));

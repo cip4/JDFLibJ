@@ -290,7 +290,7 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * (5) set attribute Class
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setClass(EClass) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setClass(EnumClass enumVar)

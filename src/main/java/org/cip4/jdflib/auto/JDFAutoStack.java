@@ -281,7 +281,7 @@ public abstract class JDFAutoStack extends JDFElement
 	 * (5) set attribute LogicalStackSequence
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setLogicalStackSequence(ELogicalStackSequence) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLogicalStackSequence(EnumLogicalStackSequence enumVar)
@@ -293,7 +293,9 @@ public abstract class JDFAutoStack extends JDFElement
 	 * (9) get attribute LogicalStackSequence
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ELogicalStackSequence getELogicalStackSequence() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumLogicalStackSequence getLogicalStackSequence()
 	{
 		return EnumLogicalStackSequence.getEnum(getAttribute(AttributeName.LOGICALSTACKSEQUENCE, null, "SheetIndex"));

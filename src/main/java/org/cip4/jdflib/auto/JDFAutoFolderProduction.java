@@ -280,7 +280,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 * (5) set attribute ProductionType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setProductionType(EProductionType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProductionType(EnumProductionType enumVar)
@@ -292,7 +292,9 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 * (9) get attribute ProductionType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EProductionType getEProductionType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumProductionType getProductionType()
 	{
 		return EnumProductionType.getEnum(getAttribute(AttributeName.PRODUCTIONTYPE, null, "NonCollect"));

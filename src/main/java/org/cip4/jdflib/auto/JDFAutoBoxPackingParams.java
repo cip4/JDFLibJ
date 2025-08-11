@@ -369,7 +369,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * (5) set attribute BoxType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBoxType(EBoxType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBoxType(EnumBoxType enumVar)
@@ -381,7 +381,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * (9) get attribute BoxType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBoxType getEBoxType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBoxType getBoxType()
 	{
 		return EnumBoxType.getEnum(getAttribute(AttributeName.BOXTYPE, null, null));
@@ -490,7 +492,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * (5) set attribute ComponentOrientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setComponentOrientation(EComponentOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setComponentOrientation(EnumComponentOrientation enumVar)
@@ -502,7 +504,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * (9) get attribute ComponentOrientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EComponentOrientation getEComponentOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumComponentOrientation getComponentOrientation()
 	{
 		return EnumComponentOrientation.getEnum(getAttribute(AttributeName.COMPONENTORIENTATION, null, null));

@@ -938,7 +938,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (5) set attribute Collate
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCollate(ECollate) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCollate(EnumCollate enumVar)
@@ -950,7 +950,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (9) get attribute Collate
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECollate getECollate() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCollate getCollate()
 	{
 		return EnumCollate.getEnum(getAttribute(AttributeName.COLLATE, null, null));
@@ -988,7 +990,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (5) set attribute FeedSheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFeedSheetLay(EFeedSheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFeedSheetLay(EnumFeedSheetLay enumVar)
@@ -1000,7 +1002,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (9) get attribute FeedSheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFeedSheetLay getEFeedSheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFeedSheetLay getFeedSheetLay()
 	{
 		return EnumFeedSheetLay.getEnum(getAttribute(AttributeName.FEEDSHEETLAY, null, null));
@@ -1160,7 +1164,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (5) set attribute PageDelivery
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPageDelivery(EPageDelivery) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPageDelivery(EnumPageDelivery enumVar)
@@ -1172,7 +1176,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (9) get attribute PageDelivery
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPageDelivery getEPageDelivery() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPageDelivery getPageDelivery()
 	{
 		return EnumPageDelivery.getEnum(getAttribute(AttributeName.PAGEDELIVERY, null, null));
@@ -1208,7 +1214,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (5) set attribute PrintPass
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPrintPass(EPrintPass) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintPass(EnumPrintPass enumVar)
@@ -1220,7 +1226,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (9) get attribute PrintPass
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPrintPass getEPrintPass() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPrintPass getPrintPass()
 	{
 		return EnumPrintPass.getEnum(getAttribute(AttributeName.PRINTPASS, null, null));
@@ -1258,7 +1266,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (5) set attribute PrintQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPrintQuality(EPrintQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintQuality(EnumPrintQuality enumVar)
@@ -1270,7 +1278,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (9) get attribute PrintQuality
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPrintQuality getEPrintQuality() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPrintQuality getPrintQuality()
 	{
 		return EnumPrintQuality.getEnum(getAttribute(AttributeName.PRINTQUALITY, null, null));
@@ -1308,7 +1318,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (5) set attribute PrintingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPrintingType(EPrintingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintingType(EnumPrintingType enumVar)
@@ -1320,7 +1330,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (9) get attribute PrintingType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPrintingType getEPrintingType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPrintingType getPrintingType()
 	{
 		return EnumPrintingType.getEnum(getAttribute(AttributeName.PRINTINGTYPE, null, null));
@@ -1356,7 +1368,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (5) set attribute SheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSheetLay(ESheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -1368,7 +1380,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (9) get attribute SheetLay
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESheetLay getESheetLay() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSheetLay getSheetLay()
 	{
 		return EnumSheetLay.getEnum(getAttribute(AttributeName.SHEETLAY, null, null));
@@ -1404,7 +1418,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (5) set attribute Sides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSides(ESides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSides(EnumSides enumVar)
@@ -1416,7 +1430,9 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 	 * (9) get attribute Sides
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESides getESides() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSides getSides()
 	{
 		return EnumSides.getEnum(getAttribute(AttributeName.SIDES, null, null));

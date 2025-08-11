@@ -377,7 +377,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 * (5) set attribute StitchingPosition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setStitchingPosition(EStitchingPosition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStitchingPosition(EnumStitchingPosition enumVar)
@@ -389,7 +389,9 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 * (9) get attribute StitchingPosition
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EStitchingPosition getEStitchingPosition() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumStitchingPosition getStitchingPosition()
 	{
 		return EnumStitchingPosition.getEnum(getAttribute(AttributeName.STITCHINGPOSITION, null, null));
@@ -427,7 +429,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 * (5) set attribute StitchingReferenceEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setStitchingReferenceEdge(EStitchingReferenceEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStitchingReferenceEdge(EnumStitchingReferenceEdge enumVar)
@@ -439,7 +441,9 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 * (9) get attribute StitchingReferenceEdge
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EStitchingReferenceEdge getEStitchingReferenceEdge() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumStitchingReferenceEdge getStitchingReferenceEdge()
 	{
 		return EnumStitchingReferenceEdge.getEnum(getAttribute(AttributeName.STITCHINGREFERENCEEDGE, null, null));

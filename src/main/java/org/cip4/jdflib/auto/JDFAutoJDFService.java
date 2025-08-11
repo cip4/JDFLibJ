@@ -345,7 +345,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 * (5) set attribute CombinedMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCombinedMethod(ECombinedMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCombinedMethod(EnumCombinedMethod enumVar)
@@ -357,7 +357,9 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 * (9) get attribute CombinedMethod
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECombinedMethod getECombinedMethod() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCombinedMethod getCombinedMethod()
 	{
 		return EnumCombinedMethod.getEnum(getAttribute(AttributeName.COMBINEDMETHOD, null, null));
@@ -416,7 +418,7 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 * (5) set attribute TypeOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTypeOrder(ETypeOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTypeOrder(EnumTypeOrder enumVar)
@@ -428,7 +430,9 @@ public abstract class JDFAutoJDFService extends JDFElement
 	 * (9) get attribute TypeOrder
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETypeOrder getETypeOrder() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTypeOrder getTypeOrder()
 	{
 		return EnumTypeOrder.getEnum(getAttribute(AttributeName.TYPEORDER, null, null));

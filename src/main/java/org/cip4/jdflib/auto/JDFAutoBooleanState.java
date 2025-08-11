@@ -341,7 +341,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	/**
 	 * (9.2) get AllowedValueList attribute AllowedValueList
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EAllowedValueList> getEnumsAllowedValueList()
 	{
@@ -356,7 +356,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * (5.2) set attribute AllowedValueList
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEAllowedValueList(List<EAllowedValueList>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAllowedValueList(List<EnumAllowedValueList> v)
@@ -368,7 +368,9 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * (9.2) get AllowedValueList attribute AllowedValueList
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EAllowedValueList> getEnumsAllowedValueList() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumAllowedValueList> getAllowedValueList()
 	{
 		return getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumAllowedValueList.getEnum(0), false);
@@ -439,7 +441,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	/**
 	 * (9.2) get PresentValueList attribute PresentValueList
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EPresentValueList> getEnumsPresentValueList()
 	{
@@ -454,7 +456,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * (5.2) set attribute PresentValueList
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEPresentValueList(List<EPresentValueList>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPresentValueList(List<EnumPresentValueList> v)
@@ -466,7 +468,9 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * (9.2) get PresentValueList attribute PresentValueList
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EPresentValueList> getEnumsPresentValueList() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumPresentValueList> getPresentValueList()
 	{
 		return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST, null, EnumPresentValueList.getEnum(0), false);

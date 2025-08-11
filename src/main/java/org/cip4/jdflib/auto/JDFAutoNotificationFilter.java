@@ -359,7 +359,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	/**
 	 * (9.2) get Classes attribute Classes
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EClass> getEnumsClasses()
 	{
@@ -373,7 +373,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * (5.2) set attribute Classes
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEClasses(List<EClass>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setClasses(List<EnumClass> v)
@@ -385,7 +385,9 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * (9.2) get Classes attribute Classes
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EClass> getEnumsClasses() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumClass> getClasses()
 	{
 		return getEnumerationsAttribute(AttributeName.CLASSES, null, EnumClass.getEnum(0), false);

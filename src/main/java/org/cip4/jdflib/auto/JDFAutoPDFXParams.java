@@ -507,7 +507,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 * (5) set attribute PDFXTrapped
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPDFXTrapped(EPDFXTrapped) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPDFXTrapped(EnumPDFXTrapped enumVar)
@@ -519,7 +519,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 * (9) get attribute PDFXTrapped
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPDFXTrapped getEPDFXTrapped() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPDFXTrapped getPDFXTrapped()
 	{
 		return EnumPDFXTrapped.getEnum(getAttribute(AttributeName.PDFXTRAPPED, null, null));

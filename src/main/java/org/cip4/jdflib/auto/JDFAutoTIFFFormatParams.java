@@ -358,7 +358,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * (5) set attribute ByteOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setByteOrder(EByteOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setByteOrder(EnumByteOrder enumVar)
@@ -370,7 +370,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * (9) get attribute ByteOrder
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EByteOrder getEByteOrder() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumByteOrder getByteOrder()
 	{
 		return EnumByteOrder.getEnum(getAttribute(AttributeName.BYTEORDER, null, null));
@@ -455,7 +457,7 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * (5) set attribute Segmentation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSegmentation(ESegmentation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSegmentation(EnumSegmentation enumVar)
@@ -467,7 +469,9 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
 	 * (9) get attribute Segmentation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESegmentation getESegmentation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSegmentation getSegmentation()
 	{
 		return EnumSegmentation.getEnum(getAttribute(AttributeName.SEGMENTATION, null, null));

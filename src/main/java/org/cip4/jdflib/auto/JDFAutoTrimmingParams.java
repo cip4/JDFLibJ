@@ -358,7 +358,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 * (5) set attribute TrimCover
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTrimCover(ETrimCover) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTrimCover(EnumTrimCover enumVar)
@@ -370,7 +370,9 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 * (9) get attribute TrimCover
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETrimCover getETrimCover() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTrimCover getTrimCover()
 	{
 		return EnumTrimCover.getEnum(getAttribute(AttributeName.TRIMCOVER, null, "Both"));
@@ -478,7 +480,7 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 * (5) set attribute TrimmingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setTrimmingType(ETrimmingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTrimmingType(EnumTrimmingType enumVar)
@@ -490,7 +492,9 @@ public abstract class JDFAutoTrimmingParams extends JDFResource
 	 * (9) get attribute TrimmingType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ETrimmingType getETrimmingType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumTrimmingType getTrimmingType()
 	{
 		return EnumTrimmingType.getEnum(getAttribute(AttributeName.TRIMMINGTYPE, null, null));

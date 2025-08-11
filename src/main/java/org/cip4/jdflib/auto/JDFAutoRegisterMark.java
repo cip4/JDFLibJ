@@ -349,7 +349,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * (5) set attribute MarkUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMarkUsage(EMarkUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkUsage(EnumMarkUsage enumVar)
@@ -361,7 +361,9 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * (9) get attribute MarkUsage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMarkUsage getEMarkUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMarkUsage getMarkUsage()
 	{
 		return EnumMarkUsage.getEnum(getAttribute(AttributeName.MARKUSAGE, null, null));

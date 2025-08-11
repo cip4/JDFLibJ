@@ -358,7 +358,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * (5) set attribute ChannelMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setChannelMode(EChannelMode) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setChannelMode(EnumChannelMode enumVar)
@@ -370,7 +370,9 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * (9) get attribute ChannelMode
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EChannelMode getEChannelMode() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumChannelMode getChannelMode()
 	{
 		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
@@ -527,7 +529,7 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * (5) set attribute RetryPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setRetryPolicy(ERetryPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRetryPolicy(EnumRetryPolicy enumVar)
@@ -539,7 +541,9 @@ public abstract class JDFAutoSubscription extends JDFElement
 	 * (9) get attribute RetryPolicy
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ERetryPolicy getERetryPolicy() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumRetryPolicy getRetryPolicy()
 	{
 		return EnumRetryPolicy.getEnum(getAttribute(AttributeName.RETRYPOLICY, null, null));

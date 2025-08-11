@@ -246,7 +246,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	/**
 	 * (9.2) get ChannelMode attribute ChannelMode
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<EChannelMode> getEnumsChannelMode()
 	{
@@ -260,7 +260,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 * (5.2) set attribute ChannelMode
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setEChannelMode(List<EChannelMode>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setChannelMode(List<EnumChannelMode> v)
@@ -272,7 +272,9 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 	 * (9.2) get ChannelMode attribute ChannelMode
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<EChannelMode> getEnumsChannelMode() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumChannelMode> getChannelMode()
 	{
 		return getEnumerationsAttribute(AttributeName.CHANNELMODE, null, EnumChannelMode.getEnum(0), false);

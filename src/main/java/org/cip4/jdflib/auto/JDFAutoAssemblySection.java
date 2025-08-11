@@ -371,7 +371,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * (5) set attribute Order
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOrder(EOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrder(EnumOrder enumVar)
@@ -383,7 +383,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * (9) get attribute Order
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOrder getEOrder() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOrder getOrder()
 	{
 		return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, null));

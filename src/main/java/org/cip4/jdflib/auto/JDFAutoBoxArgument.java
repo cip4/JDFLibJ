@@ -344,7 +344,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * (5) set attribute Box
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setBox(EBox) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBox(EnumBox enumVar)
@@ -356,7 +356,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * (9) get attribute Box
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EBox getEBox() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumBox getBox()
 	{
 		return EnumBox.getEnum(getAttribute(AttributeName.BOX, null, null));
@@ -394,7 +396,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * (5) set attribute MirrorMargins
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setMirrorMargins(EMirrorMargins) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMirrorMargins(EnumMirrorMargins enumVar)
@@ -406,7 +408,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * (9) get attribute MirrorMargins
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EMirrorMargins getEMirrorMargins() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumMirrorMargins getMirrorMargins()
 	{
 		return EnumMirrorMargins.getEnum(getAttribute(AttributeName.MIRRORMARGINS, null, null));

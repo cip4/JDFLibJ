@@ -419,7 +419,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * (5) set attribute DefectType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setDefectType(EDefectType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDefectType(EnumDefectType enumVar)
@@ -431,7 +431,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * (9) get attribute DefectType
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EDefectType getEDefectType() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumDefectType getDefectType()
 	{
 		return EnumDefectType.getEnum(getAttribute(AttributeName.DEFECTTYPE, null, null));
@@ -491,7 +493,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * (5) set attribute Face
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setFace(EFace) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFace(EnumFace enumVar)
@@ -503,7 +505,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * (9) get attribute Face
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EFace getEFace() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumFace getFace()
 	{
 		return EnumFace.getEnum(getAttribute(AttributeName.FACE, null, null));

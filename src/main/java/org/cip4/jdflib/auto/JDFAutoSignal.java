@@ -280,7 +280,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * (5) set attribute ChannelMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setChannelMode(EChannelMode) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setChannelMode(EnumChannelMode enumVar)
@@ -292,7 +292,9 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * (9) get attribute ChannelMode
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EChannelMode getEChannelMode() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumChannelMode getChannelMode()
 	{
 		return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));

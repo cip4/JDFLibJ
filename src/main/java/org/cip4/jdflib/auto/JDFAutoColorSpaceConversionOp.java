@@ -756,7 +756,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (5) set attribute Operation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOperation(EOperation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOperation(EnumOperation enumVar)
@@ -768,7 +768,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9) get attribute Operation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOperation getEOperation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOperation getOperation()
 	{
 		return EnumOperation.getEnum(getAttribute(AttributeName.OPERATION, null, null));
@@ -830,7 +832,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (5) set attribute RenderingIntent
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setRenderingIntent(ERenderingIntent) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRenderingIntent(EnumRenderingIntent enumVar)
@@ -842,7 +844,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9) get attribute RenderingIntent
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ERenderingIntent getERenderingIntent() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumRenderingIntent getRenderingIntent()
 	{
 		return EnumRenderingIntent.getEnum(getAttribute(AttributeName.RENDERINGINTENT, null, "ColorSpaceDependent"));
@@ -926,7 +930,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (5) set attribute SourceCS
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSourceCS(ESourceCS) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceCS(EnumSourceCS enumVar)
@@ -938,7 +942,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9) get attribute SourceCS
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESourceCS getESourceCS() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSourceCS getSourceCS()
 	{
 		return EnumSourceCS.getEnum(getAttribute(AttributeName.SOURCECS, null, null));
@@ -961,7 +967,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	/**
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<ESourceObjects> getEnumsSourceObjects()
 	{
@@ -976,7 +982,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (5.2) set attribute SourceObjects
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceObjects(List<EnumSourceObjects> v)
@@ -988,7 +994,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<ESourceObjects> getEnumsSourceObjects() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumSourceObjects> getSourceObjects()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
@@ -1026,7 +1034,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (5) set attribute SourceRenderingIntent
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setSourceRenderingIntent(ESourceRenderingIntent) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceRenderingIntent(EnumSourceRenderingIntent enumVar)
@@ -1038,7 +1046,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9) get attribute SourceRenderingIntent
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ESourceRenderingIntent getESourceRenderingIntent() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumSourceRenderingIntent getSourceRenderingIntent()
 	{
 		return EnumSourceRenderingIntent.getEnum(getAttribute(AttributeName.SOURCERENDERINGINTENT, null, null));

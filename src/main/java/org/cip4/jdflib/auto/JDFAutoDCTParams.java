@@ -359,7 +359,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	/**
 	 * (9.2) get SourceCSs attribute SourceCSs
 	 *
-	 * @return Vector of the enumerations
+	 * @return List of the enumerations
 	 */
 	public List<ESourceCSs> getEnumsSourceCSs()
 	{
@@ -373,7 +373,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * (5.2) set attribute SourceCSs
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setESourceCSs(List<ESourceCSs>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceCSs(List<EnumSourceCSs> v)
@@ -385,7 +385,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * (9.2) get SourceCSs attribute SourceCSs
 	 *
 	 * @return Vector of the enumerations
+	 * @deprecated use List<ESourceCSs> getEnumsSourceCSs() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public Vector<EnumSourceCSs> getSourceCSs()
 	{
 		return getEnumerationsAttribute(AttributeName.SOURCECSS, null, EnumSourceCSs.getEnum(0), false);
@@ -546,7 +548,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * (5) set attribute ColorTransform
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setColorTransform(EColorTransform) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setColorTransform(EnumColorTransform enumVar)
@@ -558,7 +560,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * (9) get attribute ColorTransform
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EColorTransform getEColorTransform() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumColorTransform getColorTransform()
 	{
 		return EnumColorTransform.getEnum(getAttribute(AttributeName.COLORTRANSFORM, null, "Automatic"));

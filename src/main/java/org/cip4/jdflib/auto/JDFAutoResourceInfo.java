@@ -641,7 +641,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (5) set attribute CommandResult
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setCommandResult(ECommandResult) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCommandResult(EnumCommandResult enumVar)
@@ -653,7 +653,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute CommandResult
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ECommandResult getECommandResult() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumCommandResult getCommandResult()
 	{
 		return EnumCommandResult.getEnum(getAttribute(AttributeName.COMMANDRESULT, null, null));
@@ -712,7 +714,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (5) set attribute Level
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setLevel(ELevel) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLevel(EnumLevel enumVar)
@@ -724,7 +726,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Level
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use ELevel getELevel() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumLevel getLevel()
 	{
 		return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, null));
@@ -855,7 +859,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (5) set attribute Orientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setOrientation(EOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
@@ -867,7 +871,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Orientation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EOrientation getEOrientation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumOrientation getOrientation()
 	{
 		return EnumOrientation.getEnum(getAttribute(AttributeName.ORIENTATION, null, null));
@@ -997,7 +1003,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (5) set attribute Scope
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setScope(EScope) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setScope(EnumScope enumVar)
@@ -1009,7 +1015,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Scope
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EScope getEScope() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumScope getScope()
 	{
 		return EnumScope.getEnum(getAttribute(AttributeName.SCOPE, null, null));
@@ -1046,7 +1054,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setResStatus(JDFResource.EResourceClass enumVar)
+	public void setResStatus(JDFResource.EResStatus enumVar)
 	{
 		setAttribute(AttributeName.STATUS, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -1056,9 +1064,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 *
 	 * @return the value of the attribute
 	 */
-	public JDFResource.EResourceClass getEResStatus()
+	public JDFResource.EResStatus getEResStatus()
 	{
-		return JDFResource.EResourceClass.getEnum(getAttribute(AttributeName.STATUS, null, null));
+		return JDFResource.EResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
 	}
 
 	/*
@@ -1068,7 +1076,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (5) set attribute Status
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setResStatus(JDFResource.EResStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResStatus(JDFResource.EnumResStatus enumVar)
@@ -1080,7 +1088,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Status
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFResource.EResStatus getEResStatus() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFResource.EnumResStatus getResStatus()
 	{
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.STATUS, null, null));
@@ -1188,7 +1198,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setUsage(JDFResourceLink.EUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUsage(JDFResourceLink.EnumUsage enumVar)
@@ -1200,7 +1210,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Usage
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use JDFResourceLink.EUsage getEUsage() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public JDFResourceLink.EnumUsage getUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));

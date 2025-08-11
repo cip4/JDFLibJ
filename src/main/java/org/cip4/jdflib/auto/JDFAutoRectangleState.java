@@ -437,7 +437,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * (5) set attribute AllowedHWRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAllowedHWRelation(EAllowedHWRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAllowedHWRelation(EnumAllowedHWRelation enumVar)
@@ -449,7 +449,9 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * (9) get attribute AllowedHWRelation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAllowedHWRelation getEAllowedHWRelation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAllowedHWRelation getAllowedHWRelation()
 	{
 		return EnumAllowedHWRelation.getEnum(getAttribute(AttributeName.ALLOWEDHWRELATION, null, null));
@@ -513,7 +515,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * (5) set attribute PresentHWRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setPresentHWRelation(EPresentHWRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPresentHWRelation(EnumPresentHWRelation enumVar)
@@ -525,7 +527,9 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * (9) get attribute PresentHWRelation
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EPresentHWRelation getEPresentHWRelation() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumPresentHWRelation getPresentHWRelation()
 	{
 		return EnumPresentHWRelation.getEnum(getAttribute(AttributeName.PRESENTHWRELATION, null, null));

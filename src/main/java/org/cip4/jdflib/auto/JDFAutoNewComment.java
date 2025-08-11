@@ -277,7 +277,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * (5) set attribute Action
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use java.lang.enum
+	 * @deprecated use setAction(EAction) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAction(EnumAction enumVar)
@@ -289,7 +289,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * (9) get attribute Action
 	 *
 	 * @return the value of the attribute
+	 * @deprecated use EAction getEAction() based on java.lang.enum instead
 	 */
+	@Deprecated
 	public EnumAction getAction()
 	{
 		return EnumAction.getEnum(getAttribute(AttributeName.ACTION, null, null));
