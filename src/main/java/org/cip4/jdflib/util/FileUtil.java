@@ -750,7 +750,9 @@ public class FileUtil
 
 		if (maxSize <= 0 || f.length() <= maxSize * 2l)
 		{
-			return StreamUtil.getMD5(bufferedInputStream);
+			final byte[] md5 = StreamUtil.getMD5(bufferedInputStream);
+			StreamUtil.close(bufferedInputStream);
+			return md5;
 		}
 		final byte[] b = new byte[maxSize];
 		MessageDigest md5;
@@ -760,6 +762,7 @@ public class FileUtil
 		}
 		catch (final NoSuchAlgorithmException e)
 		{
+			StreamUtil.close(bufferedInputStream);
 			return null;
 		}
 		try
@@ -797,6 +800,7 @@ public class FileUtil
 		}
 		catch (final IOException e)
 		{
+			StreamUtil.close(bufferedInputStream);
 			return null;
 		}
 	}
