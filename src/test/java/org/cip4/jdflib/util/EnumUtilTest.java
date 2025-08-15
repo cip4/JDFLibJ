@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
+import org.cip4.jdflib.auto.JDFAutoStripMark.EAnchor;
+import org.cip4.jdflib.auto.JDFAutoThreadSewingParams.ECastingMaterial;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.junit.jupiter.api.Test;
@@ -183,6 +185,17 @@ class EnumUtilTest extends JDFTestCaseBase
 	{
 		assertEquals(EnumUtil.getName(EnumAnchor.BottomRight), "BottomRight");
 		assertEquals(EnumUtil.getName(null), "null");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetEnumEnum()
+	{
+		assertEquals(EAnchor.BottomRight, EnumUtil.getEnum(EAnchor.class, org.cip4.jdflib.auto.JDFAutoStripMark.EnumAnchor.BottomRight));
+		assertNull(EnumUtil.getEnum(ECastingMaterial.class, org.cip4.jdflib.auto.JDFAutoStripMark.EnumAnchor.BottomRight));
+		assertNull(EnumUtil.getEnum(ECastingMaterial.class, null));
 	}
 
 	/**
