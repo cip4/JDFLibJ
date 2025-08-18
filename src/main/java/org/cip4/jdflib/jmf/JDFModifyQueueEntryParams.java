@@ -94,7 +94,7 @@ public class JDFModifyQueueEntryParams extends JDFElement
 
 	public enum eOperation
 	{
-		Abort, Complete, Hold, Move, Remove, Resume, Suspend;
+		Abort, Complete, Hold, Move, Remove, Resume, SetGang, Suspend;
 
 		public static eOperation getEnum(final String s)
 		{

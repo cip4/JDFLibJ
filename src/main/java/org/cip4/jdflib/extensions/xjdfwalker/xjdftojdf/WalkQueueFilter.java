@@ -71,8 +71,11 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
+import org.cip4.jdflib.extensions.xjdfwalker.IDFinder;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -112,20 +115,33 @@ public class WalkQueueFilter extends WalkXElement
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf.WalkXElement#updateAttributes(org.cip4.jdflib.core.KElement)
 	 */
 	@Override
-	protected void updateAttributes(KElement elem)
+	protected void updateAttributes(final KElement elem)
 	{
-		String qeids = elem.getNonEmpty(XJDFConstants.QueueEntryIDs);
+		final String qeids = elem.getNonEmpty(XJDFConstants.QueueEntryIDs);
+		final JDFQueueFilter qf = (JDFQueueFilter) elem;
 		if (qeids != null)
 		{
 			elem.removeAttribute(XJDFConstants.QueueEntryIDs);
-			JDFQueueFilter qf = (JDFQueueFilter) elem;
-			VString vs = StringUtil.tokenize(qeids, null, false);
-			for (String s : vs)
+			final VString vs = StringUtil.tokenize(qeids, null, false);
+			for (final String s : vs)
 			{
 				qf.appendQueueEntryDef(s);
 			}
 		}
 		super.updateAttributes(elem);
+	}
+
+	@Override
+	public KElement walk(final KElement e, final KElement trackElem)
+	{
+		final KElement walk = super.walk(e, trackElem);
+		final JDFQueueFilter qf = (JDFQueueFilter) e;
+		for (final JDFPart part : qf.getAllPart())
+		{
+			final JDFAttributeMap partMap = IDFinder.getPartMap(part);
+			part.setAttributes(partMap);
+		}
+		return walk;
 	}
 
 }

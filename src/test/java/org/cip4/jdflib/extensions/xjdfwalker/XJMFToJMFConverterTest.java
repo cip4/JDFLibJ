@@ -52,12 +52,15 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJMFHelper;
 import org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.JDFToXJDF;
+import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFDeviceInfo.eXjdfDeviceCondition;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -65,10 +68,14 @@ import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFMessageService;
+import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams;
+import org.cip4.jdflib.jmf.JDFModifyQueueEntryParams.eOperation;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
+import org.cip4.jdflib.jmf.JDFQueueFilter;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResourceQuParams;
 import org.cip4.jdflib.jmf.JDFResponse;
+import org.cip4.jdflib.jmf.JDFResumeQueueEntryParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Test;
@@ -177,6 +184,30 @@ class XJMFToJMFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xc.convert(h.getRoot());
 		final JDFResourceQuParams rqp2 = d.getJMFRoot().getQuery(0).getResourceQuParams();
 		assertEquals(EnumScope.Allowed, rqp2.getScope());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testCommandModify()
+	{
+		final XJMFHelper h = new XJMFHelper();
+		final MessageHelper mh = h.appendMessage(EnumFamily.Command, "ModifyQueueEntry");
+		final JDFModifyQueueEntryParams mqp = (JDFModifyQueueEntryParams) mh.appendElement(XJDFConstants.ModifyQueueEntryParams);
+		mqp.setOperation(eOperation.Resume);
+		final JDFQueueFilter qf = mqp.getCreateQueueFilter();
+		qf.setJobID("j1");
+		qf.setPartMapVector(new VJDFAttributeMap(new JDFAttributeMap(AttributeName.SHEETNAME, "S1")));
+
+		final XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		final JDFDoc d = xc.convert(h.getRoot());
+		final JDFJMF jmf = d.getJMFRoot();
+		final JDFCommand c = jmf.getCommand();
+
+		final JDFResumeQueueEntryParams rqp = (JDFResumeQueueEntryParams) c.getElement(ElementName.RESUMEQUEUEENTRYPARAMS);
+		final JDFQueueFilter qf2 = rqp.getQueueFilter(0);
+		assertEquals("Sig_S1", qf2.getPartMapVector().get(0).get(AttributeName.SIGNATURENAME));
 	}
 
 	/**
