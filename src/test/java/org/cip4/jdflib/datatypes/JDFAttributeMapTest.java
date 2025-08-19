@@ -54,8 +54,10 @@ import java.util.HashSet;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.JDFResourceLink.EUsage;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFResource.EPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.Test;
@@ -217,6 +219,8 @@ class JDFAttributeMapTest extends JDFTestCaseBase
 		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put("a", 2);
 		assertEquals(map.getInt("a", 4), 2);
+		map.put(EUsage.Input, 2);
+		assertEquals(2, map.getInt(EUsage.Input, 4));
 	}
 
 	/**
@@ -251,6 +255,8 @@ class JDFAttributeMapTest extends JDFTestCaseBase
 		assertNull(m1.putNotNull("null", null));
 		m1.putNotNull(EnumPartIDKey.Side, "Front");
 		assertEquals(m1.get("Side"), "Front");
+		m1.putNotNull(EPartIDKey.Side, "Back");
+		assertEquals(m1.get(EPartIDKey.Side), "Back");
 	}
 
 	/**
