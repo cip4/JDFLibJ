@@ -3383,6 +3383,11 @@ class JDFNodeTest extends JDFTestCaseBase
 
 		final JDFResourceLink rls = (JDFResourceLink) h.getLinksForType(EnumType.Stitching).get(0);
 		assertEquals(rls.getTarget(), rlt.getTarget());
+		h.setProcessUsage("foo");
+		final VElement linksForType = h.getLinksForType(EnumType.Stitching);
+		assertNull(linksForType);
+		final JDFResourceLink rls2 = h.getCreateLinkForType(EnumType.Stitching);
+		assertEquals(h.getProcessUsage(), rls2.getProcessUsage());
 	}
 
 	/**

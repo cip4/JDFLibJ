@@ -1155,6 +1155,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		private int nType;
 		private EnumUsage usage;
 		private String linkName;
+		private String processUsage;
 		private boolean linkBoth;
 
 		/**
@@ -1247,7 +1248,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					rlLast.setCombinedProcessIndex(nPos);
 				}
 			}
-
+			rl.setProcessUsage(processUsage);
 			return rl;
 
 		}
@@ -1327,13 +1328,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				return null;
 			}
-			// not combined, simpy get links from entire node
+			// not combined, simply get links from entire node
 			// no links here at all
 			final JDFAttributeMap attMap = new JDFAttributeMap();
 			if (usage != null)
 			{
 				attMap.put(AttributeName.USAGE, usage);
 			}
+			attMap.putNotNull(AttributeName.PROCESSUSAGE, processUsage);
 
 			if (typ.equals(type))
 			{
@@ -1455,6 +1457,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public String getResName()
 		{
 			return StringUtil.leftStr(linkName, -4);
+		}
+
+		public String getProcessUsage()
+		{
+			return processUsage;
+		}
+
+		public void setProcessUsage(final String processUsage)
+		{
+			this.processUsage = StringUtil.getNonEmpty(processUsage);
 		}
 
 	}
