@@ -86,15 +86,13 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPreview : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreview : public JDFResource
  */
 
 public abstract class JDFAutoPreview extends JDFResource
@@ -102,16 +100,20 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, "PNG");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0),
+				"Separation");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0),
+				null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x3333333333l, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOLUTION, 0x3111111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.SIZE, 0x3111111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -175,7 +177,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -353,11 +355,14 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewFileType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewFileType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -381,7 +386,8 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -405,14 +411,15 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PreviewUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPreviewUsage(EPreviewUsage) based on java.lang.enum instead
+	 * @deprecated use SetPreviewUsage(EPreviewUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreviewUsage(EnumPreviewUsage enumVar)
@@ -424,7 +431,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	 * (9) get attribute PreviewUsage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPreviewUsage getEPreviewUsage() based on java.lang.enum instead
+	 * @deprecated use EPreviewUsage GetEPreviewUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPreviewUsage getPreviewUsage()
@@ -433,7 +440,9 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -456,7 +465,8 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Compensation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Compensation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -480,14 +490,15 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Compensation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Compensation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Compensation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setCompensation(ECompensation) based on java.lang.enum instead
+	 * @deprecated use SetCompensation(ECompensation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCompensation(EnumCompensation enumVar)
@@ -499,7 +510,7 @@ public abstract class JDFAutoPreview extends JDFResource
 	 * (9) get attribute Compensation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ECompensation getECompensation() based on java.lang.enum instead
+	 * @deprecated use ECompensation GetECompensation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumCompensation getCompensation()
@@ -508,7 +519,9 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CTM
@@ -523,17 +536,20 @@ public abstract class JDFAutoPreview extends JDFResource
 	/**
 	 * (20) get JDFMatrix attribute CTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Directory ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Directory
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Directory
@@ -556,7 +572,8 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MimeTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MimeTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -580,7 +597,65 @@ public abstract class JDFAutoPreview extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Resolution
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Resolution
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setResolution(JDFXYPair value)
+	{
+		setAttribute(AttributeName.RESOLUTION, value, null);
+	}
+
+	/**
+	 * (20) get JDFXYPair attribute Resolution
+	 *
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
+	 */
+	public JDFXYPair getResolution()
+	{
+		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
+
+	/*
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Size
+	 * ---------------------------------------------------------------------
+	 */
+	/**
+	 * (36) set attribute Size
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setSize(JDFXYPair value)
+	{
+		setAttribute(AttributeName.SIZE, value, null);
+	}
+
+	/**
+	 * (20) get JDFXYPair attribute Size
+	 *
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
+	 */
+	public JDFXYPair getSize()
+	{
+		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		return nPlaceHolder;
+	}
+
+	/*
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -619,7 +694,8 @@ public abstract class JDFAutoPreview extends JDFResource
 	 * (27) const get element Comment
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFComment the element default is getComment(0)
+	 * @return JDFComment the element
+	 *         default is getComment(0)
 	 */
 	@Override
 	public JDFComment getComment(int iSkip)
@@ -683,7 +759,8 @@ public abstract class JDFAutoPreview extends JDFResource
 	 * (27) const get element GeneralID
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGeneralID the element default is getGeneralID(0)
+	 * @return JDFGeneralID the element
+	 *         default is getGeneralID(0)
 	 */
 	@Override
 	public JDFGeneralID getGeneralID(int iSkip)
