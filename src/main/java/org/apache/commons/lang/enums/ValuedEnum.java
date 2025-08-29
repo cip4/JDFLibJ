@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,18 +22,15 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.lang3.EnumUtils;
 
 /**
  * <p>
  * Abstract superclass for type-safe enums with integer values suitable for use in <code>switch</code> statements.
  * </p>
- *
  * <p>
  * <em>NOTE:</em>Due to the way in which Java ClassLoaders work, comparing <code>Enum</code> objects should always be done using the equals() method, not <code>==</code>. The
  * equals() method will try <code>==</code> first so in most cases the effect is the same.
  * </p>
- *
  * <p>
  * To use this class, it must be subclassed. For example:
  * </p>
@@ -55,38 +52,36 @@ import org.apache.commons.lang3.EnumUtils;
  * 	{
  * 		super(name, value);
  * 	}
- * 
+ *
  * 	public static JavaVersionEnum getEnum(String javaVersion)
  * 	{
  * 		return (JavaVersionEnum) getEnum(JavaVersionEnum.class, javaVersion);
  * 	}
- * 
+ *
  * 	public static JavaVersionEnum getEnum(int javaVersion)
  * 	{
  * 		return (JavaVersionEnum) getEnum(JavaVersionEnum.class, javaVersion);
  * 	}
- * 
+ *
  * 	public static Map getEnumMap()
  * 	{
  * 		return getEnumMap(JavaVersionEnum.class);
  * 	}
- * 
+ *
  * 	public static List getEnumList()
  * 	{
  * 		return getEnumList(JavaVersionEnum.class);
  * 	}
- * 
+ *
  * 	public static Iterator iterator()
  * 	{
  * 		return iterator(JavaVersionEnum.class);
  * 	}
  * }
  * </pre>
- *
  * <p>
  * <em>NOTE:</em>These are declared <code>final</code>, so compilers may inline the code. Ensure you recompile everything when using final.
  * </p>
- *
  * <p>
  * The above class could then be used as follows:
  * </p>
@@ -106,16 +101,13 @@ import org.apache.commons.lang3.EnumUtils;
  * 	}
  * }
  * </pre>
- *
  * <p>
  * As shown, each enum has a name and a value. These can be accessed using <code>getName</code> and <code>getValue</code>.
  * </p>
- *
  * <p>
  * <em>NOTE:</em> Because the switch is ultimately sitting on top of an int, the example above is not type-safe. That is, there is nothing that checks that JAVA1_0_VALUE is a legal
  * constant for JavaVersionEnum.
  * </p>
- *
  * <p>
  * The <code>getEnum</code> and <code>iterator</code> methods are recommended. Unfortunately, Java restrictions require these to be coded as shown in each subclass. An alternative
  * choice is to use the {@link EnumUtils} class.
@@ -131,7 +123,7 @@ public abstract class ValuedEnum extends Enum
 
 	/**
 	 * Required for serialization support.
-	 * 
+	 *
 	 * @see java.io.Serializable
 	 */
 	private static final long serialVersionUID = -7129650521543789085L;
@@ -144,7 +136,7 @@ public abstract class ValuedEnum extends Enum
 	/**
 	 * Constructor for enum item.
 	 *
-	 * @param name the name of enum item
+	 * @param name  the name of enum item
 	 * @param value the value of enum item
 	 */
 	protected ValuedEnum(final String name, final int value)
@@ -157,13 +149,12 @@ public abstract class ValuedEnum extends Enum
 	 * <p>
 	 * Gets an <code>Enum</code> object by class and value.
 	 * </p>
-	 *
 	 * <p>
 	 * This method loops through the list of <code>Enum</code>, thus if there are many <code>Enum</code>s this will be slow.
 	 * </p>
-	 * 
+	 *
 	 * @param enumClass the class of the <code>Enum</code> to get
-	 * @param value the value of the <code>Enum</code> to get
+	 * @param value     the value of the <code>Enum</code> to get
 	 * @return the enum object, or null if the enum does not exist
 	 * @throws IllegalArgumentException if the enum class is <code>null</code>
 	 */
@@ -201,11 +192,9 @@ public abstract class ValuedEnum extends Enum
 	 * <p>
 	 * Tests for order.
 	 * </p>
-	 *
 	 * <p>
 	 * The default ordering is numeric by value, but this can be overridden by subclasses.
 	 * </p>
-	 *
 	 * <p>
 	 * NOTE: From v2.2 the enums must be of the same type. If the parameter is in a different class loader than this instance, reflection is used to compare the values.
 	 * </p>
@@ -213,7 +202,7 @@ public abstract class ValuedEnum extends Enum
 	 * @see java.lang.Comparable#compareTo(Object)
 	 * @param other the other object to compare to
 	 * @return -ve if this is less than the other object, +ve if greater than, <code>0</code> of equal
-	 * @throws ClassCastException if other is not an <code>Enum</code>
+	 * @throws ClassCastException   if other is not an <code>Enum</code>
 	 * @throws NullPointerException if other is <code>null</code>
 	 */
 	@Override
