@@ -62,8 +62,8 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
-import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -120,7 +120,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param node
 	 * @return
 	 */
@@ -164,7 +163,7 @@ public class WalkJDFElement extends WalkElement
 				final JDFElement parent = (JDFElement) (resourceRoot == null ? null : resourceRoot.getParentNode_KElement());
 				r = r.makeRootResource(null, parent, false);
 			}
-			r.setResStatus(EnumResStatus.Available, true);
+			r.setResStatus(EResStatus.Available, true);
 			je.refElement(r);
 		}
 	}
@@ -267,7 +266,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param xjdf
 	 * @param rl
 	 * @return
@@ -348,7 +346,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param r
 	 */
 	void updateColorPoolColors(final JDFResource r)
@@ -369,7 +366,7 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 * @param rl the refelement or reslink
+	 * @param rl         the refelement or reslink
 	 * @param linkTarget
 	 * @param xRoot
 	 * @return the vector of partitions
@@ -432,7 +429,9 @@ public class WalkJDFElement extends WalkElement
 				}
 			}
 			if (changed)
+			{
 				ContainerUtil.unify(newTargetVector);
+			}
 			return newTargetVector;
 		}
 		else
@@ -460,7 +459,9 @@ public class WalkJDFElement extends WalkElement
 			for (final JDFResource leaf : vLeaves)
 			{
 				if (AttributeName.SIGNATURENAME.equals(leaf.getLocalPartitionKey()))
+				{
 					continue;
+				}
 				final KElement newBaseRes = setBaseResource(rl, leaf, setHelper);
 				if (newBaseRes != null)
 				{
@@ -478,7 +479,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param linkTarget
 	 * @param rl
 	 * @return
@@ -496,15 +496,14 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param resLink
 	 * @param linkTarget
 	 * @return
 	 */
 	boolean isExchangeResource(final JDFResourceLink resLink, final JDFResource linkTarget)
 	{
-		if (!jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage()) && resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX)
-				&& !resLink.getCombinedProcessIndex().contains(0)))
+		if (!jdfToXJDF.isSingleNode() || (resLink != null && EnumUsage.Input.equals(resLink.getUsage())
+				&& resLink.hasNonEmpty(AttributeName.COMBINEDPROCESSINDEX) && !resLink.getCombinedProcessIndex().contains(0)))
 		{
 
 			final JDFResource resInRoot = linkTarget == null ? null : linkTarget.getResourceRoot();
@@ -522,7 +521,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param linkTarget
 	 * @param xRoot
 	 * @param className
@@ -539,7 +537,6 @@ public class WalkJDFElement extends WalkElement
 	 * @param r
 	 * @param xjdfSet
 	 * @return
-	 *
 	 */
 	protected KElement setBaseResource(final JDFElement rl, final JDFResource r, final SetHelper sh)
 	{
@@ -584,8 +581,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
-	 *
 	 * @param rl
 	 * @param newLeaf
 	 * @param partMap
@@ -650,7 +645,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param newAP
 	 * @param pa
 	 */
@@ -709,7 +703,9 @@ public class WalkJDFElement extends WalkElement
 	{
 		resourceSet.setAttribute(AttributeName.NAME, jdfToXJDF.getSetName(linkRoot));
 		if (rl instanceof JDFResourceLink)
+		{
 			resourceSet.setAttributes(rl);
+		}
 		final JDFResource rootroot = linkRoot == null ? null : linkRoot.getResourceRoot();
 		resourceSet.copyAttribute(AttributeName.DESCRIPTIVENAME, rootroot);
 		resourceSet.moveAttribute(AttributeName.COMMENTURL, rootroot);
@@ -740,7 +736,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param resourceSet
 	 * @param rl
 	 * @param linkRoot
@@ -828,7 +823,6 @@ public class WalkJDFElement extends WalkElement
 	}
 
 	/**
-	 *
 	 * @param r
 	 */
 	void moveToContent(final JDFPageList pl)

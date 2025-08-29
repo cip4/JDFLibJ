@@ -118,6 +118,7 @@ import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -162,7 +163,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	private static AtrInfoTable[] atrInfoTable_abstract = new AtrInfoTable[21];
 	static
 	{
-		atrInfoTable_abstract[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable_abstract[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration,
+				EnumActivation.getEnum(0), null);
 		atrInfoTable_abstract[1] = new AtrInfoTable(AttributeName.CATEGORY, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_abstract[2] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_abstract[3] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
@@ -174,13 +176,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		atrInfoTable_abstract[9] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[10] = new AtrInfoTable(AttributeName.RELATEDJOBPARTID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[11] = new AtrInfoTable(AttributeName.SPAWNID, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_abstract[12] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
+		atrInfoTable_abstract[12] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0),
+				null);
 		atrInfoTable_abstract[13] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[14] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable_abstract[15] = new AtrInfoTable(AttributeName.TEMPLATEID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[16] = new AtrInfoTable(AttributeName.TEMPLATEVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_abstract[17] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable_abstract[18] = new AtrInfoTable(AttributeName.VERSION, 0x33333333, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
+		atrInfoTable_abstract[18] = new AtrInfoTable(AttributeName.VERSION, 0x33333333, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0),
+				null);
 		atrInfoTable_abstract[19] = new AtrInfoTable(AttributeName.XMLNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, EnumVersion.getEnum(0), null);
 		atrInfoTable_abstract[20] = new AtrInfoTable(AttributeName.XSITYPE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, EnumVersion.getEnum(0), null);
 	}
@@ -325,7 +329,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		private static int m_startValue = 0;
 
 		/**
-		 *
 		 * @see org.apache.commons.lang.enums.ValuedEnum#toString()
 		 */
 		@Override
@@ -406,7 +409,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		private static int m_startValue = 0;
 
 		/**
-		 *
 		 * return true if a allows us to actively process now
 		 *
 		 * @param a
@@ -527,6 +529,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/** @deprecated use EnumActivation.Active */
 	@Deprecated
 	public static final EnumActivation Activation_Active = EnumActivation.Active;
+
+	public enum EType
+	{
+		ProcessGroup, Combined, Product, Approval, Buffer, Combine, Delivery, ManualLabor, Ordering, Packing, QualityControl, ResourceDefinition, Split, Verification, AssetListCreation, Bending, ColorCorrection, ColorSpaceConversion, ContactCopying, ContoneCalibration, CylinderLayoutPreparation, DBDocTemplateLayout, DBTemplateMerging, DieDesign, DieLayoutProduction, DigitalDelivery, FilmToPlateCopying, FormatConversion, ImageEnhancement, ImageReplacement, ImageSetting, InkZoneCalculation, Interpreting, LayoutElementProduction, LayoutPreparation, LayoutShifting, PageAssigning, PDFToPSConversion, PDLCreation, Preflight, PreviewGeneration, Proofing, PSToPDFConversion, RasterReading, Rendering, Scanning, Screening, Separation, SoftProofing, Stripping, Tiling, Trapping, ConventionalPrinting, DigitalPrinting, IDPrinting, Varnishing, AdhesiveBinding, BlockPreparation, BoxPacking, BoxFolding, Bundling, CaseMaking, CasingIn, ChannelBinding, CoilBinding, Collecting, CoverApplication, Creasing, Cutting, DieMaking, Dividing, Embossing, EndSheetGluing, Feeding, Folding, Gathering, Gluing, HeadBandApplication, HoleMaking, Inserting, Jacketing, Labeling, Laminating, LongitudinalRibbonOperations, Numbering, Palletizing, Perforating, PlasticCombBinding, PrintRolling, RingBinding, SaddleStitching, ShapeCutting, ShapeDefProduction, SheetOptimizing, Shrinking, SideSewing, SpinePreparation, SpineTaping, Stacking, StaticBlocking, Stitching, Strapping, StripBinding, ThreadSealing, ThreadSewing, Trimming, WebInlineFinishing, Winding, WireCombBinding, Wrapping;
+
+		public static EType getEnum(final String name)
+		{
+			return EnumUtil.getJavaEnumIgnoreCase(EType.class, name);
+		}
+	}
 
 	/**
 	 * inner class EnumType: Enumeration for accessing typesafe node types
@@ -1145,9 +1157,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public static final EnumType Type_Wrapping = EnumType.Wrapping;
 
 	/**
-	 *
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         Sep 25, 2009
 	 */
 	public class CombinedProcessLinkHelper
@@ -1171,7 +1181,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		/**
 		 * @param _linkName
 		 * @param _usage
-		 *
 		 */
 		public CombinedProcessLinkHelper(final String _linkName, final EnumUsage _usage)
 		{
@@ -1186,7 +1195,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 *
 		 * @param type the process type for which to get the links
 		 * @return
-		 *
 		 * @default getLinksForType(type, -1)
 		 */
 		public JDFResourceLink getCreateLinkForType(final EnumType type)
@@ -1260,7 +1268,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 * @param combinedProcessIndex the nTh occurence of the CombinedProcessIndex field, -1 if all valid positions are ok
 		 * @param skip
 		 * @return
-		 *
 		 * @default getLinksForCombinedProcessIndex(-1)
 		 */
 		public JDFResourceLink getLinkForCombinedProcessIndex(final int combinedProcessIndex, final int skip)
@@ -1275,7 +1282,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 *
 		 * @param combinedProcessIndex the nTh occurence of the CombinedProcessIndex field, -1 if all valid positions are ok
 		 * @return
-		 *
 		 * @default getLinksForCombinedProcessIndex(-1)
 		 */
 		public VElement getLinksForCombinedProcessIndex(final int combinedProcessIndex)
@@ -1318,7 +1324,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 *
 		 * @param type the process type for which to get the links
 		 * @return
-		 *
 		 * @default getLinksForType(type, -1)
 		 */
 		public VElement getLinksForType(final EnumType type)
@@ -1472,7 +1477,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	private class PartStatusHelper
@@ -1488,8 +1492,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		/**
 		 * set the node's partition status if nodeinfo is partitioned, all leaves NodeStati below part are removed
 		 *
-		 * @param mattr Attribute map of partition
-		 * @param status Status to set
+		 * @param mattr         Attribute map of partition
+		 * @param status        Status to set
 		 * @param statusDetails
 		 * @return boolean: success or not
 		 */
@@ -1664,8 +1668,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		/**
 		 * sets the node's partition status and StatusDetails
 		 *
-		 * @param vmattr vector Attribute maps of partition
-		 * @param status Status to set
+		 * @param vmattr        vector Attribute maps of partition
+		 * @param status        Status to set
 		 * @param statusDetails
 		 * @return boolean: success or not
 		 */
@@ -1713,11 +1717,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public boolean equals(final Object obj)
 		{
 			if (this == obj)
+			{
 				return true;
+			}
 			if (obj == null)
+			{
 				return false;
+			}
 			if (getClass() != obj.getClass())
+			{
 				return false;
+			}
 			final ResPart other = (ResPart) obj;
 			return Objects.equals(part, other.part) && Objects.equals(res, other.res);
 		}
@@ -1733,7 +1743,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * synchronization of stati based on child jdf node status
 	 *
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         July 17, 2009
 	 */
 	public class StatusSynch
@@ -1841,7 +1850,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         Aug 10, 2009
 	 */
 	// **************************************** Constructors
@@ -1854,10 +1862,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 * @param resourceLink
 		 * @param types
 		 */
-		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFResourceLink resourceLink, final VString types)
+		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage,
+				final JDFResourceLink resourceLink, final VString types)
 		{
 			if (resourceLink == null || jdfResource == null || resourceLink instanceof JDFPartAmount)
+			{
 				return;
+			}
 
 			final JDFIntegerList cpi = new JDFIntegerList();
 			final String resName = jdfResource.getLocalName();
@@ -1908,11 +1919,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			}
 		}
 
-		private static boolean cleanCombinedProcessIndex(final EnumUsage usage, final LinkInfo linkInfo, final JDFIntegerList cpi, final LinkInfo linkInfoLast, boolean bAddCPI)
+		private static boolean cleanCombinedProcessIndex(final EnumUsage usage, final LinkInfo linkInfo, final JDFIntegerList cpi, final LinkInfo linkInfoLast,
+				boolean bAddCPI)
 		{
 			boolean bOut = linkInfoLast.hasOutput(null);
 			if (!bOut)
+			{
 				return bAddCPI;
+			}
 
 			final boolean bIn = linkInfo.hasInput(null);
 			bOut = linkInfo.hasOutput(null);
@@ -2205,7 +2219,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			String comment = "Generated by the CIP4 Java open source JDF Library version : ";
 			comment += JDFAudit.software();
 			if (getOwnerDocument_KElement().getXMLComment() == null && getOwnerDocument_KElement().getRoot() != null)
+			{
 				setXMLComment(comment, true);
+			}
 
 		}
 		ensureJobPartID();
@@ -2295,8 +2311,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * sets the node's partition status and StatusDetails
 	 *
-	 * @param vmattr vector Attribute maps of partition
-	 * @param status Status to set
+	 * @param vmattr        vector Attribute maps of partition
+	 * @param status        Status to set
 	 * @param statusDetails
 	 * @return boolean: success or not
 	 */
@@ -2308,7 +2324,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * set the node's partition status if nodeinfo is partitioned, all leaves NodeStati below part are removed
 	 *
-	 * @param mattr Attribute map of partition
+	 * @param mattr  Attribute map of partition
 	 * @param status Status to set
 	 * @return boolean: success or not
 	 * @deprecated use 3 parameter version
@@ -2322,8 +2338,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * set the node's partition status if nodeinfo is partitioned, all leaves NodeStati below part are removed
 	 *
-	 * @param mattr Attribute map of partition
-	 * @param status Status to set
+	 * @param mattr         Attribute map of partition
+	 * @param status        Status to set
 	 * @param statusDetails
 	 * @return boolean: success or not
 	 */
@@ -2441,7 +2457,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				partitionGetter.setFollowIdentical(false);
 				final JDFNodeInfo identicalSrc = (JDFNodeInfo) partitionGetter.getPartition(attMap, null);
 				if (identicalSrc != null)
+				{
 					identicalSrcMap = identicalSrc.getPartMap();
+				}
 			}
 			status = null;
 
@@ -2453,7 +2471,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.get(i);
 				JDFAttributeMap map = niCmp.getPartMap();
 				if (identicalSrcMap != null)
+				{
 					map.putAll(identicalSrcMap);
+				}
 				if (map != null && !JDFPart.overlapPartMap(map, attMap, false))
 				{
 					continue;
@@ -2520,7 +2540,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the node's partition statusdetails
 	 *
 	 * @param mattr Attribute map of partition
-	 *
 	 * @return String: Status of the partition, null if no Status exists (note the null return!)
 	 */
 	public String getPartStatusDetails(final JDFAttributeMap mattr)
@@ -2551,7 +2570,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				partitionGetter.setFollowIdentical(false);
 				final JDFNodeInfo identicalSrc = (JDFNodeInfo) partitionGetter.getPartition(mattr, null);
 				if (identicalSrc != null)
+				{
 					identicalSrcMap = identicalSrc.getPartMap();
+				}
 			}
 
 			final List<JDFResource> vLeaves = ni.getLeafArray(false);
@@ -2561,7 +2582,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.get(i);
 				final JDFAttributeMap map = niCmp.getPartMap();
 				if (identicalSrcMap != null)
+				{
 					map.putAll(identicalSrcMap);
+				}
 				if (map != null && !map.overlapMap(mattr))
 				{
 					continue;
@@ -2591,17 +2614,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Set the Status and StatusDetails of this node update the PhaseTime audit or append a new phasetime as appropriate also generate a status JMF
 	 *
-	 * @param nodeStatus the new status of the node
-	 * @param nodeStatusDetails the new statusDetails of the node
-	 * @param deviceStatus the new status of the device
+	 * @param nodeStatus          the new status of the node
+	 * @param nodeStatusDetails   the new statusDetails of the node
+	 * @param deviceStatus        the new status of the device
 	 * @param deviceStatusDetails the new statusDetails of the device
-	 * @param vPartMap the vector of parts to that should be set
-	 *
+	 * @param vPartMap            the vector of parts to that should be set
 	 * @return The root element representing the PhaseTime JMF
 	 * @deprecated use the version with deviceID
 	 */
 	@Deprecated
-	public JDFDoc setPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final VJDFAttributeMap vPartMap)
+	public JDFDoc setPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus,
+			final String deviceStatusDetails, final VJDFAttributeMap vPartMap)
 	{
 		final StatusCounter sc = new StatusCounter(this, vPartMap, null);
 		sc.setPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails);
@@ -2698,7 +2721,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get attribute Activation; defaults to Active
 	 *
 	 * @param bWalkThroughAncestors if true, walks through all ancestors which may overwrite the local activation state; if false only the explicit activation, if any, is returned
-	 *
 	 * @return the enumeration value of the attribute
 	 */
 	public JDFNode.EnumActivation getActivation(final boolean bWalkThroughAncestors)
@@ -2757,7 +2779,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * addModified
 	 *
 	 * @param by
-	 *
 	 * @return JDFAudit
 	 */
 	public JDFAudit addModified(final String by)
@@ -2768,10 +2789,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Get the linked resource with name=strName
 	 *
-	 * @param strName the resource name
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param strName      the resource name
+	 * @param usage        the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param i            the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
 	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, final int i)
@@ -2783,8 +2804,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Get the linked resource with name=strName
 	 *
 	 * @param strName the resource name
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param usage   the ResourceLink Usage, if null either in or out are accepted
+	 * @param i       the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
 	public JDFResource getResourceRoot(final String strName, final EnumUsage usage, final int i)
@@ -2798,8 +2819,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Get the linked resource with name=strName
 	 *
 	 * @param strName the resource name
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
-	 * @param i the number of matches to skip, if negative, count backwards
+	 * @param usage   the ResourceLink Usage, if null either in or out are accepted
+	 * @param i       the number of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
 	public JDFResource getResource(final String strName, final EnumUsage usage, final int i)
@@ -2811,7 +2832,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Get the linked resource with name=strName
 	 *
 	 * @param strName the resource name
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param usage   the ResourceLink Usage, if null either in or out are accepted
 	 * @return the matching resource, null if none matches
 	 */
 	public JDFResource getResource(final String strName, final EnumUsage usage)
@@ -2833,10 +2854,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Get the linked resource with name=strName
 	 *
-	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param strName      the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage        the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage the processUsage of the respective resource
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param i            the nuber of matches to skip, if negative, count backwards
 	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
 	 * @return the matching resource, null if none matches
 	 * @deprecated
@@ -2850,10 +2871,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Get the linked resource with name=strName
 	 *
-	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param strName      the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage        the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage the processUsage of the respective resource
-	 *
 	 * @return the matching resource, null if none matches
 	 */
 	public JDFResource getCreateResource(final String strName, final EnumUsage usage, final String processUsage)
@@ -2873,8 +2893,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Get the resource link with name=strName - convenience
 	 *
-	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param strName      the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage        the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage the processUsage of the respective resource
 	 * @return the matching resource, null if none matches
 	 */
@@ -2886,10 +2906,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Get the resource link with name=strName
 	 *
-	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param strName      the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage        the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage the processUsage of the respective resource
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param i            the nuber of matches to skip, if negative, count backwards
 	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
 	 * @return the matching resource, null if none matches
 	 */
@@ -2919,10 +2939,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Get the linked resource with name=strName
 	 *
-	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param strName      the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage        the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage the processUsage of the respective resource
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param i            the nuber of matches to skip, if negative, count backwards
 	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
 	 * @return the matching resource, null if none matches
 	 */
@@ -2935,10 +2955,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Get the linked resource with name=strName
 	 *
-	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param strName      the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage        the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage the processUsage of the respective resource
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param i            the nuber of matches to skip, if negative, count backwards
 	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
 	 * @return the matching resource, null if none matches
 	 */
@@ -2950,10 +2970,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Get the linked resource with name=strName
 	 *
-	 * @param strName the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
+	 * @param strName      the resource name if strName has a prefix, the explicit DOM level 1 resource with prefix will be searched
+	 * @param usage        the ResourceLink Usage, if null either in or out are accepted
 	 * @param processUsage the processUsage of the respective resource
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param i            the nuber of matches to skip, if negative, count backwards
 	 * @param namespaceURI if null and no prefix, assume JDF namespace, else correct lvl 2 handling
 	 * @return the matching resource, null if none matches
 	 */
@@ -2967,10 +2987,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Get the linked resource with name=strName; create it if it does not exist
 	 *
 	 * @param strName the resource name
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param usage   the ResourceLink Usage, if null either in or out are accepted
+	 * @param i       the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource,
-	 *
 	 * @throws JDFException if resource does not exist and EnumUsage is null
 	 */
 	public JDFResource getCreateResource(final String strName, final EnumUsage usage, final int i)
@@ -2987,10 +3006,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Get the linked resource with name=strName; create it if it does not exist
 	 *
 	 * @param strName the resource name
-	 * @param usage the ResourceLink Usage, if null either in or out are accepted
-	 * @param i the nuber of matches to skip, if negative, count backwards
+	 * @param usage   the ResourceLink Usage, if null either in or out are accepted
+	 * @param i       the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource,
-	 *
 	 * @throws JDFException if resource does not exist and EnumUsage is null
 	 */
 	public JDFResource getCreateResource(final String strName, final EnumUsage usage)
@@ -3001,19 +3019,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * addResource - add a resource to resroot and link it to this process
 	 *
-	 * @param strName the localname of the resource
-	 * @param resClass the JFD/@Class of the resource; if null, find from factory
-	 * @param bInput if true, the resource is linked as input, else output
-	 * @param resRoot the node where to add the Resource, if null defaults to this. Note that the link is always in this
-	 * @param bLink if true, creat a ResourceLink to the newly created resource
+	 * @param strName      the localname of the resource
+	 * @param resClass     the JFD/@Class of the resource; if null, find from factory
+	 * @param bInput       if true, the resource is linked as input, else output
+	 * @param resRoot      the node where to add the Resource, if null defaults to this. Note that the link is always in this
+	 * @param bLink        if true, creat a ResourceLink to the newly created resource
 	 * @param nameSpaceURI the nsURI of the resource, if null take the default ns
-	 *
 	 * @return JDFResource
 	 * @deprecated use addResource(String strName, JDFResource.EnumResourceClass resClass, EnumUsage usage, EnumProcessUsage processUsage, JDFNode resRoot, String nameSpaceURI)
 	 * @default addResource(name, null, bInput, null, true, null)
 	 */
 	@Deprecated
-	public JDFResource addResource(final String strName, final JDFResource.EnumResourceClass resClass, final boolean bInput, final JDFNode resRoot, final boolean bLink, final String nameSpaceURI)
+	public JDFResource addResource(final String strName, final JDFResource.EnumResourceClass resClass, final boolean bInput, final JDFNode resRoot,
+			final boolean bLink, final String nameSpaceURI)
 	{
 		EnumUsage usage = null;
 		if (bLink)
@@ -3027,9 +3045,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * addResource - add a resource to resroot and link it to this process utility with the minimal parameter set
 	 *
 	 * @param strName the localname of the resource
-	 * @param usage the Usage attribute of the ResourceLink. If null, the resource is not linked
+	 * @param usage   the Usage attribute of the ResourceLink. If null, the resource is not linked
 	 * @return JDFResource the new resource
-	 *
 	 * @default addResource(name, null, usage, null, null, null,null)
 	 */
 	public JDFResource addResource(final String strName, final EnumUsage usage)
@@ -3040,18 +3057,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * addResource - add a resource to resroot and link it to this process
 	 *
-	 * @param strName the localname of the resource
-	 * @param resClass the JFD/@Class of the resource; if null, find the resource class from factory
-	 * @param usage the Usage attribute of the ResourceLink. If null, the resource is not linked
+	 * @param strName      the localname of the resource
+	 * @param resClass     the JFD/@Class of the resource; if null, find the resource class from factory
+	 * @param usage        the Usage attribute of the ResourceLink. If null, the resource is not linked
 	 * @param processUsage the processUsage attribute of the link to the resource
-	 * @param resRoot the node to add the Resource to, defaults to 'this' if null. Note that the link is always in 'this'
+	 * @param resRoot      the node to add the Resource to, defaults to 'this' if null. Note that the link is always in 'this'
 	 * @param nameSpaceURI the nsURI of the resource, if null take the default ns
-	 * @param toReplace the resource to replace by this - also add a resource audit
+	 * @param toReplace    the resource to replace by this - also add a resource audit
 	 * @return JDFResource
-	 *
 	 * @default addResource(name, null, usage, null, null, null,null)
 	 */
-	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, JDFNode resRoot, final String nameSpaceURI, final JDFResource toReplace)
+	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage,
+			JDFNode resRoot, final String nameSpaceURI, final JDFResource toReplace)
 	{
 		if (resRoot == null)
 		{
@@ -3081,11 +3098,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		if (EnumUsage.Input.equals(usage)
 				&& (EnumResourceClass.Parameter.equals(resClass) || EnumResourceClass.Consumable.equals(resClass) || EnumResourceClass.Intent.equals(resClass)))
 		{
-			r.setResStatus(EnumResStatus.Available, false);
+			r.setResStatus(EResStatus.Available, false);
 		}
 		else
 		{
-			r.setResStatus(JDFResource.EnumResStatus.Unavailable, false);
+			r.setResStatus(EResStatus.Unavailable, false);
 		}
 		if (toReplace != null)
 		{
@@ -3118,11 +3135,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * LinkResource: create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the appropriate combined process index
 	 *
-	 *
 	 * @param jdfResource the resource or partition to link to
-	 * @param input it true, link as input, else link as output
-	 * @param bForce if true, create a new link, even if an existing link already exists
-	 *
+	 * @param input       it true, link as input, else link as output
+	 * @param bForce      if true, create a new link, even if an existing link already exists
 	 * @return JDFResourceLink the new link
 	 * @deprecated use linkResource(enum)
 	 * @default LinkResource(r, true, false)
@@ -3143,13 +3158,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * LinkResource: create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the appropriate combined process index
 	 *
-	 *
-	 * @param jdfResource the resource or partition to link to
-	 * @param usage Usage of the resource
+	 * @param jdfResource  the resource or partition to link to
+	 * @param usage        Usage of the resource
 	 * @param processUsage processUsage of the resource
-	 *
 	 * @return JDFResourceLink the new link
-	 *
 	 * @default LinkResource(r, usage, null)
 	 */
 	public JDFResourceLink linkResource(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage)
@@ -3163,7 +3175,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFResourceLink resourceLink = resourceLinkPool.linkResource(jdfResource, usage, processUsage);
 		final VString types = getTypes();
 		// generate
-		if (resourceLink != null && types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass()) && !(jdfResource instanceof JDFNodeInfo))
+		if (resourceLink != null && types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass())
+				&& !(jdfResource instanceof JDFNodeInfo))
 		{
 			CombinedProcessIndexHelper.generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
 		}
@@ -3171,7 +3184,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
 	 * @param jdfResource
 	 * @param usage
 	 * @param processUsage
@@ -3186,13 +3198,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * ensureLink: if it does not yet exist, create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the appropriate combined process index
 	 *
-	 *
-	 * @param jdfResource the resource or partition to link to
-	 * @param usage Usage of the resource
+	 * @param jdfResource  the resource or partition to link to
+	 * @param usage        Usage of the resource
 	 * @param processUsage processUsage of the resource
-	 *
 	 * @return JDFResourceLink the link
-	 *
 	 * @default ensureLink(r, usage, null)
 	 */
 	public JDFResourceLink ensureLinkPU(final JDFResource jdfResource, final EnumUsage usage, final String processUsage)
@@ -3240,12 +3249,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public void ensureValidRefsPosition(final JDFResource r)
 	{
 		if (r == null)
+		{
 			return;
+		}
 		// move the resource to the closest common ancestor if it is not already an
 		// ancestor of this
 		VElement refs = r.getvHRefRes(true, true);
 		if (refs == null)
+		{
 			refs = new VElement();
+		}
 		refs.add(r);
 		for (final KElement target : refs)
 		{
@@ -3262,7 +3275,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public void ensureValidResPosition(JDFResource res)
 	{
 		if (res == null)
+		{
 			return;
+		}
 
 		JDFNode parent = res.getParentJDF();
 		while (parent != null && !parent.isAncestor(this))
@@ -3276,8 +3291,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			parent = parent.getParentJDF();
 			if (parent == null)
 			{
-				throw new JDFException(res.getInheritedAttribute(AttributeName.JOBID, null, "unknown jobid") + " " + res.getLocalName() + JDFConstants.SLASH + res.getID()
-						+ " is not correctly nested");
+				throw new JDFException(res.getInheritedAttribute(AttributeName.JOBID, null, "unknown jobid") + " " + res.getLocalName() + JDFConstants.SLASH
+						+ res.getID() + " is not correctly nested");
 			}
 
 			res = (JDFResource) parent.getCreateResourcePool().moveElement(res, null);
@@ -3300,7 +3315,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the resourcelinks in the resourcepool of this node
 	 *
 	 * @param mLinkAtt the map of attributes
-	 *
 	 * @return VElement - the vector of ResourceLinks, null if none exist:
 	 */
 	public VElement getResourceLinks(final JDFAttributeMap mLinkAtt)
@@ -3335,11 +3349,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the linked resources matching certain conditions<br>
 	 * combines all linked resources from ResourceLinkPool, CustomerInfo, NodeInfo and AuditPool
 	 *
-	 * @param mResAtt map of Resource attributes to search for
+	 * @param mResAtt     map of Resource attributes to search for
 	 * @param bFollowRefs true if internal references shall be followed
-	 *
 	 * @return vResource: vector with all elements matching the conditions
-	 *
 	 * @default getLinkedResources(null, false)
 	 */
 	public VElement getLinkedResources(final JDFAttributeMap mResAtt, final boolean bFollowRefs)
@@ -3386,7 +3398,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * TODO: also include resources that are only linked by other unlinked resources
 	 *
 	 * @param bLocal if true, only in the local resourcepool, else also recurse into children
-	 *
 	 * @return vElement vector with all
 	 * @deprecated - Use @see UnlinkFinder
 	 */
@@ -3419,7 +3430,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get a vector of all direct predecessor or following nodes, depending on bPre
 	 *
 	 * @param bPre if true get predecessors, if false get following nodes
-	 *
 	 * @return Vector of pre / post decessor nodes
 	 * @deprecated use getPredecessors(bPre,false);
 	 */
@@ -3433,9 +3443,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * get a vector of all direct predecessor or following nodes, depending on bPre
 	 *
-	 * @param bPre if true get predecessors, if false get following nodes
+	 * @param bPre    if true get predecessors, if false get following nodes
 	 * @param bDirect if true, only return the direct condidates
-	 *
 	 * @return Vector of pre / post decessor nodes
 	 */
 	public VElement getPredecessors(final boolean bPre, final boolean bDirect)
@@ -3449,8 +3458,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
-	 *
 	 * @param bPre
 	 * @param bDirect
 	 * @param h
@@ -3475,7 +3482,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 	}
 
-	protected void checkPredecessorResource(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, final HashSet<ResPart> done, final KElement resElem)
+	protected void checkPredecessorResource(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, final HashSet<ResPart> done,
+			final KElement resElem)
 	{
 		final JDFResource r = (JDFResource) resElem;
 		final ResPart id = new ResPart(r);
@@ -3495,7 +3503,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		}
 	}
 
-	void checkPredecessorLink(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, final HashSet<ResPart> done, final JDFResource r, final VElement vNode, final JDFResourceLink rl)
+	void checkPredecessorLink(final boolean bPre, final boolean bDirect, final HashSet<KElement> h, final HashSet<ResPart> done, final JDFResource r,
+			final VElement vNode, final JDFResourceLink rl)
 	{
 		final VJDFAttributeMap vMaps = rl.getPartMapVector();
 		for (final KElement nodeElem : vNode)
@@ -3520,16 +3529,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * isExecutable - checks whether a node is executable by checking the resources linked by the resourcelinkpool and @Status or NodeInfo/@NodeStatus and JDF/@Activation
 	 *
-	 * @param partMap the Attribute to check
+	 * @param partMap        the Attribute to check
 	 * @param bCheckChildren if true, calculates the availability Status of a resource from all child partition leaves, else the Status is taken from the appropriate leaf itself
-	 *
 	 * @return boolean - true if the node is executable, false if not
-	 *
 	 *         default: isExecutable(null, true)
 	 */
 
 	/**
-	 *
 	 * @param partMap
 	 * @param bCheckChildren
 	 * @return
@@ -3649,21 +3655,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Get a vector of all JDF children with type nodeType
 	 *
 	 * @param nodeType : node Type attribute
-	 * @param active : Activation of the requesetd nodes, if null ignore activation
-	 * @param bDirect : if true, get direct children only, else recurse down the tree and include this, i.e. return a complete tree starting at this
-	 *
+	 * @param active   : Activation of the requesetd nodes, if null ignore activation
+	 * @param bDirect  : if true, get direct children only, else recurse down the tree and include this, i.e. return a complete tree starting at this
 	 * @return: VElement of JDF nodes
-	 *
 	 *          default: getvJDFNode(null, JDFNode.EnumActivation.Unknown, false)
 	 */
 
 	/**
 	 * Get a vector of all JDF children with type nodeType
 	 *
-	 * @param task node type
-	 * @param active Activation of the requested nodes, if null ignore activation
+	 * @param task    node type
+	 * @param active  Activation of the requested nodes, if null ignore activation
 	 * @param bDirect if true, get direct children only, else recurse down the tree and include this, i.e. return a complete tree starting at this
-	 *
 	 * @return VElement of JDF nodes
 	 * @default getvJDFNode(null, null, false)
 	 */
@@ -3700,9 +3703,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param task
 	 * @param active
-	 *
 	 * @return Vector of JDFNodes
-	 *
 	 * @default getvJDFNode(null, false)
 	 * @deprecated use public Vector getvJDFNode(task, JDFNode.EnumActivation.Unknown, false)
 	 */
@@ -3717,7 +3718,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * isActive
 	 *
 	 * @deprecated use fitsActivation
-	 *
 	 * @return boolean
 	 */
 	@Deprecated
@@ -3771,7 +3771,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * removeNode - remove a node. If bLeaveSubmit is true, leave a stub with the id and status field
 	 *
 	 * @param bLeaveSubmit if true, leave a stub with id and status field
-	 *
 	 * @default removeNode(true)
 	 * @deprecated
 	 */
@@ -3829,7 +3828,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * addTask
 	 *
 	 * @param task
-	 *
 	 * @return JDFNode
 	 * @deprecated use addJDFNode
 	 */
@@ -3852,9 +3850,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * setType set the type attribute to the string type
 	 *
-	 * @param newType the new type to set this to
+	 * @param newType   the new type to set this to
 	 * @param checkName if true, check whether this type exists and throw an exception if not
-	 *
 	 * @return ignore, always true
 	 * @throws JDFException if type is not a known JDF type
 	 * @default setType(newType, false)
@@ -4103,7 +4100,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param level validation level
 	 * @return boolean - true if unknown Links are in this element
-	 *
 	 * @default public boolean hasInvalidLinks (ValidationLevel_Complete)
 	 */
 	public boolean hasInvalidLinks(final EnumValidationLevel level)
@@ -4115,9 +4111,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * typesafe validator utility
 	 *
 	 * @param level validation level
-	 * @param nMax max. size of the returned vector
+	 * @param nMax  max. size of the returned vector
 	 * @return vector of invalid Link names
-	 *
 	 * @default getInvalidLinks (ValidationLevel_Complete, Integer.MAX_VALUE)
 	 */
 	public VString getInvalidLinks(final EnumValidationLevel level, final int nMax)
@@ -4138,8 +4133,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * update the node status or nodeinfo/@NodeStatus for all partitions specified in vMap
 	 *
-	 * @param vMap the map of partitions to apply the update algorithm to
-	 * @param updateKids if true, also recursively update all kids, if false move to root without updating kids
+	 * @param vMap          the map of partitions to apply the update algorithm to
+	 * @param updateKids    if true, also recursively update all kids, if false move to root without updating kids
 	 * @param updateParents if true, recurse down to the root, updatimg the satus based on modifications in this
 	 * @deprecated use 4 parameter version
 	 */
@@ -4152,10 +4147,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * update the node status or nodeinfo/@NodeStatus for all partitions specified in vMap
 	 *
-	 * @param vMap the map of partitions to apply the update algorithm to
-	 * @param updateKids if true, also recursively update all kids, if false move to root without updating kids
+	 * @param vMap          the map of partitions to apply the update algorithm to
+	 * @param updateKids    if true, also recursively update all kids, if false move to root without updating kids
 	 * @param updateParents if true, recurse down to the root, updatimg the satus based on modifications in this
-	 * @param method : -1, 0 or 1; -1 min status; 0 equals, 1 max status
+	 * @param method        : -1, 0 or 1; -1 min status; 0 equals, 1 max status
 	 */
 	public void updatePartStatus(final VJDFAttributeMap vMap, final boolean updateKids, final boolean updateParents, final int method)
 	{
@@ -4293,9 +4288,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * getJobPart - get a child node with a given jobpartid
 	 *
 	 * @param nodeID the NodeIdentifier of the job part
-	 *
 	 * @return JDFNode
-	 *
 	 */
 	public JDFNode getJobPart(final NodeIdentifier nodeID)
 	{
@@ -4310,9 +4303,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * getJobPart - get a child node with a given jobpartid
 	 *
 	 * @param nodeID the NodeIdentifier of the job part
-	 *
 	 * @return JDFNode
-	 *
 	 */
 	public JDFNode getJDF(final int iSkip)
 	{
@@ -4323,10 +4314,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * getJobPart - get a child node with a given jobpartid
 	 *
 	 * @param jobPartID the ID of the part job
-	 * @param jobID the ID of the job
-	 *
+	 * @param jobID     the ID of the job
 	 * @return JDFNode
-	 *
 	 * @default getJobPart(jobPartID, JDFConstants.EMPTYSTRING)
 	 */
 	public JDFNode getJobPart(final String jobPartID, final String jobID)
@@ -4348,14 +4337,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * add any resources that live in ancestor nodes to this node
 	 *
 	 * @param vRWResources vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
-	 *        the format is one of:<br>
-	 *        <li>ResName</li><br>
-	 *        <li>ResName:Input</li><br>
-	 *        <li>ResName:Output</li><br>
-	 *        <li>ResName:ProcessUsage</li><br>
-	 *        <li>ID<br>
-	 * @param vSpawnParts vector of JDFAttributeMaps that describe the parts to spawn
-	 *
+	 *                     the format is one of:<br>
+	 *                     <li>ResName</li><br>
+	 *                     <li>ResName:Input</li><br>
+	 *                     <li>ResName:Output</li><br>
+	 *                     <li>ResName:ProcessUsage</li><br>
+	 *                     <li>ID<br>
+	 * @param vSpawnParts  vector of JDFAttributeMaps that describe the parts to spawn
 	 * @return HashSet of resources or resource partitions that would be spawned rw multiple times
 	 */
 	public Collection<JDFResource> checkSpawnedResources(final VString vRWResources, final VJDFAttributeMap vSpawnParts)
@@ -4370,8 +4358,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get inter-resource linked resource refs and resourcs links
 	 *
 	 * @param vDoneRefs
-	 * @param bRecurse if true, also return references linked from the resource pool directly
-	 *
+	 * @param bRecurse  if true, also return references linked from the resource pool directly
 	 * @return HashSet of referenced resource refs and links
 	 */
 	@Override
@@ -4379,7 +4366,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		HashSet<JDFElement> v1 = vDoneRefs;
 		if (v1 == null)
+		{
 			v1 = new LinkedHashSet<>();
+		}
 		final JDFResourcePool rp = getResourcePool();
 		if (rp != null && bRecurse)
 		{
@@ -4458,7 +4447,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param bInput
 	 * @param resRoot
 	 * @param bLink
-	 *
 	 * @return JDFComponent
 	 * @deprecated use standard addResource
 	 * @default addComponent(cType, bInput, null, true)
@@ -4493,18 +4481,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * others are spawned read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * @param parentURL
-	 * @param spawnURL URL of the spawned JDF file
-	 * @param vRWResources_in vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
-	 *        the format is one of:<br>
-	 *        ResName:Input<br>
-	 *        ResName:Output<br>
-	 *        ResName:ProcessUsage<br>
-	 * @param vSpawnParts vector of mAttributes that describe the parts to spawn, only valid PartIDKeys are allowed
+	 * @param spawnURL          URL of the spawned JDF file
+	 * @param vRWResources_in   vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
+	 *                          the format is one of:<br>
+	 *                          ResName:Input<br>
+	 *                          ResName:Output<br>
+	 *                          ResName:ProcessUsage<br>
+	 * @param vSpawnParts       vector of mAttributes that describe the parts to spawn, only valid PartIDKeys are allowed
 	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
-	 * @param bCopyNodeInfo copy the NodeInfo elements into the Ancestors
+	 * @param bCopyNodeInfo     copy the NodeInfo elements into the Ancestors
 	 * @param bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
-	 * @param bCopyComments copy the Comment elements into the Ancestors
-	 *
+	 * @param bCopyComments     copy the Comment elements into the Ancestors
 	 * @return The spawned node
 	 * @since 050831 added bCopyComments
 	 * @tbd enhance nested spawning of partitioned nodes
@@ -4512,7 +4499,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @default spawn(parentURL, null, null, null, false, false, false, false)
 	 */
 	@Deprecated
-	public JDFNode spawn(final String parentURL, final String spawnURL, final VString vRWResources_in, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
+	public JDFNode spawn(final String parentURL, final String spawnURL, final VString vRWResources_in, final VJDFAttributeMap vSpawnParts,
+			final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn spawn = new JDFSpawn(this);
 		return spawn.spawn(parentURL, spawnURL, vRWResources_in, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -4523,25 +4511,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the parameters except for the list of rw resources, which are by
 	 * definition empty, are identical to those of Spawn
-	 *
 	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the vector of part maps
 	 * that are to be spawned, defaults to no part, i.e. the whole thing
 	 *
 	 * @param parentURL
-	 *
-	 * @param spawnURL URL of the spawned JDF file
-	 * @param vSpawnParts vector of mAttributes that describe the parts to spawn
+	 * @param spawnURL          URL of the spawned JDF file
+	 * @param vSpawnParts       vector of mAttributes that describe the parts to spawn
 	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
-	 * @param bCopyNodeInfo copy the NodeInfo elements into the Ancestors
+	 * @param bCopyNodeInfo     copy the NodeInfo elements into the Ancestors
 	 * @param bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
-	 * @param bCopyComments copy the Comment elements into the Ancestors
+	 * @param bCopyComments     copy the Comment elements into the Ancestors
 	 * @return JDFDoc - the spawned node's owner document.
-	 *
 	 * @default spawnInformative(parentURL, null, null, false, false, false, false);
 	 * @deprecated use JDFSpawn.spawnInformative()
 	 */
 	@Deprecated
-	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
+	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly,
+			final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn _spawn = new JDFSpawn(this);
 		return _spawn.spawnInformative(parentURL, spawnURL, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -4566,7 +4552,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * merge nodes in a way that no duplicate elements are created<br>
 	 * attention !! this kills pools !!
 	 *
-	 * @param e the node element to merge with the current node
+	 * @param e       the node element to merge with the current node
 	 * @param bDelete if true KElement e will be deleted
 	 * @return JDFNode: the merged node element
 	 */
@@ -4615,11 +4601,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * getLink - get the resourcelink that resides in the ResourceLinkPool of this node and references the resource r
 	 *
-	 * @param r the resource you are searching a link for
+	 * @param r      the resource you are searching a link for
 	 * @param bInput
-	 *
 	 * @return JDFResourceLink - the resource link you was searching for or if not found, a new empty JDFResource Link
-	 *
 	 * @default getLink(r, true)
 	 * @deprecated use getLink(resource, EnumUsage)
 	 */
@@ -4632,11 +4616,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * getLink - get the resourcelink that resides in the ResourceLinkPool of this node and references the resource r
 	 *
-	 * @param r the resource you are searching a link for
+	 * @param r     the resource you are searching a link for
 	 * @param usage the usage attribute of the link. If null, both input and output resourelinks will be returned
-	 *
 	 * @return JDFResourceLink - the resource link you was searching for or if not found, null
-	 *
 	 */
 	public JDFResourceLink getLink(final JDFResource r, final EnumUsage usage)
 	{
@@ -4670,7 +4652,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
 	 * get the vector of all resource leaves linked to a resource
 	 *
 	 * @param usage
@@ -4684,7 +4665,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		final JDFResourceLinkPool p = getResourceLinkPool();
 		final VElement vLinks = p == null ? null : p.getInOutLinks(usage, true, resName, procUsage);
 		if (vLinks == null || vLinks.size() == 0)
+		{
 			return null;
+		}
 		final VElement v = new VElement();
 		for (final KElement e : vLinks)
 		{
@@ -4794,12 +4777,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * searches for the first element occurence in the parent nodes and then the ancestor elements of the root ancestorpool
 	 *
-	 * @param attrib the element name
+	 * @param attrib       the element name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param def the default value, if there is no ancestor attribute
-	 *
+	 * @param def          the default value, if there is no ancestor attribute
 	 * @return String - value of attribute found, value of def if not available
-	 *
 	 * @default getAncestorAttribute(attrib, null, null)
 	 */
 	public String getAncestorAttribute(final String attrib, final String nameSpaceURI, final String def)
@@ -4826,11 +4807,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * true if a non default attribute occurence in the parent nodes and then the ancestor elements of the root ancestorpool exists
 	 *
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 *
 	 * @return true if the attribute exists
-	 *
 	 * @default hasAncestorAttribute(attrib, null)
 	 */
 	public boolean hasAncestorAttribute(final String attrib, final String nameSpaceURI)
@@ -4874,7 +4853,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * searches for the first element occurence in this and the ancestor elements
 	 *
-	 * @param element the attribute name
+	 * @param element      the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @since 180502
 	 * @return the KElement found
@@ -4910,7 +4889,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * true if a non default attribute occurs in the parent nodes and then the ancestor elements of the root ancestorpool exists
 	 *
 	 * @deprecated
-	 * @param element the attribute name
+	 * @param element      the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @since 180502
 	 * @return boolean - true if the attribute exists
@@ -4929,7 +4908,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param bInput
 	 * @param resRoot
 	 * @param bLink
-	 *
 	 * @return JDFResource
 	 * @deprecated use addResource(strName, JDFResource.EnumClass.Parameter, bInput, resRoot, bLink, null)
 	 */
@@ -4946,10 +4924,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param bInput
 	 * @param resRoot
 	 * @param bLink
-	 *
 	 * @deprecated use addResource(name, null, true, null, true)
 	 * @return JDFResource
-	 *
 	 * @default addResource(name, null, true, null, true)
 	 */
 	@Deprecated
@@ -4965,10 +4941,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param bInput
 	 * @param resRoot
 	 * @param bLink
-	 *
 	 * @deprecated use addResource(name, null, true, null, true)
 	 * @return JDFResource
-	 *
 	 * @default addResource(name, JDFResource.EnumClass.Handling, true, null, true)
 	 */
 	@Deprecated
@@ -5072,7 +5046,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param bInherit if true recurse through ancestors when searching
 	 * @return String - attribute value
-	 *
 	 * @default getJobPartID(flase)
 	 */
 	public String getJobPartID(final boolean bInherit)
@@ -5133,7 +5106,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param bInherit if true recurse through ancestors when searching
 	 * @return String - attribute value
-	 *
 	 * @default getSpawnID(false)
 	 */
 	public String getSpawnID(final boolean bInherit)
@@ -5206,7 +5178,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		while (parent != null)
 		{
 			if (parent.isProduct())
+			{
 				break;
+			}
 			parent = parent.getParentJDF();
 		}
 		return parent;
@@ -5229,16 +5203,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param type the type to check for
 	 * @return boolean - true if attribute Type is either in Type or types always true for null
-	 *
 	 */
 	public boolean containsType(final String type)
 	{
 		if (type == null)
+		{
 			return true;
+		}
 
 		final String myType = getTypesString();
 		if (myType == null)
+		{
 			return false;
+		}
 		return StringUtil.hasToken(myType, type, " ", 0);
 	}
 
@@ -5259,7 +5236,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the resource that matches the typesafe link described by i
 	 *
 	 * @param info the LinkInfo string for this name
-	 * @param i the index of the pu to find
+	 * @param i    the index of the pu to find
 	 * @return the enumerated process usage of this checked link
 	 * @default getEnumProcessUsage(info, 0)
 	 * @deprecated
@@ -5374,9 +5351,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * isValidLink check whether an resLink is legal for this class
 	 *
-	 * @param level the checking level
-	 * @param rl the JDFResourceLink to check
-	 * @param doneNameList Vector of Integer
+	 * @param level         the checking level
+	 * @param rl            the JDFResourceLink to check
+	 * @param doneNameList  Vector of Integer
 	 * @param doneIndexList Vector of Integer
 	 * @return true if valid
 	 */
@@ -5415,8 +5392,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the links that match the typesafe resource name if the Resource type is not defined for the process represented by this node see chapter 6 JDFSpec, then the links are
 	 * ignored
 	 *
-	 * @param resName of the resource to remove
-	 * @param bLink if false, returns the linked resources, else if true, returns the ResourceLink elements
+	 * @param resName      of the resource to remove
+	 * @param bLink        if false, returns the linked resources, else if true, returns the ResourceLink elements
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @return vector of resourcelink elements
 	 */
@@ -5438,7 +5415,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
 	 * @param resName
 	 * @param processUsage
 	 * @param partMap
@@ -5469,10 +5445,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the resource that matches a typesafe resource name if the Resource type is not defined for the process represented by this node see chapter 6 JDFSpec, then the resource
 	 * is ignored
 	 *
-	 * @param resName of the resource to remove
+	 * @param resName      of the resource to remove
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param partMap
-	 * @param pos the position of the link if multiple matching links exist
+	 * @param pos          the position of the link if multiple matching links exist
 	 * @return JDFResource - the resourcelink element
 	 */
 	public JDFResource getMatchingResource(final String resName, final EnumProcessUsage processUsage, final JDFAttributeMap partMap, final int pos)
@@ -5501,9 +5477,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the link that matches the typesafe resource name<br>
 	 * if the Resource type is not defined for the process represented by this node, the link is ignored (see JDF Spec Chapter 6)
 	 *
-	 * @param resName name of the resource to remove
+	 * @param resName      name of the resource to remove
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
-	 * @param pos the position of the link (if multiple matching links exist)
+	 * @param pos          the position of the link (if multiple matching links exist)
 	 * @return JDFResourceLink - the resourcelink
 	 */
 	public JDFResourceLink getMatchingLink(final String resName, final EnumProcessUsage processUsage, final int pos)
@@ -5516,18 +5492,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * resource link in this
 	 *
 	 * @param resName the name of the resource to add
-	 * @param usage the Usage of the resourcelink of the resource to add:
-	 *        <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
-	 *
+	 * @param usage   the Usage of the resourcelink of the resource to add:
+	 *                <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
 	 * @return JDFResource the newly created resource
 	 */
 	public JDFResource appendMatchingResource(final String resName, final EnumUsage usage)
 	{
 		EnumProcessUsage processUsage = null;
 		if (EnumUsage.Input.equals(usage))
+		{
 			processUsage = EnumProcessUsage.AnyInput;
+		}
 		else if (EnumUsage.Output.equals(usage))
+		{
 			processUsage = EnumProcessUsage.AnyOutput;
+		}
 		return new LinkValidator(this).appendMatchingResource(resName, processUsage, null);
 	}
 
@@ -5535,13 +5514,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Method AppendMatchingResource. Appends a resource and link it to this if it is listed in the list of valid nodes for for a JDF with the given type also creates the matching
 	 * resource link in this
 	 *
-	 * @param resName the name of the resource to add
+	 * @param resName      the name of the resource to add
 	 * @param processUsage the processUsage of the resourcelink of the resource to add:
-	 *        <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
-	 *        <li>EnumProcessUsage.AnyOutput - for output but no processUsage</li>
-	 *
+	 *                     <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
+	 *                     <li>EnumProcessUsage.AnyOutput - for output but no processUsage</li>
 	 * @param resourceRoot the root JDF node, that is the parent of the resourcepool where the resource should be added. If null, this node is assumed.
-	 *
 	 * @return JDFResource the newly created resource
 	 */
 	public JDFResource appendMatchingResource(final String resName, final EnumProcessUsage processUsage, final JDFNode resourceRoot)
@@ -5552,12 +5529,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * remove the link that matches the typesafe link resource name
 	 *
-	 * @param resName name of the resource to remove
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
+	 * @param resName         name of the resource to remove
+	 * @param processUsage    enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param bRemoveResource also remove the resource, if it is not linked by any other process
-	 * @param pos the position of the link, if multiple matching links exist
+	 * @param pos             the position of the link, if multiple matching links exist
 	 * @return true if successful
-	 *
 	 * @default removeMatchingLink(resName, processUsage, false, 0)
 	 */
 	public boolean removeMatchingLink(final String resName, final int processUsage, final boolean bRemoveResource, final int pos)
@@ -5573,7 +5549,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
 	 * remove a resourceLink and potentially its linked resource
 	 *
 	 * @param l
@@ -5582,7 +5557,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public void removeLink(final JDFResourceLink l, final boolean bRemoveResource)
 	{
 		if (l == null)
+		{
 			return;
+		}
 
 		if (bRemoveResource)
 		{
@@ -5603,11 +5580,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * remove the link that matches the typesafe link resource name
 	 *
-	 * @param resName name of the resource to remove
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
+	 * @param resName         name of the resource to remove
+	 * @param processUsage    enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param bRemoveResource also remove the resource, if it is not linked by any other process
 	 * @return true if successful
-	 *
 	 * @default removeMatchingLink(resName, processUsage, false, 0)
 	 */
 	public boolean removeMatchingLinks(final String resName, final EnumProcessUsage processUsage, final boolean bRemoveResource)
@@ -5623,11 +5599,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Append a resource that matches the typesafe link described by resource name
 	 *
-	 * @param resource the resource to link
+	 * @param resource     the resource to link
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
-	 * @param partMap the Attribute map of parts
+	 * @param partMap      the Attribute map of parts
 	 * @return the new link, null if failure
-	 *
 	 * @default linkMatchingResource(resource, processUsage, null)
 	 */
 	public JDFResourceLink linkMatchingResource(final JDFResource resource, final EnumProcessUsage processUsage, final JDFAttributeMap partMap)
@@ -5638,11 +5613,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * get the number of links that match the typesafe link resource name
 	 *
-	 * @param resName name of the resources to match
-	 * @param bLink if false: returns the linked resources, if true: returns the ResourceLink elements
+	 * @param resName      name of the resources to match
+	 * @param bLink        if false: returns the linked resources, if true: returns the ResourceLink elements
 	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @return int - the number of resourcelink elements
-	 *
 	 * @default numMatchingLinks(resName, true, ProcessUsage_Any.getValue())
 	 */
 	public int numMatchingLinks(final String resName, final boolean bLink, final EnumProcessUsage processUsage)
@@ -5747,7 +5721,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * gets the existing inherited CustomerInfo or NodeInfo from parents including ancestorpool
 	 *
 	 * @param elementName name of the element to look for
-	 * @param bInherit if true: recurse into parents
+	 * @param bInherit    if true: recurse into parents
 	 * @param xPath
 	 * @return the existing CustomerInfo or NodeInfo
 	 */
@@ -5805,7 +5779,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				for (final KElement leaf : vLeaves)
 				{
 					if (leaf.hasXPathNode(xPath))
+					{
 						return nici;
+					}
 				}
 			}
 
@@ -5848,7 +5824,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param idUsage
 	 * @param iPos
-	 *
 	 * @return String the attribute value
 	 */
 	public String getGeneralID(final String idUsage, final int iPos, final boolean inherit)
@@ -5874,7 +5849,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param idUsage
 	 * @param iPos
-	 *
 	 * @return String the attribute value
 	 */
 	@Override
@@ -5897,7 +5871,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * gets the existing NodeInfo or creates a new one if none exists this method will check if a NodeInfo/CustomerInfo exists,
 	 *
 	 * @param s
-	 *
 	 * @return the found or created NodeInfo/CustomerInfo
 	 */
 	private KElement getCreateNiCi(final String s)
@@ -5974,9 +5947,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		if (combinedProcessIndex < 0 || combinedProcessIndex >= ContainerUtil.size(getTypes()))
 		{
 			if (combinedProcessIndex == 0)
+			{
 				return getNodeInfo();
+			}
 			else
+			{
 				return null;
+			}
 		}
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp == null)
@@ -5990,7 +5967,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return null;
 		}
 		else
+		{
 			return (JDFNodeInfo) rl.getTarget();
+		}
 	}
 
 	/**
@@ -6007,8 +5986,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get first NodeInfo element from child list or child list of any ancestor
 	 *
 	 * @param xPath the xPath to an element or attribute that must exist in the queried CustomerInfo<br>
-	 *        note that attributes must be marked with an "@", if xPath=null, simply return the next in line
-	 *
+	 *              note that attributes must be marked with an "@", if xPath=null, simply return the next in line
 	 * @return JDFNodeInfo The matching NodeInfo element
 	 */
 	public JDFNodeInfo getInheritedNodeInfo(final String xPath)
@@ -6020,8 +5998,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get first NodeInfo element from child list or child list of any ancestor
 	 *
 	 * @param xPath the xPath to an element or attribute that must exist in the queried CustomerInfo<br>
-	 *        note that attributes must be marked with an "@", if xPath=null, simply return the next in line
-	 *
+	 *              note that attributes must be marked with an "@", if xPath=null, simply return the next in line
 	 * @return JDFNodeInfo The matching NodeInfo element
 	 */
 	JDFNodeInfo getScheduleNodeInfo(final String att)
@@ -6044,7 +6021,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 * remove element NodeInfo
-	 *
 	 * with ProcessUsage="Ancestor" is infinity. Use removeNodeInfos() to remove all.
 	 */
 	public void removeNodeInfo()
@@ -6141,10 +6117,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * remove a type from the types list - also cleaning up combinedprocessindex
 	 *
-	 * @param type the type
+	 * @param type  the type
 	 * @param iSkip the index of this type in the list of identical types - typically 0
 	 * @deprecated use the 3-parameter version
-	 *
 	 */
 	@Deprecated
 	public void removeFromTypes(final String type, final int iSkip)
@@ -6155,10 +6130,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * remove a type from the types list - also cleaning up combinedprocessindex
 	 *
-	 * @param type the type
-	 * @param iSkip the index of this type in the list of identical types - typically 0
+	 * @param type             the type
+	 * @param iSkip            the index of this type in the list of identical types - typically 0
 	 * @param bRemoveEmptyLink if true, remove any reslinks that have no remaining combinedprocessindex
-	 *
 	 */
 	public void removeFromTypes(final String type, final int iSkip, final boolean bRemoveEmptyLink)
 	{
@@ -6225,7 +6199,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * removes a Resource from this ResourceLinkPool and from the resourcePool if it is no longer linked to any other process
 	 *
 	 * @param nodeName the Nodename of the Resource "NodeInfo" for example
-	 * @param iSkip number to skip before deleting
+	 * @param iSkip    number to skip before deleting
 	 * @return KElement the removed resource, null if nothing was found or deleted (e.g. 4 found and the 5th is the one to delete). The link is not returned<br>
 	 *         If the link is deleted and the resource is still linked to another process, null is returned.
 	 */
@@ -6410,11 +6384,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * get a Child JDFNode with a given ID attribute
 	 *
-	 * @param id the id of the child
+	 * @param id      the id of the child
 	 * @param bDirect if true, only direct children, else recurse down the tree
-	 *
 	 * @return JDFNode - the parent JDF, null if this is the root JDF
-	 *
 	 * @default getChildJDFNode(id, false)
 	 */
 	public JDFNode getChildJDFNode(final String id, final boolean bDirect)
@@ -6428,7 +6400,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param bInherit recurse through ancestors and Ancestor elements of the AncestorPool when searching
 	 * @return true if attribute Version exists
-	 *
 	 * @default hasVersion(false)
 	 */
 	public boolean hasVersion(final boolean bInherit)
@@ -6457,9 +6428,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param bInherit recurse through ancestors when searching
 	 * @return EnumVersion - attribute value
-	 *
 	 * @default getVersion(false)
-	 *
 	 *          this method replaces the C++ methods GetVersion and GetEnumVersion
 	 */
 	@Override
@@ -6484,7 +6453,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * The cloned copy has a new Id in the format: (thisID)_old_nnn
 	 *
 	 * @param resLink
-	 *
 	 * @return the ResourceAudit that was created
 	 */
 	public JDFResourceAudit cloneResourceToModify(final JDFResourceLink resLink)
@@ -6523,7 +6491,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * call JDFResourceAudit.UpdateLink with the modified link to finalize
 	 *
 	 * @param resLink
-	 *
 	 * @return the ResourceAudit that was created
 	 */
 	public JDFResourceAudit prepareToModifyLink(final JDFResourceLink resLink)
@@ -6587,7 +6554,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * get the first index of a process in types after start
 	 *
-	 * @param typ the Type to search for
+	 * @param typ   the Type to search for
 	 * @param start the position to start searching at - generally 0
 	 * @return int the position of the first occurence after start,-1 if none is found
 	 */
@@ -6603,7 +6570,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * get the first index of a process in types after start
 	 *
-	 * @param typ the Type to search for
+	 * @param typ   the Type to search for
 	 * @param start the position to start searching at - generally 0
 	 * @return int the position of the first occurence after start,-1 if none is found
 	 */
@@ -6648,7 +6615,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 * one of Combined or ProcessGroup
-	 * 
+	 *
 	 * @param combineType
 	 */
 	public void ensureCombined(final EnumType combineType)
@@ -6745,7 +6712,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param combinedProcessIndex the nTh occurence of the CombinedProcessIndex field, -1 if all valid positions are ok
 	 * @return
-	 *
 	 * @default getLinksForCombinedProcessIndex(-1)
 	 */
 	public VElement getLinksForCombinedProcessIndex(final int combinedProcessIndex)
@@ -6758,10 +6724,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the links that are selected by a given CombinedProcessIndex<br>
 	 * all links with no CombinedProcessIndex are included in the list
 	 *
-	 * @param type the process type for which to get the links
+	 * @param type  the process type for which to get the links
 	 * @param nType the nTh occurence of the Type field, -1 if all valid positions are ok
 	 * @return
-	 *
 	 * @default getLinksForType(type, -1)
 	 */
 	public VElement getLinksForType(final EnumType type, final int nType)
@@ -6785,7 +6750,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * insert a new Process into @Types at the position pos
 	 *
-	 * @param type the process type
+	 * @param type      the process type
 	 * @param beforePos the position before which to add the in the list, 0 is first, ... -1 is before the last, very large is append
 	 */
 	public void insertTypeInTypes(final EnumType type, int beforePos)
@@ -6864,17 +6829,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * merge a previously spawned JDF into a node that is a child of, or this root
 	 *
-	 * @param toMerge the previosly spawned jdf node
-	 * @param urlMerge the url of the ???
-	 * @param cleanPolicy how to clean up the spawn and merge audits after merging
+	 * @param toMerge      the previosly spawned jdf node
+	 * @param urlMerge     the url of the ???
+	 * @param cleanPolicy  how to clean up the spawn and merge audits after merging
 	 * @param amountPolicy how to clean up the Resource amounts after merging
 	 * @return JDFNode - the merged node in the new document<br>
 	 *         note that the return value used to be boolean. The boolean value is now replaced by exceptions. This always corresponds to <code>true</code>.
-	 *
 	 * @throws JDFException if toMerge has already been merged
 	 * @throws JDFException if toMerge was not spawned from this
 	 * @throws JDFException if toMerge has no AncestorPool
-	 *
 	 * @default mergeJDF(toMerge, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
 	 * @deprecated use JDFMerge class
 	 */
@@ -7112,7 +7075,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param tasks types of the processgroup
 	 * @return the added JDFNode
-	 *
 	 * @default addProcessGroup(null)
 	 */
 	public JDFNode addProcessGroup(final VString tasks)
@@ -7145,7 +7107,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * add a product node to this
 	 *
 	 * @return
-	 *
 	 * @throws JDFException ith this is not a Product itself
 	 */
 	public JDFNode addProduct()
@@ -7163,7 +7124,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * remove all completed nodes
 	 *
 	 * @return
-	 *
 	 * @deprecated
 	 */
 	@SuppressWarnings("rawtypes")
@@ -7212,7 +7172,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Returns a resource with id anywhere in the tree below this node similar to getTarget(id) but looks only in the resource pool's direct children
 	 *
 	 * @param id the id of the resource
-	 *
 	 * @return the resource, if available
 	 */
 	public JDFResource getTargetResource(final String id)
@@ -7255,17 +7214,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * searches for the first attribute occurence in the ancestor elements subelements
 	 *
 	 * @param element
-	 *
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param def default value, if no matching attribute is found
+	 * @param def          default value, if no matching attribute is found
 	 * @since 180502
 	 * @return String - value of attribute found, empty string if not available
 	 */
 	public String getAncestorElementAttribute(final String element, final String attrib, final String nameSpaceURI, final String def)
 	{
 		if (StringUtil.getNonEmpty(attrib) == null)
+		{
 			return null;
+		}
 
 		if (ElementName.NODEINFO.equals(element) || ElementName.CUSTOMERINFO.equals(element))
 		{
@@ -7305,7 +7265,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * true if a non default attribute occurs in the parent nodes and the ancestor elements subelements of the root ancestorpool exists
 	 *
 	 * @param element
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @since 180502
 	 * @return true if the attribute exists
@@ -7348,8 +7308,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get a vector of ResourceLink elements that exist but are unknown by this element
 	 *
 	 * @param vInNameSpace list of namespaces where unknown Links are searched for<br>
-	 *        if null, all namespaces are searched
-	 * @param nMax maximum size of the returned vector
+	 *                     if null, all namespaces are searched
+	 * @param nMax         maximum size of the returned vector
 	 * @return VElement vector of unknown elements
 	 * @since 060730 return type changed to VElement - but since the routine was utterly broken, we should be ok
 	 */
@@ -7473,7 +7433,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param bInherit if true recurse through ancestors when searching
 	 * @return VString - attribute value
-	 *
 	 * @default getICSVersions(false)
 	 */
 	public VString getICSVersions(final boolean bInherit)
@@ -7496,7 +7455,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
 	 * @param value the string version to set MaxVersion to
 	 * @deprecated use setMaxVersion(EnumVersion)
 	 */
@@ -7511,7 +7469,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param bInherit if true recurse through ancestors when searching
 	 * @return EnumVersion - attribute value
-	 *
 	 *         default - getMaxVersion(false)
 	 */
 	@Override
@@ -7706,9 +7663,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get the NodeInfo/@workstepid for a given partition if no workstepID exists, returns jobPartID
 	 *
 	 * @param map
-	 *
 	 * @return the workstepid
-	 *
 	 */
 	public String getWorkStepID(final JDFAttributeMap map)
 	{
@@ -7769,7 +7724,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 * @return
-	 * 
 	 */
 	public JDFDate getNodeInfoEnd()
 	{
@@ -7869,7 +7823,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public JDFDuration getNodeInfoSetupDuration()
@@ -8014,8 +7967,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get first CustomerInfo element from child list or child list of any ancestor
 	 *
 	 * @param xPath the the xPath to an element or attribute that must exist in the queried CustomerInfo<br>
-	 *        note that attributes must be marked with an "@", if xPath=null, simply return the next in line
-	 *
+	 *              note that attributes must be marked with an "@", if xPath=null, simply return the next in line
 	 * @return the matching CustomerInfo element
 	 */
 	public JDFCustomerInfo getInheritedCustomerInfo(final String xPath)
@@ -8161,7 +8113,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Checks if this process is the successor of the given process node.
 	 *
 	 * @param proc node to check against
-	 *
 	 * @return boolean - <code>true</code> if this process is successor of given process
 	 */
 
@@ -8188,9 +8139,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Returns the input or output resource IDs of this process node.
 	 *
 	 * @param isInput
-	 *        <li><code>true</code> to get input resource IDs.</li>
-	 *        <li><code>false</code> to get output resource IDs.</li>
-	 *
+	 *                <li><code>true</code> to get input resource IDs.</li>
+	 *                <li><code>false</code> to get output resource IDs.</li>
 	 * @return VString - Vector containing resource IDs.
 	 */
 	public VString getResourceIDs(final boolean isInput)
@@ -8217,11 +8167,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Gets the executable partitions of the resource in this node (with corresponding resource link). The part maps returned may be nested. If the empty part map is contained, the
 	 * whole resource is executable.<br>
-	 *
 	 * Availability of a resource depends on the status, the availability of refered sub-partitions and the part usage.
 	 *
-	 * @param link the resource link.
-	 * @param res the resource. (legacy dummy the resource is actually calculated from the link)
+	 * @param link      the resource link.
+	 * @param res       the resource. (legacy dummy the resource is actually calculated from the link)
 	 * @param minStatus minimum resource status to include.
 	 * @deprecated use getExecutablePartitions(link, minStatus);
 	 * @return VJDFAttributeMap - A part map vector containing the executable partitions.
@@ -8243,7 +8192,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Method getExecutablePartitions
 	 *
 	 * @deprecated only for backward compatibility !!!
-	 *
 	 * @param link
 	 * @param minStatus
 	 * @return
@@ -8258,13 +8206,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Gets the executable partitions of the resource in this node (with corresponding resource link). The part maps returned may be nested. If the empty part map is contained, the
 	 * whole resource is executable.<br>
-	 *
 	 * Availability of a resource depends on the status, the availability of refered sub-partitions and the part usage.
 	 *
-	 * @param link the resource link.
-	 * @param minStatus minimum resource status to include.
+	 * @param link             the resource link.
+	 * @param minStatus        minimum resource status to include.
 	 * @param bCheckNodeStatus check node status.
-	 *
 	 * @return VJDFAttributeMap - A part map vector containing the executable partitions.
 	 */
 
@@ -8287,7 +8233,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	private class ExecCheck
 	{
-		private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps, final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
+		private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys,
+				final VJDFAttributeMap vamPartMaps, final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
 		{
 			final JDFAttributeMap amPartMap = res.getPartMap();
 
@@ -8392,7 +8339,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return new ExecPartFlags(isAvailable, isProcStatOK);
 		}
 
-		private void modifyPartMap(final VJDFAttributeMap vamPartMaps, final JDFAttributeMap amPartMap, final boolean isLeaf, final JDFElement.EnumNodeStatus stat, final boolean isExecutable)
+		private void modifyPartMap(final VJDFAttributeMap vamPartMaps, final JDFAttributeMap amPartMap, final boolean isLeaf,
+				final JDFElement.EnumNodeStatus stat, final boolean isExecutable)
 		{
 			if (isExecutable)
 			{
@@ -8458,9 +8406,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 * Class ExecPartFlags
-	 *
 	 * Returned by <code>addExecutablePartitions</code>
-	 *
 	 */
 	private static final class ExecPartFlags
 	{
@@ -8488,7 +8434,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * Gets all child process nodes. This function replaces the JDFDoc.getProcessNodes, which may be implemented as getJDFRoot.getProcessNodes();
 	 *
 	 * @deprecated use getvJDFNode(null,null,false) and skip intermediate nodes
-	 *
 	 * @return JDFNode [] - All child process nodes.
 	 */
 
@@ -8535,8 +8480,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * add an internal pipe (an input and an output link to an explicitly defined exchange resource)
 	 *
 	 * @param resourceName The name of the reource to create
-	 * @param indexOutput the CombinedProcessIndex of the output ResourceLink to the internal pipe
-	 * @param indexInput the CombinedProcessIndex of the input ResourceLink to the internal pipe
+	 * @param indexOutput  the CombinedProcessIndex of the output ResourceLink to the internal pipe
+	 * @param indexInput   the CombinedProcessIndex of the input ResourceLink to the internal pipe
 	 * @return JDFResource - the newly created resource
 	 */
 	public JDFResource addInternalPipe(final String resourceName, final int indexOutput, final int indexInput)
@@ -8563,7 +8508,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * get a heuristic partidkey vector from the partitons of the linked resources
 	 *
 	 * @param partMap the partmap to order. If not specified, use the output link
-	 *
 	 * @return the ordered vector of partIDKeys
 	 */
 	public VString getPartIDKeys(final JDFAttributeMap partMap)
@@ -8629,7 +8573,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * prepare the nodeinfo for a list of parts, e.g. for a partitioned spawn if nodeinfo is prepartitioned it will return a vector of all matching leaves
 	 *
 	 * @param vSpawnParts the list of parts
-	 *
 	 * @return the vector of nodeinfo leaves
 	 */
 	public VElement prepareNodeInfo(final VJDFAttributeMap vSpawnParts)
@@ -8695,8 +8638,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param linkName the name of the link including or excluding the "Link", If it is omitted, it will be added
 	 * @param mLinkAtt the attributes to search for
-	 * @param linkNS the namespace of the link
-	 *
+	 * @param linkNS   the namespace of the link
 	 * @return VElement - all elements matching the condition mLinkAtt
 	 * @default getLinks(null,null,null)
 	 * @deprecated - use getResourceLinks
@@ -8712,8 +8654,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 *
 	 * @param linkName the name of the link including or excluding the "Link", If it is omitted, it will be added
 	 * @param mLinkAtt the resourcelink attributes to search for
-	 * @param linkNS the namespace of the link
-	 *
+	 * @param linkNS   the namespace of the link
 	 * @return VElement - all elements matching the condition mLinkAtt,
 	 * @default getLinks(null,null,null)
 	 */
@@ -8735,11 +8676,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * getLink - get the n'th link matching mLinkAtt out of the resource link pool
 	 *
-	 * @param index the index of the matching link
+	 * @param index    the index of the matching link
 	 * @param linkName the name of the link including or excluding the "Link". If it is omitted, it will be added.
 	 * @param mLinkAtt the attributes to search for
-	 * @param linkNS the namespace of the link
-	 *
+	 * @param linkNS   the namespace of the link
 	 * @return JDFResourceLink - the ResourceLink matching the condition mLinkAtt
 	 * @default getLinks(null,null,null)
 	 */
@@ -8761,9 +8701,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	/**
 	 * Gets all elements with name linkName, which contain resource links that point to this resource
 	 *
-	 * @param linkName defaults to any
+	 * @param linkName     defaults to any
 	 * @param nameSpaceURI attribute namespace you are searching in
-	 *
 	 * @return VElement vector of all found elements
 	 * @deprecated this routine does not belong here at all!
 	 * @default getLinks(null, null)
@@ -8885,7 +8824,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		for (int i = 0; i < links.size(); i++)
 		{
 			final JDFResourceLink link = (JDFResourceLink) links.get(i);
-			final JDFResourceLink parentLink = (JDFResourceLink) parentPool.getChildWithAttribute(link.getLocalName(), AttributeName.RREF, null, link.getrRef(), 0, true);
+			final JDFResourceLink parentLink = (JDFResourceLink) parentPool.getChildWithAttribute(link.getLocalName(), AttributeName.RREF, null, link.getrRef(),
+					0, true);
 			if (parentLink != null)
 			{
 				VJDFAttributeMap vParts = link.getPartMapVector();
@@ -9025,7 +8965,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
 	 * @return the filename of this; null if not implemented
 	 */
 	@Override
@@ -9086,7 +9025,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static JDFNode createRoot()

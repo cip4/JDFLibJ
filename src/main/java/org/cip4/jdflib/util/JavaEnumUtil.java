@@ -80,7 +80,6 @@ import org.cip4.jdflib.core.StringArray;
  * class with utilities for enums
  *
  * @author prosirai
- *
  */
 public class JavaEnumUtil
 {
@@ -213,7 +212,6 @@ public class JavaEnumUtil
 	}
 
 	/**
-	 * 
 	 * @param <T>
 	 * @param c
 	 * @return
@@ -290,4 +288,5 @@ public class JavaEnumUtil
 		final StringArray lst = StringArray.getVString(strings, null);
 		return getEnumList(c, lst, unique);
 	}
+
 }

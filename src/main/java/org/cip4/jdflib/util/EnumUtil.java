@@ -82,7 +82,6 @@ import org.cip4.jdflib.core.VString;
  * class with utilities for enums
  *
  * @author prosirai
- *
  */
 public class EnumUtil
 {
@@ -103,7 +102,9 @@ public class EnumUtil
 	public static VString getNamesVector(final Class<? extends ValuedEnum> e)
 	{
 		if (e == null)
+		{
 			return null;
+		}
 
 		final VString namesVector = new VString();
 		final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
@@ -125,7 +126,9 @@ public class EnumUtil
 	public static StringArray getNamesList(final Class<? extends ValuedEnum> e)
 	{
 		if (e == null)
+		{
 			return null;
+		}
 
 		final StringArray list = new StringArray();
 		final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
@@ -252,7 +255,7 @@ public class EnumUtil
 	 * get enum ignoring case
 	 *
 	 * @param clazz the jdflib valued enum class
-	 * @param e the enum
+	 * @param e     the enum
 	 * @return
 	 */
 	public static ValuedEnum getEnumIgnoreCase(final Class<? extends ValuedEnum> clazz, final Enum<?> e)
@@ -305,6 +308,89 @@ public class EnumUtil
 	public static <T extends Enum<T>> T getJavaEnumIgnoreCase(final Class<T> c, final String val)
 	{
 		return JavaEnumUtil.getEnumIgnoreCase(c, val, null);
+	}
+
+	/**
+	 * @param <T>
+	 * @param <T>
+	 * @param val
+	 * @param c
+	 * @return
+	 */
+	public static <T extends Enum<T>> T getJavaEnum(final ValuedEnum val)
+	{
+		Class<T> c = getJavaEnumClass(val);
+		return c == null ? null : JavaEnumUtil.getEnumIgnoreCase(c, getName(val));
+	}
+
+	/**
+	 * @param <T>
+	 * @param <T>
+	 * @param val
+	 * @param c
+	 * @return
+	 */
+	public static <T extends Enum<T>> Class<T> getJavaEnumClass(final ValuedEnum val)
+	{
+		if (val == null)
+		{
+			return null;
+		}
+		String name = val.getClass().getName();
+		String simple = StringUtil.token(name, -1, ".$");
+		String newsimple = "E" + StringUtil.rightStr(simple, -4);
+
+		String newname = StringUtil.replaceToken(name, -1, ".$", newsimple);
+		try
+		{
+			return (Class<T>) Class.forName(newname);
+		}
+		catch (ClassNotFoundException e)
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * @param <T>
+	 * @param <T>
+	 * @param val
+	 * @param c
+	 * @return
+	 */
+	public static <T extends ValuedEnum, E extends Enum<E>> T getOldEnum(final E val)
+	{
+		Class<T> c = getOldEnumClass(val);
+		return c == null ? null : (T) getEnumIgnoreCase(c, JavaEnumUtil.getName(val));
+	}
+
+	/**
+	 * @param <T>
+	 * @param <T>
+	 * @param <E>
+	 * @param val
+	 * @param c
+	 * @return
+	 */
+	public static <T extends ValuedEnum, E extends Enum<E>> Class<T> getOldEnumClass(final Enum<E> val)
+	{
+		if (val == null)
+		{
+			return null;
+		}
+		String name = val.getClass().getName();
+		String simple = StringUtil.token(name, -1, ".$");
+		String newsimple = "Enum" + StringUtil.rightStr(simple, -1);
+
+		String newname = StringUtil.replaceToken(name, -1, ".$", newsimple);
+		try
+		{
+			return (Class<T>) Class.forName(newname);
+		}
+		catch (ClassNotFoundException e)
+		{
+			return null;
+		}
 	}
 
 }
