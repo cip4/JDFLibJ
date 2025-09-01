@@ -93,6 +93,7 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -106,7 +107,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- *
  *         This implements the first fixture with unit tests for class JDFElement.
  */
 class JDFResourceLinkTest extends JDFTestCaseBase
@@ -561,7 +561,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * tests whether the convoluted inheritence of partAmount and ResourceLink function correctly
-	 *
 	 */
 	@Test
 	void testPartAmountVirtual()
@@ -642,7 +641,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTarget
-	 *
 	 */
 	@Test
 	void testGetLeafVector()
@@ -917,7 +915,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTarget
-	 *
 	 */
 	@Test
 	void testGetTargetVectorSparse()
@@ -954,7 +951,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetTarget
-	 *
 	 */
 	@Test
 	void testGetTargetVectorNullPart()
@@ -1120,7 +1116,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetLinkRootJMF
-	 *
 	 */
 	@Test
 	void testGetLinkRoot()
@@ -1201,7 +1196,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIncludesMatchingAttribute.
-	 *
 	 */
 	@Test
 	void testSetPartMap()
@@ -1258,7 +1252,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * Method testIncludesMatchingAttribute.
-	 *
 	 */
 	@Test
 	void testGetUsage()
@@ -1272,7 +1265,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testHasResourcePartMap.
-	 *
 	 */
 	@Test
 	void testHasResourcePartMap()
@@ -1363,7 +1355,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIsExecutable().
-	 *
 	 */
 	@Test
 	void testIsExecutableNull()
@@ -1372,14 +1363,13 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFResource r = n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl = n.getLink(r, null);
-		r.setResStatus(null, true);
+		r.setResStatus((EResStatus) null, true);
 
 		assertFalse(rl.isExecutable(null, true));
 	}
 
 	/**
 	 * Method testIsExecutable().
-	 *
 	 */
 	@Test
 	void testIsExecutable()
@@ -1457,7 +1447,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * test that the position checking algorithm works
-	 *
 	 */
 	@Test
 	void testValidPosition()
@@ -1478,7 +1467,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * test that the position checking algorithm works
-	 *
 	 */
 	@Test
 	void testUnPartition()
@@ -1500,7 +1488,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * test that the position checking algorithm works
-	 *
 	 */
 	@Test
 	void testValidAttributesAmountPool()
@@ -1520,7 +1507,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	/**
 	 * test that the position checking algorithm works
-	 *
 	 */
 	@Test
 	void testValidCombinedProcessIndex()
@@ -1558,7 +1544,6 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 
 	/**
 	 * test that the position checking algorithm works
-	 *
 	 */
 	@Test
 	void testSetCombinedProcessIndex()
