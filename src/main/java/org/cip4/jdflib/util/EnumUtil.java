@@ -324,13 +324,13 @@ public class EnumUtil
 	}
 
 	/**
-	 * @param <T>
-	 * @param <T>
+	 * @param <J>
+	 * @param <J>
 	 * @param val
 	 * @param c
 	 * @return
 	 */
-	public static <T extends Enum<T>> Class<T> getJavaEnumClass(final ValuedEnum val)
+	public static <J extends Enum<J>> Class<J> getJavaEnumClass(final ValuedEnum val)
 	{
 		if (val == null)
 		{
@@ -343,7 +343,7 @@ public class EnumUtil
 		String newname = StringUtil.replaceToken(name, -1, ".$", newsimple);
 		try
 		{
-			return (Class<T>) Class.forName(newname);
+			return (Class<J>) Class.forName(newname);
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -365,29 +365,29 @@ public class EnumUtil
 	}
 
 	/**
-	 * @param <T>
-	 * @param <T>
+	 * @param <O>
+	 * @param <O>
 	 * @param <E>
-	 * @param val
+	 * @param oldEnum
 	 * @param c
 	 * @return
 	 */
-	public static <T extends ValuedEnum, E extends Enum<E>> Class<T> getOldEnumClass(final Enum<E> val)
+	public static <O extends ValuedEnum, E extends Enum<E>> Class<O> getOldEnumClass(final Enum<E> oldEnum)
 	{
-		if (val == null)
+		if (oldEnum == null)
 		{
 			return null;
 		}
-		String name = val.getClass().getName();
-		String simple = StringUtil.token(name, -1, ".$");
-		String newsimple = "Enum" + StringUtil.rightStr(simple, -1);
+		String name = oldEnum.getClass().getName();
+		String simpleClass = StringUtil.token(name, -1, ".$");
+		String newsimple = "Enum" + StringUtil.rightStr(simpleClass, -1);
 
 		String newname = StringUtil.replaceToken(name, -1, ".$", newsimple);
 		try
 		{
-			return (Class<T>) Class.forName(newname);
+			return (Class<O>) Class.forName(newname);
 		}
-		catch (ClassNotFoundException e)
+		catch (ClassNotFoundException x)
 		{
 			return null;
 		}
