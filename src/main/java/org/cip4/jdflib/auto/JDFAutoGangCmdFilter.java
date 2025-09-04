@@ -85,10 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoGangCmdFilter : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGangCmdFilter : public JDFElement
  */
 
 public abstract class JDFAutoGangCmdFilter extends JDFElement
@@ -223,11 +220,15 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GangNames ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GangNames
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GangNames
@@ -246,14 +247,16 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 */
 	public VString getGangNames()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Policy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Policy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Policy
@@ -276,13 +279,15 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Policy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Policy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Policy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPolicy(EPolicy) based on java.lang.enum instead
+	 * @deprecated use SetPolicy(EPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPolicy(EnumPolicy enumVar)
@@ -294,7 +299,7 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
 	 * (9) get attribute Policy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPolicy getEPolicy() based on java.lang.enum instead
+	 * @deprecated use EPolicy GetEPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPolicy getPolicy()

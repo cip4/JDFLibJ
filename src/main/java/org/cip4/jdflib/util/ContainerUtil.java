@@ -75,7 +75,7 @@ public class ContainerUtil
 	/**
 	 * create a HashSet from an enumeration
 	 *
-	 * @param <A> the data type of the sets
+	 * @param <A>         the data type of the sets
 	 * @param enumeration the enumeration
 	 * @return a Set created from list
 	 */
@@ -131,7 +131,7 @@ public class ContainerUtil
 	/**
 	 * create a HashSet from a List (Vector...)
 	 *
-	 * @param <A> the data type of the sets
+	 * @param <A>  the data type of the sets
 	 * @param list the list
 	 * @return a Set created from list
 	 */
@@ -143,7 +143,7 @@ public class ContainerUtil
 	/**
 	 * create a HashSet from a List (Vector...)
 	 *
-	 * @param <A> the data type of the sets
+	 * @param <A>  the data type of the sets
 	 * @param list the list
 	 * @return a Set created from list
 	 */
@@ -168,7 +168,7 @@ public class ContainerUtil
 	 * create a HashSet from an Array
 	 *
 	 * @param <A> datatype
-	 * @param l the array
+	 * @param l   the array
 	 * @return a Set created from list
 	 */
 	public static <A> Set<A> toHashSet(final A[] l)
@@ -188,7 +188,7 @@ public class ContainerUtil
 	/**
 	 * create a Vector from an Array, skipping null elements
 	 *
-	 * @param <A> the type
+	 * @param <A>   the type
 	 * @param array the array to convert
 	 * @return a Vector<a>
 	 */
@@ -242,7 +242,7 @@ public class ContainerUtil
 	/**
 	 * create an ArrayList from an Array, skipping null elements
 	 *
-	 * @param <A> the type
+	 * @param <A>   the type
 	 * @param array the array to convert
 	 * @return a Vector<a>
 	 */
@@ -267,8 +267,8 @@ public class ContainerUtil
 	/**
 	 * null safe addAll
 	 *
-	 * @param c1 first collection
-	 * @param c2 second collection
+	 * @param c1  first collection
+	 * @param c2  second collection
 	 * @param <A> type
 	 * @return c1 with c2 added, c2 if c1==null
 	 */
@@ -418,6 +418,46 @@ public class ContainerUtil
 	}
 
 	/**
+	 * appends all strings of an array to <code>this</code>
+	 *
+	 * @param strings the array of strings to append to <code>this</code>
+	 */
+	public static <A> Collection<A> removeAll(final Collection<A> c, Collection<A> a)
+	{
+		if (a != null && c != null)
+		{
+			for (final A aa : a)
+			{
+				if (aa != null)
+				{
+					c.remove(aa);
+				}
+			}
+		}
+		return c;
+	}
+
+	/**
+	 * appends all strings of an array to <code>this</code>
+	 *
+	 * @param strings the array of strings to append to <code>this</code>
+	 */
+	public static <A> Collection<A> removeAll(final Collection<A> c, final A[] a)
+	{
+		if (a != null && c != null)
+		{
+			for (final A aa : a)
+			{
+				if (aa != null)
+				{
+					c.remove(aa);
+				}
+			}
+		}
+		return c;
+	}
+
+	/**
 	 * null safe add
 	 *
 	 * @param strings the array of strings to append to <code>this</code>
@@ -434,9 +474,9 @@ public class ContainerUtil
 	/**
 	 * return a matching element from a collection of IMatches
 	 *
-	 * @param <a> the data type
-	 * @param c the collection to search
-	 * @param obj the search key for matches
+	 * @param <a>   the data type
+	 * @param c     the collection to search
+	 * @param obj   the search key for matches
 	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
 	 * @return the matching {@link IMatches}
 	 */
@@ -478,9 +518,9 @@ public class ContainerUtil
 	/**
 	 * return a matching element from a collection of IMatches
 	 *
-	 * @param <A> the data type
+	 * @param <A>   the data type
 	 * @param match the matcher
-	 * @param c the {@link Collection}
+	 * @param c     the {@link Collection}
 	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
 	 * @return the matching <a>
 	 */
@@ -523,7 +563,7 @@ public class ContainerUtil
 	 * return a matching element from a collection of IMatches
 	 *
 	 * @param <A> the data type
-	 * @param c the collection to search
+	 * @param c   the collection to search
 	 * @param obj the search key for matches
 	 * @return Vector of matching a
 	 */
@@ -548,7 +588,7 @@ public class ContainerUtil
 	 * return a matching element from a collection of IMatches
 	 *
 	 * @param <A> the data type
-	 * @param c the collection to search
+	 * @param c   the collection to search
 	 * @param obj the search key for matches
 	 * @return Vector of matching a
 	 */
@@ -573,7 +613,7 @@ public class ContainerUtil
 	 * return a matching element from a collection
 	 *
 	 * @param <A> the data type
-	 * @param c the collection to search
+	 * @param c   the collection to search
 	 * @param obj the matches
 	 * @return Vector of matching a
 	 */
@@ -598,7 +638,7 @@ public class ContainerUtil
 	 * return a matching element from a collection
 	 *
 	 * @param <A> the data type
-	 * @param c the collection to search
+	 * @param c   the collection to search
 	 * @param obj the matches
 	 * @return Vector of matching a
 	 */
@@ -622,9 +662,9 @@ public class ContainerUtil
 	/**
 	 * create a Vector of entry values from a map
 	 *
-	 * @param <a> type of the map key
-	 * @param <b> type of the map entry
-	 * @param m the map to dump to an array
+	 * @param <a>       type of the map key
+	 * @param <b>       type of the map entry
+	 * @param m         the map to dump to an array
 	 * @param sortByKey , if true, sort the entries by key
 	 * @return the vector
 	 */
@@ -675,9 +715,9 @@ public class ContainerUtil
 	/**
 	 * create a Vector of entry values from a map
 	 *
-	 * @param <A> type of the map key
-	 * @param <B> type of the map entry
-	 * @param m the map to dump to an array
+	 * @param <A>       type of the map key
+	 * @param <B>       type of the map entry
+	 * @param m         the map to dump to an array
 	 * @param sortByKey , if true, sort the entries by key
 	 * @return the vector
 	 */
@@ -730,7 +770,7 @@ public class ContainerUtil
 	 *
 	 * @param <A> data type of the map key
 	 * @param <B> data type of the map value
-	 * @param m the map to dump to an array
+	 * @param m   the map to dump to an array
 	 * @return the vector
 	 */
 	public static <A, B> Vector<B> toValueVector(final Map<A, B> m)
@@ -758,7 +798,7 @@ public class ContainerUtil
 	 *
 	 * @param <A> data type of the map key
 	 * @param <B> data type of the map value
-	 * @param m the map to dump to an array
+	 * @param m   the map to dump to an array
 	 * @return the vector
 	 */
 	public static <A, B> List<B> toArrayList(final Map<A, B> m)
@@ -787,7 +827,7 @@ public class ContainerUtil
 	 *
 	 * @param <A> data type of the map key
 	 * @param <B> data type of the map value
-	 * @param m the map to invert
+	 * @param m   the map to invert
 	 * @return the inverted map
 	 * @deprecated
 	 */
@@ -900,7 +940,7 @@ public class ContainerUtil
 	 *
 	 * @param <A> data type of the map key
 	 * @param <B> data type of the map value
-	 * @param m the map to invert
+	 * @param m   the map to invert
 	 * @return the inverted map
 	 */
 	public static <A, B> ListMap<B, A> getInvertedListMap(final Map<A, B> m)
@@ -934,7 +974,7 @@ public class ContainerUtil
 	 * create a Vector of key values from a map
 	 *
 	 * @param <A> data type of the map key
-	 * @param m the map to dump to an array
+	 * @param m   the map to dump to an array
 	 * @return the vector of keys - note that this Vector goes NOT reflect changes to the map
 	 * @deprecated
 	 */
@@ -1040,7 +1080,7 @@ public class ContainerUtil
 	/**
 	 * ensure that a collection has at least size elements and fill any newly created entries with nulls
 	 *
-	 * @param <A> anything - needed for the cast
+	 * @param <A>  anything - needed for the cast
 	 * @param size
 	 * @param coll
 	 */
@@ -1060,7 +1100,7 @@ public class ContainerUtil
 	 * unify a collection while retaining the initial order (if the input collection is ordered)
 	 *
 	 * @param <A> the data type of the collection
-	 * @param c the collection to unify
+	 * @param c   the collection to unify
 	 * @return the unified collection - always the input collection
 	 */
 	public static <A> Collection<A> unify(final Collection<A> c)
@@ -1091,7 +1131,7 @@ public class ContainerUtil
 	 * unify a collection while retaining the initial order (if the input collection is ordered)
 	 *
 	 * @param <A> the data type of the collection
-	 * @param c the collection to unify
+	 * @param c   the collection to unify
 	 * @return the unified collection - always the input collection
 	 */
 	public static <A extends IMatches> Collection<A> unifyMatches(final Collection<A> c)

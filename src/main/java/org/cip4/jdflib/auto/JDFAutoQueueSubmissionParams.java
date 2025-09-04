@@ -70,12 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EGangPolicy;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumGangPolicy;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -85,13 +82,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFDisposition;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoQueueSubmissionParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQueueSubmissionParams : public JDFElement
  */
 
 public abstract class JDFAutoQueueSubmissionParams extends JDFElement
@@ -103,7 +96,8 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumGangPolicy.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GANGPOLICY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumGangPolicy.getEnum(0),
+				null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.HOLD, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEXTQUEUEENTRYID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PREVQUEUEENTRYID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -169,91 +163,16 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for GangPolicy
-	 */
-
-	public enum EGangPolicy
-	{
-		Gang, GangAndForce, NoGang;
-
-		public static EGangPolicy getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EGangPolicy.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for GangPolicy
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumGangPolicy extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumGangPolicy(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumGangPolicy getEnum(String enumName)
-		{
-			return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumGangPolicy getEnum(int enumValue)
-		{
-			return (EnumGangPolicy) getEnum(EnumGangPolicy.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumGangPolicy.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumGangPolicy.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumGangPolicy.class);
-		}
-
-		/**  */
-		public static final EnumGangPolicy Gang = new EnumGangPolicy("Gang");
-		/**  */
-		public static final EnumGangPolicy GangAndForce = new EnumGangPolicy("GangAndForce");
-		/**  */
-		public static final EnumGangPolicy NoGang = new EnumGangPolicy("NoGang");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GangName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GangName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GangName
@@ -276,7 +195,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GangPolicy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GangPolicy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute GangPolicy
@@ -299,13 +220,15 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GangPolicy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GangPolicy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute GangPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setGangPolicy(EGangPolicy) based on java.lang.enum instead
+	 * @deprecated use SetGangPolicy(EGangPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGangPolicy(EnumGangPolicy enumVar)
@@ -317,7 +240,7 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	 * (9) get attribute GangPolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EGangPolicy getEGangPolicy() based on java.lang.enum instead
+	 * @deprecated use EGangPolicy GetEGangPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumGangPolicy getGangPolicy()
@@ -326,7 +249,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Hold ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Hold
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Hold
@@ -349,7 +274,8 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NextQueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NextQueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -373,7 +299,8 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrevQueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrevQueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -397,7 +324,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Priority
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Priority
@@ -420,7 +349,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute refID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute refID
@@ -443,7 +374,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReturnJMF ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReturnJMF
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReturnJMF
@@ -466,7 +399,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReturnURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReturnURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReturnURL
@@ -489,7 +424,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -512,7 +449,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WatchURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WatchURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WatchURL
@@ -535,7 +474,9 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -561,7 +502,8 @@ public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 	/**
 	 * (29) append element Disposition
 	 *
-	 * @return JDFDisposition the element @ if the element already exists
+	 * @return JDFDisposition the element
+	 * @ if the element already exists
 	 */
 	public JDFDisposition appendDisposition()
 	{

@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoCCITTFaxParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCCITTFaxParams : public JDFElement
  */
 
 public abstract class JDFAutoCCITTFaxParams extends JDFElement
@@ -141,11 +138,14 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Uncompressed
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Uncompressed
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -169,7 +169,9 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute K ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute K
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute K
@@ -192,7 +194,9 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndOfLine ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndOfLine
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute EndOfLine
@@ -215,7 +219,8 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EncodedByteAlign
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EncodedByteAlign
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -239,7 +244,9 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndOfBlock ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndOfBlock
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute EndOfBlock

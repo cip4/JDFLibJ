@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 /**
- *****************************************************************************
- * class JDFAutoCasingInParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCasingInParams : public JDFResource
  */
 
 public abstract class JDFAutoCasingInParams extends JDFResource
@@ -164,7 +161,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -179,11 +176,15 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CaseRadius ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CaseRadius
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CaseRadius
@@ -206,7 +207,8 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CoverBoardWidth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CoverBoardWidth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -230,7 +232,8 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpineBoardWidth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpineBoardWidth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -254,7 +257,9 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -292,7 +297,8 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * (27) const get element GlueApplication
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueApplication the element default is getGlueApplication(0)
+	 * @return JDFGlueApplication the element
+	 *         default is getGlueApplication(0)
 	 */
 	public JDFGlueApplication getGlueApplication(int iSkip)
 	{
@@ -364,7 +370,8 @@ public abstract class JDFAutoCasingInParams extends JDFResource
 	 * (27) const get element GlueLine
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueLine the element default is getGlueLine(0)
+	 * @return JDFGlueLine the element
+	 *         default is getGlueLine(0)
 	 */
 	public JDFGlueLine getGlueLine(int iSkip)
 	{

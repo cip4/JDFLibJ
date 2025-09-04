@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoPhaseTime : public JDFAudit
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPhaseTime : public JDFAudit
  */
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
@@ -170,11 +167,15 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute End
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute End
@@ -198,13 +199,15 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFDate getEnd()
 	{
-		final String str = getAttribute(AttributeName.END, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.END, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Start
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Start
@@ -228,13 +231,14 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 */
 	public JDFDate getStart()
 	{
-		final String str = getAttribute(AttributeName.START, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.START, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StatusDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -258,7 +262,9 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -296,7 +302,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * (27) const get element Device
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element default is getDevice(0)
+	 * @return JDFDevice the element
+	 *         default is getDevice(0)
 	 */
 	public JDFDevice getDevice(int iSkip)
 	{
@@ -369,7 +376,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)
@@ -444,7 +452,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * (27) const get element Activity
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFActivity the element default is getActivity(0)
+	 * @return JDFActivity the element
+	 *         default is getActivity(0)
 	 */
 	public JDFActivity getActivity(int iSkip)
 	{
@@ -494,7 +503,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	/**
 	 * (29) append element MISDetails
 	 *
-	 * @return JDFMISDetails the element @ if the element already exists
+	 * @return JDFMISDetails the element
+	 * @ if the element already exists
 	 */
 	public JDFMISDetails appendMISDetails()
 	{
@@ -536,7 +546,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * (27) const get element ModulePhase
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFModulePhase the element default is getModulePhase(0)
+	 * @return JDFModulePhase the element
+	 *         default is getModulePhase(0)
 	 */
 	public JDFModulePhase getModulePhase(int iSkip)
 	{
@@ -598,7 +609,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

@@ -85,10 +85,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDisposition : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDisposition : public JDFElement
  */
 
 public abstract class JDFAutoDisposition extends JDFElement
@@ -99,8 +96,10 @@ public abstract class JDFAutoDisposition extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DISPOSITIONACTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDispositionAction.getEnum(0), "Delete");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DISPOSITIONUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDispositionUsage.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DISPOSITIONACTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDispositionAction.getEnum(0), "Delete");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DISPOSITIONUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDispositionUsage.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.EXTRADURATION, 0x3333333311l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MINDURATION, 0x3333333311l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRIORITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "0");
@@ -304,11 +303,14 @@ public abstract class JDFAutoDisposition extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DispositionAction
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DispositionAction
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -332,14 +334,15 @@ public abstract class JDFAutoDisposition extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DispositionAction
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DispositionAction
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DispositionAction
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDispositionAction(EDispositionAction) based on java.lang.enum instead
+	 * @deprecated use SetDispositionAction(EDispositionAction) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDispositionAction(EnumDispositionAction enumVar)
@@ -351,7 +354,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * (9) get attribute DispositionAction
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDispositionAction getEDispositionAction() based on java.lang.enum instead
+	 * @deprecated use EDispositionAction GetEDispositionAction() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDispositionAction getDispositionAction()
@@ -360,7 +363,8 @@ public abstract class JDFAutoDisposition extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DispositionUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DispositionUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -384,14 +388,15 @@ public abstract class JDFAutoDisposition extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DispositionUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DispositionUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DispositionUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDispositionUsage(EDispositionUsage) based on java.lang.enum instead
+	 * @deprecated use SetDispositionUsage(EDispositionUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDispositionUsage(EnumDispositionUsage enumVar)
@@ -403,7 +408,7 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 * (9) get attribute DispositionUsage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDispositionUsage getEDispositionUsage() based on java.lang.enum instead
+	 * @deprecated use EDispositionUsage GetEDispositionUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDispositionUsage getDispositionUsage()
@@ -412,7 +417,8 @@ public abstract class JDFAutoDisposition extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ExtraDuration
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ExtraDuration
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -428,17 +434,20 @@ public abstract class JDFAutoDisposition extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute ExtraDuration
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getExtraDuration()
 	{
-		final String strAttrName = getAttribute(AttributeName.EXTRADURATION, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.EXTRADURATION, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinDuration ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinDuration
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MinDuration
@@ -453,17 +462,20 @@ public abstract class JDFAutoDisposition extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute MinDuration
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getMinDuration()
 	{
-		final String strAttrName = getAttribute(AttributeName.MINDURATION, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MINDURATION, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Priority
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Priority
@@ -486,7 +498,9 @@ public abstract class JDFAutoDisposition extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Until ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Until
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Until
@@ -510,8 +524,8 @@ public abstract class JDFAutoDisposition extends JDFElement
 	 */
 	public JDFDate getUntil()
 	{
-		final String str = getAttribute(AttributeName.UNTIL, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.UNTIL, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

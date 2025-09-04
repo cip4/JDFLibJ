@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 /**
- *****************************************************************************
- * class JDFAutoBooleanEvaluation : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBooleanEvaluation : public JDFResource
  */
 
 public abstract class JDFAutoBooleanEvaluation extends JDFResource
@@ -161,17 +158,21 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueList
@@ -194,7 +195,9 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -232,7 +235,8 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
 	 * (27) const get element BasicPreflightTest
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBasicPreflightTest the element default is getBasicPreflightTest(0)
+	 * @return JDFBasicPreflightTest the element
+	 *         default is getBasicPreflightTest(0)
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{

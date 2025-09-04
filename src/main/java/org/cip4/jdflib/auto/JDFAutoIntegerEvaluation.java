@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 /**
- *****************************************************************************
- * class JDFAutoIntegerEvaluation : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIntegerEvaluation : public JDFResource
  */
 
 public abstract class JDFAutoIntegerEvaluation extends JDFResource
@@ -163,17 +160,21 @@ public abstract class JDFAutoIntegerEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueList
@@ -188,17 +189,20 @@ public abstract class JDFAutoIntegerEvaluation extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute ValueList
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueMod ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueMod
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueMod
@@ -213,17 +217,20 @@ public abstract class JDFAutoIntegerEvaluation extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute ValueMod
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getValueMod()
 	{
-		final String strAttrName = getAttribute(AttributeName.VALUEMOD, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.VALUEMOD, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -261,7 +268,8 @@ public abstract class JDFAutoIntegerEvaluation extends JDFResource
 	 * (27) const get element BasicPreflightTest
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBasicPreflightTest the element default is getBasicPreflightTest(0)
+	 * @return JDFBasicPreflightTest the element
+	 *         default is getBasicPreflightTest(0)
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{

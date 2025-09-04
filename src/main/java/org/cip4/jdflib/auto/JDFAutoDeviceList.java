@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 
 /**
- *****************************************************************************
- * class JDFAutoDeviceList : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeviceList : public JDFElement
  */
 
 public abstract class JDFAutoDeviceList extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoDeviceList extends JDFElement
 	 * (27) const get element DeviceInfo
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceInfo the element default is getDeviceInfo(0)
+	 * @return JDFDeviceInfo the element
+	 *         default is getDeviceInfo(0)
 	 */
 	public JDFDeviceInfo getDeviceInfo(int iSkip)
 	{

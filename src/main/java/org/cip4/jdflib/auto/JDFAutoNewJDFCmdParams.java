@@ -81,10 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFIDInfo;
 
 /**
- *****************************************************************************
- * class JDFAutoNewJDFCmdParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNewJDFCmdParams : public JDFElement
  */
 
 public abstract class JDFAutoNewJDFCmdParams extends JDFElement
@@ -153,11 +150,15 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JDFDetails ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JDFDetails
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JDFDetails
@@ -180,7 +181,9 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -206,7 +209,8 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
 	/**
 	 * (29) append element IDInfo
 	 *
-	 * @return JDFIDInfo the element @ if the element already exists
+	 * @return JDFIDInfo the element
+	 * @ if the element already exists
 	 */
 	public JDFIDInfo appendIDInfo()
 	{

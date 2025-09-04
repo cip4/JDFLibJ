@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EPrintQuality;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -95,10 +97,7 @@ import org.cip4.jdflib.resource.process.JDFMediaSource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPrintingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPrintingParams : public JDFResource
  */
 
 public abstract class JDFAutoIDPrintingParams extends JDFResource
@@ -114,8 +113,10 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.IPPJOBPRIORITY, 0x4444444443l, AttributeInfo.EnumAttributeType.integer, null, "50");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.IPPVERSION, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OUTPUTBIN, 0x4444444443l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPageDelivery.getEnum(0), null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PAGEDELIVERY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPageDelivery.getEnum(0),
+				null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0),
+				null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SHEETCOLLATE, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
@@ -184,7 +185,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -281,91 +282,15 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 		public static final EnumPageDelivery SystemSpecified = new EnumPageDelivery("SystemSpecified");
 	}
 
-	/**
-	 * Enumeration strings for PrintQuality
-	 */
-
-	public enum EPrintQuality
-	{
-		High, Normal, Draft;
-
-		public static EPrintQuality getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPrintQuality.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for PrintQuality
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPrintQuality extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPrintQuality(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPrintQuality getEnum(String enumName)
-		{
-			return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPrintQuality getEnum(int enumValue)
-		{
-			return (EnumPrintQuality) getEnum(EnumPrintQuality.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPrintQuality.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPrintQuality.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPrintQuality.class);
-		}
-
-		/**  */
-		public static final EnumPrintQuality High = new EnumPrintQuality("High");
-		/**  */
-		public static final EnumPrintQuality Normal = new EnumPrintQuality("Normal");
-		/**  */
-		public static final EnumPrintQuality Draft = new EnumPrintQuality("Draft");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AttributesNaturalLang
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AttributesNaturalLang
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -389,7 +314,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IDPAttributeFidelity
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IDPAttributeFidelity
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -413,7 +339,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IPPJobPriority
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IPPJobPriority
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -437,7 +364,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IPPVersion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IPPVersion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IPPVersion
@@ -452,17 +381,20 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute IPPVersion
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getIPPVersion()
 	{
-		final String strAttrName = getAttribute(AttributeName.IPPVERSION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.IPPVERSION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OutputBin ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OutputBin
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OutputBin
@@ -485,7 +417,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageDelivery
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageDelivery
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -509,14 +442,15 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageDelivery
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageDelivery
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PageDelivery
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPageDelivery(EPageDelivery) based on java.lang.enum instead
+	 * @deprecated use SetPageDelivery(EPageDelivery) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPageDelivery(EnumPageDelivery enumVar)
@@ -528,7 +462,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * (9) get attribute PageDelivery
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPageDelivery getEPageDelivery() based on java.lang.enum instead
+	 * @deprecated use EPageDelivery GetEPageDelivery() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPageDelivery getPageDelivery()
@@ -537,7 +471,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintQuality
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintQuality
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -561,14 +496,15 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintQuality
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintQuality
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PrintQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPrintQuality(EPrintQuality) based on java.lang.enum instead
+	 * @deprecated use SetPrintQuality(EPrintQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintQuality(EnumPrintQuality enumVar)
@@ -580,7 +516,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * (9) get attribute PrintQuality
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPrintQuality getEPrintQuality() based on java.lang.enum instead
+	 * @deprecated use EPrintQuality GetEPrintQuality() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPrintQuality getPrintQuality()
@@ -589,7 +525,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetCollate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetCollate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -613,7 +550,9 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -651,7 +590,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * (27) const get element Cover
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCover the element default is getCover(0)
+	 * @return JDFCover the element
+	 *         default is getCover(0)
 	 */
 	public JDFCover getCover(int iSkip)
 	{
@@ -701,7 +641,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	/**
 	 * (29) append element IDPFinishing
 	 *
-	 * @return JDFIDPFinishing the element @ if the element already exists
+	 * @return JDFIDPFinishing the element
+	 * @ if the element already exists
 	 */
 	public JDFIDPFinishing appendIDPFinishing()
 	{
@@ -731,7 +672,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	/**
 	 * (29) append element IDPLayout
 	 *
-	 * @return JDFIDPLayout the element @ if the element already exists
+	 * @return JDFIDPLayout the element
+	 * @ if the element already exists
 	 */
 	public JDFIDPLayout appendIDPLayout()
 	{
@@ -773,7 +715,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	 * (27) const get element JobSheet
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFJobSheet the element default is getJobSheet(0)
+	 * @return JDFJobSheet the element
+	 *         default is getJobSheet(0)
 	 */
 	public JDFJobSheet getJobSheet(int iSkip)
 	{
@@ -823,7 +766,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	/**
 	 * (29) append element MediaIntent
 	 *
-	 * @return JDFMediaIntent the element @ if the element already exists
+	 * @return JDFMediaIntent the element
+	 * @ if the element already exists
 	 */
 	public JDFMediaIntent appendMediaIntent()
 	{
@@ -863,7 +807,8 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
 	/**
 	 * (29) append element MediaSource
 	 *
-	 * @return JDFMediaSource the element @ if the element already exists
+	 * @return JDFMediaSource the element
+	 * @ if the element already exists
 	 */
 	public JDFMediaSource appendMediaSource()
 	{

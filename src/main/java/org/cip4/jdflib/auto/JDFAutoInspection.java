@@ -79,10 +79,7 @@ import org.cip4.jdflib.resource.JDFDefect;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoInspection : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInspection : public JDFElement
  */
 
 public abstract class JDFAutoInspection extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoInspection extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -166,7 +165,8 @@ public abstract class JDFAutoInspection extends JDFElement
 	/**
 	 * (29) append element Defect
 	 *
-	 * @return JDFDefect the element @ if the element already exists
+	 * @return JDFDefect the element
+	 * @ if the element already exists
 	 */
 	public JDFDefect appendDefect()
 	{
@@ -196,7 +196,8 @@ public abstract class JDFAutoInspection extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

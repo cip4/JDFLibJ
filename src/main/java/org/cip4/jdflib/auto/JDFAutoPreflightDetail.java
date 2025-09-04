@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightDetail : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightDetail : public JDFElement
  */
 
 public abstract class JDFAutoPreflightDetail extends JDFElement
@@ -158,11 +155,15 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageRefs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageRefs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageRefs
@@ -177,17 +178,20 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageRefs
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageRefs()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Property ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Property
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Property
@@ -210,7 +214,9 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -248,7 +254,8 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
 	 * (27) const get element Value
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getValue(0)
+	 * @return JDFElement the element
+	 *         default is getValue(0)
 	 */
 	public JDFElement getValue(int iSkip)
 	{

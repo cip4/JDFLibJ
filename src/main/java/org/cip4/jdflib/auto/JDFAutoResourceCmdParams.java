@@ -95,10 +95,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoResourceCmdParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResourceCmdParams : public JDFElement
  */
 
 public abstract class JDFAutoResourceCmdParams extends JDFElement
@@ -109,7 +106,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), "Active");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
+				"Active");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -119,10 +117,13 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCEID, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUS, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUS, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JDFResource.EnumResStatus.getEnum(0), null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.UPDATEIDS, 0x4444444331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[12] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0),
+				"Complete");
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				JDFResourceLink.EnumUsage.getEnum(0), null);
 	}
 
 	@Override
@@ -261,11 +262,15 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Activation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Activation
@@ -288,13 +293,15 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Activation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Activation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setActivation(EActivation) based on java.lang.enum instead
+	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setActivation(EnumActivation enumVar)
@@ -306,7 +313,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (9) get attribute Activation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EActivation getEActivation() based on java.lang.enum instead
+	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumActivation getActivation()
@@ -315,7 +322,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Exact ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Exact
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Exact
@@ -338,7 +347,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -361,7 +372,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -384,7 +397,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcessUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProcessUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -408,7 +422,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProductID
@@ -431,7 +447,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductionAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductionAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -455,7 +472,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -479,7 +497,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -503,7 +522,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ResourceID
@@ -526,7 +547,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Status
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Status
@@ -549,13 +572,15 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Status
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Status
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setResStatus(JDFResource.EResStatus) based on java.lang.enum instead
+	 * @deprecated use SetResStatus(Eesource.EnumResStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResStatus(JDFResource.EnumResStatus enumVar)
@@ -567,7 +592,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (9) get attribute Status
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use JDFResource.EResStatus getEResStatus() based on java.lang.enum instead
+	 * @deprecated use Eesource.EnumResStatus GetEResStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public JDFResource.EnumResStatus getResStatus()
@@ -576,7 +601,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpdateIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UpdateIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute UpdateIDs
@@ -595,14 +622,15 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 */
 	public VString getUpdateIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.UPDATEIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpdateMethod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UpdateMethod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -626,14 +654,15 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpdateMethod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UpdateMethod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute UpdateMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUpdateMethod(EUpdateMethod) based on java.lang.enum instead
+	 * @deprecated use SetUpdateMethod(EUpdateMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUpdateMethod(EnumUpdateMethod enumVar)
@@ -645,7 +674,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (9) get attribute UpdateMethod
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EUpdateMethod getEUpdateMethod() based on java.lang.enum instead
+	 * @deprecated use EUpdateMethod GetEUpdateMethod() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumUpdateMethod getUpdateMethod()
@@ -654,7 +683,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
@@ -677,13 +708,15 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUsage(JDFResourceLink.EUsage) based on java.lang.enum instead
+	 * @deprecated use SetUsage(EesourceLink.EnumUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUsage(JDFResourceLink.EnumUsage enumVar)
@@ -695,7 +728,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (9) get attribute Usage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use JDFResourceLink.EUsage getEUsage() based on java.lang.enum instead
+	 * @deprecated use EesourceLink.EnumUsage GetEUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public JDFResourceLink.EnumUsage getUsage()
@@ -704,7 +737,9 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -742,7 +777,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{
@@ -792,7 +828,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	/**
 	 * (29) append element MISDetails
 	 *
-	 * @return JDFMISDetails the element @ if the element already exists
+	 * @return JDFMISDetails the element
+	 * @ if the element already exists
 	 */
 	public JDFMISDetails appendMISDetails()
 	{
@@ -834,7 +871,8 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
 	 * (27) const get element Resource
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFResource the element default is getResource(0)
+	 * @return JDFResource the element
+	 *         default is getResource(0)
 	 */
 	public JDFResource getResource(int iSkip)
 	{

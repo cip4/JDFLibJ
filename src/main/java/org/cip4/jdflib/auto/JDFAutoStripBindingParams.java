@@ -82,10 +82,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
 /**
- *****************************************************************************
- * class JDFAutoStripBindingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStripBindingParams : public JDFResource
  */
 
 public abstract class JDFAutoStripBindingParams extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,15 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Brand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Brand
@@ -207,7 +208,9 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Distance ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Distance
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Distance
@@ -230,7 +233,9 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LengthJDF ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LengthJDF
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LengthJDF
@@ -253,7 +258,9 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripColor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripColor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute StripColor
@@ -280,7 +287,8 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripColorDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripColorDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -304,7 +312,9 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -330,7 +340,8 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
 	/**
 	 * (29) append element HoleMakingParams
 	 *
-	 * @return JDFHoleMakingParams the element @ if the element already exists
+	 * @return JDFHoleMakingParams the element
+	 * @ if the element already exists
 	 */
 	public JDFHoleMakingParams appendHoleMakingParams()
 	{

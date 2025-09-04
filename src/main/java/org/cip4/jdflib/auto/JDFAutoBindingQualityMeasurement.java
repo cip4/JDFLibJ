@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoBindingQualityMeasurement : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBindingQualityMeasurement : public JDFElement
  */
 
 public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
@@ -138,11 +135,15 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FlexValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FlexValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FlexValue
@@ -165,7 +166,8 @@ public abstract class JDFAutoBindingQualityMeasurement extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PullOutValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PullOutValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**

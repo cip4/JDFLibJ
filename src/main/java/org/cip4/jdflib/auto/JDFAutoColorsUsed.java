@@ -50,10 +50,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoColorsUsed : public JDFElement
- *****************************************************************************
- *
+ ***************************************************************************** class JDFAutoColorsUsed : public JDFElement
  */
 
 public abstract class JDFAutoColorsUsed extends JDFElement

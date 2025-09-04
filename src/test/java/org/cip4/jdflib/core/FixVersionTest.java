@@ -48,6 +48,7 @@ import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -93,7 +94,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class FixVersionTest extends JDFTestCaseBase
@@ -101,7 +101,6 @@ class FixVersionTest extends JDFTestCaseBase
 	private JDFNode n;
 
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -642,7 +641,7 @@ class FixVersionTest extends JDFTestCaseBase
 		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0))
 				.appendColorSpaceConversionOp();
 
-		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.All);
+		co.addSourceObject(EnumSourceObjects.All);
 		final boolean converted = new FixVersion(EnumVersion.Version_1_6).convert(co);
 		assertTrue(converted);
 		assertNull(co.getSourceObjects());
@@ -657,7 +656,7 @@ class FixVersionTest extends JDFTestCaseBase
 		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0))
 				.appendColorSpaceConversionOp();
 
-		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.ImagePhotographic);
+		co.addSourceObject(EnumSourceObjects.ImagePhotographic);
 		final boolean converted = new FixVersion(EnumVersion.Version_1_6).convert(co);
 		assertTrue(converted);
 		assertEquals(1, co.getSourceObjects().size());
@@ -672,8 +671,8 @@ class FixVersionTest extends JDFTestCaseBase
 		final JDFColorSpaceConversionOp co = ((JDFColorSpaceConversionParams) n.getCreateResource(ElementName.COLORSPACECONVERSIONPARAMS, EnumUsage.Input, 0))
 				.appendColorSpaceConversionOp();
 
-		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.ImagePhotographic);
-		co.addSourceObject(JDFColorSpaceConversionOp.EnumSourceObjects.All);
+		co.addSourceObject(EnumSourceObjects.ImagePhotographic);
+		co.addSourceObject(EnumSourceObjects.All);
 		final boolean converted = new FixVersion((EnumVersion) null).convert(co);
 		assertTrue(converted);
 		assertEquals(2, co.getSourceObjects().size());
@@ -1205,7 +1204,6 @@ class FixVersionTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see junit.framework.TestCase#toString()
 	 */
 	@Override

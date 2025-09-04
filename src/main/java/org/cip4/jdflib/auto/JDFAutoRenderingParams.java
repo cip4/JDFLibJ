@@ -92,10 +92,7 @@ import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoRenderingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRenderingParams : public JDFResource
  */
 
 public abstract class JDFAutoRenderingParams extends JDFResource
@@ -107,7 +104,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BANDHEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDORDERING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.BANDORDERING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0),
+				null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.BANDWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLORANTDEPTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -177,7 +175,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -269,11 +267,15 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BandHeight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BandHeight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BandHeight
@@ -296,7 +298,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BandOrdering
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BandOrdering
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -320,14 +323,15 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BandOrdering
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BandOrdering
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BandOrdering
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBandOrdering(EBandOrdering) based on java.lang.enum instead
+	 * @deprecated use SetBandOrdering(EBandOrdering) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBandOrdering(EnumBandOrdering enumVar)
@@ -339,7 +343,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 * (9) get attribute BandOrdering
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBandOrdering getEBandOrdering() based on java.lang.enum instead
+	 * @deprecated use EBandOrdering GetEBandOrdering() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBandOrdering getBandOrdering()
@@ -348,7 +352,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BandWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BandWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BandWidth
@@ -371,7 +377,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorantDepth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorantDepth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -395,7 +402,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Interleaved ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Interleaved
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Interleaved
@@ -418,7 +427,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MimeType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MimeType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MimeType
@@ -441,7 +452,9 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -467,7 +480,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	/**
 	 * (29) append element AutomatedOverPrintParams
 	 *
-	 * @return JDFAutomatedOverPrintParams the element @ if the element already exists
+	 * @return JDFAutomatedOverPrintParams the element
+	 * @ if the element already exists
 	 */
 	public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams()
 	{
@@ -509,7 +523,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	 * (27) const get element ObjectResolution
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFObjectResolution the element default is getObjectResolution(0)
+	 * @return JDFObjectResolution the element
+	 *         default is getObjectResolution(0)
 	 */
 	public JDFObjectResolution getObjectResolution(int iSkip)
 	{
@@ -559,7 +574,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{
@@ -599,7 +615,8 @@ public abstract class JDFAutoRenderingParams extends JDFResource
 	/**
 	 * (29) append element TIFFFormatParams
 	 *
-	 * @return JDFTIFFFormatParams the element @ if the element already exists
+	 * @return JDFTIFFFormatParams the element
+	 * @ if the element already exists
 	 */
 	public JDFTIFFFormatParams appendTIFFFormatParams()
 	{

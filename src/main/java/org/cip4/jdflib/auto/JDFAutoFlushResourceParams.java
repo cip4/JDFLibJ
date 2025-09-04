@@ -87,10 +87,7 @@ import org.cip4.jdflib.jmf.JDFQueueFilter;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoFlushResourceParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFlushResourceParams : public JDFElement
  */
 
 public abstract class JDFAutoFlushResourceParams extends JDFElement
@@ -101,7 +98,8 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumFlushPolicy.getEnum(0), "QueueEntry");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumFlushPolicy.getEnum(0),
+				"QueueEntry");
 	}
 
 	@Override
@@ -238,11 +236,15 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FlushPolicy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FlushPolicy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute FlushPolicy
@@ -265,13 +267,15 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FlushPolicy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FlushPolicy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute FlushPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setFlushPolicy(EFlushPolicy) based on java.lang.enum instead
+	 * @deprecated use SetFlushPolicy(EFlushPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFlushPolicy(EnumFlushPolicy enumVar)
@@ -283,7 +287,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	 * (9) get attribute FlushPolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFlushPolicy getEFlushPolicy() based on java.lang.enum instead
+	 * @deprecated use EFlushPolicy GetEFlushPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFlushPolicy getFlushPolicy()
@@ -292,7 +296,9 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -318,7 +324,8 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
 	/**
 	 * (29) append element QueueFilter
 	 *
-	 * @return JDFQueueFilter the element @ if the element already exists
+	 * @return JDFQueueFilter the element
+	 * @ if the element already exists
 	 */
 	public JDFQueueFilter appendQueueFilter()
 	{

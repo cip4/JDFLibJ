@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBoxFoldAction : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBoxFoldAction : public JDFElement
  */
 
 public abstract class JDFAutoBoxFoldAction extends JDFElement
@@ -265,11 +262,15 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FoldIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FoldIndex
@@ -284,17 +285,20 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute FoldIndex
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getFoldIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.FOLDINDEX, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FOLDINDEX, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Action ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Action
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Action
@@ -317,13 +321,15 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Action ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Action
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Action
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAction(EAction) based on java.lang.enum instead
+	 * @deprecated use SetAction(EAction) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAction(EnumAction enumVar)
@@ -335,7 +341,7 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 * (9) get attribute Action
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAction getEAction() based on java.lang.enum instead
+	 * @deprecated use EAction GetEAction() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAction getAction()
@@ -344,7 +350,9 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -382,7 +390,8 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
 	 * (27) const get element GlueLine
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueLine the element default is getGlueLine(0)
+	 * @return JDFGlueLine the element
+	 *         default is getGlueLine(0)
 	 */
 	public JDFGlueLine getGlueLine(int iSkip)
 	{

@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoCollatingItem : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCollatingItem : public JDFElement
  */
 
 public abstract class JDFAutoCollatingItem extends JDFElement
@@ -105,10 +102,11 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BUNDLEDEPTH, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0),
+				null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333333311l, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRANSFORMATIONCONTEXT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumTransformationContext.getEnum(0),
-				"StackItem");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.TRANSFORMATIONCONTEXT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumTransformationContext.getEnum(0), "StackItem");
 	}
 
 	@Override
@@ -164,95 +162,6 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	protected JDFAutoCollatingItem(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * Enumeration strings for Orientation
-	 */
-
-	public enum EOrientation
-	{
-		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
-
-		public static EOrientation getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Orientation
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOrientation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOrientation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumOrientation getEnum(String enumName)
-		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOrientation getEnum(int enumValue)
-		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOrientation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOrientation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOrientation.class);
-		}
-
-		/**  */
-		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
-		/**  */
-		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
-		/**  */
-		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
-		/**  */
-		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
-		/**  */
-		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
-		/**  */
-		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
-		/**  */
-		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
-		/**  */
-		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
 	}
 
 	/**
@@ -335,11 +244,15 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -362,7 +275,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BundleDepth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BundleDepth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BundleDepth
@@ -385,7 +300,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Orientation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Orientation
@@ -408,13 +325,15 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Orientation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setOrientation(EOrientation) based on java.lang.enum instead
+	 * @deprecated use SetOrientation(EOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
@@ -426,7 +345,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * (9) get attribute Orientation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EOrientation getEOrientation() based on java.lang.enum instead
+	 * @deprecated use EOrientation GetEOrientation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumOrientation getOrientation()
@@ -435,7 +354,8 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Transformation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Transformation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -451,17 +371,19 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	/**
 	 * (20) get JDFMatrix attribute Transformation
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getTransformation()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransformationContext
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TransformationContext
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -485,14 +407,15 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransformationContext
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TransformationContext
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TransformationContext
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTransformationContext(ETransformationContext) based on java.lang.enum instead
+	 * @deprecated use SetTransformationContext(ETransformationContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransformationContext(EnumTransformationContext enumVar)
@@ -504,7 +427,7 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	 * (9) get attribute TransformationContext
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETransformationContext getETransformationContext() based on java.lang.enum instead
+	 * @deprecated use ETransformationContext GetETransformationContext() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTransformationContext getTransformationContext()
@@ -513,7 +436,9 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -539,7 +464,8 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	/**
 	 * (29) append element Component
 	 *
-	 * @return JDFComponent the element @ if the element already exists
+	 * @return JDFComponent the element
+	 * @ if the element already exists
 	 */
 	public JDFComponent appendComponent()
 	{
@@ -579,7 +505,8 @@ public abstract class JDFAutoCollatingItem extends JDFElement
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{

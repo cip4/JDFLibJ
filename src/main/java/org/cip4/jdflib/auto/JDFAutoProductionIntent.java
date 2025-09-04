@@ -83,10 +83,7 @@ import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFSpanPrintPreference;
 
 /**
- *****************************************************************************
- * class JDFAutoProductionIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoProductionIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoProductionIntent extends JDFIntentResource
@@ -146,7 +143,9 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -184,7 +183,8 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * (27) const get element Certification
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCertification the element default is getCertification(0)
+	 * @return JDFCertification the element
+	 *         default is getCertification(0)
 	 */
 	public JDFCertification getCertification(int iSkip)
 	{
@@ -234,7 +234,8 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	/**
 	 * (29) append element PrintPreference
 	 *
-	 * @return JDFSpanPrintPreference the element @ if the element already exists
+	 * @return JDFSpanPrintPreference the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanPrintPreference appendPrintPreference()
 	{
@@ -264,7 +265,8 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	/**
 	 * (29) append element PrintProcess
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendPrintProcess()
 	{
@@ -306,7 +308,8 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
 	 * (27) const get element Resource
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFResource the element default is getResource(0)
+	 * @return JDFResource the element
+	 *         default is getResource(0)
 	 */
 	public JDFResource getResource(int iSkip)
 	{

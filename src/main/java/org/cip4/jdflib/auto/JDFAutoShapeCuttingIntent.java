@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFShapeCut;
 
 /**
- *****************************************************************************
- * class JDFAutoShapeCuttingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShapeCuttingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
@@ -140,7 +137,9 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 	 * (27) const get element ShapeCut
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFShapeCut the element default is getShapeCut(0)
+	 * @return JDFShapeCut the element
+	 *         default is getShapeCut(0)
 	 */
 	public JDFShapeCut getShapeCut(int iSkip)
 	{

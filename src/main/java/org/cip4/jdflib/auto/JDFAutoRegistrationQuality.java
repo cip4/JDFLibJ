@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 
 /**
- *****************************************************************************
- * class JDFAutoRegistrationQuality : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRegistrationQuality : public JDFElement
  */
 
 public abstract class JDFAutoRegistrationQuality extends JDFElement
@@ -140,11 +137,15 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Offset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Offset
@@ -159,17 +160,20 @@ public abstract class JDFAutoRegistrationQuality extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Offset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Reference ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Reference
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Reference

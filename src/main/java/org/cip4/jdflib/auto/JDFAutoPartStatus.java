@@ -82,10 +82,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *****************************************************************************
- * class JDFAutoPartStatus : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPartStatus : public JDFElement
  */
 
 public abstract class JDFAutoPartStatus extends JDFElement
@@ -155,11 +152,14 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StatusDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -183,7 +183,9 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -209,7 +211,8 @@ public abstract class JDFAutoPartStatus extends JDFElement
 	/**
 	 * (29) append element Part
 	 *
-	 * @return JDFPart the element @ if the element already exists
+	 * @return JDFPart the element
+	 * @ if the element already exists
 	 */
 	public JDFPart appendPart()
 	{

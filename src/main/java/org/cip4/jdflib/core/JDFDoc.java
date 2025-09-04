@@ -51,8 +51,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import jakarta.mail.BodyPart;
-
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -69,6 +67,8 @@ import org.cip4.jdflib.util.net.HTTPDetails;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import jakarta.mail.BodyPart;
 
 /**
  *

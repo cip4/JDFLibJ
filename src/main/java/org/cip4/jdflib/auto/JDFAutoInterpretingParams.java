@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoMedia.EPolarity;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumPolarity;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -93,10 +95,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFInterpretingDetails;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoInterpretingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInterpretingParams : public JDFResource
  */
 
 public abstract class JDFAutoInterpretingParams extends JDFResource
@@ -108,9 +107,12 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x3333311111l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORAROUND, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorAround.getEnum(0), "None");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.POLARITY, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), "Positive");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0), "Normal");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORAROUND, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorAround.getEnum(0),
+				"None");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.POLARITY, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0),
+				"Positive");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRINTQUALITY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintQuality.getEnum(0),
+				"Normal");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.FITTOPAGE, 0x4444444443l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.POSTER, 0x4444433333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.POSTEROVERLAP, 0x4444433333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -182,7 +184,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -278,83 +280,6 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for Polarity
-	 */
-
-	public enum EPolarity
-	{
-		Positive, Negative;
-
-		public static EPolarity getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPolarity.class, val, EPolarity.Positive);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Polarity
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPolarity extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPolarity(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPolarity getEnum(String enumName)
-		{
-			return (EnumPolarity) getEnum(EnumPolarity.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPolarity getEnum(int enumValue)
-		{
-			return (EnumPolarity) getEnum(EnumPolarity.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPolarity.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPolarity.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPolarity.class);
-		}
-
-		/**  */
-		public static final EnumPolarity Positive = new EnumPolarity("Positive");
-		/**  */
-		public static final EnumPolarity Negative = new EnumPolarity("Negative");
-	}
-
-	/**
 	 * Enumeration strings for PrintQuality
 	 */
 
@@ -434,11 +359,15 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Center
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Center
@@ -461,7 +390,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MirrorAround
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -485,14 +415,15 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MirrorAround
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MirrorAround
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMirrorAround(EMirrorAround) based on java.lang.enum instead
+	 * @deprecated use SetMirrorAround(EMirrorAround) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMirrorAround(EnumMirrorAround enumVar)
@@ -504,7 +435,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 * (9) get attribute MirrorAround
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMirrorAround getEMirrorAround() based on java.lang.enum instead
+	 * @deprecated use EMirrorAround GetEMirrorAround() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMirrorAround getMirrorAround()
@@ -513,7 +444,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Polarity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Polarity
@@ -536,13 +469,15 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Polarity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Polarity
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPolarity(EPolarity) based on java.lang.enum instead
+	 * @deprecated use SetPolarity(EPolarity) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPolarity(EnumPolarity enumVar)
@@ -554,7 +489,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 * (9) get attribute Polarity
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPolarity getEPolarity() based on java.lang.enum instead
+	 * @deprecated use EPolarity GetEPolarity() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPolarity getPolarity()
@@ -563,7 +498,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintQuality
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintQuality
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -587,14 +523,15 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintQuality
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintQuality
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PrintQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPrintQuality(EPrintQuality) based on java.lang.enum instead
+	 * @deprecated use SetPrintQuality(EPrintQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintQuality(EnumPrintQuality enumVar)
@@ -606,7 +543,7 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 * (9) get attribute PrintQuality
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPrintQuality getEPrintQuality() based on java.lang.enum instead
+	 * @deprecated use EPrintQuality GetEPrintQuality() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPrintQuality getPrintQuality()
@@ -615,7 +552,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FitToPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FitToPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FitToPage
@@ -638,7 +577,9 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Poster ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Poster
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Poster
@@ -653,17 +594,19 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Poster
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPoster()
 	{
-		final String strAttrName = getAttribute(AttributeName.POSTER, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.POSTER, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PosterOverlap
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PosterOverlap
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -679,17 +622,20 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute PosterOverlap
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPosterOverlap()
 	{
-		final String strAttrName = getAttribute(AttributeName.POSTEROVERLAP, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.POSTEROVERLAP, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scaling ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Scaling
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Scaling
@@ -704,17 +650,19 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Scaling
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getScaling()
 	{
-		final String strAttrName = getAttribute(AttributeName.SCALING, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SCALING, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ScalingOrigin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ScalingOrigin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -730,17 +678,20 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute ScalingOrigin
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getScalingOrigin()
 	{
-		final String strAttrName = getAttribute(AttributeName.SCALINGORIGIN, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SCALINGORIGIN, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -778,7 +729,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 * (27) const get element ObjectResolution
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFObjectResolution the element default is getObjectResolution(0)
+	 * @return JDFObjectResolution the element
+	 *         default is getObjectResolution(0)
 	 */
 	public JDFObjectResolution getObjectResolution(int iSkip)
 	{
@@ -828,7 +780,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	/**
 	 * (29) append element FitPolicy
 	 *
-	 * @return JDFFitPolicy the element @ if the element already exists
+	 * @return JDFFitPolicy the element
+	 * @ if the element already exists
 	 */
 	public JDFFitPolicy appendFitPolicy()
 	{
@@ -870,7 +823,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 * (27) const get element InterpretingDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFInterpretingDetails the element default is getInterpretingDetails(0)
+	 * @return JDFInterpretingDetails the element
+	 *         default is getInterpretingDetails(0)
 	 */
 	public JDFInterpretingDetails getInterpretingDetails(int iSkip)
 	{
@@ -932,7 +886,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	 * (27) const get element Media
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMedia the element default is getMedia(0)
+	 * @return JDFMedia the element
+	 *         default is getMedia(0)
 	 */
 	public JDFMedia getMedia(int iSkip)
 	{
@@ -992,7 +947,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
 	/**
 	 * (29) append element PDFInterpretingParams
 	 *
-	 * @return JDFPDFInterpretingParams the element @ if the element already exists
+	 * @return JDFPDFInterpretingParams the element
+	 * @ if the element already exists
 	 */
 	public JDFPDFInterpretingParams appendPDFInterpretingParams()
 	{

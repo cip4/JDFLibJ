@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.ESheetLay;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumSheetLay;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -88,13 +86,9 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.postpress.JDFCut;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoCuttingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCuttingParams : public JDFResource
  */
 
 public abstract class JDFAutoCuttingParams extends JDFResource
@@ -171,7 +165,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,89 +179,15 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/**
-	 * Enumeration strings for SheetLay
-	 */
-
-	public enum ESheetLay
-	{
-		Left, Right;
-
-		public static ESheetLay getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESheetLay.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for SheetLay
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSheetLay extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSheetLay(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSheetLay getEnum(String enumName)
-		{
-			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSheetLay getEnum(int enumValue)
-		{
-			return (EnumSheetLay) getEnum(EnumSheetLay.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSheetLay.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSheetLay.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSheetLay.class);
-		}
-
-		/**  */
-		public static final EnumSheetLay Left = new EnumSheetLay("Left");
-		/**  */
-		public static final EnumSheetLay Right = new EnumSheetLay("Right");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NUpSeparation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NUpSeparation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -283,17 +203,20 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute NUpSeparation
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getNUpSeparation()
 	{
-		final String strAttrName = getAttribute(AttributeName.NUPSEPARATION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.NUPSEPARATION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetLay
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetLay
@@ -316,13 +239,15 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetLay
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSheetLay(ESheetLay) based on java.lang.enum instead
+	 * @deprecated use SetSheetLay(ESheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -334,7 +259,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * (9) get attribute SheetLay
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESheetLay getESheetLay() based on java.lang.enum instead
+	 * @deprecated use ESheetLay GetESheetLay() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSheetLay getSheetLay()
@@ -343,7 +268,9 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -381,7 +308,8 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * (27) const get element CutBlock
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCutBlock the element default is getCutBlock(0)
+	 * @return JDFCutBlock the element
+	 *         default is getCutBlock(0)
 	 */
 	public JDFCutBlock getCutBlock(int iSkip)
 	{
@@ -453,7 +381,8 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * (27) const get element CutMark
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCutMark the element default is getCutMark(0)
+	 * @return JDFCutMark the element
+	 *         default is getCutMark(0)
 	 */
 	public JDFCutMark getCutMark(int iSkip)
 	{
@@ -525,7 +454,8 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 	 * (27) const get element Cut
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCut the element default is getCut(0)
+	 * @return JDFCut the element
+	 *         default is getCut(0)
 	 */
 	public JDFCut getCut(int iSkip)
 	{

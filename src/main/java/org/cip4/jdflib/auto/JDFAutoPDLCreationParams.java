@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFPDFToPSConversionParams;
 import org.cip4.jdflib.resource.process.prepress.JDFPSToPDFConversionParams;
 
 /**
- *****************************************************************************
- * class JDFAutoPDLCreationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPDLCreationParams : public JDFResource
  */
 
 public abstract class JDFAutoPDLCreationParams extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,15 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MimeType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MimeType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MimeType
@@ -205,7 +206,9 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -231,7 +234,8 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	/**
 	 * (29) append element FontParams
 	 *
-	 * @return JDFFontParams the element @ if the element already exists
+	 * @return JDFFontParams the element
+	 * @ if the element already exists
 	 */
 	public JDFFontParams appendFontParams()
 	{
@@ -271,7 +275,8 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	/**
 	 * (29) append element PDFToPSConversionParams
 	 *
-	 * @return JDFPDFToPSConversionParams the element @ if the element already exists
+	 * @return JDFPDFToPSConversionParams the element
+	 * @ if the element already exists
 	 */
 	public JDFPDFToPSConversionParams appendPDFToPSConversionParams()
 	{
@@ -311,7 +316,8 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
 	/**
 	 * (29) append element PSToPDFConversionParams
 	 *
-	 * @return JDFPSToPDFConversionParams the element @ if the element already exists
+	 * @return JDFPSToPDFConversionParams the element
+	 * @ if the element already exists
 	 */
 	public JDFPSToPDFConversionParams appendPSToPDFConversionParams()
 	{

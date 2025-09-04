@@ -42,13 +42,13 @@ package org.cip4.jdflib.jmf;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
 import org.cip4.jdflib.auto.JDFAutoResourceInfo.EnumScope;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
 import org.cip4.jdflib.auto.JDFAutoShutDownCmdParams.EnumShutDownType;
-import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -68,7 +68,6 @@ import org.cip4.jdflib.util.StringUtil;
  * factory for creating JMF messages
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         June 20, 2009 split off from JMFFactory
  */
 public class JMFBuilder implements Cloneable
@@ -251,7 +250,7 @@ public class JMFBuilder implements Cloneable
 	 * build a JMF Status query
 	 *
 	 * @param deviceDetails the device details
-	 * @param jobDetails the status details
+	 * @param jobDetails    the status details
 	 * @return the message
 	 */
 	public JDFJMF buildStatus(final EnumDeviceDetails deviceDetails, final EnumJobDetails jobDetails)
@@ -280,7 +279,7 @@ public class JMFBuilder implements Cloneable
 	/**
 	 * build a JMF Status query
 	 *
-	 * @param bExact if true
+	 * @param bExact  if true
 	 * @param resLink
 	 * @return the message
 	 */
@@ -302,7 +301,7 @@ public class JMFBuilder implements Cloneable
 	 * build a JMF Status query
 	 *
 	 * @param deviceDetails the device details
-	 * @param jobDetails the status details
+	 * @param jobDetails    the status details
 	 * @return the message
 	 */
 	public JDFJMF buildStatusSignal(final EnumDeviceDetails deviceDetails, final EnumJobDetails jobDetails)
@@ -399,7 +398,7 @@ public class JMFBuilder implements Cloneable
 	 * build a JMF Milestone querysignal
 	 *
 	 * @param milestoneType the milestone type
-	 * @param jobID the jobID
+	 * @param jobID         the jobID
 	 * @return the message
 	 */
 	public JDFJMF buildMilestone(final String milestoneType, final String jobID)
@@ -417,7 +416,7 @@ public class JMFBuilder implements Cloneable
 	/**
 	 * build a JMF KnownSubscriptions query
 	 *
-	 * @param url the url of the subscription - typically the sender of the message
+	 * @param url       the url of the subscription - typically the sender of the message
 	 * @param slaveQEID the queuentryID at the slave
 	 * @return the message
 	 */
@@ -614,7 +613,7 @@ public class JMFBuilder implements Cloneable
 	 * default: JMFFactory.buildRequestQueueEntry(theQueueURL,null)
 	 *
 	 * @param queueURL the queue URL of the device sending the command ("where do you want your SubmitQE's delivered to?")
-	 * @param nid the nodeidentifier of the requested qe, default=null
+	 * @param nid      the nodeidentifier of the requested qe, default=null
 	 * @return the message
 	 */
 	public JDFJMF buildRequestQueueEntry(final String queueURL, final NodeIdentifier nid)
@@ -651,7 +650,7 @@ public class JMFBuilder implements Cloneable
 	 * build a ResubmitQueueEntry message
 	 *
 	 * @param qeID
-	 * @param url the url of the jdf to resubmit
+	 * @param url  the url of the jdf to resubmit
 	 * @return the jmf
 	 */
 	public JDFJMF buildResubmitQueueEntry(final String qeID, final String url)
@@ -668,7 +667,6 @@ public class JMFBuilder implements Cloneable
 	 * build a Shutdown message
 	 *
 	 * @param typ hard or soft shutdown?
-	 *
 	 * @return the jmf
 	 */
 	public JDFJMF buildShutdownCommand(final EnumShutDownType typ)
@@ -685,7 +683,7 @@ public class JMFBuilder implements Cloneable
 	 *
 	 * @param channelID
 	 * @param qeID
-	 * @param url the url of the subscription
+	 * @param url       the url of the subscription
 	 * @return the jmf
 	 */
 	public JDFJMF buildStopPersistentChannel(final String channelID, final String qeID, final String url)
@@ -726,7 +724,6 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 *
 	 * get the SenderId used for this builder
 	 *
 	 * @return
@@ -737,7 +734,6 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 *
 	 * set the SenderId used for this builder
 	 *
 	 * @param senderID the new default senderID, if null use the static default from {@link JDFJMF}
@@ -748,7 +744,6 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
@@ -763,7 +758,6 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -773,7 +767,6 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public String getAgentName()
@@ -782,7 +775,6 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 *
 	 * @param agentName
 	 */
 	public void setAgentName(final String agentName)
@@ -791,7 +783,6 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public String getAgentVersion()
@@ -800,7 +791,6 @@ public class JMFBuilder implements Cloneable
 	}
 
 	/**
-	 *
 	 * @param agentVersion
 	 */
 	public void setAgentVersion(final String agentVersion)

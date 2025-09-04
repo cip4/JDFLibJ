@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 
 /**
- *****************************************************************************
- * class JDFAutoModuleCap : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoModuleCap : public JDFElement
  */
 
 public abstract class JDFAutoModuleCap extends JDFElement
@@ -93,7 +90,8 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceCap.EnumAvailability.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AVAILABILITY, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JDFDeviceCap.EnumAvailability.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x2222222111l, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
@@ -141,11 +139,14 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Availability
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Availability
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -169,14 +170,15 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Availability
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Availability
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Availability
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAvailability(JDFDeviceCap.EAvailability) based on java.lang.enum instead
+	 * @deprecated use SetAvailability(EeviceCap.EnumAvailability) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAvailability(JDFDeviceCap.EnumAvailability enumVar)
@@ -188,7 +190,7 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	 * (9) get attribute Availability
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use JDFDeviceCap.EAvailability getEAvailability() based on java.lang.enum instead
+	 * @deprecated use EeviceCap.EnumAvailability GetEAvailability() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public JDFDeviceCap.EnumAvailability getAvailability()
@@ -197,7 +199,9 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -222,7 +226,9 @@ public abstract class JDFAutoModuleCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleIndex

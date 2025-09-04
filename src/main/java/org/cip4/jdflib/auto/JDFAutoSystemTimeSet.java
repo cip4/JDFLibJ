@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoSystemTimeSet : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSystemTimeSet : public JDFElement
  */
 
 public abstract class JDFAutoSystemTimeSet extends JDFElement
@@ -139,11 +136,15 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NewTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NewTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute NewTime
@@ -167,13 +168,15 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 */
 	public JDFDate getNewTime()
 	{
-		final String str = getAttribute(AttributeName.NEWTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.NEWTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OldTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OldTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute OldTime
@@ -197,8 +200,8 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
 	 */
 	public JDFDate getOldTime()
 	{
-		final String str = getAttribute(AttributeName.OLDTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.OLDTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

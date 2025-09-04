@@ -74,10 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoRemoved : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRemoved : public JDFElement
  */
 
 public abstract class JDFAutoRemoved extends JDFElement

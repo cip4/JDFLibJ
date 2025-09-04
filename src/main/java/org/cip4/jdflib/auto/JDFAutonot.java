@@ -74,10 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutonot : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutonot : public JDFResource
  */
 
 public abstract class JDFAutonot extends JDFResource
@@ -127,7 +124,7 @@ public abstract class JDFAutonot extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}

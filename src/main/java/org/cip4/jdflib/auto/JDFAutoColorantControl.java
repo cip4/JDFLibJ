@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoColor.EMappingSelection;
+import org.cip4.jdflib.auto.JDFAutoColor.EnumMappingSelection;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -93,10 +95,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoColorantControl : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorantControl : public JDFResource
  */
 
 public abstract class JDFAutoColorantControl extends JDFResource
@@ -108,8 +107,10 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FORCESEPARATIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERNALCOLORMODEL, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumInternalColorModel.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumMappingSelection.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.INTERNALCOLORMODEL, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumInternalColorModel.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumMappingSelection.getEnum(0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROCESSCOLORMODEL, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
@@ -180,7 +181,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -273,91 +274,15 @@ public abstract class JDFAutoColorantControl extends JDFResource
 		public static final EnumInternalColorModel Explicit = new EnumInternalColorModel("Explicit");
 	}
 
-	/**
-	 * Enumeration strings for MappingSelection
-	 */
-
-	public enum EMappingSelection
-	{
-		UsePDLValues, UseLocalPrinterValues, UseProcessColorValues;
-
-		public static EMappingSelection getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMappingSelection.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for MappingSelection
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMappingSelection extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMappingSelection(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMappingSelection getEnum(String enumName)
-		{
-			return (EnumMappingSelection) getEnum(EnumMappingSelection.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMappingSelection getEnum(int enumValue)
-		{
-			return (EnumMappingSelection) getEnum(EnumMappingSelection.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMappingSelection.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMappingSelection.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMappingSelection.class);
-		}
-
-		/**  */
-		public static final EnumMappingSelection UsePDLValues = new EnumMappingSelection("UsePDLValues");
-		/**  */
-		public static final EnumMappingSelection UseLocalPrinterValues = new EnumMappingSelection("UseLocalPrinterValues");
-		/**  */
-		public static final EnumMappingSelection UseProcessColorValues = new EnumMappingSelection("UseProcessColorValues");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ForceSeparations
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ForceSeparations
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -381,7 +306,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InternalColorModel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InternalColorModel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -405,14 +331,15 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InternalColorModel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InternalColorModel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute InternalColorModel
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setInternalColorModel(EInternalColorModel) based on java.lang.enum instead
+	 * @deprecated use SetInternalColorModel(EInternalColorModel) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setInternalColorModel(EnumInternalColorModel enumVar)
@@ -424,7 +351,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (9) get attribute InternalColorModel
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EInternalColorModel getEInternalColorModel() based on java.lang.enum instead
+	 * @deprecated use EInternalColorModel GetEInternalColorModel() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumInternalColorModel getInternalColorModel()
@@ -433,7 +360,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MappingSelection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -457,14 +385,15 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MappingSelection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MappingSelection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMappingSelection(EMappingSelection) based on java.lang.enum instead
+	 * @deprecated use SetMappingSelection(EMappingSelection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMappingSelection(EnumMappingSelection enumVar)
@@ -476,7 +405,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (9) get attribute MappingSelection
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMappingSelection getEMappingSelection() based on java.lang.enum instead
+	 * @deprecated use EMappingSelection GetEMappingSelection() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMappingSelection getMappingSelection()
@@ -485,7 +414,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcessColorModel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProcessColorModel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -509,7 +439,9 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -547,7 +479,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (27) const get element ColorantAlias
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorantAlias the element default is getColorantAlias(0)
+	 * @return JDFColorantAlias the element
+	 *         default is getColorantAlias(0)
 	 */
 	public JDFColorantAlias getColorantAlias(int iSkip)
 	{
@@ -607,7 +540,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	/**
 	 * (29) append element ColorantConvertProcess
 	 *
-	 * @return JDFSeparationList the element @ if the element already exists
+	 * @return JDFSeparationList the element
+	 * @ if the element already exists
 	 */
 	public JDFSeparationList appendColorantConvertProcess()
 	{
@@ -637,7 +571,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	/**
 	 * (29) append element ColorantOrder
 	 *
-	 * @return JDFSeparationList the element @ if the element already exists
+	 * @return JDFSeparationList the element
+	 * @ if the element already exists
 	 */
 	public JDFSeparationList appendColorantOrder()
 	{
@@ -667,7 +602,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	/**
 	 * (29) append element ColorantParams
 	 *
-	 * @return JDFSeparationList the element @ if the element already exists
+	 * @return JDFSeparationList the element
+	 * @ if the element already exists
 	 */
 	public JDFSeparationList appendColorantParams()
 	{
@@ -697,7 +633,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	/**
 	 * (29) append element ColorPool
 	 *
-	 * @return JDFColorPool the element @ if the element already exists
+	 * @return JDFColorPool the element
+	 * @ if the element already exists
 	 */
 	public JDFColorPool appendColorPool()
 	{
@@ -749,7 +686,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (27) const get element ColorSpaceSubstitute
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorSpaceSubstitute the element default is getColorSpaceSubstitute(0)
+	 * @return JDFColorSpaceSubstitute the element
+	 *         default is getColorSpaceSubstitute(0)
 	 */
 	public JDFColorSpaceSubstitute getColorSpaceSubstitute(int iSkip)
 	{
@@ -799,7 +737,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	/**
 	 * (29) append element DeviceColorantOrder
 	 *
-	 * @return JDFSeparationList the element @ if the element already exists
+	 * @return JDFSeparationList the element
+	 * @ if the element already exists
 	 */
 	public JDFSeparationList appendDeviceColorantOrder()
 	{
@@ -841,7 +780,8 @@ public abstract class JDFAutoColorantControl extends JDFResource
 	 * (27) const get element DeviceNSpace
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceNSpace the element default is getDeviceNSpace(0)
+	 * @return JDFDeviceNSpace the element
+	 *         default is getDeviceNSpace(0)
 	 */
 	public JDFDeviceNSpace getDeviceNSpace(int iSkip)
 	{

@@ -6044,6 +6044,16 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
+	 * Sets attribute PartUsage
+	 *
+	 * @param value enumeration value of the attribute PartUsage to be set
+	 */
+	public void setPartUsage(final EPartUsage value)
+	{
+		setAttribute(AttributeName.PARTUSAGE, value, null);
+	}
+
+	/**
 	 * if set to true, the default @PartUsage of unpartitioned resources is Implicit. Note: this is NOT according to the specification since the Specification defaults PartUsage to
 	 * Explicit for all Resources.
 	 *
@@ -6078,6 +6088,33 @@ public class JDFResource extends JDFElement
 		else
 		{
 			return EnumPartUsage.getEnum(partUsage);
+		}
+	}
+
+	/**
+	 * Gets typesafe enumerated value of attribute PartUsage; defaults to PartUsage_Explicit unless setUnpartitiondImplicit(true) has been called and the resource is not
+	 * partitioned, in which case PartUsage_Implicit is called.
+	 * Achtung - mieser Balkon!
+	 *
+	 * @return EnumPartUsage - attribute enumeration value
+	 */
+	public EPartUsage getEPartUsage()
+	{
+		final String partUsage = getNonEmpty(AttributeName.PARTUSAGE);
+		if (partUsage == null)
+		{
+			if (!bUnpartitiondImplicit || getResourceRoot().hasAttribute(AttributeName.PARTIDKEYS))
+			{
+				return EPartUsage.Explicit;
+			}
+			else
+			{
+				return EPartUsage.Implicit;
+			}
+		}
+		else
+		{
+			return EPartUsage.getEnum(partUsage);
 		}
 	}
 

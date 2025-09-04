@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFLayerDetails;
 
 /**
- *****************************************************************************
- * class JDFAutoLayerList : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLayerList : public JDFElement
  */
 
 public abstract class JDFAutoLayerList extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoLayerList extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoLayerList extends JDFElement
 	 * (27) const get element LayerDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLayerDetails the element default is getLayerDetails(0)
+	 * @return JDFLayerDetails the element
+	 *         default is getLayerDetails(0)
 	 */
 	public JDFLayerDetails getLayerDetails(int iSkip)
 	{

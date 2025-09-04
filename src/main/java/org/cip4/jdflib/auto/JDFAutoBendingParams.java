@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoBendingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBendingParams : public JDFResource
  */
 
 public abstract class JDFAutoBendingParams extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,11 +157,15 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Bend ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Bend
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Bend
@@ -187,7 +188,9 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Punch ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Punch
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Punch
@@ -210,7 +213,9 @@ public abstract class JDFAutoBendingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PunchType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PunchType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PunchType

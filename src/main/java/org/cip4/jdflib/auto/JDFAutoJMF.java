@@ -92,10 +92,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoJMF : public JDFPool
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoJMF : public JDFPool
  */
 
 public abstract class JDFAutoJMF extends JDFPool
@@ -110,7 +107,8 @@ public abstract class JDFAutoJMF extends JDFPool
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333111l, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333111l, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0),
+				null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.RESPONSEURL, 0x4444433311l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x2222222222l, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -178,11 +176,15 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AgentName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AgentName
@@ -205,7 +207,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AgentVersion
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -229,7 +232,9 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceID
@@ -252,7 +257,9 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ICSVersions
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ICSVersions
@@ -271,14 +278,16 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public VString getICSVersions()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxVersion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxVersion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MaxVersion
@@ -301,13 +310,15 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxVersion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxVersion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MaxVersion
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMaxVersion(EVersion) based on java.lang.enum instead
+	 * @deprecated use SetMaxVersion(EVersion) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMaxVersion(EnumVersion enumVar)
@@ -319,7 +330,7 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (9) get attribute MaxVersion
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EVersion getEMaxVersion() based on java.lang.enum instead
+	 * @deprecated use EVersion GetEMaxVersion() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumVersion getMaxVersion()
@@ -328,7 +339,9 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResponseURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResponseURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ResponseURL
@@ -351,7 +364,9 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SenderID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SenderID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SenderID
@@ -374,7 +389,9 @@ public abstract class JDFAutoJMF extends JDFPool
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TimeStamp ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TimeStamp
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute TimeStamp
@@ -398,13 +415,15 @@ public abstract class JDFAutoJMF extends JDFPool
 	 */
 	public JDFDate getTimeStamp()
 	{
-		final String str = getAttribute(AttributeName.TIMESTAMP, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.TIMESTAMP, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -442,7 +461,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{
@@ -504,7 +524,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (27) const get element Command
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCommand the element default is getCommand(0)
+	 * @return JDFCommand the element
+	 *         default is getCommand(0)
 	 */
 	public JDFCommand getCommand(int iSkip)
 	{
@@ -566,7 +587,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (27) const get element Acknowledge
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFAcknowledge the element default is getAcknowledge(0)
+	 * @return JDFAcknowledge the element
+	 *         default is getAcknowledge(0)
 	 */
 	public JDFAcknowledge getAcknowledge(int iSkip)
 	{
@@ -628,7 +650,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (27) const get element Response
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFResponse the element default is getResponse(0)
+	 * @return JDFResponse the element
+	 *         default is getResponse(0)
 	 */
 	public JDFResponse getResponse(int iSkip)
 	{
@@ -690,7 +713,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (27) const get element Signal
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSignal the element default is getSignal(0)
+	 * @return JDFSignal the element
+	 *         default is getSignal(0)
 	 */
 	public JDFSignal getSignal(int iSkip)
 	{
@@ -752,7 +776,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (27) const get element Query
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFQuery the element default is getQuery(0)
+	 * @return JDFQuery the element
+	 *         default is getQuery(0)
 	 */
 	public JDFQuery getQuery(int iSkip)
 	{
@@ -814,7 +839,8 @@ public abstract class JDFAutoJMF extends JDFPool
 	 * (27) const get element Registration
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRegistration the element default is getRegistration(0)
+	 * @return JDFRegistration the element
+	 *         default is getRegistration(0)
 	 */
 	public JDFRegistration getRegistration(int iSkip)
 	{

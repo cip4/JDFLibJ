@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoImageReplacementParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoImageReplacementParams : public JDFResource
  */
 
 public abstract class JDFAutoImageReplacementParams extends JDFResource
@@ -177,7 +174,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -352,11 +349,14 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageReplacementStrategy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageReplacementStrategy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -380,14 +380,15 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageReplacementStrategy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageReplacementStrategy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ImageReplacementStrategy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setImageReplacementStrategy(EImageReplacementStrategy) based on java.lang.enum instead
+	 * @deprecated use SetImageReplacementStrategy(EImageReplacementStrategy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setImageReplacementStrategy(EnumImageReplacementStrategy enumVar)
@@ -399,7 +400,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * (9) get attribute ImageReplacementStrategy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EImageReplacementStrategy getEImageReplacementStrategy() based on java.lang.enum instead
+	 * @deprecated use EImageReplacementStrategy GetEImageReplacementStrategy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumImageReplacementStrategy getImageReplacementStrategy()
@@ -408,7 +409,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImagePreScanStrategy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImagePreScanStrategy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -432,7 +434,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxResolution
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxResolution
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -456,7 +459,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinResolution
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinResolution
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -480,7 +484,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResolutionReductionStrategy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResolutionReductionStrategy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -504,14 +509,15 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResolutionReductionStrategy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResolutionReductionStrategy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ResolutionReductionStrategy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setResolutionReductionStrategy(EResolutionReductionStrategy) based on java.lang.enum instead
+	 * @deprecated use SetResolutionReductionStrategy(EResolutionReductionStrategy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResolutionReductionStrategy(EnumResolutionReductionStrategy enumVar)
@@ -523,7 +529,7 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * (9) get attribute ResolutionReductionStrategy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EResolutionReductionStrategy getEResolutionReductionStrategy() based on java.lang.enum instead
+	 * @deprecated use EResolutionReductionStrategy GetEResolutionReductionStrategy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumResolutionReductionStrategy getResolutionReductionStrategy()
@@ -532,7 +538,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreExtensions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreExtensions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -552,14 +559,15 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 */
 	public VString getIgnoreExtensions()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.IGNOREEXTENSIONS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.IGNOREEXTENSIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxSearchRecursion
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxSearchRecursion
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -583,7 +591,9 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -621,7 +631,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{
@@ -693,7 +704,8 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
 	 * (27) const get element SearchPath
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getSearchPath(0)
+	 * @return JDFElement the element
+	 *         default is getSearchPath(0)
 	 */
 	public JDFElement getSearchPath(int iSkip)
 	{

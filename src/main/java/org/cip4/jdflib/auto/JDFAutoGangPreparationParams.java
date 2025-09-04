@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFDisjointing;
 
 /**
- *****************************************************************************
- * class JDFAutoGangPreparationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGangPreparationParams : public JDFResource
  */
 
 public abstract class JDFAutoGangPreparationParams extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,15 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GangName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GangName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GangName
@@ -205,7 +206,9 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobIDs
@@ -224,14 +227,16 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 */
 	public VString getJobIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.JOBIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.JOBIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -269,7 +274,8 @@ public abstract class JDFAutoGangPreparationParams extends JDFResource
 	 * (27) const get element Disjointing
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDisjointing the element default is getDisjointing(0)
+	 * @return JDFDisjointing the element
+	 *         default is getDisjointing(0)
 	 */
 	public JDFDisjointing getDisjointing(int iSkip)
 	{

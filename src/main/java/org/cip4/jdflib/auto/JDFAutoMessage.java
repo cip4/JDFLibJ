@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoMessage : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMessage : public JDFElement
  */
 
 public abstract class JDFAutoMessage extends JDFElement
@@ -147,11 +144,15 @@ public abstract class JDFAutoMessage extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AgentName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AgentName
@@ -174,7 +175,8 @@ public abstract class JDFAutoMessage extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AgentVersion
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -198,7 +200,9 @@ public abstract class JDFAutoMessage extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ICSVersions
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ICSVersions
@@ -217,14 +221,16 @@ public abstract class JDFAutoMessage extends JDFElement
 	 */
 	public VString getICSVersions()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -249,7 +255,9 @@ public abstract class JDFAutoMessage extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SenderID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SenderID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SenderID
@@ -272,7 +280,9 @@ public abstract class JDFAutoMessage extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Time ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Time
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Time
@@ -296,13 +306,15 @@ public abstract class JDFAutoMessage extends JDFElement
 	 */
 	public JDFDate getTime()
 	{
-		final String str = getAttribute(AttributeName.TIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.TIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Type

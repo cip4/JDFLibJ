@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoConventionalPrintingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoConventionalPrintingParams : public JDFResource
  */
 
 public abstract class JDFAutoConventionalPrintingParams extends JDFResource
@@ -107,12 +104,16 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DIRECTPROOF, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DRYING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDrying.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDSHEETLAY, 0x3111111111l, AttributeInfo.EnumAttributeType.enumeration, EnumFeedSheetLay.getEnum(0), null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.FIRSTSURFACE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumFirstSurface.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.FOUNTAINSOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumFountainSolution.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.FEEDSHEETLAY, 0x3111111111l, AttributeInfo.EnumAttributeType.enumeration, EnumFeedSheetLay.getEnum(0),
+				null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.FIRSTSURFACE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumFirstSurface.getEnum(0),
+				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.FOUNTAINSOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumFountainSolution.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MEDIALOCATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEAVAILABLEINDEX, 0x4444443331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEDRYING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumModuleDrying.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEDRYING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumModuleDrying.getEnum(0),
+				null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x4444443333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINBOTTOM, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINLEFT, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -120,11 +121,14 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINTOP, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.PERFECTINGMODULE, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.POWDER, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.PRINTINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintingType.getEnum(0), null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.PRINTINGTECHNOLOGY, 0x4444431111l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintingTechnology.getEnum(0), null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.PRINTINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPrintingType.getEnum(0),
+				null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.PRINTINGTECHNOLOGY, 0x4444431111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumPrintingTechnology.getEnum(0), null);
 		atrInfoTable[17] = new AtrInfoTable(AttributeName.SHEETLAY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
 		atrInfoTable[18] = new AtrInfoTable(AttributeName.SPEED, 0x4443333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -188,7 +192,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -930,11 +934,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DirectProof ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DirectProof
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DirectProof
@@ -957,7 +965,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Drying ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Drying
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Drying
@@ -980,13 +990,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Drying ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Drying
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Drying
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDrying(EDrying) based on java.lang.enum instead
+	 * @deprecated use SetDrying(EDrying) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDrying(EnumDrying enumVar)
@@ -998,7 +1010,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute Drying
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDrying getEDrying() based on java.lang.enum instead
+	 * @deprecated use EDrying GetEDrying() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDrying getDrying()
@@ -1007,7 +1019,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FeedSheetLay
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FeedSheetLay
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1031,14 +1044,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FeedSheetLay
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FeedSheetLay
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute FeedSheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setFeedSheetLay(EFeedSheetLay) based on java.lang.enum instead
+	 * @deprecated use SetFeedSheetLay(EFeedSheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFeedSheetLay(EnumFeedSheetLay enumVar)
@@ -1050,7 +1064,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute FeedSheetLay
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFeedSheetLay getEFeedSheetLay() based on java.lang.enum instead
+	 * @deprecated use EFeedSheetLay GetEFeedSheetLay() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFeedSheetLay getFeedSheetLay()
@@ -1059,7 +1073,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FirstSurface
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FirstSurface
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1083,14 +1098,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FirstSurface
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FirstSurface
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute FirstSurface
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setFirstSurface(EFirstSurface) based on java.lang.enum instead
+	 * @deprecated use SetFirstSurface(EFirstSurface) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFirstSurface(EnumFirstSurface enumVar)
@@ -1102,7 +1118,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute FirstSurface
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFirstSurface getEFirstSurface() based on java.lang.enum instead
+	 * @deprecated use EFirstSurface GetEFirstSurface() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFirstSurface getFirstSurface()
@@ -1111,7 +1127,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FountainSolution
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FountainSolution
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1135,14 +1152,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FountainSolution
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FountainSolution
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute FountainSolution
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setFountainSolution(EFountainSolution) based on java.lang.enum instead
+	 * @deprecated use SetFountainSolution(EFountainSolution) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFountainSolution(EnumFountainSolution enumVar)
@@ -1154,7 +1172,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute FountainSolution
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFountainSolution getEFountainSolution() based on java.lang.enum instead
+	 * @deprecated use EFountainSolution GetEFountainSolution() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFountainSolution getFountainSolution()
@@ -1163,7 +1181,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaLocation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MediaLocation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1187,7 +1206,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleAvailableIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleAvailableIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1203,17 +1223,19 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute ModuleAvailableIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getModuleAvailableIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.MODULEAVAILABLEINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MODULEAVAILABLEINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleDrying
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleDrying
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1237,14 +1259,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleDrying
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleDrying
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ModuleDrying
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setModuleDrying(EModuleDrying) based on java.lang.enum instead
+	 * @deprecated use SetModuleDrying(EModuleDrying) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setModuleDrying(EnumModuleDrying enumVar)
@@ -1256,7 +1279,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute ModuleDrying
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EModuleDrying getEModuleDrying() based on java.lang.enum instead
+	 * @deprecated use EModuleDrying GetEModuleDrying() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumModuleDrying getModuleDrying()
@@ -1265,7 +1288,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleIndex
@@ -1280,17 +1305,19 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute ModuleIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginBottom
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NonPrintableMarginBottom
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1314,7 +1341,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginLeft
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NonPrintableMarginLeft
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1338,7 +1366,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginRight
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NonPrintableMarginRight
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1362,7 +1391,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginTop
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NonPrintableMarginTop
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1386,7 +1416,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PerfectingModule
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PerfectingModule
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1410,7 +1441,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Powder ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Powder
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Powder
@@ -1433,7 +1466,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintingType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintingType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1457,14 +1491,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintingType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintingType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PrintingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPrintingType(EPrintingType) based on java.lang.enum instead
+	 * @deprecated use SetPrintingType(EPrintingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintingType(EnumPrintingType enumVar)
@@ -1476,7 +1511,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute PrintingType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPrintingType getEPrintingType() based on java.lang.enum instead
+	 * @deprecated use EPrintingType GetEPrintingType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPrintingType getPrintingType()
@@ -1485,7 +1520,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintingTechnology
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintingTechnology
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1509,14 +1545,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintingTechnology
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintingTechnology
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PrintingTechnology
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPrintingTechnology(EPrintingTechnology) based on java.lang.enum instead
+	 * @deprecated use SetPrintingTechnology(EPrintingTechnology) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPrintingTechnology(EnumPrintingTechnology enumVar)
@@ -1528,7 +1565,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute PrintingTechnology
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPrintingTechnology getEPrintingTechnology() based on java.lang.enum instead
+	 * @deprecated use EPrintingTechnology GetEPrintingTechnology() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPrintingTechnology getPrintingTechnology()
@@ -1537,7 +1574,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetLay
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetLay
@@ -1560,13 +1599,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetLay ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetLay
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetLay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSheetLay(ESheetLay) based on java.lang.enum instead
+	 * @deprecated use SetSheetLay(ESheetLay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetLay(EnumSheetLay enumVar)
@@ -1578,7 +1619,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute SheetLay
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESheetLay getESheetLay() based on java.lang.enum instead
+	 * @deprecated use ESheetLay GetESheetLay() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSheetLay getSheetLay()
@@ -1587,7 +1628,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Speed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Speed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Speed
@@ -1610,7 +1653,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkStyle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkStyle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute WorkStyle
@@ -1633,13 +1678,15 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkStyle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkStyle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute WorkStyle
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setWorkStyle(EWorkStyle) based on java.lang.enum instead
+	 * @deprecated use SetWorkStyle(EWorkStyle) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWorkStyle(EnumWorkStyle enumVar)
@@ -1651,7 +1698,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (9) get attribute WorkStyle
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EWorkStyle getEWorkStyle() based on java.lang.enum instead
+	 * @deprecated use EWorkStyle GetEWorkStyle() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumWorkStyle getWorkStyle()
@@ -1660,7 +1707,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -1698,7 +1747,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	 * (27) const get element Ink
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFInk the element default is getInk(0)
+	 * @return JDFInk the element
+	 *         default is getInk(0)
 	 */
 	public JDFInk getInk(int iSkip)
 	{
@@ -1758,7 +1808,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 	/**
 	 * (29) append element ApprovalParams
 	 *
-	 * @return JDFApprovalParams the element @ if the element already exists
+	 * @return JDFApprovalParams the element
+	 * @ if the element already exists
 	 */
 	public JDFApprovalParams appendApprovalParams()
 	{

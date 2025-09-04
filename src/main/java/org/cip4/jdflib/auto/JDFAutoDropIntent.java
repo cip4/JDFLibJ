@@ -94,10 +94,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoDropIntent : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDropIntent : public JDFElement
  */
 
 public abstract class JDFAutoDropIntent extends JDFElement
@@ -182,11 +179,14 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdditionalAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AdditionalAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -210,7 +210,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BuyerAccount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BuyerAccount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -234,7 +235,9 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DropID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DropID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DropID
@@ -257,7 +260,9 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pickup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pickup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pickup
@@ -280,7 +285,9 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -306,7 +313,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element Earliest
 	 *
-	 * @return JDFTimeSpan the element @ if the element already exists
+	 * @return JDFTimeSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFTimeSpan appendEarliest()
 	{
@@ -336,7 +344,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element EarliestDuration
 	 *
-	 * @return JDFDurationSpan the element @ if the element already exists
+	 * @return JDFDurationSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFDurationSpan appendEarliestDuration()
 	{
@@ -366,7 +375,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element Method
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendMethod()
 	{
@@ -396,7 +406,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element Required
 	 *
-	 * @return JDFTimeSpan the element @ if the element already exists
+	 * @return JDFTimeSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFTimeSpan appendRequired()
 	{
@@ -426,7 +437,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element RequiredDuration
 	 *
-	 * @return JDFDurationSpan the element @ if the element already exists
+	 * @return JDFDurationSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFDurationSpan appendRequiredDuration()
 	{
@@ -456,7 +468,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element ReturnMethod
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendReturnMethod()
 	{
@@ -486,7 +499,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element ServiceLevel
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendServiceLevel()
 	{
@@ -516,7 +530,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element SurplusHandling
 	 *
-	 * @return JDFSpanSurplusHandling the element @ if the element already exists
+	 * @return JDFSpanSurplusHandling the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanSurplusHandling appendSurplusHandling()
 	{
@@ -546,7 +561,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element Transfer
 	 *
-	 * @return JDFSpanTransfer the element @ if the element already exists
+	 * @return JDFSpanTransfer the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanTransfer appendTransfer()
 	{
@@ -576,7 +592,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element Company
 	 *
-	 * @return JDFCompany the element @ if the element already exists
+	 * @return JDFCompany the element
+	 * @ if the element already exists
 	 */
 	public JDFCompany appendCompany()
 	{
@@ -628,7 +645,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -688,7 +706,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -740,7 +759,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	 * (27) const get element DropItemIntent
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDropItemIntent the element default is getDropItemIntent(0)
+	 * @return JDFDropItemIntent the element
+	 *         default is getDropItemIntent(0)
 	 */
 	public JDFDropItemIntent getDropItemIntent(int iSkip)
 	{
@@ -790,7 +810,8 @@ public abstract class JDFAutoDropIntent extends JDFElement
 	/**
 	 * (29) append element Pricing
 	 *
-	 * @return JDFPricing the element @ if the element already exists
+	 * @return JDFPricing the element
+	 * @ if the element already exists
 	 */
 	public JDFPricing appendPricing()
 	{

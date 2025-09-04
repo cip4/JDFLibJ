@@ -85,10 +85,7 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoPipeParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPipeParams : public JDFElement
  */
 
 public abstract class JDFAutoPipeParams extends JDFElement
@@ -103,8 +100,10 @@ public abstract class JDFAutoPipeParams extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.PIPEID, 0x2222222222l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.PROJECTID, 0x3333311111l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), "InProgress");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPDATEDSTATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.STATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0),
+				"InProgress");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPDATEDSTATUS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JDFResource.EnumResStatus.getEnum(0), null);
 	}
 
 	@Override
@@ -163,11 +162,15 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -190,7 +193,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -213,7 +218,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PipeID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PipeID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PipeID
@@ -236,7 +243,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProjectID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProjectID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProjectID
@@ -259,7 +268,8 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpdatedStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UpdatedStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -283,14 +293,15 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpdatedStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UpdatedStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute UpdatedStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUpdatedStatus(JDFResource.EResStatus) based on java.lang.enum instead
+	 * @deprecated use SetUpdatedStatus(Eesource.EnumResStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUpdatedStatus(JDFResource.EnumResStatus enumVar)
@@ -302,7 +313,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * (9) get attribute UpdatedStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use JDFResource.EResStatus getEUpdatedStatus() based on java.lang.enum instead
+	 * @deprecated use Eesource.EnumResStatus GetEUpdatedStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public JDFResource.EnumResStatus getUpdatedStatus()
@@ -311,7 +322,9 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -337,7 +350,8 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	/**
 	 * (29) append element AmountPool
 	 *
-	 * @return JDFAmountPool the element @ if the element already exists
+	 * @return JDFAmountPool the element
+	 * @ if the element already exists
 	 */
 	public JDFAmountPool appendAmountPool()
 	{
@@ -379,7 +393,8 @@ public abstract class JDFAutoPipeParams extends JDFElement
 	 * (27) const get element Resource
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFResource the element default is getResource(0)
+	 * @return JDFResource the element
+	 *         default is getResource(0)
 	 */
 	public JDFResource getResource(int iSkip)
 	{

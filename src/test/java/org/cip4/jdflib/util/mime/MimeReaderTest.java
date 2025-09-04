@@ -43,11 +43,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.File;
 
-import jakarta.mail.Multipart;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.MimeUtil;
 import org.junit.jupiter.api.Test;
+
+import jakarta.mail.Multipart;
 
 class MimeReaderTest extends JDFTestCaseBase
 {

@@ -81,10 +81,7 @@ import org.cip4.jdflib.span.JDFSpanHoleType;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoPlasticCombBinding : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPlasticCombBinding : public JDFElement
  */
 
 public abstract class JDFAutoPlasticCombBinding extends JDFElement
@@ -144,7 +141,9 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -170,7 +169,8 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	/**
 	 * (29) append element CombBrand
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendCombBrand()
 	{
@@ -200,7 +200,8 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	/**
 	 * (29) append element PlasticCombType
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendPlasticCombType()
 	{
@@ -230,7 +231,8 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	/**
 	 * (29) append element HoleList
 	 *
-	 * @return JDFHoleList the element @ if the element already exists
+	 * @return JDFHoleList the element
+	 * @ if the element already exists
 	 */
 	public JDFHoleList appendHoleList()
 	{
@@ -260,7 +262,8 @@ public abstract class JDFAutoPlasticCombBinding extends JDFElement
 	/**
 	 * (29) append element HoleType
 	 *
-	 * @return JDFSpanHoleType the element @ if the element already exists
+	 * @return JDFSpanHoleType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanHoleType appendHoleType()
 	{

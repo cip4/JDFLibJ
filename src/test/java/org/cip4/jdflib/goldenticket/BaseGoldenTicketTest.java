@@ -72,8 +72,13 @@ package org.cip4.jdflib.goldenticket;
 
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.examples.ExampleTest;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;

@@ -70,12 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoCut.EWorkingDirection;
+import org.cip4.jdflib.auto.JDFAutoCut.EnumWorkingDirection;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -85,13 +82,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoGlue : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGlue : public JDFElement
  */
 
 public abstract class JDFAutoGlue extends JDFElement
@@ -102,7 +95,8 @@ public abstract class JDFAutoGlue extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumWorkingDirection.getEnum(0), null);
 	}
 
 	@Override
@@ -160,89 +154,15 @@ public abstract class JDFAutoGlue extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for WorkingDirection
-	 */
-
-	public enum EWorkingDirection
-	{
-		Top, Bottom;
-
-		public static EWorkingDirection getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EWorkingDirection.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for WorkingDirection
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumWorkingDirection extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumWorkingDirection(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumWorkingDirection getEnum(String enumName)
-		{
-			return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumWorkingDirection getEnum(int enumValue)
-		{
-			return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumWorkingDirection.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumWorkingDirection.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumWorkingDirection.class);
-		}
-
-		/**  */
-		public static final EnumWorkingDirection Top = new EnumWorkingDirection("Top");
-		/**  */
-		public static final EnumWorkingDirection Bottom = new EnumWorkingDirection("Bottom");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -266,14 +186,15 @@ public abstract class JDFAutoGlue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute WorkingDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setWorkingDirection(EWorkingDirection) based on java.lang.enum instead
+	 * @deprecated use SetWorkingDirection(EWorkingDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWorkingDirection(EnumWorkingDirection enumVar)
@@ -285,7 +206,7 @@ public abstract class JDFAutoGlue extends JDFElement
 	 * (9) get attribute WorkingDirection
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EWorkingDirection getEWorkingDirection() based on java.lang.enum instead
+	 * @deprecated use EWorkingDirection GetEWorkingDirection() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumWorkingDirection getWorkingDirection()
@@ -294,7 +215,9 @@ public abstract class JDFAutoGlue extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -320,7 +243,8 @@ public abstract class JDFAutoGlue extends JDFElement
 	/**
 	 * (29) append element GlueApplication
 	 *
-	 * @return JDFGlueApplication the element @ if the element already exists
+	 * @return JDFGlueApplication the element
+	 * @ if the element already exists
 	 */
 	public JDFGlueApplication appendGlueApplication()
 	{
@@ -360,7 +284,8 @@ public abstract class JDFAutoGlue extends JDFElement
 	/**
 	 * (29) append element GlueLine
 	 *
-	 * @return JDFGlueLine the element @ if the element already exists
+	 * @return JDFGlueLine the element
+	 * @ if the element already exists
 	 */
 	public JDFGlueLine appendGlueLine()
 	{

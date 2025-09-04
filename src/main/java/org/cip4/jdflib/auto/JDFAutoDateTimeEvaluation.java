@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 /**
- *****************************************************************************
- * class JDFAutoDateTimeEvaluation : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDateTimeEvaluation : public JDFResource
  */
 
 public abstract class JDFAutoDateTimeEvaluation extends JDFResource
@@ -163,17 +160,20 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueDurationList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueDurationList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -189,17 +189,20 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
 	/**
 	 * (20) get JDFDurationRangeList attribute ValueDurationList
 	 *
-	 * @return JDFDurationRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDurationRangeList
+	 * @return JDFDurationRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDurationRangeList
 	 */
 	public JDFDurationRangeList getValueDurationList()
 	{
-		final String strAttrName = getAttribute(AttributeName.VALUEDURATIONLIST, null, null);
-		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.VALUEDURATIONLIST, null, null);
+		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueList
@@ -214,17 +217,20 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
 	/**
 	 * (20) get JDFDateTimeRangeList attribute ValueList
 	 *
-	 * @return JDFDateTimeRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDateTimeRangeList
+	 * @return JDFDateTimeRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDateTimeRangeList
 	 */
 	public JDFDateTimeRangeList getValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
-		final JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
+		JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -262,7 +268,8 @@ public abstract class JDFAutoDateTimeEvaluation extends JDFResource
 	 * (27) const get element BasicPreflightTest
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBasicPreflightTest the element default is getBasicPreflightTest(0)
+	 * @return JDFBasicPreflightTest the element
+	 *         default is getBasicPreflightTest(0)
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{

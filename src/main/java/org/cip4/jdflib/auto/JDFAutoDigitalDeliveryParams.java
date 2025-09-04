@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDigitalDeliveryParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDigitalDeliveryParams : public JDFResource
  */
 
 public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
@@ -169,7 +166,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -261,11 +258,14 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DigitalDeliveryDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DigitalDeliveryDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -289,14 +289,15 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DigitalDeliveryDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DigitalDeliveryDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DigitalDeliveryDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDigitalDeliveryDirection(EDigitalDeliveryDirection) based on java.lang.enum instead
+	 * @deprecated use SetDigitalDeliveryDirection(EDigitalDeliveryDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDigitalDeliveryDirection(EnumDigitalDeliveryDirection enumVar)
@@ -308,7 +309,7 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	 * (9) get attribute DigitalDeliveryDirection
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDigitalDeliveryDirection getEDigitalDeliveryDirection() based on java.lang.enum instead
+	 * @deprecated use EDigitalDeliveryDirection GetEDigitalDeliveryDirection() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDigitalDeliveryDirection getDigitalDeliveryDirection()
@@ -317,7 +318,8 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DigitalDeliveryProtocol
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DigitalDeliveryProtocol
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -341,7 +343,9 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Method
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Method
@@ -364,7 +368,9 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -404,7 +410,8 @@ public abstract class JDFAutoDigitalDeliveryParams extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{

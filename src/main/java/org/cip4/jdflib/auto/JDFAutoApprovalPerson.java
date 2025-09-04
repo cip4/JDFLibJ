@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoApprovalPerson : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoApprovalPerson : public JDFElement
  */
 
 public abstract class JDFAutoApprovalPerson extends JDFElement
@@ -103,7 +100,8 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.OBLIGATED, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALROLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalRole.getEnum(0), "Obligated");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALROLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalRole.getEnum(0),
+				"Obligated");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.APPROVALROLEDETAILS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -243,11 +241,15 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Obligated ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Obligated
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Obligated
@@ -270,7 +272,8 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ApprovalRole
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ApprovalRole
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -294,14 +297,15 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ApprovalRole
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ApprovalRole
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ApprovalRole
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setApprovalRole(EApprovalRole) based on java.lang.enum instead
+	 * @deprecated use SetApprovalRole(EApprovalRole) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setApprovalRole(EnumApprovalRole enumVar)
@@ -313,7 +317,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	 * (9) get attribute ApprovalRole
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EApprovalRole getEApprovalRole() based on java.lang.enum instead
+	 * @deprecated use EApprovalRole GetEApprovalRole() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumApprovalRole getApprovalRole()
@@ -322,7 +326,8 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ApprovalRoleDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ApprovalRoleDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -346,7 +351,9 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -372,7 +379,8 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
 	/**
 	 * (29) append element Contact
 	 *
-	 * @return JDFContact the element @ if the element already exists
+	 * @return JDFContact the element
+	 * @ if the element already exists
 	 */
 	public JDFContact appendContact()
 	{

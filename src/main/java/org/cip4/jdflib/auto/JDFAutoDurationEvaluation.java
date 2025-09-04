@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 /**
- *****************************************************************************
- * class JDFAutoDurationEvaluation : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDurationEvaluation : public JDFResource
  */
 
 public abstract class JDFAutoDurationEvaluation extends JDFResource
@@ -161,17 +158,21 @@ public abstract class JDFAutoDurationEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueRange ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueRange
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueRange
@@ -186,17 +187,20 @@ public abstract class JDFAutoDurationEvaluation extends JDFResource
 	/**
 	 * (20) get JDFDurationRangeList attribute ValueRange
 	 *
-	 * @return JDFDurationRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDurationRangeList
+	 * @return JDFDurationRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDurationRangeList
 	 */
 	public JDFDurationRangeList getValueRange()
 	{
-		final String strAttrName = getAttribute(AttributeName.VALUERANGE, null, null);
-		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.VALUERANGE, null, null);
+		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -234,7 +238,8 @@ public abstract class JDFAutoDurationEvaluation extends JDFResource
 	 * (27) const get element BasicPreflightTest
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBasicPreflightTest the element default is getBasicPreflightTest(0)
+	 * @return JDFBasicPreflightTest the element
+	 *         default is getBasicPreflightTest(0)
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{

@@ -79,10 +79,7 @@ import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoChannelBindingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoChannelBindingParams : public JDFResource
  */
 
 public abstract class JDFAutoChannelBindingParams extends JDFResource
@@ -149,7 +146,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -164,11 +161,15 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClampSystem ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClampSystem
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClampSystem
@@ -191,7 +192,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Brand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Brand
@@ -216,7 +219,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClampColor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClampColor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute ClampColor
@@ -243,7 +248,8 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClampColorDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClampColorDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -267,7 +273,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClampD ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClampD
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClampD
@@ -290,7 +298,9 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClampSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClampSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClampSize
@@ -305,12 +315,13 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 	/**
 	 * (20) get JDFShape attribute ClampSize
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getClampSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.CLAMPSIZE, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CLAMPSIZE, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 

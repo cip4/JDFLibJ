@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *****************************************************************************
- * class JDFAutoTrackResult : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTrackResult : public JDFElement
  */
 
 public abstract class JDFAutoTrackResult extends JDFElement
@@ -161,11 +158,15 @@ public abstract class JDFAutoTrackResult extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -188,7 +189,9 @@ public abstract class JDFAutoTrackResult extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -211,7 +214,9 @@ public abstract class JDFAutoTrackResult extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProjectID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProjectID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProjectID
@@ -234,7 +239,8 @@ public abstract class JDFAutoTrackResult extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -258,7 +264,9 @@ public abstract class JDFAutoTrackResult extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -281,7 +289,9 @@ public abstract class JDFAutoTrackResult extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsDevice ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsDevice
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsDevice
@@ -304,7 +314,9 @@ public abstract class JDFAutoTrackResult extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -342,7 +354,8 @@ public abstract class JDFAutoTrackResult extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

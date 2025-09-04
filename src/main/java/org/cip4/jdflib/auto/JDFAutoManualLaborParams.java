@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoManualLaborParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoManualLaborParams : public JDFResource
  */
 
 public abstract class JDFAutoManualLaborParams extends JDFResource
@@ -143,7 +140,7 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -158,11 +155,15 @@ public abstract class JDFAutoManualLaborParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LaborType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LaborType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LaborType

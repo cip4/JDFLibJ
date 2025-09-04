@@ -83,8 +83,8 @@ import java.util.Vector;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComponent;
+import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.datatypes.JDFShape;
@@ -94,7 +94,6 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         before June 3, 2009
  */
 public class JDFComponent extends JDFAutoComponent
@@ -103,11 +102,10 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * Constructor for JDFComponent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFComponent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -116,12 +114,11 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * Constructor for JDFComponent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFComponent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -130,15 +127,15 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * Constructor for JDFComponent
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 * 
 	 */
-	public JDFComponent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFComponent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -147,7 +144,7 @@ public class JDFComponent extends JDFAutoComponent
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -158,7 +155,7 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * sets the Dimension to X Y 0 convenience method to copy media dimension to component
-	 * 
+	 *
 	 * @param dimension
 	 */
 	public void setDimensions(final JDFXYPair dimension)
@@ -172,10 +169,10 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * sets the Dimension to X Y 0 convenience method to copy media dimension to component
-	 * 
+	 *
 	 * @param dimension
 	 */
-	public JDFSurfaceMark getCreateSurfaceMark(final EnumFace face)
+	public JDFSurfaceMark getCreateSurfaceMark(final EFace face)
 	{
 		JDFSurfaceMark sm = getSurfaceMark(face);
 		if (sm == null)
@@ -185,12 +182,12 @@ public class JDFComponent extends JDFAutoComponent
 		return sm;
 	}
 
-	public JDFSurfaceMark getSurfaceMark(final EnumFace face)
+	public JDFSurfaceMark getSurfaceMark(final EFace face)
 	{
-		return getChildWithAttribute(JDFSurfaceMark.class, AttributeName.SURFACE, face.getName());
+		return getChildWithAttribute(JDFSurfaceMark.class, AttributeName.SURFACE, face.name());
 	}
 
-	public JDFSurfaceMark appendSurfaceMark(final EnumFace face)
+	public JDFSurfaceMark appendSurfaceMark(final EFace face)
 	{
 		JDFSurfaceMark sm;
 		sm = appendSurfaceMark();
@@ -221,9 +218,8 @@ public class JDFComponent extends JDFAutoComponent
 	}
 
 	/**
-	 * 
 	 * return true if this component contains typ
-	 * 
+	 *
 	 * @param typ
 	 * @return
 	 */
@@ -236,7 +232,7 @@ public class JDFComponent extends JDFAutoComponent
 
 	/**
 	 * get the media that is associated with this component, either directly or in the layout
-	 * 
+	 *
 	 * @return the media, null if none there
 	 */
 	@Override

@@ -79,10 +79,7 @@ import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFSpanStapleShape;
 
 /**
- *****************************************************************************
- * class JDFAutoSaddleStitching : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSaddleStitching : public JDFElement
  */
 
 public abstract class JDFAutoSaddleStitching extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -166,7 +165,8 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 	/**
 	 * (29) append element StapleShape
 	 *
-	 * @return JDFSpanStapleShape the element @ if the element already exists
+	 * @return JDFSpanStapleShape the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanStapleShape appendStapleShape()
 	{
@@ -196,7 +196,8 @@ public abstract class JDFAutoSaddleStitching extends JDFElement
 	/**
 	 * (29) append element StitchNumber
 	 *
-	 * @return JDFIntegerSpan the element @ if the element already exists
+	 * @return JDFIntegerSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFIntegerSpan appendStitchNumber()
 	{

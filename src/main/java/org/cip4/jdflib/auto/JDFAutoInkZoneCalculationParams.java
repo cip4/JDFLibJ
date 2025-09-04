@@ -83,10 +83,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoInkZoneCalculationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInkZoneCalculationParams : public JDFResource
  */
 
 public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
@@ -165,7 +162,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -180,11 +177,14 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FountainPositions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FountainPositions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -200,17 +200,19 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute FountainPositions
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getFountainPositions()
 	{
-		final String strAttrName = getAttribute(AttributeName.FOUNTAINPOSITIONS, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FOUNTAINPOSITIONS, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintableArea
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintableArea
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -226,17 +228,20 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute PrintableArea
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getPrintableArea()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRINTABLEAREA, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRINTABLEAREA, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZoneWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ZoneWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ZoneWidth
@@ -259,7 +264,9 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Zones ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Zones
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Zones
@@ -282,7 +289,9 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZonesY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ZonesY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ZonesY
@@ -305,7 +314,9 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZoneHeight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ZoneHeight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ZoneHeight
@@ -328,7 +339,9 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -354,7 +367,8 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 	/**
 	 * (29) append element Device
 	 *
-	 * @return JDFDevice the element @ if the element already exists
+	 * @return JDFDevice the element
+	 * @ if the element already exists
 	 */
 	public JDFDevice appendDevice()
 	{

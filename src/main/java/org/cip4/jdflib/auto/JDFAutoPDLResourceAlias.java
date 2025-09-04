@@ -82,10 +82,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoPDLResourceAlias : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPDLResourceAlias : public JDFResource
  */
 
 public abstract class JDFAutoPDLResourceAlias extends JDFResource
@@ -160,7 +157,7 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -175,11 +172,14 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -203,7 +203,9 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SourceName
@@ -226,7 +228,9 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -252,7 +256,8 @@ public abstract class JDFAutoPDLResourceAlias extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

@@ -81,10 +81,7 @@ import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoRegistration : public JDFMessage
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRegistration : public JDFMessage
  */
 
 public abstract class JDFAutoRegistration extends JDFMessage
@@ -142,7 +139,9 @@ public abstract class JDFAutoRegistration extends JDFMessage
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -180,7 +179,8 @@ public abstract class JDFAutoRegistration extends JDFMessage
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{
@@ -230,7 +230,8 @@ public abstract class JDFAutoRegistration extends JDFMessage
 	/**
 	 * (29) append element Subscription
 	 *
-	 * @return JDFSubscription the element @ if the element already exists
+	 * @return JDFSubscription the element
+	 * @ if the element already exists
 	 */
 	public JDFSubscription appendSubscription()
 	{

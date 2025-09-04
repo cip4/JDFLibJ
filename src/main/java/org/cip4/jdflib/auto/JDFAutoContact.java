@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFPerson;
 
 /**
- *****************************************************************************
- * class JDFAutoContact : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoContact : public JDFResource
  */
 
 public abstract class JDFAutoContact extends JDFResource
@@ -170,7 +167,7 @@ public abstract class JDFAutoContact extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,11 +182,14 @@ public abstract class JDFAutoContact extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContactTypes
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContactTypes
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -209,14 +209,15 @@ public abstract class JDFAutoContact extends JDFResource
 	 */
 	public VString getContactTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.CONTACTTYPES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.CONTACTTYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContactTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContactTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -240,7 +241,9 @@ public abstract class JDFAutoContact extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UserID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UserID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute UserID
@@ -263,7 +266,9 @@ public abstract class JDFAutoContact extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -289,7 +294,8 @@ public abstract class JDFAutoContact extends JDFResource
 	/**
 	 * (29) append element Address
 	 *
-	 * @return JDFAddress the element @ if the element already exists
+	 * @return JDFAddress the element
+	 * @ if the element already exists
 	 */
 	public JDFAddress appendAddress()
 	{
@@ -341,7 +347,8 @@ public abstract class JDFAutoContact extends JDFResource
 	 * (27) const get element ComChannel
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFComChannel the element default is getComChannel(0)
+	 * @return JDFComChannel the element
+	 *         default is getComChannel(0)
 	 */
 	public JDFComChannel getComChannel(int iSkip)
 	{
@@ -401,7 +408,8 @@ public abstract class JDFAutoContact extends JDFResource
 	/**
 	 * (29) append element Company
 	 *
-	 * @return JDFCompany the element @ if the element already exists
+	 * @return JDFCompany the element
+	 * @ if the element already exists
 	 */
 	public JDFCompany appendCompany()
 	{
@@ -441,7 +449,8 @@ public abstract class JDFAutoContact extends JDFResource
 	/**
 	 * (29) append element Person
 	 *
-	 * @return JDFPerson the element @ if the element already exists
+	 * @return JDFPerson the element
+	 * @ if the element already exists
 	 */
 	public JDFPerson appendPerson()
 	{

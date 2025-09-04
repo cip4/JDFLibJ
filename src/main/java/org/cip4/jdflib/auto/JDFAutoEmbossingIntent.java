@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFEmbossingItem;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 
 /**
- *****************************************************************************
- * class JDFAutoEmbossingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoEmbossingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
@@ -140,7 +137,9 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 	 * (27) const get element EmbossingItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmbossingItem the element default is getEmbossingItem(0)
+	 * @return JDFEmbossingItem the element
+	 *         default is getEmbossingItem(0)
 	 */
 	public JDFEmbossingItem getEmbossingItem(int iSkip)
 	{

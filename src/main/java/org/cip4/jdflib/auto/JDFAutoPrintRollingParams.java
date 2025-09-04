@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoPrintRollingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPrintRollingParams : public JDFResource
  */
 
 public abstract class JDFAutoPrintRollingParams extends JDFResource
@@ -143,7 +140,7 @@ public abstract class JDFAutoPrintRollingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -158,11 +155,15 @@ public abstract class JDFAutoPrintRollingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Copies ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Copies
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Copies
@@ -185,7 +186,9 @@ public abstract class JDFAutoPrintRollingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxDiameter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxDiameter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxDiameter

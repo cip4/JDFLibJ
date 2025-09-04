@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 /**
- *****************************************************************************
- * class JDFAutoAdhesiveNote : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAdhesiveNote : public JDFElement
  */
 
 public abstract class JDFAutoAdhesiveNote extends JDFElement
@@ -138,7 +135,9 @@ public abstract class JDFAutoAdhesiveNote extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -164,7 +163,8 @@ public abstract class JDFAutoAdhesiveNote extends JDFElement
 	/**
 	 * (29) append element GlueLine
 	 *
-	 * @return JDFGlueLine the element @ if the element already exists
+	 * @return JDFGlueLine the element
+	 * @ if the element already exists
 	 */
 	public JDFGlueLine appendGlueLine()
 	{

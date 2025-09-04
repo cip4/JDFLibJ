@@ -78,6 +78,8 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.ESourceObjects;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -94,10 +96,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoColorSpaceConversionOp : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorSpaceConversionOp : public JDFElement
  */
 
 public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
@@ -114,14 +113,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OPERATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOperation.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESERVEBLACK, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.RENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumRenderingIntent.getEnum(0),
-				"ColorSpaceDependent");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.RENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumRenderingIntent.getEnum(0), "ColorSpaceDependent");
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.RGBGRAY2BLACK, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.RGBGRAY2BLACKTHRESHOLD, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, "1");
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCECS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceCS.getEnum(0), null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCERENDERINGINTENT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceRenderingIntent.getEnum(0),
-				null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumSourceObjects.getEnum(0), "All");
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCERENDERINGINTENT, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumSourceRenderingIntent.getEnum(0), null);
 	}
 
 	@Override
@@ -457,91 +457,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/**
-	 * Enumeration strings for SourceObjects
-	 */
-
-	public enum ESourceObjects
-	{
-		All, ImagePhotographic, ImageScreenShot, LineArt, SmoothShades, Text;
-
-		public static ESourceObjects getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESourceObjects.class, val, ESourceObjects.All);
-		}
-	}
-
-	/**
-	 * Enumeration strings for SourceObjects
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSourceObjects extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSourceObjects(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSourceObjects getEnum(String enumName)
-		{
-			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSourceObjects getEnum(int enumValue)
-		{
-			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSourceObjects.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSourceObjects.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSourceObjects.class);
-		}
-
-		/**  */
-		public static final EnumSourceObjects All = new EnumSourceObjects("All");
-		/**  */
-		public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
-		/**  */
-		public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
-		/**  */
-		public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
-		/**  */
-		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
-		/**  */
-		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
-	}
-
-	/**
 	 * Enumeration strings for SourceRenderingIntent
 	 */
 
@@ -625,11 +540,14 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlackPointCompensation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlackPointCompensation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -653,7 +571,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlackPointCompensationDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlackPointCompensationDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -677,7 +596,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreEmbeddedICC
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreEmbeddedICC
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -701,7 +621,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ObjectTags
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ObjectTags
@@ -720,14 +642,16 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 */
 	public VString getObjectTags()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Operation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Operation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Operation
@@ -750,13 +674,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Operation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Operation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Operation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setOperation(EOperation) based on java.lang.enum instead
+	 * @deprecated use SetOperation(EOperation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOperation(EnumOperation enumVar)
@@ -768,7 +694,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9) get attribute Operation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EOperation getEOperation() based on java.lang.enum instead
+	 * @deprecated use EOperation GetEOperation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumOperation getOperation()
@@ -777,7 +703,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveBlack
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreserveBlack
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -801,7 +728,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RenderingIntent
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RenderingIntent
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -825,14 +753,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RenderingIntent
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RenderingIntent
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute RenderingIntent
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setRenderingIntent(ERenderingIntent) based on java.lang.enum instead
+	 * @deprecated use SetRenderingIntent(ERenderingIntent) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRenderingIntent(EnumRenderingIntent enumVar)
@@ -844,7 +773,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9) get attribute RenderingIntent
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ERenderingIntent getERenderingIntent() based on java.lang.enum instead
+	 * @deprecated use ERenderingIntent GetERenderingIntent() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumRenderingIntent getRenderingIntent()
@@ -853,7 +782,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RGBGray2Black
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RGBGray2Black
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -877,7 +807,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RGBGray2BlackThreshold
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RGBGray2BlackThreshold
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -901,7 +832,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceCS ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceCS
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SourceCS
@@ -924,13 +857,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceCS ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceCS
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SourceCS
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSourceCS(ESourceCS) based on java.lang.enum instead
+	 * @deprecated use SetSourceCS(ESourceCS) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceCS(EnumSourceCS enumVar)
@@ -942,7 +877,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9) get attribute SourceCS
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESourceCS getESourceCS() based on java.lang.enum instead
+	 * @deprecated use ESourceCS GetESourceCS() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSourceCS getSourceCS()
@@ -951,7 +886,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -967,7 +903,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	/**
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<ESourceObjects> getEnumsSourceObjects()
 	{
@@ -975,14 +911,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
+	 * @deprecated use SetESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceObjects(List<EnumSourceObjects> v)
@@ -994,7 +931,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<ESourceObjects> getEnumsSourceObjects() based on java.lang.enum instead
+	 * @deprecated use List<ESourceObjects > GetESourceObjects() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumSourceObjects> getSourceObjects()
@@ -1003,7 +940,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceRenderingIntent
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceRenderingIntent
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1027,14 +965,15 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceRenderingIntent
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceRenderingIntent
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SourceRenderingIntent
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSourceRenderingIntent(ESourceRenderingIntent) based on java.lang.enum instead
+	 * @deprecated use SetSourceRenderingIntent(ESourceRenderingIntent) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceRenderingIntent(EnumSourceRenderingIntent enumVar)
@@ -1046,7 +985,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (9) get attribute SourceRenderingIntent
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESourceRenderingIntent getESourceRenderingIntent() based on java.lang.enum instead
+	 * @deprecated use ESourceRenderingIntent GetESourceRenderingIntent() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSourceRenderingIntent getSourceRenderingIntent()
@@ -1055,7 +994,9 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -1081,7 +1022,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	/**
 	 * (29) append element DeviceNSpace
 	 *
-	 * @return JDFDeviceNSpace the element @ if the element already exists
+	 * @return JDFDeviceNSpace the element
+	 * @ if the element already exists
 	 */
 	public JDFDeviceNSpace appendDeviceNSpace()
 	{
@@ -1123,7 +1065,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{
@@ -1195,7 +1138,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (27) const get element ScreenSelector
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFScreenSelector the element default is getScreenSelector(0)
+	 * @return JDFScreenSelector the element
+	 *         default is getScreenSelector(0)
 	 */
 	public JDFScreenSelector getScreenSelector(int iSkip)
 	{
@@ -1257,7 +1201,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

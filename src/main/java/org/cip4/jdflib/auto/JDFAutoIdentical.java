@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *****************************************************************************
- * class JDFAutoIdentical : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIdentical : public JDFElement
  */
 
 public abstract class JDFAutoIdentical extends JDFElement
@@ -138,7 +135,9 @@ public abstract class JDFAutoIdentical extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -164,7 +163,8 @@ public abstract class JDFAutoIdentical extends JDFElement
 	/**
 	 * (29) append element Part
 	 *
-	 * @return JDFPart the element @ if the element already exists
+	 * @return JDFPart the element
+	 * @ if the element already exists
 	 */
 	public JDFPart appendPart()
 	{

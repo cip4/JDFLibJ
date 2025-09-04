@@ -84,10 +84,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoImageShift : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoImageShift : public JDFElement
  */
 
 public abstract class JDFAutoImageShift extends JDFElement
@@ -313,11 +310,15 @@ public abstract class JDFAutoImageShift extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionX ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PositionX
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PositionX
@@ -340,13 +341,15 @@ public abstract class JDFAutoImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionX ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PositionX
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PositionX
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPositionX(EPositionX) based on java.lang.enum instead
+	 * @deprecated use SetPositionX(EPositionX) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPositionX(EnumPositionX enumVar)
@@ -358,7 +361,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * (9) get attribute PositionX
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPositionX getEPositionX() based on java.lang.enum instead
+	 * @deprecated use EPositionX GetEPositionX() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPositionX getPositionX()
@@ -367,7 +370,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PositionY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PositionY
@@ -390,13 +395,15 @@ public abstract class JDFAutoImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PositionY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PositionY
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPositionY(EPositionY) based on java.lang.enum instead
+	 * @deprecated use SetPositionY(EPositionY) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPositionY(EnumPositionY enumVar)
@@ -408,7 +415,7 @@ public abstract class JDFAutoImageShift extends JDFElement
 	 * (9) get attribute PositionY
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPositionY getEPositionY() based on java.lang.enum instead
+	 * @deprecated use EPositionY GetEPositionY() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPositionY getPositionY()
@@ -417,7 +424,9 @@ public abstract class JDFAutoImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShiftBack ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShiftBack
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShiftBack
@@ -432,17 +441,20 @@ public abstract class JDFAutoImageShift extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute ShiftBack
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getShiftBack()
 	{
-		final String strAttrName = getAttribute(AttributeName.SHIFTBACK, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SHIFTBACK, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShiftFront ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShiftFront
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShiftFront
@@ -457,12 +469,13 @@ public abstract class JDFAutoImageShift extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute ShiftFront
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getShiftFront()
 	{
-		final String strAttrName = getAttribute(AttributeName.SHIFTFRONT, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SHIFTFRONT, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

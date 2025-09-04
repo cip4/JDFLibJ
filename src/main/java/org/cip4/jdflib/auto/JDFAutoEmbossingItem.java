@@ -88,10 +88,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoEmbossingItem : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoEmbossingItem : public JDFElement
  */
 
 public abstract class JDFAutoEmbossingItem extends JDFElement
@@ -169,11 +166,15 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToolName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToolName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ToolName
@@ -196,7 +197,9 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -222,7 +225,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element Direction
 	 *
-	 * @return JDFSpanDirection the element @ if the element already exists
+	 * @return JDFSpanDirection the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanDirection appendDirection()
 	{
@@ -252,7 +256,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element EdgeAngle
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendEdgeAngle()
 	{
@@ -282,7 +287,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element EdgeShape
 	 *
-	 * @return JDFSpanEdgeShape the element @ if the element already exists
+	 * @return JDFSpanEdgeShape the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanEdgeShape appendEdgeShape()
 	{
@@ -312,7 +318,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element EmbossingType
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendEmbossingType()
 	{
@@ -342,7 +349,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element FoilColor
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendFoilColor()
 	{
@@ -372,7 +380,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element FoilColorDetails
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendFoilColorDetails()
 	{
@@ -402,7 +411,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element Height
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendHeight()
 	{
@@ -432,7 +442,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element ImageSize
 	 *
-	 * @return JDFXYPairSpan the element @ if the element already exists
+	 * @return JDFXYPairSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFXYPairSpan appendImageSize()
 	{
@@ -462,7 +473,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element Level
 	 *
-	 * @return JDFSpanLevel the element @ if the element already exists
+	 * @return JDFSpanLevel the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanLevel appendLevel()
 	{
@@ -492,7 +504,8 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 	/**
 	 * (29) append element Position
 	 *
-	 * @return JDFXYPairSpan the element @ if the element already exists
+	 * @return JDFXYPairSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFXYPairSpan appendPosition()
 	{

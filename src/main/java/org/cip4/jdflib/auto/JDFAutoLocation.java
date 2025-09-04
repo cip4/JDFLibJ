@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFAddress;
 
 /**
- *****************************************************************************
- * class JDFAutoLocation : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLocation : public JDFElement
  */
 
 public abstract class JDFAutoLocation extends JDFElement
@@ -157,11 +154,14 @@ public abstract class JDFAutoLocation extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LocationName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LocationName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -185,7 +185,9 @@ public abstract class JDFAutoLocation extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LocID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LocID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LocID
@@ -208,7 +210,9 @@ public abstract class JDFAutoLocation extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -246,7 +250,8 @@ public abstract class JDFAutoLocation extends JDFElement
 	 * (27) const get element Address
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFAddress the element default is getAddress(0)
+	 * @return JDFAddress the element
+	 *         default is getAddress(0)
 	 */
 	public JDFAddress getAddress(int iSkip)
 	{

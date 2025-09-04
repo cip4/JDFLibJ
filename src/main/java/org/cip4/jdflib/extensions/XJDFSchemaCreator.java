@@ -78,8 +78,8 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
-import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
@@ -121,11 +121,9 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * class to generate a jdf 2.0 schema from the jdf 1.x java library
- *
  * concepts:
  * keep things - mainly data type declarations - local whenever possible
  * remove all deprecated elements
- *
  * TODO devcaps
  * TODO add all generic elements where appropriate
  *
@@ -141,8 +139,8 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * any matching class will be removed with extreme prejudice...
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	protected class WalkIgnore extends WalkElement
 	{
@@ -151,7 +149,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#matches(org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @return
-		*/
+		 */
 		@Override
 		public boolean matches(final KElement e)
 		{
@@ -187,9 +185,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	}
 
 	/**
-	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkElement extends BaseWalker
 	{
@@ -202,7 +198,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			private static final long serialVersionUID = 1L;
 
 			/**
-			 *
 			 * @param s
 			 */
 			public void remove(final String s)
@@ -215,7 +210,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			}
 
 			/**
-			 *
 			 * @param s
 			 * @return
 			 */
@@ -333,7 +327,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			/**
 			 * @see java.lang.Object#toString()
 			 * @return
-			*/
+			 */
 			@Override
 			public String toString()
 			{
@@ -344,7 +338,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			 * @see java.lang.Object#equals(java.lang.Object)
 			 * @param obj
 			 * @return
-			*/
+			 */
 			@Override
 			public boolean equals(final Object obj)
 			{
@@ -358,7 +352,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			/**
 			 * @see java.lang.Object#hashCode()
 			 * @return
-			*/
+			 */
 			@Override
 			public int hashCode()
 			{
@@ -421,20 +415,28 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			// TODO data types enumerations
 			final String name = in.getLocalName();
 			if (e2 == null)
+			{
 				e2 = jdfRoot.appendElement(name);
+			}
 			if (complexType == null)
+			{
 				complexType = setComplexType(out, name);
+			}
 			if (baseElms == null)
+			{
 				createbaseElms();
+			}
 			if (baseAttribs == null)
+			{
 				createbaseAttribs();
+			}
 
 			final Vector<AttributeDescriptor> knownAtts = getKnownAtts();
 			final VString knownElms = getKnownElms();
 			if (knownAtts.size() + knownElms.size() == 0)
 			{
 				complexType.deleteNode();
-				//				System.out.println("deleting empty content: " + name);
+				// System.out.println("deleting empty content: " + name);
 				return null;
 			}
 			for (int i = 0; i < knownElms.size(); i++)
@@ -475,7 +477,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		{
 			final VAttributeDescriptor vDesc = new VAttributeDescriptor();
 			if (!(e2 instanceof JDFElement))
+			{
 				return vDesc;
+			}
 
 			final JDFElement je = (JDFElement) e2;
 			final AttributeInfo ai = je.getAttributeInfo();
@@ -523,7 +527,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 					desc.setTyp(EnumAttributeType.IDREF);
 				}
 				if (desc != null)
+				{
 					vDesc.add(desc);
+				}
 
 			}
 			return vDesc;
@@ -540,13 +546,16 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 		/**
 		 * locally map attnames and elmnames
+		 *
 		 * @param string
 		 * @return
 		 */
 		protected String getNewName(final String string)
 		{
 			if (ElementName.COLORPOOL.equals(string))
+			{
 				return "Color";
+			}
 			return string;
 		}
 
@@ -557,7 +566,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		{
 			final VString ret = new VString();
 			if (!(e2 instanceof JDFElement))
+			{
 				return ret;
+			}
 			final JDFElement je = (JDFElement) e2;
 			final VString knownElms = je.knownElements();
 			for (int i = knownElms.size() - 1; i >= 0; i--)
@@ -620,7 +631,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @return
@@ -633,7 +643,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#finalizeWalk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @param trackElem
@@ -651,7 +660,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#prepareWalk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @param trackElem
@@ -665,7 +673,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param root
 		 * @param attName
 		 * @param typ
@@ -675,7 +682,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		{
 			KElement att = root.getChildWithAttribute("xs:attribute", "name", null, attName, 0, true);
 			if (att == null)
+			{
 				att = root.appendElement("xs:attribute");
+			}
 			att.setAttribute("use", required ? "required" : "optional");
 			att.setAttribute("name", attName);
 			final String typName = typ.getName();
@@ -683,12 +692,11 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param root
 		 * @param attName
 		 * @param typName
 		 * @param required
-		 * @param ve a valued enum to generate values
+		 * @param ve       a valued enum to generate values
 		 * @return
 		 */
 		protected KElement setXSAttribute(final KElement root, final String attName, String typName, final boolean required, final ValuedEnum ve)
@@ -700,15 +708,23 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			if (typName == null || typName.startsWith("enumeration"))
 			{
 				if (typName == null)
+				{
 					typName = "_" + attName;
+				}
 				else
+				{
 					typName += "_" + attName;
+				}
 				if (enumMap.get(typName) == null)
 				{
 					if (typName.startsWith("enumerations"))
+					{
 						typName = getTypeName(EnumAttributeType.NMTOKENS);
+					}
 					else
+					{
 						typName = getTypeName(EnumAttributeType.NMTOKEN);
+					}
 				}
 			}
 			if (ve != null)
@@ -720,7 +736,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 				}
 			}
 			else
+			{
 				att.setAttribute("type", typName);
+			}
 
 			return att;
 		}
@@ -728,14 +746,15 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		/**
 		 * @param complexType
 		 * @param bID
-		 *
 		 */
 		protected void setGeneric(final KElement complexType, final boolean bID)
 		{
 			setXSElement(complexType, ElementName.GENERALID);
 			setXSElement(complexType, ElementName.COMMENT);
 			if (bID)
+			{
 				setXSAttribute(complexType, "ID", EnumAttributeType.ID, true);
+			}
 			setXSAttribute(complexType, AttributeName.DESCRIPTIVENAME, EnumAttributeType.string, false);
 		}
 
@@ -753,7 +772,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 				complexElement.setAttribute("name", name);
 			}
 			else
+			{
 				complexElement = null;
+			}
 			final boolean bLocal = name.equals(typeForName);
 			KElement compType;
 			if (bLocal)
@@ -780,7 +801,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		}
 
 		/**
-		 *
 		 * @param root
 		 * @param elmName
 		 */
@@ -799,7 +819,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			elem.setAttribute("minOccurs", "0");
 			final boolean bRef = elmName.equals(getTypeForName(elmName));
 			if (bRef)
+			{
 				elem.setAttribute("ref", getTypeForName(elmName));
+			}
 			else
 			{
 				elem.setAttribute("name", elmName);
@@ -814,17 +836,29 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		protected String getTypeForName(final String elmName)
 		{
 			if (ElementName.FOLDERSUPERSTRUCTUREWEBPATH.equals(elmName))
+			{
 				return "ProductionSubPath";
+			}
 			if (ElementName.POSTPRESSCOMPONENTPATH.equals(elmName))
+			{
 				return "ProductionSubPath";
+			}
 			if (ElementName.PRINTINGUNITWEBPATH.equals(elmName))
+			{
 				return "ProductionSubPath";
+			}
 			if (ElementName.EXTENDEDADDRESS.equals(elmName))
+			{
 				return "TextElement";
+			}
 			if (ElementName.ORGANIZATIONALUNIT.equals(elmName))
+			{
 				return "TextElement";
+			}
 			if (ElementName.PRODUCTIONSUBPATH.equals(elmName))
+			{
 				return null;
+			}
 
 			return elmName;
 		}
@@ -860,7 +894,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
 		 * @return
-		*/
+		 */
 		protected VAttributeDescriptor getKnownAtts()
 		{
 			final VAttributeDescriptor va = getKnownAttsBase();
@@ -880,7 +914,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownElms()
 		 * @return
-		*/
+		 */
 		protected VString getKnownElms()
 		{
 			final VString vElem = getKnownElmsBase();
@@ -929,8 +963,8 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * class for the classes list root - does nothing special
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	protected class WalkRoot extends WalkElement
 	{
@@ -1018,7 +1052,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkDeviceCap extends WalkElement
 	{
@@ -1030,7 +1063,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#createbaseAttribs()
-		*/
+		 */
 		@Override
 		protected void createbaseAttribs()
 		{
@@ -1047,7 +1080,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @param in
 		 * @param out
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement in, final KElement out)
 		{
@@ -1062,7 +1095,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkResourceElement extends WalkElement
 	{
@@ -1128,7 +1160,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#createbaseAttribs()
-		*/
+		 */
 		@Override
 		protected void createbaseAttribs()
 		{
@@ -1151,7 +1183,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkResSet extends WalkElement
 	{
@@ -1184,7 +1215,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkProductList extends WalkElement
 	{
@@ -1214,7 +1244,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkProduct extends WalkElement
 	{
@@ -1245,8 +1274,8 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * the class for XJDF Resource Parameter etc elements
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	protected class WalkResource extends WalkElement
 	{
@@ -1268,10 +1297,12 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			final String name = in.getLocalName();
 			EnumResourceClass clazz = EnumResourceClass.getEnum(name);
 			if (clazz == null)
+			{
 				clazz = EnumResourceClass.Quantity;
+			}
 			e2 = jdfRoot.addResource(name, clazz, null, null, null, null, null);
 			complexType = setComplexType(out, name);
-			//		setGeneric(complexType, true);
+			// setGeneric(complexType, true);
 			// substitution group!
 			super.walk(in, out);
 			setXSElement(complexType, name + "Type");
@@ -1286,7 +1317,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
 		 * @return
-		*/
+		 */
 		@Override
 		protected VAttributeDescriptor getKnownAtts()
 		{
@@ -1302,8 +1333,8 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * the base of all schema creation walkers
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	protected class WalkNode extends WalkElement
 	{
@@ -1348,7 +1379,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
 		 * @return
-		*/
+		 */
 		@Override
 		protected VAttributeDescriptor getKnownAtts()
 		{
@@ -1361,7 +1392,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkEnumerationType extends WalkElement
 	{
@@ -1400,7 +1430,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#prepareWalk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @param trackElem
-		*/
+		 */
 		@Override
 		public void prepareWalk(final KElement e, final KElement trackElem)
 		{
@@ -1414,7 +1444,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkChildProduct extends WalkElement
 	{
@@ -1445,8 +1474,8 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	private static class XJDFSchemaCreatorWalkerFactory extends BaseWalkerFactory
 	{
 		/**
-		 *
 		 * get the appropriate walker for a given element
+		 *
 		 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalker(org.cip4.jdflib .core.KElement)
 		 */
 		@Override
@@ -1466,7 +1495,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkTextElement extends WalkElement
 	{
@@ -1484,9 +1512,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		public KElement walk(final KElement in, final KElement out)
 		{
 			final String name = in.getLocalName();
-			//			complexElement = out.appendElement("xs:element");
-			//			complexElement.setAttribute("name", name);
-			//			appendSimpleType(complexElement, null, getTypeName(EnumAttributeType.string), null);
+			// complexElement = out.appendElement("xs:element");
+			// complexElement.setAttribute("name", name);
+			// appendSimpleType(complexElement, null, getTypeName(EnumAttributeType.string), null);
 			appendSimpleType(out, name, getTypeName(EnumAttributeType.string), null);
 
 			return null;
@@ -1495,7 +1523,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkState extends WalkElement
 	{
@@ -1507,7 +1534,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#createbaseAttribs()
-		*/
+		 */
 		@Override
 		protected void createbaseAttribs()
 		{
@@ -1519,20 +1546,22 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#matches(org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @return
-		*/
+		 */
 		@Override
 		public boolean matches(final KElement e)
 		{
 			final String nodeName = e.getNodeName();
 			if (e2 == null)
+			{
 				e2 = jdfRoot.appendElement(nodeName);
+			}
 			return e2 instanceof JDFAbstractState || "ElementState".equals(nodeName);
 		}
 
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
 		 * @return
-		*/
+		 */
 		@Override
 		protected VAttributeDescriptor getKnownAtts()
 		{
@@ -1541,9 +1570,13 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			knownAtts.add(new AttributeDescriptor("XPathRoot", EnumAttributeType.XPath, false, null));
 			knownAtts.add(new AttributeDescriptor(AttributeName.DESCRIPTIVENAME, EnumAttributeType.string, false, null));
 			if (knownAtts.get(AttributeName.MINOCCURS) == null)
+			{
 				knownAtts.add(new AttributeDescriptor(AttributeName.MINOCCURS, EnumAttributeType.integer, false, null));
+			}
 			if (knownAtts.get(AttributeName.MAXOCCURS) == null)
+			{
 				knownAtts.add(new AttributeDescriptor(AttributeName.MAXOCCURS, EnumAttributeType.integer, false, null));
+			}
 
 			return knownAtts;
 		}
@@ -1552,7 +1585,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkEvaluation extends WalkTerm
 	{
@@ -1564,7 +1596,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#createbaseAttribs()
-		*/
+		 */
 		@Override
 		protected void createbaseAttribs()
 		{
@@ -1576,20 +1608,22 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#matches(org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @return
-		*/
+		 */
 		@Override
 		public boolean matches(final KElement e)
 		{
 			final String nodeName = e.getNodeName();
 			if (e2 == null)
+			{
 				e2 = jdfRoot.appendElement(nodeName);
+			}
 			return e2 instanceof JDFEvaluation;
 		}
 
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
 		 * @return
-		*/
+		 */
 		@Override
 		protected VAttributeDescriptor getKnownAtts()
 		{
@@ -1603,7 +1637,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkTerm extends WalkElement
 	{
@@ -1617,15 +1650,19 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#matches(org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @return
-		*/
+		 */
 		@Override
 		public boolean matches(final KElement e)
 		{
 			if (!super.matches(e))
+			{
 				return false;
+			}
 			final String nodeName = e.getNodeName();
 			if (e2 == null)
+			{
 				e2 = jdfRoot.appendElement(nodeName);
+			}
 			return e2 instanceof JDFTerm;
 		}
 
@@ -1634,7 +1671,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @param in
 		 * @param out
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement in, final KElement out)
 		{
@@ -1650,7 +1687,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownElms()
 		 * @return
-		*/
+		 */
 		@Override
 		protected VString getKnownElms()
 		{
@@ -1666,7 +1703,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 				}
 			}
 			if (bAdd)
+			{
 				v.add("TermType");
+			}
 			return v;
 		}
 
@@ -1674,7 +1713,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkTest extends WalkTerm
 	{
@@ -1689,7 +1727,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @param in
 		 * @param out
 		 * @return
-		*/
+		 */
 		@Override
 		public KElement walk(final KElement in, final KElement out)
 		{
@@ -1705,7 +1743,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkJobPhase extends WalkElement
 	{
@@ -1718,7 +1755,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownElms()
 		 * @return
-		*/
+		 */
 		@Override
 		protected VString getKnownElms()
 		{
@@ -1731,8 +1768,8 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * the class for XJDF Resource Parameter etc elements
-	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 *
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	protected class WalkResourcePhysical extends WalkResource
 	{
@@ -1740,7 +1777,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		/**
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
 		 * @return
-		*/
+		 */
 		@Override
 		protected VAttributeDescriptor getKnownAtts()
 		{
@@ -1763,7 +1800,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkDependent extends WalkElement
 	{
@@ -1792,7 +1828,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class WalkNiCi extends WalkResourceElement
 	{
@@ -1817,7 +1852,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkResourceElement#matches(org.cip4.jdflib.core.KElement)
 		 * @param toCheck
 		 * @return
-		*/
+		 */
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
@@ -1854,9 +1889,10 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	{
 		if (ignoreNames == null)
 		{
-			ignoreNames = new VString("Audit RefElement AttributeMap Element ResourceLink ResourceLinkPool ResourcePool AncestorPool Ancestor Spawned Merged" + " "
-					+ "BusinessInfo Identical Doc DocumentBuilder Exception PartStatus PartAmount AmountPool PlaceHolder Node BindItem" + " "
-					+ "DevCap DevCaps DevCapPool DisplayGroupPool FeaturePool CreateLink CreateResource NewComment UpdateJDFCmdParams MoveResource Sheet Surface", null).getSet();
+			ignoreNames = new VString("Audit RefElement AttributeMap Element ResourceLink ResourceLinkPool ResourcePool AncestorPool Ancestor Spawned Merged"
+					+ " " + "BusinessInfo Identical Doc DocumentBuilder Exception PartStatus PartAmount AmountPool PlaceHolder Node BindItem" + " "
+					+ "DevCap DevCaps DevCapPool DisplayGroupPool FeaturePool CreateLink CreateResource NewComment UpdateJDFCmdParams MoveResource Sheet Surface",
+					null).getSet();
 
 			ignoreNames.add("TargetRoute");
 			ignoreNames.add("Route");
@@ -1906,11 +1942,17 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			final File parent = file.getParentFile();
 			final String parentName = parent.getName();
 			if (parentName.equals("auto"))
+			{
 				continue;
+			}
 			if (parentName.equals("ifaces"))
+			{
 				continue;
+			}
 			if (parentName.equals("goldenticket"))
+			{
 				continue;
+			}
 			String name = file.getName();
 			if (name.startsWith("JDF"))
 			{
@@ -1934,7 +1976,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		putPair(EnumOrientation.getEnum(0), treeRoot);
 		putPair(EnumWorkStyle.getEnum(0), treeRoot);
 		putPair(EnumFrontCoatings.getEnum(0), treeRoot);
-		//TODO combine stati
+		// TODO combine stati
 		putPair(EnumDeviceStatus.getEnum(0), treeRoot);
 		putPair(EnumListType.getEnum(0), treeRoot);
 		putPair(EnumAvailability.getEnum(0), treeRoot);
@@ -1951,7 +1993,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		treeRoot.getCreateElement("Parameter");
 		treeRoot.getCreateElement("ParameterSet");
 		treeRoot.getCreateElement("Intent");
-		//		treeRoot.getCreateElement("IntentSet");
+		// treeRoot.getCreateElement("IntentSet");
 		treeRoot.getCreateElement("ChildProduct");
 		treeRoot.getCreateElement("Product");
 		treeRoot.getCreateElement("ProductList");
@@ -1964,7 +2006,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	/**
 	 * @param en
 	 * @param treeRoot
-	 *
 	 */
 	private void putPair(final ValuedEnum en, final KElement treeRoot)
 	{
@@ -1980,12 +2021,18 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	protected String getEnumName(final ValuedEnum valuedEnum)
 	{
 		if (valuedEnum == null)
+		{
 			return null;
+		}
 		String s = EnumUtil.getEnumName(valuedEnum).substring(4);
 		if (AttributeName.SOURCEWORKSTYLE.equals(s))
+		{
 			s = AttributeName.WORKSTYLE;
+		}
 		if (AttributeName.BACKCOATINGS.equals(s) || AttributeName.FRONTCOATINGS.equals(s))
+		{
 			s = "Coatings";
+		}
 		return "Enum" + s;
 	}
 
@@ -2033,7 +2080,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		String className = class1.getName();
 		final int pos = className.indexOf("$Enum");
 		if (pos > 0)
+		{
 			className = className.substring(pos + 5);
+		}
 		if (AttributeName.STATUS.equals(className) || AttributeName.NODESTATUS.equals(className) || AttributeName.ENDSTATUS.equals(className))
 		{
 			v.remove(EnumNodeStatus.FailedTestRun.getName());

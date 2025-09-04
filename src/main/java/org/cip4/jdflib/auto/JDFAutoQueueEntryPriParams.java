@@ -82,10 +82,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
 
 /**
- *****************************************************************************
- * class JDFAutoQueueEntryPriParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQueueEntryPriParams : public JDFElement
  */
 
 public abstract class JDFAutoQueueEntryPriParams extends JDFElement
@@ -155,11 +152,15 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Priority
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Priority
@@ -182,7 +183,8 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -206,7 +208,9 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -232,7 +236,8 @@ public abstract class JDFAutoQueueEntryPriParams extends JDFElement
 	/**
 	 * (29) append element QueueFilter
 	 *
-	 * @return JDFQueueFilter the element @ if the element already exists
+	 * @return JDFQueueFilter the element
+	 * @ if the element already exists
 	 */
 	public JDFQueueFilter appendQueueFilter()
 	{

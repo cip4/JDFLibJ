@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoJBIG2Params : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoJBIG2Params : public JDFElement
  */
 
 public abstract class JDFAutoJBIG2Params extends JDFElement
@@ -137,11 +134,14 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JBIG2Lossless
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JBIG2Lossless
 	 * ---------------------------------------------------------------------
 	 */
 	/**

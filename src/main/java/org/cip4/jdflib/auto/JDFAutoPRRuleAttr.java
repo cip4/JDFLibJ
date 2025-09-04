@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 
 /**
- *****************************************************************************
- * class JDFAutoPRRuleAttr : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPRRuleAttr : public JDFElement
  */
 
 public abstract class JDFAutoPRRuleAttr extends JDFElement
@@ -143,11 +140,15 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GroupBy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GroupBy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GroupBy
@@ -166,14 +167,16 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 */
 	public VString getGroupBy()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.GROUPBY, null, "Tested");
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.GROUPBY, null, "Tested");
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReportAttr ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReportAttr
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReportAttr
@@ -192,14 +195,16 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	 */
 	public VString getReportAttr()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.REPORTATTR, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.REPORTATTR, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogErrors ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LogErrors
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LogErrors
@@ -222,7 +227,9 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxGroups ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxGroups
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxGroups
@@ -245,7 +252,9 @@ public abstract class JDFAutoPRRuleAttr extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxPerGroup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxPerGroup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxPerGroup

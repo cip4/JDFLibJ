@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 
 /**
- *****************************************************************************
- * class JDFAutoShapeState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShapeState : public JDFResource
  */
 
 public abstract class JDFAutoShapeState extends JDFResource
@@ -178,17 +175,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -204,17 +204,19 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFShape attribute DefaultValue
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getDefaultValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -230,17 +232,19 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFShape attribute CurrentValue
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getCurrentValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -256,17 +260,19 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFShapeRangeList attribute AllowedValueList
 	 *
-	 * @return JDFShapeRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFShapeRangeList
+	 * @return JDFShapeRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShapeRangeList
 	 */
 	public JDFShapeRangeList getAllowedValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		final JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMax
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueMax
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -282,17 +288,19 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFShape attribute AllowedValueMax
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getAllowedValueMax()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMAX, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMAX, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueMin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -308,17 +316,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFShape attribute AllowedValueMin
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getAllowedValueMin()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMIN, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMIN, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedX ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedX
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AllowedX
@@ -333,17 +344,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute AllowedX
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getAllowedX()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDX, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDX, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AllowedY
@@ -358,17 +372,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute AllowedY
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getAllowedY()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDY, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDY, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedZ ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedZ
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AllowedZ
@@ -383,17 +400,19 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute AllowedZ
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getAllowedZ()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDZ, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDZ, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -409,17 +428,19 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFShapeRangeList attribute PresentValueList
 	 *
-	 * @return JDFShapeRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFShapeRangeList
+	 * @return JDFShapeRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShapeRangeList
 	 */
 	public JDFShapeRangeList getPresentValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		final JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMax
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueMax
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -435,17 +456,19 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFShape attribute PresentValueMax
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getPresentValueMax()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEMAX, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUEMAX, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueMin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -461,17 +484,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFShape attribute PresentValueMin
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getPresentValueMin()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEMIN, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUEMIN, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentX ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentX
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PresentX
@@ -486,17 +512,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute PresentX
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getPresentX()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTX, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTX, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PresentY
@@ -511,17 +540,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute PresentY
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getPresentY()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTY, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTY, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentZ ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentZ
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PresentZ
@@ -536,17 +568,20 @@ public abstract class JDFAutoShapeState extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute PresentZ
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getPresentZ()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTZ, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTZ, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -584,7 +619,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -646,7 +682,8 @@ public abstract class JDFAutoShapeState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

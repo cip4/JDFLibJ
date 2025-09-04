@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightItem : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightItem : public JDFElement
  */
 
 public abstract class JDFAutoPreflightItem extends JDFElement
@@ -97,7 +94,8 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTLEVEL, 0x3333111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightLevel.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTLEVEL, 0x3333111111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumPreflightLevel.getEnum(0), null);
 	}
 
 	@Override
@@ -222,11 +220,14 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightLevel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreflightLevel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -250,14 +251,15 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightLevel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreflightLevel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PreflightLevel
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPreflightLevel(EPreflightLevel) based on java.lang.enum instead
+	 * @deprecated use SetPreflightLevel(EPreflightLevel) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreflightLevel(EnumPreflightLevel enumVar)
@@ -269,7 +271,7 @@ public abstract class JDFAutoPreflightItem extends JDFElement
 	 * (9) get attribute PreflightLevel
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPreflightLevel getEPreflightLevel() based on java.lang.enum instead
+	 * @deprecated use EPreflightLevel GetEPreflightLevel() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPreflightLevel getPreflightLevel()

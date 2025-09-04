@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoTransferFunctionControl : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTransferFunctionControl : public JDFResource
  */
 
 public abstract class JDFAutoTransferFunctionControl extends JDFResource
@@ -101,8 +98,8 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONSOURCE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumTransferFunctionSource.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONSOURCE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumTransferFunctionSource.getEnum(0), null);
 	}
 
 	@Override
@@ -165,7 +162,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -259,11 +256,14 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransferFunctionSource
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TransferFunctionSource
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -287,14 +287,15 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransferFunctionSource
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TransferFunctionSource
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TransferFunctionSource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTransferFunctionSource(ETransferFunctionSource) based on java.lang.enum instead
+	 * @deprecated use SetTransferFunctionSource(ETransferFunctionSource) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransferFunctionSource(EnumTransferFunctionSource enumVar)
@@ -306,7 +307,7 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	 * (9) get attribute TransferFunctionSource
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETransferFunctionSource getETransferFunctionSource() based on java.lang.enum instead
+	 * @deprecated use ETransferFunctionSource GetETransferFunctionSource() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTransferFunctionSource getTransferFunctionSource()
@@ -315,7 +316,9 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -341,7 +344,8 @@ public abstract class JDFAutoTransferFunctionControl extends JDFResource
 	/**
 	 * (29) append element TransferCurvePool
 	 *
-	 * @return JDFTransferCurvePool the element @ if the element already exists
+	 * @return JDFTransferCurvePool the element
+	 * @ if the element already exists
 	 */
 	public JDFTransferCurvePool appendTransferCurvePool()
 	{

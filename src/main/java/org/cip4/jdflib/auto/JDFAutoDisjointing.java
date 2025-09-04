@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.JDFInsertSheet;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDisjointing : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDisjointing : public JDFElement
  */
 
 public abstract class JDFAutoDisjointing extends JDFElement
@@ -108,7 +105,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMBER, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSETAMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFSETDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOffsetDirection.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFSETDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumOffsetDirection.getEnum(0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OFFSETUNITS, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.OVERFOLD, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
@@ -254,11 +252,15 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Number ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Number
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Number
@@ -281,7 +283,9 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Offset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Offset
@@ -296,17 +300,19 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Offset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OffsetAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OffsetAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -330,7 +336,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OffsetDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OffsetDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -354,14 +361,15 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OffsetDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OffsetDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute OffsetDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setOffsetDirection(EOffsetDirection) based on java.lang.enum instead
+	 * @deprecated use SetOffsetDirection(EOffsetDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOffsetDirection(EnumOffsetDirection enumVar)
@@ -373,7 +381,7 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * (9) get attribute OffsetDirection
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EOffsetDirection getEOffsetDirection() based on java.lang.enum instead
+	 * @deprecated use EOffsetDirection GetEOffsetDirection() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumOffsetDirection getOffsetDirection()
@@ -382,7 +390,9 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OffsetUnits ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OffsetUnits
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OffsetUnits
@@ -405,7 +415,9 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Overfold ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Overfold
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Overfold
@@ -428,7 +440,9 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -466,7 +480,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	public JDFIdentificationField getIdentificationField(int iSkip)
 	{
@@ -516,7 +531,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
 	/**
 	 * (29) append element InsertSheet
 	 *
-	 * @return JDFInsertSheet the element @ if the element already exists
+	 * @return JDFInsertSheet the element
+	 * @ if the element already exists
 	 */
 	public JDFInsertSheet appendInsertSheet()
 	{

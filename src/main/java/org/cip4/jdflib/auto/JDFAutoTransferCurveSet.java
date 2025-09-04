@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
 
 /**
- *****************************************************************************
- * class JDFAutoTransferCurveSet : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTransferCurveSet : public JDFElement
  */
 
 public abstract class JDFAutoTransferCurveSet extends JDFElement
@@ -158,11 +155,15 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CTM
@@ -177,17 +178,20 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	/**
 	 * (20) get JDFMatrix attribute CTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -210,7 +214,9 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -248,7 +254,8 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
 	 * (27) const get element TransferCurve
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFTransferCurve the element default is getTransferCurve(0)
+	 * @return JDFTransferCurve the element
+	 *         default is getTransferCurve(0)
 	 */
 	public JDFTransferCurve getTransferCurve(int iSkip)
 	{

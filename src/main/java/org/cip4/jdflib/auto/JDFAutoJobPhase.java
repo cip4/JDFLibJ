@@ -99,10 +99,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoJobPhase : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoJobPhase : public JDFElement
  */
 
 public abstract class JDFAutoJobPhase extends JDFElement
@@ -113,7 +110,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[24];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
+				null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEADLINE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDeadLine.getEnum(0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ENDTIME, 0x3331111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -278,11 +276,15 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Activation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Activation
@@ -305,13 +307,15 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Activation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Activation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setActivation(EActivation) based on java.lang.enum instead
+	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setActivation(EnumActivation enumVar)
@@ -323,7 +327,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (9) get attribute Activation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EActivation getEActivation() based on java.lang.enum instead
+	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumActivation getActivation()
@@ -332,7 +336,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -355,7 +361,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeadLine ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeadLine
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeadLine
@@ -378,13 +386,15 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeadLine ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeadLine
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeadLine
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDeadLine(EDeadLine) based on java.lang.enum instead
+	 * @deprecated use SetDeadLine(EDeadLine) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeadLine(EnumDeadLine enumVar)
@@ -396,7 +406,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (9) get attribute DeadLine
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDeadLine getEDeadLine() based on java.lang.enum instead
+	 * @deprecated use EDeadLine GetEDeadLine() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDeadLine getDeadLine()
@@ -405,7 +415,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute EndTime
@@ -429,13 +441,15 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public JDFDate getEndTime()
 	{
-		final String str = getAttribute(AttributeName.ENDTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.ENDTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -458,7 +472,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -481,7 +497,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PercentCompleted
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PercentCompleted
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -505,7 +522,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PhaseAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PhaseAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PhaseAmount
@@ -528,7 +547,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PhaseStartTime
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PhaseStartTime
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -553,13 +573,15 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public JDFDate getPhaseStartTime()
 	{
-		final String str = getAttribute(AttributeName.PHASESTARTTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.PHASESTARTTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PhaseWaste ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PhaseWaste
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PhaseWaste
@@ -582,7 +604,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -606,7 +629,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelatedJobID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelatedJobID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -630,7 +654,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelatedJobPartID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelatedJobPartID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -654,7 +679,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RestTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RestTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RestTime
@@ -669,17 +696,20 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute RestTime
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getRestTime()
 	{
-		final String strAttrName = getAttribute(AttributeName.RESTTIME, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RESTTIME, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Speed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Speed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Speed
@@ -702,7 +732,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpawnID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpawnID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SpawnID
@@ -725,7 +757,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute StartTime
@@ -749,13 +783,14 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public JDFDate getStartTime()
 	{
-		final String str = getAttribute(AttributeName.STARTTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.STARTTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StatusDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -779,7 +814,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToolIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToolIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ToolIDs
@@ -798,14 +835,16 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 */
 	public VString getToolIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.TOOLIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.TOOLIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TotalAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TotalAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TotalAmount
@@ -828,7 +867,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -851,7 +892,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Waste ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Waste
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Waste
@@ -874,7 +917,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkStepID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkStepID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WorkStepID
@@ -897,7 +942,9 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -935,7 +982,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (27) const get element Activity
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFActivity the element default is getActivity(0)
+	 * @return JDFActivity the element
+	 *         default is getActivity(0)
 	 */
 	public JDFActivity getActivity(int iSkip)
 	{
@@ -985,7 +1033,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	/**
 	 * (29) append element CostCenter
 	 *
-	 * @return JDFCostCenter the element @ if the element already exists
+	 * @return JDFCostCenter the element
+	 * @ if the element already exists
 	 */
 	public JDFCostCenter appendCostCenter()
 	{
@@ -1027,7 +1076,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (27) const get element GangSource
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGangSource the element default is getGangSource(0)
+	 * @return JDFGangSource the element
+	 *         default is getGangSource(0)
 	 */
 	public JDFGangSource getGangSource(int iSkip)
 	{
@@ -1077,7 +1127,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	/**
 	 * (29) append element MISDetails
 	 *
-	 * @return JDFMISDetails the element @ if the element already exists
+	 * @return JDFMISDetails the element
+	 * @ if the element already exists
 	 */
 	public JDFMISDetails appendMISDetails()
 	{
@@ -1119,7 +1170,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (27) const get element ModuleStatus
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFModuleStatus the element default is getModuleStatus(0)
+	 * @return JDFModuleStatus the element
+	 *         default is getModuleStatus(0)
 	 */
 	public JDFModuleStatus getModuleStatus(int iSkip)
 	{
@@ -1181,7 +1233,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

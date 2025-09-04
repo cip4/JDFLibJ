@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoCreateResource : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCreateResource : public JDFElement
  */
 
 public abstract class JDFAutoCreateResource extends JDFElement
@@ -157,11 +154,15 @@ public abstract class JDFAutoCreateResource extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -184,7 +185,9 @@ public abstract class JDFAutoCreateResource extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -207,7 +210,9 @@ public abstract class JDFAutoCreateResource extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -245,7 +250,8 @@ public abstract class JDFAutoCreateResource extends JDFElement
 	 * (27) const get element Resource
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFResource the element default is getResource(0)
+	 * @return JDFResource the element
+	 *         default is getResource(0)
 	 */
 	public JDFResource getResource(int iSkip)
 	{

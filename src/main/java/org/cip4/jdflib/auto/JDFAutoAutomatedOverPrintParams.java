@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoAutomatedOverPrintParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAutomatedOverPrintParams : public JDFElement
  */
 
 public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
@@ -142,11 +139,14 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute KnockOutCMYKWhite
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute KnockOutCMYKWhite
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -170,7 +170,8 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LineArtBlackLevel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LineArtBlackLevel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -194,7 +195,8 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OverPrintBlackLineArt
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OverPrintBlackLineArt
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -218,7 +220,8 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OverPrintBlackText
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OverPrintBlackText
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -242,7 +245,8 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TextBlackLevel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TextBlackLevel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -266,7 +270,8 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TextSizeThreshold
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TextSizeThreshold
 	 * ---------------------------------------------------------------------
 	 */
 	/**

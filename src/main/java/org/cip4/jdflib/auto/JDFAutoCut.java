@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoCut : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCut : public JDFElement
  */
 
 public abstract class JDFAutoCut extends JDFElement
@@ -105,7 +102,8 @@ public abstract class JDFAutoCut extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.UPPERRIBBONNAME, 0x3333311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumWorkingDirection.getEnum(0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
@@ -229,11 +227,15 @@ public abstract class JDFAutoCut extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutWidth
@@ -256,7 +258,8 @@ public abstract class JDFAutoCut extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LowerRibbonName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LowerRibbonName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -280,7 +283,8 @@ public abstract class JDFAutoCut extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeStartPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelativeStartPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -296,17 +300,19 @@ public abstract class JDFAutoCut extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute RelativeStartPosition
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getRelativeStartPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeWorkingPath
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelativeWorkingPath
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -322,17 +328,19 @@ public abstract class JDFAutoCut extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute RelativeWorkingPath
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getRelativeWorkingPath()
 	{
-		final String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -348,17 +356,19 @@ public abstract class JDFAutoCut extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute StartPosition
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getStartPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpperRibbonName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UpperRibbonName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -382,7 +392,8 @@ public abstract class JDFAutoCut extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -406,14 +417,15 @@ public abstract class JDFAutoCut extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute WorkingDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setWorkingDirection(EWorkingDirection) based on java.lang.enum instead
+	 * @deprecated use SetWorkingDirection(EWorkingDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWorkingDirection(EnumWorkingDirection enumVar)
@@ -425,7 +437,7 @@ public abstract class JDFAutoCut extends JDFElement
 	 * (9) get attribute WorkingDirection
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EWorkingDirection getEWorkingDirection() based on java.lang.enum instead
+	 * @deprecated use EWorkingDirection GetEWorkingDirection() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumWorkingDirection getWorkingDirection()
@@ -434,7 +446,9 @@ public abstract class JDFAutoCut extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WorkingPath
@@ -449,12 +463,13 @@ public abstract class JDFAutoCut extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute WorkingPath
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getWorkingPath()
 	{
-		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

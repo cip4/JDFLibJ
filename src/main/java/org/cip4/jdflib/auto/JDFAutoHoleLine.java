@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
 
 /**
- *****************************************************************************
- * class JDFAutoHoleLine : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoHoleLine : public JDFElement
  */
 
 public abstract class JDFAutoHoleLine extends JDFElement
@@ -155,11 +152,15 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pitch ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pitch
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pitch
@@ -182,7 +183,9 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -220,7 +223,8 @@ public abstract class JDFAutoHoleLine extends JDFElement
 	 * (27) const get element Hole
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFHole the element default is getHole(0)
+	 * @return JDFHole the element
+	 *         default is getHole(0)
 	 */
 	public JDFHole getHole(int iSkip)
 	{

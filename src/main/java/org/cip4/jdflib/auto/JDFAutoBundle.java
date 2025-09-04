@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBundle : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBundle : public JDFResource
  */
 
 public abstract class JDFAutoBundle extends JDFResource
@@ -104,7 +101,8 @@ public abstract class JDFAutoBundle extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUNDLETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumBundleType.getEnum(0), "Stack");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BUNDLETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumBundleType.getEnum(0),
+				"Stack");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.FOLIOCOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.READERPAGECOUNT, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHEETCOUNT, 0x3333311111l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -173,7 +171,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Quantity);
 		return bRet;
 	}
@@ -287,11 +285,15 @@ public abstract class JDFAutoBundle extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BundleType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BundleType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BundleType
@@ -314,13 +316,15 @@ public abstract class JDFAutoBundle extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BundleType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BundleType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BundleType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBundleType(EBundleType) based on java.lang.enum instead
+	 * @deprecated use SetBundleType(EBundleType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBundleType(EnumBundleType enumVar)
@@ -332,7 +336,7 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * (9) get attribute BundleType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBundleType getEBundleType() based on java.lang.enum instead
+	 * @deprecated use EBundleType GetEBundleType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBundleType getBundleType()
@@ -341,7 +345,9 @@ public abstract class JDFAutoBundle extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FolioCount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FolioCount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FolioCount
@@ -364,7 +370,8 @@ public abstract class JDFAutoBundle extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReaderPageCount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReaderPageCount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -388,7 +395,9 @@ public abstract class JDFAutoBundle extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetCount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetCount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SheetCount
@@ -411,7 +420,9 @@ public abstract class JDFAutoBundle extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TotalAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TotalAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TotalAmount
@@ -434,7 +445,9 @@ public abstract class JDFAutoBundle extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -472,7 +485,8 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * (27) const get element BundleItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBundleItem the element default is getBundleItem(0)
+	 * @return JDFBundleItem the element
+	 *         default is getBundleItem(0)
 	 */
 	public JDFBundleItem getBundleItem(int iSkip)
 	{
@@ -536,7 +550,8 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -610,7 +625,8 @@ public abstract class JDFAutoBundle extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

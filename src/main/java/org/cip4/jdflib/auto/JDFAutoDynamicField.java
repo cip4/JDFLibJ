@@ -82,10 +82,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFDeviceMark;
 
 /**
- *****************************************************************************
- * class JDFAutoDynamicField : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDynamicField : public JDFElement
  */
 
 public abstract class JDFAutoDynamicField extends JDFElement
@@ -159,11 +156,15 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Format ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Format
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Format
@@ -186,7 +187,9 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InputField ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InputField
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute InputField
@@ -209,7 +212,9 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Ord
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Ord
@@ -232,7 +237,8 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrdExpression
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OrdExpression
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -256,7 +262,8 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReplaceField
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReplaceField
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -280,7 +287,9 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Template ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Template
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Template
@@ -303,7 +312,9 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -329,7 +340,8 @@ public abstract class JDFAutoDynamicField extends JDFElement
 	/**
 	 * (29) append element DeviceMark
 	 *
-	 * @return JDFDeviceMark the element @ if the element already exists
+	 * @return JDFDeviceMark the element
+	 * @ if the element already exists
 	 */
 	public JDFDeviceMark appendDeviceMark()
 	{

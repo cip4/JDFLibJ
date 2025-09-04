@@ -69,7 +69,6 @@
 package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.core.KElement;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoValue : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoValue : public JDFElement
  */
 
 public abstract class JDFAutoValue extends JDFElement
@@ -105,7 +102,8 @@ public abstract class JDFAutoValue extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUE, 0x2222222221l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRESENTVALUE, 0x4444444431l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumValueUsage.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumValueUsage.getEnum(0),
+				null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUE, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -247,11 +245,14 @@ public abstract class JDFAutoValue extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -275,7 +276,8 @@ public abstract class JDFAutoValue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -299,7 +301,9 @@ public abstract class JDFAutoValue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ValueUsage
@@ -322,13 +326,15 @@ public abstract class JDFAutoValue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ValueUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setValueUsage(EValueUsage) based on java.lang.enum instead
+	 * @deprecated use SetValueUsage(EValueUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setValueUsage(EnumValueUsage enumVar)
@@ -340,7 +346,7 @@ public abstract class JDFAutoValue extends JDFElement
 	 * (9) get attribute ValueUsage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EValueUsage getEValueUsage() based on java.lang.enum instead
+	 * @deprecated use EValueUsage GetEValueUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumValueUsage getValueUsage()
@@ -349,7 +355,9 @@ public abstract class JDFAutoValue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Value ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Value
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Value
@@ -372,7 +380,9 @@ public abstract class JDFAutoValue extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -410,7 +420,8 @@ public abstract class JDFAutoValue extends JDFElement
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{

@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionOp;
 
 /**
- *****************************************************************************
- * class JDFAutoColorCorrectionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorCorrectionParams : public JDFResource
  */
 
 public abstract class JDFAutoColorCorrectionParams extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,14 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorManagementSystem
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorManagementSystem
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -206,7 +206,9 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -244,7 +246,8 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{
@@ -316,7 +319,8 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
 	 * (27) const get element ColorCorrectionOp
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorCorrectionOp the element default is getColorCorrectionOp(0)
+	 * @return JDFColorCorrectionOp the element
+	 *         default is getColorCorrectionOp(0)
 	 */
 	public JDFColorCorrectionOp getColorCorrectionOp(int iSkip)
 	{

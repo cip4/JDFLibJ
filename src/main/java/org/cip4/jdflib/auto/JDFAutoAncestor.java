@@ -86,10 +86,7 @@ import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 
 /**
- *****************************************************************************
- * class JDFAutoAncestor : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAncestor : public JDFElement
  */
 
 public abstract class JDFAutoAncestor extends JDFElement
@@ -100,13 +97,15 @@ public abstract class JDFAutoAncestor extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[21];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
+				null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CATEGORY, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FILENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333311l, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MAXVERSION, 0x3333333311l, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0),
+				null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.NODEID, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PROJECTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.RELATEDJOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -179,11 +178,15 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Activation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Activation
@@ -206,13 +209,15 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Activation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Activation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setActivation(EActivation) based on java.lang.enum instead
+	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setActivation(EnumActivation enumVar)
@@ -224,7 +229,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 * (9) get attribute Activation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EActivation getEActivation() based on java.lang.enum instead
+	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumActivation getActivation()
@@ -233,7 +238,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Category ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Category
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Category
@@ -256,7 +263,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FileName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FileName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FileName
@@ -279,7 +288,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICSVersions ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ICSVersions
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ICSVersions
@@ -298,14 +309,16 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 */
 	public VString getICSVersions()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ICSVERSIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -328,7 +341,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -351,7 +366,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxVersion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxVersion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MaxVersion
@@ -374,13 +391,15 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxVersion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxVersion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MaxVersion
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMaxVersion(EVersion) based on java.lang.enum instead
+	 * @deprecated use SetMaxVersion(EVersion) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMaxVersion(EnumVersion enumVar)
@@ -392,7 +411,7 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 * (9) get attribute MaxVersion
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EVersion getEMaxVersion() based on java.lang.enum instead
+	 * @deprecated use EVersion GetEMaxVersion() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumVersion getMaxVersion()
@@ -401,7 +420,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NodeID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NodeID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NodeID
@@ -424,7 +445,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProjectID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProjectID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProjectID
@@ -447,7 +470,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelatedJobID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelatedJobID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -471,7 +495,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelatedJobPartID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelatedJobPartID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -495,7 +520,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelatedProjectID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelatedProjectID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -519,7 +545,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpawnID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpawnID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SpawnID
@@ -542,7 +570,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StatusDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -566,7 +595,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Template ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Template
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Template
@@ -589,7 +620,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TemplateID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TemplateID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TemplateID
@@ -612,7 +645,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TemplateVersion
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TemplateVersion
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -636,7 +670,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Type
@@ -659,7 +695,9 @@ public abstract class JDFAutoAncestor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Types ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Types
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Types
@@ -678,14 +716,16 @@ public abstract class JDFAutoAncestor extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -711,7 +751,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	/**
 	 * (29) append element CustomerInfo
 	 *
-	 * @return JDFCustomerInfo the element @ if the element already exists
+	 * @return JDFCustomerInfo the element
+	 * @ if the element already exists
 	 */
 	public JDFCustomerInfo appendCustomerInfo()
 	{
@@ -741,7 +782,8 @@ public abstract class JDFAutoAncestor extends JDFElement
 	/**
 	 * (29) append element NodeInfo
 	 *
-	 * @return JDFNodeInfo the element @ if the element already exists
+	 * @return JDFNodeInfo the element
+	 * @ if the element already exists
 	 */
 	public JDFNodeInfo appendNodeInfo()
 	{

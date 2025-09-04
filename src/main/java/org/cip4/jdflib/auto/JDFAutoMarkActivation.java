@@ -84,10 +84,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoMarkActivation : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMarkActivation : public JDFElement
  */
 
 public abstract class JDFAutoMarkActivation extends JDFElement
@@ -248,11 +245,15 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Context
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Context
@@ -275,13 +276,15 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Context
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Context
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setContext(EContext) based on java.lang.enum instead
+	 * @deprecated use SetContext(EContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setContext(EnumContext enumVar)
@@ -293,7 +296,7 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	 * (9) get attribute Context
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EContext getEContext() based on java.lang.enum instead
+	 * @deprecated use EContext GetEContext() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumContext getContext()
@@ -302,7 +305,9 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Index ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Index
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Index
@@ -317,12 +322,13 @@ public abstract class JDFAutoMarkActivation extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute Index
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.INDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.INDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 

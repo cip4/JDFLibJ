@@ -80,6 +80,7 @@ package org.cip4.jdflib.resource.process;
 import java.util.List;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoDeliveryParams.EnumTransfer;
 import org.cip4.jdflib.auto.JDFAutoDrop;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -90,7 +91,6 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.w3c.dom.DOMException;
 
 /**
- * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFDrop extends JDFAutoDrop
@@ -98,7 +98,6 @@ public class JDFDrop extends JDFAutoDrop
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -109,7 +108,6 @@ public class JDFDrop extends JDFAutoDrop
 	}
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -121,7 +119,6 @@ public class JDFDrop extends JDFAutoDrop
 	}
 
 	/**
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -138,7 +135,7 @@ public class JDFDrop extends JDFAutoDrop
 
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -153,7 +150,9 @@ public class JDFDrop extends JDFAutoDrop
 	public void setFromArtDelivery(JDFArtDelivery ad)
 	{
 		if (ad == null)
+		{
 			return;
+		}
 
 		JDFIntentResource.copyActualToProcess(ad, this, AttributeName.TRANSFER, null);
 		JDFIntentResource.copyActualToProcess(ad, this, ElementName.ARTDELIVERYDATE, AttributeName.REQUIRED);
@@ -164,7 +163,7 @@ public class JDFDrop extends JDFAutoDrop
 
 	/**
 	 * copy all data from dropintent to this
-	 * 
+	 *
 	 * @param di
 	 */
 	public void setFromDropIntent(JDFDropIntent di)
@@ -185,7 +184,6 @@ public class JDFDrop extends JDFAutoDrop
 	}
 
 	/**
-	 * 
 	 * @return true if we are an artDeliveryintent rather than a delivery
 	 */
 	public boolean isArtDeliveryIntent()

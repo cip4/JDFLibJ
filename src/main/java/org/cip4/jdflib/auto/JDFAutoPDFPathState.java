@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 
 /**
- *****************************************************************************
- * class JDFAutoPDFPathState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPDFPathState : public JDFResource
  */
 
 public abstract class JDFAutoPDFPathState extends JDFResource
@@ -167,17 +164,20 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -201,7 +201,8 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -225,7 +226,8 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedLength
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedLength
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -241,17 +243,19 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	/**
 	 * (20) get JDFIntegerRange attribute AllowedLength
 	 *
-	 * @return JDFIntegerRange the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRange
+	 * @return JDFIntegerRange the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRange
 	 */
 	public JDFIntegerRange getAllowedLength()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDLENGTH, null, null);
-		final JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDLENGTH, null, null);
+		JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentLength
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentLength
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -267,17 +271,20 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	/**
 	 * (20) get JDFIntegerRange attribute PresentLength
 	 *
-	 * @return JDFIntegerRange the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRange
+	 * @return JDFIntegerRange the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRange
 	 */
 	public JDFIntegerRange getPresentLength()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTLENGTH, null, null);
-		final JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTLENGTH, null, null);
+		JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -315,7 +322,8 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -377,7 +385,8 @@ public abstract class JDFAutoPDFPathState extends JDFResource
 	 * (27) const get element Value
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValue the element default is getValue(0)
+	 * @return JDFValue the element
+	 *         default is getValue(0)
 	 */
 	public JDFValue getValue(int iSkip)
 	{

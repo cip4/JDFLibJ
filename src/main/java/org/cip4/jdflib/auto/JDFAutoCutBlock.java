@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoCutBlock : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCutBlock : public JDFResource
  */
 
 public abstract class JDFAutoCutBlock extends JDFResource
@@ -107,7 +104,8 @@ public abstract class JDFAutoCutBlock extends JDFResource
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.BLOCKTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumBlockType.getEnum(0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumBlockElementType.getEnum(0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.CUTWIDTH, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.OPERATIONS, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
@@ -160,7 +158,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -333,11 +331,15 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BlockSize
@@ -352,17 +354,19 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute BlockSize
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getBlockSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.BLOCKSIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BLOCKSIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockSubdivision
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockSubdivision
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -378,17 +382,20 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute BlockSubdivision
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getBlockSubdivision()
 	{
-		final String strAttrName = getAttribute(AttributeName.BLOCKSUBDIVISION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BLOCKSUBDIVISION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockTrf ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockTrf
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BlockTrf
@@ -403,17 +410,20 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	/**
 	 * (20) get JDFMatrix attribute BlockTrf
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getBlockTrf()
 	{
-		final String strAttrName = getAttribute(AttributeName.BLOCKTRF, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BLOCKTRF, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BlockType
@@ -436,13 +446,15 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BlockType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBlockType(EBlockType) based on java.lang.enum instead
+	 * @deprecated use SetBlockType(EBlockType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBlockType(EnumBlockType enumVar)
@@ -454,7 +466,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 * (9) get attribute BlockType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBlockType getEBlockType() based on java.lang.enum instead
+	 * @deprecated use EBlockType GetEBlockType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBlockType getBlockType()
@@ -463,7 +475,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssemblyIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssemblyIDs
@@ -482,14 +496,15 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 */
 	public VString getAssemblyIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockElementSize
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockElementSize
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -505,17 +520,19 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute BlockElementSize
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getBlockElementSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.BLOCKELEMENTSIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BLOCKELEMENTSIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockElementType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockElementType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -539,14 +556,15 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockElementType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockElementType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BlockElementType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBlockElementType(EBlockElementType) based on java.lang.enum instead
+	 * @deprecated use SetBlockElementType(EBlockElementType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBlockElementType(EnumBlockElementType enumVar)
@@ -558,7 +576,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 * (9) get attribute BlockElementType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBlockElementType getEBlockElementType() based on java.lang.enum instead
+	 * @deprecated use EBlockElementType GetEBlockElementType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBlockElementType getBlockElementType()
@@ -567,7 +585,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutWidth
@@ -590,7 +610,9 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Operations ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Operations
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Operations
@@ -609,8 +631,8 @@ public abstract class JDFAutoCutBlock extends JDFResource
 	 */
 	public VString getOperations()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

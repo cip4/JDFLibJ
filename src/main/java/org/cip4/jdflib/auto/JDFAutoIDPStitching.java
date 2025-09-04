@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPStitching : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPStitching : public JDFElement
  */
 
 public abstract class JDFAutoIDPStitching extends JDFElement
@@ -102,9 +99,10 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHINGPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumStitchingPosition.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHINGREFERENCEEDGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumStitchingReferenceEdge.getEnum(0),
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHINGPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumStitchingPosition.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHINGREFERENCEEDGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumStitchingReferenceEdge.getEnum(0), null);
 	}
 
 	@Override
@@ -342,11 +340,14 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchingPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchingPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -370,14 +371,15 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchingPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchingPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StitchingPosition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setStitchingPosition(EStitchingPosition) based on java.lang.enum instead
+	 * @deprecated use SetStitchingPosition(EStitchingPosition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStitchingPosition(EnumStitchingPosition enumVar)
@@ -389,7 +391,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 * (9) get attribute StitchingPosition
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EStitchingPosition getEStitchingPosition() based on java.lang.enum instead
+	 * @deprecated use EStitchingPosition GetEStitchingPosition() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumStitchingPosition getStitchingPosition()
@@ -398,7 +400,8 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchingReferenceEdge
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchingReferenceEdge
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -422,14 +425,15 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchingReferenceEdge
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchingReferenceEdge
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StitchingReferenceEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setStitchingReferenceEdge(EStitchingReferenceEdge) based on java.lang.enum instead
+	 * @deprecated use SetStitchingReferenceEdge(EStitchingReferenceEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStitchingReferenceEdge(EnumStitchingReferenceEdge enumVar)
@@ -441,7 +445,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 * (9) get attribute StitchingReferenceEdge
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EStitchingReferenceEdge getEStitchingReferenceEdge() based on java.lang.enum instead
+	 * @deprecated use EStitchingReferenceEdge GetEStitchingReferenceEdge() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumStitchingReferenceEdge getStitchingReferenceEdge()
@@ -450,7 +454,9 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -488,7 +494,8 @@ public abstract class JDFAutoIDPStitching extends JDFElement
 	 * (27) const get element StitchingParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStitchingParams the element default is getStitchingParams(0)
+	 * @return JDFStitchingParams the element
+	 *         default is getStitchingParams(0)
 	 */
 	public JDFStitchingParams getStitchingParams(int iSkip)
 	{

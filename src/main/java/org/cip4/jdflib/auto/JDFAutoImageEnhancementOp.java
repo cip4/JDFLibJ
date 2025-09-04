@@ -70,26 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.ESourceObjects;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoImageEnhancementOp : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoImageEnhancementOp : public JDFElement
  */
 
 public abstract class JDFAutoImageEnhancementOp extends JDFElement
@@ -103,7 +98,8 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.OPERATION, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OPERATIONDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumSourceObjects.getEnum(0), null);
 	}
 
 	@Override
@@ -148,97 +144,16 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for SourceObjects
-	 */
-
-	public enum ESourceObjects
-	{
-		All, ImagePhotographic, ImageScreenShot, LineArt, SmoothShades, Text;
-
-		public static ESourceObjects getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESourceObjects.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for SourceObjects
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSourceObjects extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSourceObjects(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSourceObjects getEnum(String enumName)
-		{
-			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSourceObjects getEnum(int enumValue)
-		{
-			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSourceObjects.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSourceObjects.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSourceObjects.class);
-		}
-
-		/**  */
-		public static final EnumSourceObjects All = new EnumSourceObjects("All");
-		/**  */
-		public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
-		/**  */
-		public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
-		/**  */
-		public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
-		/**  */
-		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
-		/**  */
-		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ObjectTags
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ObjectTags
@@ -257,14 +172,16 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 	 */
 	public VString getObjectTags()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Operation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Operation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Operation
@@ -287,7 +204,8 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OperationDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OperationDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -311,7 +229,8 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -327,7 +246,7 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 	/**
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<ESourceObjects> getEnumsSourceObjects()
 	{
@@ -335,14 +254,15 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
+	 * @deprecated use SetESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceObjects(List<EnumSourceObjects> v)
@@ -354,7 +274,7 @@ public abstract class JDFAutoImageEnhancementOp extends JDFElement
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<ESourceObjects> getEnumsSourceObjects() based on java.lang.enum instead
+	 * @deprecated use List<ESourceObjects > GetESourceObjects() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumSourceObjects> getSourceObjects()

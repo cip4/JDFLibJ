@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoStrap : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStrap : public JDFResource
  */
 
 public abstract class JDFAutoStrap extends JDFResource
@@ -169,7 +166,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -263,11 +260,15 @@ public abstract class JDFAutoStrap extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Material
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Material
@@ -290,13 +291,15 @@ public abstract class JDFAutoStrap extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Material
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Material
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMaterial(EMaterial) based on java.lang.enum instead
+	 * @deprecated use SetMaterial(EMaterial) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMaterial(EnumMaterial enumVar)
@@ -308,7 +311,7 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * (9) get attribute Material
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMaterial getEMaterial() based on java.lang.enum instead
+	 * @deprecated use EMaterial GetEMaterial() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMaterial getMaterial()
@@ -317,7 +320,9 @@ public abstract class JDFAutoStrap extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StrapColor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StrapColor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute StrapColor
@@ -344,7 +349,9 @@ public abstract class JDFAutoStrap extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -384,7 +391,8 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -458,7 +466,8 @@ public abstract class JDFAutoStrap extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

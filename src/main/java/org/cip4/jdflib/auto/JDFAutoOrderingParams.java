@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
- *****************************************************************************
- * class JDFAutoOrderingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoOrderingParams : public JDFResource
  */
 
 public abstract class JDFAutoOrderingParams extends JDFResource
@@ -164,7 +161,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -179,11 +176,15 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -208,7 +209,9 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Unit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Unit
@@ -233,7 +236,9 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -259,7 +264,8 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	/**
 	 * (29) append element Company
 	 *
-	 * @return JDFCompany the element @ if the element already exists
+	 * @return JDFCompany the element
+	 * @ if the element already exists
 	 */
 	public JDFCompany appendCompany()
 	{
@@ -313,7 +319,8 @@ public abstract class JDFAutoOrderingParams extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{

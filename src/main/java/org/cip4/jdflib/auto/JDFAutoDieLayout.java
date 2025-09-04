@@ -94,10 +94,7 @@ import org.cip4.jdflib.resource.process.JDFStation;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDieLayout : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDieLayout : public JDFResource
  */
 
 public abstract class JDFAutoDieLayout extends JDFResource
@@ -180,7 +177,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -351,11 +348,15 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutBox
@@ -370,17 +371,20 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute CutBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getCutBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DieSide ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DieSide
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DieSide
@@ -403,13 +407,15 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DieSide ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DieSide
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DieSide
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDieSide(EDieSide) based on java.lang.enum instead
+	 * @deprecated use SetDieSide(EDieSide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDieSide(EnumDieSide enumVar)
@@ -421,7 +427,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (9) get attribute DieSide
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDieSide getEDieSide() based on java.lang.enum instead
+	 * @deprecated use EDieSide GetEDieSide() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDieSide getDieSide()
@@ -430,7 +436,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaSide ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MediaSide
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MediaSide
@@ -453,13 +461,15 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaSide ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MediaSide
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MediaSide
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMediaSide(EMediaSide) based on java.lang.enum instead
+	 * @deprecated use SetMediaSide(EMediaSide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMediaSide(EnumMediaSide enumVar)
@@ -471,7 +481,7 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (9) get attribute MediaSide
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMediaSide getEMediaSide() based on java.lang.enum instead
+	 * @deprecated use EMediaSide GetEMediaSide() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMediaSide getMediaSide()
@@ -480,7 +490,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Rotated ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Rotated
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Rotated
@@ -503,7 +515,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Waste ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Waste
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Waste
@@ -526,7 +540,9 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -564,7 +580,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (27) const get element Device
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element default is getDevice(0)
+	 * @return JDFDevice the element
+	 *         default is getDevice(0)
 	 */
 	public JDFDevice getDevice(int iSkip)
 	{
@@ -636,7 +653,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{
@@ -696,7 +714,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{
@@ -748,7 +767,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (27) const get element RuleLength
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRuleLength the element default is getRuleLength(0)
+	 * @return JDFRuleLength the element
+	 *         default is getRuleLength(0)
 	 */
 	public JDFRuleLength getRuleLength(int iSkip)
 	{
@@ -810,7 +830,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	 * (27) const get element Station
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStation the element default is getStation(0)
+	 * @return JDFStation the element
+	 *         default is getStation(0)
 	 */
 	public JDFStation getStation(int iSkip)
 	{
@@ -860,7 +881,8 @@ public abstract class JDFAutoDieLayout extends JDFResource
 	/**
 	 * (29) append element CutLines
 	 *
-	 * @return JDFSeparationList the element @ if the element already exists
+	 * @return JDFSeparationList the element
+	 * @ if the element already exists
 	 */
 	public JDFSeparationList appendCutLines()
 	{

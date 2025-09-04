@@ -92,10 +92,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoQuery : public JDFMessage
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQuery : public JDFMessage
  */
 
 public abstract class JDFAutoQuery extends JDFMessage
@@ -109,7 +106,8 @@ public abstract class JDFAutoQuery extends JDFMessage
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGEFORMAT, 0x4444433111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETEMPLATE, 0x4444433111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ACKNOWLEDGEURL, 0x3333333111l, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumAcknowledgeType.getEnum(0), "Completed");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.LANGUAGES, 0x3311111111l, AttributeInfo.EnumAttributeType.languages, null, null);
 	}
 
@@ -248,11 +246,14 @@ public abstract class JDFAutoQuery extends JDFMessage
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeFormat
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AcknowledgeFormat
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -276,7 +277,8 @@ public abstract class JDFAutoQuery extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeTemplate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AcknowledgeTemplate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -300,7 +302,8 @@ public abstract class JDFAutoQuery extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeURL
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AcknowledgeURL
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -324,7 +327,8 @@ public abstract class JDFAutoQuery extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AcknowledgeType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -340,7 +344,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	/**
 	 * (9.2) get AcknowledgeType attribute AcknowledgeType
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EAcknowledgeType> getEnumsAcknowledgeType()
 	{
@@ -348,14 +352,15 @@ public abstract class JDFAutoQuery extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AcknowledgeType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute AcknowledgeType
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEAcknowledgeType(List<EAcknowledgeType>) based on java.lang.enum instead
+	 * @deprecated use SetEAcknowledgeType(List<EAcknowledgeType>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAcknowledgeType(List<EnumAcknowledgeType> v)
@@ -367,7 +372,7 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 * (9.2) get AcknowledgeType attribute AcknowledgeType
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EAcknowledgeType> getEnumsAcknowledgeType() based on java.lang.enum instead
+	 * @deprecated use List<EAcknowledgeType > GetEAcknowledgeType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumAcknowledgeType> getAcknowledgeType()
@@ -376,7 +381,9 @@ public abstract class JDFAutoQuery extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Languages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Languages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Languages
@@ -395,14 +402,16 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 */
 	public VString getLanguages()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -428,7 +437,8 @@ public abstract class JDFAutoQuery extends JDFMessage
 	/**
 	 * (29) append element Subscription
 	 *
-	 * @return JDFSubscription the element @ if the element already exists
+	 * @return JDFSubscription the element
+	 * @ if the element already exists
 	 */
 	public JDFSubscription appendSubscription()
 	{
@@ -470,7 +480,8 @@ public abstract class JDFAutoQuery extends JDFMessage
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{

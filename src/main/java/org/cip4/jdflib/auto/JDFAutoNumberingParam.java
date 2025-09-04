@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 
 /**
- *****************************************************************************
- * class JDFAutoNumberingParam : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNumberingParam : public JDFElement
  */
 
 public abstract class JDFAutoNumberingParam extends JDFElement
@@ -143,11 +140,15 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StartValue
@@ -170,7 +171,9 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute XPosition ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute XPosition
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute XPosition
@@ -193,7 +196,9 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute YPosition ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute YPosition
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute YPosition
@@ -208,17 +213,20 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute YPosition
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getYPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.YPOSITION, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.YPOSITION, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Orientation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Orientation
@@ -241,7 +249,9 @@ public abstract class JDFAutoNumberingParam extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Step ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Step
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Step

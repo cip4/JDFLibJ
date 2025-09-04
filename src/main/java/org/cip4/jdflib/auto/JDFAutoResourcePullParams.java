@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoResourcePullParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResourcePullParams : public JDFElement
  */
 
 public abstract class JDFAutoResourcePullParams extends JDFElement
@@ -112,7 +109,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRIORITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.REPEATPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumRepeatPolicy.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.REPEATPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumRepeatPolicy.getEnum(0),
+				null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCEID, 0x2222222211l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.RETURNURL, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.WATCHURL, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
@@ -254,11 +252,15 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -281,7 +283,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Hold ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Hold
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Hold
@@ -304,7 +308,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NextQueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NextQueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -328,7 +333,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrevQueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrevQueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -352,7 +358,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -375,7 +383,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Priority
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Priority
@@ -398,7 +408,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -422,7 +433,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RepeatPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RepeatPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -446,14 +458,15 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RepeatPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RepeatPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute RepeatPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setRepeatPolicy(ERepeatPolicy) based on java.lang.enum instead
+	 * @deprecated use SetRepeatPolicy(ERepeatPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRepeatPolicy(EnumRepeatPolicy enumVar)
@@ -465,7 +478,7 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * (9) get attribute RepeatPolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ERepeatPolicy getERepeatPolicy() based on java.lang.enum instead
+	 * @deprecated use ERepeatPolicy GetERepeatPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumRepeatPolicy getRepeatPolicy()
@@ -474,7 +487,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ResourceID
@@ -497,7 +512,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReturnURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReturnURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReturnURL
@@ -520,7 +537,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WatchURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WatchURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WatchURL
@@ -543,7 +562,9 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -581,7 +602,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{
@@ -631,7 +653,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	/**
 	 * (29) append element Disposition
 	 *
-	 * @return JDFDisposition the element @ if the element already exists
+	 * @return JDFDisposition the element
+	 * @ if the element already exists
 	 */
 	public JDFDisposition appendDisposition()
 	{
@@ -661,7 +684,8 @@ public abstract class JDFAutoResourcePullParams extends JDFElement
 	/**
 	 * (29) append element MISDetails
 	 *
-	 * @return JDFMISDetails the element @ if the element already exists
+	 * @return JDFMISDetails the element
+	 * @ if the element already exists
 	 */
 	public JDFMISDetails appendMISDetails()
 	{

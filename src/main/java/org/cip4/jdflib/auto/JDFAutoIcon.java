@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoIcon : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIcon : public JDFElement
  */
 
 public abstract class JDFAutoIcon extends JDFElement
@@ -105,7 +102,8 @@ public abstract class JDFAutoIcon extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SIZE, 0x2222222221l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BITDEPTH, 0x2222222221l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ICONUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumIconUsage.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ICONUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumIconUsage.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -250,11 +248,15 @@ public abstract class JDFAutoIcon extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Size
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Size
@@ -269,17 +271,20 @@ public abstract class JDFAutoIcon extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Size
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BitDepth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BitDepth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BitDepth
@@ -302,7 +307,9 @@ public abstract class JDFAutoIcon extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IconUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IconUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute IconUsage
@@ -317,7 +324,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	/**
 	 * (9.2) get IconUsage attribute IconUsage
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EIconUsage> getEnumsIconUsage()
 	{
@@ -325,13 +332,15 @@ public abstract class JDFAutoIcon extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IconUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IconUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute IconUsage
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEIconUsage(List<EIconUsage>) based on java.lang.enum instead
+	 * @deprecated use SetEIconUsage(List<EIconUsage>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIconUsage(List<EnumIconUsage> v)
@@ -343,7 +352,7 @@ public abstract class JDFAutoIcon extends JDFElement
 	 * (9.2) get IconUsage attribute IconUsage
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EIconUsage> getEnumsIconUsage() based on java.lang.enum instead
+	 * @deprecated use List<EIconUsage > GetEIconUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumIconUsage> getIconUsage()
@@ -352,7 +361,9 @@ public abstract class JDFAutoIcon extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -378,7 +389,8 @@ public abstract class JDFAutoIcon extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

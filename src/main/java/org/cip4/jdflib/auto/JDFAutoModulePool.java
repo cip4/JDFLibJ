@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
 
 /**
- *****************************************************************************
- * class JDFAutoModulePool : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoModulePool : public JDFElement
  */
 
 public abstract class JDFAutoModulePool extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoModulePool extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoModulePool extends JDFElement
 	 * (27) const get element ModuleCap
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFModuleCap the element default is getModuleCap(0)
+	 * @return JDFModuleCap the element
+	 *         default is getModuleCap(0)
 	 */
 	public JDFModuleCap getModuleCap(int iSkip)
 	{

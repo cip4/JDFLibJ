@@ -81,7 +81,7 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.auto.JDFAutoBoxFoldAction.EnumAction;
 import org.cip4.jdflib.auto.JDFAutoBoxFoldingParams.EnumBoxFoldingType;
 import org.cip4.jdflib.auto.JDFAutoBundle.EnumBundleType;
-import org.cip4.jdflib.auto.JDFAutoSurfaceMark.EnumFace;
+import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -110,15 +110,12 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Apr 1, 2009
  */
 class MISFinTest extends BaseGoldenTicketTest
 {
 	/**
 	 * test MIS to Finishing ICS
-	 *
-	 *
 	 */
 	@Test
 	void testAmount()
@@ -229,7 +226,7 @@ class MISFinTest extends BaseGoldenTicketTest
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
-	 * 
+	 *
 	 * @throws DataFormatException
 	 * @throws Exception
 	 */
@@ -264,7 +261,7 @@ class MISFinTest extends BaseGoldenTicketTest
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
-	 * 
+	 *
 	 * @throws DataFormatException
 	 * @throws Exception
 	 */
@@ -282,7 +279,7 @@ class MISFinTest extends BaseGoldenTicketTest
 		final JDFComponent comp = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		comp.setDimensions((JDFXYPair) new JDFXYPair(50, 40).scaleFromCM(1));
 
-		final JDFSurfaceMark sm = comp.getCreateSurfaceMark(EnumFace.Front);
+		final JDFSurfaceMark sm = comp.getCreateSurfaceMark(EFace.Front);
 
 		snippets.add("ResourceSet[@Name=\"CuttingParams\"]");
 		snippets.add("ResourceSet[@Name=\"Component\"]");

@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoRectangleState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRectangleState : public JDFResource
  */
 
 public abstract class JDFAutoRectangleState extends JDFResource
@@ -107,9 +104,11 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDHWRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation, EnumAllowedHWRelation.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDHWRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation,
+				EnumAllowedHWRelation.getEnum(0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333311l, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTHWRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation, EnumPresentHWRelation.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTHWRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation,
+				EnumPresentHWRelation.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333311l, AttributeInfo.EnumAttributeType.RectangleRangeList, null, null);
 	}
 
@@ -174,7 +173,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -350,11 +349,14 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -370,17 +372,19 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute DefaultValue
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getDefaultValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -396,17 +400,19 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute CurrentValue
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getCurrentValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedHWRelation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedHWRelation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -430,14 +436,15 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedHWRelation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedHWRelation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AllowedHWRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAllowedHWRelation(EAllowedHWRelation) based on java.lang.enum instead
+	 * @deprecated use SetAllowedHWRelation(EAllowedHWRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAllowedHWRelation(EnumAllowedHWRelation enumVar)
@@ -449,7 +456,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * (9) get attribute AllowedHWRelation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAllowedHWRelation getEAllowedHWRelation() based on java.lang.enum instead
+	 * @deprecated use EAllowedHWRelation GetEAllowedHWRelation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAllowedHWRelation getAllowedHWRelation()
@@ -458,7 +465,8 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -474,17 +482,19 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	/**
 	 * (20) get JDFRectangleRangeList attribute AllowedValueList
 	 *
-	 * @return JDFRectangleRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangleRangeList
+	 * @return JDFRectangleRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangleRangeList
 	 */
 	public JDFRectangleRangeList getAllowedValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		final JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentHWRelation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentHWRelation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -508,14 +518,15 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentHWRelation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentHWRelation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PresentHWRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPresentHWRelation(EPresentHWRelation) based on java.lang.enum instead
+	 * @deprecated use SetPresentHWRelation(EPresentHWRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPresentHWRelation(EnumPresentHWRelation enumVar)
@@ -527,7 +538,7 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * (9) get attribute PresentHWRelation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPresentHWRelation getEPresentHWRelation() based on java.lang.enum instead
+	 * @deprecated use EPresentHWRelation GetEPresentHWRelation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPresentHWRelation getPresentHWRelation()
@@ -536,7 +547,8 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -552,17 +564,20 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	/**
 	 * (20) get JDFRectangleRangeList attribute PresentValueList
 	 *
-	 * @return JDFRectangleRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangleRangeList
+	 * @return JDFRectangleRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangleRangeList
 	 */
 	public JDFRectangleRangeList getPresentValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		final JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		JDFRectangleRangeList nPlaceHolder = JDFRectangleRangeList.createRectangleRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -600,7 +615,8 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -662,7 +678,8 @@ public abstract class JDFAutoRectangleState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBlockPreparationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBlockPreparationParams : public JDFResource
  */
 
 public abstract class JDFAutoBlockPreparationParams extends JDFResource
@@ -104,7 +101,8 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKING, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ROUNDING, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -167,7 +165,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -263,11 +261,15 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Backing ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Backing
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Backing
@@ -290,7 +292,9 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Rounding ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Rounding
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Rounding
@@ -313,7 +317,8 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TightBacking
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TightBacking
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -337,14 +342,15 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TightBacking
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TightBacking
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TightBacking
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTightBacking(ETightBacking) based on java.lang.enum instead
+	 * @deprecated use SetTightBacking(ETightBacking) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTightBacking(EnumTightBacking enumVar)
@@ -356,7 +362,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * (9) get attribute TightBacking
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETightBacking getETightBacking() based on java.lang.enum instead
+	 * @deprecated use ETightBacking GetETightBacking() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTightBacking getTightBacking()
@@ -365,7 +371,9 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -403,7 +411,8 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
 	 * (27) const get element RegisterRibbon
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRegisterRibbon the element default is getRegisterRibbon(0)
+	 * @return JDFRegisterRibbon the element
+	 *         default is getRegisterRibbon(0)
 	 */
 	public JDFRegisterRibbon getRegisterRibbon(int iSkip)
 	{

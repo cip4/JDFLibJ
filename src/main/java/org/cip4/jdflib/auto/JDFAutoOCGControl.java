@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoOCGControl : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoOCGControl : public JDFElement
  */
 
 public abstract class JDFAutoOCGControl extends JDFElement
@@ -141,11 +138,15 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeOCG ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeOCG
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IncludeOCG
@@ -168,7 +169,9 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OCGName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OCGName
@@ -191,7 +194,8 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcStepsGroup
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProcStepsGroup
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -215,7 +219,8 @@ public abstract class JDFAutoOCGControl extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcStepsType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProcStepsType
 	 * ---------------------------------------------------------------------
 	 */
 	/**

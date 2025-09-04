@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 import org.cip4.jdflib.util.JDFDuration;
 
 /**
- *****************************************************************************
- * class JDFAutoDurationState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDurationState : public JDFResource
  */
 
 public abstract class JDFAutoDurationState extends JDFResource
@@ -167,17 +164,20 @@ public abstract class JDFAutoDurationState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -193,17 +193,19 @@ public abstract class JDFAutoDurationState extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute DefaultValue
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getDefaultValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -219,17 +221,19 @@ public abstract class JDFAutoDurationState extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute CurrentValue
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getCurrentValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -245,17 +249,19 @@ public abstract class JDFAutoDurationState extends JDFResource
 	/**
 	 * (20) get JDFDurationRangeList attribute AllowedValueList
 	 *
-	 * @return JDFDurationRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDurationRangeList
+	 * @return JDFDurationRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDurationRangeList
 	 */
 	public JDFDurationRangeList getAllowedValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -271,17 +277,20 @@ public abstract class JDFAutoDurationState extends JDFResource
 	/**
 	 * (20) get JDFDurationRangeList attribute PresentValueList
 	 *
-	 * @return JDFDurationRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDurationRangeList
+	 * @return JDFDurationRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDurationRangeList
 	 */
 	public JDFDurationRangeList getPresentValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -319,7 +328,8 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -381,7 +391,8 @@ public abstract class JDFAutoDurationState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

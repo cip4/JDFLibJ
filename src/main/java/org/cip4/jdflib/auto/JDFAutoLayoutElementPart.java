@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFPositionObj;
 import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionParams;
 
 /**
- *****************************************************************************
- * class JDFAutoLayoutElementPart : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLayoutElementPart : public JDFElement
  */
 
 public abstract class JDFAutoLayoutElementPart extends JDFElement
@@ -166,11 +163,15 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -195,7 +196,9 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -221,7 +224,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	/**
 	 * (29) append element BarcodeProductionParams
 	 *
-	 * @return JDFBarcodeProductionParams the element @ if the element already exists
+	 * @return JDFBarcodeProductionParams the element
+	 * @ if the element already exists
 	 */
 	public JDFBarcodeProductionParams appendBarcodeProductionParams()
 	{
@@ -263,7 +267,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * (27) const get element ColorCorrectionParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorCorrectionParams the element default is getColorCorrectionParams(0)
+	 * @return JDFColorCorrectionParams the element
+	 *         default is getColorCorrectionParams(0)
 	 */
 	public JDFColorCorrectionParams getColorCorrectionParams(int iSkip)
 	{
@@ -335,7 +340,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * (27) const get element ImageCompressionParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFImageCompressionParams the element default is getImageCompressionParams(0)
+	 * @return JDFImageCompressionParams the element
+	 *         default is getImageCompressionParams(0)
 	 */
 	public JDFImageCompressionParams getImageCompressionParams(int iSkip)
 	{
@@ -407,7 +413,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	 * (27) const get element ImageEnhancementParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFImageEnhancementParams the element default is getImageEnhancementParams(0)
+	 * @return JDFImageEnhancementParams the element
+	 *         default is getImageEnhancementParams(0)
 	 */
 	public JDFImageEnhancementParams getImageEnhancementParams(int iSkip)
 	{
@@ -467,7 +474,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	/**
 	 * (29) append element LayoutElement
 	 *
-	 * @return JDFLayoutElement the element @ if the element already exists
+	 * @return JDFLayoutElement the element
+	 * @ if the element already exists
 	 */
 	public JDFLayoutElement appendLayoutElement()
 	{
@@ -507,7 +515,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
 	/**
 	 * (29) append element PositionObj
 	 *
-	 * @return JDFPositionObj the element @ if the element already exists
+	 * @return JDFPositionObj the element
+	 * @ if the element already exists
 	 */
 	public JDFPositionObj appendPositionObj()
 	{

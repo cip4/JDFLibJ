@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBooleanState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBooleanState : public JDFResource
  */
 
 public abstract class JDFAutoBooleanState extends JDFResource
@@ -104,10 +101,12 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumAllowedValueList.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumAllowedValueList.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumPresentValueList.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumPresentValueList.getEnum(0), null);
 	}
 
 	@Override
@@ -171,7 +170,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -321,11 +320,14 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -341,7 +343,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	/**
 	 * (9.2) get AllowedValueList attribute AllowedValueList
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EAllowedValueList> getEnumsAllowedValueList()
 	{
@@ -349,14 +351,15 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute AllowedValueList
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEAllowedValueList(List<EAllowedValueList>) based on java.lang.enum instead
+	 * @deprecated use SetEAllowedValueList(List<EAllowedValueList>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAllowedValueList(List<EnumAllowedValueList> v)
@@ -368,7 +371,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * (9.2) get AllowedValueList attribute AllowedValueList
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EAllowedValueList> getEnumsAllowedValueList() based on java.lang.enum instead
+	 * @deprecated use List<EAllowedValueList > GetEAllowedValueList() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumAllowedValueList> getAllowedValueList()
@@ -377,7 +380,8 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -401,7 +405,8 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -425,7 +430,8 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -441,7 +447,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	/**
 	 * (9.2) get PresentValueList attribute PresentValueList
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EPresentValueList> getEnumsPresentValueList()
 	{
@@ -449,14 +455,15 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute PresentValueList
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEPresentValueList(List<EPresentValueList>) based on java.lang.enum instead
+	 * @deprecated use SetEPresentValueList(List<EPresentValueList>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPresentValueList(List<EnumPresentValueList> v)
@@ -468,7 +475,7 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * (9.2) get PresentValueList attribute PresentValueList
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EPresentValueList> getEnumsPresentValueList() based on java.lang.enum instead
+	 * @deprecated use List<EPresentValueList > GetEPresentValueList() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumPresentValueList> getPresentValueList()
@@ -477,7 +484,9 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -515,7 +524,8 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -577,7 +587,8 @@ public abstract class JDFAutoBooleanState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

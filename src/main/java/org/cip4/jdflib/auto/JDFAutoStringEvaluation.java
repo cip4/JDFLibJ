@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 /**
- *****************************************************************************
- * class JDFAutoStringEvaluation : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStringEvaluation : public JDFResource
  */
 
 public abstract class JDFAutoStringEvaluation extends JDFResource
@@ -165,17 +162,21 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LengthJDF ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LengthJDF
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LengthJDF
@@ -190,17 +191,20 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	/**
 	 * (20) get JDFIntegerRange attribute LengthJDF
 	 *
-	 * @return JDFIntegerRange the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRange
+	 * @return JDFIntegerRange the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRange
 	 */
 	public JDFIntegerRange getLengthJDF()
 	{
-		final String strAttrName = getAttribute(AttributeName.LENGTHJDF, null, null);
-		final JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
+		String strAttrName = getAttribute(AttributeName.LENGTHJDF, null, null);
+		JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RegExp ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RegExp
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RegExp
@@ -223,7 +227,9 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -261,7 +267,8 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	 * (27) const get element BasicPreflightTest
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBasicPreflightTest the element default is getBasicPreflightTest(0)
+	 * @return JDFBasicPreflightTest the element
+	 *         default is getBasicPreflightTest(0)
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{
@@ -323,7 +330,8 @@ public abstract class JDFAutoStringEvaluation extends JDFResource
 	 * (27) const get element Value
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValue the element default is getValue(0)
+	 * @return JDFValue the element
+	 *         default is getValue(0)
 	 */
 	public JDFValue getValue(int iSkip)
 	{

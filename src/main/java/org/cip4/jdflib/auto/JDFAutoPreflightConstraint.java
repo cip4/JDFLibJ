@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightConstraint : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightConstraint : public JDFElement
  */
 
 public abstract class JDFAutoPreflightConstraint extends JDFElement
@@ -158,11 +155,14 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AttemptFixupErrors
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AttemptFixupErrors
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -186,7 +186,8 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AttemptFixupWarnings
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AttemptFixupWarnings
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -210,7 +211,9 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Constraint ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Constraint
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Constraint
@@ -233,7 +236,9 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -271,7 +276,8 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
 	 * (27) const get element ConstraintValue
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getConstraintValue(0)
+	 * @return JDFElement the element
+	 *         default is getConstraintValue(0)
 	 */
 	public JDFElement getConstraintValue(int iSkip)
 	{

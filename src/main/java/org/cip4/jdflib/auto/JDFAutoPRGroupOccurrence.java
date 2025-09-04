@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.process.JDFArgumentValue;
 import org.cip4.jdflib.resource.process.JDFStringListValue;
 
 /**
- *****************************************************************************
- * class JDFAutoPRGroupOccurrence : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPRGroupOccurrence : public JDFElement
  */
 
 public abstract class JDFAutoPRGroupOccurrence extends JDFElement
@@ -142,7 +139,9 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -180,7 +179,8 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * (27) const get element StringListValue
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStringListValue the element default is getStringListValue(0)
+	 * @return JDFStringListValue the element
+	 *         default is getStringListValue(0)
 	 */
 	public JDFStringListValue getStringListValue(int iSkip)
 	{
@@ -242,7 +242,8 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 	 * (27) const get element ArgumentValue
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFArgumentValue the element default is getArgumentValue(0)
+	 * @return JDFArgumentValue the element
+	 *         default is getArgumentValue(0)
 	 */
 	public JDFArgumentValue getArgumentValue(int iSkip)
 	{

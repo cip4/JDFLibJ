@@ -53,9 +53,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
 
-import jakarta.mail.BodyPart;
-import jakarta.mail.Multipart;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.ElementDefinitionImpl;
@@ -95,6 +92,9 @@ import org.w3c.dom.ranges.Range;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
 import org.w3c.dom.traversal.TreeWalker;
+
+import jakarta.mail.BodyPart;
+import jakarta.mail.Multipart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG

@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFPerforate;
 
 /**
- *****************************************************************************
- * class JDFAutoPerforatingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPerforatingParams : public JDFResource
  */
 
 public abstract class JDFAutoPerforatingParams extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,7 +157,9 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +197,8 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
 	 * (27) const get element Perforate
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPerforate the element default is getPerforate(0)
+	 * @return JDFPerforate the element
+	 *         default is getPerforate(0)
 	 */
 	public JDFPerforate getPerforate(int iSkip)
 	{

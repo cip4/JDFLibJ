@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *****************************************************************************
- * class JDFAutoStopPersChParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStopPersChParams : public JDFElement
  */
 
 public abstract class JDFAutoStopPersChParams extends JDFElement
@@ -162,11 +159,15 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ChannelID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ChannelID
@@ -189,7 +190,9 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MessageType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MessageType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MessageType
@@ -212,7 +215,9 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceID
@@ -235,7 +240,9 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -258,7 +265,9 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -281,7 +290,8 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -305,7 +315,9 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -328,7 +340,9 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -366,7 +380,8 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

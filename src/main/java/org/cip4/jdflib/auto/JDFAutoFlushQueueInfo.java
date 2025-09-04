@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
 
 /**
- *****************************************************************************
- * class JDFAutoFlushQueueInfo : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFlushQueueInfo : public JDFElement
  */
 
 public abstract class JDFAutoFlushQueueInfo extends JDFElement
@@ -138,7 +135,9 @@ public abstract class JDFAutoFlushQueueInfo extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -164,7 +163,8 @@ public abstract class JDFAutoFlushQueueInfo extends JDFElement
 	/**
 	 * (29) append element QueueFilter
 	 *
-	 * @return JDFQueueFilter the element @ if the element already exists
+	 * @return JDFQueueFilter the element
+	 * @ if the element already exists
 	 */
 	public JDFQueueFilter appendQueueFilter()
 	{

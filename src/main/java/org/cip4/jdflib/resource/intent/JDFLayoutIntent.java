@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,26 +56,26 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
- * ========================================================================== 
+ * ==========================================================================
  * class JDFLayoutIntent extends JDFResource
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author  sabjon@topmail.de   using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author  sabjon@topmail.de   using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  * Revision history:   ...
  */
 
@@ -88,8 +88,7 @@ import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
 /**
- * 
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class JDFLayoutIntent extends JDFAutoLayoutIntent
 {
@@ -97,10 +96,10 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 
 	/**
 	 * Constructor for JDFLayoutIntent
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
 	public JDFLayoutIntent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
@@ -109,11 +108,11 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 
 	/**
 	 * Constructor for JDFLayoutIntent
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @throws DOMException 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @throws DOMException
 	 */
 	public JDFLayoutIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
@@ -122,11 +121,11 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 
 	/**
 	 * Constructor for JDFLayoutIntent
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
-	 * 
+	 *
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
 	 * @throws DOMException
 	 */
 	public JDFLayoutIntent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
@@ -135,7 +134,6 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 	}
 
 	/**
-	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoLayoutIntent#toString()
 	 * @return
 	 */
@@ -146,9 +144,10 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 	}
 
 	/**
-	 * get the vector of sides for this layoutintent 
+	 * get the vector of sides for this layoutintent
+	 *
 	 * @return a vector containing the appropriate Strings "Front" and/or "Back" <br/>
-	 * may be null is Sides is not specified
+	 *         may be null is Sides is not specified
 	 */
 	public VString getSideVector()
 	{
@@ -157,18 +156,24 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 	}
 
 	/**
-	 * 
 	 * @param sides
 	 * @return
 	 */
-	public static VString getSideVector(EnumSides sides) {
+	public static VString getSideVector(EnumSides sides)
+	{
 		if (sides == null)
+		{
 			return null;
+		}
 		VString v = new VString();
-		if (!EnumSides.OneSidedBack.equals(sides))
+		if (!EnumSides.OneSidedBackFlipX.equals(sides) && !EnumSides.OneSidedBackFlipY.equals(sides))
+		{
 			v.add(EnumSide.Front.getName());
-		if (!EnumSides.OneSided.equals(sides))
+		}
+		if (!EnumSides.OneSidedFront.equals(sides))
+		{
 			v.add(EnumSide.Back.getName());
+		}
 		return v;
 	}
 }

@@ -48,8 +48,8 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoColor.EnumMappingSelection;
 import org.cip4.jdflib.auto.JDFAutoColorantControl.EnumInternalColorModel;
-import org.cip4.jdflib.auto.JDFAutoColorantControl.EnumMappingSelection;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;

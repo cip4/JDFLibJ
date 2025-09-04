@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoStitchingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStitchingParams : public JDFResource
  */
 
 public abstract class JDFAutoStitchingParams extends JDFResource
@@ -99,17 +96,22 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHORIGIN, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumStitchOrigin.getEnum(0), "UntrimmedJogSide");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHORIGIN, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumStitchOrigin.getEnum(0),
+				"UntrimmedJogSide");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANGLE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.REFERENCEEDGE, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumReferenceEdge.getEnum(0), null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.REFERENCEEDGE, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumReferenceEdge.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0),
+				null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.STITCHFROMFRONT, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.STITCHTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumStitchType.getEnum(0), null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.STITCHTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumStitchType.getEnum(0),
+				null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0),
+				null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.WIREBRAND, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
@@ -162,7 +164,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -576,11 +578,14 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchOrigin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchOrigin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -604,14 +609,15 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchOrigin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchOrigin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StitchOrigin
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setStitchOrigin(EStitchOrigin) based on java.lang.enum instead
+	 * @deprecated use SetStitchOrigin(EStitchOrigin) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStitchOrigin(EnumStitchOrigin enumVar)
@@ -623,7 +629,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute StitchOrigin
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EStitchOrigin getEStitchOrigin() based on java.lang.enum instead
+	 * @deprecated use EStitchOrigin GetEStitchOrigin() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumStitchOrigin getStitchOrigin()
@@ -632,7 +638,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Angle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Angle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Angle
@@ -655,7 +663,8 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumberOfStitches
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NumberOfStitches
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -679,7 +688,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Offset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Offset
@@ -702,7 +713,8 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReferenceEdge
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReferenceEdge
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -726,14 +738,15 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReferenceEdge
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReferenceEdge
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ReferenceEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setReferenceEdge(EReferenceEdge) based on java.lang.enum instead
+	 * @deprecated use SetReferenceEdge(EReferenceEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setReferenceEdge(EnumReferenceEdge enumVar)
@@ -745,7 +758,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute ReferenceEdge
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EReferenceEdge getEReferenceEdge() based on java.lang.enum instead
+	 * @deprecated use EReferenceEdge GetEReferenceEdge() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumReferenceEdge getReferenceEdge()
@@ -754,7 +767,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StapleShape ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StapleShape
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StapleShape
@@ -777,13 +792,15 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StapleShape ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StapleShape
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StapleShape
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setStapleShape(EStapleShape) based on java.lang.enum instead
+	 * @deprecated use SetStapleShape(EStapleShape) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStapleShape(EnumStapleShape enumVar)
@@ -795,7 +812,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute StapleShape
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EStapleShape getEStapleShape() based on java.lang.enum instead
+	 * @deprecated use EStapleShape GetEStapleShape() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumStapleShape getStapleShape()
@@ -804,7 +821,8 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchFromFront
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchFromFront
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -828,7 +846,8 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchPositions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchPositions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -844,17 +863,20 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute StitchPositions
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getStitchPositions()
 	{
-		final String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StitchType
@@ -877,13 +899,15 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StitchType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setStitchType(EStitchType) based on java.lang.enum instead
+	 * @deprecated use SetStitchType(EStitchType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStitchType(EnumStitchType enumVar)
@@ -895,7 +919,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute StitchType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EStitchType getEStitchType() based on java.lang.enum instead
+	 * @deprecated use EStitchType GetEStitchType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumStitchType getStitchType()
@@ -904,7 +928,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StitchWidth
@@ -927,7 +953,8 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TightBacking
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TightBacking
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -951,14 +978,15 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TightBacking
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TightBacking
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TightBacking
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTightBacking(ETightBacking) based on java.lang.enum instead
+	 * @deprecated use SetTightBacking(ETightBacking) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTightBacking(EnumTightBacking enumVar)
@@ -970,7 +998,7 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	 * (9) get attribute TightBacking
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETightBacking getETightBacking() based on java.lang.enum instead
+	 * @deprecated use ETightBacking GetETightBacking() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTightBacking getTightBacking()
@@ -979,7 +1007,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WireGauge ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WireGauge
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WireGauge
@@ -1002,7 +1032,9 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WireBrand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WireBrand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WireBrand

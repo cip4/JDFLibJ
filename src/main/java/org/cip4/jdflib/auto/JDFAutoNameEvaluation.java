@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 /**
- *****************************************************************************
- * class JDFAutoNameEvaluation : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNameEvaluation : public JDFResource
  */
 
 public abstract class JDFAutoNameEvaluation extends JDFResource
@@ -163,17 +160,21 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RegExp ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RegExp
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RegExp
@@ -196,7 +197,9 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueList
@@ -215,14 +218,16 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 	 */
 	public VString getValueList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.VALUELIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.VALUELIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -260,7 +265,8 @@ public abstract class JDFAutoNameEvaluation extends JDFResource
 	 * (27) const get element BasicPreflightTest
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBasicPreflightTest the element default is getBasicPreflightTest(0)
+	 * @return JDFBasicPreflightTest the element
+	 *         default is getBasicPreflightTest(0)
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{

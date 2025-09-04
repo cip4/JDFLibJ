@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFPRGroup;
 
 /**
- *****************************************************************************
- * class JDFAutoPROccurrence : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPROccurrence : public JDFElement
  */
 
 public abstract class JDFAutoPROccurrence extends JDFElement
@@ -155,11 +152,15 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Occurrences ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Occurrences
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Occurrences
@@ -182,7 +183,9 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -220,7 +223,8 @@ public abstract class JDFAutoPROccurrence extends JDFElement
 	 * (27) const get element PRGroup
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPRGroup the element default is getPRGroup(0)
+	 * @return JDFPRGroup the element
+	 *         default is getPRGroup(0)
 	 */
 	public JDFPRGroup getPRGroup(int iSkip)
 	{

@@ -87,10 +87,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoPublishingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPublishingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoPublishingIntent extends JDFIntentResource
@@ -163,11 +160,14 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentDataRefs
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContentDataRefs
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -187,14 +187,16 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	 */
 	public VString getContentDataRefs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -220,7 +222,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	/**
 	 * (29) append element IssueDate
 	 *
-	 * @return JDFTimeSpan the element @ if the element already exists
+	 * @return JDFTimeSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFTimeSpan appendIssueDate()
 	{
@@ -250,7 +253,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	/**
 	 * (29) append element IssueName
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendIssueName()
 	{
@@ -280,7 +284,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	/**
 	 * (29) append element IssueType
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendIssueType()
 	{
@@ -310,7 +315,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Circulation
 	 *
-	 * @return JDFIntegerSpan the element @ if the element already exists
+	 * @return JDFIntegerSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFIntegerSpan appendCirculation()
 	{
@@ -340,7 +346,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 	/**
 	 * (29) append element ContentList
 	 *
-	 * @return JDFContentList the element @ if the element already exists
+	 * @return JDFContentList the element
+	 * @ if the element already exists
 	 */
 	public JDFContentList appendContentList()
 	{

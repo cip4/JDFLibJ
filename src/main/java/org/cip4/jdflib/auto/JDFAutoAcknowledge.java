@@ -71,13 +71,12 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoQuery.EAcknowledgeType;
+import org.cip4.jdflib.auto.JDFAutoQuery.EnumAcknowledgeType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -88,13 +87,9 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoAcknowledge : public JDFMessage
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAcknowledge : public JDFMessage
  */
 
 public abstract class JDFAutoAcknowledge extends JDFMessage
@@ -106,7 +101,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.REFID, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumAcknowledgeType.getEnum(0), "Completed");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "0");
 	}
 
@@ -165,91 +161,16 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for AcknowledgeType
-	 */
-
-	public enum EAcknowledgeType
-	{
-		Received, Applied, Completed;
-
-		public static EAcknowledgeType getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAcknowledgeType.class, val, EAcknowledgeType.Completed);
-		}
-	}
-
-	/**
-	 * Enumeration strings for AcknowledgeType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAcknowledgeType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAcknowledgeType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAcknowledgeType getEnum(String enumName)
-		{
-			return (EnumAcknowledgeType) getEnum(EnumAcknowledgeType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAcknowledgeType getEnum(int enumValue)
-		{
-			return (EnumAcknowledgeType) getEnum(EnumAcknowledgeType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAcknowledgeType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAcknowledgeType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAcknowledgeType.class);
-		}
-
-		/**  */
-		public static final EnumAcknowledgeType Received = new EnumAcknowledgeType("Received");
-		/**  */
-		public static final EnumAcknowledgeType Applied = new EnumAcknowledgeType("Applied");
-		/**  */
-		public static final EnumAcknowledgeType Completed = new EnumAcknowledgeType("Completed");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute refID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute refID
@@ -274,7 +195,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AcknowledgeType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -290,7 +212,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	/**
 	 * (9.2) get AcknowledgeType attribute AcknowledgeType
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EAcknowledgeType> getEnumsAcknowledgeType()
 	{
@@ -298,14 +220,15 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AcknowledgeType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AcknowledgeType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute AcknowledgeType
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEAcknowledgeType(List<EAcknowledgeType>) based on java.lang.enum instead
+	 * @deprecated use SetEAcknowledgeType(List<EAcknowledgeType>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAcknowledgeType(List<EnumAcknowledgeType> v)
@@ -317,7 +240,7 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 * (9.2) get AcknowledgeType attribute AcknowledgeType
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EAcknowledgeType> getEnumsAcknowledgeType() based on java.lang.enum instead
+	 * @deprecated use List<EAcknowledgeType > GetEAcknowledgeType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumAcknowledgeType> getAcknowledgeType()
@@ -326,7 +249,9 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReturnCode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReturnCode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReturnCode
@@ -350,7 +275,9 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -376,7 +303,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	/**
 	 * (29) append element Notification
 	 *
-	 * @return JDFNotification the element @ if the element already exists
+	 * @return JDFNotification the element
+	 * @ if the element already exists
 	 */
 	public JDFNotification appendNotification()
 	{
@@ -418,7 +346,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{

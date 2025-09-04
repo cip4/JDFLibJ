@@ -118,7 +118,9 @@ class CADTest extends JDFTestCaseBase
 	{
 		String s = super.toString();
 		if (n != null)
+		{
 			s += "\n" + n.toString();
+		}
 		return s;
 	}
 
@@ -127,7 +129,7 @@ class CADTest extends JDFTestCaseBase
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -153,7 +155,7 @@ class CADTest extends JDFTestCaseBase
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -166,7 +168,7 @@ class CADTest extends JDFTestCaseBase
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -215,15 +217,18 @@ class CADTest extends JDFTestCaseBase
 		}
 		final JDFFileSpec filespec = (JDFFileSpec) shapeTemplate.appendElement(ElementName.FILESPEC);
 		filespec.setURL(UrlUtil.fileToUrl(new File("//host/share/dir1/dir2/File with �.cff2"), false));
-		filespec.setDescriptiveName("This is the optional location of the input cff2 (or evd), Note the escaping of Blanks. - chars > 127 may but need not be encoded as utf-8");
+		filespec.setDescriptiveName(
+				"This is the optional location of the input cff2 (or evd), Note the escaping of Blanks. - chars > 127 may but need not be encoded as utf-8");
 
 		for (int i = 0; i < nOptions; i++)
+		{
 			createShapeDef(EnumUsage.Output, i, nOptions);
+		}
 	}
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -262,7 +267,7 @@ class CADTest extends JDFTestCaseBase
 
 	/**
 	 * tests the creation of the initial shapedefproduction (one up) process
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -297,7 +302,6 @@ class CADTest extends JDFTestCaseBase
 	/**
 	 * @param inOut
 	 * @return the dielayout
-	 *
 	 */
 	private JDFDieLayout createDieLayout(final EnumUsage inOut, final String fileName)
 	{
@@ -311,8 +315,8 @@ class CADTest extends JDFTestCaseBase
 
 	/**
 	 * note that this may be calle multiple times to describe multiple one-ups per sheet
-	 * 
-	 * @param inOut input or output
+	 *
+	 * @param inOut    input or output
 	 * @param option
 	 * @param nOptions
 	 * @return
@@ -322,9 +326,13 @@ class CADTest extends JDFTestCaseBase
 		// now the output
 		JDFResource shapeDefRoot;
 		if (option == 0)
+		{
 			shapeDefRoot = n.addResource("ShapeDef", EnumResourceClass.Parameter, inOut, null, null, null, null);
+		}
 		else
+		{
 			shapeDefRoot = n.getResource("ShapeDef", inOut, 0);
+		}
 
 		JDFResource shapeDef;
 		if (nOptions == 1)
@@ -338,7 +346,8 @@ class CADTest extends JDFTestCaseBase
 		final JDFFileSpec filespecOut = (JDFFileSpec) shapeDef.appendElement(ElementName.FILESPEC);
 		filespecOut.setURL(UrlUtil.fileToUrl(new File("//host/share/dir1/dir2/OutFile with ü.cff2"), false));
 		filespecOut.setDescriptiveName("This is the requested location of the output cff2 (or evd)");
-		shapeDef.setDescriptiveName("Additional parameters may be filled by CAD - note also that this shapeDef will be the input of the DieLayoutProduction process");
+		shapeDef.setDescriptiveName(
+				"Additional parameters may be filled by CAD - note also that this shapeDef will be the input of the DieLayoutProduction process");
 		shapeDef.setAttribute("Area", "0.3");
 		shapeDef.setAttribute("GrainDirection", "XDirection");
 		shapeDef.setAttribute("FluteDirection", "YDirection");

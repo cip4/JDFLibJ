@@ -88,10 +88,7 @@ import org.cip4.jdflib.span.JDFXYPairSpan;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSizeIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSizeIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoSizeIntent extends JDFIntentResource
@@ -238,11 +235,15 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Type
@@ -265,13 +266,15 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Type
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setType(EType) based on java.lang.enum instead
+	 * @deprecated use SetType(EType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setType(EnumType enumVar)
@@ -283,7 +286,7 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	 * (9) get attribute Type
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EType getEType() based on java.lang.enum instead
+	 * @deprecated use EType GetEType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumType getType()
@@ -292,7 +295,9 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -318,7 +323,8 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	/**
 	 * (29) append element Dimensions
 	 *
-	 * @return JDFXYPairSpan the element @ if the element already exists
+	 * @return JDFXYPairSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFXYPairSpan appendDimensions()
 	{
@@ -348,7 +354,8 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
 	/**
 	 * (29) append element Pages
 	 *
-	 * @return JDFIntegerSpan the element @ if the element already exists
+	 * @return JDFIntegerSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFIntegerSpan appendPages()
 	{

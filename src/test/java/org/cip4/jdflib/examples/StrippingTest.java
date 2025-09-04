@@ -46,11 +46,11 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
-import org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation;
 import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -173,7 +173,8 @@ class StrippingTest extends JDFTestCaseBase
 			sm1.setAttribute("Orientation", "Rotate90");
 			setNextAnchor(sm1, null, "CenterRight", "0 0", null, "Parent");
 			sm1.setAttribute("Anchor", "TopCenter");
-			sm1.appendElement(ElementName.COLORCONTROLSTRIP).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
+			sm1.appendElement(ElementName.COLORCONTROLSTRIP)
+					.setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
 		}
 
 		final JDFStrippingParams spBS1 = (JDFStrippingParams) spS1.addPartition(EnumPartIDKey.BinderySignatureName, "BS_1");
@@ -192,7 +193,8 @@ class StrippingTest extends JDFTestCaseBase
 			sm1_1.setAttribute("Orientation", "Rotate0");
 			sm1_1.setAttribute("Anchor", "Center");
 			setNextAnchor(sm1_1, null, "BottomRight", "-5 5", null, "Parent");
-			sm1_1.appendElement(ElementName.CUTMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
+			sm1_1.appendElement(ElementName.CUTMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata",
+					true);
 		}
 		// TODO page cs vs. cell cs
 		{
@@ -206,7 +208,8 @@ class StrippingTest extends JDFTestCaseBase
 			sm1_2.setAttribute("Orientation", "Rotate90");
 			sm1_2.setAttribute("Anchor", "CenterLeft");
 			setNextAnchor(sm1_2, null, "BottomCenter", "5 0", null, "Parent");
-			sm1_2.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
+			sm1_2.appendElement(ElementName.IDENTIFICATIONFIELD)
+					.setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
 		}
 
 		{
@@ -222,7 +225,8 @@ class StrippingTest extends JDFTestCaseBase
 			setNextAnchor(sm1_3, null, "BottomCenter", "0 5", null, "Parent");
 			sm1_3.setAttribute("AbsoluteWidth", "20");
 			sm1_3.setAttribute("AbsoluteHeight", "10");
-			sm1_3.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
+			sm1_3.appendElement(ElementName.IDENTIFICATIONFIELD)
+					.setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
 		}
 
 		final JDFStrippingParams spBS2 = (JDFStrippingParams) spS1.addPartition(EnumPartIDKey.BinderySignatureName, "BS_2");
@@ -247,7 +251,8 @@ class StrippingTest extends JDFTestCaseBase
 			sm2_1.setAttribute("Anchor", "TopLeft");
 			setNextAnchor(sm2_1, null, "TopLeft", "2 -3", null, "Parent");
 			final String idAnchor = sm2_1.appendAnchor(null);
-			sm2_1.appendElement(ElementName.IDENTIFICATIONFIELD).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
+			sm2_1.appendElement(ElementName.IDENTIFICATIONFIELD)
+					.setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
 
 			final JDFStripMark sm2_2 = spBS2.appendStripMark();
 			sm2_2.setXMLComment("The following is a relatively positioned stripmark.", true);
@@ -256,7 +261,8 @@ class StrippingTest extends JDFTestCaseBase
 			sm2_2.setMarkName("RegisterMark");
 			sm2_2.setMarkSide(EnumMarkSide.Front);
 			sm2_2.setAttribute("Orientation", "Rotate0");
-			sm2_2.appendElement(ElementName.REGISTERMARK).setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
+			sm2_2.appendElement(ElementName.REGISTERMARK)
+					.setXMLComment("The various explicit mark elements should be allowed here for their associated metatdata", true);
 			setNextAnchor(sm2_2, idAnchor, "BottomRight", "3 0",
 					"This NextAnchor element refers to the previous barcode. the lower left of this is 3 points tothe right of the lower right of the referenced barcode.",
 					"Sibling");
@@ -290,7 +296,8 @@ class StrippingTest extends JDFTestCaseBase
 	 * @param sm2_2
 	 * @param idAnchor
 	 */
-	private static void setNextAnchor(final KElement sm2_2, final String idAnchor, final String anchor, final String absolutePosition, final String xmlComment, final String anchorType)
+	private static void setNextAnchor(final KElement sm2_2, final String idAnchor, final String anchor, final String absolutePosition, final String xmlComment,
+			final String anchorType)
 	{
 		final KElement nextAnchor = sm2_2.appendElement("RefAnchor");
 		nextAnchor.setAttribute("Anchor", anchor);

@@ -85,10 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
 
 /**
- *****************************************************************************
- * class JDFAutoStation : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStation : public JDFElement
  */
 
 public abstract class JDFAutoStation extends JDFElement
@@ -159,11 +156,15 @@ public abstract class JDFAutoStation extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssemblyIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssemblyIDs
@@ -182,14 +183,15 @@ public abstract class JDFAutoStation extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StationAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StationAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -213,7 +215,9 @@ public abstract class JDFAutoStation extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StationName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StationName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StationName
@@ -236,7 +240,9 @@ public abstract class JDFAutoStation extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -274,7 +280,8 @@ public abstract class JDFAutoStation extends JDFElement
 	 * (27) const get element ShapeDef
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFShapeDef the element default is getShapeDef(0)
+	 * @return JDFShapeDef the element
+	 *         default is getShapeDef(0)
 	 */
 	public JDFShapeDef getShapeDef(int iSkip)
 	{

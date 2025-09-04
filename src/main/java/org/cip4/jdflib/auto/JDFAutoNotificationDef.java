@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoNotificationDef : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNotificationDef : public JDFElement
  */
 
 public abstract class JDFAutoNotificationDef extends JDFElement
@@ -145,11 +142,15 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Classes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute Classes
@@ -164,7 +165,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	/**
 	 * (9.2) get Classes attribute Classes
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EClass> getEnumsClasses()
 	{
@@ -172,13 +173,15 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Classes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute Classes
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEClasses(List<EClass>) based on java.lang.enum instead
+	 * @deprecated use SetEClasses(List<EClass>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setClasses(List<EnumClass> v)
@@ -190,7 +193,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	 * (9.2) get Classes attribute Classes
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EClass> getEnumsClasses() based on java.lang.enum instead
+	 * @deprecated use List<EClass > GetEClasses() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumClass> getClasses()
@@ -199,7 +202,9 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SignalType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SignalType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SignalType
@@ -222,7 +227,9 @@ public abstract class JDFAutoNotificationDef extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Type

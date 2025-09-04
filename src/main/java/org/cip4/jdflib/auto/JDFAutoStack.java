@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoStack : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStack : public JDFElement
  */
 
 public abstract class JDFAutoStack extends JDFElement
@@ -98,8 +95,8 @@ public abstract class JDFAutoStack extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x2222221111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALSTACKSEQUENCE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumLogicalStackSequence.getEnum(0),
-				"SheetIndex");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOGICALSTACKSEQUENCE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumLogicalStackSequence.getEnum(0), "SheetIndex");
 	}
 
 	@Override
@@ -222,11 +219,14 @@ public abstract class JDFAutoStack extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackOrd
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LogicalStackOrd
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -250,7 +250,8 @@ public abstract class JDFAutoStack extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackSequence
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LogicalStackSequence
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -274,14 +275,15 @@ public abstract class JDFAutoStack extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackSequence
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LogicalStackSequence
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute LogicalStackSequence
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setLogicalStackSequence(ELogicalStackSequence) based on java.lang.enum instead
+	 * @deprecated use SetLogicalStackSequence(ELogicalStackSequence) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLogicalStackSequence(EnumLogicalStackSequence enumVar)
@@ -293,7 +295,7 @@ public abstract class JDFAutoStack extends JDFElement
 	 * (9) get attribute LogicalStackSequence
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ELogicalStackSequence getELogicalStackSequence() based on java.lang.enum instead
+	 * @deprecated use ELogicalStackSequence GetELogicalStackSequence() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumLogicalStackSequence getLogicalStackSequence()

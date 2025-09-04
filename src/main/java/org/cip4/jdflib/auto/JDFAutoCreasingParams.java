@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFCrease;
 
 /**
- *****************************************************************************
- * class JDFAutoCreasingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCreasingParams : public JDFResource
  */
 
 public abstract class JDFAutoCreasingParams extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,7 +157,9 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +197,8 @@ public abstract class JDFAutoCreasingParams extends JDFResource
 	 * (27) const get element Crease
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCrease the element default is getCrease(0)
+	 * @return JDFCrease the element
+	 *         default is getCrease(0)
 	 */
 	public JDFCrease getCrease(int iSkip)
 	{

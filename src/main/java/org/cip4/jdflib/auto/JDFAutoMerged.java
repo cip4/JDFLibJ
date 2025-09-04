@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoMerged : public JDFAudit
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMerged : public JDFAudit
  */
 
 public abstract class JDFAutoMerged extends JDFAudit
@@ -164,11 +161,15 @@ public abstract class JDFAutoMerged extends JDFAudit
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Independent ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Independent
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Independent
@@ -191,7 +192,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute jRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute jRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute jRef
@@ -214,7 +217,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute jRefSource ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute jRefSource
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute jRefSource
@@ -237,7 +242,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MergeID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MergeID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MergeID
@@ -260,7 +267,8 @@ public abstract class JDFAutoMerged extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute rRefsOverwritten
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute rRefsOverwritten
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -280,14 +288,16 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 */
 	public VString getrRefsOverwritten()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.RREFSOVERWRITTEN, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.RREFSOVERWRITTEN, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -310,7 +320,9 @@ public abstract class JDFAutoMerged extends JDFAudit
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -349,7 +361,8 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)
@@ -414,7 +427,8 @@ public abstract class JDFAutoMerged extends JDFAudit
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

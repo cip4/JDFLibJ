@@ -98,10 +98,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoResourceInfo : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResourceInfo : public JDFElement
  */
 
 public abstract class JDFAutoResourceInfo extends JDFElement
@@ -115,25 +112,29 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.AVAILABLEAMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMMANDRESULT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumCommandResult.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMMANDRESULT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumCommandResult.getEnum(0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.LEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.LOCATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.LOTCONTROLLED, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.MODULEID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0),
+				null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRODUCTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.RESOURCEID, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.SCOPE, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumScope.getEnum(0), null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.SPEED, 0x3333111111l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.STATUS, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.STATUS, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				JDFResource.EnumResStatus.getEnum(0), null);
 		atrInfoTable[18] = new AtrInfoTable(AttributeName.TOTALAMOUNT, 0x3333111111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[19] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x3333111111l, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[20] = new AtrInfoTable(AttributeName.UNIT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[21] = new AtrInfoTable(AttributeName.USAGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.USAGE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				JDFResourceLink.EnumUsage.getEnum(0), null);
 	}
 
 	@Override
@@ -363,95 +364,6 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/**
-	 * Enumeration strings for Orientation
-	 */
-
-	public enum EOrientation
-	{
-		Rotate0, Rotate90, Rotate180, Rotate270, Flip0, Flip90, Flip180, Flip270;
-
-		public static EOrientation getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOrientation.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Orientation
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOrientation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOrientation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumOrientation getEnum(String enumName)
-		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOrientation getEnum(int enumValue)
-		{
-			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOrientation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOrientation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOrientation.class);
-		}
-
-		/**  */
-		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
-		/**  */
-		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
-		/**  */
-		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
-		/**  */
-		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
-		/**  */
-		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
-		/**  */
-		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
-		/**  */
-		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
-		/**  */
-		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
-	}
-
-	/**
 	 * Enumeration strings for Scope
 	 */
 
@@ -535,11 +447,14 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActualAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActualAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -563,7 +478,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -586,7 +503,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AvailableAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AvailableAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -610,7 +528,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CommandResult
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CommandResult
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -634,14 +553,15 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CommandResult
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CommandResult
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CommandResult
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setCommandResult(ECommandResult) based on java.lang.enum instead
+	 * @deprecated use SetCommandResult(ECommandResult) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCommandResult(EnumCommandResult enumVar)
@@ -653,7 +573,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute CommandResult
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ECommandResult getECommandResult() based on java.lang.enum instead
+	 * @deprecated use ECommandResult GetECommandResult() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumCommandResult getCommandResult()
@@ -662,7 +582,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceID
@@ -685,7 +607,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Level ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Level
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Level
@@ -708,13 +632,15 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Level ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Level
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Level
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setLevel(ELevel) based on java.lang.enum instead
+	 * @deprecated use SetLevel(ELevel) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLevel(EnumLevel enumVar)
@@ -726,7 +652,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Level
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ELevel getELevel() based on java.lang.enum instead
+	 * @deprecated use ELevel GetELevel() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumLevel getLevel()
@@ -735,7 +661,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Location ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Location
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Location
@@ -758,7 +686,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LotControlled
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LotControlled
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -782,7 +711,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleID
@@ -805,7 +736,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleIndex
@@ -820,17 +753,20 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute ModuleIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Orientation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Orientation
@@ -853,13 +789,15 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Orientation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setOrientation(EOrientation) based on java.lang.enum instead
+	 * @deprecated use SetOrientation(EOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
@@ -871,7 +809,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Orientation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EOrientation getEOrientation() based on java.lang.enum instead
+	 * @deprecated use EOrientation GetEOrientation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumOrientation getOrientation()
@@ -880,7 +818,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcessUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProcessUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -904,7 +843,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProductID
@@ -927,7 +868,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ResourceID
@@ -950,7 +893,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -974,7 +918,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Scope
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Scope
@@ -997,13 +943,15 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Scope
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Scope
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setScope(EScope) based on java.lang.enum instead
+	 * @deprecated use SetScope(EScope) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setScope(EnumScope enumVar)
@@ -1015,7 +963,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Scope
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EScope getEScope() based on java.lang.enum instead
+	 * @deprecated use EScope GetEScope() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumScope getScope()
@@ -1024,7 +972,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Speed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Speed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Speed
@@ -1047,7 +997,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Status
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Status
@@ -1070,13 +1022,15 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Status
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Status
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setResStatus(JDFResource.EResStatus) based on java.lang.enum instead
+	 * @deprecated use SetResStatus(Eesource.EnumResStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResStatus(JDFResource.EnumResStatus enumVar)
@@ -1088,7 +1042,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Status
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use JDFResource.EResStatus getEResStatus() based on java.lang.enum instead
+	 * @deprecated use Eesource.EnumResStatus GetEResStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public JDFResource.EnumResStatus getResStatus()
@@ -1097,7 +1051,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TotalAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TotalAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TotalAmount
@@ -1120,7 +1076,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Transformation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Transformation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1136,17 +1093,20 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	/**
 	 * (20) get JDFMatrix attribute Transformation
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getTransformation()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRANSFORMATION, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Unit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Unit
@@ -1169,7 +1129,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
@@ -1192,13 +1154,15 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUsage(JDFResourceLink.EUsage) based on java.lang.enum instead
+	 * @deprecated use SetUsage(EesourceLink.EnumUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUsage(JDFResourceLink.EnumUsage enumVar)
@@ -1210,7 +1174,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (9) get attribute Usage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use JDFResourceLink.EUsage getEUsage() based on java.lang.enum instead
+	 * @deprecated use EesourceLink.EnumUsage GetEUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public JDFResourceLink.EnumUsage getUsage()
@@ -1219,7 +1183,9 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -1245,7 +1211,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	/**
 	 * (29) append element AmountPool
 	 *
-	 * @return JDFAmountPool the element @ if the element already exists
+	 * @return JDFAmountPool the element
+	 * @ if the element already exists
 	 */
 	public JDFAmountPool appendAmountPool()
 	{
@@ -1275,7 +1242,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	/**
 	 * (29) append element CostCenter
 	 *
-	 * @return JDFCostCenter the element @ if the element already exists
+	 * @return JDFCostCenter the element
+	 * @ if the element already exists
 	 */
 	public JDFCostCenter appendCostCenter()
 	{
@@ -1317,7 +1285,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (27) const get element Event
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEvent the element default is getEvent(0)
+	 * @return JDFEvent the element
+	 *         default is getEvent(0)
 	 */
 	public JDFEvent getEvent(int iSkip)
 	{
@@ -1379,7 +1348,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (27) const get element Lot
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLot the element default is getLot(0)
+	 * @return JDFLot the element
+	 *         default is getLot(0)
 	 */
 	public JDFLot getLot(int iSkip)
 	{
@@ -1429,7 +1399,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	/**
 	 * (29) append element MISDetails
 	 *
-	 * @return JDFMISDetails the element @ if the element already exists
+	 * @return JDFMISDetails the element
+	 * @ if the element already exists
 	 */
 	public JDFMISDetails appendMISDetails()
 	{
@@ -1471,7 +1442,8 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

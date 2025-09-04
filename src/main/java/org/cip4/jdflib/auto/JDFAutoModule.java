@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFModule;
 
 /**
- *****************************************************************************
- * class JDFAutoModule : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoModule : public JDFElement
  */
 
 public abstract class JDFAutoModule extends JDFElement
@@ -168,11 +165,15 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceType
@@ -195,7 +196,8 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Manufacturer
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Manufacturer
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -219,7 +221,8 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ManufacturerURL
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ManufacturerURL
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -243,7 +246,8 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModelDescription
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModelDescription
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -267,7 +271,9 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModelName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModelName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModelName
@@ -290,7 +296,9 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModelNumber ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModelNumber
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModelNumber
@@ -313,7 +321,9 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModelURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModelURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModelURL
@@ -336,7 +346,9 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleID
@@ -359,7 +371,9 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleIndex
@@ -382,7 +396,9 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleType
@@ -405,7 +421,9 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Revision ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Revision
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Revision
@@ -428,7 +446,8 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SerialNumber
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SerialNumber
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -452,7 +471,8 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SubModuleIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SubModuleIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -476,7 +496,9 @@ public abstract class JDFAutoModule extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -514,7 +536,8 @@ public abstract class JDFAutoModule extends JDFElement
 	 * (27) const get element Module
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFModule the element default is getModule(0)
+	 * @return JDFModule the element
+	 *         default is getModule(0)
 	 */
 	public JDFModule getModule(int iSkip)
 	{

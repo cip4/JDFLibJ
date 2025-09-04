@@ -86,10 +86,7 @@ import org.cip4.jdflib.jmf.JDFSubscription;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *****************************************************************************
- * class JDFAutoSubscriptionInfo : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSubscriptionInfo : public JDFElement
  */
 
 public abstract class JDFAutoSubscriptionInfo extends JDFElement
@@ -166,11 +163,15 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ChannelID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ChannelID
@@ -193,7 +194,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SenderID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SenderID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SenderID
@@ -216,7 +219,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Family ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Family
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Family
@@ -239,7 +244,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -262,7 +269,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -285,7 +294,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Languages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Languages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Languages
@@ -304,14 +315,16 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	 */
 	public VString getLanguages()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MessageType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MessageType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MessageType
@@ -334,7 +347,8 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -358,7 +372,9 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -396,7 +412,8 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{
@@ -446,7 +463,8 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
 	/**
 	 * (29) append element Subscription
 	 *
-	 * @return JDFSubscription the element @ if the element already exists
+	 * @return JDFSubscription the element
+	 * @ if the element already exists
 	 */
 	public JDFSubscription appendSubscription()
 	{

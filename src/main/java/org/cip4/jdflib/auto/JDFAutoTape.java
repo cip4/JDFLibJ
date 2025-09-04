@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 
 /**
- *****************************************************************************
- * class JDFAutoTape : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTape : public JDFElement
  */
 
 public abstract class JDFAutoTape extends JDFElement
@@ -138,7 +135,9 @@ public abstract class JDFAutoTape extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -164,7 +163,8 @@ public abstract class JDFAutoTape extends JDFElement
 	/**
 	 * (29) append element TapeColor
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendTapeColor()
 	{

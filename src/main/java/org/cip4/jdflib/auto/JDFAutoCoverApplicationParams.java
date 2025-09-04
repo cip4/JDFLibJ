@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFScore;
 
 /**
- *****************************************************************************
- * class JDFAutoCoverApplicationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCoverApplicationParams : public JDFResource
  */
 
 public abstract class JDFAutoCoverApplicationParams extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,15 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CoverOffset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CoverOffset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CoverOffset
@@ -197,17 +198,20 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute CoverOffset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getCoverOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.COVEROFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.COVEROFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -245,7 +249,8 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * (27) const get element GlueApplication
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueApplication the element default is getGlueApplication(0)
+	 * @return JDFGlueApplication the element
+	 *         default is getGlueApplication(0)
 	 */
 	public JDFGlueApplication getGlueApplication(int iSkip)
 	{
@@ -317,7 +322,8 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
 	 * (27) const get element Score
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFScore the element default is getScore(0)
+	 * @return JDFScore the element
+	 *         default is getScore(0)
 	 */
 	public JDFScore getScore(int iSkip)
 	{

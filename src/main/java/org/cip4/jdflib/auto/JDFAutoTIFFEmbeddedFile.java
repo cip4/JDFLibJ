@@ -81,10 +81,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoTIFFEmbeddedFile : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTIFFEmbeddedFile : public JDFElement
  */
 
 public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
@@ -154,11 +151,15 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TagNumber ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TagNumber
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TagNumber
@@ -181,7 +182,9 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TagType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TagType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TagType
@@ -204,7 +207,9 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -230,7 +235,8 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

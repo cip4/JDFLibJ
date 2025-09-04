@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFset;
 
 /**
- *****************************************************************************
- * class JDFAutowhen : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutowhen : public JDFElement
  */
 
 public abstract class JDFAutowhen extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutowhen extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutowhen extends JDFElement
 	 * (27) const get element set
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFset the element default is getset(0)
+	 * @return JDFset the element
+	 *         default is getset(0)
 	 */
 	public JDFset getset(int iSkip)
 	{

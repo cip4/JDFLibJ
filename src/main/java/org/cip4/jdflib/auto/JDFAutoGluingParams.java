@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlue;
 
 /**
- *****************************************************************************
- * class JDFAutoGluingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGluingParams : public JDFResource
  */
 
 public abstract class JDFAutoGluingParams extends JDFResource
@@ -161,7 +158,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -176,11 +173,14 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GluingProductionID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GluingProductionID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -204,7 +204,9 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -242,7 +244,8 @@ public abstract class JDFAutoGluingParams extends JDFResource
 	 * (27) const get element Glue
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlue the element default is getGlue(0)
+	 * @return JDFGlue the element
+	 *         default is getGlue(0)
 	 */
 	public JDFGlue getGlue(int iSkip)
 	{

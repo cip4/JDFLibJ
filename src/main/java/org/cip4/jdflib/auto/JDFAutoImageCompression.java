@@ -93,10 +93,7 @@ import org.cip4.jdflib.resource.process.JDFLZWParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoImageCompression : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoImageCompression : public JDFElement
  */
 
 public abstract class JDFAutoImageCompression extends JDFElement
@@ -117,11 +114,12 @@ public abstract class JDFAutoImageCompression extends JDFElement
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.IMAGEAUTOFILTERSTRATEGY, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.IMAGEDEPTH, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.IMAGEDOWNSAMPLETHRESHOLD, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "2.0");
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.IMAGEDOWNSAMPLETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumImageDownsampleType.getEnum(0),
-				null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.IMAGEDOWNSAMPLETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumImageDownsampleType.getEnum(0), null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.IMAGEFILTER, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.IMAGERESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumImageType.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumImageType.getEnum(0),
+				null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.JPXQUALITY, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
@@ -344,11 +342,14 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AntiAliasImages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AntiAliasImages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -372,7 +373,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AutoFilterImages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AutoFilterImages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -396,7 +398,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ConvertImagesToIndexed
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ConvertImagesToIndexed
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -420,7 +423,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DCTQuality ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DCTQuality
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DCTQuality
@@ -443,7 +448,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DownsampleImages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DownsampleImages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -467,7 +473,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EncodeColorImages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EncodeColorImages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -491,7 +498,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EncodeImages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EncodeImages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -515,7 +523,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageAutoFilterStrategy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageAutoFilterStrategy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -539,7 +548,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageDepth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageDepth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ImageDepth
@@ -562,7 +573,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageDownsampleThreshold
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageDownsampleThreshold
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -586,7 +598,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageDownsampleType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageDownsampleType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -610,14 +623,15 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageDownsampleType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageDownsampleType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ImageDownsampleType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setImageDownsampleType(EImageDownsampleType) based on java.lang.enum instead
+	 * @deprecated use SetImageDownsampleType(EImageDownsampleType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setImageDownsampleType(EnumImageDownsampleType enumVar)
@@ -629,7 +643,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * (9) get attribute ImageDownsampleType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EImageDownsampleType getEImageDownsampleType() based on java.lang.enum instead
+	 * @deprecated use EImageDownsampleType GetEImageDownsampleType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumImageDownsampleType getImageDownsampleType()
@@ -638,7 +652,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageFilter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageFilter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ImageFilter
@@ -661,7 +677,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageResolution
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageResolution
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -685,7 +702,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ImageType
@@ -708,13 +727,15 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ImageType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setImageType(EImageType) based on java.lang.enum instead
+	 * @deprecated use SetImageType(EImageType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setImageType(EnumImageType enumVar)
@@ -726,7 +747,7 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * (9) get attribute ImageType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EImageType getEImageType() based on java.lang.enum instead
+	 * @deprecated use EImageType GetEImageType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumImageType getImageType()
@@ -735,7 +756,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JPXQuality ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JPXQuality
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JPXQuality
@@ -758,7 +781,9 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -784,7 +809,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	/**
 	 * (29) append element CCITTFaxParams
 	 *
-	 * @return JDFCCITTFaxParams the element @ if the element already exists
+	 * @return JDFCCITTFaxParams the element
+	 * @ if the element already exists
 	 */
 	public JDFCCITTFaxParams appendCCITTFaxParams()
 	{
@@ -814,7 +840,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	/**
 	 * (29) append element DCTParams
 	 *
-	 * @return JDFDCTParams the element @ if the element already exists
+	 * @return JDFDCTParams the element
+	 * @ if the element already exists
 	 */
 	public JDFDCTParams appendDCTParams()
 	{
@@ -856,7 +883,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * (27) const get element JBIG2Params
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFJBIG2Params the element default is getJBIG2Params(0)
+	 * @return JDFJBIG2Params the element
+	 *         default is getJBIG2Params(0)
 	 */
 	public JDFJBIG2Params getJBIG2Params(int iSkip)
 	{
@@ -918,7 +946,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	 * (27) const get element JPEG2000Params
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFJPEG2000Params the element default is getJPEG2000Params(0)
+	 * @return JDFJPEG2000Params the element
+	 *         default is getJPEG2000Params(0)
 	 */
 	public JDFJPEG2000Params getJPEG2000Params(int iSkip)
 	{
@@ -968,7 +997,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
 	/**
 	 * (29) append element LZWParams
 	 *
-	 * @return JDFLZWParams the element @ if the element already exists
+	 * @return JDFLZWParams the element
+	 * @ if the element already exists
 	 */
 	public JDFLZWParams appendLZWParams()
 	{

@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 
 /**
- *****************************************************************************
- * class JDFAutoRegisterRibbon : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRegisterRibbon : public JDFResource
  */
 
 public abstract class JDFAutoRegisterRibbon extends JDFResource
@@ -168,7 +165,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -183,11 +180,14 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LengthOverall
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LengthOverall
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -211,7 +211,9 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Material
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Material
@@ -234,7 +236,9 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RibbonColor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RibbonColor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute RibbonColor
@@ -261,7 +265,8 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RibbonColorDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RibbonColorDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -285,7 +290,9 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RibbonEnd ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RibbonEnd
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RibbonEnd
@@ -308,7 +315,8 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute VisibleLength
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute VisibleLength
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -332,7 +340,9 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -372,7 +382,8 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -446,7 +457,8 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

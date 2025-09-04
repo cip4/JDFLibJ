@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPlasticCombBindingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPlasticCombBindingParams : public JDFResource
  */
 
 public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
@@ -170,7 +167,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -326,11 +323,15 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Brand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Brand
@@ -355,7 +356,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Color ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Color
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute Color
@@ -382,7 +385,8 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -406,7 +410,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Diameter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Diameter
@@ -429,7 +435,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Thickness ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Thickness
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Thickness
@@ -452,7 +460,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Type
@@ -475,13 +485,15 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Type
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setType(EType) based on java.lang.enum instead
+	 * @deprecated use SetType(EType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setType(EnumType enumVar)
@@ -493,7 +505,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	 * (9) get attribute Type
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EType getEType() based on java.lang.enum instead
+	 * @deprecated use EType GetEType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumType getType()
@@ -502,7 +514,9 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -528,7 +542,8 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
 	/**
 	 * (29) append element HoleMakingParams
 	 *
-	 * @return JDFHoleMakingParams the element @ if the element already exists
+	 * @return JDFHoleMakingParams the element
+	 * @ if the element already exists
 	 */
 	public JDFHoleMakingParams appendHoleMakingParams()
 	{

@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 /**
- *****************************************************************************
- * class JDFAutoMediaLayers : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMediaLayers : public JDFElement
  */
 
 public abstract class JDFAutoMediaLayers extends JDFElement
@@ -142,7 +139,9 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -180,7 +179,8 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 	 * (27) const get element GlueLine
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueLine the element default is getGlueLine(0)
+	 * @return JDFGlueLine the element
+	 *         default is getGlueLine(0)
 	 */
 	public JDFGlueLine getGlueLine(int iSkip)
 	{
@@ -242,7 +242,8 @@ public abstract class JDFAutoMediaLayers extends JDFElement
 	 * (27) const get element Media
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMedia the element default is getMedia(0)
+	 * @return JDFMedia the element
+	 *         default is getMedia(0)
 	 */
 	public JDFMedia getMedia(int iSkip)
 	{

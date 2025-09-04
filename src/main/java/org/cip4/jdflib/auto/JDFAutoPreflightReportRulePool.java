@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.process.JDFPRRule;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightReportRulePool : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightReportRulePool : public JDFResource
  */
 
 public abstract class JDFAutoPreflightReportRulePool extends JDFResource
@@ -162,7 +159,7 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -177,11 +174,14 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxOccurrences
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxOccurrences
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -205,7 +205,9 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -243,7 +245,8 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	 * (27) const get element PRRule
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPRRule the element default is getPRRule(0)
+	 * @return JDFPRRule the element
+	 *         default is getPRRule(0)
 	 */
 	public JDFPRRule getPRRule(int iSkip)
 	{
@@ -293,7 +296,8 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 	/**
 	 * (29) append element PRRuleAttr
 	 *
-	 * @return JDFPRRuleAttr the element @ if the element already exists
+	 * @return JDFPRRuleAttr the element
+	 * @ if the element already exists
 	 */
 	public JDFPRRuleAttr appendPRRuleAttr()
 	{

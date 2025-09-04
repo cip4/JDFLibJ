@@ -70,12 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoProcessRun.EnumEndStatus;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -84,13 +80,9 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoAbortQueueEntryParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAbortQueueEntryParams : public JDFElement
  */
 
 public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
@@ -158,89 +150,16 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for EndStatus
-	 */
-
-	public enum EEndStatus
-	{
-		Aborted, Completed;
-
-		public static EEndStatus getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EEndStatus.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for EndStatus
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumEndStatus extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumEndStatus(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumEndStatus getEnum(String enumName)
-		{
-			return (EnumEndStatus) getEnum(EnumEndStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumEndStatus getEnum(int enumValue)
-		{
-			return (EnumEndStatus) getEnum(EnumEndStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumEndStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumEndStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumEndStatus.class);
-		}
-
-		/**  */
-		public static final EnumEndStatus Aborted = new EnumEndStatus("Aborted");
-		/**  */
-		public static final EnumEndStatus Completed = new EnumEndStatus("Completed");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndStatus ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndStatus
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute EndStatus
@@ -263,13 +182,15 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndStatus ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndStatus
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute EndStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setNodeStatus(ENodeStatus) based on java.lang.enum instead
+	 * @deprecated use SetNodeStatus(ENodeStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setNodeStatus(EnumNodeStatus enumVar)
@@ -281,7 +202,7 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	 * (9) get attribute EndStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ENodeStatus getENodeStatus() based on java.lang.enum instead
+	 * @deprecated use ENodeStatus GetENodeStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumNodeStatus getNodeStatus()
@@ -290,7 +211,9 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -316,7 +239,8 @@ public abstract class JDFAutoAbortQueueEntryParams extends JDFElement
 	/**
 	 * (29) append element QueueFilter
 	 *
-	 * @return JDFQueueFilter the element @ if the element already exists
+	 * @return JDFQueueFilter the element
+	 * @ if the element already exists
 	 */
 	public JDFQueueFilter appendQueueFilter()
 	{

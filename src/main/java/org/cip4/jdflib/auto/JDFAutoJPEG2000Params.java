@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoJPEG2000Params : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoJPEG2000Params : public JDFElement
  */
 
 public abstract class JDFAutoJPEG2000Params extends JDFElement
@@ -103,7 +100,8 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LAYERSPERTILE, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAYERRATES, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMRESOLUTIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROGRESSIONORDER, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumProgressionOrder.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROGRESSIONORDER, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumProgressionOrder.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x3333333111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
@@ -233,11 +231,14 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CodeBlockSize
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CodeBlockSize
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -261,7 +262,8 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayersPerTile
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LayersPerTile
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -285,7 +287,9 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayerRates ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LayerRates
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LayerRates
@@ -300,17 +304,19 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute LayerRates
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getLayerRates()
 	{
-		final String strAttrName = getAttribute(AttributeName.LAYERRATES, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.LAYERRATES, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumResolutions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NumResolutions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -334,7 +340,8 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProgressionOrder
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProgressionOrder
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -358,14 +365,15 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProgressionOrder
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProgressionOrder
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ProgressionOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setProgressionOrder(EProgressionOrder) based on java.lang.enum instead
+	 * @deprecated use SetProgressionOrder(EProgressionOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProgressionOrder(EnumProgressionOrder enumVar)
@@ -377,7 +385,7 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	 * (9) get attribute ProgressionOrder
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EProgressionOrder getEProgressionOrder() based on java.lang.enum instead
+	 * @deprecated use EProgressionOrder GetEProgressionOrder() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumProgressionOrder getProgressionOrder()
@@ -386,7 +394,9 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TileSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TileSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TileSize
@@ -401,12 +411,13 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute TileSize
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTileSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.TILESIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TILESIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

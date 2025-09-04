@@ -43,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBindingEdge;
 
 /**
  * The CIP4 Software License, Version 1.0
@@ -82,10 +83,9 @@ import org.cip4.jdflib.JDFTestCaseBase;
  */
 
 import org.cip4.jdflib.auto.JDFAutoFitPolicy.EnumSizePolicy;
-import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumBindingEdge;
-import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides;
-import org.cip4.jdflib.auto.JDFAutoPosition.EnumOrientation;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.ESides;
+import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -117,7 +117,7 @@ class StrippingConverterTest extends JDFTestCaseBase
 	@Test
 	void testSidesBack()
 	{
-		for (EnumSides s : new EnumSides[] { EnumSides.OneSidedBackFlipX, EnumSides.OneSidedBackFlipY })
+		for (ESides s : new ESides[] { ESides.OneSidedBackFlipX, ESides.OneSidedBackFlipY })
 		{
 			final JDFLayoutPreparationParams lpp = createlpp();
 			lpp.setSides(s);
@@ -126,7 +126,7 @@ class StrippingConverterTest extends JDFTestCaseBase
 			strippingConverter.convert();
 			final JDFStrippingParams sp = strippingConverter.getStrippingParams();
 			JDFStripCellParams scp = sp.getStripCellParams();
-			assertEquals(org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides.OneSidedBack, scp.getSides());
+			assertEquals(ESides.OneSidedBack, scp.getESides());
 		}
 	}
 
@@ -156,7 +156,6 @@ class StrippingConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	JDFLayoutPreparationParams createlpp()

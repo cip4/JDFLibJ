@@ -104,10 +104,7 @@ import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoArtDelivery : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoArtDelivery : public JDFElement
  */
 
 public abstract class JDFAutoArtDelivery extends JDFElement
@@ -124,7 +121,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PAGELIST, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PREFLIGHTOUTPUT, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightStatus.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumPreflightStatus.getEnum(0), null);
 	}
 
 	@Override
@@ -278,11 +276,15 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -305,7 +307,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ArtDeliveryType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ArtDeliveryType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -329,7 +332,9 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HasBleeds ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HasBleeds
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HasBleeds
@@ -352,7 +357,9 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsTrapped ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsTrapped
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsTrapped
@@ -375,7 +382,9 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageList
@@ -390,17 +399,19 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageList
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageList()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGELIST, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGELIST, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightOutput
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreflightOutput
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -424,7 +435,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreflightStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -448,14 +460,15 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreflightStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PreflightStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPreflightStatus(EPreflightStatus) based on java.lang.enum instead
+	 * @deprecated use SetPreflightStatus(EPreflightStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreflightStatus(EnumPreflightStatus enumVar)
@@ -467,7 +480,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 * (9) get attribute PreflightStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPreflightStatus getEPreflightStatus() based on java.lang.enum instead
+	 * @deprecated use EPreflightStatus GetEPreflightStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPreflightStatus getPreflightStatus()
@@ -476,7 +489,9 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -502,7 +517,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element ArtDeliveryDate
 	 *
-	 * @return JDFTimeSpan the element @ if the element already exists
+	 * @return JDFTimeSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFTimeSpan appendArtDeliveryDate()
 	{
@@ -532,7 +548,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element ArtDeliveryDuration
 	 *
-	 * @return JDFDurationSpan the element @ if the element already exists
+	 * @return JDFDurationSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFDurationSpan appendArtDeliveryDuration()
 	{
@@ -562,7 +579,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element ArtHandling
 	 *
-	 * @return JDFSpanArtHandling the element @ if the element already exists
+	 * @return JDFSpanArtHandling the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanArtHandling appendArtHandling()
 	{
@@ -592,7 +610,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element DeliveryCharge
 	 *
-	 * @return JDFSpanDeliveryCharge the element @ if the element already exists
+	 * @return JDFSpanDeliveryCharge the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanDeliveryCharge appendDeliveryCharge()
 	{
@@ -622,7 +641,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element Method
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendMethod()
 	{
@@ -652,7 +672,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element ReturnMethod
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendReturnMethod()
 	{
@@ -682,7 +703,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element ServiceLevel
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendServiceLevel()
 	{
@@ -712,7 +734,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element Transfer
 	 *
-	 * @return JDFSpanTransfer the element @ if the element already exists
+	 * @return JDFSpanTransfer the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanTransfer appendTransfer()
 	{
@@ -742,7 +765,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element Company
 	 *
-	 * @return JDFCompany the element @ if the element already exists
+	 * @return JDFCompany the element
+	 * @ if the element already exists
 	 */
 	public JDFCompany appendCompany()
 	{
@@ -782,7 +806,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element Component
 	 *
-	 * @return JDFComponent the element @ if the element already exists
+	 * @return JDFComponent the element
+	 * @ if the element already exists
 	 */
 	public JDFComponent appendComponent()
 	{
@@ -834,7 +859,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -894,7 +920,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element DigitalMedia
 	 *
-	 * @return JDFDigitalMedia the element @ if the element already exists
+	 * @return JDFDigitalMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFDigitalMedia appendDigitalMedia()
 	{
@@ -934,7 +961,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element ExposedMedia
 	 *
-	 * @return JDFExposedMedia the element @ if the element already exists
+	 * @return JDFExposedMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFExposedMedia appendExposedMedia()
 	{
@@ -974,7 +1002,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element RunList
 	 *
-	 * @return JDFRunList the element @ if the element already exists
+	 * @return JDFRunList the element
+	 * @ if the element already exists
 	 */
 	public JDFRunList appendRunList()
 	{
@@ -1014,7 +1043,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element ScanParams
 	 *
-	 * @return JDFScanParams the element @ if the element already exists
+	 * @return JDFScanParams the element
+	 * @ if the element already exists
 	 */
 	public JDFScanParams appendScanParams()
 	{
@@ -1054,7 +1084,8 @@ public abstract class JDFAutoArtDelivery extends JDFElement
 	/**
 	 * (29) append element Tool
 	 *
-	 * @return JDFTool the element @ if the element already exists
+	 * @return JDFTool the element
+	 * @ if the element already exists
 	 */
 	public JDFTool appendTool()
 	{

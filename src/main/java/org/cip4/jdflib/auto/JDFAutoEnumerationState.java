@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 
 /**
- *****************************************************************************
- * class JDFAutoEnumerationState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoEnumerationState : public JDFResource
  */
 
 public abstract class JDFAutoEnumerationState extends JDFResource
@@ -167,17 +164,20 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -201,7 +201,8 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -225,7 +226,8 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -245,14 +247,15 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	 */
 	public VString getAllowedValueList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ALLOWEDVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ALLOWEDVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -272,14 +275,16 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	 */
 	public VString getPresentValueList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.PRESENTVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.PRESENTVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -317,7 +322,8 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -379,7 +385,8 @@ public abstract class JDFAutoEnumerationState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

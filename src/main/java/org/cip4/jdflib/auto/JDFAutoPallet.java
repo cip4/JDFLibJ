@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 
 /**
- *****************************************************************************
- * class JDFAutoPallet : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPallet : public JDFResource
  */
 
 public abstract class JDFAutoPallet extends JDFResource
@@ -165,7 +162,7 @@ public abstract class JDFAutoPallet extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -180,11 +177,15 @@ public abstract class JDFAutoPallet extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PalletType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PalletType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PalletType
@@ -207,7 +208,9 @@ public abstract class JDFAutoPallet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Size
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Size
@@ -222,17 +225,20 @@ public abstract class JDFAutoPallet extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Size
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -272,7 +278,8 @@ public abstract class JDFAutoPallet extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -346,7 +353,8 @@ public abstract class JDFAutoPallet extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

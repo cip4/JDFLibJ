@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
 
 /**
- *****************************************************************************
- * class JDFAutoContentData : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoContentData : public JDFElement
  */
 
 public abstract class JDFAutoContentData extends JDFElement
@@ -176,11 +173,15 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CatalogID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CatalogID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CatalogID
@@ -203,7 +204,8 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CatalogDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CatalogDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -227,7 +229,9 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentRefs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContentRefs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ContentRefs
@@ -246,14 +250,16 @@ public abstract class JDFAutoContentData extends JDFElement
 	 */
 	public VString getContentRefs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.CONTENTREFS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.CONTENTREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContentType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ContentType
@@ -276,7 +282,9 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HasBleeds ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HasBleeds
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HasBleeds
@@ -299,7 +307,9 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -324,7 +334,9 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsBlank ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsBlank
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsBlank
@@ -347,7 +359,9 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsTrapped ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsTrapped
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsTrapped
@@ -370,7 +384,9 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -393,7 +409,9 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProductID
@@ -416,7 +434,9 @@ public abstract class JDFAutoContentData extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -442,7 +462,8 @@ public abstract class JDFAutoContentData extends JDFElement
 	/**
 	 * (29) append element ContentMetadata
 	 *
-	 * @return JDFContentMetadata the element @ if the element already exists
+	 * @return JDFContentMetadata the element
+	 * @ if the element already exists
 	 */
 	public JDFContentMetadata appendContentMetadata()
 	{
@@ -472,7 +493,8 @@ public abstract class JDFAutoContentData extends JDFElement
 	/**
 	 * (29) append element ElementColorParams
 	 *
-	 * @return JDFElementColorParams the element @ if the element already exists
+	 * @return JDFElementColorParams the element
+	 * @ if the element already exists
 	 */
 	public JDFElementColorParams appendElementColorParams()
 	{
@@ -512,7 +534,8 @@ public abstract class JDFAutoContentData extends JDFElement
 	/**
 	 * (29) append element ImageCompressionParams
 	 *
-	 * @return JDFImageCompressionParams the element @ if the element already exists
+	 * @return JDFImageCompressionParams the element
+	 * @ if the element already exists
 	 */
 	public JDFImageCompressionParams appendImageCompressionParams()
 	{
@@ -564,7 +587,8 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * (27) const get element OCGControl
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFOCGControl the element default is getOCGControl(0)
+	 * @return JDFOCGControl the element
+	 *         default is getOCGControl(0)
 	 */
 	public JDFOCGControl getOCGControl(int iSkip)
 	{
@@ -614,7 +638,8 @@ public abstract class JDFAutoContentData extends JDFElement
 	/**
 	 * (29) append element ScreeningParams
 	 *
-	 * @return JDFScreeningParams the element @ if the element already exists
+	 * @return JDFScreeningParams the element
+	 * @ if the element already exists
 	 */
 	public JDFScreeningParams appendScreeningParams()
 	{
@@ -666,7 +691,8 @@ public abstract class JDFAutoContentData extends JDFElement
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

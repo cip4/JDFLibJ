@@ -91,10 +91,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoProcessRun : public JDFAudit
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoProcessRun : public JDFAudit
  */
 
 public abstract class JDFAutoProcessRun extends JDFAudit
@@ -252,11 +249,15 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Duration ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Duration
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Duration
@@ -271,17 +272,20 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	/**
 	 * (20) get JDFDuration attribute Duration
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getDuration()
 	{
-		final String strAttrName = getAttribute(AttributeName.DURATION, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DURATION, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute End
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute End
@@ -305,13 +309,15 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 */
 	public JDFDate getEnd()
 	{
-		final String str = getAttribute(AttributeName.END, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.END, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndStatus ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndStatus
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute EndStatus
@@ -334,13 +340,15 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndStatus ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndStatus
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute EndStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setEndStatus(ENodeStatus) based on java.lang.enum instead
+	 * @deprecated use SetEndStatus(ENodeStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	@Override
@@ -353,7 +361,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 * (9) get attribute EndStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ENodeStatus getEEndStatus() based on java.lang.enum instead
+	 * @deprecated use ENodeStatus GetEEndStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	@Override
@@ -363,7 +371,9 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReturnTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReturnTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute ReturnTime
@@ -387,13 +397,15 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 */
 	public JDFDate getReturnTime()
 	{
-		final String str = getAttribute(AttributeName.RETURNTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.RETURNTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Start
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Start
@@ -417,13 +429,14 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 */
 	public JDFDate getStart()
 	{
-		final String str = getAttribute(AttributeName.START, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.START, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SubmissionTime
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SubmissionTime
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -448,13 +461,15 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 */
 	public JDFDate getSubmissionTime()
 	{
-		final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -493,7 +508,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)
@@ -558,7 +574,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

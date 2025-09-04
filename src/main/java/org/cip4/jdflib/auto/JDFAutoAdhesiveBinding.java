@@ -80,10 +80,7 @@ import org.cip4.jdflib.span.JDFSpanGlue;
 import org.cip4.jdflib.span.JDFSpanScoring;
 
 /**
- *****************************************************************************
- * class JDFAutoAdhesiveBinding : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAdhesiveBinding : public JDFElement
  */
 
 public abstract class JDFAutoAdhesiveBinding extends JDFElement
@@ -142,7 +139,9 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -168,7 +167,8 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 	/**
 	 * (29) append element Scoring
 	 *
-	 * @return JDFSpanScoring the element @ if the element already exists
+	 * @return JDFSpanScoring the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanScoring appendScoring()
 	{
@@ -198,7 +198,8 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 	/**
 	 * (29) append element SpineGlue
 	 *
-	 * @return JDFSpanGlue the element @ if the element already exists
+	 * @return JDFSpanGlue the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanGlue appendSpineGlue()
 	{
@@ -228,7 +229,8 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
 	/**
 	 * (29) append element TapeBinding
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendTapeBinding()
 	{

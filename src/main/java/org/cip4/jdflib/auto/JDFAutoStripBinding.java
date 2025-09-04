@@ -79,10 +79,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFSpanHoleType;
 
 /**
- *****************************************************************************
- * class JDFAutoStripBinding : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStripBinding : public JDFElement
  */
 
 public abstract class JDFAutoStripBinding extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoStripBinding extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -166,7 +165,8 @@ public abstract class JDFAutoStripBinding extends JDFElement
 	/**
 	 * (29) append element HoleList
 	 *
-	 * @return JDFHoleList the element @ if the element already exists
+	 * @return JDFHoleList the element
+	 * @ if the element already exists
 	 */
 	public JDFHoleList appendHoleList()
 	{
@@ -196,7 +196,8 @@ public abstract class JDFAutoStripBinding extends JDFElement
 	/**
 	 * (29) append element HoleType
 	 *
-	 * @return JDFSpanHoleType the element @ if the element already exists
+	 * @return JDFSpanHoleType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanHoleType appendHoleType()
 	{

@@ -70,24 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoCut.EWorkingDirection;
+import org.cip4.jdflib.auto.JDFAutoCut.EnumWorkingDirection;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPerforate : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPerforate : public JDFElement
  */
 
 public abstract class JDFAutoPerforate extends JDFElement
@@ -103,7 +96,8 @@ public abstract class JDFAutoPerforate extends JDFElement
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumWorkingDirection.getEnum(0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -149,89 +143,16 @@ public abstract class JDFAutoPerforate extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for WorkingDirection
-	 */
-
-	public enum EWorkingDirection
-	{
-		Top, Bottom;
-
-		public static EWorkingDirection getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EWorkingDirection.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for WorkingDirection
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumWorkingDirection extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumWorkingDirection(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumWorkingDirection getEnum(String enumName)
-		{
-			return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumWorkingDirection getEnum(int enumValue)
-		{
-			return (EnumWorkingDirection) getEnum(EnumWorkingDirection.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumWorkingDirection.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumWorkingDirection.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumWorkingDirection.class);
-		}
-
-		/**  */
-		public static final EnumWorkingDirection Top = new EnumWorkingDirection("Top");
-		/**  */
-		public static final EnumWorkingDirection Bottom = new EnumWorkingDirection("Bottom");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Depth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Depth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Depth
@@ -254,7 +175,8 @@ public abstract class JDFAutoPerforate extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeStartPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelativeStartPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -270,17 +192,19 @@ public abstract class JDFAutoPerforate extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute RelativeStartPosition
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getRelativeStartPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeWorkingPath
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelativeWorkingPath
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -296,17 +220,19 @@ public abstract class JDFAutoPerforate extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute RelativeWorkingPath
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getRelativeWorkingPath()
 	{
-		final String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -322,17 +248,20 @@ public abstract class JDFAutoPerforate extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute StartPosition
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getStartPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WorkingPath
@@ -347,17 +276,19 @@ public abstract class JDFAutoPerforate extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute WorkingPath
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getWorkingPath()
 	{
-		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -381,14 +312,15 @@ public abstract class JDFAutoPerforate extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute WorkingDirection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setWorkingDirection(EWorkingDirection) based on java.lang.enum instead
+	 * @deprecated use SetWorkingDirection(EWorkingDirection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWorkingDirection(EnumWorkingDirection enumVar)
@@ -400,7 +332,7 @@ public abstract class JDFAutoPerforate extends JDFElement
 	 * (9) get attribute WorkingDirection
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EWorkingDirection getEWorkingDirection() based on java.lang.enum instead
+	 * @deprecated use EWorkingDirection GetEWorkingDirection() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumWorkingDirection getWorkingDirection()
@@ -409,7 +341,8 @@ public abstract class JDFAutoPerforate extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TeethPerDimension
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TeethPerDimension
 	 * ---------------------------------------------------------------------
 	 */
 	/**

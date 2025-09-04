@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.JDFErrorData;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoError : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoError : public JDFElement
  */
 
 public abstract class JDFAutoError extends JDFElement
@@ -240,11 +237,15 @@ public abstract class JDFAutoError extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ErrorID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ErrorID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ErrorID
@@ -267,7 +268,9 @@ public abstract class JDFAutoError extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Resend ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Resend
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Resend
@@ -290,13 +293,15 @@ public abstract class JDFAutoError extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Resend ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Resend
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Resend
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setResend(EResend) based on java.lang.enum instead
+	 * @deprecated use SetResend(EResend) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResend(EnumResend enumVar)
@@ -308,7 +313,7 @@ public abstract class JDFAutoError extends JDFElement
 	 * (9) get attribute Resend
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EResend getEResend() based on java.lang.enum instead
+	 * @deprecated use EResend GetEResend() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumResend getResend()
@@ -317,7 +322,9 @@ public abstract class JDFAutoError extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReturnCode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReturnCode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReturnCode
@@ -340,7 +347,9 @@ public abstract class JDFAutoError extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -378,7 +387,8 @@ public abstract class JDFAutoError extends JDFElement
 	 * (27) const get element ErrorData
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFErrorData the element default is getErrorData(0)
+	 * @return JDFErrorData the element
+	 *         default is getErrorData(0)
 	 */
 	public JDFErrorData getErrorData(int iSkip)
 	{

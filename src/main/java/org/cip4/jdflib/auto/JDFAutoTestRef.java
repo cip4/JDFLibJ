@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoTestRef : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTestRef : public JDFResource
  */
 
 public abstract class JDFAutoTestRef extends JDFResource
@@ -143,17 +140,21 @@ public abstract class JDFAutoTestRef extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute rRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute rRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute rRef

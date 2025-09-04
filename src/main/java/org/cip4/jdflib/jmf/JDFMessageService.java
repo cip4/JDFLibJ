@@ -87,6 +87,7 @@ import java.util.Vector;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
 import org.cip4.jdflib.auto.JDFAutoMessageService;
+import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -106,7 +107,6 @@ import org.cip4.jdflib.util.JavaEnumUtil;
 //----------------------------------
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class JDFMessageService extends JDFAutoMessageService implements IDeviceCapable
 {
@@ -314,7 +314,9 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		{
 			final int siz = families.size();
 			for (int i = 0; i < siz; i++)
+			{
 				vResult.add(families.get(i).getName());
+			}
 		}
 
 		return vResult;
@@ -329,15 +331,25 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	{
 		final Vector<EnumFamily> fams = new Vector<EnumFamily>();
 		if (getCommand())
+		{
 			fams.add(EnumFamily.Command);
+		}
 		if (getSignal())
+		{
 			fams.add(EnumFamily.Signal);
+		}
 		if (getQuery())
+		{
 			fams.add(EnumFamily.Query);
+		}
 		if (getRegistration())
+		{
 			fams.add(EnumFamily.Registration);
+		}
 		if (getAcknowledge())
+		{
 			fams.add(EnumFamily.Acknowledge);
+		}
 		return fams.size() == 0 ? null : fams;
 	}
 
@@ -356,7 +368,9 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		setPersistent(false);
 
 		if (fams == null)
+		{
 			return;
+		}
 		for (int i = 0; i < fams.size(); i++)
 		{
 			try
@@ -364,7 +378,9 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 				final EnumFamily family = fams.elementAt(i);
 				setFamily(family);
 				if (EnumFamily.Signal.equals(family))
+				{
 					setPersistent(true);
+				}
 			}
 			catch (final JDFException x)
 			{ /* nop */
@@ -380,21 +396,24 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	public void setFamily(final EnumFamily family)
 	{
 		if (family == null || EnumFamily.Response.equals(family))
+		{
 			throw new JDFException("setFamily: illegal family:" + family);
+		}
 		setAttribute(family.getName(), true, null);
 	}
 
 	/**
 	 * @param id
 	 * @return the capabilty description
-	 *
 	 */
 	@Override
 	public ICapabilityElement getTargetCap(final String id)
 	{
 		final KElement e = getTarget(id, null);
 		if (e instanceof ICapabilityElement)
+		{
 			return (ICapabilityElement) e;
+		}
 		return null;
 	}
 

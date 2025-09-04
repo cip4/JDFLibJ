@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstanceDetail;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightInstance : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightInstance : public JDFElement
  */
 
 public abstract class JDFAutoPreflightInstance extends JDFElement
@@ -158,11 +155,15 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Identifier ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Identifier
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Identifier
@@ -185,7 +186,9 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageRefs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageRefs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageRefs
@@ -200,17 +203,20 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageRefs
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageRefs()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGEREFS, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -248,7 +254,8 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
 	 * (27) const get element PreflightInstanceDetail
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPreflightInstanceDetail the element default is getPreflightInstanceDetail(0)
+	 * @return JDFPreflightInstanceDetail the element
+	 *         default is getPreflightInstanceDetail(0)
 	 */
 	public JDFPreflightInstanceDetail getPreflightInstanceDetail(int iSkip)
 	{

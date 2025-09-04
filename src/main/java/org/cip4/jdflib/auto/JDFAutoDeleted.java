@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoDeleted : public JDFAudit
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeleted : public JDFAudit
  */
 
 public abstract class JDFAutoDeleted extends JDFAudit
@@ -156,11 +153,15 @@ public abstract class JDFAutoDeleted extends JDFAudit
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute XPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute XPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute XPath
@@ -183,7 +184,9 @@ public abstract class JDFAutoDeleted extends JDFAudit
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -222,7 +225,8 @@ public abstract class JDFAutoDeleted extends JDFAudit
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)

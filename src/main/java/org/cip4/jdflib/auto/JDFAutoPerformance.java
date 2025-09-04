@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDuration;
 
 /**
- *****************************************************************************
- * class JDFAutoPerformance : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPerformance : public JDFElement
  */
 
 public abstract class JDFAutoPerformance extends JDFElement
@@ -150,11 +147,14 @@ public abstract class JDFAutoPerformance extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AverageAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AverageAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -178,7 +178,8 @@ public abstract class JDFAutoPerformance extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AverageCleanup
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AverageCleanup
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -194,17 +195,19 @@ public abstract class JDFAutoPerformance extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute AverageCleanup
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getAverageCleanup()
 	{
-		final String strAttrName = getAttribute(AttributeName.AVERAGECLEANUP, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.AVERAGECLEANUP, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AverageSetup
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AverageSetup
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -220,17 +223,20 @@ public abstract class JDFAutoPerformance extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute AverageSetup
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getAverageSetup()
 	{
-		final String strAttrName = getAttribute(AttributeName.AVERAGESETUP, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.AVERAGESETUP, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxAmount
@@ -253,7 +259,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxCleanup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxCleanup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxCleanup
@@ -268,17 +276,20 @@ public abstract class JDFAutoPerformance extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute MaxCleanup
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getMaxCleanup()
 	{
-		final String strAttrName = getAttribute(AttributeName.MAXCLEANUP, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MAXCLEANUP, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxSetup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxSetup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxSetup
@@ -293,17 +304,20 @@ public abstract class JDFAutoPerformance extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute MaxSetup
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getMaxSetup()
 	{
-		final String strAttrName = getAttribute(AttributeName.MAXSETUP, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MAXSETUP, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MinAmount
@@ -326,7 +340,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinCleanup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinCleanup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MinCleanup
@@ -341,17 +357,20 @@ public abstract class JDFAutoPerformance extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute MinCleanup
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getMinCleanup()
 	{
-		final String strAttrName = getAttribute(AttributeName.MINCLEANUP, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MINCLEANUP, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinSetup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinSetup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MinSetup
@@ -366,17 +385,20 @@ public abstract class JDFAutoPerformance extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute MinSetup
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getMinSetup()
 	{
-		final String strAttrName = getAttribute(AttributeName.MINSETUP, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MINSETUP, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -399,7 +421,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DevCapsRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DevCapsRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DevCapsRef
@@ -422,7 +446,9 @@ public abstract class JDFAutoPerformance extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Unit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Unit

@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.JDFCylinderPosition;
 import org.cip4.jdflib.resource.process.JDFLayout;
 
 /**
- *****************************************************************************
- * class JDFAutoCylinderLayout : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCylinderLayout : public JDFResource
  */
 
 public abstract class JDFAutoCylinderLayout extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,15 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceID
@@ -205,7 +206,9 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -231,7 +234,8 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	/**
 	 * (29) append element Layout
 	 *
-	 * @return JDFLayout the element @ if the element already exists
+	 * @return JDFLayout the element
+	 * @ if the element already exists
 	 */
 	public JDFLayout appendLayout()
 	{
@@ -283,7 +287,8 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
 	 * (27) const get element CylinderPosition
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCylinderPosition the element default is getCylinderPosition(0)
+	 * @return JDFCylinderPosition the element
+	 *         default is getCylinderPosition(0)
 	 */
 	public JDFCylinderPosition getCylinderPosition(int iSkip)
 	{

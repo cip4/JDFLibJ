@@ -80,10 +80,7 @@ import org.cip4.jdflib.span.JDFSpanGlueType;
 import org.cip4.jdflib.span.JDFSpanMethod;
 
 /**
- *****************************************************************************
- * class JDFAutoInsertingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInsertingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoInsertingIntent extends JDFIntentResource
@@ -142,7 +139,9 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -168,7 +167,8 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	/**
 	 * (29) append element GlueType
 	 *
-	 * @return JDFSpanGlueType the element @ if the element already exists
+	 * @return JDFSpanGlueType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanGlueType appendGlueType()
 	{
@@ -198,7 +198,8 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	/**
 	 * (29) append element InsertList
 	 *
-	 * @return JDFInsertList the element @ if the element already exists
+	 * @return JDFInsertList the element
+	 * @ if the element already exists
 	 */
 	public JDFInsertList appendInsertList()
 	{
@@ -228,7 +229,8 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Method
 	 *
-	 * @return JDFSpanMethod the element @ if the element already exists
+	 * @return JDFSpanMethod the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanMethod appendMethod()
 	{

@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -106,10 +108,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoMarkObject : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMarkObject : public JDFElement
  */
 
 public abstract class JDFAutoMarkObject extends JDFElement
@@ -211,97 +210,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/**
-	 * Enumeration strings for Anchor
-	 */
-
-	public enum EAnchor
-	{
-		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
-
-		public static EAnchor getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAnchor.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Anchor
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAnchor extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAnchor(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(String enumName)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(int enumValue)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAnchor.class);
-		}
-
-		/**  */
-		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
-		/**  */
-		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
-		/**  */
-		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
-		/**  */
-		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
-		/**  */
-		public static final EnumAnchor Center = new EnumAnchor("Center");
-		/**  */
-		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
-		/**  */
-		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
-		/**  */
-		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
-		/**  */
-		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
-	}
-
-	/**
 	 * Enumeration strings for Type
 	 */
 
@@ -379,11 +287,15 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Ord
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Ord
@@ -406,7 +318,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceClipPath
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceClipPath
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -430,7 +343,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimClipPath
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrimClipPath
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -454,7 +368,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackOrd
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LogicalStackOrd
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -478,7 +393,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayoutElementPageNum
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LayoutElementPageNum
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -502,7 +418,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContentRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ContentRef
@@ -525,7 +443,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxFormat
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipBoxFormat
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -549,7 +468,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Anchor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Anchor
@@ -572,13 +493,15 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Anchor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Anchor
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAnchor(EAnchor) based on java.lang.enum instead
+	 * @deprecated use SetAnchor(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
@@ -590,7 +513,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (9) get attribute Anchor
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAnchor getEAnchor() based on java.lang.enum instead
+	 * @deprecated use EAnchor GetEAnchor() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAnchor getAnchor()
@@ -599,7 +522,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrdID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OrdID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OrdID
@@ -622,7 +547,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Type
@@ -645,13 +572,15 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Type
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setType(EType) based on java.lang.enum instead
+	 * @deprecated use SetType(EType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setType(EnumType enumVar)
@@ -663,7 +592,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (9) get attribute Type
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EType getEType() based on java.lang.enum instead
+	 * @deprecated use EType GetEType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumType getType()
@@ -672,7 +601,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClipBox
@@ -687,17 +618,19 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute ClipBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getClipBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMTemplate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CompensationCTMTemplate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -721,7 +654,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayerID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LayerID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LayerID
@@ -744,7 +679,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimCTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrimCTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrimCTM
@@ -759,17 +696,20 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (20) get JDFMatrix attribute TrimCTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getTrimCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRIMCTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRIMCTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClipPath
@@ -792,7 +732,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HalfTonePhaseOrigin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HalfTonePhaseOrigin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -808,17 +749,19 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute HalfTonePhaseOrigin
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getHalfTonePhaseOrigin()
 	{
-		final String strAttrName = getAttribute(AttributeName.HALFTONEPHASEORIGIN, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.HALFTONEPHASEORIGIN, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMFormat
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CompensationCTMFormat
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -842,7 +785,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssemblyIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssemblyIDs
@@ -861,14 +806,16 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CTM
@@ -883,17 +830,19 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (20) get JDFMatrix attribute CTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxTemplate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipBoxTemplate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -917,7 +866,9 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrimSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrimSize
@@ -932,17 +883,20 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute TrimSize
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTrimSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -980,7 +934,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element CIELABMeasuringField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCIELABMeasuringField the element default is getCIELABMeasuringField(0)
+	 * @return JDFCIELABMeasuringField the element
+	 *         default is getCIELABMeasuringField(0)
 	 */
 	public JDFCIELABMeasuringField getCIELABMeasuringField(int iSkip)
 	{
@@ -1052,7 +1007,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element ColorControlStrip
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorControlStrip the element default is getColorControlStrip(0)
+	 * @return JDFColorControlStrip the element
+	 *         default is getColorControlStrip(0)
 	 */
 	public JDFColorControlStrip getColorControlStrip(int iSkip)
 	{
@@ -1124,7 +1080,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element CutMark
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCutMark the element default is getCutMark(0)
+	 * @return JDFCutMark the element
+	 *         default is getCutMark(0)
 	 */
 	public JDFCutMark getCutMark(int iSkip)
 	{
@@ -1196,7 +1153,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element DensityMeasuringField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDensityMeasuringField the element default is getDensityMeasuringField(0)
+	 * @return JDFDensityMeasuringField the element
+	 *         default is getDensityMeasuringField(0)
 	 */
 	public JDFDensityMeasuringField getDensityMeasuringField(int iSkip)
 	{
@@ -1256,7 +1214,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (29) append element DeviceMark
 	 *
-	 * @return JDFDeviceMark the element @ if the element already exists
+	 * @return JDFDeviceMark the element
+	 * @ if the element already exists
 	 */
 	public JDFDeviceMark appendDeviceMark()
 	{
@@ -1298,7 +1257,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element DynamicField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDynamicField the element default is getDynamicField(0)
+	 * @return JDFDynamicField the element
+	 *         default is getDynamicField(0)
 	 */
 	public JDFDynamicField getDynamicField(int iSkip)
 	{
@@ -1360,7 +1320,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element FillMark
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFillMark the element default is getFillMark(0)
+	 * @return JDFFillMark the element
+	 *         default is getFillMark(0)
 	 */
 	public JDFFillMark getFillMark(int iSkip)
 	{
@@ -1422,7 +1383,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	public JDFIdentificationField getIdentificationField(int iSkip)
 	{
@@ -1482,7 +1444,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (29) append element JobField
 	 *
-	 * @return JDFJobField the element @ if the element already exists
+	 * @return JDFJobField the element
+	 * @ if the element already exists
 	 */
 	public JDFJobField appendJobField()
 	{
@@ -1512,7 +1475,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (29) append element LayoutElement
 	 *
-	 * @return JDFLayoutElement the element @ if the element already exists
+	 * @return JDFLayoutElement the element
+	 * @ if the element already exists
 	 */
 	public JDFLayoutElement appendLayoutElement()
 	{
@@ -1564,7 +1528,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element MarkActivation
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMarkActivation the element default is getMarkActivation(0)
+	 * @return JDFMarkActivation the element
+	 *         default is getMarkActivation(0)
 	 */
 	public JDFMarkActivation getMarkActivation(int iSkip)
 	{
@@ -1614,7 +1579,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	/**
 	 * (29) append element RefAnchor
 	 *
-	 * @return JDFRefAnchor the element @ if the element already exists
+	 * @return JDFRefAnchor the element
+	 * @ if the element already exists
 	 */
 	public JDFRefAnchor appendRefAnchor()
 	{
@@ -1656,7 +1622,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element RegisterMark
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRegisterMark the element default is getRegisterMark(0)
+	 * @return JDFRegisterMark the element
+	 *         default is getRegisterMark(0)
 	 */
 	public JDFRegisterMark getRegisterMark(int iSkip)
 	{
@@ -1728,7 +1695,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
 	 * (27) const get element ScavengerArea
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFScavengerArea the element default is getScavengerArea(0)
+	 * @return JDFScavengerArea the element
+	 *         default is getScavengerArea(0)
 	 */
 	public JDFScavengerArea getScavengerArea(int iSkip)
 	{

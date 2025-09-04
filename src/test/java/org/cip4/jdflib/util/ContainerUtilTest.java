@@ -70,7 +70,6 @@ import org.junit.jupiter.api.Test;
  * general utilities for containers and objects
  *
  * @author Rainer Prosi
- *
  */
 class ContainerUtilTest extends JDFTestCaseBase
 {
@@ -85,14 +84,15 @@ class ContainerUtilTest extends JDFTestCaseBase
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 		 */
 		@Override
 		public boolean matches(final Object subset)
 		{
 			if (subset instanceof Integer)
+			{
 				return ((Integer) subset).intValue() == i;
+			}
 			return ((SimpleMatch) subset).i == i;
 		}
 
@@ -109,7 +109,6 @@ class ContainerUtilTest extends JDFTestCaseBase
 		}
 
 		/**
-		 *
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
 		@Override
@@ -140,7 +139,6 @@ class ContainerUtilTest extends JDFTestCaseBase
 		}
 
 		/**
-		 *
 		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 		 */
 		@Override
@@ -261,6 +259,34 @@ class ContainerUtilTest extends JDFTestCaseBase
 		assertEquals(ContainerUtil.addAll(null, v1), v1);
 		assertEquals(ContainerUtil.addAll(v1, v2), v3);
 		assertEquals(v1, v3);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRemoveAll()
+	{
+		final VString v1 = new VString("a b c", null);
+		final VString v2 = new VString("e f g", null);
+		final VString v3 = new VString("a b c e f g", null);
+		assertEquals(ContainerUtil.removeAll(null, (List<String>) null), null);
+		assertEquals(ContainerUtil.removeAll(v1, (List<String>) null), v1);
+		assertEquals(ContainerUtil.removeAll(v3, v1), v2);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRemoveAll2()
+	{
+		final VString v1 = new VString("a b c", null);
+		final String[] v2 = new String[] { "e", "f", "g" };
+		final VString v3 = new VString("a b c e f g", null);
+		assertEquals(ContainerUtil.removeAll(null, (String[]) null), null);
+		assertEquals(ContainerUtil.removeAll(v1, new String[1]), v1);
+		assertEquals(ContainerUtil.removeAll(v3, v2), v1);
 	}
 
 	/**
@@ -635,7 +661,6 @@ class ContainerUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws FileNotFoundException
-	 *
 	 */
 	@Test
 	void testClose() throws FileNotFoundException

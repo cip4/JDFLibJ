@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoRefAnchor : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRefAnchor : public JDFElement
  */
 
 public abstract class JDFAutoRefAnchor extends JDFElement
@@ -99,7 +96,8 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchorType.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchorType.getEnum(0),
+				null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.RREF, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
@@ -314,11 +312,15 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Anchor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Anchor
@@ -341,13 +343,15 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Anchor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Anchor
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAnchor(EAnchor) based on java.lang.enum instead
+	 * @deprecated use SetAnchor(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
@@ -359,7 +363,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * (9) get attribute Anchor
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAnchor getEAnchor() based on java.lang.enum instead
+	 * @deprecated use EAnchor GetEAnchor() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAnchor getAnchor()
@@ -368,7 +372,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AnchorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AnchorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AnchorType
@@ -391,13 +397,15 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AnchorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AnchorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AnchorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAnchorType(EAnchorType) based on java.lang.enum instead
+	 * @deprecated use SetAnchorType(EAnchorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchorType(EnumAnchorType enumVar)
@@ -409,7 +417,7 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	 * (9) get attribute AnchorType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAnchorType getEAnchorType() based on java.lang.enum instead
+	 * @deprecated use EAnchorType GetEAnchorType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAnchorType getAnchorType()
@@ -418,7 +426,9 @@ public abstract class JDFAutoRefAnchor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute rRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute rRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute rRef

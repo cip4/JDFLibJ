@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightAction : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightAction : public JDFElement
  */
 
 public abstract class JDFAutoPreflightAction extends JDFElement
@@ -98,7 +95,8 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETSPLITBY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSetSplitBy.getEnum(0), "RunList");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETSPLITBY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSetSplitBy.getEnum(0),
+				"RunList");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.SETREF, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
@@ -224,11 +222,15 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetSplitBy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetSplitBy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SetSplitBy
@@ -251,13 +253,15 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetSplitBy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetSplitBy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SetSplitBy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSetSplitBy(ESetSplitBy) based on java.lang.enum instead
+	 * @deprecated use SetSetSplitBy(ESetSplitBy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSetSplitBy(EnumSetSplitBy enumVar)
@@ -269,7 +273,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	 * (9) get attribute SetSplitBy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESetSplitBy getESetSplitBy() based on java.lang.enum instead
+	 * @deprecated use ESetSplitBy GetESetSplitBy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSetSplitBy getSetSplitBy()
@@ -278,7 +282,9 @@ public abstract class JDFAutoPreflightAction extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetRef

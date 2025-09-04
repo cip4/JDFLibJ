@@ -76,6 +76,8 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.ESides;
+import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
@@ -156,9 +158,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * some simple examples
- * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
 class JDFExampleDocTest extends ExampleTest
 {
@@ -182,9 +183,7 @@ class JDFExampleDocTest extends ExampleTest
 
 	/**
 	 * a simple generic main routine for a dumb console app
-	 *
 	 * switches: -a: actions to perform - DoAll calls all test programs -i input JDF file -o output JDF File
-	 *
 	 */
 	@Test
 	void testAll()
@@ -364,7 +363,8 @@ class JDFExampleDocTest extends ExampleTest
 		productNode.setType(JDFNode.EnumType.Product.getName(), false);
 
 		// Add an intent resource
-		final JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput,
+				null);
 
 		final JDFComponent c = (JDFComponent) productNode.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		c.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
@@ -424,7 +424,8 @@ class JDFExampleDocTest extends ExampleTest
 		compCover.setComponentType(vComType);
 
 		// Add an ArtDeliveryIntent to define the input files for the cover
-		JDFArtDeliveryIntent artDeliveryIntent = (JDFArtDeliveryIntent) prodCover.appendMatchingResource(ElementName.ARTDELIVERYINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFArtDeliveryIntent artDeliveryIntent = (JDFArtDeliveryIntent) prodCover.appendMatchingResource(ElementName.ARTDELIVERYINTENT,
+				JDFNode.EnumProcessUsage.AnyInput, null);
 
 		final JDFArtDelivery artDeliveryCover = artDeliveryIntent.appendArtDelivery();
 		artDeliveryCover.setArtDeliveryType("DigitalNetwork");
@@ -437,10 +438,11 @@ class JDFExampleDocTest extends ExampleTest
 		// link the cover to the brochure node as input
 		productNode.linkMatchingResource(compCover, JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap());
 
-		final JDFLayoutIntent layoutIntent = (JDFLayoutIntent) prodCover.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFLayoutIntent layoutIntent = (JDFLayoutIntent) prodCover.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput,
+				null);
 
 		layoutIntent.setNumberUp(new JDFXYPair(1, 1));
-		layoutIntent.setSides(JDFLayoutIntent.EnumSides.OneSided);
+		layoutIntent.setSides(EnumSides.OneSidedFront);
 
 		prodCover.appendMatchingResource(ElementName.COLORINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
@@ -451,7 +453,8 @@ class JDFExampleDocTest extends ExampleTest
 		prodInsert.setJobPartID("Part3");
 
 		// link the insert to the brochure node as input
-		final JDFComponent compInsert = (JDFComponent) prodInsert.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, productNode);
+		final JDFComponent compInsert = (JDFComponent) prodInsert.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput,
+				productNode);
 
 		compInsert.setDescriptiveName("Insert Component");
 
@@ -461,10 +464,11 @@ class JDFExampleDocTest extends ExampleTest
 		productNode.linkMatchingResource(compInsert, JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap());
 
 		// add some intent resources to be filled in later
-		final JDFLayoutIntent insertLayoutIntent = (JDFLayoutIntent) prodInsert.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFLayoutIntent insertLayoutIntent = (JDFLayoutIntent) prodInsert.appendMatchingResource(ElementName.LAYOUTINTENT,
+				JDFNode.EnumProcessUsage.AnyInput, null);
 
 		insertLayoutIntent.setNumberUp(new JDFXYPair(1, 1));
-		insertLayoutIntent.setSides(JDFLayoutIntent.EnumSides.TwoSidedHeadToHead);
+		insertLayoutIntent.setSides(ESides.TwoSidedFlipY);
 		prodInsert.appendMatchingResource(ElementName.COLORINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		// Add an ArtDeliveryIntent to define the input files for the inser
@@ -490,7 +494,6 @@ class JDFExampleDocTest extends ExampleTest
 	// /
 	/**
 	 * Example 3: parse a JDF or PrintTalk and print the node type + ID
-	 *
 	 */
 
 	private int parseNodes()
@@ -548,7 +551,8 @@ class JDFExampleDocTest extends ExampleTest
 
 		runPart = runList.addSepRun(v, StringUtil.tokenize("Cyan Yellow Black Green", " ", false), 10, 1, true);
 
-		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("No Magenta, the missing sep does not exist as a page");
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL())
+				.appendText("No Magenta, the missing sep does not exist as a page");
 
 		// add a preseparated run
 		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ", false), 14, 2, true);
@@ -576,7 +580,6 @@ class JDFExampleDocTest extends ExampleTest
 	// /
 	/**
 	 * Example 5: parse a JDF and simulate processing it also add some audit elements
-	 *
 	 */
 
 	private int doAudit()
@@ -616,7 +619,6 @@ class JDFExampleDocTest extends ExampleTest
 
 	/**
 	 * Example 6: parse a JDF and validate the runlist
-	 *
 	 */
 
 	private int doValid()
@@ -730,7 +732,8 @@ class JDFExampleDocTest extends ExampleTest
 		// separation names
 		final String separationList = "Cyan Magenta Yellow Black";
 		// runPart is used to reference the partitioned runlist leaves
-		docList.addSepRun(StringUtil.tokenize("Cyan.pdf Magenta.pdf Yellow.pdf Black.pdf", " ", false), StringUtil.tokenize(separationList, " ", false), 0, 1, true);
+		docList.addSepRun(StringUtil.tokenize("Cyan.pdf Magenta.pdf Yellow.pdf Black.pdf", " ", false), StringUtil.tokenize(separationList, " ", false), 0, 1,
+				true);
 
 		// add the marks runlist
 		final JDFRunList markList = (JDFRunList) impositionNode.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Marks, null);
@@ -781,7 +784,8 @@ class JDFExampleDocTest extends ExampleTest
 		inRunList.addRun("File1.pdf", 0, 1);
 		inRunList.addRun("File2.pdf", 0, 1);
 
-		final JDFColorantControl colorantControl = (JDFColorantControl) ripNode.appendMatchingResource(ElementName.COLORANTCONTROL, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFColorantControl colorantControl = (JDFColorantControl) ripNode.appendMatchingResource(ElementName.COLORANTCONTROL,
+				JDFNode.EnumProcessUsage.AnyInput, null);
 		colorantControl.setProcessColorModel("DeviceCMYK");
 
 		ripNode.appendMatchingResource(ElementName.RENDERINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
@@ -796,7 +800,8 @@ class JDFExampleDocTest extends ExampleTest
 		mediaLink.setAmount(4 * 4, new JDFAttributeMap()); // 4 seps * 8 pages
 
 		// set up the expose output media
-		final JDFExposedMedia exposedMedia = (JDFExposedMedia) ripNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyOutput, null);
+		final JDFExposedMedia exposedMedia = (JDFExposedMedia) ripNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyOutput,
+				null);
 		exposedMedia.refMedia(media);
 
 		// set up one partition / page
@@ -1006,8 +1011,8 @@ class JDFExampleDocTest extends ExampleTest
 		partAmount.setOrientation(JDFResourceLink.EnumOrientation.Rotate0);
 
 		// get the MediaLink and set the attributes
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) printNode.appendMatchingResource(ElementName.DIGITALPRINTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput,
-				null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) printNode.appendMatchingResource(ElementName.DIGITALPRINTINGPARAMS,
+				JDFNode.EnumProcessUsage.AnyInput, null);
 
 		dpp.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString("0 -1,1~-2", ","));
 
@@ -1071,10 +1076,12 @@ class JDFExampleDocTest extends ExampleTest
 		final JDFExposedMedia xmFlexo = (JDFExposedMedia) printNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.Plate, null);
 		xmFlexo.setDescriptiveName("Flexo Plate");
 
-		final JDFLaminatingParams lamParm = (JDFLaminatingParams) printNode.appendMatchingResource(ElementName.LAMINATINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFLaminatingParams lamParm = (JDFLaminatingParams) printNode.appendMatchingResource(ElementName.LAMINATINGPARAMS,
+				JDFNode.EnumProcessUsage.AnyInput, null);
 		lamParm.setDescriptiveName("laminating parameters");
 
-		final JDFShapeCuttingParams cutParm = (JDFShapeCuttingParams) printNode.appendMatchingResource(ElementName.SHAPECUTTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
+		final JDFShapeCuttingParams cutParm = (JDFShapeCuttingParams) printNode.appendMatchingResource(ElementName.SHAPECUTTINGPARAMS,
+				JDFNode.EnumProcessUsage.AnyInput, null);
 		cutParm.setDescriptiveName("cutting parameters");
 
 		// fix resource links
@@ -1103,7 +1110,6 @@ class JDFExampleDocTest extends ExampleTest
 
 	/**
 	 * create a simple stripping node for 2 user jobs in a gang job
-	 *
 	 */
 	@Test
 	void testDigitalDelivery()
@@ -1157,7 +1163,9 @@ class JDFExampleDocTest extends ExampleTest
 		{
 			final boolean b = updateExample(f, EnumVersion.Version_1_9, 2024);
 			if (b)
+			{
 				n++;
+			}
 		}
 
 		XMLDoc.setLineWidth(l);
@@ -1199,7 +1207,9 @@ class JDFExampleDocTest extends ExampleTest
 				assertEquals(vPost || vPre, vPost, f.getName());
 				final boolean reparse = reparse(e, 1, version.getMinorVersion());
 				if (reparse0)
+				{
 					assertTrue(reparse, f.getName());
+				}
 				return true;
 			}
 		}
@@ -1208,7 +1218,6 @@ class JDFExampleDocTest extends ExampleTest
 
 	/**
 	 * create a simple stripping node for 2 user jobs in a gang job
-	 *
 	 */
 	@Test
 	void testGangDigitalDelivery()
@@ -1220,7 +1229,8 @@ class JDFExampleDocTest extends ExampleTest
 		final JDFDoc delDoc1 = new JDFDoc(delNode1.getOwnerDocument());
 		final JDFRunList rl1 = (JDFRunList) delNode1.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
 		rl1.setProductID("RL1ID");
-		final JDFRegistration reg = (JDFRegistration) delNode1.getNodeInfo().getJMF(0).getMessageElement(EnumFamily.Registration, JDFMessage.EnumType.Resource, 0);
+		final JDFRegistration reg = (JDFRegistration) delNode1.getNodeInfo().getJMF(0).getMessageElement(EnumFamily.Registration, JDFMessage.EnumType.Resource,
+				0);
 		final JDFResourceCmdParams rc = reg.getResourceCmdParams(0);
 		rc.setProductID("RL1ID");
 		reg.appendSubscription();
@@ -1229,7 +1239,8 @@ class JDFExampleDocTest extends ExampleTest
 		final JDFDoc delDoc2 = new JDFDoc(delNode2.getOwnerDocument());
 		final JDFRunList rl2 = (JDFRunList) delNode2.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
 		rl2.setProductID("RL2ID");
-		final JDFRegistration reg2 = (JDFRegistration) delNode2.getNodeInfo().getJMF(0).getMessageElement(EnumFamily.Registration, JDFMessage.EnumType.Resource, 0);
+		final JDFRegistration reg2 = (JDFRegistration) delNode2.getNodeInfo().getJMF(0).getMessageElement(EnumFamily.Registration, JDFMessage.EnumType.Resource,
+				0);
 		final JDFResourceCmdParams rc2 = reg2.getResourceCmdParams(0);
 		reg2.appendSubscription();
 		delNode2.setJobID("Del2ID");

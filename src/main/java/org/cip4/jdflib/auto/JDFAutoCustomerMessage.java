@@ -85,10 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 
 /**
- *****************************************************************************
- * class JDFAutoCustomerMessage : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCustomerMessage : public JDFElement
  */
 
 public abstract class JDFAutoCustomerMessage extends JDFElement
@@ -159,11 +156,15 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Language ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Language
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Language
@@ -186,7 +187,8 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MessageEvents
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MessageEvents
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -206,14 +208,16 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 */
 	public VString getMessageEvents()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.MESSAGEEVENTS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.MESSAGEEVENTS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShowList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShowList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShowList
@@ -232,14 +236,16 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 */
 	public VString getShowList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -277,7 +283,8 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
 	 * (27) const get element ComChannel
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFComChannel the element default is getComChannel(0)
+	 * @return JDFComChannel the element
+	 *         default is getComChannel(0)
 	 */
 	public JDFComChannel getComChannel(int iSkip)
 	{

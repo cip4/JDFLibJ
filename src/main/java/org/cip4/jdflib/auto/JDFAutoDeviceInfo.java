@@ -99,10 +99,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDeviceInfo : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeviceInfo : public JDFElement
  */
 
 public abstract class JDFAutoDeviceInfo extends JDFElement
@@ -114,10 +111,13 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERUNIT, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICECONDITION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceCondition.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICECONDITION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDeviceCondition.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceOperationMode.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceStatus.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDeviceOperationMode.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceStatus.getEnum(0),
+				null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.ENDTIME, 0x3331111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.HOURCOUNTER, 0x3333333333l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.IDLESTARTTIME, 0x3333331111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -357,11 +357,15 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CounterUnit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CounterUnit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CounterUnit
@@ -384,7 +388,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceCondition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceCondition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -408,14 +413,15 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceCondition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceCondition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeviceCondition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDeviceCondition(EDeviceCondition) based on java.lang.enum instead
+	 * @deprecated use SetDeviceCondition(EDeviceCondition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceCondition(EnumDeviceCondition enumVar)
@@ -427,7 +433,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (9) get attribute DeviceCondition
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDeviceCondition getEDeviceCondition() based on java.lang.enum instead
+	 * @deprecated use EDeviceCondition GetEDeviceCondition() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDeviceCondition getDeviceCondition()
@@ -436,7 +442,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceID
@@ -459,7 +467,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceOperationMode
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceOperationMode
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -483,14 +492,15 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceOperationMode
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceOperationMode
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeviceOperationMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDeviceOperationMode(EDeviceOperationMode) based on java.lang.enum instead
+	 * @deprecated use SetDeviceOperationMode(EDeviceOperationMode) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
@@ -502,7 +512,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (9) get attribute DeviceOperationMode
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDeviceOperationMode getEDeviceOperationMode() based on java.lang.enum instead
+	 * @deprecated use EDeviceOperationMode GetEDeviceOperationMode() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDeviceOperationMode getDeviceOperationMode()
@@ -511,7 +521,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -535,14 +546,15 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeviceStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDeviceStatus(EDeviceStatus) based on java.lang.enum instead
+	 * @deprecated use SetDeviceStatus(EDeviceStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceStatus(EnumDeviceStatus enumVar)
@@ -554,7 +566,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (9) get attribute DeviceStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDeviceStatus getEDeviceStatus() based on java.lang.enum instead
+	 * @deprecated use EDeviceStatus GetEDeviceStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDeviceStatus getDeviceStatus()
@@ -563,7 +575,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute EndTime
@@ -587,13 +601,15 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFDate getEndTime()
 	{
-		final String str = getAttribute(AttributeName.ENDTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.ENDTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HourCounter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HourCounter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HourCounter
@@ -608,17 +624,19 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	/**
 	 * (20) get JDFDuration attribute HourCounter
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getHourCounter()
 	{
-		final String strAttrName = getAttribute(AttributeName.HOURCOUNTER, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.HOURCOUNTER, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IdleStartTime
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IdleStartTime
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -643,13 +661,15 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFDate getIdleStartTime()
 	{
-		final String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PowerOnTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PowerOnTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute PowerOnTime
@@ -673,13 +693,14 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public JDFDate getPowerOnTime()
 	{
-		final String str = getAttribute(AttributeName.POWERONTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.POWERONTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductionCounter
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductionCounter
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -703,7 +724,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Speed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Speed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Speed
@@ -726,7 +749,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StatusDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -750,7 +774,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToolIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToolIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ToolIDs
@@ -769,14 +795,15 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 */
 	public VString getToolIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.TOOLIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.TOOLIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TotalProductionCounter
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TotalProductionCounter
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -800,7 +827,9 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -838,7 +867,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (27) const get element Activity
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFActivity the element default is getActivity(0)
+	 * @return JDFActivity the element
+	 *         default is getActivity(0)
 	 */
 	public JDFActivity getActivity(int iSkip)
 	{
@@ -888,7 +918,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	/**
 	 * (29) append element Device
 	 *
-	 * @return JDFDevice the element @ if the element already exists
+	 * @return JDFDevice the element
+	 * @ if the element already exists
 	 */
 	public JDFDevice appendDevice()
 	{
@@ -930,7 +961,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{
@@ -992,7 +1024,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (27) const get element Event
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEvent the element default is getEvent(0)
+	 * @return JDFEvent the element
+	 *         default is getEvent(0)
 	 */
 	public JDFEvent getEvent(int iSkip)
 	{
@@ -1054,7 +1087,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (27) const get element JobPhase
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFJobPhase the element default is getJobPhase(0)
+	 * @return JDFJobPhase the element
+	 *         default is getJobPhase(0)
 	 */
 	public JDFJobPhase getJobPhase(int iSkip)
 	{
@@ -1116,7 +1150,8 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 	 * (27) const get element ModuleStatus
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFModuleStatus the element default is getModuleStatus(0)
+	 * @return JDFModuleStatus the element
+	 *         default is getModuleStatus(0)
 	 */
 	public JDFModuleStatus getModuleStatus(int iSkip)
 	{

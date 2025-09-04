@@ -93,10 +93,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoResourceQuParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResourceQuParams : public JDFElement
  */
 
 public abstract class JDFAutoResourceQuParams extends JDFElement
@@ -107,22 +104,26 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[16];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, JDFResource.EnumResourceClass.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
+				JDFResource.EnumResourceClass.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.EXACT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.LOCATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.LOTDETAILS, 0x4444331111l, AttributeInfo.EnumAttributeType.enumeration, EnumLotDetails.getEnum(0), "Brief");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.LOTDETAILS, 0x4444331111l, AttributeInfo.EnumAttributeType.enumeration, EnumLotDetails.getEnum(0),
+				"Brief");
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.LOTID, 0x4444331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[11] = new AtrInfoTable(AttributeName.RESOURCEDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumResourceDetails.getEnum(0), "Full");
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.RESOURCEDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumResourceDetails.getEnum(0), "Full");
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.RESOURCEID, 0x4444333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.SCOPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumScope.getEnum(0), null);
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.USAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.USAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				JDFResourceLink.EnumUsage.getEnum(0), null);
 	}
 
 	@Override
@@ -496,11 +497,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Classes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute Classes
@@ -515,7 +520,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	/**
 	 * (9.2) get Classes attribute Classes
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<JDFResource.EResourceClass> getEnumsClasses()
 	{
@@ -523,13 +528,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Classes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute Classes
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEClasses(List<JDFResource.EResourceClass>) based on java.lang.enum instead
+	 * @deprecated use SetEClasses(List<Eesource.EnumResourceClass>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setClasses(List<JDFResource.EnumResourceClass> v)
@@ -541,7 +548,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9.2) get Classes attribute Classes
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<JDFResource.EResourceClass> getEnumsClasses() based on java.lang.enum instead
+	 * @deprecated use List<Eesource.EnumResourceClass > GetEClasses() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<JDFResource.EnumResourceClass> getClasses()
@@ -550,7 +557,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Context
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Context
@@ -573,13 +582,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Context
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Context
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setContext(EContext) based on java.lang.enum instead
+	 * @deprecated use SetContext(EContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setContext(EnumContext enumVar)
@@ -591,7 +602,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute Context
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EContext getEContext() based on java.lang.enum instead
+	 * @deprecated use EContext GetEContext() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumContext getContext()
@@ -600,7 +611,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Exact ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Exact
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Exact
@@ -623,7 +636,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -646,7 +661,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -669,7 +686,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Location ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Location
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Location
@@ -692,7 +711,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LotDetails ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LotDetails
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute LotDetails
@@ -715,13 +736,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LotDetails ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LotDetails
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute LotDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setLotDetails(ELotDetails) based on java.lang.enum instead
+	 * @deprecated use SetLotDetails(ELotDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setLotDetails(EnumLotDetails enumVar)
@@ -733,7 +756,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute LotDetails
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ELotDetails getELotDetails() based on java.lang.enum instead
+	 * @deprecated use ELotDetails GetELotDetails() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumLotDetails getLotDetails()
@@ -742,7 +765,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LotID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LotID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LotID
@@ -765,7 +790,8 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcessUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProcessUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -789,7 +815,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProductID
@@ -812,7 +840,8 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -836,7 +865,8 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -860,14 +890,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ResourceDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setResourceDetails(EResourceDetails) based on java.lang.enum instead
+	 * @deprecated use SetResourceDetails(EResourceDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setResourceDetails(EnumResourceDetails enumVar)
@@ -879,7 +910,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute ResourceDetails
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EResourceDetails getEResourceDetails() based on java.lang.enum instead
+	 * @deprecated use EResourceDetails GetEResourceDetails() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumResourceDetails getResourceDetails()
@@ -888,7 +919,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ResourceID
@@ -911,7 +944,8 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ResourceName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ResourceName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -931,14 +965,16 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 */
 	public VString getResourceName()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.RESOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.RESOURCENAME, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Scope
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Scope
@@ -961,13 +997,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Scope
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Scope
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setScope(EScope) based on java.lang.enum instead
+	 * @deprecated use SetScope(EScope) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setScope(EnumScope enumVar)
@@ -979,7 +1017,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute Scope
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EScope getEScope() based on java.lang.enum instead
+	 * @deprecated use EScope GetEScope() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumScope getScope()
@@ -988,7 +1026,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
@@ -1011,13 +1051,15 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUsage(JDFResourceLink.EUsage) based on java.lang.enum instead
+	 * @deprecated use SetUsage(EesourceLink.EnumUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUsage(JDFResourceLink.EnumUsage enumVar)
@@ -1029,7 +1071,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (9) get attribute Usage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use JDFResourceLink.EUsage getEUsage() based on java.lang.enum instead
+	 * @deprecated use EesourceLink.EnumUsage GetEUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public JDFResourceLink.EnumUsage getUsage()
@@ -1038,7 +1080,9 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -1076,7 +1120,8 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

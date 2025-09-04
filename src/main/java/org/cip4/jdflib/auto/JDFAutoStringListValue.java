@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFValue;
 
 /**
- *****************************************************************************
- * class JDFAutoStringListValue : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStringListValue : public JDFElement
  */
 
 public abstract class JDFAutoStringListValue extends JDFElement
@@ -156,11 +153,15 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -183,7 +184,9 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -221,7 +224,8 @@ public abstract class JDFAutoStringListValue extends JDFElement
 	 * (27) const get element Value
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValue the element default is getValue(0)
+	 * @return JDFValue the element
+	 *         default is getValue(0)
 	 */
 	public JDFValue getValue(int iSkip)
 	{

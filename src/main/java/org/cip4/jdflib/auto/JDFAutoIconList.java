@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFIcon;
 
 /**
- *****************************************************************************
- * class JDFAutoIconList : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIconList : public JDFElement
  */
 
 public abstract class JDFAutoIconList extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoIconList extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoIconList extends JDFElement
 	 * (27) const get element Icon
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIcon the element default is getIcon(0)
+	 * @return JDFIcon the element
+	 *         default is getIcon(0)
 	 */
 	public JDFIcon getIcon(int iSkip)
 	{

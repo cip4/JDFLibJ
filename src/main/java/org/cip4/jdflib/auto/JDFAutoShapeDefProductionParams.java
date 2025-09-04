@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.process.JDFObjectModel;
 import org.cip4.jdflib.resource.process.JDFShapeTemplate;
 
 /**
- *****************************************************************************
- * class JDFAutoShapeDefProductionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShapeDefProductionParams : public JDFResource
  */
 
 public abstract class JDFAutoShapeDefProductionParams extends JDFResource
@@ -147,7 +144,7 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -162,7 +159,9 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -200,7 +199,8 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	 * (27) const get element ObjectModel
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFObjectModel the element default is getObjectModel(0)
+	 * @return JDFObjectModel the element
+	 *         default is getObjectModel(0)
 	 */
 	public JDFObjectModel getObjectModel(int iSkip)
 	{
@@ -250,7 +250,8 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
 	/**
 	 * (29) append element ShapeTemplate
 	 *
-	 * @return JDFShapeTemplate the element @ if the element already exists
+	 * @return JDFShapeTemplate the element
+	 * @ if the element already exists
 	 */
 	public JDFShapeTemplate appendShapeTemplate()
 	{

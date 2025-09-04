@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.JDFAddress;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 
 /**
- *****************************************************************************
- * class JDFAutoPerson : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPerson : public JDFResource
  */
 
 public abstract class JDFAutoPerson extends JDFResource
@@ -172,7 +169,7 @@ public abstract class JDFAutoPerson extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -187,11 +184,14 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdditionalNames
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AdditionalNames
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -215,7 +215,9 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FamilyName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FamilyName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FamilyName
@@ -238,7 +240,8 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PhoneticLastName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PhoneticLastName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -262,7 +265,9 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FirstName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FirstName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FirstName
@@ -285,7 +290,8 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PhoneticFirstName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PhoneticFirstName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -309,7 +315,9 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobTitle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobTitle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobTitle
@@ -332,7 +340,9 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Languages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Languages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Languages
@@ -351,14 +361,16 @@ public abstract class JDFAutoPerson extends JDFResource
 	 */
 	public VString getLanguages()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NamePrefix ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NamePrefix
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NamePrefix
@@ -381,7 +393,9 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NameSuffix ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NameSuffix
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NameSuffix
@@ -404,7 +418,9 @@ public abstract class JDFAutoPerson extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -430,7 +446,8 @@ public abstract class JDFAutoPerson extends JDFResource
 	/**
 	 * (29) append element Address
 	 *
-	 * @return JDFAddress the element @ if the element already exists
+	 * @return JDFAddress the element
+	 * @ if the element already exists
 	 */
 	public JDFAddress appendAddress()
 	{
@@ -482,7 +499,8 @@ public abstract class JDFAutoPerson extends JDFResource
 	 * (27) const get element ComChannel
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFComChannel the element default is getComChannel(0)
+	 * @return JDFComChannel the element
+	 *         default is getComChannel(0)
 	 */
 	public JDFComChannel getComChannel(int iSkip)
 	{

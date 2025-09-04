@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoWindingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoWindingParams : public JDFResource
  */
 
 public abstract class JDFAutoWindingParams extends JDFResource
@@ -146,7 +143,7 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -161,11 +158,15 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Fixation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Fixation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Fixation
@@ -188,7 +189,9 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Copies ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Copies
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Copies
@@ -211,7 +214,9 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Diameter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Diameter
@@ -234,7 +239,9 @@ public abstract class JDFAutoWindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LengthJDF ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LengthJDF
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LengthJDF

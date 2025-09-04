@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.JDFShapeElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoShapeElement : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShapeElement : public JDFResource
  */
 
 public abstract class JDFAutoShapeElement extends JDFResource
@@ -176,7 +173,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -349,11 +346,15 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LockOrigins ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LockOrigins
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LockOrigins
@@ -376,7 +377,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutBox
@@ -391,17 +394,20 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute CutBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getCutBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutOut ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutOut
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutOut
@@ -424,7 +430,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutPath
@@ -447,7 +455,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CutType
@@ -470,13 +480,15 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CutType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setCutType(ECutType) based on java.lang.enum instead
+	 * @deprecated use SetCutType(ECutType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCutType(EnumCutType enumVar)
@@ -488,7 +500,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * (9) get attribute CutType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ECutType getECutType() based on java.lang.enum instead
+	 * @deprecated use ECutType GetECutType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumCutType getCutType()
@@ -497,7 +509,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DDESCutType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DDESCutType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DDESCutType
@@ -520,7 +534,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Material
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Material
@@ -543,7 +559,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShapeDepth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShapeDepth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShapeDepth
@@ -566,7 +584,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShapeType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShapeType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ShapeType
@@ -589,13 +609,15 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShapeType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShapeType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ShapeType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setShapeType(EShapeType) based on java.lang.enum instead
+	 * @deprecated use SetShapeType(EShapeType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setShapeType(EnumShapeType enumVar)
@@ -607,7 +629,7 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * (9) get attribute ShapeType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EShapeType getEShapeType() based on java.lang.enum instead
+	 * @deprecated use EShapeType GetEShapeType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumShapeType getShapeType()
@@ -616,7 +638,8 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TeethPerDimension
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TeethPerDimension
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -640,7 +663,9 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -678,7 +703,8 @@ public abstract class JDFAutoShapeElement extends JDFResource
 	 * (27) const get element Shape
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFShapeElement the element default is getShape(0)
+	 * @return JDFShapeElement the element
+	 *         default is getShape(0)
 	 */
 	public JDFShapeElement getShape(int iSkip)
 	{

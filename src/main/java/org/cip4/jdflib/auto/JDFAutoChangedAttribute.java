@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoChangedAttribute : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoChangedAttribute : public JDFElement
  */
 
 public abstract class JDFAutoChangedAttribute extends JDFElement
@@ -142,11 +139,14 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AttributeName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AttributeName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -170,7 +170,9 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ElementID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ElementID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ElementID
@@ -193,7 +195,9 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ElementType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ElementType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ElementType
@@ -216,7 +220,9 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OldValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OldValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OldValue
@@ -239,7 +245,9 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NewValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NewValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NewValue

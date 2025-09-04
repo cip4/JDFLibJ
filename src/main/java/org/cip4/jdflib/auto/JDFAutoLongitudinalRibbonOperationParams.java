@@ -83,10 +83,7 @@ import org.cip4.jdflib.resource.process.JDFLongPerforate;
 import org.cip4.jdflib.resource.process.JDFLongSlit;
 
 /**
- *****************************************************************************
- * class JDFAutoLongitudinalRibbonOperationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLongitudinalRibbonOperationParams : public JDFResource
  */
 
 public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResource
@@ -151,7 +148,7 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -166,7 +163,9 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -204,7 +203,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * (27) const get element LongFold
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLongFold the element default is getLongFold(0)
+	 * @return JDFLongFold the element
+	 *         default is getLongFold(0)
 	 */
 	public JDFLongFold getLongFold(int iSkip)
 	{
@@ -266,7 +266,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * (27) const get element LongGlue
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLongGlue the element default is getLongGlue(0)
+	 * @return JDFLongGlue the element
+	 *         default is getLongGlue(0)
 	 */
 	public JDFLongGlue getLongGlue(int iSkip)
 	{
@@ -328,7 +329,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * (27) const get element LongPerforate
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLongPerforate the element default is getLongPerforate(0)
+	 * @return JDFLongPerforate the element
+	 *         default is getLongPerforate(0)
 	 */
 	public JDFLongPerforate getLongPerforate(int iSkip)
 	{
@@ -390,7 +392,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
 	 * (27) const get element LongSlit
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLongSlit the element default is getLongSlit(0)
+	 * @return JDFLongSlit the element
+	 *         default is getLongSlit(0)
 	 */
 	public JDFLongSlit getLongSlit(int iSkip)
 	{

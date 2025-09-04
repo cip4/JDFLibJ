@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFPreflightAction;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoAction : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAction : public JDFElement
  */
 
 public abstract class JDFAutoAction extends JDFElement
@@ -104,7 +101,8 @@ public abstract class JDFAutoAction extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEVERITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSeverity.getEnum(0), "Error");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SEVERITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSeverity.getEnum(0),
+				"Error");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ID, 0x2222222222l, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.TESTREF, 0x2222222222l, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
@@ -244,11 +242,15 @@ public abstract class JDFAutoAction extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Severity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Severity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Severity
@@ -271,13 +273,15 @@ public abstract class JDFAutoAction extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Severity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Severity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Severity
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSeverity(ESeverity) based on java.lang.enum instead
+	 * @deprecated use SetSeverity(ESeverity) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSeverity(EnumSeverity enumVar)
@@ -289,7 +293,7 @@ public abstract class JDFAutoAction extends JDFElement
 	 * (9) get attribute Severity
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESeverity getESeverity() based on java.lang.enum instead
+	 * @deprecated use ESeverity GetESeverity() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSeverity getSeverity()
@@ -298,7 +302,9 @@ public abstract class JDFAutoAction extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -323,7 +329,9 @@ public abstract class JDFAutoAction extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TestRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TestRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TestRef
@@ -346,7 +354,9 @@ public abstract class JDFAutoAction extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -384,7 +394,8 @@ public abstract class JDFAutoAction extends JDFElement
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -446,7 +457,8 @@ public abstract class JDFAutoAction extends JDFElement
 	 * (27) const get element PreflightAction
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPreflightAction the element default is getPreflightAction(0)
+	 * @return JDFPreflightAction the element
+	 *         default is getPreflightAction(0)
 	 */
 	public JDFPreflightAction getPreflightAction(int iSkip)
 	{

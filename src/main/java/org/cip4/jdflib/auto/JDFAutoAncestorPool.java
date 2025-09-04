@@ -81,10 +81,7 @@ import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *****************************************************************************
- * class JDFAutoAncestorPool : public JDFPool
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAncestorPool : public JDFPool
  */
 
 public abstract class JDFAutoAncestorPool extends JDFPool
@@ -142,7 +139,9 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -180,7 +179,8 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * (27) const get element Ancestor
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFAncestor the element default is getAncestor(0)
+	 * @return JDFAncestor the element
+	 *         default is getAncestor(0)
 	 */
 	public JDFAncestor getAncestor(int iSkip)
 	{
@@ -242,7 +242,8 @@ public abstract class JDFAutoAncestorPool extends JDFPool
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

@@ -87,10 +87,7 @@ import org.cip4.jdflib.jmf.JDFFlushQueueParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoShutDownCmdParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShutDownCmdParams : public JDFElement
  */
 
 public abstract class JDFAutoShutDownCmdParams extends JDFElement
@@ -101,7 +98,8 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumShutDownType.getEnum(0), "StandBy");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumShutDownType.getEnum(0),
+				"StandBy");
 	}
 
 	@Override
@@ -236,11 +234,14 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShutDownType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShutDownType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -264,14 +265,15 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShutDownType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShutDownType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ShutDownType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setShutDownType(EShutDownType) based on java.lang.enum instead
+	 * @deprecated use SetShutDownType(EShutDownType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setShutDownType(EnumShutDownType enumVar)
@@ -283,7 +285,7 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	 * (9) get attribute ShutDownType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EShutDownType getEShutDownType() based on java.lang.enum instead
+	 * @deprecated use EShutDownType GetEShutDownType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumShutDownType getShutDownType()
@@ -292,7 +294,9 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -318,7 +322,8 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
 	/**
 	 * (29) append element FlushQueueParams
 	 *
-	 * @return JDFFlushQueueParams the element @ if the element already exists
+	 * @return JDFFlushQueueParams the element
+	 * @ if the element already exists
 	 */
 	public JDFFlushQueueParams appendFlushQueueParams()
 	{

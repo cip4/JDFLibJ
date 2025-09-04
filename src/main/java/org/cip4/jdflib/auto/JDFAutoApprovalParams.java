@@ -83,10 +83,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFApprovalPerson;
 
 /**
- *****************************************************************************
- * class JDFAutoApprovalParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoApprovalParams : public JDFResource
  */
 
 public abstract class JDFAutoApprovalParams extends JDFResource
@@ -160,7 +157,7 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -175,11 +172,14 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinApprovals
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinApprovals
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -203,7 +203,9 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -241,7 +243,8 @@ public abstract class JDFAutoApprovalParams extends JDFResource
 	 * (27) const get element ApprovalPerson
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFApprovalPerson the element default is getApprovalPerson(0)
+	 * @return JDFApprovalPerson the element
+	 *         default is getApprovalPerson(0)
 	 */
 	public JDFApprovalPerson getApprovalPerson(int iSkip)
 	{

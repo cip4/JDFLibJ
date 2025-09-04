@@ -94,10 +94,7 @@ import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPageCell : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPageCell : public JDFElement
  */
 
 public abstract class JDFAutoPageCell extends JDFElement
@@ -254,11 +251,15 @@ public abstract class JDFAutoPageCell extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Border ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Border
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Border
@@ -281,7 +282,9 @@ public abstract class JDFAutoPageCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClipBox
@@ -296,17 +299,20 @@ public abstract class JDFAutoPageCell extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute ClipBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getClipBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MarkList
@@ -325,14 +331,16 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 */
 	public VString getMarkList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Rotate
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Rotate
@@ -355,13 +363,15 @@ public abstract class JDFAutoPageCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Rotate
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Rotate
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setRotate(ERotate) based on java.lang.enum instead
+	 * @deprecated use SetRotate(ERotate) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRotate(EnumRotate enumVar)
@@ -373,7 +383,7 @@ public abstract class JDFAutoPageCell extends JDFElement
 	 * (9) get attribute Rotate
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ERotate getERotate() based on java.lang.enum instead
+	 * @deprecated use ERotate GetERotate() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumRotate getRotate()
@@ -382,7 +392,9 @@ public abstract class JDFAutoPageCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrimSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrimSize
@@ -397,17 +409,20 @@ public abstract class JDFAutoPageCell extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute TrimSize
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTrimSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -433,7 +448,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 	/**
 	 * (29) append element Color
 	 *
-	 * @return JDFColor the element @ if the element already exists
+	 * @return JDFColor the element
+	 * @ if the element already exists
 	 */
 	public JDFColor appendColor()
 	{
@@ -473,7 +489,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 	/**
 	 * (29) append element DeviceMark
 	 *
-	 * @return JDFDeviceMark the element @ if the element already exists
+	 * @return JDFDeviceMark the element
+	 * @ if the element already exists
 	 */
 	public JDFDeviceMark appendDeviceMark()
 	{
@@ -503,7 +520,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 	/**
 	 * (29) append element FitPolicy
 	 *
-	 * @return JDFFitPolicy the element @ if the element already exists
+	 * @return JDFFitPolicy the element
+	 * @ if the element already exists
 	 */
 	public JDFFitPolicy appendFitPolicy()
 	{
@@ -533,7 +551,8 @@ public abstract class JDFAutoPageCell extends JDFElement
 	/**
 	 * (29) append element ImageShift
 	 *
-	 * @return JDFImageShift the element @ if the element already exists
+	 * @return JDFImageShift the element
+	 * @ if the element already exists
 	 */
 	public JDFImageShift appendImageShift()
 	{

@@ -87,10 +87,7 @@ import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFSpanOrientation;
 
 /**
- *****************************************************************************
- * class JDFAutoFoldingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFoldingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoFoldingIntent extends JDFIntentResource
@@ -162,11 +159,15 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Folds ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Folds
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Folds
@@ -181,17 +182,19 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	/**
 	 * (20) get JDFXYPair attribute Folds
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getFolds()
 	{
-		final String strAttrName = getAttribute(AttributeName.FOLDS, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FOLDS, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldingDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FoldingDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -215,7 +218,9 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -241,7 +246,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	/**
 	 * (29) append element FoldingCatalog
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendFoldingCatalog()
 	{
@@ -283,7 +289,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	 * (27) const get element Fold
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFold the element default is getFold(0)
+	 * @return JDFFold the element
+	 *         default is getFold(0)
 	 */
 	public JDFFold getFold(int iSkip)
 	{
@@ -333,7 +340,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Orientation
 	 *
-	 * @return JDFSpanOrientation the element @ if the element already exists
+	 * @return JDFSpanOrientation the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanOrientation appendOrientation()
 	{

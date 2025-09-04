@@ -76,6 +76,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoColor.EColorType;
+import org.cip4.jdflib.auto.JDFAutoColor.EnumColorType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -89,10 +91,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoProofingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoProofingParams : public JDFResource
  */
 
 public abstract class JDFAutoProofingParams extends JDFResource
@@ -107,9 +106,10 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.HALFTONE, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.IMAGEVIEWINGSTRATEGY, 0x4444444433l, AttributeInfo.EnumAttributeType.string, null, "NoImages");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MANUALFEED, 0x4444444431l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOFRENDERINGINTENT, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration, EnumProofRenderingIntent.getEnum(0),
-				"Perceptual");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumProofType.getEnum(0), "None");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOFRENDERINGINTENT, 0x4444444431l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumProofRenderingIntent.getEnum(0), "Perceptual");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumProofType.getEnum(0),
+				"None");
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOLUTION, 0x4444444433l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
@@ -175,7 +175,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -349,91 +349,15 @@ public abstract class JDFAutoProofingParams extends JDFResource
 		public static final EnumProofType Imposition = new EnumProofType("Imposition");
 	}
 
-	/**
-	 * Enumeration strings for ColorType
-	 */
-
-	public enum EColorType
-	{
-		Monochrome, BasicColor, MatchedColor;
-
-		public static EColorType getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EColorType.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for ColorType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumColorType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumColorType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumColorType getEnum(String enumName)
-		{
-			return (EnumColorType) getEnum(EnumColorType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumColorType getEnum(int enumValue)
-		{
-			return (EnumColorType) getEnum(EnumColorType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumColorType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumColorType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumColorType.class);
-		}
-
-		/**  */
-		public static final EnumColorType Monochrome = new EnumColorType("Monochrome");
-		/**  */
-		public static final EnumColorType BasicColor = new EnumColorType("BasicColor");
-		/**  */
-		public static final EnumColorType MatchedColor = new EnumColorType("MatchedColor");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DisplayTraps
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DisplayTraps
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -457,7 +381,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HalfTone ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HalfTone
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HalfTone
@@ -480,7 +406,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageViewingStrategy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageViewingStrategy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -504,7 +431,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ManualFeed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ManualFeed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ManualFeed
@@ -527,7 +456,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofRenderingIntent
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofRenderingIntent
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -551,14 +481,15 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofRenderingIntent
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofRenderingIntent
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ProofRenderingIntent
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setProofRenderingIntent(EProofRenderingIntent) based on java.lang.enum instead
+	 * @deprecated use SetProofRenderingIntent(EProofRenderingIntent) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProofRenderingIntent(EnumProofRenderingIntent enumVar)
@@ -570,7 +501,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (9) get attribute ProofRenderingIntent
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EProofRenderingIntent getEProofRenderingIntent() based on java.lang.enum instead
+	 * @deprecated use EProofRenderingIntent GetEProofRenderingIntent() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumProofRenderingIntent getProofRenderingIntent()
@@ -579,7 +510,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ProofType
@@ -602,13 +535,15 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ProofType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setProofType(EProofType) based on java.lang.enum instead
+	 * @deprecated use SetProofType(EProofType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProofType(EnumProofType enumVar)
@@ -620,7 +555,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (9) get attribute ProofType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EProofType getEProofType() based on java.lang.enum instead
+	 * @deprecated use EProofType GetEProofType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumProofType getProofType()
@@ -629,7 +564,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ColorType
@@ -652,13 +589,15 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ColorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setColorType(EColorType) based on java.lang.enum instead
+	 * @deprecated use SetColorType(EColorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setColorType(EnumColorType enumVar)
@@ -670,7 +609,7 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	 * (9) get attribute ColorType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EColorType getEColorType() based on java.lang.enum instead
+	 * @deprecated use EColorType GetEColorType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumColorType getColorType()
@@ -679,7 +618,9 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Resolution
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Resolution
@@ -694,17 +635,20 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Resolution
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getResolution()
 	{
-		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -730,7 +674,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -770,7 +715,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{

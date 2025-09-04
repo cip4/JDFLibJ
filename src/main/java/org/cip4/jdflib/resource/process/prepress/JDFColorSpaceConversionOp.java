@@ -83,6 +83,7 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
@@ -217,7 +218,6 @@ public class JDFColorSpaceConversionOp extends JDFAutoColorSpaceConversionOp
 	}
 
 	/**
-	 *
 	 * @param val
 	 */
 	public void addSourceObject(final EnumSourceObjects val)

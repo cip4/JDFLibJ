@@ -83,10 +83,7 @@ import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoNumberingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNumberingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoNumberingIntent extends JDFIntentResource
@@ -146,7 +143,9 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -172,7 +171,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	/**
 	 * (29) append element ColorName
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendColorName()
 	{
@@ -214,7 +214,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * (27) const get element ColorNameDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStringSpan the element default is getColorNameDetails(0)
+	 * @return JDFStringSpan the element
+	 *         default is getColorNameDetails(0)
 	 */
 	public JDFStringSpan getColorNameDetails(int iSkip)
 	{
@@ -264,7 +265,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	/**
 	 * (29) append element ColorPool
 	 *
-	 * @return JDFColorPool the element @ if the element already exists
+	 * @return JDFColorPool the element
+	 * @ if the element already exists
 	 */
 	public JDFColorPool appendColorPool()
 	{
@@ -316,7 +318,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 	 * (27) const get element NumberItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFNumberItem the element default is getNumberItem(0)
+	 * @return JDFNumberItem the element
+	 *         default is getNumberItem(0)
 	 */
 	public JDFNumberItem getNumberItem(int iSkip)
 	{

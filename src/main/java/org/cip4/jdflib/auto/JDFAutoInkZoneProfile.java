@@ -78,10 +78,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoInkZoneProfile : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInkZoneProfile : public JDFResource
  */
 
 public abstract class JDFAutoInkZoneProfile extends JDFResource
@@ -146,7 +143,7 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -161,11 +158,14 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZoneSettingsX
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ZoneSettingsX
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -181,17 +181,20 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute ZoneSettingsX
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getZoneSettingsX()
 	{
-		final String strAttrName = getAttribute(AttributeName.ZONESETTINGSX, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ZONESETTINGSX, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZoneWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ZoneWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ZoneWidth
@@ -214,7 +217,9 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZoneHeight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ZoneHeight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ZoneHeight
@@ -237,7 +242,8 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ZoneSettingsY
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ZoneSettingsY
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -253,12 +259,13 @@ public abstract class JDFAutoInkZoneProfile extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute ZoneSettingsY
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getZoneSettingsY()
 	{
-		final String strAttrName = getAttribute(AttributeName.ZONESETTINGSY, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ZONESETTINGSY, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 

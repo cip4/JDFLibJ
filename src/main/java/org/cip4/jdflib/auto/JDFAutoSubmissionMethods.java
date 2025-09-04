@@ -86,10 +86,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSubmissionMethods : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSubmissionMethods : public JDFElement
  */
 
 public abstract class JDFAutoSubmissionMethods extends JDFElement
@@ -103,7 +100,8 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FILE, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.HOTFOLDER, 0x4444443333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.HTTPGET, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations, EnumPackaging.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations, EnumPackaging.getEnum(0),
+				null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MIME, 0x4444444433l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
@@ -228,11 +226,15 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute File ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute File
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute File
@@ -255,7 +257,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HotFolder ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HotFolder
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HotFolder
@@ -278,7 +282,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HttpGet ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HttpGet
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HttpGet
@@ -301,7 +307,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Packaging ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Packaging
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute Packaging
@@ -316,7 +324,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	/**
 	 * (9.2) get Packaging attribute Packaging
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EPackaging> getEnumsPackaging()
 	{
@@ -324,13 +332,15 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Packaging ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Packaging
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute Packaging
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEPackaging(List<EPackaging>) based on java.lang.enum instead
+	 * @deprecated use SetEPackaging(List<EPackaging>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPackaging(List<EnumPackaging> v)
@@ -342,7 +352,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 * (9.2) get Packaging attribute Packaging
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EPackaging> getEnumsPackaging() based on java.lang.enum instead
+	 * @deprecated use List<EPackaging > GetEPackaging() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumPackaging> getPackaging()
@@ -351,7 +361,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MIME ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MIME
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MIME
@@ -374,7 +386,9 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URLSchemes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URLSchemes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URLSchemes
@@ -393,8 +407,8 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
 	 */
 	public VString getURLSchemes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.URLSCHEMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

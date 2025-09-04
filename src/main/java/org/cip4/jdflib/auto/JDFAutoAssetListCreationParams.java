@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoAssetListCreationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAssetListCreationParams : public JDFResource
  */
 
 public abstract class JDFAutoAssetListCreationParams extends JDFResource
@@ -103,7 +100,8 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.LISTPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumListPolicy.getEnum(0), "All");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.LISTPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumListPolicy.getEnum(0),
+				"All");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSETTYPES, 0x3333333311l, AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
@@ -167,7 +165,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -259,11 +257,15 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ListPolicy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ListPolicy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ListPolicy
@@ -286,13 +288,15 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ListPolicy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ListPolicy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ListPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setListPolicy(EListPolicy) based on java.lang.enum instead
+	 * @deprecated use SetListPolicy(EListPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setListPolicy(EnumListPolicy enumVar)
@@ -304,7 +308,7 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * (9) get attribute ListPolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EListPolicy getEListPolicy() based on java.lang.enum instead
+	 * @deprecated use EListPolicy GetEListPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumListPolicy getListPolicy()
@@ -313,7 +317,9 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssetTypes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssetTypes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssetTypes
@@ -336,7 +342,9 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -374,7 +382,8 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{

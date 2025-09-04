@@ -132,8 +132,8 @@ class StrippingExampleTest extends ExampleTest
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
 		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
-		final JDFStrippingParams spLeaf = (JDFStrippingParams) sp.getCreatePartition(EnumPartIDKey.SignatureName, "Sig1", null).getCreatePartition(EnumPartIDKey.SheetName,
-				"Sheet1", null);
+		final JDFStrippingParams spLeaf = (JDFStrippingParams) sp.getCreatePartition(EnumPartIDKey.SignatureName, "Sig1", null)
+				.getCreatePartition(EnumPartIDKey.SheetName, "Sheet1", null);
 		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		as.setAssemblyIDs(new VString("BS1"));
 		as.setOrder(EnumOrder.Collecting);
@@ -164,8 +164,8 @@ class StrippingExampleTest extends ExampleTest
 		final JDFNode n = JDFNode.createRoot();
 		n.setType(EnumType.Stripping);
 		final JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
-		final JDFStrippingParams spLeaf = (JDFStrippingParams) sp.getCreatePartition(EnumPartIDKey.SignatureName, "Sig1", null).getCreatePartition(EnumPartIDKey.SheetName,
-				"Sheet1", null);
+		final JDFStrippingParams spLeaf = (JDFStrippingParams) sp.getCreatePartition(EnumPartIDKey.SignatureName, "Sig1", null)
+				.getCreatePartition(EnumPartIDKey.SheetName, "Sheet1", null);
 		final JDFAssembly as = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
 		as.setAssemblyIDs(new VString("BS1 BS2"));
 		as.setOrder(EnumOrder.Collecting);
@@ -191,4 +191,5 @@ class StrippingExampleTest extends ExampleTest
 		setSnippet(n.getResourceLinkPool(), true);
 		writeRoundTrip(n, "MultiSection");
 	}
+
 }

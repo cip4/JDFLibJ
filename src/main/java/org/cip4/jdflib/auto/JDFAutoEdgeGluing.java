@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.span.JDFSpanGlue;
 
 /**
- *****************************************************************************
- * class JDFAutoEdgeGluing : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoEdgeGluing : public JDFElement
  */
 
 public abstract class JDFAutoEdgeGluing extends JDFElement
@@ -138,7 +135,9 @@ public abstract class JDFAutoEdgeGluing extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -164,7 +163,8 @@ public abstract class JDFAutoEdgeGluing extends JDFElement
 	/**
 	 * (29) append element EdgeGlue
 	 *
-	 * @return JDFSpanGlue the element @ if the element already exists
+	 * @return JDFSpanGlue the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanGlue appendEdgeGlue()
 	{

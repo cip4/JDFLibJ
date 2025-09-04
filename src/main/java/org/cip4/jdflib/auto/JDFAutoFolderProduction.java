@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoFolderProduction : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFolderProduction : public JDFElement
  */
 
 public abstract class JDFAutoFolderProduction extends JDFElement
@@ -98,7 +95,8 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDERMODULEINDEX, 0x2222222111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTIONTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumProductionType.getEnum(0), "NonCollect");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTIONTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumProductionType.getEnum(0), "NonCollect");
 	}
 
 	@Override
@@ -221,11 +219,14 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FolderModuleIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FolderModuleIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -249,7 +250,8 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductionType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductionType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -273,14 +275,15 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductionType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductionType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ProductionType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setProductionType(EProductionType) based on java.lang.enum instead
+	 * @deprecated use SetProductionType(EProductionType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProductionType(EnumProductionType enumVar)
@@ -292,7 +295,7 @@ public abstract class JDFAutoFolderProduction extends JDFElement
 	 * (9) get attribute ProductionType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EProductionType getEProductionType() based on java.lang.enum instead
+	 * @deprecated use EProductionType GetEProductionType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumProductionType getProductionType()

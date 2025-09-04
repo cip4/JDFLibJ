@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFPreflightArgument;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBasicPreflightTest : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBasicPreflightTest : public JDFElement
  */
 
 public abstract class JDFAutoBasicPreflightTest extends JDFElement
@@ -106,7 +103,8 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CLASSNAME, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x3333333333l, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0), "SingleValue");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0),
+				"SingleValue");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MINOCCURS, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -268,11 +266,15 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Classes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Classes
@@ -291,14 +293,16 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	 */
 	public VString getClasses()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.CLASSES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.CLASSES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClassName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClassName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClassName
@@ -321,7 +325,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DevNS ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DevNS
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DevNS
@@ -344,7 +350,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ListType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ListType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ListType
@@ -367,13 +375,15 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ListType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ListType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ListType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setListType(EListType) based on java.lang.enum instead
+	 * @deprecated use SetListType(EListType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setListType(EnumListType enumVar)
@@ -385,7 +395,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	 * (9) get attribute ListType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EListType getEListType() based on java.lang.enum instead
+	 * @deprecated use EListType GetEListType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumListType getListType()
@@ -394,7 +404,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxOccurs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxOccurs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxOccurs
@@ -417,7 +429,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinOccurs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinOccurs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MinOccurs
@@ -440,7 +454,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -463,7 +479,9 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -489,7 +507,8 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 	/**
 	 * (29) append element PreflightArgument
 	 *
-	 * @return JDFPreflightArgument the element @ if the element already exists
+	 * @return JDFPreflightArgument the element
+	 * @ if the element already exists
 	 */
 	public JDFPreflightArgument appendPreflightArgument()
 	{

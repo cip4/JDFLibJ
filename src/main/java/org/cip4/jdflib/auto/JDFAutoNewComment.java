@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoNewComment : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNewComment : public JDFElement
  */
 
 public abstract class JDFAutoNewComment extends JDFElement
@@ -244,11 +241,15 @@ public abstract class JDFAutoNewComment extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Action ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Action
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Action
@@ -271,13 +272,15 @@ public abstract class JDFAutoNewComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Action ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Action
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Action
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAction(EAction) based on java.lang.enum instead
+	 * @deprecated use SetAction(EAction) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAction(EnumAction enumVar)
@@ -289,7 +292,7 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * (9) get attribute Action
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAction getEAction() based on java.lang.enum instead
+	 * @deprecated use EAction GetEAction() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAction getAction()
@@ -298,7 +301,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CommentID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CommentID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CommentID
@@ -321,7 +326,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute refID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute refID
@@ -344,7 +351,9 @@ public abstract class JDFAutoNewComment extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -382,7 +391,8 @@ public abstract class JDFAutoNewComment extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

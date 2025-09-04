@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoAddress : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAddress : public JDFResource
  */
 
 public abstract class JDFAutoAddress extends JDFResource
@@ -170,7 +167,7 @@ public abstract class JDFAutoAddress extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,11 +182,14 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AddressUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AddressUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -213,7 +213,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute City ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute City
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute City
@@ -236,7 +238,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CivicNumber ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CivicNumber
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CivicNumber
@@ -259,7 +263,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Country ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Country
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Country
@@ -282,7 +288,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CountryCode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CountryCode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CountryCode
@@ -305,7 +313,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PostBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PostBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PostBox
@@ -328,7 +338,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PostalCode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PostalCode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PostalCode
@@ -351,7 +363,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Region ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Region
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Region
@@ -374,7 +388,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Street ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Street
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Street
@@ -397,7 +413,9 @@ public abstract class JDFAutoAddress extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -435,7 +453,8 @@ public abstract class JDFAutoAddress extends JDFResource
 	 * (27) const get element AddressLine
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getAddressLine(0)
+	 * @return JDFElement the element
+	 *         default is getAddressLine(0)
 	 */
 	public JDFElement getAddressLine(int iSkip)
 	{
@@ -485,7 +504,8 @@ public abstract class JDFAutoAddress extends JDFResource
 	/**
 	 * (29) append element ExtendedAddress
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendExtendedAddress()
 	{

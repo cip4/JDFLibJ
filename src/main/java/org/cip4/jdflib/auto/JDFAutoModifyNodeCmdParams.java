@@ -86,10 +86,7 @@ import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 
 /**
- *****************************************************************************
- * class JDFAutoModifyNodeCmdParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoModifyNodeCmdParams : public JDFElement
  */
 
 public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
@@ -100,7 +97,8 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0),
+				null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x2222222111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
@@ -160,11 +158,15 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Activation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Activation
@@ -187,13 +189,15 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Activation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Activation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Activation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setActivation(EActivation) based on java.lang.enum instead
+	 * @deprecated use SetActivation(EActivation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setActivation(EnumActivation enumVar)
@@ -205,7 +209,7 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 * (9) get attribute Activation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EActivation getEActivation() based on java.lang.enum instead
+	 * @deprecated use EActivation GetEActivation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumActivation getActivation()
@@ -214,7 +218,9 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -237,7 +243,9 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -260,7 +268,9 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -298,7 +308,8 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 	 * (27) const get element NewComment
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFNewComment the element default is getNewComment(0)
+	 * @return JDFNewComment the element
+	 *         default is getNewComment(0)
 	 */
 	public JDFNewComment getNewComment(int iSkip)
 	{

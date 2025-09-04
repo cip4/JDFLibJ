@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EFinishedPageOrientation;
+import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumFinishedPageOrientation;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -88,13 +86,9 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFImageShift;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPLayout : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPLayout : public JDFElement
  */
 
 public abstract class JDFAutoIDPLayout extends JDFElement
@@ -169,168 +163,16 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for FinishedPageOrientation
-	 */
-
-	public enum EFinishedPageOrientation
-	{
-		Portrait, Landscape;
-
-		public static EFinishedPageOrientation getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFinishedPageOrientation.class, val, EFinishedPageOrientation.Portrait);
-		}
-	}
-
-	/**
-	 * Enumeration strings for FinishedPageOrientation
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumFinishedPageOrientation extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFinishedPageOrientation(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFinishedPageOrientation getEnum(String enumName)
-		{
-			return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFinishedPageOrientation getEnum(int enumValue)
-		{
-			return (EnumFinishedPageOrientation) getEnum(EnumFinishedPageOrientation.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFinishedPageOrientation.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFinishedPageOrientation.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFinishedPageOrientation.class);
-		}
-
-		/**  */
-		public static final EnumFinishedPageOrientation Portrait = new EnumFinishedPageOrientation("Portrait");
-		/**  */
-		public static final EnumFinishedPageOrientation Landscape = new EnumFinishedPageOrientation("Landscape");
-	}
-
-	/**
-	 * Enumeration strings for Sides
-	 */
-
-	public enum ESides
-	{
-		OneSided, TwoSidedLongEdge, TwoSidedShortEdge;
-
-		public static ESides getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESides.class, val, ESides.OneSided);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Sides
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSides extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSides(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSides getEnum(String enumName)
-		{
-			return (EnumSides) getEnum(EnumSides.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSides getEnum(int enumValue)
-		{
-			return (EnumSides) getEnum(EnumSides.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSides.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSides.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSides.class);
-		}
-
-		/**  */
-		public static final EnumSides OneSided = new EnumSides("OneSided");
-		/**  */
-		public static final EnumSides TwoSidedLongEdge = new EnumSides("TwoSidedLongEdge");
-		/**  */
-		public static final EnumSides TwoSidedShortEdge = new EnumSides("TwoSidedShortEdge");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Border ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Border
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Border
@@ -353,7 +195,8 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FinishedPageOrientation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FinishedPageOrientation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -377,14 +220,15 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FinishedPageOrientation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FinishedPageOrientation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute FinishedPageOrientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setFinishedPageOrientation(EFinishedPageOrientation) based on java.lang.enum instead
+	 * @deprecated use SetFinishedPageOrientation(EFinishedPageOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFinishedPageOrientation(EnumFinishedPageOrientation enumVar)
@@ -396,7 +240,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 * (9) get attribute FinishedPageOrientation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFinishedPageOrientation getEFinishedPageOrientation() based on java.lang.enum instead
+	 * @deprecated use EFinishedPageOrientation GetEFinishedPageOrientation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFinishedPageOrientation getFinishedPageOrientation()
@@ -405,7 +249,8 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ForceFrontSide
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ForceFrontSide
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -421,17 +266,20 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	/**
 	 * (20) get JDFNumberRangeList attribute ForceFrontSide
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getForceFrontSide()
 	{
-		final String strAttrName = getAttribute(AttributeName.FORCEFRONTSIDE, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FORCEFRONTSIDE, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumberUp ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NumberUp
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NumberUp
@@ -446,17 +294,19 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute NumberUp
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getNumberUp()
 	{
-		final String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.NUMBERUP, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentationDirection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentationDirection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -480,7 +330,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Rotate ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Rotate
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Rotate
@@ -503,7 +355,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Sides
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Sides
@@ -526,13 +380,15 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Sides
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Sides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSides(ESides) based on java.lang.enum instead
+	 * @deprecated use SetSides(ESides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSides(EnumSides enumVar)
@@ -544,7 +400,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 * (9) get attribute Sides
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESides getESides() based on java.lang.enum instead
+	 * @deprecated use ESides GetESides() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSides getSides()
@@ -553,7 +409,9 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -568,7 +426,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 
 	/**
 	 * (25) getCreateImageShift
-	 * 
+	 *
 	 * @return JDFImageShift the element
 	 */
 	public JDFImageShift getCreateImageShift()
@@ -578,7 +436,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 
 	/**
 	 * (26) getCreateImageShift
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFImageShift the element
 	 */
@@ -591,7 +449,8 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 	 * (27) const get element ImageShift
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFImageShift the element default is getImageShift(0)
+	 * @return JDFImageShift the element
+	 *         default is getImageShift(0)
 	 */
 	public JDFImageShift getImageShift(int iSkip)
 	{
@@ -600,7 +459,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
 
 	/**
 	 * Get all ImageShift from the current element
-	 * 
+	 *
 	 * @return Collection<JDFImageShift>, null if none are available
 	 */
 	public Collection<JDFImageShift> getAllImageShift()

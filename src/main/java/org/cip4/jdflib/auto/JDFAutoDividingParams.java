@@ -78,10 +78,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoDividingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDividingParams : public JDFResource
  */
 
 public abstract class JDFAutoDividingParams extends JDFResource
@@ -143,7 +140,7 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -158,11 +155,14 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DividePositions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DividePositions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -178,12 +178,13 @@ public abstract class JDFAutoDividingParams extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute DividePositions
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getDividePositions()
 	{
-		final String strAttrName = getAttribute(AttributeName.DIVIDEPOSITIONS, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DIVIDEPOSITIONS, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 

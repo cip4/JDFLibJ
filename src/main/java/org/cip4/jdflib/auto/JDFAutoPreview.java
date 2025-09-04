@@ -86,7 +86,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.JavaEnumUtil;
@@ -100,7 +99,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, "PNG");
@@ -112,8 +111,6 @@ public abstract class JDFAutoPreview extends JDFResource
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x3333333333l, AttributeInfo.EnumAttributeType.matrix, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOLUTION, 0x3111111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.SIZE, 0x3111111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
 	@Override
@@ -594,62 +591,6 @@ public abstract class JDFAutoPreview extends JDFResource
 	public String getMimeTypeDetails()
 	{
 		return getAttribute(AttributeName.MIMETYPEDETAILS, null, JDFCoreConstants.EMPTYSTRING);
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Resolution
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute Resolution
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setResolution(JDFXYPair value)
-	{
-		setAttribute(AttributeName.RESOLUTION, value, null);
-	}
-
-	/**
-	 * (20) get JDFXYPair attribute Resolution
-	 *
-	 * @return JDFXYPair the value of the attribute, null if a the
-	 *         attribute value is not a valid to create a JDFXYPair
-	 */
-	public JDFXYPair getResolution()
-	{
-		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-		return nPlaceHolder;
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute Size
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute Size
-	 *
-	 * @param value the value to set the attribute to
-	 */
-	public void setSize(JDFXYPair value)
-	{
-		setAttribute(AttributeName.SIZE, value, null);
-	}
-
-	/**
-	 * (20) get JDFXYPair attribute Size
-	 *
-	 * @return JDFXYPair the value of the attribute, null if a the
-	 *         attribute value is not a valid to create a JDFXYPair
-	 */
-	public JDFXYPair getSize()
-	{
-		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
-		return nPlaceHolder;
 	}
 
 	/*

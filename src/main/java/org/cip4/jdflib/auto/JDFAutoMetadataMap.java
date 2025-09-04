@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoGeneralID.EDataType;
+import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -89,10 +91,7 @@ import org.cip4.jdflib.resource.process.JDFExpr;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoMetadataMap : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMetadataMap : public JDFElement
  */
 
 public abstract class JDFAutoMetadataMap extends JDFElement
@@ -103,7 +102,8 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0), "PagePool");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTEXT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumContext.getEnum(0),
+				"PagePool");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DATATYPE, 0x2222221111l, AttributeInfo.EnumAttributeType.enumeration, EnumDataType.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x2222221111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUEFORMAT, 0x2222221111l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -267,101 +267,16 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 		public static final EnumContext Object = new EnumContext("Object");
 	}
 
-	/**
-	 * Enumeration strings for DataType
-	 */
-
-	public enum EDataType
-	{
-		string, integer, double_, NMTOKEN, boolean_, dateTime, duration, PartIDKeys;
-
-		public static EDataType getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDataType.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for DataType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDataType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDataType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDataType getEnum(String enumName)
-		{
-			return (EnumDataType) getEnum(EnumDataType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDataType getEnum(int enumValue)
-		{
-			return (EnumDataType) getEnum(EnumDataType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDataType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDataType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDataType.class);
-		}
-
-		/**  */
-		public static final EnumDataType string = new EnumDataType("string");
-		/**  */
-		public static final EnumDataType integer = new EnumDataType("integer");
-		/**  */
-		public static final EnumDataType double_ = new EnumDataType("double");
-		/**  */
-		public static final EnumDataType NMTOKEN = new EnumDataType("NMTOKEN");
-		/**  */
-		public static final EnumDataType boolean_ = new EnumDataType("boolean");
-		/**  */
-		public static final EnumDataType dateTime = new EnumDataType("dateTime");
-		/**  */
-		public static final EnumDataType duration = new EnumDataType("duration");
-		/**  */
-		public static final EnumDataType PartIDKeys = new EnumDataType("PartIDKeys");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Context
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Context
@@ -384,13 +299,15 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Context ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Context
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Context
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setContext(EContext) based on java.lang.enum instead
+	 * @deprecated use SetContext(EContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setContext(EnumContext enumVar)
@@ -402,7 +319,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * (9) get attribute Context
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EContext getEContext() based on java.lang.enum instead
+	 * @deprecated use EContext GetEContext() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumContext getContext()
@@ -411,7 +328,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DataType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DataType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DataType
@@ -434,13 +353,15 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DataType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DataType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DataType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDataType(EDataType) based on java.lang.enum instead
+	 * @deprecated use SetDataType(EDataType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDataType(EnumDataType enumVar)
@@ -452,7 +373,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * (9) get attribute DataType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDataType getEDataType() based on java.lang.enum instead
+	 * @deprecated use EDataType GetEDataType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDataType getDataType()
@@ -461,7 +382,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -484,7 +407,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueFormat ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueFormat
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueFormat
@@ -507,7 +432,8 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueTemplate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueTemplate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -531,7 +457,9 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -546,7 +474,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 
 	/**
 	 * (25) getCreateExpr
-	 * 
+	 *
 	 * @return JDFExpr the element
 	 */
 	public JDFExpr getCreateExpr()
@@ -556,7 +484,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 
 	/**
 	 * (26) getCreateExpr
-	 * 
+	 *
 	 * @param iSkip number of elements to skip
 	 * @return JDFExpr the element
 	 */
@@ -569,7 +497,8 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 	 * (27) const get element Expr
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFExpr the element default is getExpr(0)
+	 * @return JDFExpr the element
+	 *         default is getExpr(0)
 	 */
 	public JDFExpr getExpr(int iSkip)
 	{
@@ -578,7 +507,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
 
 	/**
 	 * Get all Expr from the current element
-	 * 
+	 *
 	 * @return Collection<JDFExpr>, null if none are available
 	 */
 	public Collection<JDFExpr> getAllExpr()

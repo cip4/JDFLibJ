@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFchoice;
 import org.cip4.jdflib.resource.devicecapability.JDFset;
 
 /**
- *****************************************************************************
- * class JDFAutomacro : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutomacro : public JDFElement
  */
 
 public abstract class JDFAutomacro extends JDFElement
@@ -160,11 +157,15 @@ public abstract class JDFAutomacro extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -189,7 +190,9 @@ public abstract class JDFAutomacro extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -227,7 +230,8 @@ public abstract class JDFAutomacro extends JDFElement
 	 * (27) const get element choice
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFchoice the element default is getchoice(0)
+	 * @return JDFchoice the element
+	 *         default is getchoice(0)
 	 */
 	public JDFchoice getchoice(int iSkip)
 	{
@@ -289,7 +293,8 @@ public abstract class JDFAutomacro extends JDFElement
 	 * (27) const get element set
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFset the element default is getset(0)
+	 * @return JDFset the element
+	 *         default is getset(0)
 	 */
 	public JDFset getset(int iSkip)
 	{
@@ -351,7 +356,8 @@ public abstract class JDFAutomacro extends JDFElement
 	 * (27) const get element call
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFcall the element default is getcall(0)
+	 * @return JDFcall the element
+	 *         default is getcall(0)
 	 */
 	public JDFcall getcall(int iSkip)
 	{

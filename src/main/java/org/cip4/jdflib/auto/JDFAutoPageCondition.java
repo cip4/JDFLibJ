@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
 /**
- *****************************************************************************
- * class JDFAutoPageCondition : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPageCondition : public JDFElement
  */
 
 public abstract class JDFAutoPageCondition extends JDFElement
@@ -158,11 +155,14 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RestrictedContentObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RestrictedContentObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -178,17 +178,20 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute RestrictedContentObjects
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getRestrictedContentObjects()
 	{
-		final String strAttrName = getAttribute(AttributeName.RESTRICTEDCONTENTOBJECTS, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RESTRICTEDCONTENTOBJECTS, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -226,7 +229,8 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	 * (27) const get element RunList
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRunList the element default is getRunList(0)
+	 * @return JDFRunList the element
+	 *         default is getRunList(0)
 	 */
 	public JDFRunList getRunList(int iSkip)
 	{
@@ -298,7 +302,8 @@ public abstract class JDFAutoPageCondition extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

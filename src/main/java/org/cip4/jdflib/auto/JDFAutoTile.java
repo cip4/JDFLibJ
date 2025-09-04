@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
 
 /**
- *****************************************************************************
- * class JDFAutoTile : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTile : public JDFResource
  */
 
 public abstract class JDFAutoTile extends JDFResource
@@ -168,7 +165,7 @@ public abstract class JDFAutoTile extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -183,11 +180,15 @@ public abstract class JDFAutoTile extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClipBox
@@ -202,17 +203,20 @@ public abstract class JDFAutoTile extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute ClipBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getClipBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CTM
@@ -227,17 +231,20 @@ public abstract class JDFAutoTile extends JDFResource
 	/**
 	 * (20) get JDFMatrix attribute CTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrimBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrimBox
@@ -252,17 +259,20 @@ public abstract class JDFAutoTile extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute TrimBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getTrimBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRIMBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRIMBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -300,7 +310,8 @@ public abstract class JDFAutoTile extends JDFResource
 	 * (27) const get element MarkObject
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMarkObject the element default is getMarkObject(0)
+	 * @return JDFMarkObject the element
+	 *         default is getMarkObject(0)
 	 */
 	public JDFMarkObject getMarkObject(int iSkip)
 	{
@@ -350,7 +361,8 @@ public abstract class JDFAutoTile extends JDFResource
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{
@@ -390,7 +402,8 @@ public abstract class JDFAutoTile extends JDFResource
 	/**
 	 * (29) append element MediaSource
 	 *
-	 * @return JDFMediaSource the element @ if the element already exists
+	 * @return JDFMediaSource the element
+	 * @ if the element already exists
 	 */
 	public JDFMediaSource appendMediaSource()
 	{

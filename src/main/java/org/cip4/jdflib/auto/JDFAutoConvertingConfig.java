@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
- *****************************************************************************
- * class JDFAutoConvertingConfig : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoConvertingConfig : public JDFElement
  */
 
 public abstract class JDFAutoConvertingConfig extends JDFElement
@@ -165,11 +162,14 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarginBottom
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarginBottom
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -193,7 +193,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarginLeft ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarginLeft
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MarginLeft
@@ -216,7 +218,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarginRight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarginRight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MarginRight
@@ -239,7 +243,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarginTop ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarginTop
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MarginTop
@@ -262,7 +268,9 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetHeight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetHeight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SheetHeight
@@ -277,17 +285,20 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	/**
 	 * (20) get JDFNumberRange attribute SheetHeight
 	 *
-	 * @return JDFNumberRange the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRange
+	 * @return JDFNumberRange the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRange
 	 */
 	public JDFNumberRange getSheetHeight()
 	{
-		final String strAttrName = getAttribute(AttributeName.SHEETHEIGHT, null, null);
-		final JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SHEETHEIGHT, null, null);
+		JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SheetWidth
@@ -302,17 +313,20 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	/**
 	 * (20) get JDFNumberRange attribute SheetWidth
 	 *
-	 * @return JDFNumberRange the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRange
+	 * @return JDFNumberRange the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRange
 	 */
 	public JDFNumberRange getSheetWidth()
 	{
-		final String strAttrName = getAttribute(AttributeName.SHEETWIDTH, null, null);
-		final JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SHEETWIDTH, null, null);
+		JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -350,7 +364,8 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	 * (27) const get element CutBlock
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCutBlock the element default is getCutBlock(0)
+	 * @return JDFCutBlock the element
+	 *         default is getCutBlock(0)
 	 */
 	public JDFCutBlock getCutBlock(int iSkip)
 	{
@@ -400,7 +415,8 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	/**
 	 * (29) append element Device
 	 *
-	 * @return JDFDevice the element @ if the element already exists
+	 * @return JDFDevice the element
+	 * @ if the element already exists
 	 */
 	public JDFDevice appendDevice()
 	{
@@ -440,7 +456,8 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{

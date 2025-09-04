@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFSpineTapingParams;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 
 /**
- *****************************************************************************
- * class JDFAutoAdhesiveBindingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAdhesiveBindingParams : public JDFResource
  */
 
 public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
@@ -167,7 +164,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -182,11 +179,14 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PullOutValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PullOutValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -210,7 +210,9 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FlexValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FlexValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FlexValue
@@ -233,7 +235,9 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -271,7 +275,8 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * (27) const get element SpinePreparationParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSpinePreparationParams the element default is getSpinePreparationParams(0)
+	 * @return JDFSpinePreparationParams the element
+	 *         default is getSpinePreparationParams(0)
 	 */
 	public JDFSpinePreparationParams getSpinePreparationParams(int iSkip)
 	{
@@ -333,7 +338,8 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * (27) const get element GlueApplication
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueApplication the element default is getGlueApplication(0)
+	 * @return JDFGlueApplication the element
+	 *         default is getGlueApplication(0)
 	 */
 	public JDFGlueApplication getGlueApplication(int iSkip)
 	{
@@ -395,7 +401,8 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * (27) const get element SpineTapingParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSpineTapingParams the element default is getSpineTapingParams(0)
+	 * @return JDFSpineTapingParams the element
+	 *         default is getSpineTapingParams(0)
 	 */
 	public JDFSpineTapingParams getSpineTapingParams(int iSkip)
 	{
@@ -457,7 +464,8 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 	 * (27) const get element CoverApplicationParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCoverApplicationParams the element default is getCoverApplicationParams(0)
+	 * @return JDFCoverApplicationParams the element
+	 *         default is getCoverApplicationParams(0)
 	 */
 	public JDFCoverApplicationParams getCoverApplicationParams(int iSkip)
 	{

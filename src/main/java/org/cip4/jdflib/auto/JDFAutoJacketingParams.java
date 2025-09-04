@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoJacketingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoJacketingParams : public JDFResource
  */
 
 public abstract class JDFAutoJacketingParams extends JDFResource
@@ -143,7 +140,7 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -158,11 +155,14 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldingDistance
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FoldingDistance
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -186,7 +186,8 @@ public abstract class JDFAutoJacketingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldingWidth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FoldingWidth
 	 * ---------------------------------------------------------------------
 	 */
 	/**

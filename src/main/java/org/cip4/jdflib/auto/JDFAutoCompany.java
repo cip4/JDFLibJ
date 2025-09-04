@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
- *****************************************************************************
- * class JDFAutoCompany : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCompany : public JDFResource
  */
 
 public abstract class JDFAutoCompany extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoCompany extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,14 @@ public abstract class JDFAutoCompany extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrganizationName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OrganizationName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -206,7 +206,9 @@ public abstract class JDFAutoCompany extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -246,7 +248,8 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -319,7 +322,8 @@ public abstract class JDFAutoCompany extends JDFResource
 	 * (27) const get element OrganizationalUnit
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getOrganizationalUnit(0)
+	 * @return JDFElement the element
+	 *         default is getOrganizationalUnit(0)
 	 */
 	public JDFElement getOrganizationalUnit(int iSkip)
 	{

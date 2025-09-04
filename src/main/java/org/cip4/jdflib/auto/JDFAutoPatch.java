@@ -92,10 +92,7 @@ import org.cip4.jdflib.resource.JDFSeparationTint;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPatch : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPatch : public JDFElement
  */
 
 public abstract class JDFAutoPatch extends JDFElement
@@ -110,7 +107,8 @@ public abstract class JDFAutoPatch extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DENSITY, 0x3331111111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.LAB, 0x3331111111l, AttributeInfo.EnumAttributeType.LabColor, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x3331111111l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PATCHUSAGE, 0x2221111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPatchUsage.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PATCHUSAGE, 0x2221111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPatchUsage.getEnum(0),
+				null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.RGB, 0x3331111111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.SIZE, 0x3331111111l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SPECTRUM, 0x3331111111l, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
@@ -330,11 +328,15 @@ public abstract class JDFAutoPatch extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Center
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Center
@@ -349,17 +351,20 @@ public abstract class JDFAutoPatch extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Center
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getCenter()
 	{
-		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Density ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Density
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Density
@@ -382,7 +387,9 @@ public abstract class JDFAutoPatch extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Lab ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Lab
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Lab
@@ -397,17 +404,19 @@ public abstract class JDFAutoPatch extends JDFElement
 	/**
 	 * (20) get JDFLabColor attribute Lab
 	 *
-	 * @return JDFLabColor the value of the attribute, null if a the attribute value is not a valid to create a JDFLabColor
+	 * @return JDFLabColor the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFLabColor
 	 */
 	public JDFLabColor getLab()
 	{
-		final String strAttrName = getAttribute(AttributeName.LAB, null, null);
-		final JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
+		String strAttrName = getAttribute(AttributeName.LAB, null, null);
+		JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NeutralDensity
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NeutralDensity
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -431,7 +440,9 @@ public abstract class JDFAutoPatch extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PatchUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PatchUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PatchUsage
@@ -454,13 +465,15 @@ public abstract class JDFAutoPatch extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PatchUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PatchUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PatchUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPatchUsage(EPatchUsage) based on java.lang.enum instead
+	 * @deprecated use SetPatchUsage(EPatchUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPatchUsage(EnumPatchUsage enumVar)
@@ -472,7 +485,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * (9) get attribute PatchUsage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPatchUsage getEPatchUsage() based on java.lang.enum instead
+	 * @deprecated use EPatchUsage GetEPatchUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPatchUsage getPatchUsage()
@@ -481,7 +494,9 @@ public abstract class JDFAutoPatch extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RGB ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RGB
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RGB
@@ -496,17 +511,20 @@ public abstract class JDFAutoPatch extends JDFElement
 	/**
 	 * (20) get JDFRGBColor attribute RGB
 	 *
-	 * @return JDFRGBColor the value of the attribute, null if a the attribute value is not a valid to create a JDFRGBColor
+	 * @return JDFRGBColor the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRGBColor
 	 */
 	public JDFRGBColor getRGB()
 	{
-		final String strAttrName = getAttribute(AttributeName.RGB, null, null);
-		final JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RGB, null, null);
+		JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Size
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Size
@@ -521,17 +539,20 @@ public abstract class JDFAutoPatch extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Size
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Spectrum ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Spectrum
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Spectrum
@@ -546,17 +567,20 @@ public abstract class JDFAutoPatch extends JDFElement
 	/**
 	 * (20) get JDFTransferFunction attribute Spectrum
 	 *
-	 * @return JDFTransferFunction the value of the attribute, null if a the attribute value is not a valid to create a JDFTransferFunction
+	 * @return JDFTransferFunction the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFTransferFunction
 	 */
 	public JDFTransferFunction getSpectrum()
 	{
-		final String strAttrName = getAttribute(AttributeName.SPECTRUM, null, null);
-		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SPECTRUM, null, null);
+		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpotType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpotType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SpotType
@@ -579,13 +603,15 @@ public abstract class JDFAutoPatch extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpotType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpotType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SpotType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSpotType(ESpotType) based on java.lang.enum instead
+	 * @deprecated use SetSpotType(ESpotType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSpotType(EnumSpotType enumVar)
@@ -597,7 +623,7 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * (9) get attribute SpotType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESpotType getESpotType() based on java.lang.enum instead
+	 * @deprecated use ESpotType GetESpotType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSpotType getSpotType()
@@ -606,7 +632,9 @@ public abstract class JDFAutoPatch extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -644,7 +672,8 @@ public abstract class JDFAutoPatch extends JDFElement
 	 * (27) const get element SeparationTint
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationTint the element default is getSeparationTint(0)
+	 * @return JDFSeparationTint the element
+	 *         default is getSeparationTint(0)
 	 */
 	public JDFSeparationTint getSeparationTint(int iSkip)
 	{

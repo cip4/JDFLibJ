@@ -79,10 +79,7 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 
 /**
- *****************************************************************************
- * class JDFAutoShiftPoint : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShiftPoint : public JDFElement
  */
 
 public abstract class JDFAutoShiftPoint extends JDFElement
@@ -140,11 +137,15 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CTM
@@ -159,17 +160,20 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	/**
 	 * (20) get JDFMatrix attribute CTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Position
@@ -184,12 +188,13 @@ public abstract class JDFAutoShiftPoint extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Position
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.POSITION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.POSITION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

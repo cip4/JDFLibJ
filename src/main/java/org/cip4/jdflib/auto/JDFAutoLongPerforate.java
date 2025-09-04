@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 
 /**
- *****************************************************************************
- * class JDFAutoLongPerforate : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLongPerforate : public JDFElement
  */
 
 public abstract class JDFAutoLongPerforate extends JDFElement
@@ -140,11 +137,14 @@ public abstract class JDFAutoLongPerforate extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TeethPerDimension
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TeethPerDimension
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -168,7 +168,9 @@ public abstract class JDFAutoLongPerforate extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WorkingList
@@ -183,17 +185,20 @@ public abstract class JDFAutoLongPerforate extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute WorkingList
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getWorkingList()
 	{
-		final String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute XOffset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute XOffset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute XOffset

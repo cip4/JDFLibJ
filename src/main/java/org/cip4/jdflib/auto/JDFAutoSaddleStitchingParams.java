@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSaddleStitchingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSaddleStitchingParams : public JDFResource
  */
 
 public abstract class JDFAutoSaddleStitchingParams extends JDFResource
@@ -101,7 +98,8 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x4444444442l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0),
+				null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.WIREBRAND, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
@@ -155,7 +153,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -253,11 +251,14 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumberOfStitches
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NumberOfStitches
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -281,7 +282,8 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchPositions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchPositions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -297,17 +299,20 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute StitchPositions
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getStitchPositions()
 	{
-		final String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.STITCHPOSITIONS, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StapleShape ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StapleShape
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StapleShape
@@ -330,13 +335,15 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StapleShape ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StapleShape
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StapleShape
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setStapleShape(EStapleShape) based on java.lang.enum instead
+	 * @deprecated use SetStapleShape(EStapleShape) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStapleShape(EnumStapleShape enumVar)
@@ -348,7 +355,7 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	 * (9) get attribute StapleShape
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EStapleShape getEStapleShape() based on java.lang.enum instead
+	 * @deprecated use EStapleShape GetEStapleShape() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumStapleShape getStapleShape()
@@ -357,7 +364,9 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StitchWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StitchWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StitchWidth
@@ -380,7 +389,9 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WireGauge ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WireGauge
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WireGauge
@@ -403,7 +414,9 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WireBrand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WireBrand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WireBrand

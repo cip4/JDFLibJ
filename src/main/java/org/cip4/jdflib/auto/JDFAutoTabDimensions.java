@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoTabDimensions : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTabDimensions : public JDFElement
  */
 
 public abstract class JDFAutoTabDimensions extends JDFElement
@@ -230,11 +227,15 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabEdge ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabEdge
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TabEdge
@@ -257,13 +258,15 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabEdge ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabEdge
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TabEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTabEdge(ETabEdge) based on java.lang.enum instead
+	 * @deprecated use SetTabEdge(ETabEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTabEdge(EnumTabEdge enumVar)
@@ -275,7 +278,7 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	 * (9) get attribute TabEdge
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETabEdge getETabEdge() based on java.lang.enum instead
+	 * @deprecated use ETabEdge GetETabEdge() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTabEdge getTabEdge()
@@ -284,7 +287,8 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabExtensionDistance
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabExtensionDistance
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -308,7 +312,9 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabOffset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabOffset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TabOffset
@@ -331,7 +337,9 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabsPerBank ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabsPerBank
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TabsPerBank
@@ -354,7 +362,8 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabSetCollationOrder
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabSetCollationOrder
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -378,7 +387,9 @@ public abstract class JDFAutoTabDimensions extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TabWidth

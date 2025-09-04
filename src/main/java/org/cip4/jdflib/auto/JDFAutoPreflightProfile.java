@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightProfile : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightProfile : public JDFResource
  */
 
 public abstract class JDFAutoPreflightProfile extends JDFResource
@@ -148,7 +145,7 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -163,7 +160,9 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -189,7 +188,8 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	/**
 	 * (29) append element ColorsConstraintsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendColorsConstraintsPool()
 	{
@@ -219,7 +219,8 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	/**
 	 * (29) append element DocumentConstraintsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendDocumentConstraintsPool()
 	{
@@ -249,7 +250,8 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	/**
 	 * (29) append element FontsConstraintsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendFontsConstraintsPool()
 	{
@@ -279,7 +281,8 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	/**
 	 * (29) append element FileTypeConstraintsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendFileTypeConstraintsPool()
 	{
@@ -309,7 +312,8 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	/**
 	 * (29) append element ImagesConstraintsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendImagesConstraintsPool()
 	{
@@ -339,7 +343,8 @@ public abstract class JDFAutoPreflightProfile extends JDFResource
 	/**
 	 * (29) append element PagesConstraintsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendPagesConstraintsPool()
 	{

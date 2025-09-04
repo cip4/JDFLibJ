@@ -82,10 +82,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *****************************************************************************
- * class JDFAutoNodeInfoQuParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNodeInfoQuParams : public JDFElement
  */
 
 public abstract class JDFAutoNodeInfoQuParams extends JDFElement
@@ -156,11 +153,15 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -183,7 +184,9 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -206,7 +209,8 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -230,7 +234,9 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -256,7 +262,8 @@ public abstract class JDFAutoNodeInfoQuParams extends JDFElement
 	/**
 	 * (29) append element Part
 	 *
-	 * @return JDFPart the element @ if the element already exists
+	 * @return JDFPart the element
+	 * @ if the element already exists
 	 */
 	public JDFPart appendPart()
 	{

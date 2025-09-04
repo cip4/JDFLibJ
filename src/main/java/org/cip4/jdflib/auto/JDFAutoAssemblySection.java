@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoAssembly.EOrder;
+import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -87,13 +85,9 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPageAssignedList;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoAssemblySection : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAssemblySection : public JDFElement
  */
 
 public abstract class JDFAutoAssemblySection extends JDFElement
@@ -165,89 +159,16 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for Order
-	 */
-
-	public enum EOrder
-	{
-		Collecting, Gathering;
-
-		public static EOrder getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EOrder.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Order
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumOrder extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumOrder(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumOrder getEnum(String enumName)
-		{
-			return (EnumOrder) getEnum(EnumOrder.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumOrder getEnum(int enumValue)
-		{
-			return (EnumOrder) getEnum(EnumOrder.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOrder.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOrder.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumOrder.class);
-		}
-
-		/**  */
-		public static final EnumOrder Collecting = new EnumOrder("Collecting");
-		/**  */
-		public static final EnumOrder Gathering = new EnumOrder("Gathering");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssemblyID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssemblyID
@@ -270,7 +191,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssemblyIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssemblyIDs
@@ -289,14 +212,16 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CommonFolds ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CommonFolds
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CommonFolds
@@ -319,7 +244,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -342,7 +269,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Order ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Order
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Order
@@ -365,13 +294,15 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Order ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Order
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Order
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setOrder(EOrder) based on java.lang.enum instead
+	 * @deprecated use SetOrder(EOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrder(EnumOrder enumVar)
@@ -383,7 +314,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * (9) get attribute Order
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EOrder getEOrder() based on java.lang.enum instead
+	 * @deprecated use EOrder GetEOrder() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumOrder getOrder()
@@ -392,7 +323,9 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -430,7 +363,8 @@ public abstract class JDFAutoAssemblySection extends JDFElement
 	 * (27) const get element PageAssignedList
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPageAssignedList the element default is getPageAssignedList(0)
+	 * @return JDFPageAssignedList the element
+	 *         default is getPageAssignedList(0)
 	 */
 	public JDFPageAssignedList getPageAssignedList(int iSkip)
 	{

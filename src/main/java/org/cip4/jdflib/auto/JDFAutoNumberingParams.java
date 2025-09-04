@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFNumberingParam;
 
 /**
- *****************************************************************************
- * class JDFAutoNumberingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNumberingParams : public JDFResource
  */
 
 public abstract class JDFAutoNumberingParams extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,7 +157,9 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +197,8 @@ public abstract class JDFAutoNumberingParams extends JDFResource
 	 * (27) const get element NumberingParam
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFNumberingParam the element default is getNumberingParam(0)
+	 * @return JDFNumberingParam the element
+	 *         default is getNumberingParam(0)
 	 */
 	public JDFNumberingParam getNumberingParam(int iSkip)
 	{

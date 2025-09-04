@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFPDLResourceAlias;
 
 /**
- *****************************************************************************
- * class JDFAutoColorSpaceSubstitute : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorSpaceSubstitute : public JDFElement
  */
 
 public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
@@ -142,7 +139,9 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -168,7 +167,8 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	/**
 	 * (29) append element PDLResourceAlias
 	 *
-	 * @return JDFPDLResourceAlias the element @ if the element already exists
+	 * @return JDFPDLResourceAlias the element
+	 * @ if the element already exists
 	 */
 	public JDFPDLResourceAlias appendPDLResourceAlias()
 	{
@@ -220,7 +220,8 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

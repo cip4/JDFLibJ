@@ -85,10 +85,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoControllerFilter : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoControllerFilter : public JDFElement
  */
 
 public abstract class JDFAutoControllerFilter extends JDFElement
@@ -229,11 +226,14 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ControllerID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ControllerID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -257,7 +257,9 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URLTypes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URLTypes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute URLTypes
@@ -272,7 +274,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	/**
 	 * (9.2) get URLTypes attribute URLTypes
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EURLTypes> getEnumsURLTypes()
 	{
@@ -280,13 +282,15 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URLTypes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URLTypes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute URLTypes
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEURLTypes(List<EURLTypes>) based on java.lang.enum instead
+	 * @deprecated use SetEURLTypes(List<EURLTypes>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setURLTypes(List<EnumURLTypes> v)
@@ -298,7 +302,7 @@ public abstract class JDFAutoControllerFilter extends JDFElement
 	 * (9.2) get URLTypes attribute URLTypes
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EURLTypes> getEnumsURLTypes() based on java.lang.enum instead
+	 * @deprecated use List<EURLTypes > GetEURLTypes() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumURLTypes> getURLTypes()

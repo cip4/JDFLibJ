@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoModified : public JDFAudit
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoModified : public JDFAudit
  */
 
 public abstract class JDFAutoModified extends JDFAudit
@@ -157,11 +154,15 @@ public abstract class JDFAutoModified extends JDFAudit
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute jRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute jRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute jRef
@@ -184,7 +185,9 @@ public abstract class JDFAutoModified extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute XPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute XPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute XPath
@@ -207,7 +210,9 @@ public abstract class JDFAutoModified extends JDFAudit
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -246,7 +251,8 @@ public abstract class JDFAutoModified extends JDFAudit
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)

@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -90,10 +92,7 @@ import org.cip4.jdflib.resource.process.JDFBarcodeReproParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDeviceMark : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeviceMark : public JDFElement
  */
 
 public abstract class JDFAutoDeviceMark extends JDFElement
@@ -107,12 +106,17 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.FONT, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FONTSIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumHorizontalFitPolicy.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKJUSTIFICATION, 0x4444443331l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkJustification.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.HORIZONTALFITPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumHorizontalFitPolicy.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKJUSTIFICATION, 0x4444443331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumMarkJustification.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.MARKOFFSET, 0x4444443331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MARKORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkOrientation.getEnum(0), null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKPOSITION, 0x4444443331l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkPosition.getEnum(0), null);
-		atrInfoTable[8] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.MARKORIENTATION, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumMarkOrientation.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MARKPOSITION, 0x4444443331l, AttributeInfo.EnumAttributeType.enumeration, EnumMarkPosition.getEnum(0),
+				null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumVerticalFitPolicy.getEnum(0), null);
 	}
 
 	@Override
@@ -167,97 +171,6 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	protected JDFAutoDeviceMark(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * Enumeration strings for Anchor
-	 */
-
-	public enum EAnchor
-	{
-		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
-
-		public static EAnchor getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAnchor.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Anchor
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAnchor extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAnchor(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(String enumName)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(int enumValue)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAnchor.class);
-		}
-
-		/**  */
-		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
-		/**  */
-		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
-		/**  */
-		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
-		/**  */
-		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
-		/**  */
-		public static final EnumAnchor Center = new EnumAnchor("Center");
-		/**  */
-		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
-		/**  */
-		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
-		/**  */
-		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
-		/**  */
-		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
 	}
 
 	/**
@@ -664,11 +577,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Anchor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Anchor
@@ -691,13 +608,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Anchor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Anchor
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAnchor(EAnchor) based on java.lang.enum instead
+	 * @deprecated use SetAnchor(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
@@ -709,7 +628,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute Anchor
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAnchor getEAnchor() based on java.lang.enum instead
+	 * @deprecated use EAnchor GetEAnchor() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAnchor getAnchor()
@@ -718,7 +637,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Font ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Font
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Font
@@ -741,7 +662,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FontSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FontSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FontSize
@@ -764,7 +687,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HorizontalFitPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HorizontalFitPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -788,14 +712,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HorizontalFitPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HorizontalFitPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute HorizontalFitPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setHorizontalFitPolicy(EHorizontalFitPolicy) based on java.lang.enum instead
+	 * @deprecated use SetHorizontalFitPolicy(EHorizontalFitPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setHorizontalFitPolicy(EnumHorizontalFitPolicy enumVar)
@@ -807,7 +732,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute HorizontalFitPolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EHorizontalFitPolicy getEHorizontalFitPolicy() based on java.lang.enum instead
+	 * @deprecated use EHorizontalFitPolicy GetEHorizontalFitPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumHorizontalFitPolicy getHorizontalFitPolicy()
@@ -816,7 +741,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkJustification
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkJustification
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -840,14 +766,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkJustification
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkJustification
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MarkJustification
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMarkJustification(EMarkJustification) based on java.lang.enum instead
+	 * @deprecated use SetMarkJustification(EMarkJustification) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkJustification(EnumMarkJustification enumVar)
@@ -859,7 +786,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute MarkJustification
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMarkJustification getEMarkJustification() based on java.lang.enum instead
+	 * @deprecated use EMarkJustification GetEMarkJustification() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMarkJustification getMarkJustification()
@@ -868,7 +795,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkOffset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkOffset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MarkOffset
@@ -883,17 +812,19 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute MarkOffset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getMarkOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.MARKOFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MARKOFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkOrientation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkOrientation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -917,14 +848,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkOrientation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkOrientation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MarkOrientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMarkOrientation(EMarkOrientation) based on java.lang.enum instead
+	 * @deprecated use SetMarkOrientation(EMarkOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkOrientation(EnumMarkOrientation enumVar)
@@ -936,7 +868,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute MarkOrientation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMarkOrientation getEMarkOrientation() based on java.lang.enum instead
+	 * @deprecated use EMarkOrientation GetEMarkOrientation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMarkOrientation getMarkOrientation()
@@ -945,7 +877,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -969,14 +902,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MarkPosition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMarkPosition(EMarkPosition) based on java.lang.enum instead
+	 * @deprecated use SetMarkPosition(EMarkPosition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkPosition(EnumMarkPosition enumVar)
@@ -988,7 +922,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute MarkPosition
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMarkPosition getEMarkPosition() based on java.lang.enum instead
+	 * @deprecated use EMarkPosition GetEMarkPosition() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMarkPosition getMarkPosition()
@@ -997,7 +931,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute VerticalFitPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute VerticalFitPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1021,14 +956,15 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute VerticalFitPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute VerticalFitPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute VerticalFitPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setVerticalFitPolicy(EVerticalFitPolicy) based on java.lang.enum instead
+	 * @deprecated use SetVerticalFitPolicy(EVerticalFitPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setVerticalFitPolicy(EnumVerticalFitPolicy enumVar)
@@ -1040,7 +976,7 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (9) get attribute VerticalFitPolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EVerticalFitPolicy getEVerticalFitPolicy() based on java.lang.enum instead
+	 * @deprecated use EVerticalFitPolicy GetEVerticalFitPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumVerticalFitPolicy getVerticalFitPolicy()
@@ -1049,7 +985,9 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -1087,7 +1025,8 @@ public abstract class JDFAutoDeviceMark extends JDFElement
 	 * (27) const get element BarcodeReproParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBarcodeReproParams the element default is getBarcodeReproParams(0)
+	 * @return JDFBarcodeReproParams the element
+	 *         default is getBarcodeReproParams(0)
 	 */
 	public JDFBarcodeReproParams getBarcodeReproParams(int iSkip)
 	{

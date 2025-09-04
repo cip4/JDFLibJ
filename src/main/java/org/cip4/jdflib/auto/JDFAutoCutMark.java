@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoCutMark : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCutMark : public JDFResource
  */
 
 public abstract class JDFAutoCutMark extends JDFResource
@@ -170,7 +167,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -276,11 +273,15 @@ public abstract class JDFAutoCutMark extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MarkType
@@ -303,13 +304,15 @@ public abstract class JDFAutoCutMark extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MarkType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMarkType(EMarkType) based on java.lang.enum instead
+	 * @deprecated use SetMarkType(EMarkType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkType(EnumMarkType enumVar)
@@ -321,7 +324,7 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * (9) get attribute MarkType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMarkType getEMarkType() based on java.lang.enum instead
+	 * @deprecated use EMarkType GetEMarkType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMarkType getMarkType()
@@ -330,7 +333,9 @@ public abstract class JDFAutoCutMark extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Position
@@ -345,17 +350,20 @@ public abstract class JDFAutoCutMark extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Position
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.POSITION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.POSITION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Blocks ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Blocks
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Blocks
@@ -374,14 +382,16 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 */
 	public VString getBlocks()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.BLOCKS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.BLOCKS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -419,7 +429,8 @@ public abstract class JDFAutoCutMark extends JDFResource
 	 * (27) const get element Assembly
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFAssembly the element default is getAssembly(0)
+	 * @return JDFAssembly the element
+	 *         default is getAssembly(0)
 	 */
 	public JDFAssembly getAssembly(int iSkip)
 	{

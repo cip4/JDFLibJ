@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.JDFStack;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoLogicalStackParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLogicalStackParams : public JDFElement
  */
 
 public abstract class JDFAutoLogicalStackParams extends JDFElement
@@ -103,7 +100,8 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAXSTACKDEPTH, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESTRICTIONS, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumRestrictions.getEnum(0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.RESTRICTIONS, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumRestrictions.getEnum(0),
+				"None");
 	}
 
 	@Override
@@ -240,11 +238,14 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxStackDepth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxStackDepth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -268,7 +269,8 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Restrictions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Restrictions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -292,14 +294,15 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Restrictions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Restrictions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Restrictions
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setRestrictions(ERestrictions) based on java.lang.enum instead
+	 * @deprecated use SetRestrictions(ERestrictions) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRestrictions(EnumRestrictions enumVar)
@@ -311,7 +314,7 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 * (9) get attribute Restrictions
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ERestrictions getERestrictions() based on java.lang.enum instead
+	 * @deprecated use ERestrictions GetERestrictions() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumRestrictions getRestrictions()
@@ -320,7 +323,9 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -358,7 +363,8 @@ public abstract class JDFAutoLogicalStackParams extends JDFElement
 	 * (27) const get element Stack
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStack the element default is getStack(0)
+	 * @return JDFStack the element
+	 *         default is getStack(0)
 	 */
 	public JDFStack getStack(int iSkip)
 	{

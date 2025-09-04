@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 /**
- *****************************************************************************
- * class JDFAutoMatrixEvaluation : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMatrixEvaluation : public JDFResource
  */
 
 public abstract class JDFAutoMatrixEvaluation extends JDFResource
@@ -167,17 +164,21 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RotateMod ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RotateMod
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RotateMod
@@ -200,7 +201,9 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Shift ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Shift
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Shift
@@ -223,7 +226,9 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Tolerance ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Tolerance
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Tolerance
@@ -238,17 +243,20 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Tolerance
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTolerance()
 	{
-		final String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Transforms ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Transforms
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Transforms
@@ -271,7 +279,9 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -309,7 +319,8 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * (27) const get element BasicPreflightTest
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBasicPreflightTest the element default is getBasicPreflightTest(0)
+	 * @return JDFBasicPreflightTest the element
+	 *         default is getBasicPreflightTest(0)
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{
@@ -371,7 +382,8 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
 	 * (27) const get element Value
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValue the element default is getValue(0)
+	 * @return JDFValue the element
+	 *         default is getValue(0)
 	 */
 	public JDFValue getValue(int iSkip)
 	{

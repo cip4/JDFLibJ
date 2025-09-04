@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 
 /**
- *****************************************************************************
- * class JDFAutoGangQuFilter : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGangQuFilter : public JDFElement
  */
 
 public abstract class JDFAutoGangQuFilter extends JDFElement
@@ -139,11 +136,15 @@ public abstract class JDFAutoGangQuFilter extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GangNames ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GangNames
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GangNames
@@ -162,8 +163,8 @@ public abstract class JDFAutoGangQuFilter extends JDFElement
 	 */
 	public VString getGangNames()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.GANGNAMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

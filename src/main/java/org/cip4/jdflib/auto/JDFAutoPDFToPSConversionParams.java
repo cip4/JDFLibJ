@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPDFToPSConversionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPDFToPSConversionParams : public JDFResource
  */
 
 public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
@@ -115,22 +112,24 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.IGNORETRANSFERS, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.IGNORETTFONTSFIRST, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.IGNOREUCR, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[17] = new AtrInfoTable(AttributeName.INCLUDEBASEFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeBaseFonts.getEnum(0),
-				"IncludeNever");
-		atrInfoTable[18] = new AtrInfoTable(AttributeName.INCLUDECIDFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeCIDFonts.getEnum(0),
-				"IncludeOncePerDoc");
-		atrInfoTable[19] = new AtrInfoTable(AttributeName.INCLUDEEMBEDDEDFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeEmbeddedFonts.getEnum(0),
-				"IncludeOncePerDoc");
-		atrInfoTable[20] = new AtrInfoTable(AttributeName.INCLUDEOTHERRESOURCES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeOtherResources.getEnum(0),
-				"IncludeOncePerDoc");
-		atrInfoTable[21] = new AtrInfoTable(AttributeName.INCLUDEPROCSETS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeProcSets.getEnum(0),
-				"IncludeOncePerDoc");
-		atrInfoTable[22] = new AtrInfoTable(AttributeName.INCLUDETRUETYPEFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeTrueTypeFonts.getEnum(0),
-				"IncludeOncePerDoc");
-		atrInfoTable[23] = new AtrInfoTable(AttributeName.INCLUDETYPE1FONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeType1Fonts.getEnum(0),
-				"IncludeOncePerDoc");
-		atrInfoTable[24] = new AtrInfoTable(AttributeName.INCLUDETYPE3FONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeType3Fonts.getEnum(0), null);
-		atrInfoTable[25] = new AtrInfoTable(AttributeName.OUTPUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOutputType.getEnum(0), "PostScript");
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.INCLUDEBASEFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeBaseFonts.getEnum(0), "IncludeNever");
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.INCLUDECIDFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeCIDFonts.getEnum(0), "IncludeOncePerDoc");
+		atrInfoTable[19] = new AtrInfoTable(AttributeName.INCLUDEEMBEDDEDFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeEmbeddedFonts.getEnum(0), "IncludeOncePerDoc");
+		atrInfoTable[20] = new AtrInfoTable(AttributeName.INCLUDEOTHERRESOURCES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeOtherResources.getEnum(0), "IncludeOncePerDoc");
+		atrInfoTable[21] = new AtrInfoTable(AttributeName.INCLUDEPROCSETS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeProcSets.getEnum(0), "IncludeOncePerDoc");
+		atrInfoTable[22] = new AtrInfoTable(AttributeName.INCLUDETRUETYPEFONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeTrueTypeFonts.getEnum(0), "IncludeOncePerDoc");
+		atrInfoTable[23] = new AtrInfoTable(AttributeName.INCLUDETYPE1FONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeType1Fonts.getEnum(0), "IncludeOncePerDoc");
+		atrInfoTable[24] = new AtrInfoTable(AttributeName.INCLUDETYPE3FONTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeType3Fonts.getEnum(0), null);
+		atrInfoTable[25] = new AtrInfoTable(AttributeName.OUTPUTTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumOutputType.getEnum(0),
+				"PostScript");
 		atrInfoTable[26] = new AtrInfoTable(AttributeName.PSLEVEL, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, "2");
 		atrInfoTable[27] = new AtrInfoTable(AttributeName.SCALE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, "100");
 		atrInfoTable[28] = new AtrInfoTable(AttributeName.SETPAGESIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
@@ -192,7 +191,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -916,11 +915,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinaryOK ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BinaryOK
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BinaryOK
@@ -943,7 +946,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CenterCropBox
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CenterCropBox
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -967,7 +971,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GeneratePageStreams
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GeneratePageStreams
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -991,7 +996,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreAnnotForms
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreAnnotForms
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1015,7 +1021,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreBG ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreBG
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IgnoreBG
@@ -1038,7 +1046,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreColorSeps
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreColorSeps
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1062,7 +1071,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreDSC ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreDSC
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IgnoreDSC
@@ -1085,7 +1096,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreExternStreamRef
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreExternStreamRef
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1109,7 +1121,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreHalftones
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreHalftones
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1133,7 +1146,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreOverprint
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreOverprint
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1157,7 +1171,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnorePageRotation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnorePageRotation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1181,7 +1196,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreRawData
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreRawData
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1205,7 +1221,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreSeparableImagesOnly
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreSeparableImagesOnly
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1229,7 +1246,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreShowPage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreShowPage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1253,7 +1271,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreTransfers
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreTransfers
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1277,7 +1296,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreTTFontsFirst
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreTTFontsFirst
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1301,7 +1321,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreUCR ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreUCR
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IgnoreUCR
@@ -1324,7 +1346,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeBaseFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeBaseFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1348,14 +1371,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeBaseFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeBaseFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeBaseFonts
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeBaseFonts(EIncludeBaseFonts) based on java.lang.enum instead
+	 * @deprecated use SetIncludeBaseFonts(EIncludeBaseFonts) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeBaseFonts(EnumIncludeBaseFonts enumVar)
@@ -1367,7 +1391,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute IncludeBaseFonts
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeBaseFonts getEIncludeBaseFonts() based on java.lang.enum instead
+	 * @deprecated use EIncludeBaseFonts GetEIncludeBaseFonts() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeBaseFonts getIncludeBaseFonts()
@@ -1376,7 +1400,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeCIDFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeCIDFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1400,14 +1425,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeCIDFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeCIDFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeCIDFonts
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeCIDFonts(EIncludeCIDFonts) based on java.lang.enum instead
+	 * @deprecated use SetIncludeCIDFonts(EIncludeCIDFonts) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeCIDFonts(EnumIncludeCIDFonts enumVar)
@@ -1419,7 +1445,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute IncludeCIDFonts
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeCIDFonts getEIncludeCIDFonts() based on java.lang.enum instead
+	 * @deprecated use EIncludeCIDFonts GetEIncludeCIDFonts() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeCIDFonts getIncludeCIDFonts()
@@ -1428,7 +1454,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeEmbeddedFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeEmbeddedFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1452,14 +1479,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeEmbeddedFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeEmbeddedFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeEmbeddedFonts
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeEmbeddedFonts(EIncludeEmbeddedFonts) based on java.lang.enum instead
+	 * @deprecated use SetIncludeEmbeddedFonts(EIncludeEmbeddedFonts) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeEmbeddedFonts(EnumIncludeEmbeddedFonts enumVar)
@@ -1471,7 +1499,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute IncludeEmbeddedFonts
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeEmbeddedFonts getEIncludeEmbeddedFonts() based on java.lang.enum instead
+	 * @deprecated use EIncludeEmbeddedFonts GetEIncludeEmbeddedFonts() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeEmbeddedFonts getIncludeEmbeddedFonts()
@@ -1480,7 +1508,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeOtherResources
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeOtherResources
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1504,14 +1533,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeOtherResources
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeOtherResources
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeOtherResources
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeOtherResources(EIncludeOtherResources) based on java.lang.enum instead
+	 * @deprecated use SetIncludeOtherResources(EIncludeOtherResources) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeOtherResources(EnumIncludeOtherResources enumVar)
@@ -1523,7 +1553,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute IncludeOtherResources
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeOtherResources getEIncludeOtherResources() based on java.lang.enum instead
+	 * @deprecated use EIncludeOtherResources GetEIncludeOtherResources() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeOtherResources getIncludeOtherResources()
@@ -1532,7 +1562,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeProcSets
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeProcSets
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1556,14 +1587,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeProcSets
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeProcSets
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeProcSets
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeProcSets(EIncludeProcSets) based on java.lang.enum instead
+	 * @deprecated use SetIncludeProcSets(EIncludeProcSets) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeProcSets(EnumIncludeProcSets enumVar)
@@ -1575,7 +1607,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute IncludeProcSets
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeProcSets getEIncludeProcSets() based on java.lang.enum instead
+	 * @deprecated use EIncludeProcSets GetEIncludeProcSets() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeProcSets getIncludeProcSets()
@@ -1584,7 +1616,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeTrueTypeFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeTrueTypeFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1608,14 +1641,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeTrueTypeFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeTrueTypeFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeTrueTypeFonts
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeTrueTypeFonts(EIncludeTrueTypeFonts) based on java.lang.enum instead
+	 * @deprecated use SetIncludeTrueTypeFonts(EIncludeTrueTypeFonts) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeTrueTypeFonts(EnumIncludeTrueTypeFonts enumVar)
@@ -1627,7 +1661,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute IncludeTrueTypeFonts
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeTrueTypeFonts getEIncludeTrueTypeFonts() based on java.lang.enum instead
+	 * @deprecated use EIncludeTrueTypeFonts GetEIncludeTrueTypeFonts() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeTrueTypeFonts getIncludeTrueTypeFonts()
@@ -1636,7 +1670,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeType1Fonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeType1Fonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1660,14 +1695,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeType1Fonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeType1Fonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeType1Fonts
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeType1Fonts(EIncludeType1Fonts) based on java.lang.enum instead
+	 * @deprecated use SetIncludeType1Fonts(EIncludeType1Fonts) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeType1Fonts(EnumIncludeType1Fonts enumVar)
@@ -1679,7 +1715,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute IncludeType1Fonts
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeType1Fonts getEIncludeType1Fonts() based on java.lang.enum instead
+	 * @deprecated use EIncludeType1Fonts GetEIncludeType1Fonts() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeType1Fonts getIncludeType1Fonts()
@@ -1688,7 +1724,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeType3Fonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeType3Fonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1712,14 +1749,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeType3Fonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeType3Fonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeType3Fonts
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeType3Fonts(EIncludeType3Fonts) based on java.lang.enum instead
+	 * @deprecated use SetIncludeType3Fonts(EIncludeType3Fonts) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeType3Fonts(EnumIncludeType3Fonts enumVar)
@@ -1731,7 +1769,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute IncludeType3Fonts
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeType3Fonts getEIncludeType3Fonts() based on java.lang.enum instead
+	 * @deprecated use EIncludeType3Fonts GetEIncludeType3Fonts() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeType3Fonts getIncludeType3Fonts()
@@ -1740,7 +1778,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OutputType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OutputType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute OutputType
@@ -1763,13 +1803,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OutputType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OutputType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute OutputType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setOutputType(EOutputType) based on java.lang.enum instead
+	 * @deprecated use SetOutputType(EOutputType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOutputType(EnumOutputType enumVar)
@@ -1781,7 +1823,7 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	 * (9) get attribute OutputType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EOutputType getEOutputType() based on java.lang.enum instead
+	 * @deprecated use EOutputType GetEOutputType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumOutputType getOutputType()
@@ -1790,7 +1832,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PSLevel ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PSLevel
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PSLevel
@@ -1813,7 +1857,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scale ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Scale
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Scale
@@ -1836,7 +1882,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetPageSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetPageSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetPageSize
@@ -1859,7 +1907,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetupProcsets
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetupProcsets
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1883,7 +1932,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShrinkToFit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShrinkToFit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShrinkToFit
@@ -1906,7 +1957,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SuppressCenter
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SuppressCenter
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1930,7 +1982,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SuppressRotate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SuppressRotate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1954,7 +2007,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TTasT42 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TTasT42
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TTasT42
@@ -1977,7 +2032,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UseFontAliasNames
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UseFontAliasNames
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -2001,7 +2057,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreDeviceExtGState
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreDeviceExtGState
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -2025,7 +2082,9 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BoundingBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BoundingBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BoundingBox
@@ -2040,12 +2099,13 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute BoundingBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getBoundingBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 

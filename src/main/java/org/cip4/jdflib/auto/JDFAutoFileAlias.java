@@ -70,12 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoFileSpec.EDisposition;
+import org.cip4.jdflib.auto.JDFAutoFileSpec.EnumDisposition;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -85,13 +82,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoFileAlias : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFileAlias : public JDFElement
  */
 
 public abstract class JDFAutoFileAlias extends JDFElement
@@ -103,7 +96,8 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALIAS, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DISPOSITION, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumDisposition.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DISPOSITION, 0x4444444433l, AttributeInfo.EnumAttributeType.enumeration, EnumDisposition.getEnum(0),
+				null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MIMETYPE, 0x4444444433l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.RAWALIAS, 0x3333333311l, AttributeInfo.EnumAttributeType.hexBinary, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x4444444433l, AttributeInfo.EnumAttributeType.URL, null, null);
@@ -163,91 +157,16 @@ public abstract class JDFAutoFileAlias extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for Disposition
-	 */
-
-	public enum EDisposition
-	{
-		Unlink, Delete, Retain;
-
-		public static EDisposition getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDisposition.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Disposition
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDisposition extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDisposition(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDisposition getEnum(String enumName)
-		{
-			return (EnumDisposition) getEnum(EnumDisposition.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDisposition getEnum(int enumValue)
-		{
-			return (EnumDisposition) getEnum(EnumDisposition.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDisposition.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDisposition.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDisposition.class);
-		}
-
-		/**  */
-		public static final EnumDisposition Unlink = new EnumDisposition("Unlink");
-		/**  */
-		public static final EnumDisposition Delete = new EnumDisposition("Delete");
-		/**  */
-		public static final EnumDisposition Retain = new EnumDisposition("Retain");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Alias ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Alias
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Alias
@@ -270,7 +189,9 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Disposition ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Disposition
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Disposition
@@ -293,13 +214,15 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Disposition ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Disposition
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Disposition
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDisposition(EDisposition) based on java.lang.enum instead
+	 * @deprecated use SetDisposition(EDisposition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDisposition(EnumDisposition enumVar)
@@ -311,7 +234,7 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	 * (9) get attribute Disposition
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDisposition getEDisposition() based on java.lang.enum instead
+	 * @deprecated use EDisposition GetEDisposition() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDisposition getDisposition()
@@ -320,7 +243,9 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MimeType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MimeType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MimeType
@@ -343,7 +268,9 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RawAlias ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RawAlias
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RawAlias
@@ -366,7 +293,9 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -389,7 +318,9 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -415,7 +346,8 @@ public abstract class JDFAutoFileAlias extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

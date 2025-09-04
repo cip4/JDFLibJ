@@ -83,10 +83,7 @@ import org.cip4.jdflib.resource.JDFEmboss;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoEmbossingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoEmbossingParams : public JDFResource
  */
 
 public abstract class JDFAutoEmbossingParams extends JDFResource
@@ -160,7 +157,7 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -175,11 +172,15 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleIndex
@@ -202,7 +203,9 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -240,7 +243,8 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 	 * (27) const get element Emboss
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmboss the element default is getEmboss(0)
+	 * @return JDFEmboss the element
+	 *         default is getEmboss(0)
 	 */
 	public JDFEmboss getEmboss(int iSkip)
 	{

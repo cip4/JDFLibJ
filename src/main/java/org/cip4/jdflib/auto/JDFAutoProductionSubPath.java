@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoProductionSubPath : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoProductionSubPath : public JDFElement
  */
 
 public abstract class JDFAutoProductionSubPath extends JDFElement
@@ -138,11 +135,14 @@ public abstract class JDFAutoProductionSubPath extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductionPathID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductionPathID
 	 * ---------------------------------------------------------------------
 	 */
 	/**

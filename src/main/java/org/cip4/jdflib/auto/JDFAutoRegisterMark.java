@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoRegisterMark : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRegisterMark : public JDFResource
  */
 
 public abstract class JDFAutoRegisterMark extends JDFResource
@@ -171,7 +168,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -265,11 +262,15 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Center
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Center
@@ -284,17 +285,20 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Center
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getCenter()
 	{
-		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MarkType
@@ -313,14 +317,16 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 */
 	public VString getMarkType()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.MARKTYPE, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.MARKTYPE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MarkUsage
@@ -343,13 +349,15 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MarkUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMarkUsage(EMarkUsage) based on java.lang.enum instead
+	 * @deprecated use SetMarkUsage(EMarkUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMarkUsage(EnumMarkUsage enumVar)
@@ -361,7 +369,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * (9) get attribute MarkUsage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMarkUsage getEMarkUsage() based on java.lang.enum instead
+	 * @deprecated use EMarkUsage GetEMarkUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMarkUsage getMarkUsage()
@@ -370,7 +378,9 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Rotation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Rotation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Rotation
@@ -393,7 +403,9 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -431,7 +443,8 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

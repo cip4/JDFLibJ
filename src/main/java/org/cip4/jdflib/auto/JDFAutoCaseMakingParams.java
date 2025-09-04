@@ -82,10 +82,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 /**
- *****************************************************************************
- * class JDFAutoCaseMakingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCaseMakingParams : public JDFResource
  */
 
 public abstract class JDFAutoCaseMakingParams extends JDFResource
@@ -166,7 +163,7 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -181,11 +178,14 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BottomFoldIn
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BottomFoldIn
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -209,7 +209,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CoverWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CoverWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CoverWidth
@@ -232,7 +234,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CornerType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CornerType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CornerType
@@ -255,7 +259,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontFoldIn ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FrontFoldIn
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FrontFoldIn
@@ -278,7 +284,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TopFoldIn ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TopFoldIn
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TopFoldIn
@@ -301,7 +309,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Height ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Height
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Height
@@ -324,7 +334,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JointWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JointWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JointWidth
@@ -347,7 +359,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpineWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpineWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SpineWidth
@@ -370,7 +384,9 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -396,7 +412,8 @@ public abstract class JDFAutoCaseMakingParams extends JDFResource
 	/**
 	 * (29) append element GlueLine
 	 *
-	 * @return JDFGlueLine the element @ if the element already exists
+	 * @return JDFGlueLine the element
+	 * @ if the element already exists
 	 */
 	public JDFGlueLine appendGlueLine()
 	{

@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFotherwise;
 import org.cip4.jdflib.resource.devicecapability.JDFwhen;
 
 /**
- *****************************************************************************
- * class JDFAutochoice : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutochoice : public JDFElement
  */
 
 public abstract class JDFAutochoice extends JDFElement
@@ -142,7 +139,9 @@ public abstract class JDFAutochoice extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -180,7 +179,8 @@ public abstract class JDFAutochoice extends JDFElement
 	 * (27) const get element when
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFwhen the element default is getwhen(0)
+	 * @return JDFwhen the element
+	 *         default is getwhen(0)
 	 */
 	public JDFwhen getwhen(int iSkip)
 	{
@@ -230,7 +230,8 @@ public abstract class JDFAutochoice extends JDFElement
 	/**
 	 * (29) append element otherwise
 	 *
-	 * @return JDFotherwise the element @ if the element already exists
+	 * @return JDFotherwise the element
+	 * @ if the element already exists
 	 */
 	public JDFotherwise appendotherwise()
 	{

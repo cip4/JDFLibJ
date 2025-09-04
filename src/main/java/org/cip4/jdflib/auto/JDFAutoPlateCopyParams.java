@@ -70,23 +70,16 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoContactCopyParams.EDiffusion;
+import org.cip4.jdflib.auto.JDFAutoContactCopyParams.EnumDiffusion;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPlateCopyParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPlateCopyParams : public JDFResource
  */
 
 public abstract class JDFAutoPlateCopyParams extends JDFResource
@@ -150,7 +143,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -164,89 +157,16 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/**
-	 * Enumeration strings for Diffusion
-	 */
-
-	public enum EDiffusion
-	{
-		On, Off;
-
-		public static EDiffusion getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDiffusion.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Diffusion
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDiffusion extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDiffusion(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDiffusion getEnum(String enumName)
-		{
-			return (EnumDiffusion) getEnum(EnumDiffusion.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDiffusion getEnum(int enumValue)
-		{
-			return (EnumDiffusion) getEnum(EnumDiffusion.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDiffusion.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDiffusion.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDiffusion.class);
-		}
-
-		/**  */
-		public static final EnumDiffusion On = new EnumDiffusion("On");
-		/**  */
-		public static final EnumDiffusion Off = new EnumDiffusion("Off");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Cycle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Cycle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Cycle
@@ -269,7 +189,9 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Diffusion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Diffusion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Diffusion
@@ -292,13 +214,15 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Diffusion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Diffusion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Diffusion
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDiffusion(EDiffusion) based on java.lang.enum instead
+	 * @deprecated use SetDiffusion(EDiffusion) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDiffusion(EnumDiffusion enumVar)
@@ -310,7 +234,7 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	 * (9) get attribute Diffusion
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDiffusion getEDiffusion() based on java.lang.enum instead
+	 * @deprecated use EDiffusion GetEDiffusion() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDiffusion getDiffusion()
@@ -319,7 +243,9 @@ public abstract class JDFAutoPlateCopyParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Vacuum ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Vacuum
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Vacuum

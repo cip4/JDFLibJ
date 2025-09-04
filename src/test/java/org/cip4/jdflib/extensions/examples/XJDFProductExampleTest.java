@@ -68,7 +68,7 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSpreadType;
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumSpreadType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;

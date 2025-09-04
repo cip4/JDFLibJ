@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.JDFResourceParam;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoResourceDefinitionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResourceDefinitionParams : public JDFResource
  */
 
 public abstract class JDFAutoResourceDefinitionParams extends JDFResource
@@ -103,7 +100,8 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDefaultPriority.getEnum(0), "DefaultJDF");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDefaultPriority.getEnum(0), "DefaultJDF");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFAULTID, 0x4444444443l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTJDF, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 	}
@@ -168,7 +166,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -260,11 +258,14 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultPriority
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultPriority
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -288,14 +289,15 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultPriority
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultPriority
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DefaultPriority
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDefaultPriority(EDefaultPriority) based on java.lang.enum instead
+	 * @deprecated use SetDefaultPriority(EDefaultPriority) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDefaultPriority(EnumDefaultPriority enumVar)
@@ -307,7 +309,7 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * (9) get attribute DefaultPriority
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDefaultPriority getEDefaultPriority() based on java.lang.enum instead
+	 * @deprecated use EDefaultPriority GetEDefaultPriority() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDefaultPriority getDefaultPriority()
@@ -316,7 +318,9 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DefaultID
@@ -339,7 +343,9 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultJDF ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultJDF
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DefaultJDF
@@ -362,7 +368,9 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -400,7 +408,8 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 	 * (27) const get element ResourceParam
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFResourceParam the element default is getResourceParam(0)
+	 * @return JDFResourceParam the element
+	 *         default is getResourceParam(0)
 	 */
 	public JDFResourceParam getResourceParam(int iSkip)
 	{

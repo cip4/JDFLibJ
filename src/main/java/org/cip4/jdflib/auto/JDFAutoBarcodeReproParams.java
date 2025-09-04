@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.JDFBarcodeCompParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBarcodeReproParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBarcodeReproParams : public JDFElement
  */
 
 public abstract class JDFAutoBarcodeReproParams extends JDFElement
@@ -102,7 +99,8 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BEARERBARS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumBearerBars.getEnum(0),
+				null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.HEIGHT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MAGNIFICATION, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MASKING, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMasking.getEnum(0), null);
@@ -324,11 +322,15 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BearerBars ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BearerBars
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BearerBars
@@ -351,13 +353,15 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BearerBars ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BearerBars
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BearerBars
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBearerBars(EBearerBars) based on java.lang.enum instead
+	 * @deprecated use SetBearerBars(EBearerBars) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBearerBars(EnumBearerBars enumVar)
@@ -369,7 +373,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * (9) get attribute BearerBars
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBearerBars getEBearerBars() based on java.lang.enum instead
+	 * @deprecated use EBearerBars GetEBearerBars() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBearerBars getBearerBars()
@@ -378,7 +382,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Height ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Height
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Height
@@ -401,7 +407,8 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Magnification
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Magnification
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -425,7 +432,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Masking ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Masking
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Masking
@@ -448,13 +457,15 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Masking ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Masking
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Masking
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMasking(EMasking) based on java.lang.enum instead
+	 * @deprecated use SetMasking(EMasking) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMasking(EnumMasking enumVar)
@@ -466,7 +477,7 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * (9) get attribute Masking
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMasking getEMasking() based on java.lang.enum instead
+	 * @deprecated use EMasking GetEMasking() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMasking getMasking()
@@ -475,7 +486,8 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleHeight
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleHeight
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -499,7 +511,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleWidth
@@ -522,7 +536,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ratio ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Ratio
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Ratio
@@ -545,7 +561,9 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -583,7 +601,8 @@ public abstract class JDFAutoBarcodeReproParams extends JDFElement
 	 * (27) const get element BarcodeCompParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBarcodeCompParams the element default is getBarcodeCompParams(0)
+	 * @return JDFBarcodeCompParams the element
+	 *         default is getBarcodeCompParams(0)
 	 */
 	public JDFBarcodeCompParams getBarcodeCompParams(int iSkip)
 	{

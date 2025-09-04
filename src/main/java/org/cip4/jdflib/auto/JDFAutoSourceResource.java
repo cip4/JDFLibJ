@@ -74,10 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoSourceResource : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSourceResource : public JDFElement
  */
 
 public abstract class JDFAutoSourceResource extends JDFElement
@@ -122,7 +119,9 @@ public abstract class JDFAutoSourceResource extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 }

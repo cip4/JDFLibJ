@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoAdvancedParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAdvancedParams : public JDFElement
  */
 
 public abstract class JDFAutoAdvancedParams extends JDFElement
@@ -111,9 +108,10 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRESERVEHALFTONEINFO, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.PRESERVEOVERPRINTSETTINGS, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.PRESERVEOPICOMMENTS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumTransferFunctionInfo.getEnum(0),
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.TRANSFERFUNCTIONINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumTransferFunctionInfo.getEnum(0), "Preserve");
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.UCRANDBGINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumUCRandBGInfo.getEnum(0),
 				"Preserve");
-		atrInfoTable[15] = new AtrInfoTable(AttributeName.UCRANDBGINFO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumUCRandBGInfo.getEnum(0), "Preserve");
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.USEPROLOGUE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
@@ -316,11 +314,14 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowPSXObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowPSXObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -344,7 +345,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowTransparency
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowTransparency
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -368,7 +370,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AutoPositionEPSInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AutoPositionEPSInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -392,7 +395,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmbedJobOptions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EmbedJobOptions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -416,7 +420,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitDSCWarnings
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EmitDSCWarnings
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -440,7 +445,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LockDistillerParams
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LockDistillerParams
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -464,7 +470,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ParseDSCComments
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ParseDSCComments
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -488,7 +495,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ParseDSCCommentsForDocInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ParseDSCCommentsForDocInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -512,7 +520,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PassThroughJPEGImages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PassThroughJPEGImages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -536,7 +545,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveCopyPage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreserveCopyPage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -560,7 +570,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveEPSInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreserveEPSInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -584,7 +595,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveHalftoneInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreserveHalftoneInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -608,7 +620,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveOverprintSettings
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreserveOverprintSettings
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -632,7 +645,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreserveOPIComments
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreserveOPIComments
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -656,7 +670,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransferFunctionInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TransferFunctionInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -680,14 +695,15 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransferFunctionInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TransferFunctionInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TransferFunctionInfo
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTransferFunctionInfo(ETransferFunctionInfo) based on java.lang.enum instead
+	 * @deprecated use SetTransferFunctionInfo(ETransferFunctionInfo) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransferFunctionInfo(EnumTransferFunctionInfo enumVar)
@@ -699,7 +715,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * (9) get attribute TransferFunctionInfo
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETransferFunctionInfo getETransferFunctionInfo() based on java.lang.enum instead
+	 * @deprecated use ETransferFunctionInfo GetETransferFunctionInfo() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTransferFunctionInfo getTransferFunctionInfo()
@@ -708,7 +724,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UCRandBGInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UCRandBGInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -732,14 +749,15 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UCRandBGInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UCRandBGInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute UCRandBGInfo
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUCRandBGInfo(EUCRandBGInfo) based on java.lang.enum instead
+	 * @deprecated use SetUCRandBGInfo(EUCRandBGInfo) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUCRandBGInfo(EnumUCRandBGInfo enumVar)
@@ -751,7 +769,7 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	 * (9) get attribute UCRandBGInfo
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EUCRandBGInfo getEUCRandBGInfo() based on java.lang.enum instead
+	 * @deprecated use EUCRandBGInfo GetEUCRandBGInfo() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumUCRandBGInfo getUCRandBGInfo()
@@ -760,7 +778,9 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UsePrologue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UsePrologue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute UsePrologue

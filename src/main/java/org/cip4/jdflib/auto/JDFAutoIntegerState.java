@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 
 /**
- *****************************************************************************
- * class JDFAutoIntegerState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIntegerState : public JDFResource
  */
 
 public abstract class JDFAutoIntegerState extends JDFResource
@@ -175,17 +172,20 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -209,7 +209,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -233,7 +234,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -249,17 +251,19 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute AllowedValueList
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getAllowedValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMax
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueMax
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -283,7 +287,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueMin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -307,7 +312,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueMod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -323,17 +329,19 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute AllowedValueMod
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getAllowedValueMod()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMOD, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMOD, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -349,17 +357,19 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute PresentValueList
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPresentValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMax
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueMax
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -383,7 +393,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueMin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -407,7 +418,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueMod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -423,17 +435,20 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute PresentValueMod
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPresentValueMod()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEMOD, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUEMOD, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UnitType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UnitType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute UnitType
@@ -456,7 +471,9 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -494,7 +511,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -556,7 +574,8 @@ public abstract class JDFAutoIntegerState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

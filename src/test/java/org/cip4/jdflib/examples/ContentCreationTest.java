@@ -44,7 +44,7 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
 import org.cip4.jdflib.auto.JDFAutoLayoutElement.EnumElementType;
-import org.cip4.jdflib.auto.JDFAutoPositionObj.EnumAnchor;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
@@ -92,8 +92,10 @@ class ContentCreationTest extends PreflightTest
 		final JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
 		outRun.setFileURL("output.pdf");
 
-		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
-		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL",
+		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS,
+				EnumProcessUsage.AnyInput, null);
+		lep.appendXMLComment(
+				"This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL",
 				null);
 
 		final JDFContentList cl = null;
@@ -129,7 +131,8 @@ class ContentCreationTest extends PreflightTest
 		final JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
 		outRun.setFileURL("output.pdf");
 
-		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
+		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS,
+				EnumProcessUsage.AnyInput, null);
 		final JDFContentList cl = null;
 		final JDFLayoutElementPart lePartPage = addLayoutElementPart(lep, cl);
 		lePartPage.setID("IDPage");
@@ -184,8 +187,10 @@ class ContentCreationTest extends PreflightTest
 		final JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
 		outRun.setFileURL("output.pdf");
 
-		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
-		lep.appendXMLComment("This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL",
+		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS,
+				EnumProcessUsage.AnyInput, null);
+		lep.appendXMLComment(
+				"This is a \"well placed\" CTM defined mark\nThe anchor defines the 0,0 point to be transformed\nThe element to be placed is referenced by LayoutElement/FileSpec/URL",
 				null);
 
 		/*
@@ -247,7 +252,9 @@ class ContentCreationTest extends PreflightTest
 		positionObj.setAttribute("PageRange", "0");
 		setNextAnchor(positionObj, "IDPage", "TopRight", null, null, "Parent", 0);
 		positionObj.setAttribute("Anchor", "TopRight");
-		positionObj.appendXMLComment("This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified", null);
+		positionObj.appendXMLComment(
+				"This is a \"roughly placed\"  mark\nThe anchor at top right is placed at the right (=1.0) top(=1.0) position of the page.\nNo rotation is specified",
+				null);
 		positionObj.setAttribute("PositionPolicy", "Exact");
 		addBarcode(lePart);
 		lep.appendXMLComment(
@@ -286,8 +293,8 @@ class ContentCreationTest extends PreflightTest
 		JDFLayoutElement text = (JDFLayoutElement) lePart.appendElement("LayoutElement");
 		text.setElementType(EnumElementType.Text);
 		text.setMimeURL("file://myServer/disclaimers/de/aspirin.txt");
-		lep.appendXMLComment("This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3\n" + "RelativeSize specifies the size of the object as a ratio of the size of the container",
-				null);
+		lep.appendXMLComment("This is a \"VERY roughly placed\" piece of text somewhere on pages 2-3\n"
+				+ "RelativeSize specifies the size of the object as a ratio of the size of the container", null);
 
 		lePart = addLayoutElementPart(lep, cl);
 		positionObj = lePart.appendPositionObj();
@@ -314,7 +321,6 @@ class ContentCreationTest extends PreflightTest
 	}
 
 	/**
-	 *
 	 * @param lePart
 	 */
 	private void addBarcode(final JDFLayoutElementPart lePart)
@@ -327,7 +333,6 @@ class ContentCreationTest extends PreflightTest
 	}
 
 	/**
-	 *
 	 * @param lep
 	 * @param cl
 	 * @return
@@ -347,7 +352,9 @@ class ContentCreationTest extends PreflightTest
 	private JDFContentData addMetaData(final JDFContentList cl, final JDFLayoutElementPart lePart)
 	{
 		if (cl == null)
+		{
 			return null;
+		}
 
 		final JDFContentData cd = cl.appendContentData();
 		// lePart.setAttribute("ContentDataIndex", cd.getIndex(), null);
@@ -364,8 +371,8 @@ class ContentCreationTest extends PreflightTest
 	 * @param rotation
 	 * @throws DataFormatException
 	 */
-	private static void setNextAnchor(final KElement sm2_2, final String idAnchor, final String anchor, final String absolutePosition, final String xmlComment, final String anchorType,
-			final double rotation) throws DataFormatException
+	private static void setNextAnchor(final KElement sm2_2, final String idAnchor, final String anchor, final String absolutePosition, final String xmlComment,
+			final String anchorType, final double rotation) throws DataFormatException
 	{
 		final KElement nextAnchor = sm2_2.appendElement(ElementName.REFANCHOR);
 		nextAnchor.setAttribute("Anchor", anchor);
@@ -374,7 +381,9 @@ class ContentCreationTest extends PreflightTest
 		m.shift(xy);
 		m.rotate(rotation);
 		if (xy != null || rotation != 0)
+		{
 			sm2_2.setAttribute("CTM", m.toString());
+		}
 		nextAnchor.setAttribute("rRef", idAnchor);
 		nextAnchor.setAttribute("AnchorType", anchorType);
 		nextAnchor.setXMLComment(xmlComment, true);
@@ -396,7 +405,8 @@ class ContentCreationTest extends PreflightTest
 		final JDFRunList outRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
 		outRun.setFileURL("output.pdf");
 
-		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, EnumProcessUsage.AnyInput, null);
+		final JDFLayoutElementProductionParams lep = (JDFLayoutElementProductionParams) n.appendMatchingResource(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS,
+				EnumProcessUsage.AnyInput, null);
 		final JDFComment com = lep.appendComment();
 		com.setName("Instruction");
 		com.setText("Add any human readable instructions here");

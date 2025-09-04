@@ -80,10 +80,7 @@ import org.cip4.jdflib.span.JDFSpanFrequencySelection;
 import org.cip4.jdflib.span.JDFSpanScreeningType;
 
 /**
- *****************************************************************************
- * class JDFAutoScreeningIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoScreeningIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoScreeningIntent extends JDFIntentResource
@@ -143,7 +140,9 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -169,7 +168,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	/**
 	 * (29) append element DotSize
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendDotSize()
 	{
@@ -199,7 +199,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	/**
 	 * (29) append element Frequency
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendFrequency()
 	{
@@ -229,7 +230,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	/**
 	 * (29) append element FrequencySelection
 	 *
-	 * @return JDFSpanFrequencySelection the element @ if the element already exists
+	 * @return JDFSpanFrequencySelection the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanFrequencySelection appendFrequencySelection()
 	{
@@ -259,7 +261,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 	/**
 	 * (29) append element ScreeningType
 	 *
-	 * @return JDFSpanScreeningType the element @ if the element already exists
+	 * @return JDFSpanScreeningType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanScreeningType appendScreeningType()
 	{

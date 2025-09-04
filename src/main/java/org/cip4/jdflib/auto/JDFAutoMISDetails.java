@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoMISDetails : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMISDetails : public JDFElement
  */
 
 public abstract class JDFAutoMISDetails extends JDFElement
@@ -100,7 +97,8 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPLEXITY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.COSTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumCostType.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceOperationMode.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDeviceOperationMode.getEnum(0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkType.getEnum(0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
@@ -383,11 +381,15 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Complexity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Complexity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Complexity
@@ -410,7 +412,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CostType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CostType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CostType
@@ -433,13 +437,15 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CostType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CostType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CostType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setCostType(ECostType) based on java.lang.enum instead
+	 * @deprecated use SetCostType(ECostType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCostType(EnumCostType enumVar)
@@ -451,7 +457,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (9) get attribute CostType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ECostType getECostType() based on java.lang.enum instead
+	 * @deprecated use ECostType GetECostType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumCostType getCostType()
@@ -460,7 +466,8 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceOperationMode
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceOperationMode
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -484,14 +491,15 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceOperationMode
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceOperationMode
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeviceOperationMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDeviceOperationMode(EDeviceOperationMode) based on java.lang.enum instead
+	 * @deprecated use SetDeviceOperationMode(EDeviceOperationMode) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceOperationMode(EnumDeviceOperationMode enumVar)
@@ -503,7 +511,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (9) get attribute DeviceOperationMode
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDeviceOperationMode getEDeviceOperationMode() based on java.lang.enum instead
+	 * @deprecated use EDeviceOperationMode GetEDeviceOperationMode() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDeviceOperationMode getDeviceOperationMode()
@@ -512,7 +520,9 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute WorkType
@@ -535,13 +545,15 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute WorkType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setWorkType(EWorkType) based on java.lang.enum instead
+	 * @deprecated use SetWorkType(EWorkType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWorkType(EnumWorkType enumVar)
@@ -553,7 +565,7 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	 * (9) get attribute WorkType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EWorkType getEWorkType() based on java.lang.enum instead
+	 * @deprecated use EWorkType GetEWorkType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumWorkType getWorkType()
@@ -562,7 +574,8 @@ public abstract class JDFAutoMISDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**

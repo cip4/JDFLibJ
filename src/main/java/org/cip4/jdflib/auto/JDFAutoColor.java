@@ -97,10 +97,7 @@ import org.cip4.jdflib.resource.process.JDFTransferCurve;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoColor : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColor : public JDFResource
  */
 
 public abstract class JDFAutoColor extends JDFResource
@@ -111,8 +108,8 @@ public abstract class JDFAutoColor extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[22];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumMappingSelection.getEnum(0),
-				"UsePDLValues");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumMappingSelection.getEnum(0), "UsePDLValues");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.NAME, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ACTUALCOLORNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CMYK, 0x3333333333l, AttributeInfo.EnumAttributeType.CMYKColor, null, null);
@@ -122,7 +119,8 @@ public abstract class JDFAutoColor extends JDFResource
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.COLORBOOKSUFFIX, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.COLORNAME, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.COLORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.COLORTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0),
+				null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.COLORTYPEDETAILS, 0x3333311111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.DENSITY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.GRAY, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -200,7 +198,7 @@ public abstract class JDFAutoColor extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -379,11 +377,14 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MappingSelection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -407,14 +408,15 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MappingSelection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MappingSelection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MappingSelection
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMappingSelection(EMappingSelection) based on java.lang.enum instead
+	 * @deprecated use SetMappingSelection(EMappingSelection) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMappingSelection(EnumMappingSelection enumVar)
@@ -426,7 +428,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (9) get attribute MappingSelection
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMappingSelection getEMappingSelection() based on java.lang.enum instead
+	 * @deprecated use EMappingSelection GetEMappingSelection() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMappingSelection getMappingSelection()
@@ -435,7 +437,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -458,7 +462,8 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActualColorName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActualColorName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -482,7 +487,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CMYK ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CMYK
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CMYK
@@ -497,17 +504,20 @@ public abstract class JDFAutoColor extends JDFResource
 	/**
 	 * (20) get JDFCMYKColor attribute CMYK
 	 *
-	 * @return JDFCMYKColor the value of the attribute, null if a the attribute value is not a valid to create a JDFCMYKColor
+	 * @return JDFCMYKColor the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFCMYKColor
 	 */
 	public JDFCMYKColor getCMYK()
 	{
-		final String strAttrName = getAttribute(AttributeName.CMYK, null, null);
-		final JDFCMYKColor nPlaceHolder = JDFCMYKColor.createCMYKColor(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CMYK, null, null);
+		JDFCMYKColor nPlaceHolder = JDFCMYKColor.createCMYKColor(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorBook ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorBook
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ColorBook
@@ -530,7 +540,8 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorBookEntry
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorBookEntry
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -554,7 +565,8 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorBookPrefix
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorBookPrefix
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -578,7 +590,8 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorBookSuffix
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorBookSuffix
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -602,7 +615,8 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -626,7 +640,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute ColorName
@@ -653,7 +669,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ColorType
@@ -676,13 +694,15 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ColorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setColorType(EColorType) based on java.lang.enum instead
+	 * @deprecated use SetColorType(EColorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setColorType(EnumColorType enumVar)
@@ -694,7 +714,7 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (9) get attribute ColorType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EColorType getEColorType() based on java.lang.enum instead
+	 * @deprecated use EColorType GetEColorType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumColorType getColorType()
@@ -703,7 +723,8 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -727,7 +748,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Density ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Density
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Density
@@ -750,7 +773,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Gray ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Gray
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Gray
@@ -773,7 +798,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Lab ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Lab
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Lab
@@ -788,17 +815,20 @@ public abstract class JDFAutoColor extends JDFResource
 	/**
 	 * (20) get JDFLabColor attribute Lab
 	 *
-	 * @return JDFLabColor the value of the attribute, null if a the attribute value is not a valid to create a JDFLabColor
+	 * @return JDFLabColor the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFLabColor
 	 */
 	public JDFLabColor getLab()
 	{
-		final String strAttrName = getAttribute(AttributeName.LAB, null, null);
-		final JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
+		String strAttrName = getAttribute(AttributeName.LAB, null, null);
+		JDFLabColor nPlaceHolder = JDFLabColor.createLabColor(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MediaType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MediaType
@@ -821,7 +851,8 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NeutralDensity
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NeutralDensity
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -845,7 +876,8 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintingTechnology
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintingTechnology
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -869,7 +901,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RawName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RawName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RawName
@@ -892,7 +926,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Spectrum ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Spectrum
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Spectrum
@@ -907,17 +943,20 @@ public abstract class JDFAutoColor extends JDFResource
 	/**
 	 * (20) get JDFTransferFunction attribute Spectrum
 	 *
-	 * @return JDFTransferFunction the value of the attribute, null if a the attribute value is not a valid to create a JDFTransferFunction
+	 * @return JDFTransferFunction the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFTransferFunction
 	 */
 	public JDFTransferFunction getSpectrum()
 	{
-		final String strAttrName = getAttribute(AttributeName.SPECTRUM, null, null);
-		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SPECTRUM, null, null);
+		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute sRGB ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute sRGB
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute sRGB
@@ -932,17 +971,19 @@ public abstract class JDFAutoColor extends JDFResource
 	/**
 	 * (20) get JDFRGBColor attribute sRGB
 	 *
-	 * @return JDFRGBColor the value of the attribute, null if a the attribute value is not a valid to create a JDFRGBColor
+	 * @return JDFRGBColor the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRGBColor
 	 */
 	public JDFRGBColor getsRGB()
 	{
-		final String strAttrName = getAttribute(AttributeName.SRGB, null, null);
-		final JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SRGB, null, null);
+		JDFRGBColor nPlaceHolder = JDFRGBColor.createRGBColor(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UsePDLAlternateCS
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UsePDLAlternateCS
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -966,7 +1007,9 @@ public abstract class JDFAutoColor extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -992,7 +1035,8 @@ public abstract class JDFAutoColor extends JDFResource
 	/**
 	 * (29) append element ColorMeasurementConditions
 	 *
-	 * @return JDFColorMeasurementConditions the element @ if the element already exists
+	 * @return JDFColorMeasurementConditions the element
+	 * @ if the element already exists
 	 */
 	public JDFColorMeasurementConditions appendColorMeasurementConditions()
 	{
@@ -1044,7 +1088,8 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{
@@ -1116,7 +1161,8 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (27) const get element DeviceNColor
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceNColor the element default is getDeviceNColor(0)
+	 * @return JDFDeviceNColor the element
+	 *         default is getDeviceNColor(0)
 	 */
 	public JDFDeviceNColor getDeviceNColor(int iSkip)
 	{
@@ -1178,7 +1224,8 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (27) const get element PrintConditionColor
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPrintConditionColor the element default is getPrintConditionColor(0)
+	 * @return JDFPrintConditionColor the element
+	 *         default is getPrintConditionColor(0)
 	 */
 	public JDFPrintConditionColor getPrintConditionColor(int iSkip)
 	{
@@ -1240,7 +1287,8 @@ public abstract class JDFAutoColor extends JDFResource
 	 * (27) const get element TransferCurve
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFTransferCurve the element default is getTransferCurve(0)
+	 * @return JDFTransferCurve the element
+	 *         default is getTransferCurve(0)
 	 */
 	public JDFTransferCurve getTransferCurve(int iSkip)
 	{

@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoInsertSheet : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInsertSheet : public JDFResource
  */
 
 public abstract class JDFAutoInsertSheet extends JDFResource
@@ -106,8 +103,10 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetType.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETUSAGE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetUsage.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.INCLUDEINBUNDLEITEM, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumIncludeInBundleItem.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETUSAGE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetUsage.getEnum(0),
+				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.INCLUDEINBUNDLEITEM, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIncludeInBundleItem.getEnum(0), null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ISWASTE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MARKLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -176,7 +175,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -454,11 +453,15 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetType
@@ -481,13 +484,15 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSheetType(ESheetType) based on java.lang.enum instead
+	 * @deprecated use SetSheetType(ESheetType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetType(EnumSheetType enumVar)
@@ -499,7 +504,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (9) get attribute SheetType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESheetType getESheetType() based on java.lang.enum instead
+	 * @deprecated use ESheetType GetESheetType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSheetType getSheetType()
@@ -508,7 +513,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetUsage
@@ -531,13 +538,15 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSheetUsage(ESheetUsage) based on java.lang.enum instead
+	 * @deprecated use SetSheetUsage(ESheetUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetUsage(EnumSheetUsage enumVar)
@@ -549,7 +558,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (9) get attribute SheetUsage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESheetUsage getESheetUsage() based on java.lang.enum instead
+	 * @deprecated use ESheetUsage GetESheetUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSheetUsage getSheetUsage()
@@ -558,7 +567,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeInBundleItem
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeInBundleItem
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -582,14 +592,15 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IncludeInBundleItem
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IncludeInBundleItem
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IncludeInBundleItem
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIncludeInBundleItem(EIncludeInBundleItem) based on java.lang.enum instead
+	 * @deprecated use SetIncludeInBundleItem(EIncludeInBundleItem) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIncludeInBundleItem(EnumIncludeInBundleItem enumVar)
@@ -601,7 +612,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (9) get attribute IncludeInBundleItem
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIncludeInBundleItem getEIncludeInBundleItem() based on java.lang.enum instead
+	 * @deprecated use EIncludeInBundleItem GetEIncludeInBundleItem() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIncludeInBundleItem getIncludeInBundleItem()
@@ -610,7 +621,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsWaste ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsWaste
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsWaste
@@ -633,7 +646,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarkList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MarkList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MarkList
@@ -652,14 +667,16 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 */
 	public VString getMarkList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.MARKLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetFormat ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetFormat
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SheetFormat
@@ -682,7 +699,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
@@ -705,13 +724,15 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Usage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Usage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUsage(ESheetUsage) based on java.lang.enum instead
+	 * @deprecated use SetUsage(ESheetUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUsage(EnumSheetUsage enumVar)
@@ -723,7 +744,7 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	 * (9) get attribute Usage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESheetUsage getEUsage() based on java.lang.enum instead
+	 * @deprecated use ESheetUsage GetEUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSheetUsage getUsage()
@@ -732,7 +753,9 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -758,7 +781,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	/**
 	 * (29) append element RunList
 	 *
-	 * @return JDFRunList the element @ if the element already exists
+	 * @return JDFRunList the element
+	 * @ if the element already exists
 	 */
 	public JDFRunList appendRunList()
 	{
@@ -798,7 +822,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	/**
 	 * (29) append element Layout
 	 *
-	 * @return JDFLayout the element @ if the element already exists
+	 * @return JDFLayout the element
+	 * @ if the element already exists
 	 */
 	public JDFLayout appendLayout()
 	{
@@ -838,7 +863,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
 	/**
 	 * (29) append element Sheet
 	 *
-	 * @return JDFSheet the element @ if the element already exists
+	 * @return JDFSheet the element
+	 * @ if the element already exists
 	 */
 	public JDFSheet appendSheet()
 	{

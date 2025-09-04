@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFCreditCard;
 
 /**
- *****************************************************************************
- * class JDFAutoPayment : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPayment : public JDFElement
  */
 
 public abstract class JDFAutoPayment extends JDFElement
@@ -139,7 +136,9 @@ public abstract class JDFAutoPayment extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -165,7 +164,8 @@ public abstract class JDFAutoPayment extends JDFElement
 	/**
 	 * (29) append element PayTerm
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendPayTerm()
 	{
@@ -195,7 +195,8 @@ public abstract class JDFAutoPayment extends JDFElement
 	/**
 	 * (29) append element CreditCard
 	 *
-	 * @return JDFCreditCard the element @ if the element already exists
+	 * @return JDFCreditCard the element
+	 * @ if the element already exists
 	 */
 	public JDFCreditCard appendCreditCard()
 	{

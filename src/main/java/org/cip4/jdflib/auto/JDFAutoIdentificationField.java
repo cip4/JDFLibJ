@@ -93,10 +93,7 @@ import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoIdentificationField : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIdentificationField : public JDFResource
  */
 
 public abstract class JDFAutoIdentificationField extends JDFResource
@@ -183,7 +180,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -455,11 +452,15 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BoundingBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BoundingBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BoundingBox
@@ -474,17 +475,20 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute BoundingBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getBoundingBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BOUNDINGBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Encoding ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Encoding
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Encoding
@@ -507,13 +511,15 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Encoding ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Encoding
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Encoding
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setEncoding(EEncoding) based on java.lang.enum instead
+	 * @deprecated use SetEncoding(EEncoding) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setEncoding(EnumEncoding enumVar)
@@ -525,7 +531,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (9) get attribute Encoding
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EEncoding getEEncoding() based on java.lang.enum instead
+	 * @deprecated use EEncoding GetEEncoding() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumEncoding getEncoding()
@@ -534,7 +540,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EncodingDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EncodingDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -558,7 +565,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Format ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Format
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Format
@@ -581,7 +590,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Orientation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Orientation
@@ -596,17 +607,20 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	/**
 	 * (20) get JDFMatrix attribute Orientation
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getOrientation()
 	{
-		final String strAttrName = getAttribute(AttributeName.ORIENTATION, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ORIENTATION, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Page ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Page
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Page
@@ -629,7 +643,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Position
@@ -652,13 +668,15 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPosition(EPosition) based on java.lang.enum instead
+	 * @deprecated use SetPosition(EPosition) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPosition(EnumPosition enumVar)
@@ -670,7 +688,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (9) get attribute Position
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPosition getEPosition() based on java.lang.enum instead
+	 * @deprecated use EPosition GetEPosition() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPosition getPosition()
@@ -679,7 +697,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Purpose ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Purpose
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Purpose
@@ -702,13 +722,15 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Purpose ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Purpose
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Purpose
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPurpose(EPurpose) based on java.lang.enum instead
+	 * @deprecated use SetPurpose(EPurpose) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPurpose(EnumPurpose enumVar)
@@ -720,7 +742,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (9) get attribute Purpose
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPurpose getEPurpose() based on java.lang.enum instead
+	 * @deprecated use EPurpose GetEPurpose() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPurpose getPurpose()
@@ -729,7 +751,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PurposeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PurposeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -753,7 +776,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Value ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Value
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Value
@@ -776,7 +801,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueFormat ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueFormat
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueFormat
@@ -799,7 +826,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueTemplate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueTemplate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -823,7 +851,9 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -849,7 +879,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	/**
 	 * (29) append element BarcodeDetails
 	 *
-	 * @return JDFBarcodeDetails the element @ if the element already exists
+	 * @return JDFBarcodeDetails the element
+	 * @ if the element already exists
 	 */
 	public JDFBarcodeDetails appendBarcodeDetails()
 	{
@@ -879,7 +910,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	/**
 	 * (29) append element ExtraValues
 	 *
-	 * @return JDFExtraValues the element @ if the element already exists
+	 * @return JDFExtraValues the element
+	 * @ if the element already exists
 	 */
 	public JDFExtraValues appendExtraValues()
 	{
@@ -921,7 +953,8 @@ public abstract class JDFAutoIdentificationField extends JDFResource
 	 * (27) const get element MetadataMap
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMetadataMap the element default is getMetadataMap(0)
+	 * @return JDFMetadataMap the element
+	 *         default is getMetadataMap(0)
 	 */
 	public JDFMetadataMap getMetadataMap(int iSkip)
 	{

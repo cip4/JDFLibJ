@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoFontPolicy : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFontPolicy : public JDFResource
  */
 
 public abstract class JDFAutoFontPolicy extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,11 +157,14 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreferredFont
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreferredFont
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -188,7 +188,8 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UseDefaultFont
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UseDefaultFont
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -212,7 +213,8 @@ public abstract class JDFAutoFontPolicy extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UseFontEmulation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UseFontEmulation
 	 * ---------------------------------------------------------------------
 	 */
 	/**

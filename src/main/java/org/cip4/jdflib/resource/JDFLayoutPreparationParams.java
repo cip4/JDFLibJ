@@ -68,8 +68,6 @@
  */
 package org.cip4.jdflib.resource;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams;
 import org.cip4.jdflib.datatypes.JDFRectangle;

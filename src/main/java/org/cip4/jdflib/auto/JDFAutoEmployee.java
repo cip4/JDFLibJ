@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.cip4.jdflib.resource.process.JDFPerson;
 
 /**
- *****************************************************************************
- * class JDFAutoEmployee : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoEmployee : public JDFResource
  */
 
 public abstract class JDFAutoEmployee extends JDFResource
@@ -164,7 +161,7 @@ public abstract class JDFAutoEmployee extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Implementation);
 		return bRet;
 	}
@@ -179,11 +176,15 @@ public abstract class JDFAutoEmployee extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PersonalID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PersonalID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PersonalID
@@ -206,7 +207,9 @@ public abstract class JDFAutoEmployee extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Roles ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Roles
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Roles
@@ -225,14 +228,16 @@ public abstract class JDFAutoEmployee extends JDFResource
 	 */
 	public VString getRoles()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ROLES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ROLES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Shift ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Shift
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Shift
@@ -255,7 +260,9 @@ public abstract class JDFAutoEmployee extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -281,7 +288,8 @@ public abstract class JDFAutoEmployee extends JDFResource
 	/**
 	 * (29) append element CostCenter
 	 *
-	 * @return JDFCostCenter the element @ if the element already exists
+	 * @return JDFCostCenter the element
+	 * @ if the element already exists
 	 */
 	public JDFCostCenter appendCostCenter()
 	{
@@ -311,7 +319,8 @@ public abstract class JDFAutoEmployee extends JDFResource
 	/**
 	 * (29) append element Person
 	 *
-	 * @return JDFPerson the element @ if the element already exists
+	 * @return JDFPerson the element
+	 * @ if the element already exists
 	 */
 	public JDFPerson appendPerson()
 	{

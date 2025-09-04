@@ -82,10 +82,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoReferenceXObjParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoReferenceXObjParams : public JDFElement
  */
 
 public abstract class JDFAutoReferenceXObjParams extends JDFElement
@@ -154,11 +151,15 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Mode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Mode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Mode
@@ -181,7 +182,9 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -207,7 +210,8 @@ public abstract class JDFAutoReferenceXObjParams extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

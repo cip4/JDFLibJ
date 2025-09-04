@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFTrappingOrder;
 import org.cip4.jdflib.resource.process.prepress.JDFTrappingParams;
 
 /**
- *****************************************************************************
- * class JDFAutoTrappingDetails : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTrappingDetails : public JDFResource
  */
 
 public abstract class JDFAutoTrappingDetails extends JDFResource
@@ -169,7 +166,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -184,11 +181,14 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultTrapping
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultTrapping
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -212,7 +212,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreFileParams
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreFileParams
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -236,7 +237,9 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Trapping ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Trapping
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Trapping
@@ -259,7 +262,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrappingType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrappingType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -283,7 +287,9 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -309,7 +315,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	/**
 	 * (29) append element TrappingOrder
 	 *
-	 * @return JDFTrappingOrder the element @ if the element already exists
+	 * @return JDFTrappingOrder the element
+	 * @ if the element already exists
 	 */
 	public JDFTrappingOrder appendTrappingOrder()
 	{
@@ -339,7 +346,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	/**
 	 * (29) append element TrappingParams
 	 *
-	 * @return JDFTrappingParams the element @ if the element already exists
+	 * @return JDFTrappingParams the element
+	 * @ if the element already exists
 	 */
 	public JDFTrappingParams appendTrappingParams()
 	{
@@ -391,7 +399,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * (27) const get element ObjectResolution
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFObjectResolution the element default is getObjectResolution(0)
+	 * @return JDFObjectResolution the element
+	 *         default is getObjectResolution(0)
 	 */
 	public JDFObjectResolution getObjectResolution(int iSkip)
 	{
@@ -453,7 +462,8 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
 	 * (27) const get element TrapRegion
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFTrapRegion the element default is getTrapRegion(0)
+	 * @return JDFTrapRegion the element
+	 *         default is getTrapRegion(0)
 	 */
 	public JDFTrapRegion getTrapRegion(int iSkip)
 	{

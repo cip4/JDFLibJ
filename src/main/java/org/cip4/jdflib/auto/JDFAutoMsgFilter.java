@@ -90,10 +90,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoMsgFilter : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMsgFilter : public JDFElement
  */
 
 public abstract class JDFAutoMsgFilter extends JDFElement
@@ -254,11 +251,15 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute After ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute After
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute After
@@ -282,13 +283,15 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 */
 	public JDFDate getAfter()
 	{
-		final String str = getAttribute(AttributeName.AFTER, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.AFTER, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Before ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Before
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Before
@@ -312,13 +315,15 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 */
 	public JDFDate getBefore()
 	{
-		final String str = getAttribute(AttributeName.BEFORE, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.BEFORE, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Count ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Count
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Count
@@ -341,7 +346,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceID
@@ -364,7 +371,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Family ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Family
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Family
@@ -387,13 +396,15 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Family ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Family
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Family
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setFamily(EFamily) based on java.lang.enum instead
+	 * @deprecated use SetFamily(EFamily) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFamily(EnumFamily enumVar)
@@ -405,7 +416,7 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 * (9) get attribute Family
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFamily getEFamily() based on java.lang.enum instead
+	 * @deprecated use EFamily GetEFamily() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFamily getFamily()
@@ -414,7 +425,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -437,7 +450,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -460,7 +475,8 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MessageRefID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MessageRefID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -484,7 +500,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MessageID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MessageID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MessageID
@@ -507,7 +525,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MessageType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MessageType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MessageType
@@ -530,7 +550,8 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -554,7 +575,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReceiverURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReceiverURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReceiverURL
@@ -577,7 +600,9 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -615,7 +640,8 @@ public abstract class JDFAutoMsgFilter extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

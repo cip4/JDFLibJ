@@ -42,10 +42,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoPlaceHolderResource : public JDFResource
- *****************************************************************************
- *
+ ***************************************************************************** class JDFAutoPlaceHolderResource : public JDFResource
  */
 
 public abstract class JDFAutoPlaceHolderResource extends JDFResource

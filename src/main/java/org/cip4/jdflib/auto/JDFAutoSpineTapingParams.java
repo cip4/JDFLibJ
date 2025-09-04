@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoHeadBandApplicationParams.EStripMaterial;
+import org.cip4.jdflib.auto.JDFAutoHeadBandApplicationParams.EnumStripMaterial;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -86,13 +84,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSpineTapingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSpineTapingParams : public JDFResource
  */
 
 public abstract class JDFAutoSpineTapingParams extends JDFResource
@@ -110,7 +104,8 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.STRIPCOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.STRIPCOLORDETAILS, 0x3333331111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.STRIPLENGTH, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumStripMaterial.getEnum(0), null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumStripMaterial.getEnum(0), null);
 	}
 
 	@Override
@@ -173,7 +168,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -187,99 +182,16 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/**
-	 * Enumeration strings for StripMaterial
-	 */
-
-	public enum EStripMaterial
-	{
-		Calico, Cardboard, CrepePaper, Gauze, Paper, PaperlinedMules, Tape;
-
-		public static EStripMaterial getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EStripMaterial.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for StripMaterial
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumStripMaterial extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumStripMaterial(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumStripMaterial getEnum(String enumName)
-		{
-			return (EnumStripMaterial) getEnum(EnumStripMaterial.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumStripMaterial getEnum(int enumValue)
-		{
-			return (EnumStripMaterial) getEnum(EnumStripMaterial.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumStripMaterial.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumStripMaterial.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumStripMaterial.class);
-		}
-
-		/**  */
-		public static final EnumStripMaterial Calico = new EnumStripMaterial("Calico");
-		/**  */
-		public static final EnumStripMaterial Cardboard = new EnumStripMaterial("Cardboard");
-		/**  */
-		public static final EnumStripMaterial CrepePaper = new EnumStripMaterial("CrepePaper");
-		/**  */
-		public static final EnumStripMaterial Gauze = new EnumStripMaterial("Gauze");
-		/**  */
-		public static final EnumStripMaterial Paper = new EnumStripMaterial("Paper");
-		/**  */
-		public static final EnumStripMaterial PaperlinedMules = new EnumStripMaterial("PaperlinedMules");
-		/**  */
-		public static final EnumStripMaterial Tape = new EnumStripMaterial("Tape");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TopExcess ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TopExcess
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TopExcess
@@ -302,7 +214,8 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HorizontalExcess
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HorizontalExcess
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -326,7 +239,8 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HorizontalExcessBack
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HorizontalExcessBack
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -350,7 +264,9 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripBrand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripBrand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StripBrand
@@ -373,7 +289,9 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripColor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripColor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute StripColor
@@ -400,7 +318,8 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripColorDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripColorDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -424,7 +343,9 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripLength ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripLength
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StripLength
@@ -447,7 +368,8 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripMaterial
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripMaterial
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -471,14 +393,15 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripMaterial
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripMaterial
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StripMaterial
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setStripMaterial(EStripMaterial) based on java.lang.enum instead
+	 * @deprecated use SetStripMaterial(EStripMaterial) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStripMaterial(EnumStripMaterial enumVar)
@@ -490,7 +413,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 * (9) get attribute StripMaterial
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EStripMaterial getEStripMaterial() based on java.lang.enum instead
+	 * @deprecated use EStripMaterial GetEStripMaterial() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumStripMaterial getStripMaterial()
@@ -499,7 +422,9 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -537,7 +462,8 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 	 * (27) const get element GlueApplication
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueApplication the element default is getGlueApplication(0)
+	 * @return JDFGlueApplication the element
+	 *         default is getGlueApplication(0)
 	 */
 	public JDFGlueApplication getGlueApplication(int iSkip)
 	{

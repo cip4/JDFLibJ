@@ -74,14 +74,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 
-import jakarta.mail.BodyPart;
-import jakarta.mail.Multipart;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.zip.ZipReader;
+
+import jakarta.mail.BodyPart;
+import jakarta.mail.Multipart;
 
 /**
  *

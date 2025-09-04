@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBoxPackingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBoxPackingParams : public JDFResource
  */
 
 public abstract class JDFAutoBoxPackingParams extends JDFResource
@@ -103,8 +100,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BOXTYPEDETAILS, 0x3333111111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.COMPONENTSPERROW, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.COLUMNS, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPONENTORIENTATION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumComponentOrientation.getEnum(0),
-				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPONENTORIENTATION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumComponentOrientation.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.COPIES, 0x3333331111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.FILLMATERIAL, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.LAYERS, 0x3333333111l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -163,7 +160,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -336,11 +333,15 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BoxType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BoxType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BoxType
@@ -363,13 +364,15 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BoxType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BoxType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BoxType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBoxType(EBoxType) based on java.lang.enum instead
+	 * @deprecated use SetBoxType(EBoxType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBoxType(EnumBoxType enumVar)
@@ -381,7 +384,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * (9) get attribute BoxType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBoxType getEBoxType() based on java.lang.enum instead
+	 * @deprecated use EBoxType GetEBoxType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBoxType getBoxType()
@@ -390,7 +393,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BoxTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BoxTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -414,7 +418,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ComponentsPerRow
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ComponentsPerRow
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -438,7 +443,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Columns ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Columns
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Columns
@@ -461,7 +468,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ComponentOrientation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ComponentOrientation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -485,14 +493,15 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ComponentOrientation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ComponentOrientation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ComponentOrientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setComponentOrientation(EComponentOrientation) based on java.lang.enum instead
+	 * @deprecated use SetComponentOrientation(EComponentOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setComponentOrientation(EnumComponentOrientation enumVar)
@@ -504,7 +513,7 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	 * (9) get attribute ComponentOrientation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EComponentOrientation getEComponentOrientation() based on java.lang.enum instead
+	 * @deprecated use EComponentOrientation GetEComponentOrientation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumComponentOrientation getComponentOrientation()
@@ -513,7 +522,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Copies ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Copies
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Copies
@@ -536,7 +547,8 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FillMaterial
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FillMaterial
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -560,7 +572,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Layers ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Layers
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Layers
@@ -583,7 +597,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxWeight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxWeight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxWeight
@@ -606,7 +622,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pattern ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pattern
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pattern
@@ -629,7 +647,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Rows ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Rows
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Rows
@@ -652,7 +672,9 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ties ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Ties
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Ties
@@ -667,17 +689,20 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	/**
 	 * (20) get JDFIntegerList attribute Ties
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getTies()
 	{
-		final String strAttrName = getAttribute(AttributeName.TIES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TIES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UnderLays ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UnderLays
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute UnderLays
@@ -692,12 +717,13 @@ public abstract class JDFAutoBoxPackingParams extends JDFResource
 	/**
 	 * (20) get JDFIntegerList attribute UnderLays
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getUnderLays()
 	{
-		final String strAttrName = getAttribute(AttributeName.UNDERLAYS, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.UNDERLAYS, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 

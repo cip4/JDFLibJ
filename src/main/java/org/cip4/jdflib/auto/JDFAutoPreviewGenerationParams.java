@@ -76,6 +76,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoPreview.EPreviewUsage;
+import org.cip4.jdflib.auto.JDFAutoPreview.EnumPreviewUsage;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -88,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFImageSetterParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPreviewGenerationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreviewGenerationParams : public JDFResource
  */
 
 public abstract class JDFAutoPreviewGenerationParams extends JDFResource
@@ -102,10 +101,14 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASPECTRATIO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumAspectRatio.getEnum(0), "Ignore");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewFileType.getEnum(0), "PNG");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASPECTRATIO, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumAspectRatio.getEnum(0),
+				"Ignore");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumPreviewFileType.getEnum(0), "PNG");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0),
+				"Separation");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0),
+				null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.RESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.SIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
@@ -170,7 +173,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -347,95 +350,6 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/**
-	 * Enumeration strings for PreviewUsage
-	 */
-
-	public enum EPreviewUsage
-	{
-		Animation, Identification, Separation, SeparatedThumbNail, SeparationRaw, ThumbNail, Static3D, Viewable;
-
-		public static EPreviewUsage getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPreviewUsage.class, val, EPreviewUsage.Separation);
-		}
-	}
-
-	/**
-	 * Enumeration strings for PreviewUsage
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPreviewUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPreviewUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPreviewUsage getEnum(String enumName)
-		{
-			return (EnumPreviewUsage) getEnum(EnumPreviewUsage.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPreviewUsage getEnum(int enumValue)
-		{
-			return (EnumPreviewUsage) getEnum(EnumPreviewUsage.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreviewUsage.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreviewUsage.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreviewUsage.class);
-		}
-
-		/**  */
-		public static final EnumPreviewUsage Animation = new EnumPreviewUsage("Animation");
-		/**  */
-		public static final EnumPreviewUsage Identification = new EnumPreviewUsage("Identification");
-		/**  */
-		public static final EnumPreviewUsage Separation = new EnumPreviewUsage("Separation");
-		/**  */
-		public static final EnumPreviewUsage SeparatedThumbNail = new EnumPreviewUsage("SeparatedThumbNail");
-		/**  */
-		public static final EnumPreviewUsage SeparationRaw = new EnumPreviewUsage("SeparationRaw");
-		/**  */
-		public static final EnumPreviewUsage ThumbNail = new EnumPreviewUsage("ThumbNail");
-		/**  */
-		public static final EnumPreviewUsage Static3D = new EnumPreviewUsage("Static3D");
-		/**  */
-		public static final EnumPreviewUsage Viewable = new EnumPreviewUsage("Viewable");
-	}
-
-	/**
 	 * Enumeration strings for Compensation
 	 */
 
@@ -517,11 +431,15 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AspectRatio ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AspectRatio
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AspectRatio
@@ -544,13 +462,15 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AspectRatio ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AspectRatio
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AspectRatio
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAspectRatio(EAspectRatio) based on java.lang.enum instead
+	 * @deprecated use SetAspectRatio(EAspectRatio) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAspectRatio(EnumAspectRatio enumVar)
@@ -562,7 +482,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 * (9) get attribute AspectRatio
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAspectRatio getEAspectRatio() based on java.lang.enum instead
+	 * @deprecated use EAspectRatio GetEAspectRatio() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAspectRatio getAspectRatio()
@@ -571,7 +491,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewFileType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewFileType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -595,14 +516,15 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewFileType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewFileType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PreviewFileType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPreviewFileType(EPreviewFileType) based on java.lang.enum instead
+	 * @deprecated use SetPreviewFileType(EPreviewFileType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreviewFileType(EnumPreviewFileType enumVar)
@@ -614,7 +536,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 * (9) get attribute PreviewFileType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPreviewFileType getEPreviewFileType() based on java.lang.enum instead
+	 * @deprecated use EPreviewFileType GetEPreviewFileType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPreviewFileType getPreviewFileType()
@@ -623,7 +545,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -647,14 +570,15 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PreviewUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPreviewUsage(EPreviewUsage) based on java.lang.enum instead
+	 * @deprecated use SetPreviewUsage(EPreviewUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreviewUsage(EnumPreviewUsage enumVar)
@@ -666,7 +590,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 * (9) get attribute PreviewUsage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPreviewUsage getEPreviewUsage() based on java.lang.enum instead
+	 * @deprecated use EPreviewUsage GetEPreviewUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPreviewUsage getPreviewUsage()
@@ -675,7 +599,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Compensation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Compensation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -699,14 +624,15 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Compensation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Compensation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Compensation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setCompensation(ECompensation) based on java.lang.enum instead
+	 * @deprecated use SetCompensation(ECompensation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCompensation(EnumCompensation enumVar)
@@ -718,7 +644,7 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	 * (9) get attribute Compensation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ECompensation getECompensation() based on java.lang.enum instead
+	 * @deprecated use ECompensation GetECompensation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumCompensation getCompensation()
@@ -727,7 +653,9 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Resolution
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Resolution
@@ -742,17 +670,20 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Resolution
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getResolution()
 	{
-		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Size
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Size
@@ -767,17 +698,20 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Size
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -803,7 +737,8 @@ public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 	/**
 	 * (29) append element ImageSetterParams
 	 *
-	 * @return JDFImageSetterParams the element @ if the element already exists
+	 * @return JDFImageSetterParams the element
+	 * @ if the element already exists
 	 */
 	public JDFImageSetterParams appendImageSetterParams()
 	{

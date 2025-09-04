@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoMilestone : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMilestone : public JDFElement
  */
 
 public abstract class JDFAutoMilestone extends JDFElement
@@ -139,11 +136,14 @@ public abstract class JDFAutoMilestone extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MilestoneType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MilestoneType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -167,7 +167,9 @@ public abstract class JDFAutoMilestone extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TypeAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TypeAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TypeAmount

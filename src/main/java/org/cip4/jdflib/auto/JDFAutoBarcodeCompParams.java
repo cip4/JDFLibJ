@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBarcodeCompParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBarcodeCompParams : public JDFElement
  */
 
 public abstract class JDFAutoBarcodeCompParams extends JDFElement
@@ -97,7 +94,8 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPENSATIONPROCESS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumCompensationProcess.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPENSATIONPROCESS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumCompensationProcess.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATIONVALUE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
 
@@ -221,11 +219,14 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationProcess
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CompensationProcess
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -249,14 +250,15 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationProcess
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CompensationProcess
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CompensationProcess
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setCompensationProcess(ECompensationProcess) based on java.lang.enum instead
+	 * @deprecated use SetCompensationProcess(ECompensationProcess) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCompensationProcess(EnumCompensationProcess enumVar)
@@ -268,7 +270,7 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 	 * (9) get attribute CompensationProcess
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ECompensationProcess getECompensationProcess() based on java.lang.enum instead
+	 * @deprecated use ECompensationProcess GetECompensationProcess() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumCompensationProcess getCompensationProcess()
@@ -277,7 +279,8 @@ public abstract class JDFAutoBarcodeCompParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CompensationValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**

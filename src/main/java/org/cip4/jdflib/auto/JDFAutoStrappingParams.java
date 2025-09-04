@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoStrappingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStrappingParams : public JDFResource
  */
 
 public abstract class JDFAutoStrappingParams extends JDFResource
@@ -98,7 +95,8 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.STRAPPINGTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumStrappingType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.STRAPPINGTYPE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumStrappingType.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.STRAPPOSITIONS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -150,7 +148,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -246,11 +244,14 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StrappingType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StrappingType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -274,14 +275,15 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StrappingType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StrappingType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute StrappingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setStrappingType(EStrappingType) based on java.lang.enum instead
+	 * @deprecated use SetStrappingType(EStrappingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setStrappingType(EnumStrappingType enumVar)
@@ -293,7 +295,7 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	 * (9) get attribute StrappingType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EStrappingType getEStrappingType() based on java.lang.enum instead
+	 * @deprecated use EStrappingType GetEStrappingType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumStrappingType getStrappingType()
@@ -302,7 +304,8 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StrapPositions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StrapPositions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -318,12 +321,13 @@ public abstract class JDFAutoStrappingParams extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute StrapPositions
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getStrapPositions()
 	{
-		final String strAttrName = getAttribute(AttributeName.STRAPPOSITIONS, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.STRAPPOSITIONS, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 

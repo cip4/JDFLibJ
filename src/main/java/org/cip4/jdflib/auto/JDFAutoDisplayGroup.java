@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 
 /**
- *****************************************************************************
- * class JDFAutoDisplayGroup : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDisplayGroup : public JDFElement
  */
 
 public abstract class JDFAutoDisplayGroup extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoDisplayGroup extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoDisplayGroup extends JDFElement
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{

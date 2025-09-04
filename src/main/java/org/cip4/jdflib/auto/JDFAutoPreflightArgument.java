@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.process.JDFBoxArgument;
 import org.cip4.jdflib.resource.process.JDFBoxToBoxDifference;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightArgument : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightArgument : public JDFElement
  */
 
 public abstract class JDFAutoPreflightArgument extends JDFElement
@@ -142,7 +139,9 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -180,7 +179,8 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * (27) const get element BoxArgument
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBoxArgument the element default is getBoxArgument(0)
+	 * @return JDFBoxArgument the element
+	 *         default is getBoxArgument(0)
 	 */
 	public JDFBoxArgument getBoxArgument(int iSkip)
 	{
@@ -242,7 +242,8 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
 	 * (27) const get element BoxToBoxDifference
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBoxToBoxDifference the element default is getBoxToBoxDifference(0)
+	 * @return JDFBoxToBoxDifference the element
+	 *         default is getBoxToBoxDifference(0)
 	 */
 	public JDFBoxToBoxDifference getBoxToBoxDifference(int iSkip)
 	{

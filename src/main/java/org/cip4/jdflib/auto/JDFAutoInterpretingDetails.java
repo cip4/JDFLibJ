@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoInterpretingDetails : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInterpretingDetails : public JDFElement
  */
 
 public abstract class JDFAutoInterpretingDetails extends JDFElement
@@ -137,11 +134,14 @@ public abstract class JDFAutoInterpretingDetails extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinLineWidth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinLineWidth
 	 * ---------------------------------------------------------------------
 	 */
 	/**

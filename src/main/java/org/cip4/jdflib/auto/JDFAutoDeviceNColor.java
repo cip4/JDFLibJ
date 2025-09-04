@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 
 /**
- *****************************************************************************
- * class JDFAutoDeviceNColor : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeviceNColor : public JDFElement
  */
 
 public abstract class JDFAutoDeviceNColor extends JDFElement
@@ -141,11 +138,15 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ColorList
@@ -160,17 +161,20 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute ColorList
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getColorList()
 	{
-		final String strAttrName = getAttribute(AttributeName.COLORLIST, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.COLORLIST, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute N ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute N
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute N
@@ -193,7 +197,9 @@ public abstract class JDFAutoDeviceNColor extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name

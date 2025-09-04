@@ -83,10 +83,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDBSchema : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDBSchema : public JDFResource
  */
 
 public abstract class JDFAutoDBSchema extends JDFResource
@@ -97,7 +94,8 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DBSCHEMATYPE, 0x4444422222l, AttributeInfo.EnumAttributeType.enumeration, EnumDBSchemaType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DBSCHEMATYPE, 0x4444422222l, AttributeInfo.EnumAttributeType.enumeration, EnumDBSchemaType.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -148,7 +146,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -242,11 +240,14 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DBSchemaType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DBSchemaType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -270,14 +271,15 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DBSchemaType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DBSchemaType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DBSchemaType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDBSchemaType(EDBSchemaType) based on java.lang.enum instead
+	 * @deprecated use SetDBSchemaType(EDBSchemaType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDBSchemaType(EnumDBSchemaType enumVar)
@@ -289,7 +291,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
 	 * (9) get attribute DBSchemaType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDBSchemaType getEDBSchemaType() based on java.lang.enum instead
+	 * @deprecated use EDBSchemaType GetEDBSchemaType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDBSchemaType getDBSchemaType()

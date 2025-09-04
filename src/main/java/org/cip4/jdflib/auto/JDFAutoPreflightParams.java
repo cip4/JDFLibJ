@@ -82,10 +82,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightParams : public JDFResource
  */
 
 public abstract class JDFAutoPreflightParams extends JDFResource
@@ -149,7 +146,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -164,7 +161,9 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -202,7 +201,8 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	 * (27) const get element ActionPool
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFActionPool the element default is getActionPool(0)
+	 * @return JDFActionPool the element
+	 *         default is getActionPool(0)
 	 */
 	public JDFActionPool getActionPool(int iSkip)
 	{
@@ -252,7 +252,8 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -292,7 +293,8 @@ public abstract class JDFAutoPreflightParams extends JDFResource
 	/**
 	 * (29) append element TestPool
 	 *
-	 * @return JDFTestPool the element @ if the element already exists
+	 * @return JDFTestPool the element
+	 * @ if the element already exists
 	 */
 	public JDFTestPool appendTestPool()
 	{

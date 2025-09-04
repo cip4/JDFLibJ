@@ -93,10 +93,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoNotification : public JDFAudit
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNotification : public JDFAudit
  */
 
 public abstract class JDFAutoNotification extends JDFAudit
@@ -257,11 +254,15 @@ public abstract class JDFAutoNotification extends JDFAudit
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Class ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Class
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Class
@@ -284,13 +285,15 @@ public abstract class JDFAutoNotification extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Class ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Class
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Class
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setClass(EClass) based on java.lang.enum instead
+	 * @deprecated use SetClass(EClass) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setClass(EnumClass enumVar)
@@ -309,7 +312,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CombinedProcessIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CombinedProcessIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -325,17 +329,20 @@ public abstract class JDFAutoNotification extends JDFAudit
 	/**
 	 * (20) get JDFIntegerList attribute CombinedProcessIndex
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getCombinedProcessIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -358,7 +365,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -381,7 +390,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleID
@@ -404,7 +415,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleIndex
@@ -419,17 +432,20 @@ public abstract class JDFAutoNotification extends JDFAudit
 	/**
 	 * (20) get JDFIntegerRangeList attribute ModuleIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleType
@@ -452,7 +468,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Type
@@ -475,7 +493,9 @@ public abstract class JDFAutoNotification extends JDFAudit
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -501,7 +521,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 	/**
 	 * (29) append element CostCenter
 	 *
-	 * @return JDFCostCenter the element @ if the element already exists
+	 * @return JDFCostCenter the element
+	 * @ if the element already exists
 	 */
 	public JDFCostCenter appendCostCenter()
 	{
@@ -544,7 +565,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)
@@ -609,7 +631,8 @@ public abstract class JDFAutoNotification extends JDFAudit
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

@@ -80,6 +80,7 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams;
+import org.cip4.jdflib.auto.JDFAutoSignal.EChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 
 //----------------------------------
@@ -92,7 +93,7 @@ public class JDFKnownMsgQuParams extends JDFAutoKnownMsgQuParams
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -103,7 +104,7 @@ public class JDFKnownMsgQuParams extends JDFAutoKnownMsgQuParams
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -115,7 +116,7 @@ public class JDFKnownMsgQuParams extends JDFAutoKnownMsgQuParams
 
 	/**
 	 * Constructor for JDFKnownMsgQuParams
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -126,17 +127,14 @@ public class JDFKnownMsgQuParams extends JDFAutoKnownMsgQuParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
-	 */
 	/**
 	 * (5) set attribute ChannelMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setChannelMode(EnumChannelMode enumVar)
+	public void setChannelMode(EChannelMode enumVar)
 	{
-		setAttribute(AttributeName.CHANNELMODE, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.CHANNELMODE, enumVar, null);
 	}
 
 }

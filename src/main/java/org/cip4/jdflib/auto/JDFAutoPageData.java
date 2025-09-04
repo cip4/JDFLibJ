@@ -93,10 +93,7 @@ import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
 
 /**
- *****************************************************************************
- * class JDFAutoPageData : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPageData : public JDFElement
  */
 
 public abstract class JDFAutoPageData extends JDFElement
@@ -190,11 +187,15 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssemblyID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssemblyID
@@ -217,7 +218,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssemblyIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssemblyIDs
@@ -236,14 +239,16 @@ public abstract class JDFAutoPageData extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CatalogID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CatalogID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CatalogID
@@ -266,7 +271,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CatalogDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CatalogDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -290,7 +296,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FoldOutPages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FoldOutPages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -306,17 +313,20 @@ public abstract class JDFAutoPageData extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute FoldOutPages
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFoldOutPages()
 	{
-		final String strAttrName = getAttribute(AttributeName.FOLDOUTPAGES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FOLDOUTPAGES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HasBleeds ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HasBleeds
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HasBleeds
@@ -339,7 +349,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsBlank ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsBlank
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsBlank
@@ -362,7 +374,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsPrintable ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsPrintable
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsPrintable
@@ -385,7 +399,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsTrapped ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsTrapped
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsTrapped
@@ -408,7 +424,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -431,7 +449,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageFormat ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageFormat
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageFormat
@@ -454,7 +474,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageIndex
@@ -469,17 +491,20 @@ public abstract class JDFAutoPageData extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGEINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGEINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageLabel ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageLabel
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageLabel
@@ -502,7 +527,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageLabelPrefix
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageLabelPrefix
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -526,7 +552,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageLabelSuffix
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageLabelSuffix
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -550,7 +577,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageStatus ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageStatus
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageStatus
@@ -573,7 +602,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProductID
@@ -596,7 +627,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceBleedBox
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceBleedBox
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -612,17 +644,19 @@ public abstract class JDFAutoPageData extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute SourceBleedBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getSourceBleedBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SOURCEBLEEDBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceClipBox
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceClipBox
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -638,17 +672,19 @@ public abstract class JDFAutoPageData extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute SourceClipBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getSourceClipBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SOURCECLIPBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceTrimBox
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceTrimBox
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -664,17 +700,20 @@ public abstract class JDFAutoPageData extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute SourceTrimBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getSourceTrimBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SOURCETRIMBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Template ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Template
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Template
@@ -697,7 +736,9 @@ public abstract class JDFAutoPageData extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -723,7 +764,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	/**
 	 * (29) append element ElementColorParams
 	 *
-	 * @return JDFElementColorParams the element @ if the element already exists
+	 * @return JDFElementColorParams the element
+	 * @ if the element already exists
 	 */
 	public JDFElementColorParams appendElementColorParams()
 	{
@@ -763,7 +805,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	/**
 	 * (29) append element ImageCompressionParams
 	 *
-	 * @return JDFImageCompressionParams the element @ if the element already exists
+	 * @return JDFImageCompressionParams the element
+	 * @ if the element already exists
 	 */
 	public JDFImageCompressionParams appendImageCompressionParams()
 	{
@@ -815,7 +858,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * (27) const get element OCGControl
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFOCGControl the element default is getOCGControl(0)
+	 * @return JDFOCGControl the element
+	 *         default is getOCGControl(0)
 	 */
 	public JDFOCGControl getOCGControl(int iSkip)
 	{
@@ -877,7 +921,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * (27) const get element PageElement
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPageElement the element default is getPageElement(0)
+	 * @return JDFPageElement the element
+	 *         default is getPageElement(0)
 	 */
 	public JDFPageElement getPageElement(int iSkip)
 	{
@@ -927,7 +972,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	/**
 	 * (29) append element ScreeningParams
 	 *
-	 * @return JDFScreeningParams the element @ if the element already exists
+	 * @return JDFScreeningParams the element
+	 * @ if the element already exists
 	 */
 	public JDFScreeningParams appendScreeningParams()
 	{
@@ -979,7 +1025,8 @@ public abstract class JDFAutoPageData extends JDFElement
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoComChannel : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoComChannel : public JDFResource
  */
 
 public abstract class JDFAutoComChannel extends JDFResource
@@ -99,7 +96,8 @@ public abstract class JDFAutoComChannel extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELTYPE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelType.getEnum(0),
+				null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCATOR, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.CHANNELTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.CHANNELUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
@@ -153,7 +151,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -259,11 +257,15 @@ public abstract class JDFAutoComChannel extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ChannelType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ChannelType
@@ -286,13 +288,15 @@ public abstract class JDFAutoComChannel extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ChannelType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ChannelType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setChannelType(EChannelType) based on java.lang.enum instead
+	 * @deprecated use SetChannelType(EChannelType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setChannelType(EnumChannelType enumVar)
@@ -304,7 +308,7 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 * (9) get attribute ChannelType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EChannelType getEChannelType() based on java.lang.enum instead
+	 * @deprecated use EChannelType GetEChannelType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumChannelType getChannelType()
@@ -313,7 +317,9 @@ public abstract class JDFAutoComChannel extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Locator ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Locator
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Locator
@@ -336,7 +342,8 @@ public abstract class JDFAutoComChannel extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ChannelTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -360,7 +367,8 @@ public abstract class JDFAutoComChannel extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ChannelUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -380,8 +388,8 @@ public abstract class JDFAutoComChannel extends JDFResource
 	 */
 	public VString getChannelUsage()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.CHANNELUSAGE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

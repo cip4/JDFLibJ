@@ -94,10 +94,7 @@ import org.cip4.jdflib.span.JDFSpanProofType;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoProofItem : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoProofItem : public JDFElement
  */
 
 public abstract class JDFAutoProofItem extends JDFElement
@@ -178,11 +175,15 @@ public abstract class JDFAutoProofItem extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Contract ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Contract
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Contract
@@ -205,7 +206,9 @@ public abstract class JDFAutoProofItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageIndex
@@ -220,17 +223,20 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGEINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGEINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProofName
@@ -253,7 +259,9 @@ public abstract class JDFAutoProofItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofTarget ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofTarget
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProofTarget
@@ -276,7 +284,9 @@ public abstract class JDFAutoProofItem extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -302,7 +312,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element Amount
 	 *
-	 * @return JDFIntegerSpan the element @ if the element already exists
+	 * @return JDFIntegerSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFIntegerSpan appendAmount()
 	{
@@ -332,7 +343,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element BrandName
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendBrandName()
 	{
@@ -362,7 +374,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element ColorType
 	 *
-	 * @return JDFSpanColorType the element @ if the element already exists
+	 * @return JDFSpanColorType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanColorType appendColorType()
 	{
@@ -392,7 +405,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element HalfTone
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendHalfTone()
 	{
@@ -422,7 +436,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element ImageStrategy
 	 *
-	 * @return JDFSpanImageStrategy the element @ if the element already exists
+	 * @return JDFSpanImageStrategy the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanImageStrategy appendImageStrategy()
 	{
@@ -452,7 +467,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element Technology
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendTechnology()
 	{
@@ -482,7 +498,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element ProofType
 	 *
-	 * @return JDFSpanProofType the element @ if the element already exists
+	 * @return JDFSpanProofType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanProofType appendProofType()
 	{
@@ -512,7 +529,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element ApprovalParams
 	 *
-	 * @return JDFApprovalParams the element @ if the element already exists
+	 * @return JDFApprovalParams the element
+	 * @ if the element already exists
 	 */
 	public JDFApprovalParams appendApprovalParams()
 	{
@@ -552,7 +570,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -594,7 +613,8 @@ public abstract class JDFAutoProofItem extends JDFElement
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

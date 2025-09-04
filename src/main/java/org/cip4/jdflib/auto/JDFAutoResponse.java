@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoResponse : public JDFMessage
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResponse : public JDFMessage
  */
 
 public abstract class JDFAutoResponse extends JDFMessage
@@ -163,11 +160,14 @@ public abstract class JDFAutoResponse extends JDFMessage
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Acknowledged
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Acknowledged
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -191,7 +191,9 @@ public abstract class JDFAutoResponse extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Languages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Languages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Languages
@@ -210,14 +212,16 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 */
 	public VString getLanguages()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.LANGUAGES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute refID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute refID
@@ -242,7 +246,9 @@ public abstract class JDFAutoResponse extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReturnCode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReturnCode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReturnCode
@@ -266,7 +272,9 @@ public abstract class JDFAutoResponse extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Subscribed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Subscribed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Subscribed
@@ -289,7 +297,9 @@ public abstract class JDFAutoResponse extends JDFMessage
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -327,7 +337,8 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * (27) const get element Notification
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFNotification the element default is getNotification(0)
+	 * @return JDFNotification the element
+	 *         default is getNotification(0)
 	 */
 	public JDFNotification getNotification(int iSkip)
 	{
@@ -389,7 +400,8 @@ public abstract class JDFAutoResponse extends JDFMessage
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{

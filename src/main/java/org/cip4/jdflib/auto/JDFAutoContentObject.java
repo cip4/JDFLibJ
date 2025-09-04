@@ -76,6 +76,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -88,10 +90,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoContentObject : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoContentObject : public JDFElement
  */
 
 public abstract class JDFAutoContentObject extends JDFElement
@@ -167,97 +166,6 @@ public abstract class JDFAutoContentObject extends JDFElement
 	protected JDFAutoContentObject(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * Enumeration strings for Anchor
-	 */
-
-	public enum EAnchor
-	{
-		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
-
-		public static EAnchor getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAnchor.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Anchor
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAnchor extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAnchor(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(String enumName)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(int enumValue)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAnchor.class);
-		}
-
-		/**  */
-		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
-		/**  */
-		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
-		/**  */
-		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
-		/**  */
-		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
-		/**  */
-		public static final EnumAnchor Center = new EnumAnchor("Center");
-		/**  */
-		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
-		/**  */
-		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
-		/**  */
-		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
-		/**  */
-		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
 	}
 
 	/**
@@ -338,11 +246,15 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Ord ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Ord
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Ord
@@ -365,7 +277,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceClipPath
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceClipPath
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -389,7 +302,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimClipPath
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrimClipPath
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -413,7 +327,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalStackOrd
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LogicalStackOrd
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -437,7 +352,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxFormat
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipBoxFormat
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -461,7 +377,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Anchor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Anchor
@@ -484,13 +402,15 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Anchor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Anchor
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAnchor(EAnchor) based on java.lang.enum instead
+	 * @deprecated use SetAnchor(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAnchor(EnumAnchor enumVar)
@@ -502,7 +422,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 * (9) get attribute Anchor
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAnchor getEAnchor() based on java.lang.enum instead
+	 * @deprecated use EAnchor GetEAnchor() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAnchor getAnchor()
@@ -511,7 +431,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrdID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OrdID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OrdID
@@ -534,7 +456,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Type
@@ -557,13 +481,15 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Type
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setType(EType) based on java.lang.enum instead
+	 * @deprecated use SetType(EType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setType(EnumType enumVar)
@@ -575,7 +501,7 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 * (9) get attribute Type
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EType getEType() based on java.lang.enum instead
+	 * @deprecated use EType GetEType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumType getType()
@@ -584,7 +510,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClipBox
@@ -599,17 +527,19 @@ public abstract class JDFAutoContentObject extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute ClipBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getClipBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CLIPBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrdExpression
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OrdExpression
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -633,7 +563,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMTemplate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CompensationCTMTemplate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -657,7 +588,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayerID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LayerID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LayerID
@@ -680,7 +613,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimCTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrimCTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrimCTM
@@ -695,17 +630,20 @@ public abstract class JDFAutoContentObject extends JDFElement
 	/**
 	 * (20) get JDFMatrix attribute TrimCTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getTrimCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRIMCTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRIMCTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetOrd ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetOrd
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetOrd
@@ -728,7 +666,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClipPath
@@ -751,7 +691,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HalfTonePhaseOrigin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HalfTonePhaseOrigin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -767,17 +708,20 @@ public abstract class JDFAutoContentObject extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute HalfTonePhaseOrigin
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getHalfTonePhaseOrigin()
 	{
-		final String strAttrName = getAttribute(AttributeName.HALFTONEPHASEORIGIN, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.HALFTONEPHASEORIGIN, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocOrd ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DocOrd
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DocOrd
@@ -800,7 +744,8 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompensationCTMFormat
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CompensationCTMFormat
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -824,7 +769,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -849,7 +796,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AssemblyIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AssemblyIDs
@@ -868,14 +817,16 @@ public abstract class JDFAutoContentObject extends JDFElement
 	 */
 	public VString getAssemblyIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CTM
@@ -890,17 +841,19 @@ public abstract class JDFAutoContentObject extends JDFElement
 	/**
 	 * (20) get JDFMatrix attribute CTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipBoxTemplate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipBoxTemplate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -924,7 +877,9 @@ public abstract class JDFAutoContentObject extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrimSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrimSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrimSize
@@ -939,12 +894,13 @@ public abstract class JDFAutoContentObject extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute TrimSize
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTrimSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRIMSIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

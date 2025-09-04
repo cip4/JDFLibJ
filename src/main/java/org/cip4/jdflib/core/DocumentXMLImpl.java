@@ -83,14 +83,14 @@ package org.cip4.jdflib.core;
 import java.util.HashMap;
 import java.util.Vector;
 
-import jakarta.mail.BodyPart;
-
 import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ParentNode;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.zip.ZipReader;
 import org.w3c.dom.Element;
+
+import jakarta.mail.BodyPart;
 
 /**
  * implementation of the JDFLib class factory

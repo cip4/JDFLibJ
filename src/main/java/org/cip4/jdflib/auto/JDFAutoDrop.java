@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoDeliveryParams.ETransfer;
+import org.cip4.jdflib.auto.JDFAutoDeliveryParams.EnumTransfer;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -90,13 +88,9 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JDFDate;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDrop : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDrop : public JDFElement
  */
 
 public abstract class JDFAutoDrop extends JDFElement
@@ -174,93 +168,16 @@ public abstract class JDFAutoDrop extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for Transfer
-	 */
-
-	public enum ETransfer
-	{
-		BuyerToPrinterDeliver, BuyerToPrinterPickup, PrinterToBuyerDeliver, PrinterToBuyerPickup;
-
-		public static ETransfer getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(ETransfer.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Transfer
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumTransfer extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumTransfer(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumTransfer getEnum(String enumName)
-		{
-			return (EnumTransfer) getEnum(EnumTransfer.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumTransfer getEnum(int enumValue)
-		{
-			return (EnumTransfer) getEnum(EnumTransfer.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumTransfer.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumTransfer.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumTransfer.class);
-		}
-
-		/**  */
-		public static final EnumTransfer BuyerToPrinterDeliver = new EnumTransfer("BuyerToPrinterDeliver");
-		/**  */
-		public static final EnumTransfer BuyerToPrinterPickup = new EnumTransfer("BuyerToPrinterPickup");
-		/**  */
-		public static final EnumTransfer PrinterToBuyerDeliver = new EnumTransfer("PrinterToBuyerDeliver");
-		/**  */
-		public static final EnumTransfer PrinterToBuyerPickup = new EnumTransfer("PrinterToBuyerPickup");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DropID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DropID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DropID
@@ -283,7 +200,9 @@ public abstract class JDFAutoDrop extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Earliest ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Earliest
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Earliest
@@ -307,13 +226,15 @@ public abstract class JDFAutoDrop extends JDFElement
 	 */
 	public JDFDate getEarliest()
 	{
-		final String str = getAttribute(AttributeName.EARLIEST, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.EARLIEST, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Method
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Method
@@ -336,7 +257,9 @@ public abstract class JDFAutoDrop extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pickup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pickup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pickup
@@ -359,7 +282,9 @@ public abstract class JDFAutoDrop extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Required ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Required
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Required
@@ -383,13 +308,14 @@ public abstract class JDFAutoDrop extends JDFElement
 	 */
 	public JDFDate getRequired()
 	{
-		final String str = getAttribute(AttributeName.REQUIRED, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.REQUIRED, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ServiceLevel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ServiceLevel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -413,7 +339,9 @@ public abstract class JDFAutoDrop extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrackingID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrackingID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrackingID
@@ -436,7 +364,9 @@ public abstract class JDFAutoDrop extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Transfer ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Transfer
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Transfer
@@ -459,13 +389,15 @@ public abstract class JDFAutoDrop extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Transfer ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Transfer
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Transfer
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTransfer(ETransfer) based on java.lang.enum instead
+	 * @deprecated use SetTransfer(ETransfer) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransfer(EnumTransfer enumVar)
@@ -477,7 +409,7 @@ public abstract class JDFAutoDrop extends JDFElement
 	 * (9) get attribute Transfer
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETransfer getETransfer() based on java.lang.enum instead
+	 * @deprecated use ETransfer GetETransfer() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTransfer getTransfer()
@@ -486,7 +418,9 @@ public abstract class JDFAutoDrop extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -512,7 +446,8 @@ public abstract class JDFAutoDrop extends JDFElement
 	/**
 	 * (29) append element Company
 	 *
-	 * @return JDFCompany the element @ if the element already exists
+	 * @return JDFCompany the element
+	 * @ if the element already exists
 	 */
 	public JDFCompany appendCompany()
 	{
@@ -564,7 +499,8 @@ public abstract class JDFAutoDrop extends JDFElement
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -624,7 +560,8 @@ public abstract class JDFAutoDrop extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -676,7 +613,8 @@ public abstract class JDFAutoDrop extends JDFElement
 	 * (27) const get element DropItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDropItem the element default is getDropItem(0)
+	 * @return JDFDropItem the element
+	 *         default is getDropItem(0)
 	 */
 	public JDFDropItem getDropItem(int iSkip)
 	{

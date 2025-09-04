@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFPreflightArgument;
 
 /**
- *****************************************************************************
- * class JDFAutoArgumentValue : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoArgumentValue : public JDFElement
  */
 
 public abstract class JDFAutoArgumentValue extends JDFElement
@@ -156,11 +153,15 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -183,7 +184,9 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -221,7 +224,8 @@ public abstract class JDFAutoArgumentValue extends JDFElement
 	 * (27) const get element PreflightArgument
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPreflightArgument the element default is getPreflightArgument(0)
+	 * @return JDFPreflightArgument the element
+	 *         default is getPreflightArgument(0)
 	 */
 	public JDFPreflightArgument getPreflightArgument(int iSkip)
 	{

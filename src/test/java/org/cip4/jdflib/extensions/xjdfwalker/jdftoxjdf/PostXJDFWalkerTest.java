@@ -44,11 +44,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoResourceLink.EnumOrientation;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -159,10 +159,12 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 	void testHeadbandStrip()
 	{
 		final XJDFHelper h = new XJDFHelper("a", "p", null);
-		h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource().setAttribute(AttributeName.STRIPMATERIAL, "b1");
+		h.appendResourceSet(ElementName.HEADBANDAPPLICATIONPARAMS, EnumUsage.Input).appendPartition(null, true).getResource()
+				.setAttribute(AttributeName.STRIPMATERIAL, "b1");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "BackStrip").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails), "b1");
+		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "BackStrip").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails),
+				"b1");
 	}
 
 	/**
@@ -177,7 +179,8 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 		band.setAttribute(AttributeName.TOPBRAND, "b1");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR), "Black");
+		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getResource().getAttribute(AttributeName.COLOR),
+				"Black");
 		assertEquals(h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "HeadBand").getPartition(0).getBrand(), "b1");
 	}
 
@@ -242,7 +245,8 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 		tsp.setAttribute(AttributeName.CASTINGMATERIAL, "cm");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals("cm", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Thread").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+		assertEquals("cm",
+				h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Thread").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
@@ -256,7 +260,8 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 		tsp.setAttribute(AttributeName.HARDENERTYPE, "toughstough");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Hardener").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+		assertEquals("toughstough",
+				h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Hardener").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
@@ -270,7 +275,8 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 		tsp.setAttribute(AttributeName.ADHESIVETYPE, "toughstough");
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals("toughstough", h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Glue").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
+		assertEquals("toughstough",
+				h.getSet(ElementName.MISCCONSUMABLE, EnumUsage.Input, "Glue").getPartition(0).getResource().getAttribute(XJDFConstants.TypeDetails));
 	}
 
 	/**
@@ -396,7 +402,8 @@ class PostXJDFWalkerTest extends JDFTestCaseBase
 		set.getCreatePartition(AttributeName.PARTVERSION, "P1", true);
 		final PostXJDFWalker w = new PostXJDFWalker((JDFElement) h.getRoot());
 		w.walkTree(h.getRoot(), null);
-		assertEquals(EnumOrientation.Flip0.getName(), h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getAttribute(AttributeName.ORIENTATION));
+		assertEquals(EnumOrientation.Flip0.getName(),
+				h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getPartition(0).getAttribute(AttributeName.ORIENTATION));
 		assertNull(h.getSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input).getAttribute(AttributeName.ORIENTATION));
 	}
 

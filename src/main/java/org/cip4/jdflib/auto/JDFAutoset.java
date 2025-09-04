@@ -82,10 +82,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFFeatureAttribute;
 
 /**
- *****************************************************************************
- * class JDFAutoset : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoset : public JDFElement
  */
 
 public abstract class JDFAutoset extends JDFElement
@@ -154,11 +151,15 @@ public abstract class JDFAutoset extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute rRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute rRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute rRef
@@ -181,7 +182,9 @@ public abstract class JDFAutoset extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -207,7 +210,8 @@ public abstract class JDFAutoset extends JDFElement
 	/**
 	 * (29) append element FeatureAttribute
 	 *
-	 * @return JDFFeatureAttribute the element @ if the element already exists
+	 * @return JDFFeatureAttribute the element
+	 * @ if the element already exists
 	 */
 	public JDFFeatureAttribute appendFeatureAttribute()
 	{

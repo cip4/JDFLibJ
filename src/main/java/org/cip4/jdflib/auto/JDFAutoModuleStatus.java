@@ -87,10 +87,7 @@ import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoModuleStatus : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoModuleStatus : public JDFElement
  */
 
 public abstract class JDFAutoModuleStatus extends JDFElement
@@ -102,7 +99,8 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, JDFDeviceInfo.EnumDeviceStatus.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				JDFDeviceInfo.EnumDeviceStatus.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEID, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULETYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -164,11 +162,14 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CombinedProcessIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CombinedProcessIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -184,17 +185,19 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute CombinedProcessIndex
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getCombinedProcessIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -218,14 +221,15 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeviceStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDeviceStatus(JDFDeviceInfo.EDeviceStatus) based on java.lang.enum instead
+	 * @deprecated use SetDeviceStatus(EeviceInfo.EnumDeviceStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceStatus(JDFDeviceInfo.EnumDeviceStatus enumVar)
@@ -237,7 +241,7 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 * (9) get attribute DeviceStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use JDFDeviceInfo.EDeviceStatus getEDeviceStatus() based on java.lang.enum instead
+	 * @deprecated use EeviceInfo.EnumDeviceStatus GetEDeviceStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public JDFDeviceInfo.EnumDeviceStatus getDeviceStatus()
@@ -246,7 +250,9 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleID
@@ -269,7 +275,9 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleIndex
@@ -284,17 +292,20 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute ModuleIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ModuleType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ModuleType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ModuleType
@@ -317,7 +328,8 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StatusDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -341,7 +353,9 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -379,7 +393,8 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{

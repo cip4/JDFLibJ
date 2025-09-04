@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoAuthenticationResp : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAuthenticationResp : public JDFElement
  */
 
 public abstract class JDFAutoAuthenticationResp extends JDFElement
@@ -155,11 +152,15 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SecureURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SecureURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SecureURL
@@ -182,7 +183,9 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -220,7 +223,8 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
 	 * (27) const get element Certificate
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getCertificate(0)
+	 * @return JDFElement the element
+	 *         default is getCertificate(0)
 	 */
 	public JDFElement getCertificate(int iSkip)
 	{

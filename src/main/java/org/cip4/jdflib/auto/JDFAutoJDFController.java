@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoJDFController : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoJDFController : public JDFElement
  */
 
 public abstract class JDFAutoJDFController extends JDFElement
@@ -229,11 +226,14 @@ public abstract class JDFAutoJDFController extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ControllerID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ControllerID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -257,7 +257,9 @@ public abstract class JDFAutoJDFController extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -280,7 +282,9 @@ public abstract class JDFAutoJDFController extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URLType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URLType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute URLType
@@ -303,13 +307,15 @@ public abstract class JDFAutoJDFController extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URLType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URLType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute URLType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setURLType(EURLType) based on java.lang.enum instead
+	 * @deprecated use SetURLType(EURLType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setURLType(EnumURLType enumVar)
@@ -321,7 +327,7 @@ public abstract class JDFAutoJDFController extends JDFElement
 	 * (9) get attribute URLType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EURLType getEURLType() based on java.lang.enum instead
+	 * @deprecated use EURLType GetEURLType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumURLType getURLType()

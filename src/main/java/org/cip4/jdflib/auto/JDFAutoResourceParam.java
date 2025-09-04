@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoResourceParam : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResourceParam : public JDFElement
  */
 
 public abstract class JDFAutoResourceParam extends JDFElement
@@ -100,7 +97,8 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTID, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFAULTJDF, 0x3333333331l, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumDefaultPriority.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDefaultPriority.getEnum(0), null);
 	}
 
 	@Override
@@ -223,11 +221,15 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DefaultID
@@ -250,7 +252,9 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultJDF ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultJDF
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DefaultJDF
@@ -273,7 +277,8 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultPriority
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultPriority
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -297,14 +302,15 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultPriority
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultPriority
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DefaultPriority
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDefaultPriority(EDefaultPriority) based on java.lang.enum instead
+	 * @deprecated use SetDefaultPriority(EDefaultPriority) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDefaultPriority(EnumDefaultPriority enumVar)
@@ -316,7 +322,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
 	 * (9) get attribute DefaultPriority
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDefaultPriority getEDefaultPriority() based on java.lang.enum instead
+	 * @deprecated use EDefaultPriority GetEDefaultPriority() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDefaultPriority getDefaultPriority()

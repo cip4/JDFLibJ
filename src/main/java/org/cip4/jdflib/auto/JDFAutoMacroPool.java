@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFmacro;
 
 /**
- *****************************************************************************
- * class JDFAutoMacroPool : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMacroPool : public JDFElement
  */
 
 public abstract class JDFAutoMacroPool extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoMacroPool extends JDFElement
 	 * (27) const get element macro
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFmacro the element default is getmacro(0)
+	 * @return JDFmacro the element
+	 *         default is getmacro(0)
 	 */
 	public JDFmacro getmacro(int iSkip)
 	{

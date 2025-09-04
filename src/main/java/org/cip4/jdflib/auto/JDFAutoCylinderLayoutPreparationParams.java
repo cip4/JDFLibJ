@@ -78,10 +78,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFProductionPath;
 
 /**
- *****************************************************************************
- * class JDFAutoCylinderLayoutPreparationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCylinderLayoutPreparationParams : public JDFResource
  */
 
 public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
@@ -143,7 +140,7 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -158,7 +155,9 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -184,7 +183,8 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 	/**
 	 * (29) append element ProductionPath
 	 *
-	 * @return JDFProductionPath the element @ if the element already exists
+	 * @return JDFProductionPath the element
+	 * @ if the element already exists
 	 */
 	public JDFProductionPath appendProductionPath()
 	{

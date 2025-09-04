@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoGeneralID : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGeneralID : public JDFElement
  */
 
 public abstract class JDFAutoGeneralID extends JDFElement
@@ -235,11 +232,15 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DataType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DataType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DataType
@@ -262,13 +263,15 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DataType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DataType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DataType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDataType(EDataType) based on java.lang.enum instead
+	 * @deprecated use SetDataType(EDataType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDataType(EnumDataType enumVar)
@@ -280,7 +283,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	 * (9) get attribute DataType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDataType getEDataType() based on java.lang.enum instead
+	 * @deprecated use EDataType GetEDataType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDataType getDataType()
@@ -289,7 +292,9 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IDUsage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IDUsage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IDUsage
@@ -312,7 +317,9 @@ public abstract class JDFAutoGeneralID extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IDValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IDValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IDValue

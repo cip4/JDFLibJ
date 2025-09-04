@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPTrimming : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPTrimming : public JDFElement
  */
 
 public abstract class JDFAutoIDPTrimming extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
 	 * (27) const get element TrimmingParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFTrimmingParams the element default is getTrimmingParams(0)
+	 * @return JDFTrimmingParams the element
+	 *         default is getTrimmingParams(0)
 	 */
 	public JDFTrimmingParams getTrimmingParams(int iSkip)
 	{

@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.JDFTransferFunctionControl;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 
 /**
- *****************************************************************************
- * class JDFAutoSeparationControlParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSeparationControlParams : public JDFResource
  */
 
 public abstract class JDFAutoSeparationControlParams extends JDFResource
@@ -147,7 +144,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -162,7 +159,9 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -200,7 +199,8 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * (27) const get element AutomatedOverPrintParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFAutomatedOverPrintParams the element default is getAutomatedOverPrintParams(0)
+	 * @return JDFAutomatedOverPrintParams the element
+	 *         default is getAutomatedOverPrintParams(0)
 	 */
 	public JDFAutomatedOverPrintParams getAutomatedOverPrintParams(int iSkip)
 	{
@@ -262,7 +262,8 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
 	 * (27) const get element TransferFunctionControl
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFTransferFunctionControl the element default is getTransferFunctionControl(0)
+	 * @return JDFTransferFunctionControl the element
+	 *         default is getTransferFunctionControl(0)
 	 */
 	public JDFTransferFunctionControl getTransferFunctionControl(int iSkip)
 	{

@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoQueueEntryPosParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQueueEntryPosParams : public JDFElement
  */
 
 public abstract class JDFAutoQueueEntryPosParams extends JDFElement
@@ -141,11 +138,14 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NextQueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NextQueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -169,7 +169,8 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -193,7 +194,8 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrevQueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrevQueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -217,7 +219,9 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Position

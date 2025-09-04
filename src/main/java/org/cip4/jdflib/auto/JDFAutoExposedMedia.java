@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoColor.EColorType;
+import org.cip4.jdflib.auto.JDFAutoColor.EnumColorType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -96,10 +98,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoExposedMedia : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoExposedMedia : public JDFResource
  */
 
 public abstract class JDFAutoExposedMedia extends JDFResource
@@ -115,7 +114,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x3333333111l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.PLATETYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumPlateType.getEnum(0), null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.PROOFNAME, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFQUALITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumProofQuality.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.PROOFQUALITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumProofQuality.getEnum(0),
+				null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.PROOFTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumProofType.getEnum(0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.PUNCHTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -186,7 +186,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Handling);
 		return bRet;
 	}
@@ -198,85 +198,6 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Handling;
-	}
-
-	/**
-	 * Enumeration strings for ColorType
-	 */
-
-	public enum EColorType
-	{
-		Color, GrayScale, Monochrome;
-
-		public static EColorType getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EColorType.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for ColorType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumColorType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumColorType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumColorType getEnum(String enumName)
-		{
-			return (EnumColorType) getEnum(EnumColorType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumColorType getEnum(int enumValue)
-		{
-			return (EnumColorType) getEnum(EnumColorType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumColorType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumColorType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumColorType.class);
-		}
-
-		/**  */
-		public static final EnumColorType Color = new EnumColorType("Color");
-		/**  */
-		public static final EnumColorType GrayScale = new EnumColorType("GrayScale");
-		/**  */
-		public static final EnumColorType Monochrome = new EnumColorType("Monochrome");
 	}
 
 	/**
@@ -517,11 +438,15 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Polarity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Polarity
@@ -544,7 +469,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ColorType
@@ -567,13 +494,15 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ColorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setColorType(EColorType) based on java.lang.enum instead
+	 * @deprecated use SetColorType(EColorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setColorType(EnumColorType enumVar)
@@ -585,7 +514,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (9) get attribute ColorType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EColorType getEColorType() based on java.lang.enum instead
+	 * @deprecated use EColorType GetEColorType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumColorType getColorType()
@@ -594,7 +523,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageListIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageListIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -610,17 +540,20 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageListIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageListIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PlateType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PlateType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PlateType
@@ -643,13 +576,15 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PlateType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PlateType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PlateType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPlateType(EPlateType) based on java.lang.enum instead
+	 * @deprecated use SetPlateType(EPlateType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPlateType(EnumPlateType enumVar)
@@ -661,7 +596,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (9) get attribute PlateType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPlateType getEPlateType() based on java.lang.enum instead
+	 * @deprecated use EPlateType GetEPlateType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPlateType getPlateType()
@@ -670,7 +605,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProofName
@@ -693,7 +630,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofQuality
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofQuality
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -717,14 +655,15 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofQuality
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofQuality
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ProofQuality
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setProofQuality(EProofQuality) based on java.lang.enum instead
+	 * @deprecated use SetProofQuality(EProofQuality) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProofQuality(EnumProofQuality enumVar)
@@ -736,7 +675,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (9) get attribute ProofQuality
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EProofQuality getEProofQuality() based on java.lang.enum instead
+	 * @deprecated use EProofQuality GetEProofQuality() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumProofQuality getProofQuality()
@@ -745,7 +684,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ProofType
@@ -768,13 +709,15 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProofType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProofType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ProofType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setProofType(EProofType) based on java.lang.enum instead
+	 * @deprecated use SetProofType(EProofType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setProofType(EnumProofType enumVar)
@@ -786,7 +729,7 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (9) get attribute ProofType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EProofType getEProofType() based on java.lang.enum instead
+	 * @deprecated use EProofType GetEProofType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumProofType getProofType()
@@ -795,7 +738,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PunchType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PunchType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PunchType
@@ -818,7 +763,9 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Resolution
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Resolution
@@ -833,17 +780,20 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Resolution
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getResolution()
 	{
-		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -881,7 +831,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{
@@ -941,7 +892,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{
@@ -981,7 +933,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	/**
 	 * (29) append element PageList
 	 *
-	 * @return JDFPageList the element @ if the element already exists
+	 * @return JDFPageList the element
+	 * @ if the element already exists
 	 */
 	public JDFPageList appendPageList()
 	{
@@ -1021,7 +974,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	/**
 	 * (29) append element ScreeningParams
 	 *
-	 * @return JDFScreeningParams the element @ if the element already exists
+	 * @return JDFScreeningParams the element
+	 * @ if the element already exists
 	 */
 	public JDFScreeningParams appendScreeningParams()
 	{
@@ -1075,7 +1029,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -1149,7 +1104,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

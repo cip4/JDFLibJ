@@ -84,10 +84,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSignatureCell : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSignatureCell : public JDFElement
  */
 
 public abstract class JDFAutoSignatureCell extends JDFElement
@@ -102,12 +99,14 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BACKPAGES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.BACKSPREAD, 0x3333311111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTLEANGLE, 0x4444333311l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumeration, EnumBottleAxis.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumeration, EnumBottleAxis.getEnum(0),
+				null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.FACECELLS, 0x3333331111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.FRONTFACEPAGES, 0x4444443311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.FRONTPAGES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.FRONTSPREAD, 0x3333311111l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), "Up");
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.ORIENTATION, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0),
+				"Up");
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, "0");
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.STATIONNAME, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, "0");
 	}
@@ -317,11 +316,14 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackFacePages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BackFacePages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -337,17 +339,20 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute BackFacePages
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getBackFacePages()
 	{
-		final String strAttrName = getAttribute(AttributeName.BACKFACEPAGES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BACKFACEPAGES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackPages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BackPages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BackPages
@@ -362,17 +367,20 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute BackPages
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getBackPages()
 	{
-		final String strAttrName = getAttribute(AttributeName.BACKPAGES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BACKPAGES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackSpread ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BackSpread
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BackSpread
@@ -387,17 +395,20 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute BackSpread
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getBackSpread()
 	{
-		final String strAttrName = getAttribute(AttributeName.BACKSPREAD, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BACKSPREAD, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BottleAngle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BottleAngle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BottleAngle
@@ -420,7 +431,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BottleAxis ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BottleAxis
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BottleAxis
@@ -443,13 +456,15 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BottleAxis ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BottleAxis
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BottleAxis
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBottleAxis(EBottleAxis) based on java.lang.enum instead
+	 * @deprecated use SetBottleAxis(EBottleAxis) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBottleAxis(EnumBottleAxis enumVar)
@@ -461,7 +476,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * (9) get attribute BottleAxis
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBottleAxis getEBottleAxis() based on java.lang.enum instead
+	 * @deprecated use EBottleAxis GetEBottleAxis() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBottleAxis getBottleAxis()
@@ -470,7 +485,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FaceCells ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FaceCells
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FaceCells
@@ -485,17 +502,19 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute FaceCells
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFaceCells()
 	{
-		final String strAttrName = getAttribute(AttributeName.FACECELLS, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FACECELLS, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontFacePages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FrontFacePages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -511,17 +530,20 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute FrontFacePages
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFrontFacePages()
 	{
-		final String strAttrName = getAttribute(AttributeName.FRONTFACEPAGES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FRONTFACEPAGES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontPages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FrontPages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FrontPages
@@ -536,17 +558,20 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute FrontPages
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFrontPages()
 	{
-		final String strAttrName = getAttribute(AttributeName.FRONTPAGES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FRONTPAGES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontSpread ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FrontSpread
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FrontSpread
@@ -561,17 +586,20 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute FrontSpread
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFrontSpread()
 	{
-		final String strAttrName = getAttribute(AttributeName.FRONTSPREAD, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FRONTSPREAD, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Orientation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Orientation
@@ -594,13 +622,15 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Orientation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Orientation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Orientation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setOrientation(EOrientation) based on java.lang.enum instead
+	 * @deprecated use SetOrientation(EOrientation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOrientation(EnumOrientation enumVar)
@@ -612,7 +642,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	 * (9) get attribute Orientation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EOrientation getEOrientation() based on java.lang.enum instead
+	 * @deprecated use EOrientation GetEOrientation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumOrientation getOrientation()
@@ -621,7 +651,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SectionIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SectionIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -645,7 +676,9 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StationName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StationName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StationName

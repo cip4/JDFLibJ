@@ -79,10 +79,7 @@ import org.cip4.jdflib.datatypes.JDFTransferFunction;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoTransferCurve : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTransferCurve : public JDFResource
  */
 
 public abstract class JDFAutoTransferCurve extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,11 +157,15 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Curve ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Curve
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Curve
@@ -179,17 +180,20 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 	/**
 	 * (20) get JDFTransferFunction attribute Curve
 	 *
-	 * @return JDFTransferFunction the value of the attribute, null if a the attribute value is not a valid to create a JDFTransferFunction
+	 * @return JDFTransferFunction the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFTransferFunction
 	 */
 	public JDFTransferFunction getCurve()
 	{
-		final String strAttrName = getAttribute(AttributeName.CURVE, null, null);
-		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CURVE, null, null);
+		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Separation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Separation

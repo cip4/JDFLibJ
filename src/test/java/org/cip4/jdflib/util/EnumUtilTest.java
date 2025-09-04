@@ -77,10 +77,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoPart.ESide;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
-import org.cip4.jdflib.auto.JDFAutoStripMark.EAnchor;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoThreadSewingParams.ECastingMaterial;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -224,8 +224,8 @@ class EnumUtilTest extends JDFTestCaseBase
 	@Test
 	void testGetEnumEnum()
 	{
-		assertEquals(EAnchor.BottomRight, EnumUtil.getEnum(EAnchor.class, org.cip4.jdflib.auto.JDFAutoStripMark.EnumAnchor.BottomRight));
-		assertNull(EnumUtil.getEnum(ECastingMaterial.class, org.cip4.jdflib.auto.JDFAutoStripMark.EnumAnchor.BottomRight));
+		assertEquals(EAnchor.BottomRight, EnumUtil.getEnum(EAnchor.class, EnumAnchor.BottomRight));
+		assertNull(EnumUtil.getEnum(ECastingMaterial.class, EnumAnchor.BottomRight));
 		assertNull(EnumUtil.getEnum(ECastingMaterial.class, null));
 	}
 

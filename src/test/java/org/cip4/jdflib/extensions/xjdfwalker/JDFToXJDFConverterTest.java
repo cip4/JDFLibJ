@@ -57,20 +57,20 @@ import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoCut.EnumWorkingDirection;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumPageDelivery;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
-import org.cip4.jdflib.auto.JDFAutoGlue.EnumWorkingDirection;
 import org.cip4.jdflib.auto.JDFAutoGlueApplication.EnumGluingTechnique;
 import org.cip4.jdflib.auto.JDFAutoInsertingParams.EnumMethod;
-import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPolarity;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
-import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumCostType;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFluteDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -79,8 +79,10 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -193,7 +195,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author rainer prosi
- *
  */
 public class JDFToXJDFConverterTest extends JDFTestCaseBase
 {
@@ -609,7 +610,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public KElement _testDeliveryIntent()
@@ -646,7 +646,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -672,7 +671,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -689,7 +687,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws DataFormatException
 	 */
@@ -731,7 +728,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws DataFormatException
 	 */
@@ -769,7 +765,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws DataFormatException
 	 */
@@ -811,11 +806,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(xjdf);
 		assertEquals(3, XJDFHelper.getHelper(xjdf).getSet(ElementName.BINDERYSIGNATURE, 0).getPartitionList().size());
 		assertEquals(6, xjdf.getChildArrayByClass(JDFPosition.class, true, 0).size());
-		assertEquals(2, xjdf.getChildrenByTagName(ElementName.POSITION, null, new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs2.1"), false, false, 0).size());
+		assertEquals(2,
+				xjdf.getChildrenByTagName(ElementName.POSITION, null, new JDFAttributeMap(XJDFConstants.BinderySignatureID, "bs2.1"), false, false, 0).size());
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws DataFormatException
 	 */
@@ -860,11 +855,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertNotNull(xjdf);
 		assertEquals(2, XJDFHelper.getHelper(xjdf).getSet(ElementName.BINDERYSIGNATURE, 0).getPartitionList().size());
 		assertEquals(6, xjdf.getChildArrayByClass(JDFPosition.class, true, 0).size());
-		assertEquals(4, xjdf.getChildrenByTagName(ElementName.POSITION, null, new JDFAttributeMap(XJDFConstants.BinderySignatureID, "ass2"), false, false, 0).size());
+		assertEquals(4,
+				xjdf.getChildrenByTagName(ElementName.POSITION, null, new JDFAttributeMap(XJDFConstants.BinderySignatureID, "ass2"), false, false, 0).size());
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws DataFormatException
 	 */
@@ -906,7 +901,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws DataFormatException
 	 */
@@ -926,7 +920,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws DataFormatException
 	 */
@@ -970,7 +963,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws DataFormatException
 	 */
@@ -984,7 +976,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName, "s2");
 
 		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, null);
-		final JDFTransferCurvePool tcp1 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFTransferCurvePool tcp1 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName,
+				"s1");
 		final JDFTransferCurveSet tcs1 = tcp.appendTransferCurveSet();
 		tcs1.setName("Paper");
 		tcs1.setDescriptiveName("ddd");
@@ -992,7 +985,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		tc1.setCurve(new JDFTransferFunction("0 0 1 1"));
 		tc1.setSeparation("Cyan");
 
-		final JDFTransferCurvePool tcp2 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName, "s2");
+		final JDFTransferCurvePool tcp2 = (JDFTransferCurvePool) tcp.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName,
+				"s2");
 		final JDFTransferCurveSet tcs2 = tcp.appendTransferCurveSet();
 		tcs2.setName("Plate");
 		tcs2.setDescriptiveName("eee");
@@ -1017,7 +1011,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1032,7 +1025,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1047,7 +1039,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1061,7 +1052,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1087,7 +1077,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1113,7 +1102,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1136,7 +1124,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1157,7 +1144,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1167,7 +1153,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1177,7 +1162,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1212,7 +1196,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	KElement _testPageList(final boolean retainAll)
@@ -1255,7 +1238,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1265,7 +1247,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -1286,7 +1267,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public KElement _testPageListEmpty()
@@ -2523,7 +2503,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);
 		assertNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"SheetOptimizingParams\"]/Resource/SheetOptimizingParams/GangElement[1]/@MediaRef", null));
-		assertEquals("PS3", xjdf.getXPathAttribute("ResourceSet[@Name=\"SheetOptimizingParams\"]/Resource/SheetOptimizingParams/GangElement[1]/Media/@ISOPaperSubstrate", null));
+		assertEquals("PS3", xjdf.getXPathAttribute(
+				"ResourceSet[@Name=\"SheetOptimizingParams\"]/Resource/SheetOptimizingParams/GangElement[1]/Media/@ISOPaperSubstrate", null));
 	}
 
 	/**
@@ -3026,7 +3007,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.convert(n);
 		assertNotNull(xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
-		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/ExposedMedia/@MediaRef", null), xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
+		assertEquals(xjdf.getXPathAttribute("ResourceSet/Resource/ExposedMedia/@MediaRef", null),
+				xjdf.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null));
 	}
 
 	/**
@@ -3195,7 +3177,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testLayoutExternalImpo() throws Exception
@@ -3214,7 +3195,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testLayoutExternalImpoBS() throws Exception
@@ -3585,10 +3565,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFNode product = new JDFDoc(ElementName.JDF).getJDFRoot();
 		product.setType(EnumType.Product);
 		final JDFLayoutIntent loi = (JDFLayoutIntent) product.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
-		loi.setSides(EnumSides.OneSided);
+		loi.setSides(ESides.OneSidedFront);
 		final JDFNode plateset = product.addCombined(new VString("Imposition Interpreting Rendering ImageSetting", " "));
 		final JDFInterpretingParams ip = (JDFInterpretingParams) plateset.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
-		ip.setPrintQuality(org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality.Normal);
+		ip.setPrintQuality(EPrintQuality.Normal);
 		final JDFRunList ruli = (JDFRunList) plateset.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		ruli.setFileURL("file:///foo.pdf");
 		plateset.addResource(ElementName.MEDIA, EnumUsage.Input);
@@ -3766,7 +3746,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 * @return
-	 *
 	 */
 	@Test
 	void testGlueLine()
@@ -3796,7 +3775,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 * @return
-	 *
 	 */
 	@Test
 	void testGeneralID()
@@ -3815,7 +3793,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 	/**
 	 * @return
-	 *
 	 */
 	@Test
 	void testHoleLine()
@@ -3842,7 +3819,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -3856,7 +3832,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -3874,7 +3849,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -3893,7 +3867,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -3914,7 +3887,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -3961,7 +3933,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -3976,11 +3947,11 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(XJDFConstants.LooseBinding, xjdf.getAttribute(AttributeName.TYPES));
 		assertNull(new XJDFHelper(xjdf).getSet(ElementName.COILBINDINGPARAMS, 0));
 		assertNotNull(new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0));
-		assertEquals("42", new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0).getPartition(0).getXPathValue("LooseBindingParams/CoilBindingDetails/@Diameter"));
+		assertEquals("42", new XJDFHelper(xjdf).getSet(XJDFConstants.LooseBindingParams, 0).getPartition(0)
+				.getXPathValue("LooseBindingParams/CoilBindingDetails/@Diameter"));
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Test
@@ -4031,7 +4002,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		product.setType(EnumType.Product);
 		product.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		final JDFLayoutIntent loi = (JDFLayoutIntent) product.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
-		loi.setSides(EnumSides.OneSided);
+		loi.setSides(EnumSides.OneSidedFront);
 		final JDFNode product2 = product.addProduct();
 		product2.addResource(ElementName.COMPONENT, EnumUsage.Output).setDescriptiveName("Cover");
 		product.linkOutputs(product2);
@@ -4126,7 +4097,6 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override

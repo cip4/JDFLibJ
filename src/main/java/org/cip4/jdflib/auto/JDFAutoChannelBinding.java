@@ -80,10 +80,7 @@ import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoChannelBinding : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoChannelBinding : public JDFElement
  */
 
 public abstract class JDFAutoChannelBinding extends JDFElement
@@ -142,7 +139,9 @@ public abstract class JDFAutoChannelBinding extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -168,7 +167,8 @@ public abstract class JDFAutoChannelBinding extends JDFElement
 	/**
 	 * (29) append element ChannelBrand
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendChannelBrand()
 	{
@@ -198,7 +198,8 @@ public abstract class JDFAutoChannelBinding extends JDFElement
 	/**
 	 * (29) append element Cover
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendCover()
 	{
@@ -228,7 +229,8 @@ public abstract class JDFAutoChannelBinding extends JDFElement
 	/**
 	 * (29) append element Thickness
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendThickness()
 	{

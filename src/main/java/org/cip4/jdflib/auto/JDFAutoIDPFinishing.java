@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.process.JDFIDPStitching;
 import org.cip4.jdflib.resource.process.JDFIDPTrimming;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPFinishing : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPFinishing : public JDFElement
  */
 
 public abstract class JDFAutoIDPFinishing extends JDFElement
@@ -162,11 +159,15 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Finishings ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Finishings
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Finishings
@@ -181,17 +182,20 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute Finishings
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getFinishings()
 	{
-		final String strAttrName = getAttribute(AttributeName.FINISHINGS, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FINISHINGS, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -229,7 +233,8 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * (27) const get element IDPFolding
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIDPFolding the element default is getIDPFolding(0)
+	 * @return JDFIDPFolding the element
+	 *         default is getIDPFolding(0)
 	 */
 	public JDFIDPFolding getIDPFolding(int iSkip)
 	{
@@ -291,7 +296,8 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * (27) const get element IDPHoleMaking
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIDPHoleMaking the element default is getIDPHoleMaking(0)
+	 * @return JDFIDPHoleMaking the element
+	 *         default is getIDPHoleMaking(0)
 	 */
 	public JDFIDPHoleMaking getIDPHoleMaking(int iSkip)
 	{
@@ -353,7 +359,8 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * (27) const get element IDPStitching
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIDPStitching the element default is getIDPStitching(0)
+	 * @return JDFIDPStitching the element
+	 *         default is getIDPStitching(0)
 	 */
 	public JDFIDPStitching getIDPStitching(int iSkip)
 	{
@@ -415,7 +422,8 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
 	 * (27) const get element IDPTrimming
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIDPTrimming the element default is getIDPTrimming(0)
+	 * @return JDFIDPTrimming the element
+	 *         default is getIDPTrimming(0)
 	 */
 	public JDFIDPTrimming getIDPTrimming(int iSkip)
 	{

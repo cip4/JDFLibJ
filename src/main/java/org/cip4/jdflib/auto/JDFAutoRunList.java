@@ -99,10 +99,7 @@ import org.cip4.jdflib.resource.process.JDFMetadataMap;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoRunList : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRunList : public JDFResource
  */
 
 public abstract class JDFAutoRunList extends JDFResource
@@ -116,9 +113,10 @@ public abstract class JDFAutoRunList extends JDFResource
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ISPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGECOPIES, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, "1");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.SETCOPIES, 0x3333333331l, AttributeInfo.EnumAttributeType.integer, null, "1");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.AUTOMATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumAutomation.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPONENTGRANULARITY, 0x4444443311l, AttributeInfo.EnumAttributeType.enumeration, EnumComponentGranularity.getEnum(0),
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.AUTOMATION, 0x3333311111l, AttributeInfo.EnumAttributeType.enumeration, EnumAutomation.getEnum(0),
 				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPONENTGRANULARITY, 0x4444443311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumComponentGranularity.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.DOCNAMES, 0x3333333333l, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.DOCS, 0x3333333333l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -128,7 +126,8 @@ public abstract class JDFAutoRunList extends JDFResource
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.ENDOFSET, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.FINISHEDPAGES, 0x3333111111l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.FIRSTPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[14] = new AtrInfoTable(AttributeName.IGNORECONTEXT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumIgnoreContext.getEnum(0), null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.IGNORECONTEXT, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumIgnoreContext.getEnum(0), null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.LOGICALPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.NDOC, 0x4444444431l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[17] = new AtrInfoTable(AttributeName.NPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -139,7 +138,8 @@ public abstract class JDFAutoRunList extends JDFResource
 		atrInfoTable[22] = new AtrInfoTable(AttributeName.RUNTAG, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[23] = new AtrInfoTable(AttributeName.SETNAMES, 0x3333333331l, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
 		atrInfoTable[24] = new AtrInfoTable(AttributeName.SETS, 0x3333333331l, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-		atrInfoTable[25] = new AtrInfoTable(AttributeName.SHEETSIDES, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetSides.getEnum(0), null);
+		atrInfoTable[25] = new AtrInfoTable(AttributeName.SHEETSIDES, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumSheetSides.getEnum(0),
+				null);
 		atrInfoTable[26] = new AtrInfoTable(AttributeName.SKIPPAGE, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[27] = new AtrInfoTable(AttributeName.SORTED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
@@ -211,7 +211,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -678,11 +678,15 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IsPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IsPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute IsPage
@@ -705,7 +709,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageCopies ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageCopies
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageCopies
@@ -728,7 +734,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetCopies ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetCopies
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetCopies
@@ -751,7 +759,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Automation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Automation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Automation
@@ -774,13 +784,15 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Automation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Automation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Automation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAutomation(EAutomation) based on java.lang.enum instead
+	 * @deprecated use SetAutomation(EAutomation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAutomation(EnumAutomation enumVar)
@@ -792,7 +804,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (9) get attribute Automation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAutomation getEAutomation() based on java.lang.enum instead
+	 * @deprecated use EAutomation GetEAutomation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAutomation getAutomation()
@@ -801,7 +813,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ComponentGranularity
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ComponentGranularity
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -825,14 +838,15 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ComponentGranularity
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ComponentGranularity
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ComponentGranularity
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setComponentGranularity(EComponentGranularity) based on java.lang.enum instead
+	 * @deprecated use SetComponentGranularity(EComponentGranularity) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setComponentGranularity(EnumComponentGranularity enumVar)
@@ -844,7 +858,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (9) get attribute ComponentGranularity
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EComponentGranularity getEComponentGranularity() based on java.lang.enum instead
+	 * @deprecated use EComponentGranularity GetEComponentGranularity() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumComponentGranularity getComponentGranularity()
@@ -853,7 +867,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Directory ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Directory
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Directory
@@ -876,7 +892,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocNames ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DocNames
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DocNames
@@ -891,17 +909,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (20) get JDFNameRangeList attribute DocNames
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getDocNames()
 	{
-		final String strAttrName = getAttribute(AttributeName.DOCNAMES, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DOCNAMES, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Docs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Docs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Docs
@@ -916,17 +937,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute Docs
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocs()
 	{
-		final String strAttrName = getAttribute(AttributeName.DOCS, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DOCS, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocPages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DocPages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DocPages
@@ -941,17 +965,19 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (20) get JDFIntegerList attribute DocPages
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getDocPages()
 	{
-		final String strAttrName = getAttribute(AttributeName.DOCPAGES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DOCPAGES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndOfBundleItem
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndOfBundleItem
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -975,7 +1001,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndOfDocument
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndOfDocument
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -999,7 +1026,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndOfSet ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndOfSet
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute EndOfSet
@@ -1022,7 +1051,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FinishedPages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FinishedPages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1046,7 +1076,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FirstPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FirstPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FirstPage
@@ -1069,7 +1101,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreContext
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreContext
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1093,14 +1126,15 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreContext
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreContext
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute IgnoreContext
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setIgnoreContext(EIgnoreContext) based on java.lang.enum instead
+	 * @deprecated use SetIgnoreContext(EIgnoreContext) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setIgnoreContext(EnumIgnoreContext enumVar)
@@ -1112,7 +1146,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (9) get attribute IgnoreContext
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EIgnoreContext getEIgnoreContext() based on java.lang.enum instead
+	 * @deprecated use EIgnoreContext GetEIgnoreContext() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumIgnoreContext getIgnoreContext()
@@ -1121,7 +1155,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LogicalPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LogicalPage
@@ -1144,7 +1180,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NDoc ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NDoc
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NDoc
@@ -1167,7 +1205,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NPage
@@ -1190,7 +1230,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NSet ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NSet
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NSet
@@ -1213,7 +1255,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageListIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageListIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1229,17 +1272,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageListIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageListIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageNames ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageNames
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageNames
@@ -1254,17 +1300,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (20) get JDFNameRangeList attribute PageNames
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getPageNames()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGENAMES, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGENAMES, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pages
@@ -1279,17 +1328,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute Pages
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPages()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGES, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGES, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunTag ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RunTag
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RunTag
@@ -1312,7 +1364,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetNames ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetNames
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetNames
@@ -1327,17 +1381,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (20) get JDFNameRangeList attribute SetNames
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getSetNames()
 	{
-		final String strAttrName = getAttribute(AttributeName.SETNAMES, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SETNAMES, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sets ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Sets
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Sets
@@ -1352,17 +1409,20 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute Sets
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSets()
 	{
-		final String strAttrName = getAttribute(AttributeName.SETS, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SETS, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetSides ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetSides
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetSides
@@ -1385,13 +1445,15 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetSides ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetSides
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SheetSides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSheetSides(ESheetSides) based on java.lang.enum instead
+	 * @deprecated use SetSheetSides(ESheetSides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSheetSides(EnumSheetSides enumVar)
@@ -1403,7 +1465,7 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (9) get attribute SheetSides
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESheetSides getESheetSides() based on java.lang.enum instead
+	 * @deprecated use ESheetSides GetESheetSides() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSheetSides getSheetSides()
@@ -1412,7 +1474,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SkipPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SkipPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SkipPage
@@ -1435,7 +1499,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sorted ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Sorted
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Sorted
@@ -1458,7 +1524,9 @@ public abstract class JDFAutoRunList extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -1484,7 +1552,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (29) append element ByteMap
 	 *
-	 * @return JDFByteMap the element @ if the element already exists
+	 * @return JDFByteMap the element
+	 * @ if the element already exists
 	 */
 	public JDFByteMap appendByteMap()
 	{
@@ -1536,7 +1605,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (27) const get element DynamicInput
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDynamicInput the element default is getDynamicInput(0)
+	 * @return JDFDynamicInput the element
+	 *         default is getDynamicInput(0)
 	 */
 	public JDFDynamicInput getDynamicInput(int iSkip)
 	{
@@ -1598,7 +1668,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (27) const get element MetadataMap
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMetadataMap the element default is getMetadataMap(0)
+	 * @return JDFMetadataMap the element
+	 *         default is getMetadataMap(0)
 	 */
 	public JDFMetadataMap getMetadataMap(int iSkip)
 	{
@@ -1660,7 +1731,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	 * (27) const get element InsertSheet
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFInsertSheet the element default is getInsertSheet(0)
+	 * @return JDFInsertSheet the element
+	 *         default is getInsertSheet(0)
 	 */
 	public JDFInsertSheet getInsertSheet(int iSkip)
 	{
@@ -1720,7 +1792,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (29) append element LayoutElement
 	 *
-	 * @return JDFLayoutElement the element @ if the element already exists
+	 * @return JDFLayoutElement the element
+	 * @ if the element already exists
 	 */
 	public JDFLayoutElement appendLayoutElement()
 	{
@@ -1760,7 +1833,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (29) append element InterpretedPDLData
 	 *
-	 * @return JDFInterpretedPDLData the element @ if the element already exists
+	 * @return JDFInterpretedPDLData the element
+	 * @ if the element already exists
 	 */
 	public JDFInterpretedPDLData appendInterpretedPDLData()
 	{
@@ -1800,7 +1874,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (29) append element Disposition
 	 *
-	 * @return JDFDisposition the element @ if the element already exists
+	 * @return JDFDisposition the element
+	 * @ if the element already exists
 	 */
 	public JDFDisposition appendDisposition()
 	{
@@ -1830,7 +1905,8 @@ public abstract class JDFAutoRunList extends JDFResource
 	/**
 	 * (29) append element PageList
 	 *
-	 * @return JDFPageList the element @ if the element already exists
+	 * @return JDFPageList the element
+	 * @ if the element already exists
 	 */
 	public JDFPageList appendPageList()
 	{

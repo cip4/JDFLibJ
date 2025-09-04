@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoUsageCounter : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoUsageCounter : public JDFResource
  */
 
 public abstract class JDFAutoUsageCounter extends JDFResource
@@ -152,7 +149,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -246,11 +243,15 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CounterID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CounterID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CounterID
@@ -273,7 +274,9 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Scope
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Scope
@@ -296,13 +299,15 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Scope ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Scope
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Scope
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setScope(EScope) based on java.lang.enum instead
+	 * @deprecated use SetScope(EScope) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setScope(EnumScope enumVar)
@@ -314,7 +319,7 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 * (9) get attribute Scope
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EScope getEScope() based on java.lang.enum instead
+	 * @deprecated use EScope GetEScope() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumScope getScope()
@@ -323,7 +328,8 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CounterTypes
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CounterTypes
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -343,8 +349,8 @@ public abstract class JDFAutoUsageCounter extends JDFResource
 	 */
 	public VString getCounterTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.COUNTERTYPES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.COUNTERTYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}

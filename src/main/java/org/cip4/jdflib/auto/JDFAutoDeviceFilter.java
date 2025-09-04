@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDeviceFilter : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeviceFilter : public JDFElement
  */
 
 public abstract class JDFAutoDeviceFilter extends JDFElement
@@ -103,7 +100,8 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceDetails.getEnum(0), "None");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDeviceDetails.getEnum(0), "None");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCALIZATION, 0x3333333311l, AttributeInfo.EnumAttributeType.languages, null, null);
 	}
 
@@ -249,11 +247,14 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -277,14 +278,15 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeviceDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDeviceDetails(EDeviceDetails) based on java.lang.enum instead
+	 * @deprecated use SetDeviceDetails(EDeviceDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceDetails(EnumDeviceDetails enumVar)
@@ -296,7 +298,7 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 * (9) get attribute DeviceDetails
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDeviceDetails getEDeviceDetails() based on java.lang.enum instead
+	 * @deprecated use EDeviceDetails GetEDeviceDetails() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDeviceDetails getDeviceDetails()
@@ -305,7 +307,8 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Localization
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Localization
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -329,7 +332,9 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -367,7 +372,8 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
 	 * (27) const get element Device
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element default is getDevice(0)
+	 * @return JDFDevice the element
+	 *         default is getDevice(0)
 	 */
 	public JDFDevice getDevice(int iSkip)
 	{

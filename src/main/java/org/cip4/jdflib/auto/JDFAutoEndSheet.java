@@ -82,10 +82,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 /**
- *****************************************************************************
- * class JDFAutoEndSheet : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoEndSheet : public JDFElement
  */
 
 public abstract class JDFAutoEndSheet extends JDFElement
@@ -154,11 +151,15 @@ public abstract class JDFAutoEndSheet extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Offset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Offset
@@ -173,17 +174,20 @@ public abstract class JDFAutoEndSheet extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Offset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -209,7 +213,8 @@ public abstract class JDFAutoEndSheet extends JDFElement
 	/**
 	 * (29) append element GlueLine
 	 *
-	 * @return JDFGlueLine the element @ if the element already exists
+	 * @return JDFGlueLine the element
+	 * @ if the element already exists
 	 */
 	public JDFGlueLine appendGlueLine()
 	{

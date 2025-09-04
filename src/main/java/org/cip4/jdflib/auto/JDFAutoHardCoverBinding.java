@@ -89,10 +89,7 @@ import org.cip4.jdflib.span.JDFSpanTightBacking;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoHardCoverBinding : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoHardCoverBinding : public JDFElement
  */
 
 public abstract class JDFAutoHardCoverBinding extends JDFElement
@@ -169,7 +166,9 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -195,7 +194,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element BlockThreadSewing
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendBlockThreadSewing()
 	{
@@ -225,7 +225,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element CoverStyle
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendCoverStyle()
 	{
@@ -255,7 +256,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element EndSheets
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendEndSheets()
 	{
@@ -285,7 +287,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element HeadBands
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendHeadBands()
 	{
@@ -315,7 +318,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element HeadBandColor
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendHeadBandColor()
 	{
@@ -357,7 +361,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * (27) const get element HeadBandColorDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStringSpan the element default is getHeadBandColorDetails(0)
+	 * @return JDFStringSpan the element
+	 *         default is getHeadBandColorDetails(0)
 	 */
 	public JDFStringSpan getHeadBandColorDetails(int iSkip)
 	{
@@ -407,7 +412,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element Jacket
 	 *
-	 * @return JDFSpanJacket the element @ if the element already exists
+	 * @return JDFSpanJacket the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanJacket appendJacket()
 	{
@@ -437,7 +443,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element JacketFoldingWidth
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendJacketFoldingWidth()
 	{
@@ -467,7 +474,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element JapanBind
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendJapanBind()
 	{
@@ -497,7 +505,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineBrushing
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineBrushing()
 	{
@@ -527,7 +536,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineFiberRoughing
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineFiberRoughing()
 	{
@@ -557,7 +567,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineGlue
 	 *
-	 * @return JDFSpanGlue the element @ if the element already exists
+	 * @return JDFSpanGlue the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanGlue appendSpineGlue()
 	{
@@ -587,7 +598,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineLevelling
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineLevelling()
 	{
@@ -617,7 +629,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineMilling
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineMilling()
 	{
@@ -647,7 +660,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineNotching
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineNotching()
 	{
@@ -677,7 +691,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineSanding
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineSanding()
 	{
@@ -707,7 +722,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineShredding
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineShredding()
 	{
@@ -737,7 +753,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element StripMaterial
 	 *
-	 * @return JDFSpanStripMaterial the element @ if the element already exists
+	 * @return JDFSpanStripMaterial the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanStripMaterial appendStripMaterial()
 	{
@@ -767,7 +784,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element TightBacking
 	 *
-	 * @return JDFSpanTightBacking the element @ if the element already exists
+	 * @return JDFSpanTightBacking the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanTightBacking appendTightBacking()
 	{
@@ -797,7 +815,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	/**
 	 * (29) append element Thickness
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendThickness()
 	{
@@ -839,7 +858,8 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
 	 * (27) const get element RegisterRibbon
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRegisterRibbon the element default is getRegisterRibbon(0)
+	 * @return JDFRegisterRibbon the element
+	 *         default is getRegisterRibbon(0)
 	 */
 	public JDFRegisterRibbon getRegisterRibbon(int iSkip)
 	{

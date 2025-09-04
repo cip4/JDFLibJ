@@ -69,14 +69,12 @@
 package org.cip4.jdflib.resource.intent;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoLayoutIntent.EnumSides;
+import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class JDFLayoutIntentTest extends JDFTestCaseBase
 {
@@ -87,7 +85,7 @@ class JDFLayoutIntentTest extends JDFTestCaseBase
 	void testGetSideVectorStatic()
 	{
 		Assertions.assertNull(JDFLayoutIntent.getSideVector(null));
-		Assertions.assertEquals("Front", JDFLayoutIntent.getSideVector(EnumSides.OneSided).get(0));
-		Assertions.assertEquals(2, JDFLayoutIntent.getSideVector(EnumSides.TwoSidedHeadToFoot).size());
+		Assertions.assertEquals("Front", JDFLayoutIntent.getSideVector(EnumSides.OneSidedFront).get(0));
+		Assertions.assertEquals(2, JDFLayoutIntent.getSideVector(EnumSides.TwoSidedFlipX).size());
 	}
 }

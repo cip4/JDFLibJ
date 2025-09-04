@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
 /**
- *****************************************************************************
- * class JDFAutoDigitalMedia : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDigitalMedia : public JDFResource
  */
 
 public abstract class JDFAutoDigitalMedia extends JDFResource
@@ -168,7 +165,7 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Handling);
 		return bRet;
 	}
@@ -183,11 +180,15 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MediaType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MediaType
@@ -210,7 +211,9 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Capacity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Capacity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Capacity
@@ -233,7 +236,9 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaLabel ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MediaLabel
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MediaLabel
@@ -256,7 +261,8 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MediaTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MediaTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -280,7 +286,9 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -306,7 +314,8 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	/**
 	 * (29) append element RunList
 	 *
-	 * @return JDFRunList the element @ if the element already exists
+	 * @return JDFRunList the element
+	 * @ if the element already exists
 	 */
 	public JDFRunList appendRunList()
 	{
@@ -360,7 +369,8 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -434,7 +444,8 @@ public abstract class JDFAutoDigitalMedia extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

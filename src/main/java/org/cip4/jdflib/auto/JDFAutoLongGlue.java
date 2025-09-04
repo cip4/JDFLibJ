@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoLongGlue : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLongGlue : public JDFElement
  */
 
 public abstract class JDFAutoLongGlue extends JDFElement
@@ -229,11 +226,15 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GlueBrand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GlueBrand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GlueBrand
@@ -256,7 +257,9 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GlueType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GlueType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute GlueType
@@ -279,13 +282,15 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GlueType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GlueType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute GlueType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setGlueType(EGlueType) based on java.lang.enum instead
+	 * @deprecated use SetGlueType(EGlueType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGlueType(EnumGlueType enumVar)
@@ -297,7 +302,7 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	 * (9) get attribute GlueType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EGlueType getEGlueType() based on java.lang.enum instead
+	 * @deprecated use EGlueType GetEGlueType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumGlueType getGlueType()
@@ -306,7 +311,9 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LineWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LineWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LineWidth
@@ -329,7 +336,8 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MeltingTemperature
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MeltingTemperature
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -353,7 +361,9 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WorkingList
@@ -368,17 +378,20 @@ public abstract class JDFAutoLongGlue extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute WorkingList
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getWorkingList()
 	{
-		final String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute XOffset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute XOffset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute XOffset

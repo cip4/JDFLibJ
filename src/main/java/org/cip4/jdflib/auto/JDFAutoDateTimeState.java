@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoDateTimeState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDateTimeState : public JDFResource
  */
 
 public abstract class JDFAutoDateTimeState extends JDFResource
@@ -103,9 +100,11 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEDURATIONLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUEDURATIONLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.DurationRangeList, null,
+				null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333311l, AttributeInfo.EnumAttributeType.DateTimeRangeList, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTVALUEDURATIONLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.PRESENTVALUEDURATIONLIST, 0x3333333311l, AttributeInfo.EnumAttributeType.DurationRangeList, null,
+				null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333311l, AttributeInfo.EnumAttributeType.DateTimeRangeList, null, null);
 	}
 
@@ -170,17 +169,20 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -205,13 +207,14 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 */
 	public JDFDate getDefaultValue()
 	{
-		final String str = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -236,13 +239,14 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 */
 	public JDFDate getCurrentValue()
 	{
-		final String str = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueDurationList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueDurationList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -258,17 +262,19 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	/**
 	 * (20) get JDFDurationRangeList attribute AllowedValueDurationList
 	 *
-	 * @return JDFDurationRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDurationRangeList
+	 * @return JDFDurationRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDurationRangeList
 	 */
 	public JDFDurationRangeList getAllowedValueDurationList()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEDURATIONLIST, null, null);
-		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEDURATIONLIST, null, null);
+		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -284,17 +290,19 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	/**
 	 * (20) get JDFDateTimeRangeList attribute AllowedValueList
 	 *
-	 * @return JDFDateTimeRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDateTimeRangeList
+	 * @return JDFDateTimeRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDateTimeRangeList
 	 */
 	public JDFDateTimeRangeList getAllowedValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		final JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueDurationList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueDurationList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -310,17 +318,19 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	/**
 	 * (20) get JDFDurationRangeList attribute PresentValueDurationList
 	 *
-	 * @return JDFDurationRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDurationRangeList
+	 * @return JDFDurationRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDurationRangeList
 	 */
 	public JDFDurationRangeList getPresentValueDurationList()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEDURATIONLIST, null, null);
-		final JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUEDURATIONLIST, null, null);
+		JDFDurationRangeList nPlaceHolder = JDFDurationRangeList.createDurationRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -336,17 +346,20 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	/**
 	 * (20) get JDFDateTimeRangeList attribute PresentValueList
 	 *
-	 * @return JDFDateTimeRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFDateTimeRangeList
+	 * @return JDFDateTimeRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDateTimeRangeList
 	 */
 	public JDFDateTimeRangeList getPresentValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		final JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		JDFDateTimeRangeList nPlaceHolder = JDFDateTimeRangeList.createDateTimeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -384,7 +397,8 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -446,7 +460,8 @@ public abstract class JDFAutoDateTimeState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

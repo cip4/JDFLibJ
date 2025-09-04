@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoPrintCondition : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPrintCondition : public JDFResource
  */
 
 public abstract class JDFAutoPrintCondition extends JDFResource
@@ -168,7 +165,7 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -183,11 +180,15 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -210,7 +211,9 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AimCurve ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AimCurve
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AimCurve
@@ -225,17 +228,20 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	/**
 	 * (20) get JDFTransferFunction attribute AimCurve
 	 *
-	 * @return JDFTransferFunction the value of the attribute, null if a the attribute value is not a valid to create a JDFTransferFunction
+	 * @return JDFTransferFunction the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFTransferFunction
 	 */
 	public JDFTransferFunction getAimCurve()
 	{
-		final String strAttrName = getAttribute(AttributeName.AIMCURVE, null, null);
-		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		String strAttrName = getAttribute(AttributeName.AIMCURVE, null, null);
+		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Density ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Density
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Density
@@ -258,7 +264,9 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -284,7 +292,8 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	/**
 	 * (29) append element ColorMeasurementConditions
 	 *
-	 * @return JDFColorMeasurementConditions the element @ if the element already exists
+	 * @return JDFColorMeasurementConditions the element
+	 * @ if the element already exists
 	 */
 	public JDFColorMeasurementConditions appendColorMeasurementConditions()
 	{
@@ -324,7 +333,8 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	/**
 	 * (29) append element Device
 	 *
-	 * @return JDFDevice the element @ if the element already exists
+	 * @return JDFDevice the element
+	 * @ if the element already exists
 	 */
 	public JDFDevice appendDevice()
 	{
@@ -376,7 +386,8 @@ public abstract class JDFAutoPrintCondition extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{

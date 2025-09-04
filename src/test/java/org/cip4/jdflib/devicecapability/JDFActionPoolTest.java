@@ -74,8 +74,16 @@ package org.cip4.jdflib.devicecapability;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.resource.devicecapability.*;
+import org.cip4.jdflib.resource.devicecapability.JDFAction;
+import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
+import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
+import org.cip4.jdflib.resource.devicecapability.JDFTest;
+import org.cip4.jdflib.resource.devicecapability.JDFand;
+import org.cip4.jdflib.resource.devicecapability.JDFnot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 class JDFActionPoolTest extends JDFTestCaseBase

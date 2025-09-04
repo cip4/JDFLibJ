@@ -39,13 +39,13 @@ package org.cip4.jdflib.extensions.examples;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
-import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
-import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStitchType;
-import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoAssembly.EOrder;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoStitchingParams.EStitchType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
@@ -69,9 +69,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFIDPTest extends JDFTestCaseBase
 {
@@ -95,7 +93,7 @@ class XJDFIDPTest extends JDFTestCaseBase
 		ruLi.setFileSpecURL("http://test.pdf");
 
 		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) xjdfHelper.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, null);
-		dpp.setSides(EnumSides.OneSidedFront);
+		dpp.setSides(ESides.OneSidedFront);
 
 		final JDFComponent comp = (JDFComponent) xjdfHelper.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, null);
 		ResourceHelper.getHelper(comp).setAmount(100, null, true);
@@ -127,13 +125,13 @@ class XJDFIDPTest extends JDFTestCaseBase
 		final SetHelper shAss = xjdfHelper.getCreateSet(ElementName.ASSEMBLY, EnumUsage.Input);
 		final ResourceHelper rhAss = shAss.appendPartition(null, true);
 		final JDFAssembly ass = (JDFAssembly) rhAss.getResource();
-		ass.setOrder(EnumOrder.Collecting);
+		ass.setOrder(EOrder.Collecting);
 
 		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) xjdfHelper.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, null);
-		dpp.setSides(EnumSides.TwoSided);
+		dpp.setSides(ESides.TwoSided);
 
 		final JDFStitchingParams stp = (JDFStitchingParams) xjdfHelper.getCreateResource(ElementName.STITCHINGPARAMS, EnumUsage.Input, null);
-		stp.setStitchType(EnumStitchType.Saddle);
+		stp.setStitchType(EStitchType.Saddle);
 		stp.setNumberOfStitches(3);
 
 		final JDFComponent comp = (JDFComponent) xjdfHelper.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, null);
@@ -152,7 +150,9 @@ class XJDFIDPTest extends JDFTestCaseBase
 		for (final File jdf : jdfs)
 		{
 			if (jdf.getName().startsWith("Step___nope"))
+			{
 				continue;
+			}
 			log.info("Processing " + jdf);
 			final JDFNode root = JDFNode.parseFile(jdf);
 			if (root.getAllTypes().contains(JDFConstants.TYPE_SPINEPREPARATION))

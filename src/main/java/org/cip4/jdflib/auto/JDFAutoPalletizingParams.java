@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFBundle;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoPalletizingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPalletizingParams : public JDFResource
  */
 
 public abstract class JDFAutoPalletizingParams extends JDFResource
@@ -168,7 +165,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -183,11 +180,15 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayerAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LayerAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LayerAmount
@@ -202,17 +203,20 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	/**
 	 * (20) get JDFIntegerList attribute LayerAmount
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getLayerAmount()
 	{
-		final String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxHeight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxHeight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxHeight
@@ -235,7 +239,9 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxWeight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxWeight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxWeight
@@ -258,7 +264,9 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Overhang ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Overhang
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Overhang
@@ -273,17 +281,19 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Overhang
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getOverhang()
 	{
-		final String strAttrName = getAttribute(AttributeName.OVERHANG, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.OVERHANG, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OverhangOffset
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OverhangOffset
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -299,17 +309,20 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute OverhangOffset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getOverhangOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.OVERHANGOFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.OVERHANGOFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pattern ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pattern
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pattern
@@ -332,7 +345,9 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -370,7 +385,8 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 	 * (27) const get element Bundle
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBundle the element default is getBundle(0)
+	 * @return JDFBundle the element
+	 *         default is getBundle(0)
 	 */
 	public JDFBundle getBundle(int iSkip)
 	{

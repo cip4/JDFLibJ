@@ -70,11 +70,6 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -83,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoCertificate : public JDFElement
- *****************************************************************************
- *
+ ***************************************************************************** class JDFAutoCertificate : public JDFElement
  */
 
 public abstract class JDFAutoCertificate extends JDFElement
@@ -94,12 +86,10 @@ public abstract class JDFAutoCertificate extends JDFElement
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANCHOR, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ANCHORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchorType.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.RREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
 	@Override
@@ -153,195 +143,9 @@ public abstract class JDFAutoCertificate extends JDFElement
 		return " JDFAutoCertificate[  --> " + super.toString() + " ]";
 	}
 
-	/**
-	 * Enumeration strings for Anchor
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAnchor extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumAnchor(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(String enumName)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAnchor getEnum(int enumValue)
-		{
-			return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAnchor.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAnchor.class);
-		}
-
-		/**  */
-		public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
-		/**  */
-		public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
-		/**  */
-		public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
-		/**  */
-		public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
-		/**  */
-		public static final EnumAnchor Center = new EnumAnchor("Center");
-		/**  */
-		public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
-		/**  */
-		public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
-		/**  */
-		public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
-		/**  */
-		public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
-	}
-
-	/**
-	 * Enumeration strings for AnchorType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAnchorType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumAnchorType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAnchorType getEnum(String enumName)
-		{
-			return (EnumAnchorType) getEnum(EnumAnchorType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAnchorType getEnum(int enumValue)
-		{
-			return (EnumAnchorType) getEnum(EnumAnchorType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAnchorType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAnchorType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAnchorType.class);
-		}
-
-		/**  */
-		public static final EnumAnchorType Parent = new EnumAnchorType("Parent");
-		/**  */
-		public static final EnumAnchorType Sibling = new EnumAnchorType("Sibling");
-	}
-
 	/*
 	 * ************************************************************************ Attribute getter / setter ************************************************************************
 	 */
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Anchor ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Anchor
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setAnchor(EnumAnchor enumVar)
-	{
-		setAttribute(AttributeName.ANCHOR, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute Anchor
-	 *
-	 * @return the value of the attribute
-	 */
-	public EnumAnchor getAnchor()
-	{
-		return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
-	}
-
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AnchorType ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute AnchorType
-	 *
-	 * @param enumVar the enumVar to set the attribute to
-	 */
-	public void setAnchorType(EnumAnchorType enumVar)
-	{
-		setAttribute(AttributeName.ANCHORTYPE, enumVar == null ? null : enumVar.getName(), null);
-	}
-
-	/**
-	 * (9) get attribute AnchorType
-	 *
-	 * @return the value of the attribute
-	 */
-	public EnumAnchorType getAnchorType()
-	{
-		return EnumAnchorType.getEnum(getAttribute(AttributeName.ANCHORTYPE, null, null));
-	}
 
 	/*
 	 * --------------------------------------------------------------------- Methods for Attribute rRef ---------------------------------------------------------------------

@@ -88,10 +88,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPart : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPart : public JDFElement
  */
 
 public abstract class JDFAutoPart extends JDFElement
@@ -148,7 +145,8 @@ public abstract class JDFAutoPart extends JDFElement
 		atrInfoTable[43] = new AtrInfoTable(AttributeName.PARTVERSION, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[44] = new AtrInfoTable(AttributeName.PLATELAYOUT, 0x3333333111l, AttributeInfo.EnumAttributeType.Any, null, null);
 		atrInfoTable[45] = new AtrInfoTable(AttributeName.PREFLIGHTRULE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[46] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewType.getEnum(0), null);
+		atrInfoTable[46] = new AtrInfoTable(AttributeName.PREVIEWTYPE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewType.getEnum(0),
+				null);
 		atrInfoTable[47] = new AtrInfoTable(AttributeName.PRINTCONDITION, 0x3333111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[48] = new AtrInfoTable(AttributeName.PRODUCT, 0x3331111111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[49] = new AtrInfoTable(AttributeName.PRODUCTPART, 0x4443311111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
@@ -388,11 +386,15 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sorting ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Sorting
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Sorting
@@ -407,17 +409,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute Sorting
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSorting()
 	{
-		final String strAttrName = getAttribute(AttributeName.SORTING, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SORTING, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SortAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SortAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SortAmount
@@ -440,7 +445,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderySignatureName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BinderySignatureName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -464,7 +470,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinderySignaturePaginationIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BinderySignaturePaginationIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -488,7 +495,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlockName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlockName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BlockName
@@ -511,7 +520,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BundleItemIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BundleItemIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -527,17 +537,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute BundleItemIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getBundleItemIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CellIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CellIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CellIndex
@@ -552,17 +565,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute CellIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getCellIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.CELLINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CELLINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Condition ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Condition
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Condition
@@ -585,7 +601,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit0
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit0
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -609,7 +626,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit1
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit1
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -633,7 +651,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit2
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit2
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -657,7 +676,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit3
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit3
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -681,7 +701,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit4
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit4
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -705,7 +726,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit5
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit5
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -729,7 +751,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit6
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit6
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -753,7 +776,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit7
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit7
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -777,7 +801,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit8
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit8
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -801,7 +826,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryUnit9
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryUnit9
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -825,7 +851,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocCopies ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DocCopies
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DocCopies
@@ -840,17 +868,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute DocCopies
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocCopies()
 	{
-		final String strAttrName = getAttribute(AttributeName.DOCCOPIES, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DOCCOPIES, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DocIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DocIndex
@@ -865,17 +896,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute DocIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.DOCINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DOCINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocRunIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DocRunIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DocRunIndex
@@ -890,17 +924,19 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute DocRunIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocRunIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DOCRUNINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocSheetIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DocSheetIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -916,17 +952,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute DocSheetIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getDocSheetIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DOCSHEETINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DocTags ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DocTags
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DocTags
@@ -949,7 +988,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Edition ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Edition
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Edition
@@ -972,7 +1013,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EditionVersion
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EditionVersion
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -996,7 +1038,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FountainNumber
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FountainNumber
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1020,7 +1063,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ItemNames ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ItemNames
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ItemNames
@@ -1043,7 +1088,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayerIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LayerIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LayerIDs
@@ -1058,17 +1105,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute LayerIDs
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getLayerIDs()
 	{
-		final String strAttrName = getAttribute(AttributeName.LAYERIDS, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.LAYERIDS, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Location ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Location
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Location
@@ -1091,7 +1141,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LotID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LotID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LotID
@@ -1114,7 +1166,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata0 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata0
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata0
@@ -1129,17 +1183,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata0
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata0()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA0, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA0, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata1 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata1
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata1
@@ -1154,17 +1211,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata1
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata1()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA1, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA1, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata2 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata2
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata2
@@ -1179,17 +1239,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata2
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata2()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA2, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA2, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata3 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata3
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata3
@@ -1204,17 +1267,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata3
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata3()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA3, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA3, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata4 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata4
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata4
@@ -1229,17 +1295,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata4
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata4()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA4, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA4, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata5 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata5
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata5
@@ -1254,17 +1323,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata5
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata5()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA5, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA5, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata6 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata6
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata6
@@ -1279,17 +1351,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata6
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata6()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA6, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA6, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata7 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata7
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata7
@@ -1304,17 +1379,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata7
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata7()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA7, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA7, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata8 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata8
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata8
@@ -1329,17 +1407,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata8
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata8()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA8, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA8, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Metadata9 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Metadata9
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Metadata9
@@ -1354,17 +1435,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFNameRangeList attribute Metadata9
 	 *
-	 * @return JDFNameRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNameRangeList
+	 * @return JDFNameRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNameRangeList
 	 */
 	public JDFNameRangeList getMetadata9()
 	{
-		final String strAttrName = getAttribute(AttributeName.METADATA9, null, null);
-		final JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.METADATA9, null, null);
+		JDFNameRangeList nPlaceHolder = JDFNameRangeList.createNameRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Option ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Option
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Option
@@ -1387,7 +1471,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageNumber ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageNumber
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageNumber
@@ -1402,17 +1488,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageNumber
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageNumber()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGENUMBER, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGENUMBER, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageTags ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageTags
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageTags
@@ -1435,7 +1524,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PartVersion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PartVersion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PartVersion
@@ -1454,14 +1545,16 @@ public abstract class JDFAutoPart extends JDFElement
 	 */
 	public VString getPartVersion()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.PARTVERSION, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.PARTVERSION, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PlateLayout ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PlateLayout
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PlateLayout
@@ -1484,7 +1577,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightRule
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreflightRule
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1508,7 +1602,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PreviewType
@@ -1531,13 +1627,15 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreviewType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreviewType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PreviewType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPreviewType(EPreviewType) based on java.lang.enum instead
+	 * @deprecated use SetPreviewType(EPreviewType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreviewType(EnumPreviewType enumVar)
@@ -1549,7 +1647,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 * (9) get attribute PreviewType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPreviewType getEPreviewType() based on java.lang.enum instead
+	 * @deprecated use EPreviewType GetEPreviewType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPreviewType getPreviewType()
@@ -1558,7 +1656,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintCondition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintCondition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1582,7 +1681,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Product ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Product
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Product
@@ -1605,7 +1706,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductPart ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductPart
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProductPart
@@ -1628,7 +1731,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RibbonName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RibbonName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RibbonName
@@ -1651,7 +1756,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Run ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Run
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Run
@@ -1674,7 +1781,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RunIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RunIndex
@@ -1689,17 +1798,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute RunIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getRunIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.RUNINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RUNINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RunPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RunPage
@@ -1722,7 +1834,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunPageRange
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RunPageRange
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1746,7 +1859,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunSet ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RunSet
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RunSet
@@ -1769,7 +1884,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RunTags ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RunTags
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RunTags
@@ -1792,7 +1909,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SectionIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SectionIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1808,17 +1926,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute SectionIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSectionIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SECTIONINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Separation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Separation
@@ -1841,7 +1962,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetCopies ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetCopies
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetCopies
@@ -1856,17 +1979,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetCopies
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetCopies()
 	{
-		final String strAttrName = getAttribute(AttributeName.SETCOPIES, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SETCOPIES, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetDocIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetDocIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetDocIndex
@@ -1881,17 +2007,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetDocIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetDocIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SETDOCINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetRunIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetRunIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetRunIndex
@@ -1906,17 +2035,19 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetRunIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetRunIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SETRUNINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetSheetIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetSheetIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1932,17 +2063,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetSheetIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetSheetIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SETSHEETINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetTags ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetTags
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetTags
@@ -1965,7 +2099,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SetIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SetIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SetIndex
@@ -1980,17 +2116,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute SetIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSetIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.SETINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SETINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetIndex ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetIndex
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SheetIndex
@@ -2005,17 +2144,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute SheetIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getSheetIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.SHEETINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SHEETINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SheetName
@@ -2038,7 +2180,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Side ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Side
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Side
@@ -2061,13 +2205,15 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Side ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Side
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Side
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSide(ESide) based on java.lang.enum instead
+	 * @deprecated use SetSide(ESide) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSide(EnumSide enumVar)
@@ -2079,7 +2225,7 @@ public abstract class JDFAutoPart extends JDFElement
 	 * (9) get attribute Side
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESide getESide() based on java.lang.enum instead
+	 * @deprecated use ESide GetESide() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSide getSide()
@@ -2088,7 +2234,8 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SignatureName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SignatureName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -2112,7 +2259,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StationName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StationName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StationName
@@ -2135,7 +2284,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SubRun ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SubRun
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SubRun
@@ -2158,7 +2309,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TileID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TileID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TileID
@@ -2173,17 +2326,20 @@ public abstract class JDFAutoPart extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute TileID
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTileID()
 	{
-		final String strAttrName = getAttribute(AttributeName.TILEID, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TILEID, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WebName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WebName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WebName
@@ -2206,7 +2362,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WebProduct ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WebProduct
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WebProduct
@@ -2229,7 +2387,9 @@ public abstract class JDFAutoPart extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WebSetup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WebSetup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WebSetup

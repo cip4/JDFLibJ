@@ -43,12 +43,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jakarta.mail.Message;
-import jakarta.mail.MessagingException;
-import jakarta.mail.Multipart;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFDoc;
@@ -59,6 +53,12 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.URLReader;
 import org.cip4.jdflib.util.UrlUtil;
+
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG

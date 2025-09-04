@@ -86,10 +86,7 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDCTParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDCTParams : public JDFElement
  */
 
 public abstract class JDFAutoDCTParams extends JDFElement
@@ -100,13 +97,15 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCECSS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceCSs.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCECSS, 0x4444333311l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceCSs.getEnum(0),
+				null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.HSAMPLES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.VSAMPLES, 0x3333333311l, AttributeInfo.EnumAttributeType.IntegerList, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.QFACTOR, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, "1.0");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.QUANTTABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.HUFFTABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTRANSFORM, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumColorTransform.getEnum(0), "Automatic");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTRANSFORM, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumColorTransform.getEnum(0), "Automatic");
 	}
 
 	@Override
@@ -340,11 +339,15 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceCSs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceCSs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute SourceCSs
@@ -359,7 +362,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	/**
 	 * (9.2) get SourceCSs attribute SourceCSs
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<ESourceCSs> getEnumsSourceCSs()
 	{
@@ -367,13 +370,15 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceCSs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceCSs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute SourceCSs
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setESourceCSs(List<ESourceCSs>) based on java.lang.enum instead
+	 * @deprecated use SetESourceCSs(List<ESourceCSs>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceCSs(List<EnumSourceCSs> v)
@@ -385,7 +390,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * (9.2) get SourceCSs attribute SourceCSs
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<ESourceCSs> getEnumsSourceCSs() based on java.lang.enum instead
+	 * @deprecated use List<ESourceCSs > GetESourceCSs() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumSourceCSs> getSourceCSs()
@@ -394,7 +399,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HSamples ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HSamples
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HSamples
@@ -409,17 +416,20 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute HSamples
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getHSamples()
 	{
-		final String strAttrName = getAttribute(AttributeName.HSAMPLES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.HSAMPLES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute VSamples ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute VSamples
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute VSamples
@@ -434,17 +444,20 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute VSamples
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getVSamples()
 	{
-		final String strAttrName = getAttribute(AttributeName.VSAMPLES, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.VSAMPLES, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QFactor ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QFactor
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute QFactor
@@ -467,7 +480,9 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QuantTable ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QuantTable
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute QuantTable
@@ -482,17 +497,20 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute QuantTable
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getQuantTable()
 	{
-		final String strAttrName = getAttribute(AttributeName.QUANTTABLE, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.QUANTTABLE, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HuffTable ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HuffTable
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HuffTable
@@ -507,17 +525,19 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute HuffTable
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getHuffTable()
 	{
-		final String strAttrName = getAttribute(AttributeName.HUFFTABLE, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.HUFFTABLE, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorTransform
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorTransform
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -541,14 +561,15 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorTransform
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorTransform
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ColorTransform
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setColorTransform(EColorTransform) based on java.lang.enum instead
+	 * @deprecated use SetColorTransform(EColorTransform) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setColorTransform(EnumColorTransform enumVar)
@@ -560,7 +581,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
 	 * (9) get attribute ColorTransform
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EColorTransform getEColorTransform() based on java.lang.enum instead
+	 * @deprecated use EColorTransform GetEColorTransform() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumColorTransform getColorTransform()

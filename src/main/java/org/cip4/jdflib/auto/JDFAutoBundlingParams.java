@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoBundlingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBundlingParams : public JDFResource
  */
 
 public abstract class JDFAutoBundlingParams extends JDFResource
@@ -143,7 +140,7 @@ public abstract class JDFAutoBundlingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -158,11 +155,15 @@ public abstract class JDFAutoBundlingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Copies ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Copies
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Copies
@@ -185,7 +186,9 @@ public abstract class JDFAutoBundlingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LengthJDF ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LengthJDF
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LengthJDF

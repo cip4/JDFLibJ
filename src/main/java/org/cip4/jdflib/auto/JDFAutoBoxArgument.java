@@ -84,10 +84,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBoxArgument : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBoxArgument : public JDFElement
  */
 
 public abstract class JDFAutoBoxArgument extends JDFElement
@@ -99,7 +96,8 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumBox.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORMARGINS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorMargins.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.MIRRORMARGINS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumMirrorMargins.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERLAP, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
@@ -311,11 +309,15 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Box
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Box
@@ -338,13 +340,15 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Box
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Box
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBox(EBox) based on java.lang.enum instead
+	 * @deprecated use SetBox(EBox) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBox(EnumBox enumVar)
@@ -356,7 +360,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * (9) get attribute Box
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBox getEBox() based on java.lang.enum instead
+	 * @deprecated use EBox GetEBox() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBox getBox()
@@ -365,7 +369,8 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MirrorMargins
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MirrorMargins
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -389,14 +394,15 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MirrorMargins
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MirrorMargins
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MirrorMargins
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMirrorMargins(EMirrorMargins) based on java.lang.enum instead
+	 * @deprecated use SetMirrorMargins(EMirrorMargins) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMirrorMargins(EnumMirrorMargins enumVar)
@@ -408,7 +414,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	 * (9) get attribute MirrorMargins
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMirrorMargins getEMirrorMargins() based on java.lang.enum instead
+	 * @deprecated use EMirrorMargins GetEMirrorMargins() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMirrorMargins getMirrorMargins()
@@ -417,7 +423,9 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Offset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Offset
@@ -432,17 +440,20 @@ public abstract class JDFAutoBoxArgument extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute Offset
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Overlap ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Overlap
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Overlap

@@ -36,8 +36,8 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
-import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EnumOperation;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoColorSpaceConversionOp.EOperation;
+import org.cip4.jdflib.auto.JDFAutoMedia.EMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
@@ -53,7 +53,6 @@ import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.resource.JDFCuttingParams;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFColor;
@@ -70,9 +69,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFResourceExampleTest extends ExampleTest
 {
@@ -124,21 +121,6 @@ class XJDFResourceExampleTest extends ExampleTest
 	 *
 	 */
 	@Test
-	void testCutMarks()
-	{
-		final XJDFHelper xjdfHelper = new XJDFHelper("CutMarks", null, null);
-		xjdfHelper.setTypes("Cutting");
-		final SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.CUTTINGPARAMS, EnumUsage.Input);
-		final ResourceHelper rh1 = sh1.getCreatePartition(0, true);
-		final JDFCuttingParams cp = (JDFCuttingParams) rh1.getResource();
-		xjdfHelper.appendResourceSet(ElementName.LAYOUT, EnumUsage.Input).appendPartition(null, false);
-		writeTest(xjdfHelper, "structure/CutMark.xjdf");
-	}
-
-	/**
-	 *
-	 */
-	@Test
 	final void testPrintConditions()
 	{
 		final XJDFHelper h = new XJDFHelper("PrintCondition", null, null);
@@ -154,7 +136,7 @@ class XJDFResourceExampleTest extends ExampleTest
 		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
 		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
 		final JDFMedia med = (JDFMedia) rmed.getResource();
-		med.setMediaType(EnumMediaType.Paper);
+		med.setMediaType(EMediaType.Paper);
 
 		final SetHelper scomp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 		final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
@@ -174,7 +156,7 @@ class XJDFResourceExampleTest extends ExampleTest
 		final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
 		final JDFColorSpaceConversionParams csp = (JDFColorSpaceConversionParams) rcsp.getResource();
 		final JDFColorSpaceConversionOp op = csp.appendColorSpaceConversionOp();
-		op.setOperation(EnumOperation.Convert);
+		op.setOperation(EOperation.Convert);
 		final JDFFileSpec filespec = csp.appendFileSpec();
 		filespec.setURL("file://7-color-gloss.icc");
 
@@ -196,7 +178,7 @@ class XJDFResourceExampleTest extends ExampleTest
 		final SetHelper smed = h.getCreateSet(ElementName.MEDIA, null);
 		final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
 		final JDFMedia med = (JDFMedia) rmed.getResource();
-		med.setMediaType(EnumMediaType.Paper);
+		med.setMediaType(EMediaType.Paper);
 
 		final SetHelper scomp = h.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
 		final ResourceHelper rcomp = scomp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
@@ -214,7 +196,7 @@ class XJDFResourceExampleTest extends ExampleTest
 		final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), "7-Color-gloss", true);
 		final JDFColorSpaceConversionParams csp = (JDFColorSpaceConversionParams) rcsp.getResource();
 		final JDFColorSpaceConversionOp op = csp.appendColorSpaceConversionOp();
-		op.setOperation(EnumOperation.Convert);
+		op.setOperation(EOperation.Convert);
 		final JDFFileSpec filespec = csp.appendFileSpec();
 		filespec.setURL("file://7-color-gloss.icc");
 
@@ -259,7 +241,7 @@ class XJDFResourceExampleTest extends ExampleTest
 		{
 			final ResourceHelper rmed = smed.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), pc, true);
 			final JDFMedia med = (JDFMedia) rmed.getResource();
-			med.setMediaType(EnumMediaType.Paper);
+			med.setMediaType(EMediaType.Paper);
 			final String coating = StringUtil.token(pc, -1, "-");
 			rmed.setExternalID("Media-" + coating);
 			med.setAttribute(XJDFConstants.Coating, coating);
@@ -276,7 +258,7 @@ class XJDFResourceExampleTest extends ExampleTest
 			final ResourceHelper rcsp = scsp.getCreatePartition(EnumPartIDKey.PrintCondition.getName(), pc, true);
 			final JDFColorSpaceConversionParams csp = (JDFColorSpaceConversionParams) rcsp.getResource();
 			final JDFColorSpaceConversionOp op = csp.appendColorSpaceConversionOp();
-			op.setOperation(EnumOperation.Convert);
+			op.setOperation(EOperation.Convert);
 			final JDFFileSpec filespec = csp.appendFileSpec();
 			filespec.setURL("file://" + pc + ".icc");
 		}

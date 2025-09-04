@@ -82,10 +82,7 @@ import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 
 /**
- *****************************************************************************
- * class JDFAutoCustomerInfo : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCustomerInfo : public JDFResource
  */
 
 public abstract class JDFAutoCustomerInfo extends JDFResource
@@ -135,7 +132,7 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -150,11 +147,15 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BillingCode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BillingCode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BillingCode
@@ -177,7 +178,9 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CustomerID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CustomerID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CustomerID
@@ -200,7 +203,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CustomerJobName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CustomerJobName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -224,7 +228,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CustomerOrderID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CustomerOrderID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -248,7 +253,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CustomerProjectID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CustomerProjectID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -272,7 +278,9 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -298,7 +306,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	/**
 	 * (29) append element Company
 	 *
-	 * @return JDFCompany the element @ if the element already exists
+	 * @return JDFCompany the element
+	 * @ if the element already exists
 	 */
 	public JDFCompany appendCompany()
 	{
@@ -352,7 +361,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -425,7 +435,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
 	 * (27) const get element CustomerMessage
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCustomerMessage the element default is getCustomerMessage(0)
+	 * @return JDFCustomerMessage the element
+	 *         default is getCustomerMessage(0)
 	 */
 	public JDFCustomerMessage getCustomerMessage(int iSkip)
 	{

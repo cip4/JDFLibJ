@@ -157,7 +157,8 @@ class AutoClassInstantiateVisitor implements DirectoryVisitor
 		String createdClass = kElem.getClass().toString();
 		createdClass = createdClass.substring(createdClass.lastIndexOf(".") + 1);
 
-		result = elementName.equals(createdClass.substring(ElementName.JDF.length())) || (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
+		result = elementName.equals(createdClass.substring(ElementName.JDF.length()))
+				|| (elementName.equals(ElementName.COLORSUSED) && createdClass.equals("JDFSeparationList"))
 				|| (elementName.equals(ElementName.CONTENTMETADATA) && createdClass.equals("JDFContentMetadata"))
 				|| (elementName.equals(ElementName.SHAPE) && createdClass.equals("JDFShapeElement"))
 				|| (elementName.endsWith(JDFConstants.LINK) && createdClass.substring(ElementName.JDF.length()).equals(ElementName.RESOURCELINK));
@@ -166,8 +167,8 @@ class AutoClassInstantiateVisitor implements DirectoryVisitor
 		if (!result)
 		{
 			totalResult = false;
-			throw new DOMException(DOMException.NOT_FOUND_ERR, "AutoClassIntantiateVisitor: Class JDF" + elementName + " (for " + fileName + ") could not be instantiated!"
-					+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
+			throw new DOMException(DOMException.NOT_FOUND_ERR, "AutoClassIntantiateVisitor: Class JDF" + elementName + " (for " + fileName
+					+ ") could not be instantiated!" + " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
 		}
 
 	}
@@ -180,18 +181,29 @@ class AutoClassInstantiateVisitor implements DirectoryVisitor
 		String pack = c.getPackageName();
 		final String localName = kElem.getLocalName();
 		if (new StringArray(emptyClasses).contains(localName))
+		{
 			return;
+		}
 
 		while (kElem != null && !"org.cip4.jdflib.auto".equals(pack))
 		{
 			c = c.getSuperclass();
 			pack = c.getPackageName();
 			if (!c.getPackageName().startsWith("org.cip4.jdflib."))
+			{
 				return;
+			}
 		}
 		if (c.getMethods().length == c.getSuperclass().getMethods().length)
 		{
-			throw new JDFException("class with no methods! " + localName);
+			if (ElementName.PAGEASSIGNPARAMS.equals(localName))
+			{
+				log.info("known empty");
+			}
+			else
+			{
+				throw new JDFException("class with no methods! " + localName);
+			}
 		}
 
 	}

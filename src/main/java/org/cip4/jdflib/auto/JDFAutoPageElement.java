@@ -81,10 +81,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 
 /**
- *****************************************************************************
- * class JDFAutoPageElement : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPageElement : public JDFElement
  */
 
 public abstract class JDFAutoPageElement extends JDFElement
@@ -145,11 +142,14 @@ public abstract class JDFAutoPageElement extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentDataRefs
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContentDataRefs
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -169,14 +169,15 @@ public abstract class JDFAutoPageElement extends JDFElement
 	 */
 	public VString getContentDataRefs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentListIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContentListIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -200,7 +201,8 @@ public abstract class JDFAutoPageElement extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ElementPages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ElementPages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -216,17 +218,20 @@ public abstract class JDFAutoPageElement extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute ElementPages
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getElementPages()
 	{
-		final String strAttrName = getAttribute(AttributeName.ELEMENTPAGES, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ELEMENTPAGES, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContentType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ContentType
@@ -249,7 +254,9 @@ public abstract class JDFAutoPageElement extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelativeBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RelativeBox
@@ -264,12 +271,13 @@ public abstract class JDFAutoPageElement extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute RelativeBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getRelativeBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RELATIVEBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 

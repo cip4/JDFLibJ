@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoInsertingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInsertingParams : public JDFResource
  */
 
 public abstract class JDFAutoInsertingParams extends JDFResource
@@ -103,7 +100,8 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.INSERTLOCATION, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumInsertLocation.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.INSERTLOCATION, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumInsertLocation.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.METHOD, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMethod.getEnum(0), "BlowIn");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETOFFSET, 0x4444444443l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.FINISHEDPAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -169,7 +167,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -346,11 +344,14 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InsertLocation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InsertLocation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -374,14 +375,15 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InsertLocation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InsertLocation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute InsertLocation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setInsertLocation(EInsertLocation) based on java.lang.enum instead
+	 * @deprecated use SetInsertLocation(EInsertLocation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setInsertLocation(EnumInsertLocation enumVar)
@@ -393,7 +395,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * (9) get attribute InsertLocation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EInsertLocation getEInsertLocation() based on java.lang.enum instead
+	 * @deprecated use EInsertLocation GetEInsertLocation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumInsertLocation getInsertLocation()
@@ -402,7 +404,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Method
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Method
@@ -425,13 +429,15 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Method
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Method
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMethod(EMethod) based on java.lang.enum instead
+	 * @deprecated use SetMethod(EMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMethod(EnumMethod enumVar)
@@ -443,7 +449,7 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * (9) get attribute Method
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMethod getEMethod() based on java.lang.enum instead
+	 * @deprecated use EMethod GetEMethod() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMethod getMethod()
@@ -452,7 +458,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetOffset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SheetOffset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SheetOffset
@@ -467,17 +475,19 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute SheetOffset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getSheetOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SHEETOFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FinishedPage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FinishedPage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -501,7 +511,9 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -539,7 +551,8 @@ public abstract class JDFAutoInsertingParams extends JDFResource
 	 * (27) const get element GlueLine
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueLine the element default is getGlueLine(0)
+	 * @return JDFGlueLine the element
+	 *         default is getGlueLine(0)
 	 */
 	public JDFGlueLine getGlueLine(int iSkip)
 	{

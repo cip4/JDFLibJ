@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoAuthenticationQuParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAuthenticationQuParams : public JDFElement
  */
 
 public abstract class JDFAutoAuthenticationQuParams extends JDFElement
@@ -97,7 +94,8 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumAuthenticationType.getEnum(0), null);
 	}
 
 	@Override
@@ -220,11 +218,14 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AuthenticationType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AuthenticationType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -248,14 +249,15 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AuthenticationType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AuthenticationType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AuthenticationType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAuthenticationType(EAuthenticationType) based on java.lang.enum instead
+	 * @deprecated use SetAuthenticationType(EAuthenticationType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAuthenticationType(EnumAuthenticationType enumVar)
@@ -267,7 +269,7 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
 	 * (9) get attribute AuthenticationType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAuthenticationType getEAuthenticationType() based on java.lang.enum instead
+	 * @deprecated use EAuthenticationType GetEAuthenticationType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAuthenticationType getAuthenticationType()

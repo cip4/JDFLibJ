@@ -68,19 +68,25 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import org.cip4.jdflib.auto.JDFAutoCutMark.EMarkType;
+import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFSurfaceMark;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact.EnumContactType;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
@@ -93,9 +99,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFProcessExampleTest extends ExampleTest
 {
@@ -140,6 +144,55 @@ class XJDFProcessExampleTest extends ExampleTest
 		ruliLeaf.setNPage(2);
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/PDLCreationExample.xjdf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testCutMarks()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper(EnumVersion.Version_2_3, "CutMarks");
+		xjdfHelper.setTypes("Cutting");
+		final SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.CUTTINGPARAMS, EnumUsage.Input);
+		final ResourceHelper rh1 = sh1.getCreatePartition(0, true);
+		SetHelper cs = xjdfHelper.appendResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		setSnippet(cs, true);
+		ResourceHelper ch = cs.appendPartition(null, true);
+		JDFComponent c = (JDFComponent) ch.getResource();
+		c.setDimensions((JDFXYPair) new JDFXYPair(70, 67).scaleFromCM(2));
+		JDFSurfaceMark sm = c.appendSurfaceMark(EFace.Front);
+		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(15.1, 52).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(29.4, 52).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(33.6, 52).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(52.1, 52).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(66.4, 52).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.LeftHorizontalCutMark, (JDFXYPair) new JDFXYPair(15.1, 52).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.RightHorizontalCutMark, (JDFXYPair) new JDFXYPair(66.4, 52).scaleFromCM(2));
+
+		sm.appendCutMark(EMarkType.LeftHorizontalCutMark, (JDFXYPair) new JDFXYPair(15.1, 31).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.RightHorizontalCutMark, (JDFXYPair) new JDFXYPair(66.4, 31).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(15.1, 31).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(29.4, 31).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(33.6, 31).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(52.1, 31).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(66.4, 31).scaleFromCM(2));
+
+		sm.appendCutMark(EMarkType.UpperLeftCutMark, (JDFXYPair) new JDFXYPair(15.1, 26).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(29.4, 26).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(33.6, 26).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(47.9, 26).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(52.1, 26).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.UpperRightCutMark, (JDFXYPair) new JDFXYPair(66.4, 26).scaleFromCM(2));
+
+		sm.appendCutMark(EMarkType.LowerLeftCutMark, (JDFXYPair) new JDFXYPair(15.1, 5).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(29.4, 5).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(33.6, 5).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(47.9, 5).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.CrossCutMark, (JDFXYPair) new JDFXYPair(52.1, 5).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.LowerRightCutMark, (JDFXYPair) new JDFXYPair(66.4, 5).scaleFromCM(2));
+
+		writeTest(xjdfHelper, "resources/CutMark.xjdf");
 	}
 
 	/**
@@ -225,7 +278,8 @@ class XJDFProcessExampleTest extends ExampleTest
 		final JDFRepeatDesc rd = dlpp.appendRepeatDesc();
 		rd.setAttribute("ShapeDefRef", sd0.ensureID());
 		rd.setLayoutStyle("StraightNest");
-		xjdfHelper.getCreateSet(ElementName.DIELAYOUT, EnumUsage.Output).getCreatePartition(0, true).setAttribute(AttributeName.DESCRIPTIVENAME, "The die layout");
+		xjdfHelper.getCreateSet(ElementName.DIELAYOUT, EnumUsage.Output).getCreatePartition(0, true).setAttribute(AttributeName.DESCRIPTIVENAME,
+				"The die layout");
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "processes/dielayoutproduction.xjdf");
 

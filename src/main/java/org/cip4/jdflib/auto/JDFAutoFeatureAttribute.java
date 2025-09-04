@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoFeatureAttribute : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFeatureAttribute : public JDFElement
  */
 
 public abstract class JDFAutoFeatureAttribute extends JDFElement
@@ -100,7 +97,8 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x3333333311l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EDITABLE, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -225,11 +223,14 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -253,7 +254,9 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Editable ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Editable
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Editable
@@ -276,7 +279,9 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UserDisplay ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UserDisplay
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute UserDisplay
@@ -299,13 +304,15 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UserDisplay ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UserDisplay
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute UserDisplay
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUserDisplay(EUserDisplay) based on java.lang.enum instead
+	 * @deprecated use SetUserDisplay(EUserDisplay) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUserDisplay(EnumUserDisplay enumVar)
@@ -317,7 +324,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
 	 * (9) get attribute UserDisplay
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EUserDisplay getEUserDisplay() based on java.lang.enum instead
+	 * @deprecated use EUserDisplay GetEUserDisplay() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumUserDisplay getUserDisplay()

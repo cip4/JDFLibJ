@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoQueue : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQueue : public JDFElement
  */
 
 public abstract class JDFAutoQueue extends JDFElement
@@ -251,11 +248,15 @@ public abstract class JDFAutoQueue extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Status
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Status
@@ -278,13 +279,15 @@ public abstract class JDFAutoQueue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Status ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Status
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Status
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setQueueStatus(EQueueStatus) based on java.lang.enum instead
+	 * @deprecated use SetQueueStatus(EQueueStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setQueueStatus(EnumQueueStatus enumVar)
@@ -296,7 +299,7 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * (9) get attribute Status
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EQueueStatus getEQueueStatus() based on java.lang.enum instead
+	 * @deprecated use EQueueStatus GetEQueueStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumQueueStatus getQueueStatus()
@@ -305,7 +308,9 @@ public abstract class JDFAutoQueue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceID
@@ -328,7 +333,8 @@ public abstract class JDFAutoQueue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxQueueSize
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxQueueSize
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -352,7 +358,9 @@ public abstract class JDFAutoQueue extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute QueueSize
@@ -375,7 +383,9 @@ public abstract class JDFAutoQueue extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -413,7 +423,8 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * (27) const get element Device
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element default is getDevice(0)
+	 * @return JDFDevice the element
+	 *         default is getDevice(0)
 	 */
 	public JDFDevice getDevice(int iSkip)
 	{
@@ -475,7 +486,8 @@ public abstract class JDFAutoQueue extends JDFElement
 	 * (27) const get element QueueEntry
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFQueueEntry the element default is getQueueEntry(0)
+	 * @return JDFQueueEntry the element
+	 *         default is getQueueEntry(0)
 	 */
 	public JDFQueueEntry getQueueEntry(int iSkip)
 	{

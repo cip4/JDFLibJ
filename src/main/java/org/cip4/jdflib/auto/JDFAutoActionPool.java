@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFAction;
 
 /**
- *****************************************************************************
- * class JDFAutoActionPool : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoActionPool : public JDFElement
  */
 
 public abstract class JDFAutoActionPool extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoActionPool extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoActionPool extends JDFElement
 	 * (27) const get element Action
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFAction the element default is getAction(0)
+	 * @return JDFAction the element
+	 *         default is getAction(0)
 	 */
 	public JDFAction getAction(int iSkip)
 	{

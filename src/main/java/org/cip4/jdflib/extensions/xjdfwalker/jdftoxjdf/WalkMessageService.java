@@ -68,8 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
-import org.cip4.jdflib.auto.JDFAutoMessageService.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumJMFRole;
+import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
@@ -83,9 +83,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkMessageService extends WalkJDFSubElement
 {
@@ -130,9 +128,13 @@ public class WalkMessageService extends WalkJDFSubElement
 		final String query = map.get(AttributeName.QUERY);
 		final StringArray cm = new StringArray(map.remove(AttributeName.CHANNELMODE));
 		if (StringUtil.parseBoolean(pers, false))
+		{
 			cm.appendUnique(EnumChannelMode.FireAndForget.getName());
+		}
 		if (StringUtil.parseBoolean(query, false))
+		{
 			cm.appendUnique(ElementName.RESPONSE);
+		}
 		map.putNotNull(XJDFConstants.ResponseModes, cm.getString());
 
 		map.remove(AttributeName.REGISTRATION);

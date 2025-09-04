@@ -85,10 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDeviceMark;
 
 /**
- *****************************************************************************
- * class JDFAutoJobField : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoJobField : public JDFElement
  */
 
 public abstract class JDFAutoJobField extends JDFElement
@@ -161,11 +158,15 @@ public abstract class JDFAutoJobField extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobFormat ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobFormat
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobFormat
@@ -188,7 +189,9 @@ public abstract class JDFAutoJobField extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobTemplate ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobTemplate
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobTemplate
@@ -211,7 +214,8 @@ public abstract class JDFAutoJobField extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OperatorText
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OperatorText
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -235,7 +239,9 @@ public abstract class JDFAutoJobField extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShowList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShowList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShowList
@@ -254,14 +260,16 @@ public abstract class JDFAutoJobField extends JDFElement
 	 */
 	public VString getShowList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.SHOWLIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UserText ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UserText
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute UserText
@@ -284,7 +292,9 @@ public abstract class JDFAutoJobField extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -322,7 +332,8 @@ public abstract class JDFAutoJobField extends JDFElement
 	 * (27) const get element DeviceMark
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceMark the element default is getDeviceMark(0)
+	 * @return JDFDeviceMark the element
+	 *         default is getDeviceMark(0)
 	 */
 	public JDFDeviceMark getDeviceMark(int iSkip)
 	{

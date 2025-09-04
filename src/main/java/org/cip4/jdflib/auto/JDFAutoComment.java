@@ -80,10 +80,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoComment : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoComment : public JDFElement
  */
 
 public abstract class JDFAutoComment extends JDFElement
@@ -150,11 +147,15 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AgentName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AgentName
@@ -177,7 +178,8 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AgentVersion
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -201,7 +203,9 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Attribute ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Attribute
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Attribute
@@ -224,7 +228,9 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Author ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Author
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Author
@@ -247,7 +253,9 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Box
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Box
@@ -262,17 +270,20 @@ public abstract class JDFAutoComment extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute Box
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.BOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -297,7 +308,9 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Language ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Language
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Language
@@ -320,7 +333,9 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -343,7 +358,9 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Path ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Path
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Path
@@ -366,7 +383,9 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PersonalID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PersonalID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PersonalID
@@ -389,7 +408,9 @@ public abstract class JDFAutoComment extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TimeStamp ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TimeStamp
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute TimeStamp
@@ -413,8 +434,8 @@ public abstract class JDFAutoComment extends JDFElement
 	 */
 	public JDFDate getTimeStamp()
 	{
-		final String str = getAttribute(AttributeName.TIMESTAMP, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.TIMESTAMP, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

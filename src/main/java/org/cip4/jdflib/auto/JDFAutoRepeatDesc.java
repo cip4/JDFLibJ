@@ -85,10 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoRepeatDesc : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRepeatDesc : public JDFElement
  */
 
 public abstract class JDFAutoRepeatDesc extends JDFElement
@@ -99,7 +96,8 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDROTATE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAllowedRotate.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDROTATE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumAllowedRotate.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.GUTTERX, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.GUTTERX2, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.GUTTERY, 0x3333331111l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -233,11 +231,14 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedRotate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedRotate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -261,14 +262,15 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedRotate
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedRotate
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AllowedRotate
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAllowedRotate(EAllowedRotate) based on java.lang.enum instead
+	 * @deprecated use SetAllowedRotate(EAllowedRotate) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAllowedRotate(EnumAllowedRotate enumVar)
@@ -280,7 +282,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 * (9) get attribute AllowedRotate
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAllowedRotate getEAllowedRotate() based on java.lang.enum instead
+	 * @deprecated use EAllowedRotate GetEAllowedRotate() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAllowedRotate getAllowedRotate()
@@ -289,7 +291,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GutterX ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GutterX
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GutterX
@@ -312,7 +316,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GutterX2 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GutterX2
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GutterX2
@@ -335,7 +341,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GutterY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GutterY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GutterY
@@ -358,7 +366,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GutterY2 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GutterY2
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GutterY2
@@ -381,7 +391,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LayoutStyle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LayoutStyle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LayoutStyle
@@ -400,14 +412,15 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	 */
 	public VString getLayoutStyle()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.LAYOUTSTYLE, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.LAYOUTSTYLE, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrderQuantity
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OrderQuantity
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -431,7 +444,9 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UseBleed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UseBleed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute UseBleed

@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFColorantZoneDetails;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoTrappingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTrappingParams : public JDFResource
  */
 
 public abstract class JDFAutoTrappingParams extends JDFResource
@@ -116,7 +113,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.IMAGEMASKTRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.IMAGETOIMAGETRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[12] = new AtrInfoTable(AttributeName.IMAGETOOBJECTTRAPPING, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETRAPPLACEMENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumImageTrapPlacement.getEnum(0), null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.IMAGETRAPPLACEMENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumImageTrapPlacement.getEnum(0), null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.IMAGETRAPWIDTH, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.IMAGETRAPWIDTHY, 0x3333333311l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[16] = new AtrInfoTable(AttributeName.SLIDINGTRAPLIMIT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -186,7 +184,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -282,11 +280,14 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinimumBlackWidth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinimumBlackWidth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -310,7 +311,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapEndStyle
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrapEndStyle
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -334,7 +336,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapJoinStyle
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrapJoinStyle
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -358,7 +361,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlackColorLimit
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlackColorLimit
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -382,7 +386,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlackDensityLimit
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlackDensityLimit
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -406,7 +411,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlackWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlackWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BlackWidth
@@ -429,7 +436,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Enabled ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Enabled
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Enabled
@@ -452,7 +461,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HalftoneName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HalftoneName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -476,7 +486,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageInternalTrapping
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageInternalTrapping
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -500,7 +511,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageResolution
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageResolution
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -524,7 +536,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageMaskTrapping
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageMaskTrapping
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -548,7 +561,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageToImageTrapping
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageToImageTrapping
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -572,7 +586,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageToObjectTrapping
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageToObjectTrapping
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -596,7 +611,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapPlacement
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageTrapPlacement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -620,14 +636,15 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapPlacement
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageTrapPlacement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ImageTrapPlacement
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setImageTrapPlacement(EImageTrapPlacement) based on java.lang.enum instead
+	 * @deprecated use SetImageTrapPlacement(EImageTrapPlacement) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setImageTrapPlacement(EnumImageTrapPlacement enumVar)
@@ -639,7 +656,7 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * (9) get attribute ImageTrapPlacement
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EImageTrapPlacement getEImageTrapPlacement() based on java.lang.enum instead
+	 * @deprecated use EImageTrapPlacement GetEImageTrapPlacement() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumImageTrapPlacement getImageTrapPlacement()
@@ -648,7 +665,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapWidth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageTrapWidth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -672,7 +690,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageTrapWidthY
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageTrapWidthY
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -696,7 +715,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SlidingTrapLimit
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SlidingTrapLimit
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -720,7 +740,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StepLimit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StepLimit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StepLimit
@@ -743,7 +765,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapColorScaling
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrapColorScaling
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -767,7 +790,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrapWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrapWidth
@@ -790,7 +815,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapWidthY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrapWidthY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrapWidthY
@@ -813,7 +840,9 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -851,7 +880,8 @@ public abstract class JDFAutoTrappingParams extends JDFResource
 	 * (27) const get element ColorantZoneDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorantZoneDetails the element default is getColorantZoneDetails(0)
+	 * @return JDFColorantZoneDetails the element
+	 *         default is getColorantZoneDetails(0)
 	 */
 	public JDFColorantZoneDetails getColorantZoneDetails(int iSkip)
 	{

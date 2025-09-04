@@ -84,10 +84,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoFitPolicy : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFitPolicy : public JDFElement
  */
 
 public abstract class JDFAutoFitPolicy extends JDFElement
@@ -99,10 +96,13 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CLIPOFFSET, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.GUTTERPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumGutterPolicy.getEnum(0), "Fixed");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.GUTTERPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumGutterPolicy.getEnum(0),
+				"Fixed");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.MINGUTTER, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATEPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumRotatePolicy.getEnum(0),
+				null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -389,11 +389,15 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ClipOffset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ClipOffset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ClipOffset
@@ -408,17 +412,19 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute ClipOffset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getClipOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.CLIPOFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CLIPOFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GutterPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GutterPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -442,14 +448,15 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GutterPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GutterPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute GutterPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setGutterPolicy(EGutterPolicy) based on java.lang.enum instead
+	 * @deprecated use SetGutterPolicy(EGutterPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGutterPolicy(EnumGutterPolicy enumVar)
@@ -461,7 +468,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (9) get attribute GutterPolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EGutterPolicy getEGutterPolicy() based on java.lang.enum instead
+	 * @deprecated use EGutterPolicy GetEGutterPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumGutterPolicy getGutterPolicy()
@@ -470,7 +477,9 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinGutter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinGutter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MinGutter
@@ -485,17 +494,19 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute MinGutter
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getMinGutter()
 	{
-		final String strAttrName = getAttribute(AttributeName.MINGUTTER, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MINGUTTER, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RotatePolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RotatePolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -519,14 +530,15 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RotatePolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RotatePolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute RotatePolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setRotatePolicy(ERotatePolicy) based on java.lang.enum instead
+	 * @deprecated use SetRotatePolicy(ERotatePolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setRotatePolicy(EnumRotatePolicy enumVar)
@@ -538,7 +550,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (9) get attribute RotatePolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ERotatePolicy getERotatePolicy() based on java.lang.enum instead
+	 * @deprecated use ERotatePolicy GetERotatePolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumRotatePolicy getRotatePolicy()
@@ -547,7 +559,9 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SizePolicy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SizePolicy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SizePolicy
@@ -570,13 +584,15 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SizePolicy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SizePolicy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SizePolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSizePolicy(ESizePolicy) based on java.lang.enum instead
+	 * @deprecated use SetSizePolicy(ESizePolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSizePolicy(EnumSizePolicy enumVar)
@@ -588,7 +604,7 @@ public abstract class JDFAutoFitPolicy extends JDFElement
 	 * (9) get attribute SizePolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESizePolicy getESizePolicy() based on java.lang.enum instead
+	 * @deprecated use ESizePolicy GetESizePolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSizePolicy getSizePolicy()

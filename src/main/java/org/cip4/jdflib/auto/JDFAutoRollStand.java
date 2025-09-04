@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 
 /**
- *****************************************************************************
- * class JDFAutoRollStand : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoRollStand : public JDFResource
  */
 
 public abstract class JDFAutoRollStand extends JDFResource
@@ -165,7 +162,7 @@ public abstract class JDFAutoRollStand extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Handling);
 		return bRet;
 	}
@@ -180,11 +177,15 @@ public abstract class JDFAutoRollStand extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxDiameter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxDiameter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxDiameter
@@ -207,7 +208,9 @@ public abstract class JDFAutoRollStand extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MaxWidth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MaxWidth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MaxWidth
@@ -230,7 +233,9 @@ public abstract class JDFAutoRollStand extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -256,7 +261,8 @@ public abstract class JDFAutoRollStand extends JDFResource
 	/**
 	 * (29) append element Device
 	 *
-	 * @return JDFDevice the element @ if the element already exists
+	 * @return JDFDevice the element
+	 * @ if the element already exists
 	 */
 	public JDFDevice appendDevice()
 	{
@@ -310,7 +316,8 @@ public abstract class JDFAutoRollStand extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -384,7 +391,8 @@ public abstract class JDFAutoRollStand extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

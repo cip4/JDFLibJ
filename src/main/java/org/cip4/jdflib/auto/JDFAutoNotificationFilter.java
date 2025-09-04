@@ -89,10 +89,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
 
 /**
- *****************************************************************************
- * class JDFAutoNotificationFilter : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNotificationFilter : public JDFElement
  */
 
 public abstract class JDFAutoNotificationFilter extends JDFElement
@@ -168,11 +165,15 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeviceID
@@ -195,7 +196,9 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -218,7 +221,9 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -241,7 +246,8 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MilestoneTypes
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MilestoneTypes
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -261,14 +267,15 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 */
 	public VString getMilestoneTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.MILESTONETYPES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.MILESTONETYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -292,7 +299,9 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SignalTypes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SignalTypes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SignalTypes
@@ -311,14 +320,16 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 */
 	public VString getSignalTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.SIGNALTYPES, null, "Notification");
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.SIGNALTYPES, null, "Notification");
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Types ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Types
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Types
@@ -337,14 +348,16 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Classes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute Classes
@@ -359,7 +372,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	/**
 	 * (9.2) get Classes attribute Classes
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EClass> getEnumsClasses()
 	{
@@ -367,13 +380,15 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Classes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Classes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute Classes
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEClasses(List<EClass>) based on java.lang.enum instead
+	 * @deprecated use SetEClasses(List<EClass>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setClasses(List<EnumClass> v)
@@ -385,7 +400,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * (9.2) get Classes attribute Classes
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EClass> getEnumsClasses() based on java.lang.enum instead
+	 * @deprecated use List<EClass > GetEClasses() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumClass> getClasses()
@@ -394,7 +409,9 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -432,7 +449,8 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

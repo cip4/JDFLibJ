@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 
 /**
- *****************************************************************************
- * class JDFAutoReturnQueueEntryParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoReturnQueueEntryParams : public JDFElement
  */
 
 public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
@@ -143,11 +140,15 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Aborted ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Aborted
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Aborted
@@ -166,14 +167,16 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 */
 	public VString getAborted()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ABORTED, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ABORTED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Completed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Completed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Completed
@@ -192,14 +195,16 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	 */
 	public VString getCompleted()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.COMPLETED, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.COMPLETED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Priority ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Priority
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Priority
@@ -222,7 +227,8 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -246,7 +252,9 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL

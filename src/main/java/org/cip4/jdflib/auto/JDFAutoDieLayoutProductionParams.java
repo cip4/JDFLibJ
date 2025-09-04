@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EAnchor;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -87,13 +85,9 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFConvertingConfig;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDieLayoutProductionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDieLayoutProductionParams : public JDFResource
  */
 
 public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
@@ -105,7 +99,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ESTIMATE, 0x3333331111l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
 	}
 
 	@Override
@@ -170,7 +164,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -184,103 +178,16 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/**
-	 * Enumeration strings for Position
-	 */
-
-	public enum EPosition
-	{
-		TopLeft, TopCenter, TopRight, CenterLeft, Center, CenterRight, BottomLeft, BottomCenter, BottomRight;
-
-		public static EPosition getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPosition.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Position
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPosition extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPosition(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPosition getEnum(String enumName)
-		{
-			return (EnumPosition) getEnum(EnumPosition.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPosition getEnum(int enumValue)
-		{
-			return (EnumPosition) getEnum(EnumPosition.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPosition.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPosition.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPosition.class);
-		}
-
-		/**  */
-		public static final EnumPosition TopLeft = new EnumPosition("TopLeft");
-		/**  */
-		public static final EnumPosition TopCenter = new EnumPosition("TopCenter");
-		/**  */
-		public static final EnumPosition TopRight = new EnumPosition("TopRight");
-		/**  */
-		public static final EnumPosition CenterLeft = new EnumPosition("CenterLeft");
-		/**  */
-		public static final EnumPosition Center = new EnumPosition("Center");
-		/**  */
-		public static final EnumPosition CenterRight = new EnumPosition("CenterRight");
-		/**  */
-		public static final EnumPosition BottomLeft = new EnumPosition("BottomLeft");
-		/**  */
-		public static final EnumPosition BottomCenter = new EnumPosition("BottomCenter");
-		/**  */
-		public static final EnumPosition BottomRight = new EnumPosition("BottomRight");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Estimate ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Estimate
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Estimate
@@ -303,14 +210,16 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPosition(EPosition enumVar)
+	public void setPosition(EAnchor enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -320,22 +229,24 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPosition getEPosition()
+	public EAnchor getEPosition()
 	{
-		return EPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EAnchor.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPosition(EPosition) based on java.lang.enum instead
+	 * @deprecated use SetPosition(EAnchor) based on java.lang.enum instead
 	 */
 	@Deprecated
-	public void setPosition(EnumPosition enumVar)
+	public void setPosition(EnumAnchor enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -344,16 +255,18 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * (9) get attribute Position
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPosition getEPosition() based on java.lang.enum instead
+	 * @deprecated use EAnchor GetEPosition() based on java.lang.enum instead
 	 */
 	@Deprecated
-	public EnumPosition getPosition()
+	public EnumAnchor getPosition()
 	{
-		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EnumAnchor.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -391,7 +304,8 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * (27) const get element ConvertingConfig
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFConvertingConfig the element default is getConvertingConfig(0)
+	 * @return JDFConvertingConfig the element
+	 *         default is getConvertingConfig(0)
 	 */
 	public JDFConvertingConfig getConvertingConfig(int iSkip)
 	{
@@ -453,7 +367,8 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * (27) const get element RepeatDesc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRepeatDesc the element default is getRepeatDesc(0)
+	 * @return JDFRepeatDesc the element
+	 *         default is getRepeatDesc(0)
 	 */
 	public JDFRepeatDesc getRepeatDesc(int iSkip)
 	{
@@ -517,7 +432,8 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{

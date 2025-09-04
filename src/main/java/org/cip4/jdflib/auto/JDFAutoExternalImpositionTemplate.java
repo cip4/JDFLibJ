@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoExternalImpositionTemplate : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoExternalImpositionTemplate : public JDFResource
  */
 
 public abstract class JDFAutoExternalImpositionTemplate extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoExternalImpositionTemplate extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,7 +157,9 @@ public abstract class JDFAutoExternalImpositionTemplate extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +197,8 @@ public abstract class JDFAutoExternalImpositionTemplate extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{

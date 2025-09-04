@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightAnalysis : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightAnalysis : public JDFResource
  */
 
 public abstract class JDFAutoPreflightAnalysis extends JDFResource
@@ -148,7 +145,7 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -163,7 +160,9 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -189,7 +188,8 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	/**
 	 * (29) append element ColorsResultsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendColorsResultsPool()
 	{
@@ -219,7 +219,8 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	/**
 	 * (29) append element DocumentResultsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendDocumentResultsPool()
 	{
@@ -249,7 +250,8 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	/**
 	 * (29) append element FontsResultsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendFontsResultsPool()
 	{
@@ -279,7 +281,8 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	/**
 	 * (29) append element FileTypeResultsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendFileTypeResultsPool()
 	{
@@ -309,7 +312,8 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	/**
 	 * (29) append element ImagesResultsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendImagesResultsPool()
 	{
@@ -339,7 +343,8 @@ public abstract class JDFAutoPreflightAnalysis extends JDFResource
 	/**
 	 * (29) append element PagesResultsPool
 	 *
-	 * @return JDFElement the element @ if the element already exists
+	 * @return JDFElement the element
+	 * @ if the element already exists
 	 */
 	public JDFElement appendPagesResultsPool()
 	{

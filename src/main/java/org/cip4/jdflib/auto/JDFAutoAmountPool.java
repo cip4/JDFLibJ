@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.pool.JDFPool;
 
 /**
- *****************************************************************************
- * class JDFAutoAmountPool : public JDFPool
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAmountPool : public JDFPool
  */
 
 public abstract class JDFAutoAmountPool extends JDFPool
@@ -140,7 +137,9 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoAmountPool extends JDFPool
 	 * (27) const get element PartAmount
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPartAmount the element default is getPartAmount(0)
+	 * @return JDFPartAmount the element
+	 *         default is getPartAmount(0)
 	 */
 	public JDFPartAmount getPartAmount(int iSkip)
 	{

@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFPreflightItem;
 
 /**
- *****************************************************************************
- * class JDFAutoProofingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoProofingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoProofingIntent extends JDFIntentResource
@@ -142,7 +139,9 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -180,7 +179,8 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * (27) const get element ProofItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFProofItem the element default is getProofItem(0)
+	 * @return JDFProofItem the element
+	 *         default is getProofItem(0)
 	 */
 	public JDFProofItem getProofItem(int iSkip)
 	{
@@ -242,7 +242,8 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
 	 * (27) const get element PreflightItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPreflightItem the element default is getPreflightItem(0)
+	 * @return JDFPreflightItem the element
+	 *         default is getPreflightItem(0)
 	 */
 	public JDFPreflightItem getPreflightItem(int iSkip)
 	{

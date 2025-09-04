@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 
 /**
- *****************************************************************************
- * class JDFAutoInk : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInk : public JDFResource
  */
 
 public abstract class JDFAutoInk extends JDFResource
@@ -169,7 +166,7 @@ public abstract class JDFAutoInk extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -184,11 +181,15 @@ public abstract class JDFAutoInk extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ColorName
@@ -211,7 +212,9 @@ public abstract class JDFAutoInk extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Family ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Family
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Family
@@ -234,7 +237,9 @@ public abstract class JDFAutoInk extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InkName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InkName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute InkName
@@ -257,7 +262,9 @@ public abstract class JDFAutoInk extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpecialInk ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpecialInk
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SpecialInk
@@ -280,7 +287,8 @@ public abstract class JDFAutoInk extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpecificYield
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpecificYield
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -304,7 +312,9 @@ public abstract class JDFAutoInk extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -342,7 +352,8 @@ public abstract class JDFAutoInk extends JDFResource
 	 * (27) const get element Certification
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCertification the element default is getCertification(0)
+	 * @return JDFCertification the element
+	 *         default is getCertification(0)
 	 */
 	public JDFCertification getCertification(int iSkip)
 	{
@@ -406,7 +417,8 @@ public abstract class JDFAutoInk extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -480,7 +492,8 @@ public abstract class JDFAutoInk extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

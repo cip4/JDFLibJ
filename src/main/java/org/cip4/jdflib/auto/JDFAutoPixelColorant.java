@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoPixelColorant : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPixelColorant : public JDFElement
  */
 
 public abstract class JDFAutoPixelColorant extends JDFElement
@@ -139,11 +136,14 @@ public abstract class JDFAutoPixelColorant extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorantName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorantName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -167,7 +167,9 @@ public abstract class JDFAutoPixelColorant extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PixelDepth ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PixelDepth
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PixelDepth

@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoSeparationList : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSeparationList : public JDFElement
  */
 
 public abstract class JDFAutoSeparationList extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoSeparationList extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoSeparationList extends JDFElement
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

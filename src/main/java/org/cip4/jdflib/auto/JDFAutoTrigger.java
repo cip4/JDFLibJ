@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFRemoved;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoTrigger : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTrigger : public JDFResource
  */
 
 public abstract class JDFAutoTrigger extends JDFResource
@@ -167,7 +164,7 @@ public abstract class JDFAutoTrigger extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -182,11 +179,15 @@ public abstract class JDFAutoTrigger extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RepeatStep ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RepeatStep
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RepeatStep
@@ -209,7 +210,9 @@ public abstract class JDFAutoTrigger extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RepeatTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RepeatTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RepeatTime
@@ -232,7 +235,9 @@ public abstract class JDFAutoTrigger extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -270,7 +275,8 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * (27) const get element ChangedAttribute
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFChangedAttribute the element default is getChangedAttribute(0)
+	 * @return JDFChangedAttribute the element
+	 *         default is getChangedAttribute(0)
 	 */
 	public JDFChangedAttribute getChangedAttribute(int iSkip)
 	{
@@ -320,7 +326,8 @@ public abstract class JDFAutoTrigger extends JDFResource
 	/**
 	 * (29) append element Added
 	 *
-	 * @return JDFAdded the element @ if the element already exists
+	 * @return JDFAdded the element
+	 * @ if the element already exists
 	 */
 	public JDFAdded appendAdded()
 	{
@@ -362,7 +369,8 @@ public abstract class JDFAutoTrigger extends JDFResource
 	 * (27) const get element ChangedPath
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFChangedPath the element default is getChangedPath(0)
+	 * @return JDFChangedPath the element
+	 *         default is getChangedPath(0)
 	 */
 	public JDFChangedPath getChangedPath(int iSkip)
 	{
@@ -412,7 +420,8 @@ public abstract class JDFAutoTrigger extends JDFResource
 	/**
 	 * (29) append element Removed
 	 *
-	 * @return JDFRemoved the element @ if the element already exists
+	 * @return JDFRemoved the element
+	 * @ if the element already exists
 	 */
 	public JDFRemoved appendRemoved()
 	{

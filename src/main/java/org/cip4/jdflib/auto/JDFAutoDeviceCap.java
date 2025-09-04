@@ -99,10 +99,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDeviceCap : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeviceCap : public JDFElement
  */
 
 public abstract class JDFAutoDeviceCap extends JDFElement
@@ -113,8 +110,10 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDMETHOD, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations, EnumCombinedMethod.getEnum(0), "None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXECUTIONPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumExecutionPolicy.getEnum(0), "AllFound");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.COMBINEDMETHOD, 0x3333333331l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumCombinedMethod.getEnum(0), "None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXECUTIONPOLICY, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumExecutionPolicy.getEnum(0), "AllFound");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.GENERICATTRIBUTES, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.LANG, 0x3333333311l, AttributeInfo.EnumAttributeType.languages, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OPTIONALCOMBINEDTYPES, 0x4444444431l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
@@ -428,11 +427,14 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CombinedMethod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CombinedMethod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -448,7 +450,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (9.2) get CombinedMethod attribute CombinedMethod
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<ECombinedMethod> getEnumsCombinedMethod()
 	{
@@ -456,14 +458,15 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CombinedMethod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CombinedMethod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute CombinedMethod
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setECombinedMethod(List<ECombinedMethod>) based on java.lang.enum instead
+	 * @deprecated use SetECombinedMethod(List<ECombinedMethod>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCombinedMethod(List<EnumCombinedMethod> v)
@@ -475,7 +478,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (9.2) get CombinedMethod attribute CombinedMethod
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<ECombinedMethod> getEnumsCombinedMethod() based on java.lang.enum instead
+	 * @deprecated use List<ECombinedMethod > GetECombinedMethod() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumCombinedMethod> getCombinedMethod()
@@ -484,7 +487,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ExecutionPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ExecutionPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -508,14 +512,15 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ExecutionPolicy
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ExecutionPolicy
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ExecutionPolicy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setExecutionPolicy(EExecutionPolicy) based on java.lang.enum instead
+	 * @deprecated use SetExecutionPolicy(EExecutionPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setExecutionPolicy(EnumExecutionPolicy enumVar)
@@ -527,7 +532,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (9) get attribute ExecutionPolicy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EExecutionPolicy getEExecutionPolicy() based on java.lang.enum instead
+	 * @deprecated use EExecutionPolicy GetEExecutionPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumExecutionPolicy getExecutionPolicy()
@@ -536,7 +541,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GenericAttributes
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GenericAttributes
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -556,14 +562,16 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public VString getGenericAttributes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.GENERICATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Lang ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Lang
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Lang
@@ -582,14 +590,15 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public VString getLang()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.LANG, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.LANG, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OptionalCombinedTypes
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OptionalCombinedTypes
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -609,14 +618,16 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public VString getOptionalCombinedTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.OPTIONALCOMBINEDTYPES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.OPTIONALCOMBINEDTYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Type
@@ -639,7 +650,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TypeExpression
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TypeExpression
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -663,7 +675,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TypeOrder ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TypeOrder
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TypeOrder
@@ -686,13 +700,15 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TypeOrder ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TypeOrder
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute TypeOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTypeOrder(ETypeOrder) based on java.lang.enum instead
+	 * @deprecated use SetTypeOrder(ETypeOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTypeOrder(EnumTypeOrder enumVar)
@@ -704,7 +720,7 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (9) get attribute TypeOrder
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETypeOrder getETypeOrder() based on java.lang.enum instead
+	 * @deprecated use ETypeOrder GetETypeOrder() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTypeOrder getTypeOrder()
@@ -713,7 +729,9 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Types ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Types
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Types
@@ -732,14 +750,16 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -765,7 +785,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (29) append element ActionPool
 	 *
-	 * @return JDFActionPool the element @ if the element already exists
+	 * @return JDFActionPool the element
+	 * @ if the element already exists
 	 */
 	public JDFActionPool appendActionPool()
 	{
@@ -795,7 +816,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (29) append element DevCapPool
 	 *
-	 * @return JDFDevCapPool the element @ if the element already exists
+	 * @return JDFDevCapPool the element
+	 * @ if the element already exists
 	 */
 	public JDFDevCapPool appendDevCapPool()
 	{
@@ -837,7 +859,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (27) const get element DevCaps
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevCaps the element default is getDevCaps(0)
+	 * @return JDFDevCaps the element
+	 *         default is getDevCaps(0)
 	 */
 	public JDFDevCaps getDevCaps(int iSkip)
 	{
@@ -887,7 +910,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (29) append element DisplayGroupPool
 	 *
-	 * @return JDFDisplayGroupPool the element @ if the element already exists
+	 * @return JDFDisplayGroupPool the element
+	 * @ if the element already exists
 	 */
 	public JDFDisplayGroupPool appendDisplayGroupPool()
 	{
@@ -917,7 +941,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (29) append element FeaturePool
 	 *
-	 * @return JDFFeaturePool the element @ if the element already exists
+	 * @return JDFFeaturePool the element
+	 * @ if the element already exists
 	 */
 	public JDFFeaturePool appendFeaturePool()
 	{
@@ -947,7 +972,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (29) append element MacroPool
 	 *
-	 * @return JDFMacroPool the element @ if the element already exists
+	 * @return JDFMacroPool the element
+	 * @ if the element already exists
 	 */
 	public JDFMacroPool appendMacroPool()
 	{
@@ -977,7 +1003,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (29) append element ModulePool
 	 *
-	 * @return JDFModulePool the element @ if the element already exists
+	 * @return JDFModulePool the element
+	 * @ if the element already exists
 	 */
 	public JDFModulePool appendModulePool()
 	{
@@ -1019,7 +1046,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	 * (27) const get element Performance
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPerformance the element default is getPerformance(0)
+	 * @return JDFPerformance the element
+	 *         default is getPerformance(0)
 	 */
 	public JDFPerformance getPerformance(int iSkip)
 	{
@@ -1069,7 +1097,8 @@ public abstract class JDFAutoDeviceCap extends JDFElement
 	/**
 	 * (29) append element TestPool
 	 *
-	 * @return JDFTestPool the element @ if the element already exists
+	 * @return JDFTestPool the element
+	 * @ if the element already exists
 	 */
 	public JDFTestPool appendTestPool()
 	{

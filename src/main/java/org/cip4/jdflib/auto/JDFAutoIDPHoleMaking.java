@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPHoleMaking : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPHoleMaking : public JDFElement
  */
 
 public abstract class JDFAutoIDPHoleMaking extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
 	 * (27) const get element HoleMakingParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFHoleMakingParams the element default is getHoleMakingParams(0)
+	 * @return JDFHoleMakingParams the element
+	 *         default is getHoleMakingParams(0)
 	 */
 	public JDFHoleMakingParams getHoleMakingParams(int iSkip)
 	{

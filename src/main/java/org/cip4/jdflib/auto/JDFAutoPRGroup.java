@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.JDFPRGroupOccurrence;
 import org.cip4.jdflib.resource.process.JDFPROccurrence;
 
 /**
- *****************************************************************************
- * class JDFAutoPRGroup : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPRGroup : public JDFElement
  */
 
 public abstract class JDFAutoPRGroup extends JDFElement
@@ -159,11 +156,15 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Occurrences ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Occurrences
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Occurrences
@@ -186,7 +187,9 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageSet ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageSet
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageSet
@@ -201,17 +204,20 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageSet
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageSet()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGESET, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGESET, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -249,7 +255,8 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * (27) const get element PRGroupOccurrence
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPRGroupOccurrence the element default is getPRGroupOccurrence(0)
+	 * @return JDFPRGroupOccurrence the element
+	 *         default is getPRGroupOccurrence(0)
 	 */
 	public JDFPRGroupOccurrence getPRGroupOccurrence(int iSkip)
 	{
@@ -311,7 +318,8 @@ public abstract class JDFAutoPRGroup extends JDFElement
 	 * (27) const get element PROccurrence
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPROccurrence the element default is getPROccurrence(0)
+	 * @return JDFPROccurrence the element
+	 *         default is getPROccurrence(0)
 	 */
 	public JDFPROccurrence getPROccurrence(int iSkip)
 	{

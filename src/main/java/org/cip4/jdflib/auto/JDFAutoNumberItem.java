@@ -86,10 +86,7 @@ import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoNumberItem : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNumberItem : public JDFElement
  */
 
 public abstract class JDFAutoNumberItem extends JDFElement
@@ -164,11 +161,15 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StartValue
@@ -191,7 +192,9 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Step ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Step
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Step
@@ -214,7 +217,9 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -240,7 +245,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	/**
 	 * (29) append element ColorName
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendColorName()
 	{
@@ -282,7 +288,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	 * (27) const get element ColorNameDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStringSpan the element default is getColorNameDetails(0)
+	 * @return JDFStringSpan the element
+	 *         default is getColorNameDetails(0)
 	 */
 	public JDFStringSpan getColorNameDetails(int iSkip)
 	{
@@ -332,7 +339,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	/**
 	 * (29) append element XPosition
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendXPosition()
 	{
@@ -362,7 +370,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	/**
 	 * (29) append element YPosition
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendYPosition()
 	{
@@ -392,7 +401,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	/**
 	 * (29) append element Orientation
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendOrientation()
 	{
@@ -422,7 +432,8 @@ public abstract class JDFAutoNumberItem extends JDFElement
 	/**
 	 * (29) append element SeparationSpec
 	 *
-	 * @return JDFSeparationSpec the element @ if the element already exists
+	 * @return JDFSeparationSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFSeparationSpec appendSeparationSpec()
 	{

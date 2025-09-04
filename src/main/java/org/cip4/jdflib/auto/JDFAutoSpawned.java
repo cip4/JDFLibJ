@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoSpawned : public JDFAudit
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSpawned : public JDFAudit
  */
 
 public abstract class JDFAutoSpawned extends JDFAudit
@@ -166,11 +163,15 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Independent ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Independent
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Independent
@@ -193,7 +194,9 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute jRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute jRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute jRef
@@ -216,7 +219,8 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute jRefDestination
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute jRefDestination
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -240,7 +244,9 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NewSpawnID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NewSpawnID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NewSpawnID
@@ -263,7 +269,8 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute rRefsROCopied
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute rRefsROCopied
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -283,14 +290,15 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 */
 	public VString getrRefsROCopied()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.RREFSROCOPIED, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.RREFSROCOPIED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute rRefsRWCopied
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute rRefsRWCopied
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -310,14 +318,16 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 */
 	public VString getrRefsRWCopied()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.RREFSRWCOPIED, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.RREFSRWCOPIED, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute URL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute URL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute URL
@@ -340,7 +350,9 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -379,7 +391,8 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)
@@ -444,7 +457,8 @@ public abstract class JDFAutoSpawned extends JDFAudit
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

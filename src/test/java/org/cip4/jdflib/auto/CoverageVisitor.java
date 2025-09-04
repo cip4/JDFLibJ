@@ -74,6 +74,8 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -91,12 +93,14 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm;
 import org.cip4.jdflib.span.JDFSpanBase;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 
 class CoverageVisitor implements DirectoryVisitor
 {
 	final Set<String> skip;
+	final HashMap<String, String> enums;
 
 	public CoverageVisitor()
 	{
@@ -106,7 +110,8 @@ class CoverageVisitor implements DirectoryVisitor
 						+ "JDFAbortQueueEntryParams.appendQueueFilter JDFNotification JDFNumberItem JDFPartAmount");
 		final StringArray skip1 = new StringArray(
 				"getTest getActionPool getTestPool getTestTerm getUpdatedPreviousAudit getBindingType getCreateHoleType getHoleType appendHoleType"
-						+ " getMethod getSurplusHandling getServiceLevel getReturnMethod getTransfer JDFDevCaps" + " getParentPool getModulePool getCreateParentPool"
+						+ " getMethod getSurplusHandling getServiceLevel getReturnMethod getTransfer JDFDevCaps"
+						+ " getParentPool getModulePool getCreateParentPool"
 						+ " JDFIDPrintingParams JDFLayout.getCreateSignature JDFLayout.getCreateSurface JDFLayout.getCreateFrontSurface JDFLayout.getCreateBackSurface JDFLayout.getCreateSheet"
 						+ " getCreateModulePool getCreateDevCapPool getDevCapPool getParentPool getDevCapVector getDevCap getMinOccurs getMaxOccurs JDFNumberItem JDFPartAmount JDFPartStatus JDFStatusPool JDFResourceLink");
 		;
@@ -116,6 +121,7 @@ class CoverageVisitor implements DirectoryVisitor
 		skip.addAll(skip0);
 		skip.addAll(skip1);
 		skip.addAll(skip2);
+		enums = new HashMap<>();
 	}
 
 	boolean totalResult = true;
@@ -182,11 +188,20 @@ class CoverageVisitor implements DirectoryVisitor
 
 	void cover(final KElement kElem) throws Exception
 	{
-		coverAppenders(kElem);
-		coverSetters(kElem);
-		coverrefs(kElem);
-		kElem.removeAttribute(AttributeName.RREF);
-		coverGetters(kElem);
+		try
+		{
+			coverAppenders(kElem);
+			coverSetters(kElem);
+			coverrefs(kElem);
+			coverEnums(kElem);
+			kElem.removeAttribute(AttributeName.RREF);
+			coverGetters(kElem);
+		}
+		catch (Throwable x)
+		{
+			log.error("Snafu for " + kElem.getLocalName(), x);
+			throw x;
+		}
 	}
 
 	private void coverGetters(final KElement kElem) throws Exception
@@ -215,8 +230,8 @@ class CoverageVisitor implements DirectoryVisitor
 				catch (final InvocationTargetException i)
 				{
 					final Throwable t = i.getTargetException();
-					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-							|| skip.contains(c.getSimpleName()))
+					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName())
+							|| skip.contains(ab) || skip.contains(c.getSimpleName()))
 					{
 						// skip devcaps
 					}
@@ -238,6 +253,67 @@ class CoverageVisitor implements DirectoryVisitor
 		}
 	}
 
+	private void coverEnums(final KElement kElem) throws Exception
+	{
+		final Class<? extends KElement> c = kElem.getClass();
+		HashSet<String> ignoreclasses = new HashSet<String>();
+		ignoreclasses.add(ElementName.SIGNATURE);
+		ignoreclasses.add(ElementName.SHEET);
+		if (ignoreclasses.contains(c.getSimpleName().substring(3)))
+		{
+			return;
+		}
+		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
+		Class<?> cs = c;
+		boolean auto = false;
+		while (cs.getPackageName().startsWith("org.cip4"))
+		{
+			final Class<?>[] superclasses = cs.getDeclaredClasses();
+			if (cs.getPackageName().startsWith("org.cip4.jdflib.auto"))
+			{
+				ContainerUtil.addAll(classes, superclasses);
+				auto = true;
+			}
+			else
+			{
+				ContainerUtil.removeAll(classes, superclasses);
+			}
+			cs = cs.getSuperclass();
+		}
+		HashSet<String> ignore = new HashSet<String>();
+		ignore.add(AttributeName.LEVEL);
+		ignore.add(AttributeName.ROTATEPOLICY);
+		ignore.add(AttributeName.TYPE);
+		ignore.add(AttributeName.REASON);
+		ignore.add(AttributeName.MATERIAL);
+		ignore.add(AttributeName.ACTION);
+		ignore.add(AttributeName.MEDIASIDE);
+		if (auto)
+		{
+			for (final Class<?> cl : classes)
+			{
+				if (cl.isEnum())
+				{
+					Class<Enum<?>> cle = (Class<Enum<?>>) cl;
+					Enum<?>[] vals = (Enum<?>[]) cl.getEnumConstants();
+					if (enums.containsKey(cl.getSimpleName()))
+					{
+						log.warn("duplicate enum: " + kElem.getLocalName() + " " + cl.getSimpleName() + " / " + enums.get(cl.getSimpleName()));
+						if (ignore.contains(cl.getSimpleName()))
+						{
+							log.error("duplicate enum: " + kElem.getLocalName() + " " + cl.getSimpleName() + " / " + enums.get(cl.getSimpleName()));
+						}
+						// throw new Exception("duplicate enum: " + kElem.getLocalName() + " " + cl.getSimpleName());
+					}
+					else
+					{
+						enums.put(cl.getSimpleName(), kElem.getLocalName());
+					}
+				}
+			}
+		}
+	}
+
 	private void coverAppenders(final KElement kElem) throws Exception
 	{
 		final Class<? extends KElement> c = kElem.getClass();
@@ -254,8 +330,8 @@ class CoverageVisitor implements DirectoryVisitor
 					{
 						log.info(ab);
 						final KElement e = (KElement) method.invoke(kElem, new Object[] {});
-						if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-								|| skip.contains(c.getSimpleName()))
+						if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName())
+								|| skip.contains(ab) || skip.contains(c.getSimpleName()))
 						{
 							// nop
 						}
@@ -264,14 +340,16 @@ class CoverageVisitor implements DirectoryVisitor
 							assertNotNull(e);
 						}
 						if ((e instanceof JDFAbstractState) || (e instanceof JDFSpanBase))
+						{
 							cover(e);
+						}
 					}
 				}
 				catch (final InvocationTargetException i)
 				{
 					final Throwable t = i.getTargetException();
-					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-							|| skip.contains(c.getSimpleName()))
+					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName())
+							|| skip.contains(ab) || skip.contains(c.getSimpleName()))
 					{
 						// nop
 					}
@@ -314,8 +392,8 @@ class CoverageVisitor implements DirectoryVisitor
 				catch (final InvocationTargetException i)
 				{
 					final Throwable t = i.getTargetException();
-					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-							|| skip.contains(c.getSimpleName()))
+					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName())
+							|| skip.contains(ab) || skip.contains(c.getSimpleName()))
 					{
 						// nop
 					}
@@ -383,8 +461,8 @@ class CoverageVisitor implements DirectoryVisitor
 				catch (final InvocationTargetException i)
 				{
 					final Throwable t = i.getTargetException();
-					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName()) || skip.contains(ab)
-							|| skip.contains(c.getSimpleName()))
+					if (JDFTerm.class.isAssignableFrom(c) || ICapabilityElement.class.isAssignableFrom(c) || skip.contains(method.getName())
+							|| skip.contains(ab) || skip.contains(c.getSimpleName()))
 					{
 						// nop
 					}

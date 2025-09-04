@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueueFilter;
 
 /**
- *****************************************************************************
- * class JDFAutoResumeQueueEntryParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResumeQueueEntryParams : public JDFElement
  */
 
 public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoResumeQueueEntryParams extends JDFElement
 	 * (27) const get element QueueFilter
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFQueueFilter the element default is getQueueFilter(0)
+	 * @return JDFQueueFilter the element
+	 *         default is getQueueFilter(0)
 	 */
 	public JDFQueueFilter getQueueFilter(int iSkip)
 	{

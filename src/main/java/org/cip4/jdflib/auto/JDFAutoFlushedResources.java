@@ -74,10 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoFlushedResources : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFlushedResources : public JDFElement
  */
 
 public abstract class JDFAutoFlushedResources extends JDFElement

@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDevice;
 
 /**
- *****************************************************************************
- * class JDFAutoIDInfo : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDInfo : public JDFElement
  */
 
 public abstract class JDFAutoIDInfo extends JDFElement
@@ -163,11 +160,15 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Category ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Category
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Category
@@ -190,7 +191,9 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JDFURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JDFURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JDFURL
@@ -213,7 +216,9 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -236,7 +241,9 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -259,7 +266,9 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ParentJobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ParentJobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ParentJobID
@@ -282,7 +291,8 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ParentJobPartID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ParentJobPartID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -306,7 +316,9 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProjectID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProjectID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ProjectID
@@ -329,7 +341,9 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Type ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Type
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Type
@@ -352,7 +366,9 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Types ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Types
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Types
@@ -371,14 +387,16 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	 */
 	public VString getTypes()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.TYPES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -404,7 +422,8 @@ public abstract class JDFAutoIDInfo extends JDFElement
 	/**
 	 * (29) append element Device
 	 *
-	 * @return JDFDevice the element @ if the element already exists
+	 * @return JDFDevice the element
+	 * @ if the element already exists
 	 */
 	public JDFDevice appendDevice()
 	{

@@ -85,10 +85,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
 
 /**
- *****************************************************************************
- * class JDFAutoPRRule : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPRRule : public JDFElement
  */
 
 public abstract class JDFAutoPRRule extends JDFElement
@@ -157,11 +154,15 @@ public abstract class JDFAutoPRRule extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActionRefs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActionRefs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ActionRefs
@@ -180,14 +181,16 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 */
 	public VString getActionRefs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ACTIONREFS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ACTIONREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -225,7 +228,8 @@ public abstract class JDFAutoPRRule extends JDFElement
 	 * (27) const get element PRRuleAttr
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPRRuleAttr the element default is getPRRuleAttr(0)
+	 * @return JDFPRRuleAttr the element
+	 *         default is getPRRuleAttr(0)
 	 */
 	public JDFPRRuleAttr getPRRuleAttr(int iSkip)
 	{

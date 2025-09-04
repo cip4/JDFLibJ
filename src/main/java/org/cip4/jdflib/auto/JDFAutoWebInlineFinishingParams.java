@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFolderProduction;
 
 /**
- *****************************************************************************
- * class JDFAutoWebInlineFinishingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoWebInlineFinishingParams : public JDFResource
  */
 
 public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,7 +157,9 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +197,8 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 	 * (27) const get element FolderProduction
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFolderProduction the element default is getFolderProduction(0)
+	 * @return JDFFolderProduction the element
+	 *         default is getFolderProduction(0)
 	 */
 	public JDFFolderProduction getFolderProduction(int iSkip)
 	{

@@ -82,10 +82,7 @@ import org.cip4.jdflib.span.JDFSpanSurface;
 import org.cip4.jdflib.span.JDFSpanTemperature;
 
 /**
- *****************************************************************************
- * class JDFAutoLaminatingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLaminatingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
@@ -146,7 +143,9 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -172,7 +171,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Laminated
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendLaminated()
 	{
@@ -202,7 +202,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Temperature
 	 *
-	 * @return JDFSpanTemperature the element @ if the element already exists
+	 * @return JDFSpanTemperature the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanTemperature appendTemperature()
 	{
@@ -232,7 +233,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Surface
 	 *
-	 * @return JDFSpanSurface the element @ if the element already exists
+	 * @return JDFSpanSurface the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanSurface appendSurface()
 	{
@@ -262,7 +264,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Texture
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendTexture()
 	{
@@ -292,7 +295,8 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Thickness
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendThickness()
 	{

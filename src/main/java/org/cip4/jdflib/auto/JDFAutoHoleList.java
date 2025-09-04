@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
 
 /**
- *****************************************************************************
- * class JDFAutoHoleList : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoHoleList : public JDFResource
  */
 
 public abstract class JDFAutoHoleList extends JDFResource
@@ -147,7 +144,7 @@ public abstract class JDFAutoHoleList extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -162,7 +159,9 @@ public abstract class JDFAutoHoleList extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -200,7 +199,8 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * (27) const get element Hole
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFHole the element default is getHole(0)
+	 * @return JDFHole the element
+	 *         default is getHole(0)
 	 */
 	public JDFHole getHole(int iSkip)
 	{
@@ -262,7 +262,8 @@ public abstract class JDFAutoHoleList extends JDFResource
 	 * (27) const get element HoleLine
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFHoleLine the element default is getHoleLine(0)
+	 * @return JDFHoleLine the element
+	 *         default is getHoleLine(0)
 	 */
 	public JDFHoleLine getHoleLine(int iSkip)
 	{

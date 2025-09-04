@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
 /**
- *****************************************************************************
- * class JDFAutoSheetCondition : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSheetCondition : public JDFElement
  */
 
 public abstract class JDFAutoSheetCondition extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoSheetCondition extends JDFElement
 	 * (27) const get element RunList
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRunList the element default is getRunList(0)
+	 * @return JDFRunList the element
+	 *         default is getRunList(0)
 	 */
 	public JDFRunList getRunList(int iSkip)
 	{

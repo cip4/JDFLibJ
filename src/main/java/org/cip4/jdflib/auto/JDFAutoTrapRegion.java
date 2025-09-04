@@ -83,10 +83,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.prepress.JDFTrappingParams;
 
 /**
- *****************************************************************************
- * class JDFAutoTrapRegion : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTrapRegion : public JDFResource
  */
 
 public abstract class JDFAutoTrapRegion extends JDFResource
@@ -161,7 +158,7 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -176,11 +173,15 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pages
@@ -195,17 +196,20 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute Pages
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPages()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGES, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGES, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapZone ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrapZone
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrapZone
@@ -228,7 +232,9 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -254,7 +260,8 @@ public abstract class JDFAutoTrapRegion extends JDFResource
 	/**
 	 * (29) append element TrappingParams
 	 *
-	 * @return JDFTrappingParams the element @ if the element already exists
+	 * @return JDFTrappingParams the element
+	 * @ if the element already exists
 	 */
 	public JDFTrappingParams appendTrappingParams()
 	{

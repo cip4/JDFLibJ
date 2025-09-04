@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 
 /**
- *****************************************************************************
- * class JDFAutoTestPool : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTestPool : public JDFElement
  */
 
 public abstract class JDFAutoTestPool extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoTestPool extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoTestPool extends JDFElement
 	 * (27) const get element Test
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFTest the element default is getTest(0)
+	 * @return JDFTest the element
+	 *         default is getTest(0)
 	 */
 	public JDFTest getTest(int iSkip)
 	{

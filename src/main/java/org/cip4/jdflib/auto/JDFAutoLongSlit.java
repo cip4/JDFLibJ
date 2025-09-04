@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 
 /**
- *****************************************************************************
- * class JDFAutoLongSlit : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLongSlit : public JDFElement
  */
 
 public abstract class JDFAutoLongSlit extends JDFElement
@@ -139,11 +136,15 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WorkingList
@@ -158,17 +159,20 @@ public abstract class JDFAutoLongSlit extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute WorkingList
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getWorkingList()
 	{
-		final String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.WORKINGLIST, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute XOffset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute XOffset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute XOffset

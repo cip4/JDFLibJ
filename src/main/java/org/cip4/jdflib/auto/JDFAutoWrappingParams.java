@@ -83,10 +83,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoWrappingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoWrappingParams : public JDFResource
  */
 
 public abstract class JDFAutoWrappingParams extends JDFResource
@@ -97,7 +94,8 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.WRAPPINGKIND, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumWrappingKind.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.WRAPPINGKIND, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumWrappingKind.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -148,7 +146,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -242,11 +240,14 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WrappingKind
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WrappingKind
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -270,14 +271,15 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WrappingKind
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WrappingKind
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute WrappingKind
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setWrappingKind(EWrappingKind) based on java.lang.enum instead
+	 * @deprecated use SetWrappingKind(EWrappingKind) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setWrappingKind(EnumWrappingKind enumVar)
@@ -289,7 +291,7 @@ public abstract class JDFAutoWrappingParams extends JDFResource
 	 * (9) get attribute WrappingKind
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EWrappingKind getEWrappingKind() based on java.lang.enum instead
+	 * @deprecated use EWrappingKind GetEWrappingKind() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumWrappingKind getWrappingKind()

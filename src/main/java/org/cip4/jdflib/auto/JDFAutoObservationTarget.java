@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 
 /**
- *****************************************************************************
- * class JDFAutoObservationTarget : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoObservationTarget : public JDFElement
  */
 
 public abstract class JDFAutoObservationTarget extends JDFElement
@@ -142,11 +139,15 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ElementType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ElementType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ElementType
@@ -169,7 +170,9 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Attributes ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Attributes
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Attributes
@@ -188,14 +191,16 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 */
 	public VString getAttributesJDF()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ATTRIBUTES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ElementIDs ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ElementIDs
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ElementIDs
@@ -214,14 +219,15 @@ public abstract class JDFAutoObservationTarget extends JDFElement
 	 */
 	public VString getElementIDs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ELEMENTIDS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ELEMENTIDS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ObservationPath
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ObservationPath
 	 * ---------------------------------------------------------------------
 	 */
 	/**

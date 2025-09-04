@@ -78,10 +78,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDuration;
 
 /**
- *****************************************************************************
- * class JDFAutoDevelopingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDevelopingParams : public JDFResource
  */
 
 public abstract class JDFAutoDevelopingParams extends JDFResource
@@ -147,7 +144,7 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -162,11 +159,15 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreHeatTemp ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreHeatTemp
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PreHeatTemp
@@ -189,7 +190,9 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreHeatTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreHeatTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PreHeatTime
@@ -204,17 +207,19 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute PreHeatTime
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getPreHeatTime()
 	{
-		final String strAttrName = getAttribute(AttributeName.PREHEATTIME, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PREHEATTIME, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PostBakeTemp
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PostBakeTemp
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -238,7 +243,8 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PostBakeTime
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PostBakeTime
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -254,17 +260,19 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute PostBakeTime
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getPostBakeTime()
 	{
-		final String strAttrName = getAttribute(AttributeName.POSTBAKETIME, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.POSTBAKETIME, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PostExposeTime
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PostExposeTime
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -280,12 +288,13 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute PostExposeTime
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getPostExposeTime()
 	{
-		final String strAttrName = getAttribute(AttributeName.POSTEXPOSETIME, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.POSTEXPOSETIME, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 

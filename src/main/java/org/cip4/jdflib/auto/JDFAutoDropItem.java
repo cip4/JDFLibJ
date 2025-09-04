@@ -95,10 +95,7 @@ import org.cip4.jdflib.resource.process.JDFRollStand;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 /**
- *****************************************************************************
- * class JDFAutoDropItem : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDropItem : public JDFElement
  */
 
 public abstract class JDFAutoDropItem extends JDFElement
@@ -185,11 +182,14 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActualAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActualAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -213,7 +213,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActualTotalAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActualTotalAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -237,7 +238,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -260,7 +263,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TotalAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TotalAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TotalAmount
@@ -283,7 +288,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TotalDimensions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TotalDimensions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -299,17 +305,20 @@ public abstract class JDFAutoDropItem extends JDFElement
 	/**
 	 * (20) get JDFShape attribute TotalDimensions
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getTotalDimensions()
 	{
-		final String strAttrName = getAttribute(AttributeName.TOTALDIMENSIONS, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TOTALDIMENSIONS, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TotalVolume ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TotalVolume
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TotalVolume
@@ -332,7 +341,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TotalWeight ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TotalWeight
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TotalWeight
@@ -355,7 +366,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrackingID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrackingID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TrackingID
@@ -378,7 +391,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Unit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Unit
@@ -401,7 +416,9 @@ public abstract class JDFAutoDropItem extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -439,7 +456,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element Component
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFComponent the element default is getComponent(0)
+	 * @return JDFComponent the element
+	 *         default is getComponent(0)
 	 */
 	public JDFComponent getComponent(int iSkip)
 	{
@@ -511,7 +529,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element ExposedMedia
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFExposedMedia the element default is getExposedMedia(0)
+	 * @return JDFExposedMedia the element
+	 *         default is getExposedMedia(0)
 	 */
 	public JDFExposedMedia getExposedMedia(int iSkip)
 	{
@@ -583,7 +602,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element Ink
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFInk the element default is getInk(0)
+	 * @return JDFInk the element
+	 *         default is getInk(0)
 	 */
 	public JDFInk getInk(int iSkip)
 	{
@@ -655,7 +675,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element Media
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMedia the element default is getMedia(0)
+	 * @return JDFMedia the element
+	 *         default is getMedia(0)
 	 */
 	public JDFMedia getMedia(int iSkip)
 	{
@@ -727,7 +748,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element Pallet
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPallet the element default is getPallet(0)
+	 * @return JDFPallet the element
+	 *         default is getPallet(0)
 	 */
 	public JDFPallet getPallet(int iSkip)
 	{
@@ -799,7 +821,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element RegisterRibbon
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRegisterRibbon the element default is getRegisterRibbon(0)
+	 * @return JDFRegisterRibbon the element
+	 *         default is getRegisterRibbon(0)
 	 */
 	public JDFRegisterRibbon getRegisterRibbon(int iSkip)
 	{
@@ -871,7 +894,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element Strap
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStrap the element default is getStrap(0)
+	 * @return JDFStrap the element
+	 *         default is getStrap(0)
 	 */
 	public JDFStrap getStrap(int iSkip)
 	{
@@ -943,7 +967,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element Bundle
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBundle the element default is getBundle(0)
+	 * @return JDFBundle the element
+	 *         default is getBundle(0)
 	 */
 	public JDFBundle getBundle(int iSkip)
 	{
@@ -1015,7 +1040,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element DigitalMedia
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDigitalMedia the element default is getDigitalMedia(0)
+	 * @return JDFDigitalMedia the element
+	 *         default is getDigitalMedia(0)
 	 */
 	public JDFDigitalMedia getDigitalMedia(int iSkip)
 	{
@@ -1087,7 +1113,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element RollStand
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRollStand the element default is getRollStand(0)
+	 * @return JDFRollStand the element
+	 *         default is getRollStand(0)
 	 */
 	public JDFRollStand getRollStand(int iSkip)
 	{
@@ -1159,7 +1186,8 @@ public abstract class JDFAutoDropItem extends JDFElement
 	 * (27) const get element Tool
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFTool the element default is getTool(0)
+	 * @return JDFTool the element
+	 *         default is getTool(0)
 	 */
 	public JDFTool getTool(int iSkip)
 	{

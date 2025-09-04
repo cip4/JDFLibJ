@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFThinPDFParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPSToPDFConversionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPSToPDFConversionParams : public JDFResource
  */
 
 public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
@@ -109,10 +106,11 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.DETECTBLEND, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DOTHUMBNAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OPTIMIZE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.AUTOROTATEPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAutoRotatePages.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.AUTOROTATEPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumAutoRotatePages.getEnum(0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.COMPRESSPAGES, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[7] = new AtrInfoTable(AttributeName.DEFAULTRENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDefaultRenderingIntent.getEnum(0),
-				null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.DEFAULTRENDERINGINTENT, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDefaultRenderingIntent.getEnum(0), null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.ENDPAGE, 0x4444444333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.IMAGEMEMORY, 0x4444444433l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.INITIALPAGESIZE, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -184,7 +182,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -438,11 +436,14 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ASCII85EncodePages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ASCII85EncodePages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -466,7 +467,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Binding ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Binding
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Binding
@@ -489,13 +492,15 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Binding ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Binding
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Binding
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBinding(EBinding) based on java.lang.enum instead
+	 * @deprecated use SetBinding(EBinding) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBinding(EnumBinding enumVar)
@@ -507,7 +512,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (9) get attribute Binding
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBinding getEBinding() based on java.lang.enum instead
+	 * @deprecated use EBinding GetEBinding() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBinding getBinding()
@@ -516,7 +521,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DetectBlend ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DetectBlend
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DetectBlend
@@ -539,7 +546,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DoThumbnails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DoThumbnails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -563,7 +571,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Optimize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Optimize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Optimize
@@ -586,7 +596,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AutoRotatePages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AutoRotatePages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -610,14 +621,15 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AutoRotatePages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AutoRotatePages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AutoRotatePages
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAutoRotatePages(EAutoRotatePages) based on java.lang.enum instead
+	 * @deprecated use SetAutoRotatePages(EAutoRotatePages) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAutoRotatePages(EnumAutoRotatePages enumVar)
@@ -629,7 +641,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (9) get attribute AutoRotatePages
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAutoRotatePages getEAutoRotatePages() based on java.lang.enum instead
+	 * @deprecated use EAutoRotatePages GetEAutoRotatePages() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAutoRotatePages getAutoRotatePages()
@@ -638,7 +650,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CompressPages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CompressPages
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -662,7 +675,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultRenderingIntent
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultRenderingIntent
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -686,14 +700,15 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultRenderingIntent
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultRenderingIntent
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DefaultRenderingIntent
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDefaultRenderingIntent(EDefaultRenderingIntent) based on java.lang.enum instead
+	 * @deprecated use SetDefaultRenderingIntent(EDefaultRenderingIntent) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDefaultRenderingIntent(EnumDefaultRenderingIntent enumVar)
@@ -705,7 +720,7 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	 * (9) get attribute DefaultRenderingIntent
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDefaultRenderingIntent getEDefaultRenderingIntent() based on java.lang.enum instead
+	 * @deprecated use EDefaultRenderingIntent GetEDefaultRenderingIntent() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDefaultRenderingIntent getDefaultRenderingIntent()
@@ -714,7 +729,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute EndPage
@@ -737,7 +754,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ImageMemory ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ImageMemory
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ImageMemory
@@ -760,7 +779,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InitialPageSize
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InitialPageSize
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -776,17 +796,19 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute InitialPageSize
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getInitialPageSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.INITIALPAGESIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.INITIALPAGESIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InitialResolution
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InitialResolution
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -802,17 +824,19 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute InitialResolution
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getInitialResolution()
 	{
-		final String strAttrName = getAttribute(AttributeName.INITIALRESOLUTION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.INITIALRESOLUTION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OverPrintMode
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OverPrintMode
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -836,7 +860,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFVersion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFVersion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PDFVersion
@@ -859,7 +885,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StartPage
@@ -882,7 +910,9 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -908,7 +938,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	/**
 	 * (29) append element AdvancedParams
 	 *
-	 * @return JDFAdvancedParams the element @ if the element already exists
+	 * @return JDFAdvancedParams the element
+	 * @ if the element already exists
 	 */
 	public JDFAdvancedParams appendAdvancedParams()
 	{
@@ -938,7 +969,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	/**
 	 * (29) append element PDFXParams
 	 *
-	 * @return JDFPDFXParams the element @ if the element already exists
+	 * @return JDFPDFXParams the element
+	 * @ if the element already exists
 	 */
 	public JDFPDFXParams appendPDFXParams()
 	{
@@ -968,7 +1000,8 @@ public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 	/**
 	 * (29) append element ThinPDFParams
 	 *
-	 * @return JDFThinPDFParams the element @ if the element already exists
+	 * @return JDFThinPDFParams the element
+	 * @ if the element already exists
 	 */
 	public JDFThinPDFParams appendThinPDFParams()
 	{

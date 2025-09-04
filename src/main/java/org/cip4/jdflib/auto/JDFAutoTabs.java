@@ -86,10 +86,7 @@ import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoTabs : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTabs : public JDFElement
  */
 
 public abstract class JDFAutoTabs extends JDFElement
@@ -166,11 +163,15 @@ public abstract class JDFAutoTabs extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabBanks ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabBanks
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TabBanks
@@ -193,7 +194,9 @@ public abstract class JDFAutoTabs extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabCount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabCount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TabCount
@@ -216,7 +219,9 @@ public abstract class JDFAutoTabs extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TabsPerBank ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TabsPerBank
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TabsPerBank
@@ -239,7 +244,9 @@ public abstract class JDFAutoTabs extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -265,7 +272,8 @@ public abstract class JDFAutoTabs extends JDFElement
 	/**
 	 * (29) append element TabBrand
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendTabBrand()
 	{
@@ -295,7 +303,8 @@ public abstract class JDFAutoTabs extends JDFElement
 	/**
 	 * (29) append element TabExtensionDistance
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendTabExtensionDistance()
 	{
@@ -325,7 +334,8 @@ public abstract class JDFAutoTabs extends JDFElement
 	/**
 	 * (29) append element TabExtensionMylar
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendTabExtensionMylar()
 	{
@@ -355,7 +365,8 @@ public abstract class JDFAutoTabs extends JDFElement
 	/**
 	 * (29) append element TabBindMylar
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendTabBindMylar()
 	{
@@ -385,7 +396,8 @@ public abstract class JDFAutoTabs extends JDFElement
 	/**
 	 * (29) append element TabBodyCopy
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendTabBodyCopy()
 	{
@@ -415,7 +427,8 @@ public abstract class JDFAutoTabs extends JDFElement
 	/**
 	 * (29) append element TabMylarColor
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendTabMylarColor()
 	{
@@ -457,7 +470,8 @@ public abstract class JDFAutoTabs extends JDFElement
 	 * (27) const get element TabMylarColorDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStringSpan the element default is getTabMylarColorDetails(0)
+	 * @return JDFStringSpan the element
+	 *         default is getTabMylarColorDetails(0)
 	 */
 	public JDFStringSpan getTabMylarColorDetails(int iSkip)
 	{

@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoColorantZoneDetails : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorantZoneDetails : public JDFElement
  */
 
 public abstract class JDFAutoColorantZoneDetails extends JDFElement
@@ -140,11 +137,15 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Colorant ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Colorant
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Colorant
@@ -167,7 +168,9 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StepLimit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StepLimit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StepLimit
@@ -190,7 +193,8 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TrapColorScaling
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TrapColorScaling
 	 * ---------------------------------------------------------------------
 	 */
 	/**

@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFPartStatus;
 import org.cip4.jdflib.pool.JDFPool;
 
 /**
- *****************************************************************************
- * class JDFAutoStatusPool : public JDFPool
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStatusPool : public JDFPool
  */
 
 public abstract class JDFAutoStatusPool extends JDFPool
@@ -157,11 +154,14 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StatusDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StatusDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -185,7 +185,9 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -223,7 +225,8 @@ public abstract class JDFAutoStatusPool extends JDFPool
 	 * (27) const get element PartStatus
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPartStatus the element default is getPartStatus(0)
+	 * @return JDFPartStatus the element
+	 *         default is getPartStatus(0)
 	 */
 	public JDFPartStatus getPartStatus(int iSkip)
 	{

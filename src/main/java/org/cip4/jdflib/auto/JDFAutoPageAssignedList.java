@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 
 /**
- *****************************************************************************
- * class JDFAutoPageAssignedList : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPageAssignedList : public JDFElement
  */
 
 public abstract class JDFAutoPageAssignedList extends JDFElement
@@ -142,11 +139,14 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BroadsheetNumber
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BroadsheetNumber
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -170,7 +170,8 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LogicalPrinterSection
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LogicalPrinterSection
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -194,7 +195,8 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageListIndex
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageListIndex
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -210,17 +212,19 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageListIndex
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageListIndex()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGELISTINDEX, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PagePlacementName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PagePlacementName
 	 * ---------------------------------------------------------------------
 	 */
 	/**

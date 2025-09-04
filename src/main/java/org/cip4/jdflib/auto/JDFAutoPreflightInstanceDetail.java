@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightInstanceDetail : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightInstanceDetail : public JDFElement
  */
 
 public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
@@ -156,11 +153,15 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Property ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Property
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Property
@@ -183,7 +184,9 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -221,7 +224,8 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 	 * (27) const get element Value
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getValue(0)
+	 * @return JDFElement the element
+	 *         default is getValue(0)
 	 */
 	public JDFElement getValue(int iSkip)
 	{

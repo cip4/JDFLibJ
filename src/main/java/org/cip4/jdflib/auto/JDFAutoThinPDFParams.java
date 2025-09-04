@@ -77,10 +77,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoThinPDFParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoThinPDFParams : public JDFElement
  */
 
 public abstract class JDFAutoThinPDFParams extends JDFElement
@@ -140,11 +137,15 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FilePerPage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FilePerPage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FilePerPage
@@ -167,7 +168,9 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SidelineEPS ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SidelineEPS
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SidelineEPS
@@ -190,7 +193,8 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SidelineFonts
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SidelineFonts
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -214,7 +218,8 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SidelineImages
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SidelineImages
 	 * ---------------------------------------------------------------------
 	 */
 	/**

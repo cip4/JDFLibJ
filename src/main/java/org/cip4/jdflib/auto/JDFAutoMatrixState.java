@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 
 /**
- *****************************************************************************
- * class JDFAutoMatrixState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMatrixState : public JDFResource
  */
 
 public abstract class JDFAutoMatrixState extends JDFResource
@@ -171,17 +168,20 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -197,17 +197,19 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	/**
 	 * (20) get JDFMatrix attribute DefaultValue
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getDefaultValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -223,17 +225,19 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	/**
 	 * (20) get JDFMatrix attribute CurrentValue
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCurrentValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedRotateMod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedRotateMod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -257,7 +261,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedShift
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedShift
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -281,7 +286,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedTransforms
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedTransforms
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -305,7 +311,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentRotateMod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentRotateMod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -329,7 +336,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentShift
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentShift
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -353,7 +361,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentTransforms
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentTransforms
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -377,7 +386,9 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -415,7 +426,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -477,7 +489,8 @@ public abstract class JDFAutoMatrixState extends JDFResource
 	 * (27) const get element Value
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValue the element default is getValue(0)
+	 * @return JDFValue the element
+	 *         default is getValue(0)
 	 */
 	public JDFValue getValue(int iSkip)
 	{

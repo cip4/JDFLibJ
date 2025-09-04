@@ -87,10 +87,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoGlueApplication : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGlueApplication : public JDFResource
  */
 
 public abstract class JDFAutoGlueApplication extends JDFResource
@@ -101,7 +98,8 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGTECHNIQUE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration, EnumGluingTechnique.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGTECHNIQUE, 0x2222222221l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumGluingTechnique.getEnum(0), null);
 	}
 
 	@Override
@@ -164,7 +162,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -258,11 +256,14 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GluingTechnique
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GluingTechnique
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -286,14 +287,15 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GluingTechnique
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GluingTechnique
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute GluingTechnique
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setGluingTechnique(EGluingTechnique) based on java.lang.enum instead
+	 * @deprecated use SetGluingTechnique(EGluingTechnique) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGluingTechnique(EnumGluingTechnique enumVar)
@@ -305,7 +307,7 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	 * (9) get attribute GluingTechnique
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EGluingTechnique getEGluingTechnique() based on java.lang.enum instead
+	 * @deprecated use EGluingTechnique GetEGluingTechnique() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumGluingTechnique getGluingTechnique()
@@ -314,7 +316,9 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -340,7 +344,8 @@ public abstract class JDFAutoGlueApplication extends JDFResource
 	/**
 	 * (29) append element GlueLine
 	 *
-	 * @return JDFGlueLine the element @ if the element already exists
+	 * @return JDFGlueLine the element
+	 * @ if the element already exists
 	 */
 	public JDFGlueLine appendGlueLine()
 	{

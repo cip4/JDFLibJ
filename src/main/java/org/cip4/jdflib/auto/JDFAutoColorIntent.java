@@ -88,10 +88,7 @@ import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoColorIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoColorIntent extends JDFIntentResource
@@ -167,11 +164,15 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumColors ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NumColors
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NumColors
@@ -194,7 +195,9 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -232,7 +235,8 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	 * (27) const get element Certification
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCertification the element default is getCertification(0)
+	 * @return JDFCertification the element
+	 *         default is getCertification(0)
 	 */
 	public JDFCertification getCertification(int iSkip)
 	{
@@ -282,7 +286,8 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	/**
 	 * (29) append element Coatings
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendCoatings()
 	{
@@ -312,7 +317,8 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	/**
 	 * (29) append element ColorStandard
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendColorStandard()
 	{
@@ -342,7 +348,8 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	/**
 	 * (29) append element ColorICCStandard
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendColorICCStandard()
 	{
@@ -372,7 +379,8 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	/**
 	 * (29) append element Coverage
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendCoverage()
 	{
@@ -402,7 +410,8 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	/**
 	 * (29) append element InkManufacturer
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendInkManufacturer()
 	{
@@ -432,7 +441,8 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	/**
 	 * (29) append element ColorPool
 	 *
-	 * @return JDFColorPool the element @ if the element already exists
+	 * @return JDFColorPool the element
+	 * @ if the element already exists
 	 */
 	public JDFColorPool appendColorPool()
 	{
@@ -472,7 +482,8 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
 	/**
 	 * (29) append element ColorsUsed
 	 *
-	 * @return JDFSeparationList the element @ if the element already exists
+	 * @return JDFSeparationList the element
+	 * @ if the element already exists
 	 */
 	public JDFSeparationList appendColorsUsed()
 	{

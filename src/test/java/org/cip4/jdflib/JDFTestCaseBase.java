@@ -103,7 +103,6 @@ import org.w3c.dom.Node;
  * base class for JDFLib test case classes
  *
  * @author prosirai
- *
  */
 public abstract class JDFTestCaseBase
 {
@@ -112,7 +111,6 @@ public abstract class JDFTestCaseBase
 	protected static Lock sequential = new ReentrantLock();
 
 	/**
-	 *
 	 * @param e
 	 * @param major
 	 * @param minor
@@ -135,14 +133,17 @@ public abstract class JDFTestCaseBase
 	protected static JDFParser getSchemaParser(final int major, final int minor)
 	{
 		if (major == 1)
+		{
 			return getSchemaParser(EnumVersion.getEnum(major, minor));
+		}
 		else if (major == 2)
+		{
 			return getXJDFSchemaParser(major, minor);
+		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static String getXJDFSchema()
@@ -151,7 +152,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static String getXJDFSchema(final int major, final int minor)
@@ -161,7 +161,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	protected static JDFParser getXJDFSchemaParser()
@@ -180,7 +179,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	protected static JDFParser getXJDFSchemaParser(final int major, final int minor)
@@ -231,7 +229,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * check a node against the schema
 	 *
 	 * @param root
@@ -248,7 +245,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * create a doc with exposedmedia for tests
 	 *
 	 * @return
@@ -336,7 +332,6 @@ public abstract class JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@BeforeEach
@@ -388,7 +383,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @param h
 	 * @param startFirst
 	 */
@@ -401,7 +395,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @param e
 	 * @param startFirst if true include the enclosing element, if false exclude it
 	 */
@@ -420,13 +413,14 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @param h
 	 */
 	protected void cleanSnippets(final XJDFHelper h)
 	{
 		if (h == null || h.getRoot() == null)
+		{
 			return;
+		}
 		h.cleanUp();
 		setSnippet(h, true);
 		setSnippet(h.getAuditPool(), false);
@@ -434,7 +428,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @param d
 	 * @param filename
 	 */
@@ -449,7 +442,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @param d
 	 * @param filename
 	 */
@@ -459,7 +451,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * write an element to the standard test directory sm_dirTestDataTemp
 	 *
 	 * @param e
@@ -473,7 +464,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * write an element to the standard test directory sm_dirTestDataTemp
 	 *
 	 * @param e
@@ -490,9 +480,13 @@ public abstract class JDFTestCaseBase
 		if (ext.startsWith("x"))
 		{
 			if (e.getParentNode_KElement() == null)
+			{
 				e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "xjdfexamples/" + filename, 2, false);
+			}
 			else
+			{
 				e.write2File(sm_dirTestDataTemp + "xjdfexamples/" + filename);
+			}
 			minor = getMinor(e);
 		}
 		else
@@ -588,11 +582,12 @@ public abstract class JDFTestCaseBase
 	/**
 	 * write convert and unconvert
 	 *
-	 * @param root the jdf node or jmf root
+	 * @param root     the jdf node or jmf root
 	 * @param fileBase the filename without extension
-	 * @param version 21
+	 * @param version  21
 	 */
-	protected MyPair<BaseXJDFHelper, JDFElement> writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version, final EnumValidationLevel level)
+	protected MyPair<BaseXJDFHelper, JDFElement> writeRoundTrip(final JDFElement root, final String fileBase, final EnumVersion version,
+			final EnumValidationLevel level)
 	{
 		final String tmpJDF = fileBase + ".jdf";
 		final String tmpJDFPath = sm_dirTestDataTemp + tmpJDF;
@@ -635,7 +630,9 @@ public abstract class JDFTestCaseBase
 		converted.write2File(sm_dirTestDataTemp + fileBase + ".xjdf.jdf", 2, false);
 		JDFElement jxRoot = converted.getJDFRoot();
 		if (jxRoot == null)
+		{
 			jxRoot = converted.getJMFRoot();
+		}
 		valid = jxRoot.isValid(level);
 		if (!valid)
 		{
@@ -654,10 +651,9 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 * @param h convenience method for XJDFHelper
+	 * @param h        convenience method for XJDFHelper
 	 * @param fileBase the filename without extension
-	 * @param level the level to validate the returned JDF
+	 * @param level    the level to validate the returned JDF
 	 * @return
 	 */
 	protected JDFElement writeRoundTripX(final BaseXJDFHelper h, final String fileBase, final EnumValidationLevel level)
@@ -666,16 +662,17 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 * @param h convenience method for XJDFHelper
+	 * @param h        convenience method for XJDFHelper
 	 * @param fileBase the filename without extension
-	 * @param level the level to validate the returned JDF
+	 * @param level    the level to validate the returned JDF
 	 * @return
 	 */
 	protected JDFElement writeRoundTripX(final BaseXJDFHelper h, final String fileBase, final EnumValidationLevel level, final boolean cleanup)
 	{
 		if (cleanup)
+		{
 			h.cleanUp();
+		}
 		return writeRoundTripX(h.getRoot(), fileBase, level);
 	}
 
@@ -684,7 +681,7 @@ public abstract class JDFTestCaseBase
 	 *
 	 * @param xjdfRoot the xjdf node or xjmf root
 	 * @param fileBase the filename without extension
-	 * @param level the level to validate the returned JDF
+	 * @param level    the level to validate the returned JDF
 	 * @return
 	 */
 	protected JDFElement writeRoundTripX(final KElement xjdfRoot, final String fileBase, final EnumValidationLevel level)
@@ -710,7 +707,9 @@ public abstract class JDFTestCaseBase
 			converted.write2File(fileXJ, 2, false);
 			jxRoot = converted.getJDFRoot();
 			if (jxRoot == null)
+			{
 				jxRoot = converted.getJMFRoot();
+			}
 			final boolean valid = jxRoot.isValid(level);
 			if (!valid)
 			{
@@ -771,7 +770,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @param doc
 	 * @return
 	 */
@@ -794,7 +792,8 @@ public abstract class JDFTestCaseBase
 	@Override
 	public String toString()
 	{
-		return "[" + StringUtil.token(this.getClass().getName(), -1, ".") + " Version:  " + defaultVersion + " " + new File(sm_dirTestData).getAbsolutePath() + " ]\n";
+		return "[" + StringUtil.token(this.getClass().getName(), -1, ".") + " Version:  " + defaultVersion + " " + new File(sm_dirTestData).getAbsolutePath()
+				+ " ]\n";
 	}
 
 	/**
@@ -819,7 +818,6 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	protected JDFParser getSchemaParser()
@@ -828,13 +826,14 @@ public abstract class JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	protected static JDFParser getSchemaParser(EnumVersion version)
 	{
 		if (version == null)
+		{
 			version = JDFElement.getDefaultJDFVersion();
+		}
 		int minor = version.isXJDF() ? 6 : 0;
 		minor += version.getMinorVersion();
 		final JDFParser parser = JDFParserFactory.getFactory().get();

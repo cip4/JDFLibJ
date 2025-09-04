@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFImageCompression;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoImageCompressionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoImageCompressionParams : public JDFResource
  */
 
 public abstract class JDFAutoImageCompressionParams extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoImageCompressionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,7 +157,9 @@ public abstract class JDFAutoImageCompressionParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +197,8 @@ public abstract class JDFAutoImageCompressionParams extends JDFResource
 	 * (27) const get element ImageCompression
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFImageCompression the element default is getImageCompression(0)
+	 * @return JDFImageCompression the element
+	 *         default is getImageCompression(0)
 	 */
 	public JDFImageCompression getImageCompression(int iSkip)
 	{

@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFEndSheet;
 
 /**
- *****************************************************************************
- * class JDFAutoEndSheetGluingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoEndSheetGluingParams : public JDFResource
  */
 
 public abstract class JDFAutoEndSheetGluingParams extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,7 +157,9 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +197,8 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 	 * (27) const get element EndSheet
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEndSheet the element default is getEndSheet(0)
+	 * @return JDFEndSheet the element
+	 *         default is getEndSheet(0)
 	 */
 	public JDFEndSheet getEndSheet(int iSkip)
 	{

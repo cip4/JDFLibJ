@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.span.JDFOptionSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoThreadSewing : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoThreadSewing : public JDFElement
  */
 
 public abstract class JDFAutoThreadSewing extends JDFElement
@@ -138,7 +135,9 @@ public abstract class JDFAutoThreadSewing extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -164,7 +163,8 @@ public abstract class JDFAutoThreadSewing extends JDFElement
 	/**
 	 * (29) append element Sealing
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSealing()
 	{

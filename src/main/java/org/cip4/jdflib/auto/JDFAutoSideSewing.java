@@ -74,10 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoSideSewing : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSideSewing : public JDFElement
  */
 
 public abstract class JDFAutoSideSewing extends JDFElement

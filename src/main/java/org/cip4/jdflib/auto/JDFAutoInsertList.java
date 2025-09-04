@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFInsert;
 
 /**
- *****************************************************************************
- * class JDFAutoInsertList : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoInsertList : public JDFElement
  */
 
 public abstract class JDFAutoInsertList extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoInsertList extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoInsertList extends JDFElement
 	 * (27) const get element Insert
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFInsert the element default is getInsert(0)
+	 * @return JDFInsert the element
+	 *         default is getInsert(0)
 	 */
 	public JDFInsert getInsert(int iSkip)
 	{

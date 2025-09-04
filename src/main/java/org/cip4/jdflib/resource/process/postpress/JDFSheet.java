@@ -72,9 +72,9 @@
  * class JDFSheet
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
+ * @Author: sabjon@topmail.de    using a code generator
+ * Warning! very preliminary test version.
+ * Interface subject to change without prior notice!
  */
 
 package org.cip4.jdflib.resource.process.postpress;
@@ -82,6 +82,7 @@ package org.cip4.jdflib.resource.process.postpress;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -103,7 +104,6 @@ import org.cip4.jdflib.resource.process.JDFSurface;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         09.12.2008
  */
 public class JDFSheet extends JDFSignature
@@ -115,7 +115,8 @@ public class JDFSheet extends JDFSignature
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0),
+				null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
@@ -145,7 +146,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * Constructor for JDFSheet
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -156,7 +157,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * Constructor for JDFSheet
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -168,7 +169,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * Constructor for JDFSheet
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -235,7 +236,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * const get first element
-	 * 
+	 *
 	 * @deprecated use getSurface(EnumSide side)
 	 */
 	@Deprecated
@@ -271,7 +272,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * if this is a new layout, return the partition key signaturename else return Signature/@Name of this or its appropriate parent
-	 * 
+	 *
 	 * @return the name of the signature
 	 */
 	@Override
@@ -313,7 +314,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * test element Surface existance
-	 * 
+	 *
 	 * @return boolean true if a matching element exists
 	 */
 	public boolean hasFrontSurface()
@@ -323,14 +324,16 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param JDFSurface refTarget the element that is referenced
 	 */
 	public void refFrontSurface(final JDFSurface refTarget)
 	{
 		refElement(refTarget);
 		if (refTarget != null)
+		{
 			refTarget.setSide(EnumSide.Back);
+		}
 	}
 
 	// _______________________________________________________________
@@ -349,7 +352,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * const get first element
-	 * 
+	 *
 	 * @deprecated use getSurface(EnumSide side)
 	 */
 	@Deprecated
@@ -385,7 +388,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * test element Surface existance
-	 * 
+	 *
 	 * @return boolean true if a matching element exists
 	 */
 	public boolean hasBackSurface()
@@ -395,19 +398,21 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param JDFSurface refTarget the element that is referenced
 	 */
 	public void refBackSurface(final JDFSurface refTarget)
 	{
 		refElement(refTarget);
 		if (refTarget != null)
+		{
 			refTarget.setSide(EnumSide.Back);
+		}
 	}
 
 	/**
 	 * gets or appends a signature in both old and new Layouts if old: a <Surface> element if new: a Side partition leaf
-	 * 
+	 *
 	 * @param iSkip the number of signatures to skip
 	 */
 	public JDFSurface getCreateSurface(final int iSkip)
@@ -422,7 +427,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * gets a Surface in both old and new Layouts if old: a <Surface> element if new: a Side partition leaf
-	 * 
+	 *
 	 * @param iSkip the number of signatures to skip
 	 */
 	public JDFSurface getSurface(final int iSkip)
@@ -445,7 +450,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * counts the number of Surfaces in both old and new Layouts if old: the number of <Surface> elements if new: the number of Side partition leaves
-	 * 
+	 *
 	 * @return the number of Surfaces
 	 */
 	public int numSurfaces()
@@ -455,9 +460,9 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * (28) get vector of all direct child elements Surface
-	 * 
+	 *
 	 * @param JDFAttributeMap mAttrib the map of attributes to select
-	 * @param boolean bAnd if true all attributes in the map are AND'ed, else they are OR'ed
+	 * @param boolean         bAnd if true all attributes in the map are AND'ed, else they are OR'ed
 	 * @deprecated use getChildElementVector() instead
 	 */
 	@Deprecated
@@ -476,7 +481,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * get the vector of surfaces in this sheet
-	 * 
+	 *
 	 * @return {@link VElement} the vector of surfaces in this
 	 */
 	public VElement getSurfaceVector()
@@ -486,7 +491,7 @@ public class JDFSheet extends JDFSignature
 
 	/**
 	 * (31) create inter-resource link to refTarget
-	 * 
+	 *
 	 * @param JDFSurface refTarget the element that is referenced
 	 */
 	public void refSurface(final JDFSurface refTarget)

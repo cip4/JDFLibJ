@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoAuthenticationQuParams.EAuthenticationType;
+import org.cip4.jdflib.auto.JDFAutoAuthenticationQuParams.EnumAuthenticationType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -89,10 +91,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoAuthenticationCmdParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAuthenticationCmdParams : public JDFElement
  */
 
 public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
@@ -103,7 +102,8 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumAuthenticationType.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.REASON, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASONDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.SECUREURL, 0x3333333333l, AttributeInfo.EnumAttributeType.URL, null, null);
@@ -162,83 +162,6 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	protected JDFAutoAuthenticationCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * Enumeration strings for AuthenticationType
-	 */
-
-	public enum EAuthenticationType
-	{
-		AsClient, AsServer;
-
-		public static EAuthenticationType getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EAuthenticationType.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for AuthenticationType
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumAuthenticationType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumAuthenticationType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumAuthenticationType getEnum(String enumName)
-		{
-			return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumAuthenticationType getEnum(int enumValue)
-		{
-			return (EnumAuthenticationType) getEnum(EnumAuthenticationType.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumAuthenticationType.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumAuthenticationType.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumAuthenticationType.class);
-		}
-
-		/**  */
-		public static final EnumAuthenticationType AsClient = new EnumAuthenticationType("AsClient");
-		/**  */
-		public static final EnumAuthenticationType AsServer = new EnumAuthenticationType("AsServer");
 	}
 
 	/**
@@ -331,11 +254,14 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AuthenticationType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AuthenticationType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -359,14 +285,15 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AuthenticationType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AuthenticationType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AuthenticationType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAuthenticationType(EAuthenticationType) based on java.lang.enum instead
+	 * @deprecated use SetAuthenticationType(EAuthenticationType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAuthenticationType(EnumAuthenticationType enumVar)
@@ -378,7 +305,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * (9) get attribute AuthenticationType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAuthenticationType getEAuthenticationType() based on java.lang.enum instead
+	 * @deprecated use EAuthenticationType GetEAuthenticationType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAuthenticationType getAuthenticationType()
@@ -387,7 +314,9 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Reason ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Reason
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Reason
@@ -410,13 +339,15 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Reason ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Reason
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Reason
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setReason(EReason) based on java.lang.enum instead
+	 * @deprecated use SetReason(EReason) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setReason(EnumReason enumVar)
@@ -428,7 +359,7 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * (9) get attribute Reason
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EReason getEReason() based on java.lang.enum instead
+	 * @deprecated use EReason GetEReason() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumReason getReason()
@@ -437,7 +368,8 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReasonDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReasonDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -461,7 +393,9 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SecureURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SecureURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SecureURL
@@ -484,7 +418,9 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -522,7 +458,8 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{
@@ -584,7 +521,8 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
 	 * (27) const get element Certificate
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFElement the element default is getCertificate(0)
+	 * @return JDFElement the element
+	 *         default is getCertificate(0)
 	 */
 	public JDFElement getCertificate(int iSkip)
 	{

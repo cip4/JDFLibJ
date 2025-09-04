@@ -79,10 +79,7 @@ import org.cip4.jdflib.resource.process.JDFBarcodeReproParams;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 
 /**
- *****************************************************************************
- * class JDFAutoBarcodeProductionParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBarcodeProductionParams : public JDFElement
  */
 
 public abstract class JDFAutoBarcodeProductionParams extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -166,7 +165,8 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	/**
 	 * (29) append element BarcodeReproParams
 	 *
-	 * @return JDFBarcodeReproParams the element @ if the element already exists
+	 * @return JDFBarcodeReproParams the element
+	 * @ if the element already exists
 	 */
 	public JDFBarcodeReproParams appendBarcodeReproParams()
 	{
@@ -196,7 +196,8 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
 	/**
 	 * (29) append element IdentificationField
 	 *
-	 * @return JDFIdentificationField the element @ if the element already exists
+	 * @return JDFIdentificationField the element
+	 * @ if the element already exists
 	 */
 	public JDFIdentificationField appendIdentificationField()
 	{

@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoOccupation : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoOccupation : public JDFElement
  */
 
 public abstract class JDFAutoOccupation extends JDFElement
@@ -163,11 +160,15 @@ public abstract class JDFAutoOccupation extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Busy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Busy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Busy
@@ -190,7 +191,9 @@ public abstract class JDFAutoOccupation extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -213,7 +216,9 @@ public abstract class JDFAutoOccupation extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -236,7 +241,8 @@ public abstract class JDFAutoOccupation extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -260,7 +266,9 @@ public abstract class JDFAutoOccupation extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -298,7 +306,8 @@ public abstract class JDFAutoOccupation extends JDFElement
 	 * (27) const get element Device
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element default is getDevice(0)
+	 * @return JDFDevice the element
+	 *         default is getDevice(0)
 	 */
 	public JDFDevice getDevice(int iSkip)
 	{
@@ -348,7 +357,8 @@ public abstract class JDFAutoOccupation extends JDFElement
 	/**
 	 * (29) append element Employee
 	 *
-	 * @return JDFEmployee the element @ if the element already exists
+	 * @return JDFEmployee the element
+	 * @ if the element already exists
 	 */
 	public JDFEmployee appendEmployee()
 	{
@@ -390,7 +400,8 @@ public abstract class JDFAutoOccupation extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

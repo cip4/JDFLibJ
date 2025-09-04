@@ -80,10 +80,7 @@ import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanShape;
 
 /**
- *****************************************************************************
- * class JDFAutoBookCase : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBookCase : public JDFElement
  */
 
 public abstract class JDFAutoBookCase extends JDFElement
@@ -142,7 +139,9 @@ public abstract class JDFAutoBookCase extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -168,7 +167,8 @@ public abstract class JDFAutoBookCase extends JDFElement
 	/**
 	 * (29) append element HeadBands
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendHeadBands()
 	{
@@ -198,7 +198,8 @@ public abstract class JDFAutoBookCase extends JDFElement
 	/**
 	 * (29) append element Shape
 	 *
-	 * @return JDFSpanShape the element @ if the element already exists
+	 * @return JDFSpanShape the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanShape appendShape()
 	{
@@ -228,7 +229,8 @@ public abstract class JDFAutoBookCase extends JDFElement
 	/**
 	 * (29) append element Thickness
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendThickness()
 	{

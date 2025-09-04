@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFProductionSubPath;
 
 /**
- *****************************************************************************
- * class JDFAutoProductionPath : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoProductionPath : public JDFResource
  */
 
 public abstract class JDFAutoProductionPath extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,14 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProductionPathID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ProductionPathID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -206,7 +206,9 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -232,7 +234,8 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	/**
 	 * (29) append element FolderSuperstructureWebPath
 	 *
-	 * @return JDFProductionSubPath the element @ if the element already exists
+	 * @return JDFProductionSubPath the element
+	 * @ if the element already exists
 	 */
 	public JDFProductionSubPath appendFolderSuperstructureWebPath()
 	{
@@ -274,7 +277,8 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * (27) const get element PostPressComponentPath
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFProductionSubPath the element default is getPostPressComponentPath(0)
+	 * @return JDFProductionSubPath the element
+	 *         default is getPostPressComponentPath(0)
 	 */
 	public JDFProductionSubPath getPostPressComponentPath(int iSkip)
 	{
@@ -336,7 +340,8 @@ public abstract class JDFAutoProductionPath extends JDFResource
 	 * (27) const get element PrintingUnitWebPath
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFProductionSubPath the element default is getPrintingUnitWebPath(0)
+	 * @return JDFProductionSubPath the element
+	 *         default is getPrintingUnitWebPath(0)
 	 */
 	public JDFProductionSubPath getPrintingUnitWebPath(int iSkip)
 	{

@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
 import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
 
 /**
- *****************************************************************************
- * class JDFAutoFormatConversionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFormatConversionParams : public JDFResource
  */
 
 public abstract class JDFAutoFormatConversionParams extends JDFResource
@@ -149,7 +146,7 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -164,7 +161,9 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -190,7 +189,8 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -230,7 +230,8 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	/**
 	 * (29) append element TIFFFormatParams
 	 *
-	 * @return JDFTIFFFormatParams the element @ if the element already exists
+	 * @return JDFTIFFFormatParams the element
+	 * @ if the element already exists
 	 */
 	public JDFTIFFFormatParams appendTIFFFormatParams()
 	{
@@ -260,7 +261,8 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	/**
 	 * (29) append element ImageCompressionParams
 	 *
-	 * @return JDFImageCompressionParams the element @ if the element already exists
+	 * @return JDFImageCompressionParams the element
+	 * @ if the element already exists
 	 */
 	public JDFImageCompressionParams appendImageCompressionParams()
 	{
@@ -300,7 +302,8 @@ public abstract class JDFAutoFormatConversionParams extends JDFResource
 	/**
 	 * (29) append element ColorPool
 	 *
-	 * @return JDFColorPool the element @ if the element already exists
+	 * @return JDFColorPool the element
+	 * @ if the element already exists
 	 */
 	public JDFColorPool appendColorPool()
 	{

@@ -8,7 +8,10 @@
 package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoCutMark.EMarkType;
 import org.cip4.jdflib.auto.JDFAutoSurfaceMark;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
 import org.w3c.dom.DOMException;
 
 public class JDFSurfaceMark extends JDFAutoSurfaceMark
@@ -17,7 +20,7 @@ public class JDFSurfaceMark extends JDFAutoSurfaceMark
 
 	/**
 	 * Constructor for JDFCollectingParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -29,7 +32,7 @@ public class JDFSurfaceMark extends JDFAutoSurfaceMark
 
 	/**
 	 * Constructor for JDFCollectingParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -42,16 +45,26 @@ public class JDFSurfaceMark extends JDFAutoSurfaceMark
 
 	/**
 	 * Constructor for JDFCollectingParams
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSurfaceMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFSurfaceMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	public JDFCutMark appendCutMark(EMarkType mt, JDFXYPair pos)
+	{
+		JDFCutMark cm = appendCutMark();
+		cm.setMarkType(mt);
+		cm.setPosition(pos);
+		return cm;
+
 	}
 
 }

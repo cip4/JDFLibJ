@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoShapeTemplate : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShapeTemplate : public JDFElement
  */
 
 public abstract class JDFAutoShapeTemplate extends JDFElement
@@ -159,11 +156,14 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InnerDimensions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InnerDimensions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -179,17 +179,20 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	/**
 	 * (20) get JDFShape attribute InnerDimensions
 	 *
-	 * @return JDFShape the value of the attribute, null if a the attribute value is not a valid to create a JDFShape
+	 * @return JDFShape the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShape
 	 */
 	public JDFShape getInnerDimensions()
 	{
-		final String strAttrName = getAttribute(AttributeName.INNERDIMENSIONS, null, null);
-		final JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
+		String strAttrName = getAttribute(AttributeName.INNERDIMENSIONS, null, null);
+		JDFShape nPlaceHolder = JDFShape.createShape(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -212,7 +215,9 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Standard ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Standard
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Standard
@@ -235,7 +240,9 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -273,7 +280,8 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{

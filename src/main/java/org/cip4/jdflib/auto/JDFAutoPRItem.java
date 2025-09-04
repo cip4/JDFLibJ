@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.JDFPRError;
 import org.cip4.jdflib.resource.process.JDFPRGroup;
 
 /**
- *****************************************************************************
- * class JDFAutoPRItem : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPRItem : public JDFElement
  */
 
 public abstract class JDFAutoPRItem extends JDFElement
@@ -161,11 +158,15 @@ public abstract class JDFAutoPRItem extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActionRef ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActionRef
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ActionRef
@@ -188,7 +189,9 @@ public abstract class JDFAutoPRItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Occurrences ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Occurrences
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Occurrences
@@ -211,7 +214,9 @@ public abstract class JDFAutoPRItem extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PageSet ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PageSet
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PageSet
@@ -226,17 +231,20 @@ public abstract class JDFAutoPRItem extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute PageSet
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPageSet()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGESET, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGESET, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -274,7 +282,8 @@ public abstract class JDFAutoPRItem extends JDFElement
 	 * (27) const get element PRError
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPRError the element default is getPRError(0)
+	 * @return JDFPRError the element
+	 *         default is getPRError(0)
 	 */
 	public JDFPRError getPRError(int iSkip)
 	{
@@ -336,7 +345,8 @@ public abstract class JDFAutoPRItem extends JDFElement
 	 * (27) const get element PRGroup
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPRGroup the element default is getPRGroup(0)
+	 * @return JDFPRGroup the element
+	 *         default is getPRGroup(0)
 	 */
 	public JDFPRGroup getPRGroup(int iSkip)
 	{

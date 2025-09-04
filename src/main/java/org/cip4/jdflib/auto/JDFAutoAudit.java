@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoAudit : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoAudit : public JDFElement
  */
 
 public abstract class JDFAutoAudit extends JDFElement
@@ -146,11 +143,15 @@ public abstract class JDFAutoAudit extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentName ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AgentName
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AgentName
@@ -173,7 +174,8 @@ public abstract class JDFAutoAudit extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AgentVersion
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AgentVersion
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -197,7 +199,9 @@ public abstract class JDFAutoAudit extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Author ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Author
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Author
@@ -220,7 +224,9 @@ public abstract class JDFAutoAudit extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ID
@@ -245,7 +251,8 @@ public abstract class JDFAutoAudit extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -269,7 +276,9 @@ public abstract class JDFAutoAudit extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute refID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute refID
@@ -292,7 +301,9 @@ public abstract class JDFAutoAudit extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpawnID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpawnID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute SpawnID
@@ -315,7 +326,9 @@ public abstract class JDFAutoAudit extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TimeStamp ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TimeStamp
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute TimeStamp
@@ -339,8 +352,8 @@ public abstract class JDFAutoAudit extends JDFElement
 	 */
 	public JDFDate getTimeStamp()
 	{
-		final String str = getAttribute(AttributeName.TIMESTAMP, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.TIMESTAMP, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

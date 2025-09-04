@@ -82,10 +82,7 @@ import org.cip4.jdflib.span.JDFSpanGlueProcedure;
 import org.cip4.jdflib.span.JDFSpanScoring;
 
 /**
- *****************************************************************************
- * class JDFAutoSoftCoverBinding : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSoftCoverBinding : public JDFElement
  */
 
 public abstract class JDFAutoSoftCoverBinding extends JDFElement
@@ -155,7 +152,9 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -181,7 +180,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element BlockThreadSewing
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendBlockThreadSewing()
 	{
@@ -211,7 +211,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element EndSheets
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendEndSheets()
 	{
@@ -241,7 +242,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element FoldingWidth
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendFoldingWidth()
 	{
@@ -271,7 +273,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element FoldingWidthBack
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendFoldingWidthBack()
 	{
@@ -301,7 +304,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element GlueProcedure
 	 *
-	 * @return JDFSpanGlueProcedure the element @ if the element already exists
+	 * @return JDFSpanGlueProcedure the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanGlueProcedure appendGlueProcedure()
 	{
@@ -331,7 +335,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element Scoring
 	 *
-	 * @return JDFSpanScoring the element @ if the element already exists
+	 * @return JDFSpanScoring the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanScoring appendScoring()
 	{
@@ -361,7 +366,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineBrushing
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineBrushing()
 	{
@@ -391,7 +397,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineFiberRoughing
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineFiberRoughing()
 	{
@@ -421,7 +428,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineGlue
 	 *
-	 * @return JDFSpanGlue the element @ if the element already exists
+	 * @return JDFSpanGlue the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanGlue appendSpineGlue()
 	{
@@ -451,7 +459,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineLevelling
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineLevelling()
 	{
@@ -481,7 +490,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineMilling
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineMilling()
 	{
@@ -511,7 +521,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineNotching
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineNotching()
 	{
@@ -541,7 +552,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineSanding
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineSanding()
 	{
@@ -571,7 +583,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
 	/**
 	 * (29) append element SpineShredding
 	 *
-	 * @return JDFOptionSpan the element @ if the element already exists
+	 * @return JDFOptionSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFOptionSpan appendSpineShredding()
 	{

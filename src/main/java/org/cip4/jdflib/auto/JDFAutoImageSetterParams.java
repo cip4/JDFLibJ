@@ -76,6 +76,12 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EMirrorAround;
+import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumMirrorAround;
+import org.cip4.jdflib.auto.JDFAutoMedia.EPolarity;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumPolarity;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -91,10 +97,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoImageSetterParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoImageSetterParams : public JDFResource
  */
 
 public abstract class JDFAutoImageSetterParams extends JDFResource
@@ -105,12 +108,16 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[18];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIRRORAROUND, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorAround.getEnum(0), "None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), "Positive");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIDES, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSidedFront");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.MIRRORAROUND, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumMirrorAround.getEnum(0),
+				"None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POLARITY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0),
+				"Positive");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.SIDES, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0),
+				"OneSidedFront");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ADVANCEDISTANCE, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.BURNOUTAREA, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.CENTERACROSS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCenterAcross.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.CENTERACROSS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCenterAcross.getEnum(0),
+				null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.CUTMEDIA, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.MANUALFEED, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINBOTTOM, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -121,7 +128,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		atrInfoTable[13] = new AtrInfoTable(AttributeName.PUNCHTYPE, 0x4444444333l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[14] = new AtrInfoTable(AttributeName.RESOLUTION, 0x3333333333l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[15] = new AtrInfoTable(AttributeName.ROLLCUT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[16] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0),
+				null);
 		atrInfoTable[17] = new AtrInfoTable(AttributeName.TRANSFERCURVE, 0x3333333333l, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
 	}
 
@@ -186,7 +194,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -198,247 +206,6 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	public EnumResourceClass getValidClass()
 	{
 		return JDFResource.EnumResourceClass.Parameter;
-	}
-
-	/**
-	 * Enumeration strings for MirrorAround
-	 */
-
-	public enum EMirrorAround
-	{
-		None, FeedDirection, MediaWidth, Both;
-
-		public static EMirrorAround getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EMirrorAround.class, val, EMirrorAround.None);
-		}
-	}
-
-	/**
-	 * Enumeration strings for MirrorAround
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumMirrorAround extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumMirrorAround(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumMirrorAround getEnum(String enumName)
-		{
-			return (EnumMirrorAround) getEnum(EnumMirrorAround.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumMirrorAround getEnum(int enumValue)
-		{
-			return (EnumMirrorAround) getEnum(EnumMirrorAround.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumMirrorAround.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumMirrorAround.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumMirrorAround.class);
-		}
-
-		/**  */
-		public static final EnumMirrorAround None = new EnumMirrorAround("None");
-		/**  */
-		public static final EnumMirrorAround FeedDirection = new EnumMirrorAround("FeedDirection");
-		/**  */
-		public static final EnumMirrorAround MediaWidth = new EnumMirrorAround("MediaWidth");
-		/**  */
-		public static final EnumMirrorAround Both = new EnumMirrorAround("Both");
-	}
-
-	/**
-	 * Enumeration strings for Polarity
-	 */
-
-	public enum EPolarity
-	{
-		Positive, Negative;
-
-		public static EPolarity getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPolarity.class, val, EPolarity.Positive);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Polarity
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPolarity extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPolarity(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPolarity getEnum(String enumName)
-		{
-			return (EnumPolarity) getEnum(EnumPolarity.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPolarity getEnum(int enumValue)
-		{
-			return (EnumPolarity) getEnum(EnumPolarity.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPolarity.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPolarity.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPolarity.class);
-		}
-
-		/**  */
-		public static final EnumPolarity Positive = new EnumPolarity("Positive");
-		/**  */
-		public static final EnumPolarity Negative = new EnumPolarity("Negative");
-	}
-
-	/**
-	 * Enumeration strings for Sides
-	 */
-
-	public enum ESides
-	{
-		OneSidedBackFlipX, OneSidedBackFlipY, OneSidedFront, TwoSidedFlipX, TwoSidedFlipY;
-
-		public static ESides getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESides.class, val, ESides.OneSidedFront);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Sides
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSides extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSides(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSides getEnum(String enumName)
-		{
-			return (EnumSides) getEnum(EnumSides.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSides getEnum(int enumValue)
-		{
-			return (EnumSides) getEnum(EnumSides.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSides.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSides.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSides.class);
-		}
-
-		/**  */
-		public static final EnumSides OneSidedBackFlipX = new EnumSides("OneSidedBackFlipX");
-		/**  */
-		public static final EnumSides OneSidedBackFlipY = new EnumSides("OneSidedBackFlipY");
-		/**  */
-		public static final EnumSides OneSidedFront = new EnumSides("OneSidedFront");
-		/**  */
-		public static final EnumSides TwoSidedFlipX = new EnumSides("TwoSidedFlipX");
-		/**  */
-		public static final EnumSides TwoSidedFlipY = new EnumSides("TwoSidedFlipY");
 	}
 
 	/**
@@ -522,97 +289,15 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 		public static final EnumCenterAcross Both = new EnumCenterAcross("Both");
 	}
 
-	/**
-	 * Enumeration strings for SourceWorkStyle
-	 */
-
-	public enum ESourceWorkStyle
-	{
-		Simplex, Perfecting, WorkAndBack, WorkAndTurn, WorkAndTumble, WorkAndTwist;
-
-		public static ESourceWorkStyle getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESourceWorkStyle.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for SourceWorkStyle
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSourceWorkStyle extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSourceWorkStyle(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSourceWorkStyle getEnum(String enumName)
-		{
-			return (EnumSourceWorkStyle) getEnum(EnumSourceWorkStyle.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSourceWorkStyle getEnum(int enumValue)
-		{
-			return (EnumSourceWorkStyle) getEnum(EnumSourceWorkStyle.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSourceWorkStyle.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSourceWorkStyle.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSourceWorkStyle.class);
-		}
-
-		/**  */
-		public static final EnumSourceWorkStyle Simplex = new EnumSourceWorkStyle("Simplex");
-		/**  */
-		public static final EnumSourceWorkStyle Perfecting = new EnumSourceWorkStyle("Perfecting");
-		/**  */
-		public static final EnumSourceWorkStyle WorkAndBack = new EnumSourceWorkStyle("WorkAndBack");
-		/**  */
-		public static final EnumSourceWorkStyle WorkAndTurn = new EnumSourceWorkStyle("WorkAndTurn");
-		/**  */
-		public static final EnumSourceWorkStyle WorkAndTumble = new EnumSourceWorkStyle("WorkAndTumble");
-		/**  */
-		public static final EnumSourceWorkStyle WorkAndTwist = new EnumSourceWorkStyle("WorkAndTwist");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MirrorAround
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -636,14 +321,15 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MirrorAround
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MirrorAround
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute MirrorAround
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMirrorAround(EMirrorAround) based on java.lang.enum instead
+	 * @deprecated use SetMirrorAround(EMirrorAround) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMirrorAround(EnumMirrorAround enumVar)
@@ -655,7 +341,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute MirrorAround
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMirrorAround getEMirrorAround() based on java.lang.enum instead
+	 * @deprecated use EMirrorAround GetEMirrorAround() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMirrorAround getMirrorAround()
@@ -664,7 +350,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Polarity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Polarity
@@ -687,13 +375,15 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Polarity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Polarity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Polarity
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPolarity(EPolarity) based on java.lang.enum instead
+	 * @deprecated use SetPolarity(EPolarity) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPolarity(EnumPolarity enumVar)
@@ -705,7 +395,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute Polarity
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPolarity getEPolarity() based on java.lang.enum instead
+	 * @deprecated use EPolarity GetEPolarity() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPolarity getPolarity()
@@ -714,7 +404,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Sides
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Sides
@@ -737,13 +429,15 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sides ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Sides
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Sides
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSides(ESides) based on java.lang.enum instead
+	 * @deprecated use SetSides(ESides) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSides(EnumSides enumVar)
@@ -755,7 +449,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute Sides
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESides getESides() based on java.lang.enum instead
+	 * @deprecated use ESides GetESides() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSides getSides()
@@ -764,7 +458,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdvanceDistance
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AdvanceDistance
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -788,7 +483,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BurnOutArea ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BurnOutArea
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BurnOutArea
@@ -803,17 +500,19 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute BurnOutArea
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getBurnOutArea()
 	{
-		final String strAttrName = getAttribute(AttributeName.BURNOUTAREA, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BURNOUTAREA, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CenterAcross
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CenterAcross
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -837,14 +536,15 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CenterAcross
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CenterAcross
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CenterAcross
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setCenterAcross(ECenterAcross) based on java.lang.enum instead
+	 * @deprecated use SetCenterAcross(ECenterAcross) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCenterAcross(EnumCenterAcross enumVar)
@@ -856,7 +556,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute CenterAcross
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ECenterAcross getECenterAcross() based on java.lang.enum instead
+	 * @deprecated use ECenterAcross GetECenterAcross() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumCenterAcross getCenterAcross()
@@ -865,7 +565,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutMedia ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutMedia
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutMedia
@@ -888,7 +590,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ManualFeed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ManualFeed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ManualFeed
@@ -911,7 +615,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginBottom
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NonPrintableMarginBottom
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -935,7 +640,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginLeft
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NonPrintableMarginLeft
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -959,7 +665,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginRight
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NonPrintableMarginRight
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -983,7 +690,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NonPrintableMarginTop
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NonPrintableMarginTop
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1007,7 +715,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Punch ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Punch
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Punch
@@ -1030,7 +740,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PunchType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PunchType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PunchType
@@ -1053,7 +765,9 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Resolution
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Resolution
@@ -1068,17 +782,20 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Resolution
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getResolution()
 	{
-		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RollCut ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RollCut
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RollCut
@@ -1101,7 +818,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceWorkStyle
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceWorkStyle
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1109,7 +827,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setSourceWorkStyle(ESourceWorkStyle enumVar)
+	public void setSourceWorkStyle(EWorkStyle enumVar)
 	{
 		setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -1119,23 +837,24 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public ESourceWorkStyle getESourceWorkStyle()
+	public EWorkStyle getESourceWorkStyle()
 	{
-		return ESourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
+		return EWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceWorkStyle
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceWorkStyle
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SourceWorkStyle
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSourceWorkStyle(ESourceWorkStyle) based on java.lang.enum instead
+	 * @deprecated use SetSourceWorkStyle(EWorkStyle) based on java.lang.enum instead
 	 */
 	@Deprecated
-	public void setSourceWorkStyle(EnumSourceWorkStyle enumVar)
+	public void setSourceWorkStyle(EnumWorkStyle enumVar)
 	{
 		setAttribute(AttributeName.SOURCEWORKSTYLE, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -1144,16 +863,17 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	 * (9) get attribute SourceWorkStyle
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESourceWorkStyle getESourceWorkStyle() based on java.lang.enum instead
+	 * @deprecated use EWorkStyle GetESourceWorkStyle() based on java.lang.enum instead
 	 */
 	@Deprecated
-	public EnumSourceWorkStyle getSourceWorkStyle()
+	public EnumWorkStyle getSourceWorkStyle()
 	{
-		return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
+		return EnumWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransferCurve
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TransferCurve
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -1169,17 +889,20 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	/**
 	 * (20) get JDFTransferFunction attribute TransferCurve
 	 *
-	 * @return JDFTransferFunction the value of the attribute, null if a the attribute value is not a valid to create a JDFTransferFunction
+	 * @return JDFTransferFunction the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFTransferFunction
 	 */
 	public JDFTransferFunction getTransferCurve()
 	{
-		final String strAttrName = getAttribute(AttributeName.TRANSFERCURVE, null, null);
-		final JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TRANSFERCURVE, null, null);
+		JDFTransferFunction nPlaceHolder = JDFTransferFunction.createTransferFunction(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -1194,7 +917,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * (25) getCreateMedia
-	 * 
+	 *
 	 * @return JDFMedia the element
 	 */
 	public JDFMedia getCreateMedia()
@@ -1205,7 +928,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{
@@ -1234,7 +958,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 
 	/**
 	 * (25) getCreateFitPolicy
-	 * 
+	 *
 	 * @return JDFFitPolicy the element
 	 */
 	public JDFFitPolicy getCreateFitPolicy()
@@ -1245,7 +969,8 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
 	/**
 	 * (29) append element FitPolicy
 	 *
-	 * @return JDFFitPolicy the element @ if the element already exists
+	 * @return JDFFitPolicy the element
+	 * @ if the element already exists
 	 */
 	public JDFFitPolicy appendFitPolicy()
 	{

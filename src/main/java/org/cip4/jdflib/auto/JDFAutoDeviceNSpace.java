@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoDeviceNSpace : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeviceNSpace : public JDFElement
  */
 
 public abstract class JDFAutoDeviceNSpace extends JDFElement
@@ -157,11 +154,15 @@ public abstract class JDFAutoDeviceNSpace extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute N ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute N
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute N
@@ -184,7 +185,9 @@ public abstract class JDFAutoDeviceNSpace extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Name ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Name
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Name
@@ -207,7 +210,9 @@ public abstract class JDFAutoDeviceNSpace extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -245,7 +250,8 @@ public abstract class JDFAutoDeviceNSpace extends JDFElement
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 
 /**
- *****************************************************************************
- * class JDFAutoTool : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTool : public JDFResource
  */
 
 public abstract class JDFAutoTool extends JDFResource
@@ -166,7 +163,7 @@ public abstract class JDFAutoTool extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Handling);
 		return bRet;
 	}
@@ -181,11 +178,15 @@ public abstract class JDFAutoTool extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToolID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToolID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ToolID
@@ -208,7 +209,8 @@ public abstract class JDFAutoTool extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SerialNumber
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SerialNumber
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -232,7 +234,9 @@ public abstract class JDFAutoTool extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToolAmount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToolAmount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ToolAmount
@@ -255,7 +259,9 @@ public abstract class JDFAutoTool extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToolType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToolType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ToolType
@@ -278,7 +284,9 @@ public abstract class JDFAutoTool extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -318,7 +326,8 @@ public abstract class JDFAutoTool extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -392,7 +401,8 @@ public abstract class JDFAutoTool extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

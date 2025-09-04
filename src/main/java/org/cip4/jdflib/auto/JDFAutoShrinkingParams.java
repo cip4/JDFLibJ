@@ -84,10 +84,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoShrinkingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShrinkingParams : public JDFResource
  */
 
 public abstract class JDFAutoShrinkingParams extends JDFResource
@@ -98,7 +95,8 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHRINKINGMETHOD, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumShrinkingMethod.getEnum(0), "ShrinkHot");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SHRINKINGMETHOD, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumShrinkingMethod.getEnum(0), "ShrinkHot");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DURATION, 0x3333333331l, AttributeInfo.EnumAttributeType.duration, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x3333333331l, AttributeInfo.EnumAttributeType.double_, null, null);
 	}
@@ -151,7 +149,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -243,11 +241,14 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShrinkingMethod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShrinkingMethod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -271,14 +272,15 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShrinkingMethod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShrinkingMethod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ShrinkingMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setShrinkingMethod(EShrinkingMethod) based on java.lang.enum instead
+	 * @deprecated use SetShrinkingMethod(EShrinkingMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setShrinkingMethod(EnumShrinkingMethod enumVar)
@@ -290,7 +292,7 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	 * (9) get attribute ShrinkingMethod
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EShrinkingMethod getEShrinkingMethod() based on java.lang.enum instead
+	 * @deprecated use EShrinkingMethod GetEShrinkingMethod() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumShrinkingMethod getShrinkingMethod()
@@ -299,7 +301,9 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Duration ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Duration
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Duration
@@ -314,17 +318,20 @@ public abstract class JDFAutoShrinkingParams extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute Duration
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getDuration()
 	{
-		final String strAttrName = getAttribute(AttributeName.DURATION, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DURATION, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Temperature ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Temperature
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Temperature

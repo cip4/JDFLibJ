@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoErrorData : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoErrorData : public JDFElement
  */
 
 public abstract class JDFAutoErrorData extends JDFElement
@@ -226,11 +223,15 @@ public abstract class JDFAutoErrorData extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ErrorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ErrorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ErrorType
@@ -253,13 +254,15 @@ public abstract class JDFAutoErrorData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ErrorType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ErrorType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ErrorType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setErrorType(EErrorType) based on java.lang.enum instead
+	 * @deprecated use SetErrorType(EErrorType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setErrorType(EnumErrorType enumVar)
@@ -271,7 +274,7 @@ public abstract class JDFAutoErrorData extends JDFElement
 	 * (9) get attribute ErrorType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EErrorType getEErrorType() based on java.lang.enum instead
+	 * @deprecated use EErrorType GetEErrorType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumErrorType getErrorType()
@@ -280,7 +283,9 @@ public abstract class JDFAutoErrorData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ErrorURL ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ErrorURL
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ErrorURL
@@ -303,7 +308,8 @@ public abstract class JDFAutoErrorData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FixExpression
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FixExpression
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -327,7 +333,9 @@ public abstract class JDFAutoErrorData extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Path ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Path
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Path

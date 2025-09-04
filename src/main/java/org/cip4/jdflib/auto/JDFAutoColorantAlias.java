@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoColorantAlias : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorantAlias : public JDFResource
  */
 
 public abstract class JDFAutoColorantAlias extends JDFResource
@@ -163,7 +160,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -178,11 +175,14 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReplacementColorantName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReplacementColorantName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -206,7 +206,9 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RawNames ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RawNames
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RawNames
@@ -225,14 +227,16 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 */
 	public VString getRawNames()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.RAWNAMES, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.RAWNAMES, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -270,7 +274,8 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

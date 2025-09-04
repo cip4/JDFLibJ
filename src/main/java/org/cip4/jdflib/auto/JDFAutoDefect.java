@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDefect : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDefect : public JDFElement
  */
 
 public abstract class JDFAutoDefect extends JDFElement
@@ -105,7 +102,8 @@ public abstract class JDFAutoDefect extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BOX, 0x3331111111l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.DEFECTREASON, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFECTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDefectType.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFECTTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumDefectType.getEnum(0),
+				null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.DEFECTTYPEDETAILS, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.FACE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumFace.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.SEVERITY, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -337,11 +335,15 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Box
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Box
@@ -356,17 +358,19 @@ public abstract class JDFAutoDefect extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute Box
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.BOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefectReason
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefectReason
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -390,7 +394,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefectType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefectType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DefectType
@@ -413,13 +419,15 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefectType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefectType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DefectType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDefectType(EDefectType) based on java.lang.enum instead
+	 * @deprecated use SetDefectType(EDefectType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDefectType(EnumDefectType enumVar)
@@ -431,7 +439,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * (9) get attribute DefectType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDefectType getEDefectType() based on java.lang.enum instead
+	 * @deprecated use EDefectType GetEDefectType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDefectType getDefectType()
@@ -440,7 +448,8 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefectTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefectTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -464,7 +473,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Face ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Face
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Face
@@ -487,13 +498,15 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Face ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Face
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Face
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setFace(EFace) based on java.lang.enum instead
+	 * @deprecated use SetFace(EFace) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFace(EnumFace enumVar)
@@ -505,7 +518,7 @@ public abstract class JDFAutoDefect extends JDFElement
 	 * (9) get attribute Face
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFace getEFace() based on java.lang.enum instead
+	 * @deprecated use EFace GetEFace() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFace getFace()
@@ -514,7 +527,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Severity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Severity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Severity
@@ -537,7 +552,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Size
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Size
@@ -560,7 +577,9 @@ public abstract class JDFAutoDefect extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -586,7 +605,8 @@ public abstract class JDFAutoDefect extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 
 /**
- *****************************************************************************
- * class JDFAutoColorMeasurement : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorMeasurement : public JDFElement
  */
 
 public abstract class JDFAutoColorMeasurement extends JDFElement
@@ -138,7 +135,9 @@ public abstract class JDFAutoColorMeasurement extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -164,7 +163,8 @@ public abstract class JDFAutoColorMeasurement extends JDFElement
 	/**
 	 * (29) append element ColorControlStrip
 	 *
-	 * @return JDFColorControlStrip the element @ if the element already exists
+	 * @return JDFColorControlStrip the element
+	 * @ if the element already exists
 	 */
 	public JDFColorControlStrip appendColorControlStrip()
 	{

@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFMarkColor;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoFillMark : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFillMark : public JDFElement
  */
 
 public abstract class JDFAutoFillMark extends JDFElement
@@ -106,7 +103,8 @@ public abstract class JDFAutoFillMark extends JDFElement
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.KNOCKOUTBLEED, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.KNOCKOUTREFS, 0x3333333333l, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.KNOCKOUTSOURCE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration, EnumKnockoutSource.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.KNOCKOUTSOURCE, 0x2222222222l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumKnockoutSource.getEnum(0), null);
 	}
 
 	@Override
@@ -245,11 +243,14 @@ public abstract class JDFAutoFillMark extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute KnockoutBleed
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute KnockoutBleed
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -273,7 +274,8 @@ public abstract class JDFAutoFillMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute KnockoutRefs
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute KnockoutRefs
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -293,14 +295,15 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 */
 	public VString getKnockoutRefs()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.KNOCKOUTREFS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.KNOCKOUTREFS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute KnockoutSource
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute KnockoutSource
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -324,14 +327,15 @@ public abstract class JDFAutoFillMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute KnockoutSource
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute KnockoutSource
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute KnockoutSource
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setKnockoutSource(EKnockoutSource) based on java.lang.enum instead
+	 * @deprecated use SetKnockoutSource(EKnockoutSource) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setKnockoutSource(EnumKnockoutSource enumVar)
@@ -343,7 +347,7 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * (9) get attribute KnockoutSource
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EKnockoutSource getEKnockoutSource() based on java.lang.enum instead
+	 * @deprecated use EKnockoutSource GetEKnockoutSource() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumKnockoutSource getKnockoutSource()
@@ -352,7 +356,9 @@ public abstract class JDFAutoFillMark extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -390,7 +396,8 @@ public abstract class JDFAutoFillMark extends JDFElement
 	 * (27) const get element MarkColor
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMarkColor the element default is getMarkColor(0)
+	 * @return JDFMarkColor the element
+	 *         default is getMarkColor(0)
 	 */
 	public JDFMarkColor getMarkColor(int iSkip)
 	{

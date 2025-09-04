@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFDisplayGroup;
 
 /**
- *****************************************************************************
- * class JDFAutoDisplayGroupPool : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDisplayGroupPool : public JDFElement
  */
 
 public abstract class JDFAutoDisplayGroupPool extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
 	 * (27) const get element DisplayGroup
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDisplayGroup the element default is getDisplayGroup(0)
+	 * @return JDFDisplayGroup the element
+	 *         default is getDisplayGroup(0)
 	 */
 	public JDFDisplayGroup getDisplayGroup(int iSkip)
 	{

@@ -78,7 +78,6 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.util.ThreadUtil;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

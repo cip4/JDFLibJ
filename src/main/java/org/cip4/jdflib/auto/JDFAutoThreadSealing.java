@@ -74,10 +74,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoThreadSealing : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoThreadSealing : public JDFElement
  */
 
 public abstract class JDFAutoThreadSealing extends JDFElement

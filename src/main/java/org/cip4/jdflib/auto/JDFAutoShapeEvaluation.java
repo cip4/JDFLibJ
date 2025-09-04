@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 /**
- *****************************************************************************
- * class JDFAutoShapeEvaluation : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShapeEvaluation : public JDFResource
  */
 
 public abstract class JDFAutoShapeEvaluation extends JDFResource
@@ -167,17 +164,21 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Tolerance ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Tolerance
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Tolerance
@@ -192,17 +193,20 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Tolerance
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getTolerance()
 	{
-		final String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TOLERANCE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ValueList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ValueList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ValueList
@@ -217,17 +221,20 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	/**
 	 * (20) get JDFShapeRangeList attribute ValueList
 	 *
-	 * @return JDFShapeRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFShapeRangeList
+	 * @return JDFShapeRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFShapeRangeList
 	 */
 	public JDFShapeRangeList getValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
-		final JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.VALUELIST, null, null);
+		JDFShapeRangeList nPlaceHolder = JDFShapeRangeList.createShapeRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute X ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute X
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute X
@@ -242,17 +249,20 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute X
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getX()
 	{
-		final String strAttrName = getAttribute(AttributeName.X, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.X, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Y ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Y
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Y
@@ -267,17 +277,20 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute Y
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getY()
 	{
-		final String strAttrName = getAttribute(AttributeName.Y, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.Y, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Z ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Z
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Z
@@ -292,17 +305,20 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	/**
 	 * (20) get JDFNumberRangeList attribute Z
 	 *
-	 * @return JDFNumberRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRangeList
+	 * @return JDFNumberRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRangeList
 	 */
 	public JDFNumberRangeList getZ()
 	{
-		final String strAttrName = getAttribute(AttributeName.Z, null, null);
-		final JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.Z, null, null);
+		JDFNumberRangeList nPlaceHolder = JDFNumberRangeList.createNumberRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -340,7 +356,8 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
 	 * (27) const get element BasicPreflightTest
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBasicPreflightTest the element default is getBasicPreflightTest(0)
+	 * @return JDFBasicPreflightTest the element
+	 *         default is getBasicPreflightTest(0)
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{

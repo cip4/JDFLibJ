@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
- *****************************************************************************
- * class JDFAutoColorPool : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorPool : public JDFResource
  */
 
 public abstract class JDFAutoColorPool extends JDFResource
@@ -161,7 +158,7 @@ public abstract class JDFAutoColorPool extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -176,11 +173,14 @@ public abstract class JDFAutoColorPool extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorantSetName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorantSetName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -204,7 +204,9 @@ public abstract class JDFAutoColorPool extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -242,7 +244,8 @@ public abstract class JDFAutoColorPool extends JDFResource
 	 * (27) const get element Color
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColor the element default is getColor(0)
+	 * @return JDFColor the element
+	 *         default is getColor(0)
 	 */
 	public JDFColor getColor(int iSkip)
 	{

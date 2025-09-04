@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFReferenceXObjParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPDFInterpretingParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPDFInterpretingParams : public JDFElement
  */
 
 public abstract class JDFAutoPDFInterpretingParams extends JDFElement
@@ -110,7 +107,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.EMITPDFUCR, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.HONORPDFOVERPRINT, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.ICCCOLORASDEVICECOLOR, 0x3333333331l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.OCGDEFAULT, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumOCGDefault.getEnum(0), "FromPDF");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.OCGDEFAULT, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumOCGDefault.getEnum(0),
+				"FromPDF");
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.OCGINTENT, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.OCGPROCESS, 0x3333333111l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.OCGZOOM, 0x3333333111l, AttributeInfo.EnumAttributeType.double_, null, "1.0");
@@ -254,11 +252,15 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFBG ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EmitPDFBG
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute EmitPDFBG
@@ -281,7 +283,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFHalftones
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EmitPDFHalftones
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -305,7 +308,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFTransfers
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EmitPDFTransfers
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -329,7 +333,9 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmitPDFUCR ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EmitPDFUCR
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute EmitPDFUCR
@@ -352,7 +358,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HonorPDFOverprint
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HonorPDFOverprint
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -376,7 +383,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICCColorAsDeviceColor
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ICCColorAsDeviceColor
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -400,7 +408,9 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGDefault ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OCGDefault
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute OCGDefault
@@ -423,13 +433,15 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGDefault ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OCGDefault
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute OCGDefault
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setOCGDefault(EOCGDefault) based on java.lang.enum instead
+	 * @deprecated use SetOCGDefault(EOCGDefault) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setOCGDefault(EnumOCGDefault enumVar)
@@ -441,7 +453,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * (9) get attribute OCGDefault
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EOCGDefault getEOCGDefault() based on java.lang.enum instead
+	 * @deprecated use EOCGDefault GetEOCGDefault() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumOCGDefault getOCGDefault()
@@ -450,7 +462,9 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGIntent ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OCGIntent
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OCGIntent
@@ -473,7 +487,9 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGProcess ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OCGProcess
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OCGProcess
@@ -496,7 +512,9 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OCGZoom ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OCGZoom
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute OCGZoom
@@ -519,7 +537,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintPDFAnnotations
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintPDFAnnotations
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -543,7 +562,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PrintTrapAnnotations
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PrintTrapAnnotations
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -567,7 +587,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TransparencyRenderingQuality
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TransparencyRenderingQuality
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -591,7 +612,9 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -629,7 +652,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	 * (27) const get element OCGControl
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFOCGControl the element default is getOCGControl(0)
+	 * @return JDFOCGControl the element
+	 *         default is getOCGControl(0)
 	 */
 	public JDFOCGControl getOCGControl(int iSkip)
 	{
@@ -679,7 +703,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 	/**
 	 * (29) append element ReferenceXObjParams
 	 *
-	 * @return JDFReferenceXObjParams the element @ if the element already exists
+	 * @return JDFReferenceXObjParams the element
+	 * @ if the element already exists
 	 */
 	public JDFReferenceXObjParams appendReferenceXObjParams()
 	{

@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.JDFBindItem;
 
 /**
- *****************************************************************************
- * class JDFAutoBindList : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBindList : public JDFElement
  */
 
 public abstract class JDFAutoBindList extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoBindList extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoBindList extends JDFElement
 	 * (27) const get element BindItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBindItem the element default is getBindItem(0)
+	 * @return JDFBindItem the element
+	 *         default is getBindItem(0)
 	 */
 	public JDFBindItem getBindItem(int iSkip)
 	{

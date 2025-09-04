@@ -79,10 +79,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoDBSelection : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDBSelection : public JDFResource
  */
 
 public abstract class JDFAutoDBSelection extends JDFResource
@@ -146,7 +143,7 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -161,11 +158,15 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DataBase ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DataBase
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DataBase
@@ -188,7 +189,9 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Records ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Records
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Records
@@ -203,17 +206,20 @@ public abstract class JDFAutoDBSelection extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute Records
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getRecords()
 	{
-		final String strAttrName = getAttribute(AttributeName.RECORDS, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RECORDS, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Select ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Select
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Select

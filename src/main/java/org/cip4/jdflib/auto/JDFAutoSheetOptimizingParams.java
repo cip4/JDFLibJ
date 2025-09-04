@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFGangElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSheetOptimizingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSheetOptimizingParams : public JDFResource
  */
 
 public abstract class JDFAutoSheetOptimizingParams extends JDFResource
@@ -167,7 +164,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -261,11 +258,15 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Policy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Policy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Policy
@@ -288,13 +289,15 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Policy ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Policy
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Policy
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPolicy(EPolicy) based on java.lang.enum instead
+	 * @deprecated use SetPolicy(EPolicy) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPolicy(EnumPolicy enumVar)
@@ -306,7 +309,7 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * (9) get attribute Policy
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPolicy getEPolicy() based on java.lang.enum instead
+	 * @deprecated use EPolicy GetEPolicy() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPolicy getPolicy()
@@ -315,7 +318,9 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -353,7 +358,8 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * (27) const get element ConvertingConfig
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFConvertingConfig the element default is getConvertingConfig(0)
+	 * @return JDFConvertingConfig the element
+	 *         default is getConvertingConfig(0)
 	 */
 	public JDFConvertingConfig getConvertingConfig(int iSkip)
 	{
@@ -415,7 +421,8 @@ public abstract class JDFAutoSheetOptimizingParams extends JDFResource
 	 * (27) const get element GangElement
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGangElement the element default is getGangElement(0)
+	 * @return JDFGangElement the element
+	 *         default is getGangElement(0)
 	 */
 	public JDFGangElement getGangElement(int iSkip)
 	{

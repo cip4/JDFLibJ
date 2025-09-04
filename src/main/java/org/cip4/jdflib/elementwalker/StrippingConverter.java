@@ -40,16 +40,16 @@ import java.util.List;
 
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
-import org.cip4.jdflib.auto.JDFAutoContentObject.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionX;
 import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionY;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumFinishingOrder;
-import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumRotate;
-import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate;
+import org.cip4.jdflib.auto.JDFAutoRefAnchor.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoStripCellParams;
 import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -80,7 +80,6 @@ import org.cip4.jdflib.util.StringUtil;
  * sub-class that converts LayoutPreparationParams to the corresponding StrippingParams, Assembly and BinderySignature
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         June 4, 2009
  */
 public class StrippingConverter
@@ -140,7 +139,9 @@ public class StrippingConverter
 		strippingParams = (JDFStrippingParams) parent.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
 		final JDFAttributeMap partMap = layPrepParams.getPartMap();
 		if (partMap != null && partMap.size() > 0)
+		{
 			strippingParams = (JDFStrippingParams) strippingParams.getPartition(partMap, null);
+		}
 		convertStrippingParams();
 		convertBinderySignature();
 		setSignatureCell();
@@ -226,7 +227,9 @@ public class StrippingConverter
 	{
 		final JDFPageCell pageCell = layPrepParams.getPageCell();
 		if (pageCell == null)
+		{
 			return;
+		}
 		final JDFSignatureCell signatureCell = getBinderySignature().getCreateSignatureCell(0);
 		signatureCell.setOrientation(getSigCellOrientation(pageCell.getRotate()));
 		convertImageShift(pageCell, signatureCell);
@@ -234,7 +237,6 @@ public class StrippingConverter
 	}
 
 	/**
-	 *
 	 * convert the image shift to
 	 *
 	 * @param pageCell
@@ -244,34 +246,47 @@ public class StrippingConverter
 	{
 		final JDFImageShift imageShift = pageCell.getImageShift();
 		if (imageShift == null)
+		{
 			return;
+		}
 		final EnumPositionX posX = imageShift.getPositionX();
 		final EnumPositionY posY = imageShift.getPositionY();
 		if (posX == null || posY == null)
+		{
 			return;
+		}
 
 		String anchor = posY.getName() + posX.getName();
 		if ("CenterCenter".equals(anchor))
+		{
 			anchor = "Center";
+		}
 		final EnumAnchor ea = EnumAnchor.getEnum(anchor);
 		if (ea != null)
+		{
 			signatureCell.setAttribute(AttributeName.ANCHOR, anchor);
+		}
 
 	}
 
 	/**
-	 *
 	 * @param rotate
 	 * @return
 	 */
 	private org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation getSigCellOrientation(final org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate rotate)
 	{
 		if (org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate.Rotate90.equals(rotate))
+		{
 			return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Left;
+		}
 		else if (org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate.Rotate180.equals(rotate))
+		{
 			return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Down;
+		}
 		else if (org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate.Rotate270.equals(rotate))
+		{
 			return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Right;
+		}
 
 		return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Up;
 	}
@@ -300,7 +315,6 @@ public class StrippingConverter
 	}
 
 	/**
-	 *
 	 * add a single position to the respective strippingparams
 	 *
 	 * @param x
@@ -331,8 +345,6 @@ public class StrippingConverter
 	}
 
 	/**
-	 *
-	 *
 	 * @param srx
 	 * @param sry
 	 * @param n
@@ -344,7 +356,9 @@ public class StrippingConverter
 		final int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
 
 		if (total == 1 || numberUp == null)
+		{
 			return new JDFRectangle(0, 0, 1, 1);
+		}
 		final double dx = 1.0 / numberUp.getX();
 		final double dy = 1.0 / numberUp.getY();
 		double x = n % (int) numberUp.getX();
@@ -367,7 +381,9 @@ public class StrippingConverter
 	{
 		final int total = (int) (numberUp == null ? 1 : numberUp.getX() * numberUp.getY());
 		if (total == 1)
+		{
 			return null;
+		}
 		int x = n % (int) numberUp.getX();
 		x /= srx;
 		int y = n / (int) numberUp.getX();
@@ -399,18 +415,26 @@ public class StrippingConverter
 		binderySignature.copyAttribute(AttributeName.BINDINGEDGE, layPrepParams);
 		// steprepeat requires n binderysignatures
 		if (layPrepParams.hasAttribute(AttributeName.STEPREPEAT))
+		{
 			binderySignature.setNumberUp(1, 1);
+		}
 		else
+		{
 			binderySignature.copyAttribute(AttributeName.NUMBERUP, layPrepParams);
+		}
 
 		binderySignature.copyAttribute(AttributeName.FOLDCATALOG, layPrepParams);
 
 		final String pageDistribution = layPrepParams.getPageDistributionScheme();
 		final String foldcatalog = StringUtil.getNonEmpty(layPrepParams.getFoldCatalog());
 		if ("Sequential".equals(pageDistribution) && (foldcatalog == null || "F2-1".equals(foldcatalog)))
+		{
 			binderySignature.setBinderySignatureType(EnumBinderySignatureType.Grid);
+		}
 		else
+		{
 			binderySignature.setBinderySignatureType(EnumBinderySignatureType.Fold);
+		}
 
 	}
 
@@ -439,9 +463,13 @@ public class StrippingConverter
 		{
 			final String pageDistribution = layPrepParams.getPageDistributionScheme();
 			if ("Saddle".equals(pageDistribution))
+			{
 				assembly.setOrder(EnumOrder.Collecting);
+			}
 			else
+			{
 				assembly.setOrder(EnumOrder.Gathering);
+			}
 		}
 	}
 

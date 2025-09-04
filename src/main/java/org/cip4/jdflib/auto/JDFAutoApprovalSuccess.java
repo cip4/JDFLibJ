@@ -82,10 +82,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoApprovalSuccess : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoApprovalSuccess : public JDFResource
  */
 
 public abstract class JDFAutoApprovalSuccess extends JDFResource
@@ -149,7 +146,7 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -164,7 +161,9 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -202,7 +201,8 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * (27) const get element ApprovalDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFApprovalDetails the element default is getApprovalDetails(0)
+	 * @return JDFApprovalDetails the element
+	 *         default is getApprovalDetails(0)
 	 */
 	public JDFApprovalDetails getApprovalDetails(int iSkip)
 	{
@@ -252,7 +252,8 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -306,7 +307,8 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{

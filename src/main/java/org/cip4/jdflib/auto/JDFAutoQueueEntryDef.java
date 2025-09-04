@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoQueueEntryDef : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQueueEntryDef : public JDFElement
  */
 
 public abstract class JDFAutoQueueEntryDef extends JDFElement
@@ -138,11 +135,14 @@ public abstract class JDFAutoQueueEntryDef extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**

@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoLot : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLot : public JDFElement
  */
 
 public abstract class JDFAutoLot extends JDFElement
@@ -101,7 +98,8 @@ public abstract class JDFAutoLot extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.LOTID, 0x2222222222l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONSUMPTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumConsumption.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.CONSUMPTION, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumConsumption.getEnum(0),
+				null);
 	}
 
 	@Override
@@ -224,11 +222,14 @@ public abstract class JDFAutoLot extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActualAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActualAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -252,7 +253,9 @@ public abstract class JDFAutoLot extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -275,7 +278,9 @@ public abstract class JDFAutoLot extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LotID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LotID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LotID
@@ -298,7 +303,9 @@ public abstract class JDFAutoLot extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Consumption ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Consumption
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Consumption
@@ -321,13 +328,15 @@ public abstract class JDFAutoLot extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Consumption ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Consumption
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Consumption
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setConsumption(EConsumption) based on java.lang.enum instead
+	 * @deprecated use SetConsumption(EConsumption) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setConsumption(EnumConsumption enumVar)
@@ -339,7 +348,7 @@ public abstract class JDFAutoLot extends JDFElement
 	 * (9) get attribute Consumption
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EConsumption getEConsumption() based on java.lang.enum instead
+	 * @deprecated use EConsumption GetEConsumption() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumConsumption getConsumption()

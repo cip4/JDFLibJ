@@ -84,10 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 
 /**
- *****************************************************************************
- * class JDFAutoValueLoc : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoValueLoc : public JDFElement
  */
 
 public abstract class JDFAutoValueLoc extends JDFElement
@@ -156,11 +153,15 @@ public abstract class JDFAutoValueLoc extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Value ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Value
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Value
@@ -183,7 +184,9 @@ public abstract class JDFAutoValueLoc extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -221,7 +224,8 @@ public abstract class JDFAutoValueLoc extends JDFElement
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{

@@ -79,10 +79,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoVerificationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoVerificationParams : public JDFResource
  */
 
 public abstract class JDFAutoVerificationParams extends JDFResource
@@ -147,7 +144,7 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -162,11 +159,15 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FieldRange ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FieldRange
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FieldRange
@@ -181,17 +182,20 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	/**
 	 * (20) get JDFIntegerRangeList attribute FieldRange
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getFieldRange()
 	{
-		final String strAttrName = getAttribute(AttributeName.FIELDRANGE, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.FIELDRANGE, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InsertError ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InsertError
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute InsertError
@@ -214,7 +218,9 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute InsertOK ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute InsertOK
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute InsertOK
@@ -237,7 +243,9 @@ public abstract class JDFAutoVerificationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Tolerance ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Tolerance
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Tolerance

@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 
 /**
- *****************************************************************************
- * class JDFAutoNameState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNameState : public JDFResource
  */
 
 public abstract class JDFAutoNameState extends JDFResource
@@ -169,17 +166,20 @@ public abstract class JDFAutoNameState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -203,7 +203,8 @@ public abstract class JDFAutoNameState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -227,7 +228,8 @@ public abstract class JDFAutoNameState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedRegExp
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedRegExp
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -251,7 +253,8 @@ public abstract class JDFAutoNameState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -271,14 +274,15 @@ public abstract class JDFAutoNameState extends JDFResource
 	 */
 	public VString getAllowedValueList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ALLOWEDVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.ALLOWEDVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentRegExp
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentRegExp
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -302,7 +306,8 @@ public abstract class JDFAutoNameState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -322,14 +327,16 @@ public abstract class JDFAutoNameState extends JDFResource
 	 */
 	public VString getPresentValueList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.PRESENTVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.PRESENTVALUELIST, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -367,7 +374,8 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -429,7 +437,8 @@ public abstract class JDFAutoNameState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

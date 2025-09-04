@@ -83,10 +83,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFScreenSelector;
 
 /**
- *****************************************************************************
- * class JDFAutoScreeningParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoScreeningParams : public JDFResource
  */
 
 public abstract class JDFAutoScreeningParams extends JDFResource
@@ -161,7 +158,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -176,11 +173,14 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IgnoreSourceFile
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IgnoreSourceFile
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -204,7 +204,8 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AbortJobWhenScreenMatchingFails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AbortJobWhenScreenMatchingFails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -228,7 +229,9 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -266,7 +269,8 @@ public abstract class JDFAutoScreeningParams extends JDFResource
 	 * (27) const get element ScreenSelector
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFScreenSelector the element default is getScreenSelector(0)
+	 * @return JDFScreenSelector the element
+	 *         default is getScreenSelector(0)
 	 */
 	public JDFScreenSelector getScreenSelector(int iSkip)
 	{

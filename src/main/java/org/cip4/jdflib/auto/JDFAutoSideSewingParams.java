@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSideSewingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSideSewingParams : public JDFResource
  */
 
 public abstract class JDFAutoSideSewingParams extends JDFResource
@@ -102,8 +99,10 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.NUMBEROFNEEDLES, 0x4444444442l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.OFFSET, 0x4444444442l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.NEEDLEPOSITIONS, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEWINGPATTERN, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumSewingPattern.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration, EnumThreadMaterial.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SEWINGPATTERN, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumSewingPattern.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.THREADMATERIAL, 0x4444444443l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumThreadMaterial.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.THREADTHICKNESS, 0x4444444443l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.THREADBRAND, 0x4444444443l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
@@ -156,7 +155,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -329,11 +328,14 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumberOfNeedles
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NumberOfNeedles
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -357,7 +359,9 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Offset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Offset
@@ -380,7 +384,8 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NeedlePositions
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NeedlePositions
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -396,17 +401,19 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute NeedlePositions
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getNeedlePositions()
 	{
-		final String strAttrName = getAttribute(AttributeName.NEEDLEPOSITIONS, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.NEEDLEPOSITIONS, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SewingPattern
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SewingPattern
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -430,14 +437,15 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SewingPattern
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SewingPattern
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute SewingPattern
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSewingPattern(ESewingPattern) based on java.lang.enum instead
+	 * @deprecated use SetSewingPattern(ESewingPattern) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSewingPattern(EnumSewingPattern enumVar)
@@ -449,7 +457,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	 * (9) get attribute SewingPattern
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ESewingPattern getESewingPattern() based on java.lang.enum instead
+	 * @deprecated use ESewingPattern GetESewingPattern() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumSewingPattern getSewingPattern()
@@ -458,7 +466,8 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ThreadMaterial
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ThreadMaterial
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -482,14 +491,15 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ThreadMaterial
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ThreadMaterial
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ThreadMaterial
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setThreadMaterial(EThreadMaterial) based on java.lang.enum instead
+	 * @deprecated use SetThreadMaterial(EThreadMaterial) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setThreadMaterial(EnumThreadMaterial enumVar)
@@ -501,7 +511,7 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	 * (9) get attribute ThreadMaterial
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EThreadMaterial getEThreadMaterial() based on java.lang.enum instead
+	 * @deprecated use EThreadMaterial GetEThreadMaterial() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumThreadMaterial getThreadMaterial()
@@ -510,7 +520,8 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ThreadThickness
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ThreadThickness
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -534,7 +545,9 @@ public abstract class JDFAutoSideSewingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ThreadBrand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ThreadBrand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ThreadBrand

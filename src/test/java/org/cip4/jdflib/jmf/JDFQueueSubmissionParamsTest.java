@@ -78,8 +78,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.io.File;
 import java.net.URL;
 
-import jakarta.mail.Multipart;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
@@ -97,6 +95,8 @@ import org.cip4.jdflib.util.MyPair;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import jakarta.mail.Multipart;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen

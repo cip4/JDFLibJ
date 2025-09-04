@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoDensityMeasuringField : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDensityMeasuringField : public JDFResource
  */
 
 public abstract class JDFAutoDensityMeasuringField extends JDFResource
@@ -173,7 +170,7 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -188,11 +185,15 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Center
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Center
@@ -207,17 +208,20 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Center
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getCenter()
 	{
-		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Density ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Density
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Density
@@ -232,17 +236,20 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute Density
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getDensity()
 	{
-		final String strAttrName = getAttribute(AttributeName.DENSITY, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DENSITY, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Diameter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Diameter
@@ -265,7 +272,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DotGain ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DotGain
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DotGain
@@ -288,7 +297,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Percentage ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Percentage
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Percentage
@@ -311,7 +322,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Screen ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Screen
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Screen
@@ -334,7 +347,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Separation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Separation
@@ -359,7 +374,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToleranceCyan
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToleranceCyan
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -375,17 +391,19 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute ToleranceCyan
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getToleranceCyan()
 	{
-		final String strAttrName = getAttribute(AttributeName.TOLERANCECYAN, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TOLERANCECYAN, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToleranceMagenta
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToleranceMagenta
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -401,17 +419,19 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute ToleranceMagenta
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getToleranceMagenta()
 	{
-		final String strAttrName = getAttribute(AttributeName.TOLERANCEMAGENTA, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TOLERANCEMAGENTA, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToleranceYellow
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToleranceYellow
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -427,17 +447,19 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute ToleranceYellow
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getToleranceYellow()
 	{
-		final String strAttrName = getAttribute(AttributeName.TOLERANCEYELLOW, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TOLERANCEYELLOW, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToleranceBlack
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToleranceBlack
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -453,17 +475,19 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute ToleranceBlack
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getToleranceBlack()
 	{
-		final String strAttrName = getAttribute(AttributeName.TOLERANCEBLACK, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TOLERANCEBLACK, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToleranceDotGain
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToleranceDotGain
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -479,17 +503,20 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute ToleranceDotGain
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getToleranceDotGain()
 	{
-		final String strAttrName = getAttribute(AttributeName.TOLERANCEDOTGAIN, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.TOLERANCEDOTGAIN, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Setup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Setup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Setup
@@ -512,7 +539,9 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -538,7 +567,8 @@ public abstract class JDFAutoDensityMeasuringField extends JDFResource
 	/**
 	 * (29) append element ColorMeasurementConditions
 	 *
-	 * @return JDFColorMeasurementConditions the element @ if the element already exists
+	 * @return JDFColorMeasurementConditions the element
+	 * @ if the element already exists
 	 */
 	public JDFColorMeasurementConditions appendColorMeasurementConditions()
 	{

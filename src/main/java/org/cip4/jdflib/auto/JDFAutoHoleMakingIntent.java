@@ -89,10 +89,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoHoleMakingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoHoleMakingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
@@ -103,7 +100,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumHoleReferenceEdge.getEnum(0), "Left");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLEREFERENCEEDGE, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumHoleReferenceEdge.getEnum(0), "Left");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x3333333311l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
@@ -246,11 +244,14 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HoleReferenceEdge
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HoleReferenceEdge
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -274,14 +275,15 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HoleReferenceEdge
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HoleReferenceEdge
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute HoleReferenceEdge
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setHoleReferenceEdge(EHoleReferenceEdge) based on java.lang.enum instead
+	 * @deprecated use SetHoleReferenceEdge(EHoleReferenceEdge) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setHoleReferenceEdge(EnumHoleReferenceEdge enumVar)
@@ -293,7 +295,7 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	 * (9) get attribute HoleReferenceEdge
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EHoleReferenceEdge getEHoleReferenceEdge() based on java.lang.enum instead
+	 * @deprecated use EHoleReferenceEdge GetEHoleReferenceEdge() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumHoleReferenceEdge getHoleReferenceEdge()
@@ -302,7 +304,9 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Extent ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Extent
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Extent
@@ -317,17 +321,20 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	/**
 	 * (20) get JDFXYPair attribute Extent
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getExtent()
 	{
-		final String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -353,7 +360,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	/**
 	 * (29) append element HoleType
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendHoleType()
 	{
@@ -383,7 +391,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 	/**
 	 * (29) append element HoleList
 	 *
-	 * @return JDFHoleList the element @ if the element already exists
+	 * @return JDFHoleList the element
+	 * @ if the element already exists
 	 */
 	public JDFHoleList appendHoleList()
 	{

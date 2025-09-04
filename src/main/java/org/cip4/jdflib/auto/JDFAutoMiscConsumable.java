@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 
 /**
- *****************************************************************************
- * class JDFAutoMiscConsumable : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoMiscConsumable : public JDFResource
  */
 
 public abstract class JDFAutoMiscConsumable extends JDFResource
@@ -168,7 +165,7 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Consumable);
 		return bRet;
 	}
@@ -183,11 +180,15 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Color ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Color
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute Color
@@ -214,7 +215,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -238,7 +240,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ConsumableType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ConsumableType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -262,7 +265,9 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TypeDetails ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TypeDetails
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TypeDetails
@@ -285,7 +290,9 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -323,7 +330,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	 * (27) const get element Certification
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCertification the element default is getCertification(0)
+	 * @return JDFCertification the element
+	 *         default is getCertification(0)
 	 */
 	public JDFCertification getCertification(int iSkip)
 	{
@@ -387,7 +395,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -461,7 +470,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
 	 * (27) const get element IdentificationField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIdentificationField the element default is getIdentificationField(0)
+	 * @return JDFIdentificationField the element
+	 *         default is getIdentificationField(0)
 	 */
 	@Override
 	public JDFIdentificationField getIdentificationField(int iSkip)

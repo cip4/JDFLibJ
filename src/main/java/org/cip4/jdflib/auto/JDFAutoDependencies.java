@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 
 /**
- *****************************************************************************
- * class JDFAutoDependencies : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDependencies : public JDFElement
  */
 
 public abstract class JDFAutoDependencies extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoDependencies extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoDependencies extends JDFElement
 	 * (27) const get element LayoutElement
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLayoutElement the element default is getLayoutElement(0)
+	 * @return JDFLayoutElement the element
+	 *         default is getLayoutElement(0)
 	 */
 	public JDFLayoutElement getLayoutElement(int iSkip)
 	{

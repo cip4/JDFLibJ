@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoCertification : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCertification : public JDFElement
  */
 
 public abstract class JDFAutoCertification extends JDFElement
@@ -140,11 +137,15 @@ public abstract class JDFAutoCertification extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Claim ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Claim
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Claim
@@ -167,7 +168,9 @@ public abstract class JDFAutoCertification extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Identifier ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Identifier
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Identifier
@@ -190,7 +193,8 @@ public abstract class JDFAutoCertification extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Organization
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Organization
 	 * ---------------------------------------------------------------------
 	 */
 	/**

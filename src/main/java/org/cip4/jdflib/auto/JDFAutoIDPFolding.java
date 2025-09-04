@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPFolding : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPFolding : public JDFElement
  */
 
 public abstract class JDFAutoIDPFolding extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoIDPFolding extends JDFElement
 	 * (27) const get element FoldingParams
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFoldingParams the element default is getFoldingParams(0)
+	 * @return JDFFoldingParams the element
+	 *         default is getFoldingParams(0)
 	 */
 	public JDFFoldingParams getFoldingParams(int iSkip)
 	{

@@ -92,10 +92,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPreflightReport : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPreflightReport : public JDFResource
  */
 
 public abstract class JDFAutoPreflightReport extends JDFResource
@@ -107,7 +104,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0),
+				null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
@@ -175,7 +173,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -267,11 +265,15 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ErrorCount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ErrorCount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ErrorCount
@@ -294,7 +296,9 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ErrorState ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ErrorState
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ErrorState
@@ -317,13 +321,15 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ErrorState ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ErrorState
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ErrorState
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setErrorState(EErrorState) based on java.lang.enum instead
+	 * @deprecated use SetErrorState(EErrorState) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setErrorState(EnumErrorState enumVar)
@@ -335,7 +341,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * (9) get attribute ErrorState
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EErrorState getEErrorState() based on java.lang.enum instead
+	 * @deprecated use EErrorState GetEErrorState() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumErrorState getErrorState()
@@ -344,7 +350,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WarningCount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WarningCount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -368,7 +375,9 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -394,7 +403,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -434,7 +444,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	/**
 	 * (29) append element PreflightParams
 	 *
-	 * @return JDFPreflightParams the element @ if the element already exists
+	 * @return JDFPreflightParams the element
+	 * @ if the element already exists
 	 */
 	public JDFPreflightParams appendPreflightParams()
 	{
@@ -474,7 +485,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	/**
 	 * (29) append element PreflightReportRulePool
 	 *
-	 * @return JDFPreflightReportRulePool the element @ if the element already exists
+	 * @return JDFPreflightReportRulePool the element
+	 * @ if the element already exists
 	 */
 	public JDFPreflightReportRulePool appendPreflightReportRulePool()
 	{
@@ -514,7 +526,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	/**
 	 * (29) append element RunList
 	 *
-	 * @return JDFRunList the element @ if the element already exists
+	 * @return JDFRunList the element
+	 * @ if the element already exists
 	 */
 	public JDFRunList appendRunList()
 	{
@@ -566,7 +579,8 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 	 * (27) const get element PRItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPRItem the element default is getPRItem(0)
+	 * @return JDFPRItem the element
+	 *         default is getPRItem(0)
 	 */
 	public JDFPRItem getPRItem(int iSkip)
 	{

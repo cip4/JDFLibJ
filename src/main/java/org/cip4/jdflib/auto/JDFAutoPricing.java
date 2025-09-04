@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.JDFPayment;
 import org.cip4.jdflib.resource.intent.JDFPricing;
 
 /**
- *****************************************************************************
- * class JDFAutoPricing : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPricing : public JDFElement
  */
 
 public abstract class JDFAutoPricing extends JDFElement
@@ -162,11 +159,14 @@ public abstract class JDFAutoPricing extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdditionalPrice
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AdditionalPrice
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -190,7 +190,9 @@ public abstract class JDFAutoPricing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Currency ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Currency
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Currency
@@ -213,7 +215,9 @@ public abstract class JDFAutoPricing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute HasPrice ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute HasPrice
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute HasPrice
@@ -236,7 +240,9 @@ public abstract class JDFAutoPricing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Item ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Item
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Item
@@ -259,7 +265,9 @@ public abstract class JDFAutoPricing extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Price ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Price
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Price
@@ -282,7 +290,9 @@ public abstract class JDFAutoPricing extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -320,7 +330,8 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * (27) const get element Payment
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPayment the element default is getPayment(0)
+	 * @return JDFPayment the element
+	 *         default is getPayment(0)
 	 */
 	public JDFPayment getPayment(int iSkip)
 	{
@@ -382,7 +393,8 @@ public abstract class JDFAutoPricing extends JDFElement
 	 * (27) const get element Pricing
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPricing the element default is getPricing(0)
+	 * @return JDFPricing the element
+	 *         default is getPricing(0)
 	 */
 	public JDFPricing getPricing(int iSkip)
 	{

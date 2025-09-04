@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoGlueLine : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGlueLine : public JDFElement
  */
 
 public abstract class JDFAutoGlueLine extends JDFElement
@@ -233,11 +230,15 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AreaGlue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AreaGlue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AreaGlue
@@ -260,7 +261,9 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GlueBrand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GlueBrand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute GlueBrand
@@ -283,7 +286,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GlueLineWidth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GlueLineWidth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -307,7 +311,9 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GlueType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GlueType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute GlueType
@@ -330,13 +336,15 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GlueType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GlueType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute GlueType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setGlueType(EGlueType) based on java.lang.enum instead
+	 * @deprecated use SetGlueType(EGlueType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setGlueType(EnumGlueType enumVar)
@@ -348,7 +356,7 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	 * (9) get attribute GlueType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EGlueType getEGlueType() based on java.lang.enum instead
+	 * @deprecated use EGlueType GetEGlueType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumGlueType getGlueType()
@@ -357,7 +365,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute GluingPattern
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute GluingPattern
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -373,17 +382,19 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute GluingPattern
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getGluingPattern()
 	{
-		final String strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.GLUINGPATTERN, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MeltingTemperature
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MeltingTemperature
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -407,7 +418,8 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeStartPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelativeStartPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -423,17 +435,19 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute RelativeStartPosition
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getRelativeStartPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RELATIVESTARTPOSITION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RelativeWorkingPath
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RelativeWorkingPath
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -449,17 +463,19 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute RelativeWorkingPath
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getRelativeWorkingPath()
 	{
-		final String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RELATIVEWORKINGPATH, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -475,17 +491,20 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute StartPosition
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getStartPosition()
 	{
-		final String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.STARTPOSITION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute WorkingPath
@@ -500,12 +519,13 @@ public abstract class JDFAutoGlueLine extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute WorkingPath
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getWorkingPath()
 	{
-		final String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.WORKINGPATH, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 

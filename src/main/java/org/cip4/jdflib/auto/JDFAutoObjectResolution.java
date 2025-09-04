@@ -87,10 +87,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoObjectResolution : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoObjectResolution : public JDFElement
  */
 
 public abstract class JDFAutoObjectResolution extends JDFElement
@@ -104,7 +101,8 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.ANTIALIASING, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.RESOLUTION, 0x2222222222l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumSourceObjects.getEnum(0), null);
 	}
 
 	@Override
@@ -235,11 +233,14 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AntiAliasing
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AntiAliasing
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -263,7 +264,9 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ObjectTags
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ObjectTags
@@ -282,14 +285,16 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	 */
 	public VString getObjectTags()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Resolution ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Resolution
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Resolution
@@ -304,17 +309,19 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Resolution
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getResolution()
 	{
-		final String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.RESOLUTION, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -330,7 +337,7 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	/**
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<ESourceObjects> getEnumsSourceObjects()
 	{
@@ -338,14 +345,15 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
+	 * @deprecated use SetESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceObjects(List<EnumSourceObjects> v)
@@ -357,7 +365,7 @@ public abstract class JDFAutoObjectResolution extends JDFElement
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<ESourceObjects> getEnumsSourceObjects() based on java.lang.enum instead
+	 * @deprecated use List<ESourceObjects > GetESourceObjects() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumSourceObjects> getSourceObjects()

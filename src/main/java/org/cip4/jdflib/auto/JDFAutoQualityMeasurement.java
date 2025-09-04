@@ -82,10 +82,7 @@ import org.cip4.jdflib.resource.process.JDFBindingQualityMeasurement;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoQualityMeasurement : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQualityMeasurement : public JDFElement
  */
 
 public abstract class JDFAutoQualityMeasurement extends JDFElement
@@ -157,11 +154,15 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute End
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute End
@@ -185,13 +186,15 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 */
 	public JDFDate getEnd()
 	{
-		final String str = getAttribute(AttributeName.END, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.END, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Failed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Failed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Failed
@@ -214,7 +217,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Passed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Passed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Passed
@@ -237,7 +242,9 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Start
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Start
@@ -261,13 +268,15 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	 */
 	public JDFDate getStart()
 	{
-		final String str = getAttribute(AttributeName.START, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.START, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -293,7 +302,8 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 	/**
 	 * (29) append element BindingQualityMeasurement
 	 *
-	 * @return JDFBindingQualityMeasurement the element @ if the element already exists
+	 * @return JDFBindingQualityMeasurement the element
+	 * @ if the element already exists
 	 */
 	public JDFBindingQualityMeasurement appendBindingQualityMeasurement()
 	{

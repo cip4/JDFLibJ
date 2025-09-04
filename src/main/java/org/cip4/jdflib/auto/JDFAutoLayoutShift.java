@@ -80,10 +80,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFShiftPoint;
 
 /**
- *****************************************************************************
- * class JDFAutoLayoutShift : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLayoutShift : public JDFResource
  */
 
 public abstract class JDFAutoLayoutShift extends JDFResource
@@ -145,7 +142,7 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -160,7 +157,9 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -198,7 +197,8 @@ public abstract class JDFAutoLayoutShift extends JDFResource
 	 * (27) const get element ShiftPoint
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFShiftPoint the element default is getShiftPoint(0)
+	 * @return JDFShiftPoint the element
+	 *         default is getShiftPoint(0)
 	 */
 	public JDFShiftPoint getShiftPoint(int iSkip)
 	{

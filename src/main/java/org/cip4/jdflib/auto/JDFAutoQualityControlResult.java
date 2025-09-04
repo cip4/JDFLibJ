@@ -78,6 +78,9 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
+import org.cip4.jdflib.auto.JDFAutoDefect.EnumFace;
+import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -97,10 +100,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoQualityControlResult : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQualityControlResult : public JDFResource
  */
 
 public abstract class JDFAutoQualityControlResult extends JDFResource
@@ -115,7 +115,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.END, 0x3333111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FAILED, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.MEASUREMENTS, 0x3331111111l, AttributeInfo.EnumAttributeType.integer, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.MEASUREMENTUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations, EnumMeasurementUsage.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.MEASUREMENTUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumMeasurementUsage.getEnum(0), null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.POSITION, 0x3331111111l, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.PASSED, 0x3333333311l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SAMPLE, 0x3331111111l, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
@@ -188,7 +189,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -279,97 +280,16 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 		public static final EnumMeasurementUsage Standard = new EnumMeasurementUsage("Standard");
 	}
 
-	/**
-	 * Enumeration strings for Position
-	 */
-
-	public enum EPosition
-	{
-		Top, Bottom, Left, Right, Front, Back;
-
-		public static EPosition getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPosition.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Position
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPosition extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPosition(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPosition getEnum(String enumName)
-		{
-			return (EnumPosition) getEnum(EnumPosition.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPosition getEnum(int enumValue)
-		{
-			return (EnumPosition) getEnum(EnumPosition.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPosition.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPosition.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPosition.class);
-		}
-
-		/**  */
-		public static final EnumPosition Top = new EnumPosition("Top");
-		/**  */
-		public static final EnumPosition Bottom = new EnumPosition("Bottom");
-		/**  */
-		public static final EnumPosition Left = new EnumPosition("Left");
-		/**  */
-		public static final EnumPosition Right = new EnumPosition("Right");
-		/**  */
-		public static final EnumPosition Front = new EnumPosition("Front");
-		/**  */
-		public static final EnumPosition Back = new EnumPosition("Back");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Box ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Box
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Box
@@ -384,17 +304,20 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (20) get JDFRectangle attribute Box
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.BOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute End ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute End
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute End
@@ -418,13 +341,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 */
 	public JDFDate getEnd()
 	{
-		final String str = getAttribute(AttributeName.END, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.END, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Failed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Failed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Failed
@@ -447,7 +372,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Measurements
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Measurements
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -471,7 +397,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MeasurementUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MeasurementUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -487,7 +414,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (9.2) get MeasurementUsage attribute MeasurementUsage
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<EMeasurementUsage> getEnumsMeasurementUsage()
 	{
@@ -495,14 +422,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MeasurementUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MeasurementUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute MeasurementUsage
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setEMeasurementUsage(List<EMeasurementUsage>) based on java.lang.enum instead
+	 * @deprecated use SetEMeasurementUsage(List<EMeasurementUsage>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMeasurementUsage(List<EnumMeasurementUsage> v)
@@ -514,7 +442,7 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * (9.2) get MeasurementUsage attribute MeasurementUsage
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<EMeasurementUsage> getEnumsMeasurementUsage() based on java.lang.enum instead
+	 * @deprecated use List<EMeasurementUsage > GetEMeasurementUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumMeasurementUsage> getMeasurementUsage()
@@ -523,14 +451,16 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPosition(EPosition enumVar)
+	public void setPosition(EFace enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -540,22 +470,24 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPosition getEPosition()
+	public EFace getEPosition()
 	{
-		return EPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EFace.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPosition(EPosition) based on java.lang.enum instead
+	 * @deprecated use SetPosition(EFace) based on java.lang.enum instead
 	 */
 	@Deprecated
-	public void setPosition(EnumPosition enumVar)
+	public void setPosition(EnumFace enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -564,16 +496,18 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * (9) get attribute Position
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPosition getEPosition() based on java.lang.enum instead
+	 * @deprecated use EFace GetEPosition() based on java.lang.enum instead
 	 */
 	@Deprecated
-	public EnumPosition getPosition()
+	public EnumFace getPosition()
 	{
-		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EnumFace.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Passed ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Passed
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Passed
@@ -596,7 +530,9 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Sample ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Sample
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Sample
@@ -611,17 +547,20 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (20) get JDFIntegerRange attribute Sample
 	 *
-	 * @return JDFIntegerRange the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRange
+	 * @return JDFIntegerRange the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRange
 	 */
 	public JDFIntegerRange getSample()
 	{
-		final String strAttrName = getAttribute(AttributeName.SAMPLE, null, null);
-		final JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SAMPLE, null, null);
+		JDFIntegerRange nPlaceHolder = JDFIntegerRange.createIntegerRange(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Severity ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Severity
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Severity
@@ -644,7 +583,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceDeviceID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceDeviceID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -668,7 +608,9 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Start ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Start
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Start
@@ -692,13 +634,15 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 */
 	public JDFDate getStart()
 	{
-		final String str = getAttribute(AttributeName.START, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.START, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -724,7 +668,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (29) append element BindingQualityParams
 	 *
-	 * @return JDFBindingQualityParams the element @ if the element already exists
+	 * @return JDFBindingQualityParams the element
+	 * @ if the element already exists
 	 */
 	public JDFBindingQualityParams appendBindingQualityParams()
 	{
@@ -754,7 +699,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -794,7 +740,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (29) append element Inspection
 	 *
-	 * @return JDFInspection the element @ if the element already exists
+	 * @return JDFInspection the element
+	 * @ if the element already exists
 	 */
 	public JDFInspection appendInspection()
 	{
@@ -836,7 +783,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	 * (27) const get element QualityMeasurement
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFQualityMeasurement the element default is getQualityMeasurement(0)
+	 * @return JDFQualityMeasurement the element
+	 *         default is getQualityMeasurement(0)
 	 */
 	public JDFQualityMeasurement getQualityMeasurement(int iSkip)
 	{
@@ -886,7 +834,8 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
 	/**
 	 * (29) append element RegistrationQuality
 	 *
-	 * @return JDFRegistrationQuality the element @ if the element already exists
+	 * @return JDFRegistrationQuality the element
+	 * @ if the element already exists
 	 */
 	public JDFRegistrationQuality appendRegistrationQuality()
 	{

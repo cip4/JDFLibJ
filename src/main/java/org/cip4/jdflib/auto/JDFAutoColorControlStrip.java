@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.JDFDensityMeasuringField;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoColorControlStrip : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoColorControlStrip : public JDFResource
  */
 
 public abstract class JDFAutoColorControlStrip extends JDFResource
@@ -171,7 +168,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -186,11 +183,15 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Center
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Center
@@ -205,17 +206,20 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Center
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getCenter()
 	{
-		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Rotation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Rotation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Rotation
@@ -238,7 +242,9 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Size ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Size
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Size
@@ -253,17 +259,20 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Size
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getSize()
 	{
-		final String strAttrName = getAttribute(AttributeName.SIZE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SIZE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StripType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StripType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StripType
@@ -286,7 +295,9 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -324,7 +335,8 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * (27) const get element CIELABMeasuringField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCIELABMeasuringField the element default is getCIELABMeasuringField(0)
+	 * @return JDFCIELABMeasuringField the element
+	 *         default is getCIELABMeasuringField(0)
 	 */
 	public JDFCIELABMeasuringField getCIELABMeasuringField(int iSkip)
 	{
@@ -386,7 +398,8 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * (27) const get element DensityMeasuringField
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDensityMeasuringField the element default is getDensityMeasuringField(0)
+	 * @return JDFDensityMeasuringField the element
+	 *         default is getDensityMeasuringField(0)
 	 */
 	public JDFDensityMeasuringField getDensityMeasuringField(int iSkip)
 	{
@@ -458,7 +471,8 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * (27) const get element Patch
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPatch the element default is getPatch(0)
+	 * @return JDFPatch the element
+	 *         default is getPatch(0)
 	 */
 	public JDFPatch getPatch(int iSkip)
 	{
@@ -520,7 +534,8 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 	 * (27) const get element SeparationSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFSeparationSpec the element default is getSeparationSpec(0)
+	 * @return JDFSeparationSpec the element
+	 *         default is getSeparationSpec(0)
 	 */
 	public JDFSeparationSpec getSeparationSpec(int iSkip)
 	{

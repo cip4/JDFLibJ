@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoCoilBindingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoCoilBindingParams : public JDFResource
  */
 
 public abstract class JDFAutoCoilBindingParams extends JDFResource
@@ -172,7 +169,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -270,11 +267,15 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Tucked ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Tucked
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Tucked
@@ -297,7 +298,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Brand ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Brand
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Brand
@@ -322,7 +325,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Color ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Color
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (13) set attribute Color
@@ -349,7 +354,8 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -373,7 +379,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Diameter ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Diameter
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Diameter
@@ -396,7 +404,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Material
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Material
@@ -419,13 +429,15 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Material ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Material
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Material
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setMaterial(EMaterial) based on java.lang.enum instead
+	 * @deprecated use SetMaterial(EMaterial) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setMaterial(EnumMaterial enumVar)
@@ -437,7 +449,7 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	 * (9) get attribute Material
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EMaterial getEMaterial() based on java.lang.enum instead
+	 * @deprecated use EMaterial GetEMaterial() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumMaterial getMaterial()
@@ -446,7 +458,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Shift ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Shift
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Shift
@@ -469,7 +483,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Thickness ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Thickness
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Thickness
@@ -492,7 +508,9 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -518,7 +536,8 @@ public abstract class JDFAutoCoilBindingParams extends JDFResource
 	/**
 	 * (29) append element HoleMakingParams
 	 *
-	 * @return JDFHoleMakingParams the element @ if the element already exists
+	 * @return JDFHoleMakingParams the element
+	 * @ if the element already exists
 	 */
 	public JDFHoleMakingParams appendHoleMakingParams()
 	{

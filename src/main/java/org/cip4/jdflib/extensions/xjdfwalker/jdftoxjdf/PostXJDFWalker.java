@@ -45,12 +45,12 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
-import org.cip4.jdflib.auto.JDFAutoStripCellParams.EnumSides;
-import org.cip4.jdflib.auto.JDFAutoStrippingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
@@ -137,8 +137,9 @@ class PostXJDFWalker extends BaseElementWalker
 	private boolean bDeliveryIntent;
 	private boolean retainAll;
 
-	private static final StringArray metaKeys = new StringArray(new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL,
-			AttributeName.MODULEID, AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
+	private static final StringArray metaKeys = new StringArray(
+			new String[] { AttributeName.COMMANDRESULT, AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.LEVEL, AttributeName.MODULEID,
+					AttributeName.QUEUEENTRYID, AttributeName.SCOPE, AttributeName.SPEED, AttributeName.TOTALAMOUNT, AttributeName.TYPES });
 
 	/**
 	 * @return
@@ -891,7 +892,8 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
+			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET)
+					&& ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
 		/**
@@ -1057,9 +1059,13 @@ class PostXJDFWalker extends BaseElementWalker
 									ruli2.setAttribute(AttributeName.LOGICALPAGE, null);
 								}
 								if (pages0 < 0)
+								{
 									pages0 += nPage;
+								}
 								if (pages1 < 0)
+								{
 									pages1 += nPage;
+								}
 								if (pages0 >= 0 && pages1 >= 0)
 								{
 									nPage0 = 1 + Math.abs(pages0 - pages1);
@@ -2829,9 +2835,13 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			String t1 = KElement.xmlnsPrefix(t);
 			if (t1 == null)
+			{
 				t1 = "";
+			}
 			else
+			{
 				t1 = t1 + ":";
+			}
 			t = KElement.xmlnsLocalName(t);
 
 			ms.removeAttributes(new StringArray("Command Query Signal"));
@@ -2972,7 +2982,8 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param layoutMap
 		 * @return
 		 */
-		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth, final VJDFAttributeMap layoutMaps)
+		private JDFAttributeMap mergeStrippingParamsLayout(final JDFStrippingParams strippingParams, final SetHelper layoutseth,
+				final VJDFAttributeMap layoutMaps)
 		{
 			final JDFAttributeMap layoutMap = VJDFAttributeMap.isEmpty(layoutMaps) ? new JDFAttributeMap() : layoutMaps.get(0);
 			if (isRemoveSignatureName())
@@ -3097,11 +3108,13 @@ class PostXJDFWalker extends BaseElementWalker
 			int index = 1;
 			String bsIDNew = bsID;
 
-			KElement foundpos = layoutSet.getRoot().getChildByTagName(ElementName.POSITION, null, 0, new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID), false, false);
+			KElement foundpos = layoutSet.getRoot().getChildByTagName(ElementName.POSITION, null, 0,
+					new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsID), false, false);
 			while (foundpos != null)
 			{
 				bsIDNew = bsID + "." + index++;
-				foundpos = layoutSet.getRoot().getChildByTagName(ElementName.POSITION, null, 0, new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIDNew), false, false);
+				foundpos = layoutSet.getRoot().getChildByTagName(ElementName.POSITION, null, 0, new JDFAttributeMap(XJDFConstants.BinderySignatureID, bsIDNew),
+						false, false);
 			}
 
 			return bsIDNew;
@@ -3405,8 +3418,8 @@ class PostXJDFWalker extends BaseElementWalker
 	@Override
 	public String toString()
 	{
-		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll=" + retainAll
-				+ ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
+		return "PostXJDFWalker [mergeLayout=" + mergeLayout + ", bIntentPartition=" + bIntentPartition + ", bDeliveryIntent=" + bDeliveryIntent + ", retainAll="
+				+ retainAll + ", removeSignatureName=" + removeSignatureName + ", newRoot=" + newRootHelper.getRoot() + "]";
 	}
 
 	void combineSameSets()

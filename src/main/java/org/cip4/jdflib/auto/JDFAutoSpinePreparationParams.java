@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- *****************************************************************************
- * class JDFAutoSpinePreparationParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSpinePreparationParams : public JDFResource
  */
 
 public abstract class JDFAutoSpinePreparationParams extends JDFResource
@@ -152,7 +149,7 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -167,11 +164,14 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartPosition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartPosition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -195,7 +195,9 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FlexValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FlexValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FlexValue
@@ -218,7 +220,8 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MillingDepth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MillingDepth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -242,7 +245,8 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NotchingDepth
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NotchingDepth
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -266,7 +270,8 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NotchingDistance
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NotchingDistance
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -290,7 +295,9 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Operations ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Operations
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Operations
@@ -309,14 +316,15 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	 */
 	public VString getOperations()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.OPERATIONS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PullOutValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PullOutValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -340,7 +348,8 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SealingTemperature
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SealingTemperature
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -364,7 +373,8 @@ public abstract class JDFAutoSpinePreparationParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute WorkingLength
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute WorkingLength
 	 * ---------------------------------------------------------------------
 	 */
 	/**

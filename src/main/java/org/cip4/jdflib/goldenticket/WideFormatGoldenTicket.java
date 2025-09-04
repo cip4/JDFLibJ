@@ -71,11 +71,11 @@
 package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams;
-import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFElement.EnumSides;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;

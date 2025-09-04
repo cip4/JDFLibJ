@@ -82,10 +82,7 @@ import org.cip4.jdflib.span.JDFSpanWireCombMaterial;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoWireCombBinding : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoWireCombBinding : public JDFElement
  */
 
 public abstract class JDFAutoWireCombBinding extends JDFElement
@@ -146,7 +143,9 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -172,7 +171,8 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	/**
 	 * (29) append element WireCombBrand
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendWireCombBrand()
 	{
@@ -202,7 +202,8 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	/**
 	 * (29) append element WireCombMaterial
 	 *
-	 * @return JDFSpanWireCombMaterial the element @ if the element already exists
+	 * @return JDFSpanWireCombMaterial the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanWireCombMaterial appendWireCombMaterial()
 	{
@@ -232,7 +233,8 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	/**
 	 * (29) append element WireCombShape
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendWireCombShape()
 	{
@@ -262,7 +264,8 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	/**
 	 * (29) append element HoleList
 	 *
-	 * @return JDFHoleList the element @ if the element already exists
+	 * @return JDFHoleList the element
+	 * @ if the element already exists
 	 */
 	public JDFHoleList appendHoleList()
 	{
@@ -292,7 +295,8 @@ public abstract class JDFAutoWireCombBinding extends JDFElement
 	/**
 	 * (29) append element HoleType
 	 *
-	 * @return JDFSpanHoleType the element @ if the element already exists
+	 * @return JDFSpanHoleType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanHoleType appendHoleType()
 	{

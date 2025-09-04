@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoPDFXParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoPDFXParams : public JDFElement
  */
 
 public abstract class JDFAutoPDFXParams extends JDFElement
@@ -109,7 +106,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.PDFXNOTRIMBOXERROR, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PDFXREGISTRYNAME, 0x3333333311l, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable[9] = new AtrInfoTable(AttributeName.PDFXSETBLEEDBOXTOMEDIABOX, 0x3333333311l, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-		atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRAPPED, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumPDFXTrapped.getEnum(0), null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRAPPED, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumPDFXTrapped.getEnum(0),
+				null);
 		atrInfoTable[11] = new AtrInfoTable(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, 0x3333333311l, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
@@ -235,11 +233,15 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXCheck ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXCheck
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PDFXCheck
@@ -262,7 +264,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFX1aCheck ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFX1aCheck
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PDFX1aCheck
@@ -285,7 +289,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFX3Check ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFX3Check
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PDFX3Check
@@ -308,7 +314,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXBleedBoxToTrimBoxOffset
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXBleedBoxToTrimBoxOffset
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -324,17 +331,19 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute PDFXBleedBoxToTrimBoxOffset
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getPDFXBleedBoxToTrimBoxOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PDFXBLEEDBOXTOTRIMBOXOFFSET, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXCompliantPDFOnly
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXCompliantPDFOnly
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -358,7 +367,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXOutputCondition
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXOutputCondition
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -382,7 +392,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXOutputIntentProfile
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXOutputIntentProfile
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -406,7 +417,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXNoTrimBoxError
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXNoTrimBoxError
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -430,7 +442,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXRegistryName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXRegistryName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -454,7 +467,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXSetBleedBoxToMediaBox
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXSetBleedBoxToMediaBox
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -478,7 +492,9 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXTrapped ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXTrapped
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PDFXTrapped
@@ -501,13 +517,15 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXTrapped ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXTrapped
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PDFXTrapped
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPDFXTrapped(EPDFXTrapped) based on java.lang.enum instead
+	 * @deprecated use SetPDFXTrapped(EPDFXTrapped) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPDFXTrapped(EnumPDFXTrapped enumVar)
@@ -519,7 +537,7 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	 * (9) get attribute PDFXTrapped
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPDFXTrapped getEPDFXTrapped() based on java.lang.enum instead
+	 * @deprecated use EPDFXTrapped GetEPDFXTrapped() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPDFXTrapped getPDFXTrapped()
@@ -528,7 +546,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PDFXTrimBoxToMediaBoxOffset
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PDFXTrimBoxToMediaBoxOffset
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -544,12 +563,13 @@ public abstract class JDFAutoPDFXParams extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute PDFXTrimBoxToMediaBoxOffset
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getPDFXTrimBoxToMediaBoxOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 

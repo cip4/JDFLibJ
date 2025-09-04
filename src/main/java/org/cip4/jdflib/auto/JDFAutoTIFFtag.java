@@ -80,10 +80,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 
 /**
- *****************************************************************************
- * class JDFAutoTIFFtag : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoTIFFtag : public JDFElement
  */
 
 public abstract class JDFAutoTIFFtag extends JDFElement
@@ -145,11 +142,15 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TagNumber ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TagNumber
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TagNumber
@@ -172,7 +173,9 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute TagType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute TagType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute TagType
@@ -195,7 +198,8 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute IntegerValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute IntegerValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -211,17 +215,20 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 	/**
 	 * (20) get JDFIntegerList attribute IntegerValue
 	 *
-	 * @return JDFIntegerList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerList
+	 * @return JDFIntegerList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerList
 	 */
 	public JDFIntegerList getIntegerValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.INTEGERVALUE, null, null);
-		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.INTEGERVALUE, null, null);
+		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NumberValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NumberValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute NumberValue
@@ -236,17 +243,20 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 	/**
 	 * (20) get JDFNumberList attribute NumberValue
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getNumberValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.NUMBERVALUE, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.NUMBERVALUE, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StringValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StringValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute StringValue
@@ -269,7 +279,9 @@ public abstract class JDFAutoTIFFtag extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BinaryValue ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BinaryValue
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BinaryValue

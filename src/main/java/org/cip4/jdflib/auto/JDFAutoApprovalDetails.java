@@ -89,10 +89,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoApprovalDetails : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoApprovalDetails : public JDFElement
  */
 
 public abstract class JDFAutoApprovalDetails extends JDFElement
@@ -103,7 +100,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPROVALSTATE, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration, EnumApprovalState.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.APPROVALSTATE, 0x2222222111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumApprovalState.getEnum(0), null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.APPROVALSTATEDETAILS, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
@@ -242,11 +240,14 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ApprovalState
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ApprovalState
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -270,14 +271,15 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ApprovalState
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ApprovalState
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ApprovalState
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setApprovalState(EApprovalState) based on java.lang.enum instead
+	 * @deprecated use SetApprovalState(EApprovalState) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setApprovalState(EnumApprovalState enumVar)
@@ -289,7 +291,7 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	 * (9) get attribute ApprovalState
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EApprovalState getEApprovalState() based on java.lang.enum instead
+	 * @deprecated use EApprovalState GetEApprovalState() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumApprovalState getApprovalState()
@@ -298,7 +300,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ApprovalStateDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ApprovalStateDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -322,7 +325,9 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -348,7 +353,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	/**
 	 * (29) append element Contact
 	 *
-	 * @return JDFContact the element @ if the element already exists
+	 * @return JDFContact the element
+	 * @ if the element already exists
 	 */
 	public JDFContact appendContact()
 	{
@@ -388,7 +394,8 @@ public abstract class JDFAutoApprovalDetails extends JDFElement
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

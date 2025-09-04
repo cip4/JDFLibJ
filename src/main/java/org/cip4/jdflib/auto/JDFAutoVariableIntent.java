@@ -84,10 +84,7 @@ import org.cip4.jdflib.span.JDFSpanVariableQuality;
 import org.cip4.jdflib.span.JDFSpanVariableType;
 
 /**
- *****************************************************************************
- * class JDFAutoVariableIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoVariableIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoVariableIntent extends JDFIntentResource
@@ -151,7 +148,9 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -177,7 +176,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	/**
 	 * (29) append element Area
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendArea()
 	{
@@ -207,7 +207,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	/**
 	 * (29) append element AveragePages
 	 *
-	 * @return JDFIntegerSpan the element @ if the element already exists
+	 * @return JDFIntegerSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFIntegerSpan appendAveragePages()
 	{
@@ -249,7 +250,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	 * (27) const get element maxPages
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIntegerSpan the element default is getmaxPages(0)
+	 * @return JDFIntegerSpan the element
+	 *         default is getmaxPages(0)
 	 */
 	public JDFIntegerSpan getmaxPages(int iSkip)
 	{
@@ -299,7 +301,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	/**
 	 * (29) append element MinPages
 	 *
-	 * @return JDFIntegerSpan the element @ if the element already exists
+	 * @return JDFIntegerSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFIntegerSpan appendMinPages()
 	{
@@ -329,7 +332,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	/**
 	 * (29) append element NumberOfCopies
 	 *
-	 * @return JDFIntegerSpan the element @ if the element already exists
+	 * @return JDFIntegerSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFIntegerSpan appendNumberOfCopies()
 	{
@@ -359,7 +363,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	/**
 	 * (29) append element VariableType
 	 *
-	 * @return JDFSpanVariableType the element @ if the element already exists
+	 * @return JDFSpanVariableType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanVariableType appendVariableType()
 	{
@@ -389,7 +394,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	/**
 	 * (29) append element VariableQuality
 	 *
-	 * @return JDFSpanVariableQuality the element @ if the element already exists
+	 * @return JDFSpanVariableQuality the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanVariableQuality appendVariableQuality()
 	{
@@ -419,7 +425,8 @@ public abstract class JDFAutoVariableIntent extends JDFIntentResource
 	/**
 	 * (29) append element ColorsUsed
 	 *
-	 * @return JDFSeparationList the element @ if the element already exists
+	 * @return JDFSeparationList the element
+	 * @ if the element already exists
 	 */
 	public JDFSeparationList appendColorsUsed()
 	{

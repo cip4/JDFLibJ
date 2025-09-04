@@ -85,10 +85,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 /**
- *****************************************************************************
- * class JDFAutoBoxApplication : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBoxApplication : public JDFElement
  */
 
 public abstract class JDFAutoBoxApplication extends JDFElement
@@ -158,11 +155,14 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ApplicationArea
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ApplicationArea
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -178,17 +178,20 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute ApplicationArea
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getApplicationArea()
 	{
-		final String strAttrName = getAttribute(AttributeName.APPLICATIONAREA, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.APPLICATIONAREA, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -226,7 +229,8 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * (27) const get element Component
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFComponent the element default is getComponent(0)
+	 * @return JDFComponent the element
+	 *         default is getComponent(0)
 	 */
 	public JDFComponent getComponent(int iSkip)
 	{
@@ -298,7 +302,8 @@ public abstract class JDFAutoBoxApplication extends JDFElement
 	 * (27) const get element GlueLine
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueLine the element default is getGlueLine(0)
+	 * @return JDFGlueLine the element
+	 *         default is getGlueLine(0)
 	 */
 	public JDFGlueLine getGlueLine(int iSkip)
 	{

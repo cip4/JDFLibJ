@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.process.JDFCollatingItem;
 import org.cip4.jdflib.resource.process.JDFFeeder;
 
 /**
- *****************************************************************************
- * class JDFAutoFeedingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoFeedingParams : public JDFResource
  */
 
 public abstract class JDFAutoFeedingParams extends JDFResource
@@ -147,7 +144,7 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -162,7 +159,9 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -200,7 +199,8 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * (27) const get element Feeder
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFeeder the element default is getFeeder(0)
+	 * @return JDFFeeder the element
+	 *         default is getFeeder(0)
 	 */
 	public JDFFeeder getFeeder(int iSkip)
 	{
@@ -262,7 +262,8 @@ public abstract class JDFAutoFeedingParams extends JDFResource
 	 * (27) const get element CollatingItem
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCollatingItem the element default is getCollatingItem(0)
+	 * @return JDFCollatingItem the element
+	 *         default is getCollatingItem(0)
 	 */
 	public JDFCollatingItem getCollatingItem(int iSkip)
 	{

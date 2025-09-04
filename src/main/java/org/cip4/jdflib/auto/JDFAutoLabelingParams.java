@@ -71,12 +71,11 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
+import org.cip4.jdflib.auto.JDFAutoDefect.EnumFace;
+import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumPosition;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -88,13 +87,9 @@ import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoLabelingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLabelingParams : public JDFResource
  */
 
 public abstract class JDFAutoLabelingParams extends JDFResource
@@ -171,7 +166,7 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -185,97 +180,16 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 		return JDFResource.EnumResourceClass.Parameter;
 	}
 
-	/**
-	 * Enumeration strings for Position
-	 */
-
-	public enum EPosition
-	{
-		Top, Bottom, Left, Right, Front, Back;
-
-		public static EPosition getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPosition.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Position
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPosition extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPosition(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPosition getEnum(String enumName)
-		{
-			return (EnumPosition) getEnum(EnumPosition.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPosition getEnum(int enumValue)
-		{
-			return (EnumPosition) getEnum(EnumPosition.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPosition.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPosition.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPosition.class);
-		}
-
-		/**  */
-		public static final EnumPosition Top = new EnumPosition("Top");
-		/**  */
-		public static final EnumPosition Bottom = new EnumPosition("Bottom");
-		/**  */
-		public static final EnumPosition Left = new EnumPosition("Left");
-		/**  */
-		public static final EnumPosition Right = new EnumPosition("Right");
-		/**  */
-		public static final EnumPosition Front = new EnumPosition("Front");
-		/**  */
-		public static final EnumPosition Back = new EnumPosition("Back");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Application ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Application
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Application
@@ -298,7 +212,9 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CTM ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CTM
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CTM
@@ -313,17 +229,20 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	/**
 	 * (20) get JDFMatrix attribute CTM
 	 *
-	 * @return JDFMatrix the value of the attribute, null if a the attribute value is not a valid to create a JDFMatrix
+	 * @return JDFMatrix the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFMatrix
 	 */
 	public JDFMatrix getCTM()
 	{
-		final String strAttrName = getAttribute(AttributeName.CTM, null, null);
-		final JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CTM, null, null);
+		JDFMatrix nPlaceHolder = JDFMatrix.createMatrix(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Offset ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Offset
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Offset
@@ -338,24 +257,27 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute Offset
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getOffset()
 	{
-		final String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.OFFSET, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
 	 */
-	public void setPosition(EPosition enumVar)
+	public void setPosition(EFace enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.name(), null);
 	}
@@ -365,22 +287,24 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 *
 	 * @return the value of the attribute
 	 */
-	public EPosition getEPosition()
+	public EFace getEPosition()
 	{
-		return EPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EFace.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Position ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Position
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Position
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPosition(EPosition) based on java.lang.enum instead
+	 * @deprecated use SetPosition(EFace) based on java.lang.enum instead
 	 */
 	@Deprecated
-	public void setPosition(EnumPosition enumVar)
+	public void setPosition(EnumFace enumVar)
 	{
 		setAttribute(AttributeName.POSITION, enumVar == null ? null : enumVar.getName(), null);
 	}
@@ -389,16 +313,18 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 * (9) get attribute Position
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPosition getEPosition() based on java.lang.enum instead
+	 * @deprecated use EFace GetEPosition() based on java.lang.enum instead
 	 */
 	@Deprecated
-	public EnumPosition getPosition()
+	public EnumFace getPosition()
 	{
-		return EnumPosition.getEnum(getAttribute(AttributeName.POSITION, null, null));
+		return EnumFace.getEnum(getAttribute(AttributeName.POSITION, null, null));
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -436,7 +362,8 @@ public abstract class JDFAutoLabelingParams extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{

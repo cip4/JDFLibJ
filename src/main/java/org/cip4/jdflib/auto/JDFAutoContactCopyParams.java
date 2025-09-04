@@ -88,10 +88,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoContactCopyParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoContactCopyParams : public JDFResource
  */
 
 public abstract class JDFAutoContactCopyParams extends JDFResource
@@ -170,7 +167,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -262,11 +259,14 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContactScreen
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContactScreen
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -290,7 +290,8 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PolarityChange
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PolarityChange
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -314,7 +315,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RepeatStep ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RepeatStep
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute RepeatStep
@@ -329,17 +332,20 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute RepeatStep
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getRepeatStep()
 	{
-		final String strAttrName = getAttribute(AttributeName.REPEATSTEP, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.REPEATSTEP, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Cycle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Cycle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Cycle
@@ -362,7 +368,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Diffusion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Diffusion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Diffusion
@@ -385,13 +393,15 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Diffusion ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Diffusion
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Diffusion
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDiffusion(EDiffusion) based on java.lang.enum instead
+	 * @deprecated use SetDiffusion(EDiffusion) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDiffusion(EnumDiffusion enumVar)
@@ -403,7 +413,7 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	 * (9) get attribute Diffusion
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDiffusion getEDiffusion() based on java.lang.enum instead
+	 * @deprecated use EDiffusion GetEDiffusion() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDiffusion getDiffusion()
@@ -412,7 +422,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Vacuum ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Vacuum
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Vacuum
@@ -435,7 +447,9 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -461,7 +475,8 @@ public abstract class JDFAutoContactCopyParams extends JDFResource
 	/**
 	 * (29) append element ScreeningParams
 	 *
-	 * @return JDFScreeningParams the element @ if the element already exists
+	 * @return JDFScreeningParams the element
+	 * @ if the element already exists
 	 */
 	public JDFScreeningParams appendScreeningParams()
 	{

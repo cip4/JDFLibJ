@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EUpdateMethod;
+import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -87,13 +85,9 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.resource.JDFPart;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoNodeInfoCmdParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoNodeInfoCmdParams : public JDFElement
  */
 
 public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
@@ -107,7 +101,8 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.JOBID, 0x4444444211l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBPARTID, 0x4444444311l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x4444444311l, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x4444444311l, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x4444444311l, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0),
+				"Complete");
 	}
 
 	@Override
@@ -165,91 +160,16 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for UpdateMethod
-	 */
-
-	public enum EUpdateMethod
-	{
-		Complete, Incremental, Remove;
-
-		public static EUpdateMethod getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EUpdateMethod.class, val, EUpdateMethod.Complete);
-		}
-	}
-
-	/**
-	 * Enumeration strings for UpdateMethod
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumUpdateMethod extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumUpdateMethod(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumUpdateMethod getEnum(String enumName)
-		{
-			return (EnumUpdateMethod) getEnum(EnumUpdateMethod.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumUpdateMethod getEnum(int enumValue)
-		{
-			return (EnumUpdateMethod) getEnum(EnumUpdateMethod.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumUpdateMethod.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumUpdateMethod.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumUpdateMethod.class);
-		}
-
-		/**  */
-		public static final EnumUpdateMethod Complete = new EnumUpdateMethod("Complete");
-		/**  */
-		public static final EnumUpdateMethod Incremental = new EnumUpdateMethod("Incremental");
-		/**  */
-		public static final EnumUpdateMethod Remove = new EnumUpdateMethod("Remove");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -272,7 +192,9 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -295,7 +217,8 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -319,7 +242,8 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpdateMethod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UpdateMethod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -343,14 +267,15 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UpdateMethod
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UpdateMethod
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute UpdateMethod
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setUpdateMethod(EUpdateMethod) based on java.lang.enum instead
+	 * @deprecated use SetUpdateMethod(EUpdateMethod) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setUpdateMethod(EnumUpdateMethod enumVar)
@@ -362,7 +287,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	 * (9) get attribute UpdateMethod
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EUpdateMethod getEUpdateMethod() based on java.lang.enum instead
+	 * @deprecated use EUpdateMethod GetEUpdateMethod() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumUpdateMethod getUpdateMethod()
@@ -371,7 +296,9 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -409,7 +336,8 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{
@@ -459,7 +387,8 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 	/**
 	 * (29) append element NodeInfo
 	 *
-	 * @return JDFNodeInfo the element @ if the element already exists
+	 * @return JDFNodeInfo the element
+	 * @ if the element already exists
 	 */
 	public JDFNodeInfo appendNodeInfo()
 	{

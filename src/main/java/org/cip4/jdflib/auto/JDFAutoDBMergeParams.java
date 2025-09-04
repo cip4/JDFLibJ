@@ -81,10 +81,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- *****************************************************************************
- * class JDFAutoDBMergeParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDBMergeParams : public JDFResource
  */
 
 public abstract class JDFAutoDBMergeParams extends JDFResource
@@ -158,7 +155,7 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -173,11 +170,14 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SplitDocuments
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SplitDocuments
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -201,7 +201,9 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -227,7 +229,8 @@ public abstract class JDFAutoDBMergeParams extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{

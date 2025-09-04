@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoArtDelivery.EPreflightStatus;
+import org.cip4.jdflib.auto.JDFAutoArtDelivery.EnumPreflightStatus;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -95,13 +93,9 @@ import org.cip4.jdflib.span.JDFSpanDeliveryCharge;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoArtDeliveryIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoArtDeliveryIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
@@ -112,8 +106,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightStatus.getEnum(0),
-				"NotPerformed");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumPreflightStatus.getEnum(0), "NotPerformed");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.RETURNLIST, 0x3333333331l, AttributeInfo.EnumAttributeType.NMTOKENS, null, "None");
 	}
 
@@ -181,93 +175,15 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for PreflightStatus
-	 */
-
-	public enum EPreflightStatus
-	{
-		NotPerformed, WithErrors, WithWarnings, WithoutErrors;
-
-		public static EPreflightStatus getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPreflightStatus.class, val, EPreflightStatus.NotPerformed);
-		}
-	}
-
-	/**
-	 * Enumeration strings for PreflightStatus
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPreflightStatus extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPreflightStatus(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPreflightStatus getEnum(String enumName)
-		{
-			return (EnumPreflightStatus) getEnum(EnumPreflightStatus.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPreflightStatus getEnum(int enumValue)
-		{
-			return (EnumPreflightStatus) getEnum(EnumPreflightStatus.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreflightStatus.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreflightStatus.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreflightStatus.class);
-		}
-
-		/**  */
-		public static final EnumPreflightStatus NotPerformed = new EnumPreflightStatus("NotPerformed");
-		/**  */
-		public static final EnumPreflightStatus WithErrors = new EnumPreflightStatus("WithErrors");
-		/**  */
-		public static final EnumPreflightStatus WithWarnings = new EnumPreflightStatus("WithWarnings");
-		/**  */
-		public static final EnumPreflightStatus WithoutErrors = new EnumPreflightStatus("WithoutErrors");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreflightStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -291,14 +207,15 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PreflightStatus
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PreflightStatus
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PreflightStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPreflightStatus(EPreflightStatus) based on java.lang.enum instead
+	 * @deprecated use SetPreflightStatus(EPreflightStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPreflightStatus(EnumPreflightStatus enumVar)
@@ -310,7 +227,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * (9) get attribute PreflightStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPreflightStatus getEPreflightStatus() based on java.lang.enum instead
+	 * @deprecated use EPreflightStatus GetEPreflightStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPreflightStatus getPreflightStatus()
@@ -319,7 +236,9 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReturnList ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReturnList
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ReturnList
@@ -338,14 +257,16 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 */
 	public VString getReturnList()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.RETURNLIST, null, "None");
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.RETURNLIST, null, "None");
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -371,7 +292,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element ArtDeliveryDate
 	 *
-	 * @return JDFTimeSpan the element @ if the element already exists
+	 * @return JDFTimeSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFTimeSpan appendArtDeliveryDate()
 	{
@@ -401,7 +323,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element ArtDeliveryDuration
 	 *
-	 * @return JDFDurationSpan the element @ if the element already exists
+	 * @return JDFDurationSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFDurationSpan appendArtDeliveryDuration()
 	{
@@ -431,7 +354,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element ArtHandling
 	 *
-	 * @return JDFSpanArtHandling the element @ if the element already exists
+	 * @return JDFSpanArtHandling the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanArtHandling appendArtHandling()
 	{
@@ -461,7 +385,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element DeliveryCharge
 	 *
-	 * @return JDFSpanDeliveryCharge the element @ if the element already exists
+	 * @return JDFSpanDeliveryCharge the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanDeliveryCharge appendDeliveryCharge()
 	{
@@ -491,7 +416,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element Method
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendMethod()
 	{
@@ -521,7 +447,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element ReturnMethod
 	 *
-	 * @return JDFNameSpan the element @ if the element already exists
+	 * @return JDFNameSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNameSpan appendReturnMethod()
 	{
@@ -551,7 +478,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element ServiceLevel
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendServiceLevel()
 	{
@@ -581,7 +509,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element Transfer
 	 *
-	 * @return JDFSpanTransfer the element @ if the element already exists
+	 * @return JDFSpanTransfer the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanTransfer appendTransfer()
 	{
@@ -623,7 +552,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * (27) const get element ArtDelivery
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFArtDelivery the element default is getArtDelivery(0)
+	 * @return JDFArtDelivery the element
+	 *         default is getArtDelivery(0)
 	 */
 	public JDFArtDelivery getArtDelivery(int iSkip)
 	{
@@ -673,7 +603,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	/**
 	 * (29) append element Company
 	 *
-	 * @return JDFCompany the element @ if the element already exists
+	 * @return JDFCompany the element
+	 * @ if the element already exists
 	 */
 	public JDFCompany appendCompany()
 	{
@@ -727,7 +658,8 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{

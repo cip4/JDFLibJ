@@ -71,10 +71,10 @@ package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumDeviceOperationMode;
-import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;

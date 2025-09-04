@@ -77,6 +77,8 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.ESourceObjects;
+import org.cip4.jdflib.auto.JDFAutoObjectResolution.EnumSourceObjects;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -87,10 +89,7 @@ import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoScreenSelector : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoScreenSelector : public JDFElement
  */
 
 public abstract class JDFAutoScreenSelector extends JDFElement
@@ -107,10 +106,12 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.FREQUENCY, 0x3333333333l, AttributeInfo.EnumAttributeType.double_, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x3333331111l, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.SCREENINGFAMILY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.SCREENINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumScreeningType.getEnum(0), null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.SCREENINGTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumScreeningType.getEnum(0), null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.SEPARATION, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, "All");
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.SOURCEFREQUENCY, 0x3333333333l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumerations,
+				EnumSourceObjects.getEnum(0), null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.SPOTFUNCTION, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
@@ -241,97 +242,16 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 		public static final EnumScreeningType HybridAMline_dot = new EnumScreeningType("HybridAMline-dot");
 	}
 
-	/**
-	 * Enumeration strings for SourceObjects
-	 */
-
-	public enum ESourceObjects
-	{
-		All, ImagePhotographic, ImageScreenShot, LineArt, SmoothShades, Text;
-
-		public static ESourceObjects getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(ESourceObjects.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for SourceObjects
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumSourceObjects extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumSourceObjects(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumSourceObjects getEnum(String enumName)
-		{
-			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumSourceObjects getEnum(int enumValue)
-		{
-			return (EnumSourceObjects) getEnum(EnumSourceObjects.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumSourceObjects.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumSourceObjects.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumSourceObjects.class);
-		}
-
-		/**  */
-		public static final EnumSourceObjects All = new EnumSourceObjects("All");
-		/**  */
-		public static final EnumSourceObjects ImagePhotographic = new EnumSourceObjects("ImagePhotographic");
-		/**  */
-		public static final EnumSourceObjects ImageScreenShot = new EnumSourceObjects("ImageScreenShot");
-		/**  */
-		public static final EnumSourceObjects LineArt = new EnumSourceObjects("LineArt");
-		/**  */
-		public static final EnumSourceObjects SmoothShades = new EnumSourceObjects("SmoothShades");
-		/**  */
-		public static final EnumSourceObjects Text = new EnumSourceObjects("Text");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Angle ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Angle
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Angle
@@ -354,7 +274,9 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AngleMap ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AngleMap
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute AngleMap
@@ -377,7 +299,9 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DotSize ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DotSize
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DotSize
@@ -400,7 +324,9 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Frequency ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Frequency
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Frequency
@@ -423,7 +349,9 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ObjectTags ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ObjectTags
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ObjectTags
@@ -442,14 +370,15 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	 */
 	public VString getObjectTags()
 	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
+		VString vStrAttrib = new VString();
+		String s = getAttribute(AttributeName.OBJECTTAGS, null, JDFCoreConstants.EMPTYSTRING);
 		vStrAttrib.setAllStrings(s, " ");
 		return vStrAttrib;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ScreeningFamily
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ScreeningFamily
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -473,7 +402,8 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ScreeningType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ScreeningType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -497,14 +427,15 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ScreeningType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ScreeningType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ScreeningType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setScreeningType(EScreeningType) based on java.lang.enum instead
+	 * @deprecated use SetScreeningType(EScreeningType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setScreeningType(EnumScreeningType enumVar)
@@ -516,7 +447,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	 * (9) get attribute ScreeningType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EScreeningType getEScreeningType() based on java.lang.enum instead
+	 * @deprecated use EScreeningType GetEScreeningType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumScreeningType getScreeningType()
@@ -525,7 +456,9 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Separation ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Separation
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Separation
@@ -548,7 +481,8 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceFrequency
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceFrequency
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -564,17 +498,19 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	/**
 	 * (20) get JDFNumberRange attribute SourceFrequency
 	 *
-	 * @return JDFNumberRange the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRange
+	 * @return JDFNumberRange the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberRange
 	 */
 	public JDFNumberRange getSourceFrequency()
 	{
-		final String strAttrName = getAttribute(AttributeName.SOURCEFREQUENCY, null, null);
-		final JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
+		String strAttrName = getAttribute(AttributeName.SOURCEFREQUENCY, null, null);
+		JDFNumberRange nPlaceHolder = JDFNumberRange.createNumberRange(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -590,7 +526,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	/**
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
-	 * @return List of the enumerations
+	 * @return Vector of the enumerations
 	 */
 	public List<ESourceObjects> getEnumsSourceObjects()
 	{
@@ -598,14 +534,15 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SourceObjects
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SourceObjects
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5.2) set attribute SourceObjects
 	 *
 	 * @param v List of the enumeration values
-	 * @deprecated use setESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
+	 * @deprecated use SetESourceObjects(List<ESourceObjects>) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSourceObjects(List<EnumSourceObjects> v)
@@ -617,7 +554,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	 * (9.2) get SourceObjects attribute SourceObjects
 	 *
 	 * @return Vector of the enumerations
-	 * @deprecated use List<ESourceObjects> getEnumsSourceObjects() based on java.lang.enum instead
+	 * @deprecated use List<ESourceObjects > GetESourceObjects() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public Vector<EnumSourceObjects> getSourceObjects()
@@ -626,7 +563,8 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SpotFunction
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute SpotFunction
 	 * ---------------------------------------------------------------------
 	 */
 	/**

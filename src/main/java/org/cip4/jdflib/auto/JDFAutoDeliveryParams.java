@@ -94,10 +94,7 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoDeliveryParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDeliveryParams : public JDFResource
  */
 
 public abstract class JDFAutoDeliveryParams extends JDFResource
@@ -182,7 +179,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -278,11 +275,15 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeliveryID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeliveryID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DeliveryID
@@ -305,7 +306,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Earliest ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Earliest
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Earliest
@@ -329,13 +332,14 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFDate getEarliest()
 	{
-		final String str = getAttribute(AttributeName.EARLIEST, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.EARLIEST, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EarliestDuration
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EarliestDuration
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -351,17 +355,20 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute EarliestDuration
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getEarliestDuration()
 	{
-		final String strAttrName = getAttribute(AttributeName.EARLIESTDURATION, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.EARLIESTDURATION, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Method ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Method
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Method
@@ -384,7 +391,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pickup ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pickup
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pickup
@@ -407,7 +416,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Required ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Required
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute Required
@@ -431,13 +442,14 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 */
 	public JDFDate getRequired()
 	{
-		final String str = getAttribute(AttributeName.REQUIRED, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.REQUIRED, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute RequiredDuration
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute RequiredDuration
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -453,17 +465,19 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute RequiredDuration
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getRequiredDuration()
 	{
-		final String strAttrName = getAttribute(AttributeName.REQUIREDDURATION, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.REQUIREDDURATION, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ServiceLevel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ServiceLevel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -487,7 +501,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Transfer ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Transfer
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Transfer
@@ -510,13 +526,15 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Transfer ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Transfer
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Transfer
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setTransfer(ETransfer) based on java.lang.enum instead
+	 * @deprecated use SetTransfer(ETransfer) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setTransfer(EnumTransfer enumVar)
@@ -528,7 +546,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * (9) get attribute Transfer
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ETransfer getETransfer() based on java.lang.enum instead
+	 * @deprecated use ETransfer GetETransfer() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumTransfer getTransfer()
@@ -537,7 +555,9 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -563,7 +583,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	/**
 	 * (29) append element Company
 	 *
-	 * @return JDFCompany the element @ if the element already exists
+	 * @return JDFCompany the element
+	 * @ if the element already exists
 	 */
 	public JDFCompany appendCompany()
 	{
@@ -617,7 +638,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -690,7 +712,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * (27) const get element Drop
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDrop the element default is getDrop(0)
+	 * @return JDFDrop the element
+	 *         default is getDrop(0)
 	 */
 	public JDFDrop getDrop(int iSkip)
 	{
@@ -752,7 +775,8 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{

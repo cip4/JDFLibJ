@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 
 /**
- *****************************************************************************
- * class JDFAutoDevCapPool : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDevCapPool : public JDFElement
  */
 
 public abstract class JDFAutoDevCapPool extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoDevCapPool extends JDFElement
 	 * (27) const get element DevCap
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFDevCap the element default is getDevCap(0)
+	 * @return JDFDevCap the element
+	 *         default is getDevCap(0)
 	 */
 	public JDFDevCap getDevCap(int iSkip)
 	{

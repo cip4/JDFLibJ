@@ -93,10 +93,7 @@ import org.cip4.jdflib.resource.process.JDFRollStand;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 /**
- *****************************************************************************
- * class JDFAutoDropItemIntent : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoDropItemIntent : public JDFElement
  */
 
 public abstract class JDFAutoDropItemIntent extends JDFElement
@@ -181,11 +178,14 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AdditionalAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AdditionalAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -209,7 +209,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Amount ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Amount
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Amount
@@ -232,7 +234,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DropID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DropID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute DropID
@@ -255,7 +259,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute OrderedAmount
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute OrderedAmount
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -279,7 +284,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Proof ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Proof
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Proof
@@ -302,7 +309,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Unit ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Unit
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Unit
@@ -325,7 +334,9 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -351,7 +362,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Pricing
 	 *
-	 * @return JDFPricing the element @ if the element already exists
+	 * @return JDFPricing the element
+	 * @ if the element already exists
 	 */
 	public JDFPricing appendPricing()
 	{
@@ -381,7 +393,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Component
 	 *
-	 * @return JDFComponent the element @ if the element already exists
+	 * @return JDFComponent the element
+	 * @ if the element already exists
 	 */
 	public JDFComponent appendComponent()
 	{
@@ -421,7 +434,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element ExposedMedia
 	 *
-	 * @return JDFExposedMedia the element @ if the element already exists
+	 * @return JDFExposedMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFExposedMedia appendExposedMedia()
 	{
@@ -461,7 +475,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Ink
 	 *
-	 * @return JDFInk the element @ if the element already exists
+	 * @return JDFInk the element
+	 * @ if the element already exists
 	 */
 	public JDFInk appendInk()
 	{
@@ -501,7 +516,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Media
 	 *
-	 * @return JDFMedia the element @ if the element already exists
+	 * @return JDFMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFMedia appendMedia()
 	{
@@ -541,7 +557,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Pallet
 	 *
-	 * @return JDFPallet the element @ if the element already exists
+	 * @return JDFPallet the element
+	 * @ if the element already exists
 	 */
 	public JDFPallet appendPallet()
 	{
@@ -581,7 +598,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element RegisterRibbon
 	 *
-	 * @return JDFRegisterRibbon the element @ if the element already exists
+	 * @return JDFRegisterRibbon the element
+	 * @ if the element already exists
 	 */
 	public JDFRegisterRibbon appendRegisterRibbon()
 	{
@@ -621,7 +639,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Strap
 	 *
-	 * @return JDFStrap the element @ if the element already exists
+	 * @return JDFStrap the element
+	 * @ if the element already exists
 	 */
 	public JDFStrap appendStrap()
 	{
@@ -661,7 +680,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Bundle
 	 *
-	 * @return JDFBundle the element @ if the element already exists
+	 * @return JDFBundle the element
+	 * @ if the element already exists
 	 */
 	public JDFBundle appendBundle()
 	{
@@ -701,7 +721,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element DigitalMedia
 	 *
-	 * @return JDFDigitalMedia the element @ if the element already exists
+	 * @return JDFDigitalMedia the element
+	 * @ if the element already exists
 	 */
 	public JDFDigitalMedia appendDigitalMedia()
 	{
@@ -741,7 +762,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element RollStand
 	 *
-	 * @return JDFRollStand the element @ if the element already exists
+	 * @return JDFRollStand the element
+	 * @ if the element already exists
 	 */
 	public JDFRollStand appendRollStand()
 	{
@@ -781,7 +803,8 @@ public abstract class JDFAutoDropItemIntent extends JDFElement
 	/**
 	 * (29) append element Tool
 	 *
-	 * @return JDFTool the element @ if the element already exists
+	 * @return JDFTool the element
+	 * @ if the element already exists
 	 */
 	public JDFTool appendTool()
 	{

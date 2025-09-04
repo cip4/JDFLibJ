@@ -71,12 +71,10 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoDefect.EFace;
+import org.cip4.jdflib.auto.JDFAutoDefect.EnumFace;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -88,13 +86,9 @@ import org.cip4.jdflib.resource.JDFScavengerArea;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSurfaceMark : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSurfaceMark : public JDFElement
  */
 
 public abstract class JDFAutoSurfaceMark extends JDFElement
@@ -165,97 +159,16 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for Face
-	 */
-
-	public enum EFace
-	{
-		Top, Bottom, Left, Right, Front, Back;
-
-		public static EFace getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EFace.class, val, null);
-		}
-	}
-
-	/**
-	 * Enumeration strings for Face
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumFace extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumFace(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumFace getEnum(String enumName)
-		{
-			return (EnumFace) getEnum(EnumFace.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumFace getEnum(int enumValue)
-		{
-			return (EnumFace) getEnum(EnumFace.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumFace.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumFace.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumFace.class);
-		}
-
-		/**  */
-		public static final EnumFace Top = new EnumFace("Top");
-		/**  */
-		public static final EnumFace Bottom = new EnumFace("Bottom");
-		/**  */
-		public static final EnumFace Left = new EnumFace("Left");
-		/**  */
-		public static final EnumFace Right = new EnumFace("Right");
-		/**  */
-		public static final EnumFace Front = new EnumFace("Front");
-		/**  */
-		public static final EnumFace Back = new EnumFace("Back");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Surface ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Surface
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Surface
@@ -278,13 +191,15 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Surface ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Surface
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Surface
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setSurface(EFace) based on java.lang.enum instead
+	 * @deprecated use SetSurface(EFace) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setSurface(EnumFace enumVar)
@@ -296,7 +211,7 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * (9) get attribute Surface
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFace getESurface() based on java.lang.enum instead
+	 * @deprecated use EFace GetESurface() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFace getSurface()
@@ -305,7 +220,9 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -343,7 +260,8 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * (27) const get element ColorControlStrip
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorControlStrip the element default is getColorControlStrip(0)
+	 * @return JDFColorControlStrip the element
+	 *         default is getColorControlStrip(0)
 	 */
 	public JDFColorControlStrip getColorControlStrip(int iSkip)
 	{
@@ -415,7 +333,8 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * (27) const get element CutMark
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCutMark the element default is getCutMark(0)
+	 * @return JDFCutMark the element
+	 *         default is getCutMark(0)
 	 */
 	public JDFCutMark getCutMark(int iSkip)
 	{
@@ -487,7 +406,8 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * (27) const get element RegisterMark
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRegisterMark the element default is getRegisterMark(0)
+	 * @return JDFRegisterMark the element
+	 *         default is getRegisterMark(0)
 	 */
 	public JDFRegisterMark getRegisterMark(int iSkip)
 	{
@@ -559,7 +479,8 @@ public abstract class JDFAutoSurfaceMark extends JDFElement
 	 * (27) const get element ScavengerArea
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFScavengerArea the element default is getScavengerArea(0)
+	 * @return JDFScavengerArea the element
+	 *         default is getScavengerArea(0)
 	 */
 	public JDFScavengerArea getScavengerArea(int iSkip)
 	{

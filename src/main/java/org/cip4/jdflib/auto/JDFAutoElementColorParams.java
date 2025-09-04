@@ -93,10 +93,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoElementColorParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoElementColorParams : public JDFResource
  */
 
 public abstract class JDFAutoElementColorParams extends JDFResource
@@ -108,8 +105,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.COLORMANAGEMENTSYSTEM, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ICCOUTPUTPROFILEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration, EnumICCOutputProfileUsage.getEnum(0),
-				null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.ICCOUTPUTPROFILEUSAGE, 0x3333333311l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumICCOutputProfileUsage.getEnum(0), null);
 	}
 
 	@Override
@@ -176,7 +173,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -270,11 +267,14 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ColorManagementSystem
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ColorManagementSystem
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -298,7 +298,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICCOutputProfileUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ICCOutputProfileUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -322,14 +323,15 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ICCOutputProfileUsage
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ICCOutputProfileUsage
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ICCOutputProfileUsage
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setICCOutputProfileUsage(EICCOutputProfileUsage) based on java.lang.enum instead
+	 * @deprecated use SetICCOutputProfileUsage(EICCOutputProfileUsage) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setICCOutputProfileUsage(EnumICCOutputProfileUsage enumVar)
@@ -341,7 +343,7 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * (9) get attribute ICCOutputProfileUsage
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EICCOutputProfileUsage getEICCOutputProfileUsage() based on java.lang.enum instead
+	 * @deprecated use EICCOutputProfileUsage GetEICCOutputProfileUsage() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumICCOutputProfileUsage getICCOutputProfileUsage()
@@ -350,7 +352,9 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -376,7 +380,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	/**
 	 * (29) append element AutomatedOverPrintParams
 	 *
-	 * @return JDFAutomatedOverPrintParams the element @ if the element already exists
+	 * @return JDFAutomatedOverPrintParams the element
+	 * @ if the element already exists
 	 */
 	public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams()
 	{
@@ -418,7 +423,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * (27) const get element ColorantAlias
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorantAlias the element default is getColorantAlias(0)
+	 * @return JDFColorantAlias the element
+	 *         default is getColorantAlias(0)
 	 */
 	public JDFColorantAlias getColorantAlias(int iSkip)
 	{
@@ -490,7 +496,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * (27) const get element ColorCorrectionOp
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFColorCorrectionOp the element default is getColorCorrectionOp(0)
+	 * @return JDFColorCorrectionOp the element
+	 *         default is getColorCorrectionOp(0)
 	 */
 	public JDFColorCorrectionOp getColorCorrectionOp(int iSkip)
 	{
@@ -540,7 +547,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	/**
 	 * (29) append element ColorSpaceConversionOp
 	 *
-	 * @return JDFColorSpaceConversionOp the element @ if the element already exists
+	 * @return JDFColorSpaceConversionOp the element
+	 * @ if the element already exists
 	 */
 	public JDFColorSpaceConversionOp appendColorSpaceConversionOp()
 	{
@@ -582,7 +590,8 @@ public abstract class JDFAutoElementColorParams extends JDFResource
 	 * (27) const get element FileSpec
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFFileSpec the element default is getFileSpec(0)
+	 * @return JDFFileSpec the element
+	 *         default is getFileSpec(0)
 	 */
 	public JDFFileSpec getFileSpec(int iSkip)
 	{

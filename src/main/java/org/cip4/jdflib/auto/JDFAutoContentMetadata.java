@@ -86,10 +86,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
- *****************************************************************************
- * class JDFAutoContentMetadata : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoContentMetadata : public JDFElement
  */
 
 public abstract class JDFAutoContentMetadata extends JDFElement
@@ -163,11 +160,15 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ISBN ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ISBN
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ISBN
@@ -190,7 +191,9 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ISBN10 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ISBN10
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ISBN10
@@ -213,7 +216,9 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ISBN13 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ISBN13
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ISBN13
@@ -236,7 +241,9 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Title ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Title
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Title
@@ -259,7 +266,9 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -297,7 +306,8 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	 * (27) const get element Contact
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFContact the element default is getContact(0)
+	 * @return JDFContact the element
+	 *         default is getContact(0)
 	 */
 	public JDFContact getContact(int iSkip)
 	{
@@ -357,7 +367,8 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	/**
 	 * (29) append element Employee
 	 *
-	 * @return JDFEmployee the element @ if the element already exists
+	 * @return JDFEmployee the element
+	 * @ if the element already exists
 	 */
 	public JDFEmployee appendEmployee()
 	{
@@ -397,7 +408,8 @@ public abstract class JDFAutoContentMetadata extends JDFElement
 	/**
 	 * (29) append element Part
 	 *
-	 * @return JDFPart the element @ if the element already exists
+	 * @return JDFPart the element
+	 * @ if the element already exists
 	 */
 	public JDFPart appendPart()
 	{

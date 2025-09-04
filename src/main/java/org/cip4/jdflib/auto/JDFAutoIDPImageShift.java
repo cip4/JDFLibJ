@@ -70,23 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoImageShift.EPositionX;
+import org.cip4.jdflib.auto.JDFAutoImageShift.EPositionY;
+import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionX;
+import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionY;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPImageShift : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPImageShift : public JDFElement
  */
 
 public abstract class JDFAutoIDPImageShift extends JDFElement
@@ -97,8 +92,10 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0), "None");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0), "None");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.POSITIONX, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionX.getEnum(0),
+				"None");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITIONY, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumPositionY.getEnum(0),
+				"None");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.SHIFTX, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTY, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHIFTXSIDE1, 0x3333333333l, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -149,174 +146,16 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/**
-	 * Enumeration strings for PositionX
-	 */
-
-	public enum EPositionX
-	{
-		Center, Left, None, Right;
-
-		public static EPositionX getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPositionX.class, val, EPositionX.None);
-		}
-	}
-
-	/**
-	 * Enumeration strings for PositionX
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPositionX extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPositionX(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPositionX getEnum(String enumName)
-		{
-			return (EnumPositionX) getEnum(EnumPositionX.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPositionX getEnum(int enumValue)
-		{
-			return (EnumPositionX) getEnum(EnumPositionX.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPositionX.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPositionX.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPositionX.class);
-		}
-
-		/**  */
-		public static final EnumPositionX Center = new EnumPositionX("Center");
-		/**  */
-		public static final EnumPositionX Left = new EnumPositionX("Left");
-		/**  */
-		public static final EnumPositionX None = new EnumPositionX("None");
-		/**  */
-		public static final EnumPositionX Right = new EnumPositionX("Right");
-	}
-
-	/**
-	 * Enumeration strings for PositionY
-	 */
-
-	public enum EPositionY
-	{
-		Bottom, Center, None, Top;
-
-		public static EPositionY getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPositionY.class, val, EPositionY.None);
-		}
-	}
-
-	/**
-	 * Enumeration strings for PositionY
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumPositionY extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumPositionY(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumPositionY getEnum(String enumName)
-		{
-			return (EnumPositionY) getEnum(EnumPositionY.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumPositionY getEnum(int enumValue)
-		{
-			return (EnumPositionY) getEnum(EnumPositionY.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPositionY.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPositionY.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumPositionY.class);
-		}
-
-		/**  */
-		public static final EnumPositionY Bottom = new EnumPositionY("Bottom");
-		/**  */
-		public static final EnumPositionY Center = new EnumPositionY("Center");
-		/**  */
-		public static final EnumPositionY None = new EnumPositionY("None");
-		/**  */
-		public static final EnumPositionY Top = new EnumPositionY("Top");
-	}
-
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionX ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PositionX
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PositionX
@@ -339,13 +178,15 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionX ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PositionX
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PositionX
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPositionX(EPositionX) based on java.lang.enum instead
+	 * @deprecated use SetPositionX(EPositionX) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPositionX(EnumPositionX enumVar)
@@ -357,7 +198,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 * (9) get attribute PositionX
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPositionX getEPositionX() based on java.lang.enum instead
+	 * @deprecated use EPositionX GetEPositionX() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPositionX getPositionX()
@@ -366,7 +207,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PositionY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PositionY
@@ -389,13 +232,15 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PositionY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PositionY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PositionY
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPositionY(EPositionY) based on java.lang.enum instead
+	 * @deprecated use SetPositionY(EPositionY) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPositionY(EnumPositionY enumVar)
@@ -407,7 +252,7 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	 * (9) get attribute PositionY
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPositionY getEPositionY() based on java.lang.enum instead
+	 * @deprecated use EPositionY GetEPositionY() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPositionY getPositionY()
@@ -416,7 +261,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShiftX ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShiftX
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShiftX
@@ -439,7 +286,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShiftY ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShiftY
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShiftY
@@ -462,7 +311,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShiftXSide1 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShiftXSide1
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShiftXSide1
@@ -485,7 +336,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShiftXSide2 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShiftXSide2
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShiftXSide2
@@ -508,7 +361,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShiftYSide1 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShiftYSide1
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShiftYSide1
@@ -531,7 +386,9 @@ public abstract class JDFAutoIDPImageShift extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShiftYSide2 ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShiftYSide2
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ShiftYSide2

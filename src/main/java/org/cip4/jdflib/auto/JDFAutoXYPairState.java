@@ -92,10 +92,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFValueLoc;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoXYPairState : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoXYPairState : public JDFResource
  */
 
 public abstract class JDFAutoXYPairState extends JDFResource
@@ -111,11 +108,13 @@ public abstract class JDFAutoXYPairState extends JDFResource
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMAX, 0x4444444431l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.ALLOWEDVALUEMIN, 0x4444444431l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.ALLOWEDXYRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation, EnumAllowedXYRelation.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ALLOWEDXYRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation,
+				EnumAllowedXYRelation.getEnum(0), null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x3333333331l, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
 		atrInfoTable[7] = new AtrInfoTable(AttributeName.PRESENTVALUEMAX, 0x4444444431l, AttributeInfo.EnumAttributeType.XYPair, null, null);
 		atrInfoTable[8] = new AtrInfoTable(AttributeName.PRESENTVALUEMIN, 0x4444444431l, AttributeInfo.EnumAttributeType.XYPair, null, null);
-		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTXYRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation, EnumPresentXYRelation.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.PRESENTXYRELATION, 0x3333333311l, AttributeInfo.EnumAttributeType.XYRelation,
+				EnumPresentXYRelation.getEnum(0), null);
 		atrInfoTable[10] = new AtrInfoTable(AttributeName.UNITTYPE, 0x3333333311l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
@@ -180,7 +179,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -356,11 +355,14 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DefaultValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DefaultValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -376,17 +378,19 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute DefaultValue
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getDefaultValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.DEFAULTVALUE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CurrentValue
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CurrentValue
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -402,17 +406,19 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute CurrentValue
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getCurrentValue()
 	{
-		final String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CURRENTVALUE, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -428,17 +434,19 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	/**
 	 * (20) get JDFXYPairRangeList attribute AllowedValueList
 	 *
-	 * @return JDFXYPairRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPairRangeList
+	 * @return JDFXYPairRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPairRangeList
 	 */
 	public JDFXYPairRangeList getAllowedValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
-		final JDFXYPairRangeList nPlaceHolder = JDFXYPairRangeList.createXYPairRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUELIST, null, null);
+		JDFXYPairRangeList nPlaceHolder = JDFXYPairRangeList.createXYPairRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMax
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueMax
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -454,17 +462,19 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute AllowedValueMax
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getAllowedValueMax()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMAX, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMAX, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedValueMin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedValueMin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -480,17 +490,19 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute AllowedValueMin
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getAllowedValueMin()
 	{
-		final String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMIN, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.ALLOWEDVALUEMIN, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedXYRelation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedXYRelation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -514,14 +526,15 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AllowedXYRelation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute AllowedXYRelation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute AllowedXYRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setAllowedXYRelation(EAllowedXYRelation) based on java.lang.enum instead
+	 * @deprecated use SetAllowedXYRelation(EAllowedXYRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setAllowedXYRelation(EnumAllowedXYRelation enumVar)
@@ -533,7 +546,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * (9) get attribute AllowedXYRelation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EAllowedXYRelation getEAllowedXYRelation() based on java.lang.enum instead
+	 * @deprecated use EAllowedXYRelation GetEAllowedXYRelation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumAllowedXYRelation getAllowedXYRelation()
@@ -542,7 +555,8 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueList
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueList
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -558,17 +572,19 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	/**
 	 * (20) get JDFXYPairRangeList attribute PresentValueList
 	 *
-	 * @return JDFXYPairRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPairRangeList
+	 * @return JDFXYPairRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPairRangeList
 	 */
 	public JDFXYPairRangeList getPresentValueList()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
-		final JDFXYPairRangeList nPlaceHolder = JDFXYPairRangeList.createXYPairRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUELIST, null, null);
+		JDFXYPairRangeList nPlaceHolder = JDFXYPairRangeList.createXYPairRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMax
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueMax
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -584,17 +600,19 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute PresentValueMax
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPresentValueMax()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEMAX, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUEMAX, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentValueMin
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentValueMin
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -610,17 +628,19 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	/**
 	 * (20) get JDFXYPair attribute PresentValueMin
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getPresentValueMin()
 	{
-		final String strAttrName = getAttribute(AttributeName.PRESENTVALUEMIN, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PRESENTVALUEMIN, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentXYRelation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentXYRelation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -644,14 +664,15 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PresentXYRelation
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PresentXYRelation
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute PresentXYRelation
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setPresentXYRelation(EPresentXYRelation) based on java.lang.enum instead
+	 * @deprecated use SetPresentXYRelation(EPresentXYRelation) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setPresentXYRelation(EnumPresentXYRelation enumVar)
@@ -663,7 +684,7 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * (9) get attribute PresentXYRelation
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EPresentXYRelation getEPresentXYRelation() based on java.lang.enum instead
+	 * @deprecated use EPresentXYRelation GetEPresentXYRelation() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumPresentXYRelation getPresentXYRelation()
@@ -672,7 +693,9 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute UnitType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute UnitType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute UnitType
@@ -695,7 +718,9 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -733,7 +758,8 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * (27) const get element Loc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLoc the element default is getLoc(0)
+	 * @return JDFLoc the element
+	 *         default is getLoc(0)
 	 */
 	public JDFLoc getLoc(int iSkip)
 	{
@@ -795,7 +821,8 @@ public abstract class JDFAutoXYPairState extends JDFResource
 	 * (27) const get element ValueLoc
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFValueLoc the element default is getValueLoc(0)
+	 * @return JDFValueLoc the element
+	 *         default is getValueLoc(0)
 	 */
 	public JDFValueLoc getValueLoc(int iSkip)
 	{

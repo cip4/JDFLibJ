@@ -84,10 +84,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
 
 /**
- *****************************************************************************
- * class JDFAutoLayoutElementProductionParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoLayoutElementProductionParams : public JDFResource
  */
 
 public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
@@ -153,7 +150,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -168,7 +165,9 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -194,7 +193,8 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	/**
 	 * (29) append element ActionPool
 	 *
-	 * @return JDFActionPool the element @ if the element already exists
+	 * @return JDFActionPool the element
+	 * @ if the element already exists
 	 */
 	public JDFActionPool appendActionPool()
 	{
@@ -224,7 +224,8 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	/**
 	 * (29) append element FileSpec
 	 *
-	 * @return JDFFileSpec the element @ if the element already exists
+	 * @return JDFFileSpec the element
+	 * @ if the element already exists
 	 */
 	public JDFFileSpec appendFileSpec()
 	{
@@ -276,7 +277,8 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	 * (27) const get element LayoutElementPart
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFLayoutElementPart the element default is getLayoutElementPart(0)
+	 * @return JDFLayoutElementPart the element
+	 *         default is getLayoutElementPart(0)
 	 */
 	public JDFLayoutElementPart getLayoutElementPart(int iSkip)
 	{
@@ -326,7 +328,8 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	/**
 	 * (29) append element ShapeDef
 	 *
-	 * @return JDFShapeDef the element @ if the element already exists
+	 * @return JDFShapeDef the element
+	 * @ if the element already exists
 	 */
 	public JDFShapeDef appendShapeDef()
 	{
@@ -366,7 +369,8 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 	/**
 	 * (29) append element TestPool
 	 *
-	 * @return JDFTestPool the element @ if the element already exists
+	 * @return JDFTestPool the element
+	 * @ if the element already exists
 	 */
 	public JDFTestPool appendTestPool()
 	{

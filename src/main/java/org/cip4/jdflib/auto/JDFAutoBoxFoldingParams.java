@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBoxFoldingParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBoxFoldingParams : public JDFResource
  */
 
 public abstract class JDFAutoBoxFoldingParams extends JDFResource
@@ -107,7 +104,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BLANKDIMENSIONSX, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.BLANKDIMENSIONSY, 0x3333333111l, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.BOXFOLDINGTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumBoxFoldingType.getEnum(0), null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.BOXFOLDINGTYPE, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumBoxFoldingType.getEnum(0), null);
 	}
 
 	@Override
@@ -172,7 +170,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -282,11 +280,14 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlankDimensionsX
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlankDimensionsX
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -302,17 +303,19 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute BlankDimensionsX
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getBlankDimensionsX()
 	{
-		final String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSX, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSX, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BlankDimensionsY
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BlankDimensionsY
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -328,17 +331,19 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	/**
 	 * (20) get JDFNumberList attribute BlankDimensionsY
 	 *
-	 * @return JDFNumberList the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberList
+	 * @return JDFNumberList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFNumberList
 	 */
 	public JDFNumberList getBlankDimensionsY()
 	{
-		final String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSY, null, null);
-		final JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.BLANKDIMENSIONSY, null, null);
+		JDFNumberList nPlaceHolder = JDFNumberList.createNumberList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BoxFoldingType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BoxFoldingType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -362,14 +367,15 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BoxFoldingType
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BoxFoldingType
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BoxFoldingType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBoxFoldingType(EBoxFoldingType) based on java.lang.enum instead
+	 * @deprecated use SetBoxFoldingType(EBoxFoldingType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBoxFoldingType(EnumBoxFoldingType enumVar)
@@ -381,7 +387,7 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * (9) get attribute BoxFoldingType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBoxFoldingType getEBoxFoldingType() based on java.lang.enum instead
+	 * @deprecated use EBoxFoldingType GetEBoxFoldingType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBoxFoldingType getBoxFoldingType()
@@ -390,7 +396,9 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -428,7 +436,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * (27) const get element BoxFoldAction
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBoxFoldAction the element default is getBoxFoldAction(0)
+	 * @return JDFBoxFoldAction the element
+	 *         default is getBoxFoldAction(0)
 	 */
 	public JDFBoxFoldAction getBoxFoldAction(int iSkip)
 	{
@@ -490,7 +499,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * (27) const get element GlueLine
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFGlueLine the element default is getGlueLine(0)
+	 * @return JDFGlueLine the element
+	 *         default is getGlueLine(0)
 	 */
 	public JDFGlueLine getGlueLine(int iSkip)
 	{
@@ -552,7 +562,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
 	 * (27) const get element BoxApplication
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFBoxApplication the element default is getBoxApplication(0)
+	 * @return JDFBoxApplication the element
+	 *         default is getBoxApplication(0)
 	 */
 	public JDFBoxApplication getBoxApplication(int iSkip)
 	{

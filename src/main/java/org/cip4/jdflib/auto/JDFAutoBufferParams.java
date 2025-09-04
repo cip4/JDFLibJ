@@ -78,10 +78,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDuration;
 
 /**
- *****************************************************************************
- * class JDFAutoBufferParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBufferParams : public JDFResource
  */
 
 public abstract class JDFAutoBufferParams extends JDFResource
@@ -143,7 +140,7 @@ public abstract class JDFAutoBufferParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -158,11 +155,15 @@ public abstract class JDFAutoBufferParams extends JDFResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MinimumWait ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute MinimumWait
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute MinimumWait
@@ -177,12 +178,13 @@ public abstract class JDFAutoBufferParams extends JDFResource
 	/**
 	 * (20) get JDFDuration attribute MinimumWait
 	 *
-	 * @return JDFDuration the value of the attribute, null if a the attribute value is not a valid to create a JDFDuration
+	 * @return JDFDuration the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFDuration
 	 */
 	public JDFDuration getMinimumWait()
 	{
-		final String strAttrName = getAttribute(AttributeName.MINIMUMWAIT, null, null);
-		final JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
+		String strAttrName = getAttribute(AttributeName.MINIMUMWAIT, null, null);
+		JDFDuration nPlaceHolder = JDFDuration.createDuration(strAttrName);
 		return nPlaceHolder;
 	}
 

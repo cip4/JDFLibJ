@@ -88,10 +88,7 @@ import org.cip4.jdflib.span.JDFSpanShapeType;
 import org.cip4.jdflib.span.JDFStringSpan;
 
 /**
- *****************************************************************************
- * class JDFAutoShapeCut : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoShapeCut : public JDFElement
  */
 
 public abstract class JDFAutoShapeCut extends JDFElement
@@ -169,11 +166,15 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutBox
@@ -188,17 +189,20 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	/**
 	 * (20) get JDFRectangle attribute CutBox
 	 *
-	 * @return JDFRectangle the value of the attribute, null if a the attribute value is not a valid to create a JDFRectangle
+	 * @return JDFRectangle the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFRectangle
 	 */
 	public JDFRectangle getCutBox()
 	{
-		final String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
-		final JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CUTBOX, null, null);
+		JDFRectangle nPlaceHolder = JDFRectangle.createRectangle(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutOut ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutOut
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutOut
@@ -221,7 +225,9 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CutPath ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CutPath
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute CutPath
@@ -244,7 +250,9 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Pages ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Pages
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Pages
@@ -259,17 +267,19 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	/**
 	 * (20) get JDFIntegerRangeList attribute Pages
 	 *
-	 * @return JDFIntegerRangeList the value of the attribute, null if a the attribute value is not a valid to create a JDFIntegerRangeList
+	 * @return JDFIntegerRangeList the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFIntegerRangeList
 	 */
 	public JDFIntegerRangeList getPages()
 	{
-		final String strAttrName = getAttribute(AttributeName.PAGES, null, null);
-		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		String strAttrName = getAttribute(AttributeName.PAGES, null, null);
+		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ShapeTypeDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ShapeTypeDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -293,7 +303,9 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -319,7 +331,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	/**
 	 * (29) append element Material
 	 *
-	 * @return JDFStringSpan the element @ if the element already exists
+	 * @return JDFStringSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFStringSpan appendMaterial()
 	{
@@ -349,7 +362,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	/**
 	 * (29) append element CutType
 	 *
-	 * @return JDFSpanCutType the element @ if the element already exists
+	 * @return JDFSpanCutType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanCutType appendCutType()
 	{
@@ -379,7 +393,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	/**
 	 * (29) append element CutDepth
 	 *
-	 * @return JDFSpanCutDepth the element @ if the element already exists
+	 * @return JDFSpanCutDepth the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanCutDepth appendCutDepth()
 	{
@@ -409,7 +424,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	/**
 	 * (29) append element ShapeDepth
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendShapeDepth()
 	{
@@ -439,7 +455,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	/**
 	 * (29) append element ShapeType
 	 *
-	 * @return JDFSpanShapeType the element @ if the element already exists
+	 * @return JDFSpanShapeType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanShapeType appendShapeType()
 	{
@@ -469,7 +486,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
 	/**
 	 * (29) append element TeethPerDimension
 	 *
-	 * @return JDFNumberSpan the element @ if the element already exists
+	 * @return JDFNumberSpan the element
+	 * @ if the element already exists
 	 */
 	public JDFNumberSpan appendTeethPerDimension()
 	{

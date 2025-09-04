@@ -91,10 +91,7 @@ import org.cip4.jdflib.resource.process.JDFMediaSource;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoIDPCover : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoIDPCover : public JDFElement
  */
 
 public abstract class JDFAutoIDPCover extends JDFElement
@@ -106,7 +103,8 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKSIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCoverType.getEnum(0), "Front");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.COVERTYPE, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumCoverType.getEnum(0),
+				"Front");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.FRONTSIDE, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 	}
 
@@ -245,11 +243,15 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BackSide ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BackSide
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute BackSide
@@ -272,7 +274,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CoverType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CoverType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CoverType
@@ -295,13 +299,15 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute CoverType ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute CoverType
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute CoverType
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setCoverType(ECoverType) based on java.lang.enum instead
+	 * @deprecated use SetCoverType(ECoverType) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setCoverType(EnumCoverType enumVar)
@@ -313,7 +319,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * (9) get attribute CoverType
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ECoverType getECoverType() based on java.lang.enum instead
+	 * @deprecated use ECoverType GetECoverType() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumCoverType getCoverType()
@@ -322,7 +328,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FrontSide ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FrontSide
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute FrontSide
@@ -345,7 +353,9 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -383,7 +393,8 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * (27) const get element IDPFinishing
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIDPFinishing the element default is getIDPFinishing(0)
+	 * @return JDFIDPFinishing the element
+	 *         default is getIDPFinishing(0)
 	 */
 	public JDFIDPFinishing getIDPFinishing(int iSkip)
 	{
@@ -445,7 +456,8 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * (27) const get element IDPLayout
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFIDPLayout the element default is getIDPLayout(0)
+	 * @return JDFIDPLayout the element
+	 *         default is getIDPLayout(0)
 	 */
 	public JDFIDPLayout getIDPLayout(int iSkip)
 	{
@@ -507,7 +519,8 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * (27) const get element MediaIntent
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMediaIntent the element default is getMediaIntent(0)
+	 * @return JDFMediaIntent the element
+	 *         default is getMediaIntent(0)
 	 */
 	public JDFMediaIntent getMediaIntent(int iSkip)
 	{
@@ -579,7 +592,8 @@ public abstract class JDFAutoIDPCover extends JDFElement
 	 * (27) const get element MediaSource
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMediaSource the element default is getMediaSource(0)
+	 * @return JDFMediaSource the element
+	 *         default is getMediaSource(0)
 	 */
 	public JDFMediaSource getMediaSource(int iSkip)
 	{

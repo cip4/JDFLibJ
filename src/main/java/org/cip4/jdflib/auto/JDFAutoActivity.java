@@ -79,10 +79,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- *****************************************************************************
- * class JDFAutoActivity : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoActivity : public JDFElement
  */
 
 public abstract class JDFAutoActivity extends JDFElement
@@ -143,11 +140,15 @@ public abstract class JDFAutoActivity extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActivityID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActivityID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ActivityID
@@ -170,7 +171,8 @@ public abstract class JDFAutoActivity extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ActivityName
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ActivityName
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -194,7 +196,9 @@ public abstract class JDFAutoActivity extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EndTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EndTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute EndTime
@@ -218,13 +222,15 @@ public abstract class JDFAutoActivity extends JDFElement
 	 */
 	public JDFDate getEndTime()
 	{
-		final String str = getAttribute(AttributeName.ENDTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.ENDTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute PersonalID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute PersonalID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute PersonalID
@@ -247,7 +253,9 @@ public abstract class JDFAutoActivity extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute StartTime ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute StartTime
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (11) set attribute StartTime
@@ -271,8 +279,8 @@ public abstract class JDFAutoActivity extends JDFElement
 	 */
 	public JDFDate getStartTime()
 	{
-		final String str = getAttribute(AttributeName.STARTTIME, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.STARTTIME, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 

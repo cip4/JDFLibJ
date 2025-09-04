@@ -83,10 +83,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBoxToBoxDifference : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBoxToBoxDifference : public JDFElement
  */
 
 public abstract class JDFAutoBoxToBoxDifference extends JDFElement
@@ -318,11 +315,15 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FromBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FromBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute FromBox
@@ -345,13 +346,15 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute FromBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute FromBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute FromBox
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setFromBox(EFromBox) based on java.lang.enum instead
+	 * @deprecated use SetFromBox(EFromBox) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setFromBox(EnumFromBox enumVar)
@@ -363,7 +366,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	 * (9) get attribute FromBox
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EFromBox getEFromBox() based on java.lang.enum instead
+	 * @deprecated use EFromBox GetEFromBox() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumFromBox getFromBox()
@@ -372,7 +375,9 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ToBox
@@ -395,13 +400,15 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ToBox ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ToBox
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ToBox
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setToBox(EToBox) based on java.lang.enum instead
+	 * @deprecated use SetToBox(EToBox) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setToBox(EnumToBox enumVar)
@@ -413,7 +420,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
 	 * (9) get attribute ToBox
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EToBox getEToBox() based on java.lang.enum instead
+	 * @deprecated use EToBox GetEToBox() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumToBox getToBox()

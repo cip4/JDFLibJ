@@ -47,9 +47,13 @@ package org.cip4.jdflib.devicecapability;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
-import org.cip4.jdflib.core.*;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumBoolean;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;

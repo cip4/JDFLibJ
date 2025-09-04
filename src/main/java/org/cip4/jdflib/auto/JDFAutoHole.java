@@ -85,10 +85,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoHole : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoHole : public JDFElement
  */
 
 public abstract class JDFAutoHole extends JDFElement
@@ -227,11 +224,15 @@ public abstract class JDFAutoHole extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Center ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Center
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Center
@@ -246,17 +247,20 @@ public abstract class JDFAutoHole extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Center
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getCenter()
 	{
-		final String strAttrName = getAttribute(AttributeName.CENTER, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.CENTER, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Extent ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Extent
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute Extent
@@ -271,17 +275,19 @@ public abstract class JDFAutoHole extends JDFElement
 	/**
 	 * (20) get JDFXYPair attribute Extent
 	 *
-	 * @return JDFXYPair the value of the attribute, null if a the attribute value is not a valid to create a JDFXYPair
+	 * @return JDFXYPair the value of the attribute, null if a the
+	 *         attribute value is not a valid to create a JDFXYPair
 	 */
 	public JDFXYPair getExtent()
 	{
-		final String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
-		final JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
+		String strAttrName = getAttribute(AttributeName.EXTENT, null, null);
+		JDFXYPair nPlaceHolder = JDFXYPair.createXYPair(strAttrName);
 		return nPlaceHolder;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Reinforcement
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Reinforcement
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -305,7 +311,9 @@ public abstract class JDFAutoHole extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Shape ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Shape
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Shape
@@ -328,13 +336,15 @@ public abstract class JDFAutoHole extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Shape ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Shape
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Shape
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setShape(EShape) based on java.lang.enum instead
+	 * @deprecated use SetShape(EShape) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setShape(EnumShape enumVar)
@@ -346,7 +356,7 @@ public abstract class JDFAutoHole extends JDFElement
 	 * (9) get attribute Shape
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EShape getEShape() based on java.lang.enum instead
+	 * @deprecated use EShape GetEShape() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumShape getShape()

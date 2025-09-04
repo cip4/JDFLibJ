@@ -80,10 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 
 /**
- *****************************************************************************
- * class JDFAutoQueueEntryDefList : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoQueueEntryDefList : public JDFElement
  */
 
 public abstract class JDFAutoQueueEntryDefList extends JDFElement
@@ -140,7 +137,9 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -178,7 +177,8 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
 	 * (27) const get element QueueEntryDef
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFQueueEntryDef the element default is getQueueEntryDef(0)
+	 * @return JDFQueueEntryDef the element
+	 *         default is getQueueEntryDef(0)
 	 */
 	public JDFQueueEntryDef getQueueEntryDef(int iSkip)
 	{

@@ -112,10 +112,7 @@ import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoBindingIntent : public JDFIntentResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBindingIntent : public JDFIntentResource
  */
 
 public abstract class JDFAutoBindingIntent extends JDFIntentResource
@@ -126,7 +123,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDINGORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumBindingOrder.getEnum(0), "Gathering");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDINGORDER, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumBindingOrder.getEnum(0),
+				"Gathering");
 	}
 
 	@Override
@@ -293,11 +291,14 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BindingOrder
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BindingOrder
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -321,14 +322,15 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BindingOrder
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BindingOrder
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute BindingOrder
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setBindingOrder(EBindingOrder) based on java.lang.enum instead
+	 * @deprecated use SetBindingOrder(EBindingOrder) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setBindingOrder(EnumBindingOrder enumVar)
@@ -340,7 +342,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * (9) get attribute BindingOrder
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EBindingOrder getEBindingOrder() based on java.lang.enum instead
+	 * @deprecated use EBindingOrder GetEBindingOrder() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumBindingOrder getBindingOrder()
@@ -349,7 +351,9 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -375,7 +379,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element BackCoverColor
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendBackCoverColor()
 	{
@@ -417,7 +422,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * (27) const get element BackCoverColorDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStringSpan the element default is getBackCoverColorDetails(0)
+	 * @return JDFStringSpan the element
+	 *         default is getBackCoverColorDetails(0)
 	 */
 	public JDFStringSpan getBackCoverColorDetails(int iSkip)
 	{
@@ -467,7 +473,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element BindingType
 	 *
-	 * @return JDFSpanBindingType the element @ if the element already exists
+	 * @return JDFSpanBindingType the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanBindingType appendBindingType()
 	{
@@ -497,7 +504,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element BindingColor
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendBindingColor()
 	{
@@ -539,7 +547,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * (27) const get element BindingColorDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStringSpan the element default is getBindingColorDetails(0)
+	 * @return JDFStringSpan the element
+	 *         default is getBindingColorDetails(0)
 	 */
 	public JDFStringSpan getBindingColorDetails(int iSkip)
 	{
@@ -589,7 +598,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element BindingLength
 	 *
-	 * @return JDFSpanBindingLength the element @ if the element already exists
+	 * @return JDFSpanBindingLength the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanBindingLength appendBindingLength()
 	{
@@ -619,7 +629,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element BindingSide
 	 *
-	 * @return JDFSpanBindingSide the element @ if the element already exists
+	 * @return JDFSpanBindingSide the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanBindingSide appendBindingSide()
 	{
@@ -649,7 +660,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element CoverColor
 	 *
-	 * @return JDFSpanNamedColor the element @ if the element already exists
+	 * @return JDFSpanNamedColor the element
+	 * @ if the element already exists
 	 */
 	public JDFSpanNamedColor appendCoverColor()
 	{
@@ -691,7 +703,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	 * (27) const get element CoverColorDetails
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFStringSpan the element default is getCoverColorDetails(0)
+	 * @return JDFStringSpan the element
+	 *         default is getCoverColorDetails(0)
 	 */
 	public JDFStringSpan getCoverColorDetails(int iSkip)
 	{
@@ -741,7 +754,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element AdhesiveBinding
 	 *
-	 * @return JDFAdhesiveBinding the element @ if the element already exists
+	 * @return JDFAdhesiveBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFAdhesiveBinding appendAdhesiveBinding()
 	{
@@ -771,7 +785,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element AdhesiveNote
 	 *
-	 * @return JDFAdhesiveNote the element @ if the element already exists
+	 * @return JDFAdhesiveNote the element
+	 * @ if the element already exists
 	 */
 	public JDFAdhesiveNote appendAdhesiveNote()
 	{
@@ -801,7 +816,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element BindList
 	 *
-	 * @return JDFBindList the element @ if the element already exists
+	 * @return JDFBindList the element
+	 * @ if the element already exists
 	 */
 	public JDFBindList appendBindList()
 	{
@@ -831,7 +847,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element BookCase
 	 *
-	 * @return JDFBookCase the element @ if the element already exists
+	 * @return JDFBookCase the element
+	 * @ if the element already exists
 	 */
 	public JDFBookCase appendBookCase()
 	{
@@ -861,7 +878,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element ChannelBinding
 	 *
-	 * @return JDFChannelBinding the element @ if the element already exists
+	 * @return JDFChannelBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFChannelBinding appendChannelBinding()
 	{
@@ -891,7 +909,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element CoilBinding
 	 *
-	 * @return JDFCoilBinding the element @ if the element already exists
+	 * @return JDFCoilBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFCoilBinding appendCoilBinding()
 	{
@@ -921,7 +940,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element EdgeGluing
 	 *
-	 * @return JDFEdgeGluing the element @ if the element already exists
+	 * @return JDFEdgeGluing the element
+	 * @ if the element already exists
 	 */
 	public JDFEdgeGluing appendEdgeGluing()
 	{
@@ -951,7 +971,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element HardCoverBinding
 	 *
-	 * @return JDFHardCoverBinding the element @ if the element already exists
+	 * @return JDFHardCoverBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFHardCoverBinding appendHardCoverBinding()
 	{
@@ -981,7 +1002,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element PlasticCombBinding
 	 *
-	 * @return JDFPlasticCombBinding the element @ if the element already exists
+	 * @return JDFPlasticCombBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFPlasticCombBinding appendPlasticCombBinding()
 	{
@@ -1011,7 +1033,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element RingBinding
 	 *
-	 * @return JDFRingBinding the element @ if the element already exists
+	 * @return JDFRingBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFRingBinding appendRingBinding()
 	{
@@ -1041,7 +1064,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element SaddleStitching
 	 *
-	 * @return JDFSaddleStitching the element @ if the element already exists
+	 * @return JDFSaddleStitching the element
+	 * @ if the element already exists
 	 */
 	public JDFSaddleStitching appendSaddleStitching()
 	{
@@ -1071,7 +1095,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element SideSewing
 	 *
-	 * @return JDFSideSewing the element @ if the element already exists
+	 * @return JDFSideSewing the element
+	 * @ if the element already exists
 	 */
 	public JDFSideSewing appendSideSewing()
 	{
@@ -1101,7 +1126,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element SideStitching
 	 *
-	 * @return JDFSideStitching the element @ if the element already exists
+	 * @return JDFSideStitching the element
+	 * @ if the element already exists
 	 */
 	public JDFSideStitching appendSideStitching()
 	{
@@ -1131,7 +1157,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element SoftCoverBinding
 	 *
-	 * @return JDFSoftCoverBinding the element @ if the element already exists
+	 * @return JDFSoftCoverBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFSoftCoverBinding appendSoftCoverBinding()
 	{
@@ -1161,7 +1188,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Tape
 	 *
-	 * @return JDFTape the element @ if the element already exists
+	 * @return JDFTape the element
+	 * @ if the element already exists
 	 */
 	public JDFTape appendTape()
 	{
@@ -1191,7 +1219,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element Tabs
 	 *
-	 * @return JDFTabs the element @ if the element already exists
+	 * @return JDFTabs the element
+	 * @ if the element already exists
 	 */
 	public JDFTabs appendTabs()
 	{
@@ -1221,7 +1250,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element ThreadSealing
 	 *
-	 * @return JDFThreadSealing the element @ if the element already exists
+	 * @return JDFThreadSealing the element
+	 * @ if the element already exists
 	 */
 	public JDFThreadSealing appendThreadSealing()
 	{
@@ -1251,7 +1281,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element ThreadSewing
 	 *
-	 * @return JDFThreadSewing the element @ if the element already exists
+	 * @return JDFThreadSewing the element
+	 * @ if the element already exists
 	 */
 	public JDFThreadSewing appendThreadSewing()
 	{
@@ -1281,7 +1312,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element StripBinding
 	 *
-	 * @return JDFStripBinding the element @ if the element already exists
+	 * @return JDFStripBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFStripBinding appendStripBinding()
 	{
@@ -1311,7 +1343,8 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
 	/**
 	 * (29) append element WireCombBinding
 	 *
-	 * @return JDFWireCombBinding the element @ if the element already exists
+	 * @return JDFWireCombBinding the element
+	 * @ if the element already exists
 	 */
 	public JDFWireCombBinding appendWireCombBinding()
 	{

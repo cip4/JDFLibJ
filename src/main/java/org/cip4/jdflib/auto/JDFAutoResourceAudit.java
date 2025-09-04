@@ -90,10 +90,7 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoResourceAudit : public JDFAudit
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoResourceAudit : public JDFAudit
  */
 
 public abstract class JDFAutoResourceAudit extends JDFAudit
@@ -105,8 +102,10 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTSMODIFIED, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.NODESTATUS, 0x3333333111l, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0),
+				null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x3333333331l, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0),
+				"ProcessResult");
 	}
 
 	@Override
@@ -245,11 +244,14 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ContentsModified
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ContentsModified
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -273,7 +275,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NodeStatus ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NodeStatus
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute NodeStatus
@@ -296,13 +300,15 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute NodeStatus ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute NodeStatus
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute NodeStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setNodeStatus(ENodeStatus) based on java.lang.enum instead
+	 * @deprecated use SetNodeStatus(ENodeStatus) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setNodeStatus(EnumNodeStatus enumVar)
@@ -314,7 +320,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * (9) get attribute NodeStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use ENodeStatus getENodeStatus() based on java.lang.enum instead
+	 * @deprecated use ENodeStatus GetENodeStatus() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumNodeStatus getNodeStatus()
@@ -323,7 +329,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Reason ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Reason
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Reason
@@ -346,13 +354,15 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Reason ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute Reason
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute Reason
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setReason(EReason) based on java.lang.enum instead
+	 * @deprecated use SetReason(EReason) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setReason(EnumReason enumVar)
@@ -364,7 +374,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * (9) get attribute Reason
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EReason getEReason() based on java.lang.enum instead
+	 * @deprecated use EReason GetEReason() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumReason getReason()
@@ -373,7 +383,9 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -412,7 +424,8 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	@Override
 	public JDFEmployee getEmployee(int iSkip)
@@ -465,7 +478,8 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	/**
 	 * (29) append element MISDetails
 	 *
-	 * @return JDFMISDetails the element @ if the element already exists
+	 * @return JDFMISDetails the element
+	 * @ if the element already exists
 	 */
 	public JDFMISDetails appendMISDetails()
 	{
@@ -507,7 +521,8 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

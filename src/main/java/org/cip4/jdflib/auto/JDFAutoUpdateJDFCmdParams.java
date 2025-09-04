@@ -87,10 +87,7 @@ import org.cip4.jdflib.jmf.JDFMoveResource;
 import org.cip4.jdflib.jmf.JDFRemoveLink;
 
 /**
- *****************************************************************************
- * class JDFAutoUpdateJDFCmdParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoUpdateJDFCmdParams : public JDFElement
  */
 
 public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
@@ -163,11 +160,15 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ParentJobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ParentJobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute ParentJobID
@@ -190,7 +191,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ParentJobPartID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ParentJobPartID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -214,7 +216,9 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -252,7 +256,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * (27) const get element CreateLink
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCreateLink the element default is getCreateLink(0)
+	 * @return JDFCreateLink the element
+	 *         default is getCreateLink(0)
 	 */
 	public JDFCreateLink getCreateLink(int iSkip)
 	{
@@ -314,7 +319,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * (27) const get element CreateResource
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFCreateResource the element default is getCreateResource(0)
+	 * @return JDFCreateResource the element
+	 *         default is getCreateResource(0)
 	 */
 	public JDFCreateResource getCreateResource(int iSkip)
 	{
@@ -376,7 +382,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * (27) const get element MoveResource
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFMoveResource the element default is getMoveResource(0)
+	 * @return JDFMoveResource the element
+	 *         default is getMoveResource(0)
 	 */
 	public JDFMoveResource getMoveResource(int iSkip)
 	{
@@ -438,7 +445,8 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 	 * (27) const get element RemoveLink
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFRemoveLink the element default is getRemoveLink(0)
+	 * @return JDFRemoveLink the element
+	 *         default is getRemoveLink(0)
 	 */
 	public JDFRemoveLink getRemoveLink(int iSkip)
 	{

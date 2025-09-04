@@ -78,10 +78,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFDisjointing;
 
 /**
- *****************************************************************************
- * class JDFAutoGatheringParams : public JDFResource
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoGatheringParams : public JDFResource
  */
 
 public abstract class JDFAutoGatheringParams extends JDFResource
@@ -143,7 +140,7 @@ public abstract class JDFAutoGatheringParams extends JDFResource
 	@Override
 	public boolean init()
 	{
-		final boolean bRet = super.init();
+		boolean bRet = super.init();
 		setResourceClass(JDFResource.EnumResourceClass.Parameter);
 		return bRet;
 	}
@@ -158,7 +155,9 @@ public abstract class JDFAutoGatheringParams extends JDFResource
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -184,7 +183,8 @@ public abstract class JDFAutoGatheringParams extends JDFResource
 	/**
 	 * (29) append element Disjointing
 	 *
-	 * @return JDFDisjointing the element @ if the element already exists
+	 * @return JDFDisjointing the element
+	 * @ if the element already exists
 	 */
 	public JDFDisjointing appendDisjointing()
 	{

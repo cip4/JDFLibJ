@@ -78,10 +78,7 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.JDFElement;
 
 /**
- *****************************************************************************
- * class JDFAutoBarcodeDetails : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoBarcodeDetails : public JDFElement
  */
 
 public abstract class JDFAutoBarcodeDetails extends JDFElement
@@ -141,11 +138,14 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute BarcodeVersion
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute BarcodeVersion
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -169,7 +169,8 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ErrorCorrectionLevel
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ErrorCorrectionLevel
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -193,7 +194,9 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute XCells ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute XCells
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute XCells
@@ -216,7 +219,9 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute YCells ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute YCells
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute YCells

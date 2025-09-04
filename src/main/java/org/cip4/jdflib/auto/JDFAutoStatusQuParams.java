@@ -77,6 +77,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -89,10 +91,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoStatusQuParams : public JDFElement
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoStatusQuParams : public JDFElement
  */
 
 public abstract class JDFAutoStatusQuParams extends JDFElement
@@ -103,9 +102,11 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceDetails.getEnum(0), "None");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration,
+				EnumDeviceDetails.getEnum(0), "None");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.EMPLOYEEINFO, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumJobDetails.getEnum(0), "None");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBDETAILS, 0x3333333333l, AttributeInfo.EnumAttributeType.enumeration, EnumJobDetails.getEnum(0),
+				"None");
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBPARTID, 0x3333333333l, AttributeInfo.EnumAttributeType.shortString, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x3333333311l, AttributeInfo.EnumAttributeType.shortString, null, null);
@@ -164,91 +165,6 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	protected JDFAutoStatusQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	/**
-	 * Enumeration strings for DeviceDetails
-	 */
-
-	public enum EDeviceDetails
-	{
-		None, Brief, Modules, Details, Capability, Full;
-
-		public static EDeviceDetails getEnum(String val)
-		{
-			return JavaEnumUtil.getEnumIgnoreCase(EDeviceDetails.class, val, EDeviceDetails.None);
-		}
-	}
-
-	/**
-	 * Enumeration strings for DeviceDetails
-	 */
-
-	@SuppressWarnings("rawtypes")
-	public static class EnumDeviceDetails extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		protected EnumDeviceDetails(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		/**
-		 * @param enumName the string to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceDetails getEnum(String enumName)
-		{
-			return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumName);
-		}
-
-		/**
-		 * @param enumValue the integer to convert
-		 * @return the enum
-		 */
-		public static EnumDeviceDetails getEnum(int enumValue)
-		{
-			return (EnumDeviceDetails) getEnum(EnumDeviceDetails.class, enumValue);
-		}
-
-		/**
-		 * @return the map of enums
-		 */
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumDeviceDetails.class);
-		}
-
-		/**
-		 * @return the list of enums
-		 */
-		public static List getEnumList()
-		{
-			return getEnumList(EnumDeviceDetails.class);
-		}
-
-		/**
-		 * @return the iterator
-		 */
-		public static Iterator iterator()
-		{
-			return iterator(EnumDeviceDetails.class);
-		}
-
-		/**  */
-		public static final EnumDeviceDetails None = new EnumDeviceDetails("None");
-		/**  */
-		public static final EnumDeviceDetails Brief = new EnumDeviceDetails("Brief");
-		/**  */
-		public static final EnumDeviceDetails Modules = new EnumDeviceDetails("Modules");
-		/**  */
-		public static final EnumDeviceDetails Details = new EnumDeviceDetails("Details");
-		/**  */
-		public static final EnumDeviceDetails Capability = new EnumDeviceDetails("Capability");
-		/**  */
-		public static final EnumDeviceDetails Full = new EnumDeviceDetails("Full");
 	}
 
 	/**
@@ -333,11 +249,14 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -361,14 +280,15 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute DeviceDetails
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute DeviceDetails
 	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute DeviceDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setDeviceDetails(EDeviceDetails) based on java.lang.enum instead
+	 * @deprecated use SetDeviceDetails(EDeviceDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setDeviceDetails(EnumDeviceDetails enumVar)
@@ -380,7 +300,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * (9) get attribute DeviceDetails
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EDeviceDetails getEDeviceDetails() based on java.lang.enum instead
+	 * @deprecated use EDeviceDetails GetEDeviceDetails() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumDeviceDetails getDeviceDetails()
@@ -389,7 +309,8 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute EmployeeInfo
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute EmployeeInfo
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -413,7 +334,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobDetails ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobDetails
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute JobDetails
@@ -436,13 +359,15 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobDetails ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobDetails
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute JobDetails
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setJobDetails(EJobDetails) based on java.lang.enum instead
+	 * @deprecated use SetJobDetails(EJobDetails) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setJobDetails(EnumJobDetails enumVar)
@@ -454,7 +379,7 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * (9) get attribute JobDetails
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EJobDetails getEJobDetails() based on java.lang.enum instead
+	 * @deprecated use EJobDetails GetEJobDetails() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumJobDetails getJobDetails()
@@ -463,7 +388,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobID
@@ -486,7 +413,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobPartID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute JobPartID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute JobPartID
@@ -509,7 +438,8 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueEntryID
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueEntryID
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -533,7 +463,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute QueueInfo ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute QueueInfo
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute QueueInfo
@@ -556,7 +488,9 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -594,7 +528,8 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
 	 * (27) const get element Part
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFPart the element default is getPart(0)
+	 * @return JDFPart the element
+	 *         default is getPart(0)
 	 */
 	public JDFPart getPart(int iSkip)
 	{

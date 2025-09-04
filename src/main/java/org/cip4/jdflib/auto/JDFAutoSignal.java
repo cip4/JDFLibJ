@@ -92,10 +92,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 /**
- *****************************************************************************
- * class JDFAutoSignal : public JDFMessage
- *****************************************************************************
- * 
+ ***************************************************************************** class JDFAutoSignal : public JDFMessage
  */
 
 public abstract class JDFAutoSignal extends JDFMessage
@@ -106,7 +103,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), "FireAndForget");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x3333331111l, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0),
+				"FireAndForget");
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTREPEAT, 0x3333333333l, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x3333333333l, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.REPLACEAFTER, 0x3331111111l, AttributeInfo.EnumAttributeType.dateTime, null, null);
@@ -247,11 +245,15 @@ public abstract class JDFAutoSignal extends JDFMessage
 	}
 
 	/*
-	 * ************************************************************************ Attribute getter / setter ************************************************************************
+	 * ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
 	 */
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ChannelMode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ChannelMode
@@ -274,13 +276,15 @@ public abstract class JDFAutoSignal extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ChannelMode ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ChannelMode
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (5) set attribute ChannelMode
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use setChannelMode(EChannelMode) based on java.lang.enum instead
+	 * @deprecated use SetChannelMode(EChannelMode) based on java.lang.enum instead
 	 */
 	@Deprecated
 	public void setChannelMode(EnumChannelMode enumVar)
@@ -292,7 +296,7 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * (9) get attribute ChannelMode
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EChannelMode getEChannelMode() based on java.lang.enum instead
+	 * @deprecated use EChannelMode GetEChannelMode() based on java.lang.enum instead
 	 */
 	@Deprecated
 	public EnumChannelMode getChannelMode()
@@ -301,7 +305,9 @@ public abstract class JDFAutoSignal extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute LastRepeat ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute LastRepeat
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute LastRepeat
@@ -324,7 +330,9 @@ public abstract class JDFAutoSignal extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute refID ---------------------------------------------------------------------
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute refID
+	 * ---------------------------------------------------------------------
 	 */
 	/**
 	 * (36) set attribute refID
@@ -349,7 +357,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReplaceAfter
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReplaceAfter
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -374,13 +383,14 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public JDFDate getReplaceAfter()
 	{
-		final String str = getAttribute(AttributeName.REPLACEAFTER, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.REPLACEAFTER, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ReplaceBefore
+	 * ---------------------------------------------------------------------
+	 * Methods for Attribute ReplaceBefore
 	 * ---------------------------------------------------------------------
 	 */
 	/**
@@ -405,13 +415,15 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 */
 	public JDFDate getReplaceBefore()
 	{
-		final String str = getAttribute(AttributeName.REPLACEBEFORE, null, null);
-		final JDFDate ret = JDFDate.createDate(str);
+		String str = getAttribute(AttributeName.REPLACEBEFORE, null, null);
+		JDFDate ret = JDFDate.createDate(str);
 		return ret;
 	}
 
 	/*
-	 * *********************************************************************** Element getter / setter ***********************************************************************
+	 * ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
 	 */
 
 	/**
@@ -449,7 +461,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * (27) const get element Employee
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFEmployee the element default is getEmployee(0)
+	 * @return JDFEmployee the element
+	 *         default is getEmployee(0)
 	 */
 	public JDFEmployee getEmployee(int iSkip)
 	{
@@ -511,7 +524,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	 * (27) const get element Notification
 	 *
 	 * @param iSkip number of elements to skip
-	 * @return JDFNotification the element default is getNotification(0)
+	 * @return JDFNotification the element
+	 *         default is getNotification(0)
 	 */
 	public JDFNotification getNotification(int iSkip)
 	{
@@ -561,7 +575,8 @@ public abstract class JDFAutoSignal extends JDFMessage
 	/**
 	 * (29) append element Trigger
 	 *
-	 * @return JDFTrigger the element @ if the element already exists
+	 * @return JDFTrigger the element
+	 * @ if the element already exists
 	 */
 	public JDFTrigger appendTrigger()
 	{
