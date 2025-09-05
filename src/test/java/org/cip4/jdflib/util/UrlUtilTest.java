@@ -80,7 +80,6 @@ import jakarta.mail.Multipart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         12.01.2009
  */
 class UrlUtilTest extends JDFTestCaseBase
@@ -314,7 +313,9 @@ class UrlUtilTest extends JDFTestCaseBase
 	void testWriteToURL()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
@@ -325,7 +326,9 @@ class UrlUtilTest extends JDFTestCaseBase
 	void testWriteToURLPost()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", null);
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
@@ -333,13 +336,14 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testWriteToFTP() throws IOException
 	{
 		if (!isTestNetwork() || FTP_SITE == null)
+		{
 			return;
+		}
 		final UrlPart part = UrlUtil.writeToURL(FTP_SITE, null, null, null, null);
 		assertEquals(part.getResponseCode(), 200);
 		part.buffer();
@@ -348,13 +352,14 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetFTPInputstream() throws IOException
 	{
 		if (!isTestNetwork() || FTP_SITE == null)
+		{
 			return;
+		}
 		final InputStream is = UrlUtil.getURLInputStream(FTP_SITE);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
 	}
@@ -366,7 +371,9 @@ class UrlUtilTest extends JDFTestCaseBase
 	void testWriteToURLClose()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final HTTPDetails det = new HTTPDetails();
 		det.setbKeepAlive(false);
 		assertNotNull(UrlUtil.writeToURL("http://google.com", new ByteArrayInputStream("foo".getBytes()), UrlUtil.POST, "foo/bar", det));
@@ -379,7 +386,9 @@ class UrlUtilTest extends JDFTestCaseBase
 	void testWriteToURLBearer()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final HTTPDetails det = new HTTPDetails();
 		det.setBearerToken("abc");
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://google.com", null, UrlUtil.GET, null, det);
@@ -396,7 +405,9 @@ class UrlUtilTest extends JDFTestCaseBase
 	void testWriteToURLRedirect()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		assertEquals(UrlUtil.writeToURL("http://google.ch", null, UrlUtil.GET, null, null).getResponseCode(), 200);
 	}
 
@@ -407,7 +418,9 @@ class UrlUtilTest extends JDFTestCaseBase
 	void testWriteToURLSecure()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		UrlPart writeToURL = UrlUtil.writeToURL("https://google.ch", null, UrlUtil.GET, null, null);
 		if (writeToURL == null)
 		{
@@ -419,13 +432,14 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testWriteToURLSecureStream() throws IOException
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlPart part = UrlUtil.writeToURL("https://google.ch", null, UrlUtil.GET, null, null);
 		assertEquals(part.getResponseCode(), 200);
 		part.buffer();
@@ -435,20 +449,20 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetHTTPSInputstream() throws IOException
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final InputStream is = UrlUtil.getURLInputStream("https://google.ch");
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
 	}
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testGetBodyInputstream() throws IOException
@@ -460,8 +474,6 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
-	 *
 	 */
 	@Test
 	void testGetZipInputstream() throws IOException
@@ -496,7 +508,6 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testIsReturnOKPart() throws IOException
@@ -528,7 +539,9 @@ class UrlUtilTest extends JDFTestCaseBase
 	void testWriteToURLNull()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		assertNull(UrlUtil.writeToURL(null, null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
@@ -765,7 +778,8 @@ class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.stringToURL("https://foo"), new URL("https://foo"));
 		assertNull(UrlUtil.stringToURL("File:"), "empty File: should be null");
 		assertEquals(UrlUtil.stringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
-		assertEquals(new URL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-düc-2019.pdf"), UrlUtil.stringToURL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-düc-2019.pdf"));
+		assertEquals(new URL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-düc-2019.pdf"),
+				UrlUtil.stringToURL("https://foo/-a1d3-7b4e52b36407/dywEqM_chouchou-düc-2019.pdf"));
 
 	}
 
@@ -1026,7 +1040,8 @@ class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("a%20b", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0));
 		f = new File("../a.ä");
 		assertEquals("../a.%c3%a4", StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, true), '\\', "/", 0), "escaped utf8");
-		assertEquals(new String(StringUtil.getUTF8Bytes("../a.ä")), StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0), "unescaped but utf8");
+		assertEquals(new String(StringUtil.getUTF8Bytes("../a.ä")), StringUtil.replaceChar(UrlUtil.getRelativeURL(f, null, false), '\\', "/", 0),
+				"unescaped but utf8");
 	}
 
 	/**
@@ -1180,7 +1195,6 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMoveToDirMime() throws Exception
@@ -1225,7 +1239,6 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMoveToDir() throws Exception
@@ -1252,7 +1265,6 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMoveToDownDir() throws Exception
@@ -1270,7 +1282,6 @@ class UrlUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testMoveToDirDelete() throws Exception
@@ -1303,7 +1314,8 @@ class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("http://a/a.b", UrlUtil.normalize("http://a/a.b"));
 		assertEquals("http://a/a%20.b", UrlUtil.normalize("http://a/a%20.b"));
 		assertEquals("http://a/a.b", UrlUtil.normalize("HTTP://a/a.b"));
-		assertEquals("http://a/a.b", UrlUtil.normalize("HTTP://a//a.b"));
+		assertEquals("http://a/a.b", UrlUtil.normalize("HTTP://a/a.b"));
+		assertEquals("http://a/a.b", UrlUtil.normalize("HTTP://a//a.b/"));
 		assertEquals("cid:a.b", UrlUtil.normalize("cid:a.b"));
 		assertEquals("cid:a.b", UrlUtil.normalize("<cid:a.b>"));
 		assertEquals("http://a/a.b?f=g", UrlUtil.normalize("http://a/a.b?f=g"));
