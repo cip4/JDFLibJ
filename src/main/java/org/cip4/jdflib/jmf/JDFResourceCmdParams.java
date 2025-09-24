@@ -102,6 +102,7 @@ import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -137,89 +138,99 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			final VElement vNodes = parentNode.getvJDFNode(null, null, false);
 
 			final int size = vNodes.size();
+			boolean found = false;
 			for (int i = 0; i < size; i++)
 			{
-				applyNode(vNodes, i);
+				found = applyNode(vNodes, i, false) || found;
+			}
+			if (!found)
+			{
+				for (int i = 0; i < size; i++)
+				{
+					if (applyNode(vNodes, i, true))
+					{
+						break;
+					}
+				}
 			}
 		}
 
-		private void applyNode(final VElement vNodes, final int i)
+		boolean applyNode(final VElement vNodes, final int i, boolean create)
 		{
+			final JDFNode node = (JDFNode) vNodes.elementAt(i);
+			if (!matchesNode(node))
 			{
-				final JDFNode node = (JDFNode) vNodes.elementAt(i);
-				if (!matchesNode(node))
-				{
-					return;
-				}
-				final JDFResource resCmd = getResource(null);
-				if (resCmd == null)
-				{
-					return;
-				}
-
-				final boolean isIncremental = (getUpdateMethod() == EnumUpdateMethod.Incremental);
-
-				// commented out, statements have no effect
-				// double dAmount = -1.0;
-				// if (hasAttribute (AttributeName.PRODUCTIONAMOUNT))
-				// {
-				// dAmount = getProductionAmount (); // TODO: set ProductionAmount
-				// }
-				// final String strProcessUsage = getProcessUsage(); // TODO: use
-				// ProcessUsage
-				// final JDFElement.EnumNodeStatus status = getStatus(); // TODO:
-				// set Status
-
-				final VJDFAttributeMap vamParts = getPartMapVector();
-				JDFResource resTarget = getTargetResource(node);
-				if (resTarget == null)
-				{
-					resTarget = createNewResource(node, resCmd);
-					if (resTarget == null)
-					{
-						return;
-					}
-				}
-
-				// get the most granular list of partIDKeys from the cmd or resource
-				VString vsPartIDKeys = resTarget.getPartIDKeys();
-				final VString vsPartIDKeysCmd = resCmd.getPartIDKeys();
-				final int sizTarget = vsPartIDKeys == null ? 0 : vsPartIDKeys.size();
-				final int sizCmd = vsPartIDKeysCmd == null ? 0 : vsPartIDKeysCmd.size();
-				if (sizCmd > sizTarget)
-				{
-					vsPartIDKeys = vsPartIDKeysCmd;
-				}
-
-				final int sizeParts = vamParts == null ? 1 : vamParts.size();
-				for (int j = 0; j < sizeParts; j++)
-				{
-					final JDFAttributeMap amParts = vamParts == null ? null : vamParts.elementAt(j);
-					final JDFResource resTargetPart = resTarget.getCreatePartition(amParts, vsPartIDKeys);
-					if (resTargetPart == null)
-					{
-						continue;
-					}
-
-					final String id = resTargetPart.getID();
-					if (!isIncremental)
-					{
-						final JDFAttributeMap map = resTargetPart.getPartMap();
-						resTargetPart.flush();
-						resTargetPart.setAttributes(map);
-					}
-
-					final JDFResource resCmdPart = cleanResCmdPart(resCmd, vsPartIDKeys, amParts, resTargetPart);
-
-					resTargetPart.mergeElement(resCmdPart, false);
-					resTarget.setID(id);
-				}
-
-				if (sizeParts > 0 && resTarget instanceof JDFNodeInfo)
-				{
-					fixNodeStatusFromNodeInfo(node, resTarget);
-				}
+				return false;
 			}
+			final JDFResource resCmd = getResource(null);
+			if (resCmd == null)
+			{
+				return false;
+			}
+
+			final boolean isIncremental = (getUpdateMethod() == EnumUpdateMethod.Incremental);
+
+			// commented out, statements have no effect
+			// double dAmount = -1.0;
+			// if (hasAttribute (AttributeName.PRODUCTIONAMOUNT))
+			// {
+			// dAmount = getProductionAmount (); // TODO: set ProductionAmount
+			// }
+			// final String strProcessUsage = getProcessUsage(); // TODO: use
+			// ProcessUsage
+			// final JDFElement.EnumNodeStatus status = getStatus(); // TODO:
+			// set Status
+
+			final VJDFAttributeMap vamParts = getPartMapVector();
+			JDFResource resTarget = getTargetResource(node, true);
+			if (resTarget == null && create && getTargetResource(node, false) == null)
+			{
+				resTarget = createNewResource(node, resCmd);
+			}
+			if (resTarget == null)
+			{
+				return false;
+			}
+
+			// get the most granular list of partIDKeys from the cmd or resource
+			VString vsPartIDKeys = resTarget.getPartIDKeys();
+			final VString vsPartIDKeysCmd = resCmd.getPartIDKeys();
+			final int sizTarget = vsPartIDKeys == null ? 0 : vsPartIDKeys.size();
+			final int sizCmd = vsPartIDKeysCmd == null ? 0 : vsPartIDKeysCmd.size();
+			if (sizCmd > sizTarget)
+			{
+				vsPartIDKeys = vsPartIDKeysCmd;
+			}
+
+			final int sizeParts = vamParts == null ? 1 : vamParts.size();
+			for (int j = 0; j < sizeParts; j++)
+			{
+				final JDFAttributeMap amParts = vamParts == null ? null : vamParts.elementAt(j);
+				final JDFResource resTargetPart = resTarget.getCreatePartition(amParts, vsPartIDKeys);
+				if (resTargetPart == null)
+				{
+					continue;
+				}
+
+				final String id = resTargetPart.getID();
+				if (!isIncremental)
+				{
+					final JDFAttributeMap map = resTargetPart.getPartMap();
+					resTargetPart.flush();
+					resTargetPart.setAttributes(map);
+				}
+
+				final JDFResource resCmdPart = cleanResCmdPart(resCmd, vsPartIDKeys, amParts, resTargetPart);
+
+				resTargetPart.mergeElement(resCmdPart, false);
+				resTarget.setID(id);
+			}
+
+			if (sizeParts > 0 && resTarget instanceof JDFNodeInfo)
+			{
+				fixNodeStatusFromNodeInfo(node, resTarget);
+			}
+			return true;
 		}
 
 		/**
@@ -261,7 +272,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * @param node
 		 * @return the target resource
 		 */
-		JDFResource getTargetResource(final JDFNode node)
+		JDFResource getTargetResource(final JDFNode node, boolean checkID)
 		{
 			if (node == null)
 			{
@@ -274,10 +285,10 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			}
 
 			final String resID = getResourceID();
-			if (!StringUtil.isEmpty(resID))
+			if (!StringUtil.isEmpty(resID) && checkID)
 			{
 				final VElement vRes = rlp.getLinkedResources(getResourceName(), null, new JDFAttributeMap(AttributeName.ID, resID), false, null);
-				return vRes.isEmpty() ? null : (JDFResource) vRes.elementAt(0);
+				return (JDFResource) ContainerUtil.get(vRes, 0);
 			}
 
 			return hasAttribute(AttributeName.RESOURCENAME) ? node.getResource(getResourceName(), getUsage(), EnumProcessUsage.getEnum(getProcessUsage()), 0)
@@ -324,9 +335,13 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 			if (u != null)
 			{
 				resTarget = (JDFResource) node.getCreateResourcePool().copyElement(resCmd, null);
+				if (!StringUtil.isEmpty(getResourceID()))
+				{
+					resTarget.setID(getResourceID());
+				}
 				final JDFResourceLink rl = node.linkResource(resTarget, u, null);
 				rl.copyAttribute(AttributeName.PROCESSUSAGE, JDFResourceCmdParams.this);
-				resTarget = getTargetResource(node);
+				resTarget = getTargetResource(node, false);
 			}
 			return resTarget;
 		}
