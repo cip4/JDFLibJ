@@ -112,7 +112,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi
- *
  *         Test of the Resource JMF
  */
 class JMFResourceTest extends JDFTestCaseBase
@@ -154,23 +153,24 @@ class JMFResourceTest extends JDFTestCaseBase
 		rqp.setJobPartID(jdf.getJobPartID(true));
 
 		final ApplyCommand ac = rqp.new ApplyCommand();
-		assertEquals(mediaJDF, ac.getTargetResource(jdf));
+		assertEquals(mediaJDF, ac.getTargetResource(jdf, true));
 
 		rqp.setResourceID(mediaJDF.getID());
-		assertEquals(mediaJDF, ac.getTargetResource(jdf));
+		assertEquals(mediaJDF, ac.getTargetResource(jdf, true));
 
 		rqp.setResourceName(null);
-		assertEquals(mediaJDF, ac.getTargetResource(jdf));
+		assertEquals(mediaJDF, ac.getTargetResource(jdf, true));
 
 		rqp.setResourceName("foo");
-		assertNull(ac.getTargetResource(jdf));
+		assertNull(ac.getTargetResource(jdf, true));
 
 		rqp.setResourceName("Media");
 		rqp.setResourceID("notthere");
-		assertNull(ac.getTargetResource(jdf));
+		assertNull(ac.getTargetResource(jdf, true));
 		rqp.setResourceName(null);
 		rqp.setResourceID(null);
-		assertNull(ac.getTargetResource(jdf));
+		assertNull(ac.getTargetResource(jdf, false));
+		assertNull(ac.getTargetResource(jdf, true));
 
 	}
 
@@ -557,7 +557,6 @@ class JMFResourceTest extends JDFTestCaseBase
 
 	/**
 	 * Method testResourceCommand
-	 *
 	 */
 	@Test
 	void testResourceCommand()
@@ -606,7 +605,6 @@ class JMFResourceTest extends JDFTestCaseBase
 
 	/**
 	 * Method testResourceCommandPartIDKeys
-	 *
 	 */
 	@Test
 	void testResourceCommandPartIDKeys()
@@ -628,7 +626,6 @@ class JMFResourceTest extends JDFTestCaseBase
 
 	/**
 	 * Method testResourceCommandPartIDKeys
-	 *
 	 */
 	@Test
 	void testResourceCommandIdentical()
@@ -669,7 +666,8 @@ class JMFResourceTest extends JDFTestCaseBase
 		Assertions.assertEquals(EnumSide.Front, niPart.getSide());
 	}
 
-	private JDFResourceCmdParams createResourceParams(final String strJobPartID, final String strResourceID, final JDFAttributeMap amParts, final JDFAttributeMap amAttr)
+	private JDFResourceCmdParams createResourceParams(final String strJobPartID, final String strResourceID, final JDFAttributeMap amParts,
+			final JDFAttributeMap amAttr)
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.Resource);
 
