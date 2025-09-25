@@ -69,8 +69,8 @@
  */
 package org.cip4.jdflib.jmf;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EUpdateMethod;
 import org.cip4.jdflib.core.ElementName;
