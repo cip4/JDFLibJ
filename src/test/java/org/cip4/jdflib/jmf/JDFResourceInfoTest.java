@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,12 +36,19 @@
  */
 package org.cip4.jdflib.jmf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoResourceInfo;
 import org.cip4.jdflib.auto.JDFAutoResourceLink;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
@@ -52,11 +59,9 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Jan 22, 2013
  */
@@ -78,8 +83,36 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 		final JDFSignal s = jmf.appendSignal(EnumType.Resource);
 
 		final JDFResourceInfo ri = JDFResourceInfo.createResourceInfo(s, rlLO, true);
-		Assertions.assertEquals(ri.getResourceName(), "Layout");
-		Assertions.assertNotNull(ri.getResource(null).getElement("Media"));
+		assertEquals(ri.getResourceName(), "Layout");
+		assertNotNull(ri.getResource(null).getElement("Media"));
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testAppendResource()
+	{
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFSignal s = jmf.appendSignal(EnumType.Resource);
+
+		final JDFResourceInfo ri = JDFResourceInfo.createResourceInfo(s, null, true);
+		ri.appendResource("Media");
+		assertEquals(ri.getResourceName(), "Media");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testAppendResourceBad()
+	{
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final JDFSignal s = jmf.appendSignal(EnumType.Resource);
+		final JDFResourceInfo ri = JDFResourceInfo.createResourceInfo(s, null, true);
+		assertThrows(JDFException.class, () -> ri.appendResource(ElementName.MARKOBJECT));
 	}
 
 	/**
@@ -98,8 +131,8 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 		final JDFSignal s = jmf.appendSignal(EnumType.Resource);
 
 		final JDFResourceInfo ri = JDFResourceInfo.createResourceInfo(s, rlLO, false);
-		Assertions.assertEquals(ri.getResourceName(), "Layout");
-		Assertions.assertNull(ri.getResource(null));
+		assertEquals(ri.getResourceName(), "Layout");
+		assertNull(ri.getResource(null));
 	}
 
 	/**
@@ -113,11 +146,11 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
 		final JDFResourceLink rl = n.getLink(m, null);
 		rl.setOrientation(JDFAutoResourceLink.EnumOrientation.Rotate270);
-		Assertions.assertTrue(rl.isValid(EnumValidationLevel.Incomplete));
+		assertTrue(rl.isValid(EnumValidationLevel.Incomplete));
 		final JDFJMF jmf = new JMFBuilder().buildResourceSignal(true, rl);
 		final JDFResourceInfo ri = jmf.getSignal(0).getResourceInfo(0);
-		Assertions.assertTrue(ri.isValid(EnumValidationLevel.Incomplete));
-		Assertions.assertEquals(JDFAutoResourceInfo.EnumOrientation.Rotate270, ri.getOrientation());
+		assertTrue(ri.isValid(EnumValidationLevel.Incomplete));
+		assertEquals(JDFAutoResourceInfo.EnumOrientation.Rotate270, ri.getOrientation());
 	}
 
 	/**
@@ -134,7 +167,7 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 		final JDFJMF jmf = new JMFBuilder().buildResourceSignal(true, null);
 		final JDFResourceInfo ri = jmf.getSignal(0).getCreateResourceInfo(0);
 		ri.setLink(rl, false);
-		Assertions.assertEquals(JDFAutoResourceInfo.EnumOrientation.Rotate270, ri.getOrientation());
+		assertEquals(JDFAutoResourceInfo.EnumOrientation.Rotate270, ri.getOrientation());
 	}
 
 	/**
@@ -150,7 +183,7 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 		final JDFJMF jmf = new JMFBuilder().buildResourceSignal(true, null);
 		final JDFResourceInfo ri = jmf.getSignal(0).getCreateResourceInfo(0);
 		ri.setLink(rl, false);
-		Assertions.assertEquals(ElementName.MEDIA, ri.getResourceName());
+		assertEquals(ElementName.MEDIA, ri.getResourceName());
 	}
 
 	/**
@@ -166,7 +199,7 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 		final JDFJMF jmf = new JMFBuilder().buildResourceSignal(true, null);
 		final JDFResourceInfo ri = jmf.getSignal(0).getCreateResourceInfo(0);
 		ri.setLink(rl, false);
-		Assertions.assertNull(StringUtil.getNonEmpty(ri.getResourceID()));
+		assertNull(StringUtil.getNonEmpty(ri.getResourceID()));
 	}
 
 	/**
@@ -177,12 +210,13 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 	void testSetPart()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1")
+				.addPartition(EnumPartIDKey.SheetName, "S1");
 		final JDFResourceLink rl = n.getLink(m, null);
 		final JDFJMF jmf = new JMFBuilder().buildResourceSignal(true, null);
 		final JDFResourceInfo ri = jmf.getSignal(0).getCreateResourceInfo(0);
 		ri.setLink(rl, true);
-		Assertions.assertEquals(new VString("SignatureName SheetName", null), ri.getResource(ElementName.MEDIA).getPartIDKeys());
+		assertEquals(new VString("SignatureName SheetName", null), ri.getResource(ElementName.MEDIA).getPartIDKeys());
 	}
 
 	/**
@@ -193,12 +227,13 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 	void testCreatePart()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1")
+				.addPartition(EnumPartIDKey.SheetName, "S1");
 		final JDFResourceLink rl = n.getLink(m, null);
 		rl.setPartMap(m.getPartMap());
 		final JDFJMF jmfSignal = JMFBuilderFactory.getJMFBuilder(null).createJMF(EnumFamily.Signal, EnumType.Resource);
 		final JDFResourceInfo ri = JDFResourceInfo.createResourceInfo(jmfSignal.getSignal(0), rl, true);
-		Assertions.assertEquals(new VString("SignatureName SheetName", null), ri.getResource(ElementName.MEDIA).getPartIDKeys());
+		assertEquals(new VString("SignatureName SheetName", null), ri.getResource(ElementName.MEDIA).getPartIDKeys());
 	}
 
 	/**
@@ -209,12 +244,13 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 	void testSetPart_ID()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1")
+				.addPartition(EnumPartIDKey.SheetName, "S1");
 		final JDFResourceLink rl = n.getLink(m, null);
 		final JDFJMF jmf = new JMFBuilder().buildResourceSignal(true, null);
 		final JDFResourceInfo ri = jmf.getSignal(0).getCreateResourceInfo(0);
 		ri.setLink(rl, true);
-		Assertions.assertEquals(m.getID(), ri.getResource(ElementName.MEDIA).getID());
+		assertEquals(m.getID(), ri.getResource(ElementName.MEDIA).getID());
 	}
 
 	/**
@@ -225,14 +261,15 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 	void testSetPartPartition()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "S1");
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input).addPartition(EnumPartIDKey.SignatureName, "Sig1")
+				.addPartition(EnumPartIDKey.SheetName, "S1");
 		m.setProductID("p1");
 		final JDFResourceLink rl = n.getLink(m, null);
 		final JDFJMF jmf = new JMFBuilder().buildResourceSignal(true, null);
 		final JDFResourceInfo ri = jmf.getSignal(0).getCreateResourceInfo(0);
 		ri.setLink(rl, true);
-		Assertions.assertEquals(m.getLeaf(0).getProductID(), ri.getResource(ElementName.MEDIA).getLeaf(0).getProductID());
-		Assertions.assertNull(StringUtil.getNonEmpty(ri.getResource(ElementName.MEDIA).getProductID()));
+		assertEquals(m.getLeaf(0).getProductID(), ri.getResource(ElementName.MEDIA).getLeaf(0).getProductID());
+		assertNull(StringUtil.getNonEmpty(ri.getResource(ElementName.MEDIA).getProductID()));
 	}
 
 	/**
@@ -249,6 +286,6 @@ class JDFResourceInfoTest extends JDFTestCaseBase
 		final JDFJMF jmf = new JMFBuilder().buildResourceSignal(true, null);
 		final JDFResourceInfo ri = jmf.getSignal(0).getCreateResourceInfo(0);
 		ri.setLink(rl, false);
-		Assertions.assertEquals(EnumUsage.Input, ri.getUsage());
+		assertEquals(EnumUsage.Input, ri.getUsage());
 	}
 }
