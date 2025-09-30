@@ -6,7 +6,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
-    id 'io.codearte.nexus-staging' version '0.30.0'
+    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
     id 'jacoco'
 }
 
@@ -77,7 +77,8 @@ publishing {
     }
     repositories {
         maven {
-            def releasesRepoUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2"
+            name = "sonatype"
+            def releasesRepoUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
             def snapshotsRepoUrl = "https://ossrh-staging-api.central.sonatype.com/content/repositories/snapshots"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 
@@ -89,13 +90,18 @@ publishing {
     }
 }
 
-nexusStaging {
-    packageGroup = 'org.cip4'
-    stagingProfileId = '105e2b532689c6'
-    numberOfRetries = 400
-    delayBetweenRetriesInMillis = 2500
-    username ossrhUsername
-    password ossrhPassword
+nexusPublishing {
+    repositories {
+        // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
+        sonatype {
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+            username = ossrhUsername
+            password = ossrhPassword
+            stagingProfileId = '105e2b532689c6' // This can often be omitted if your packageGroup is unique
+            packageGroup = 'org.cip4'
+        }
+    }
 }
 
 repositories {
