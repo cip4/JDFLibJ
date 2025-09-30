@@ -79,7 +79,7 @@ publishing {
         maven {
             name = "sonatype"
             def releasesRepoUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://ossrh-staging-api.central.sonatype.com/content/repositories/snapshots"
+            def snapshotsRepoUrl = "https://central.sonatype.com/repository/maven-snapshots/"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 
             credentials {
@@ -92,7 +92,6 @@ publishing {
 
 nexusPublishing {
     repositories {
-        // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
         sonatype {
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
             snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
@@ -165,6 +164,7 @@ test {
 jar {
     manifest {
         attributes(
+                "Implementation-Build-Date": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "Implementation-Title": project.description,
                 "Implementation-Version": project.version,
                 "Implementation-Vendor-Id": project.group,
