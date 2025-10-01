@@ -51,7 +51,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         08.12.2008
  */
 class ThreadUtilTest extends JDFTestCaseBase
@@ -79,7 +78,9 @@ class ThreadUtilTest extends JDFTestCaseBase
 		protected Integer handle()
 		{
 			if (sleep > 0)
+			{
 				ThreadUtil.sleep(sleep);
+			}
 			return Integer.valueOf(42);
 		}
 
@@ -91,7 +92,7 @@ class ThreadUtilTest extends JDFTestCaseBase
 	@Test
 	synchronized void testWaitTimeout()
 	{
-		assertEquals(new TestWait(1400, 42).getWaitedObject().intValue(), 42);
+		assertEquals(new TestWait(200, 4).getWaitedObject().intValue(), 42);
 		assertNull(new TestWait(2, 5000).getWaitedObject());
 	}
 
@@ -107,7 +108,9 @@ class ThreadUtilTest extends JDFTestCaseBase
 		{
 			ThreadUtil.sleep(2);
 			if (n++ > 1234)
+			{
 				break;
+			}
 		}
 
 		assertEquals(testWait.getWaitedObject().intValue(), 42);
@@ -148,7 +151,9 @@ class ThreadUtilTest extends JDFTestCaseBase
 			for (int j = 0; j < 142; j++)
 			{
 				if (testWait.getWaitedObject() != null)
+				{
 					break;
+				}
 				ThreadUtil.sleep(j);
 			}
 			ThreadUtil.sleep(1);
