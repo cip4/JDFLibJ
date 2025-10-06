@@ -68,7 +68,7 @@ class DocumentData
 	/**
 	 * register new custom class in the factory
 	 *
-	 * @param strElement local name
+	 * @param strElement  local name
 	 * @param packagepath package path
 	 */
 	void registerCustomClass(final String strElement, final String packagepath)
@@ -239,7 +239,7 @@ class DocumentData
 		sm_PackageNames.put(ElementName.COLORSPACESUBSTITUTE, JDFLIB + "resource.process.prepress.JDFColorSpaceSubstitute");
 		sm_PackageNames.put(ElementName.COLORSRESULTSPOOL, JDFLIB + "resource.process.JDFColorsResultsPool");
 		sm_PackageNames.put(ElementName.COLORSTANDARD, NAME_SPAN);
-		sm_PackageNames.put(ElementName.COLORSUSED, SEPARATION_LIST);
+		sm_PackageNames.put(ElementName.COLORSUSED, JDFLIB + "resource.JDFColorsUsed");
 		sm_PackageNames.put(ElementName.COLORTYPE, JDFLIB + "span.JDFSpanColorType");
 		sm_PackageNames.put(ElementName.COMBBRAND, STRING_SPAN);
 		sm_PackageNames.put(ElementName.COMCHANNEL, JDFLIB + "resource.process.JDFComChannel");

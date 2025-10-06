@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,6 +69,7 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.resource.JDFColorsUsed;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -87,7 +88,7 @@ class JDFSeparationListTest extends JDFTestCaseBase
 	@Test
 	void testUnify()
 	{
-		JDFSeparationList sl = (JDFSeparationList) new JDFDoc(ElementName.COLORSUSED).getRoot();
+		JDFColorsUsed sl = (JDFColorsUsed) new JDFDoc(ElementName.COLORSUSED).getRoot();
 		sl.setSeparations(new VString("a b b c", null));
 		Assertions.assertEquals(sl.unify(), new VString("a b c", null));
 		Assertions.assertEquals(sl.getSeparations(), new VString("a b c", null));
