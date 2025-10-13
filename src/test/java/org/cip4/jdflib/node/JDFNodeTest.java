@@ -877,7 +877,7 @@ class JDFNodeTest extends JDFTestCaseBase
 	void testEActivation()
 	{
 		assertTrue(EActivation.isActive(null));
-		assertFalse(EActivation.isActive(EActivation.Inactive));
+		assertFalse(EActivation.isActive(EActivation.Held));
 		assertTrue(EActivation.isActive(EActivation.Active));
 	}
 
@@ -2965,7 +2965,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(n2.getActivation(true), EnumActivation.Active);
 		assertNull(n2.getActivation(false));
 
-		root.setActivation(EActivation.Inactive);
+		root.setActivation(EnumActivation.Inactive);
 		assertEquals(root.getActivation(true), EnumActivation.Inactive);
 		assertEquals(root.getActivation(false), EnumActivation.Inactive);
 		assertEquals(n2.getActivation(true), EnumActivation.Inactive);
