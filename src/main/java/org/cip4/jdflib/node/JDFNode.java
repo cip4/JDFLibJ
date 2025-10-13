@@ -497,14 +497,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public static final EnumActivation Active = new EnumActivation(JDFConstants.ACTIVATION_ACTIVE);
 	}
 
+	/**
+	 * for XJDF
+	 */
 	public enum EActivation
 	{
-		Unknown, Inactive, Informativ, Held, TestRun, TestRunAndGo, Active;
+		Informative, Held, Active, PendingReturn, Removed;
 
 		public static EActivation getEnum(final String name)
 		{
 			return EnumUtil.getJavaEnumIgnoreCase(EActivation.class, name);
 		}
+
+		public static boolean isActive(final EActivation a)
+		{
+			return a == null || EActivation.Active.equals(a);
+		}
+
 	}
 
 	/**
@@ -2723,7 +2732,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 * @param bWalkThroughAncestors if true, walks through all ancestors which may overwrite the local activation state; if false only the explicit activation, if any, is returned
 	 * @return the enumeration value of the attribute
 	 */
-	public JDFNode.EnumActivation getActivation(final boolean bWalkThroughAncestors)
+	public EnumActivation getActivation(final boolean bWalkThroughAncestors)
 	{
 		EnumActivation res = null;
 		if (bWalkThroughAncestors)
@@ -2763,6 +2772,27 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			res = EnumActivation.getEnum(getAttribute(AttributeName.ACTIVATION, null, null));
 		}
 		return res;
+	}
+
+	/**
+	 * get attribute Activation; defaults to Active
+	 *
+	 * @param bWalkThroughAncestors if true, walks through all ancestors which may overwrite the local activation state; if false only the explicit activation, if any, is returned
+	 * @return the enumeration value of the attribute
+	 */
+	public EActivation getEActivation()
+	{
+		return EActivation.getEnum(getNonEmpty(AttributeName.ACTIVATION));
+	}
+
+	/**
+	 * Set attribute Activation
+	 *
+	 * @param bActive the value to set the attribute to
+	 */
+	public void setActivation(final EActivation active)
+	{
+		setAttribute(AttributeName.ACTIVATION, active == null ? null : active.name(), null);
 	}
 
 	/**

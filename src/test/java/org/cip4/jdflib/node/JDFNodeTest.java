@@ -80,6 +80,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode.CombinedProcessLinkHelper;
+import org.cip4.jdflib.node.JDFNode.EActivation;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -118,7 +119,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFNodeTest extends JDFTestCaseBase
 {
@@ -393,8 +393,8 @@ class JDFNodeTest extends JDFTestCaseBase
 		m21.setAttribute("ID", "m1");
 
 		n.sortChildren();
-		assertEquals(n.getChildWithAttribute("JDF", "ID", null, "n1", 0, true).getNextSiblingElement(null, null), n.getChildWithAttribute("JDF", "ID", null, "n2", 0, true),
-				"reordered sub elements");
+		assertEquals(n.getChildWithAttribute("JDF", "ID", null, "n1", 0, true).getNextSiblingElement(null, null),
+				n.getChildWithAttribute("JDF", "ID", null, "n2", 0, true), "reordered sub elements");
 
 		assertEquals(rp2.getFirstChildElement(), xm2);
 		assertEquals(xm2.getNextSiblingElement(), m21);
@@ -561,7 +561,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 *
 	 */
 	@Test
 	void testInsertTypeInTypes()
@@ -586,7 +585,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 *
 	 */
 	@Test
 	void testLinkNamesCombined()
@@ -601,7 +599,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 *
 	 */
 	@Test
 	void testLinkNamesProduct()
@@ -617,7 +614,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 *
 	 */
 	@Test
 	void testLinkResourceSimple()
@@ -680,7 +676,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
-	 *
 	 */
 	@Test
 	void testLinkOutput()
@@ -703,7 +698,6 @@ class JDFNodeTest extends JDFTestCaseBase
 	 * test whether combinedprocessIndex is automagically and correctly assigned
 	 *
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	void testLinkResourceCombined() throws Exception
@@ -852,19 +846,18 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode mainNode = doc.getJDFRoot();
 		mainNode.setType("Product", true);
-		final JDFComponent myComponent = (JDFComponent) mainNode.addResource(ElementName.COMPONENT, JDFResource.EnumResourceClass.Quantity, EnumUsage.Output, null, mainNode, null,
-				null);
+		final JDFComponent myComponent = (JDFComponent) mainNode.addResource(ElementName.COMPONENT, JDFResource.EnumResourceClass.Quantity, EnumUsage.Output,
+				null, mainNode, null, null);
 		assertEquals(myComponent.getResourceClass(), EnumResourceClass.Quantity);
 		final JDFComponent myComponent2 = (JDFComponent) mainNode.addResource(ElementName.COMPONENT, EnumUsage.Input);
 		assertEquals(myComponent2.getResourceClass(), EnumResourceClass.Quantity);
 		myComponent.setDescriptiveName("descriptive_name");
 		assertNotNull(mainNode.getMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyOutput, null, 0), "");
-		final JDFResource myRes = mainNode.addResource("whatever:foo", JDFResource.EnumResourceClass.Quantity, EnumUsage.Output, null, mainNode, "www.whatever.com", null);
+		final JDFResource myRes = mainNode.addResource("whatever:foo", JDFResource.EnumResourceClass.Quantity, EnumUsage.Output, null, mainNode,
+				"www.whatever.com", null);
 		assertEquals(myRes.getResourceClass(), EnumResourceClass.Quantity);
 		myRes.setDescriptiveName("descriptive_name");
 	}
-
-	// /////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -875,6 +868,17 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertTrue(EnumActivation.isActive(null));
 		assertFalse(EnumActivation.isActive(EnumActivation.TestRun));
 		assertTrue(EnumActivation.isActive(EnumActivation.TestRunAndGo));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testEActivation()
+	{
+		assertTrue(EActivation.isActive(null));
+		assertFalse(EActivation.isActive(EActivation.Inactive));
+		assertTrue(EActivation.isActive(EActivation.Active));
 	}
 
 	/**
@@ -896,7 +900,6 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(((JDFResourceLink) vE.elementAt(1)).getPipeProtocol(), "Internal");
 	}
 
-	// ///////////////////////////////////////////////////////
 	/**
 	 *
 	 */
@@ -1128,7 +1131,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testRemoveFromTypes() throws DataFormatException
@@ -1156,7 +1158,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testRemoveFromTypes0() throws DataFormatException
@@ -1206,7 +1207,8 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertTrue(ra.numChildElements("RunListLink", null) == 2, "resaudit children=2");
 		assertTrue(n.getResourcePool().numChildElements("RunList", null) == 2, "respool children=2");
 		assertTrue(n.getResourceLinkPool().numChildElements("RunListLink", null) == 1, "reslink children=1");
-		assertTrue(((JDFResourceLink) n.getResourceLinkPool().getElement("RunListLink", null, 0)).getrRef().equals(ra.getNewLink().getrRef()), "reslink audit1=pool");
+		assertTrue(((JDFResourceLink) n.getResourceLinkPool().getElement("RunListLink", null, 0)).getrRef().equals(ra.getNewLink().getrRef()),
+				"reslink audit1=pool");
 		assertTrue((ra.getNewLink().getrRef() + "_old_001").equals(ra.getOldLink().getrRef()), "id names");
 		assertTrue((ra.getOldLink().getTarget()).getLocked(), "old lock");
 		final JDFResourceAudit ra2 = n.getAuditPool().addResourceAudit("foo");
@@ -1222,7 +1224,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test setPartStatus with null maps
-	 *
 	 */
 	@Test
 	void testSetPartStatusNull()
@@ -1326,8 +1327,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * @throws Exception
-	 *
-	 *
 	 */
 	@Test
 	void testSetPhase() throws Exception
@@ -1489,7 +1488,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetExecutablePartitionsPreflightImport
-	 *
 	 */
 
 	@Test
@@ -1526,7 +1524,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetExecutablePartitionsNormalizer
-	 *
 	 */
 
 	@Test
@@ -1551,7 +1548,6 @@ class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIsExecutableZones
-	 *
 	 */
 
 	@Test
@@ -1851,8 +1847,8 @@ class JDFNodeTest extends JDFTestCaseBase
 		// simple non-partitioned case
 		final JDFNodeInfo n = node.appendNodeInfo();
 		assertTrue(n.hasAttribute(AttributeName.CLASS), "ni resource");
-		final JDFConventionalPrintingParams convPrintParams = (JDFConventionalPrintingParams) node.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS,
-				EnumProcessUsage.AnyInput, null);
+		final JDFConventionalPrintingParams convPrintParams = (JDFConventionalPrintingParams) node
+				.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumProcessUsage.AnyInput, null);
 		convPrintParams.setResStatus(EnumResStatus.Available, true);
 		final JDFComponent outComp = (JDFComponent) node.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyOutput, null);
 		outComp.setResStatus(EnumResStatus.Unavailable, true);
@@ -2969,26 +2965,24 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(n2.getActivation(true), EnumActivation.Active);
 		assertNull(n2.getActivation(false));
 
-		root.setActivation(EnumActivation.Inactive);
+		root.setActivation(EActivation.Inactive);
 		assertEquals(root.getActivation(true), EnumActivation.Inactive);
 		assertEquals(root.getActivation(false), EnumActivation.Inactive);
 		assertEquals(n2.getActivation(true), EnumActivation.Inactive);
 		assertNull(n2.getActivation(false));
 
-		n2.setActivation(EnumActivation.Active);
+		n2.setActivation(EActivation.Active);
 		assertEquals(n2.getActivation(true), EnumActivation.Inactive);
 		assertEquals(n2.getActivation(false), EnumActivation.Active);
 
-		n2.setActivation(EnumActivation.Held);
+		n2.setActivation(EActivation.Held);
 		assertEquals(n2.getActivation(true), EnumActivation.Inactive);
 		assertEquals(n2.getActivation(false), EnumActivation.Held);
 
-		n2.setActivation(null);
+		n2.setActivation((EActivation) null);
 		assertEquals(n2.getActivation(true), EnumActivation.Inactive);
 		assertEquals(n2.getActivation(false), null);
 	}
-
-	// ////////////////////////////////////////////////////////////
 
 	/**
 	 *
@@ -3636,15 +3630,15 @@ class JDFNodeTest extends JDFTestCaseBase
 
 		vs = root.getUnknownLinkVector(null, 999);
 		assertTrue(vs.elementAt(0) instanceof JDFResourceLink);
-		assertEquals(((JDFResourceLink) vs.elementAt(0)).getLocalName(), "FoldingParamsLink");
+		assertEquals(vs.elementAt(0).getLocalName(), "FoldingParamsLink");
 
 		root.addResource("foo:barRes", EnumResourceClass.Parameter, EnumUsage.Input, null, null, "www.foo.com", null);
 
 		vs = root.getUnknownLinkVector(null, 999);
 		assertEquals(vs.size(), 2);
 		assertTrue(vs.elementAt(0) instanceof JDFResourceLink);
-		assertEquals(((JDFResourceLink) vs.elementAt(0)).getLocalName(), "FoldingParamsLink");
-		assertEquals(((JDFResourceLink) vs.elementAt(1)).getNodeName(), "foo:barResLink");
+		assertEquals(vs.elementAt(0).getLocalName(), "FoldingParamsLink");
+		assertEquals(vs.elementAt(1).getNodeName(), "foo:barResLink");
 
 		final VString vsc = new VString();
 		vsc.add(EnumType.InkZoneCalculation);
@@ -3652,7 +3646,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		root.setCombined(vsc);
 		vs = root.getUnknownLinkVector(null, 999);
 		assertTrue(vs.elementAt(0) instanceof JDFResourceLink);
-		assertEquals(((JDFResourceLink) vs.elementAt(0)).getLocalName(), "FoldingParamsLink");
+		assertEquals(vs.elementAt(0).getLocalName(), "FoldingParamsLink");
 	}
 
 	// ////////////////////////////////////////////////////////////
