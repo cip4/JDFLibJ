@@ -45,6 +45,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.AuditHelper.eAudit;
+import org.cip4.jdflib.jmf.JMFBuilder;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -88,12 +90,16 @@ class AuditHelperTest
 	@Test
 	void testCleanup()
 	{
+		final JMFBuilder jmfBuilder = JMFBuilderFactory.getJMFBuilder(XJDFConstants.XJMF);
+		String an = jmfBuilder.getAgentName();
+		jmfBuilder.setAgentName("foo");
 		final KElement audit = KElement.createRoot(ElementName.CREATED, null);
 		final MessageHelper ah = new MessageHelper(audit);
 		ah.appendElement(XJDFConstants.Header);
 		ah.cleanUp();
 		assertNotNull(ah);
-		assertNotNull(ah.getHeader(AttributeName.AGENTNAME));
+		assertEquals("foo", ah.getHeader(AttributeName.AGENTNAME));
+		jmfBuilder.setAgentName(an);
 	}
 
 	/**
