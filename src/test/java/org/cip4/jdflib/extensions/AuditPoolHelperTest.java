@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,9 +47,7 @@ import org.cip4.jdflib.extensions.AuditHelper.eAudit;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class AuditPoolHelperTest
 {
@@ -77,7 +75,7 @@ class AuditPoolHelperTest
 	{
 		final KElement auditPool = KElement.createRoot(ElementName.AUDITPOOL);
 		final AuditPoolHelper aph = new AuditPoolHelper(auditPool);
-		final AuditHelper ah = aph.appendAudit(ElementName.NOTIFICATION);
+		final AuditHelper ah = aph.appendAudit(eAudit.Notification);
 		assertNotNull(ah.getHeader());
 	}
 

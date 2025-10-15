@@ -48,9 +48,7 @@ import org.cip4.jdflib.extensions.AuditHelper.eAudit;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class AuditHelperTest
 {
@@ -95,6 +93,7 @@ class AuditHelperTest
 		ah.appendElement(XJDFConstants.Header);
 		ah.cleanUp();
 		assertNotNull(ah);
+		assertNotNull(ah.getHeader(AttributeName.AGENTNAME));
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -71,7 +71,9 @@ public class MessageHelper extends BaseXJDFHelper
 				for (final EFamily f : values())
 				{
 					if (sl.startsWith(f.name().toLowerCase()))
+					{
 						return f;
+					}
 				}
 
 			}
@@ -90,8 +92,7 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
-	 * @param e the element - needed for subclasses
+	 * @param e           the element - needed for subclasses
 	 * @param messageName
 	 * @param family
 	 * @return
@@ -111,7 +112,6 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
 	 */
 	@Override
@@ -122,7 +122,6 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param message
 	 * @return
 	 */
@@ -180,31 +179,32 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public int getReturnCode()
 	{
 		if (!isResponse())
+		{
 			return -1;
+		}
 		final String rc = getAttribute(AttributeName.RETURNCODE);
 		return StringUtil.parseInt(rc, 0);
 	}
 
 	/**
-	 *
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
 	public void setReturnCode(final int rc)
 	{
 		if (!isResponse())
+		{
 			throw new IllegalArgumentException("Can only set return code on response");
+		}
 		setAttribute(AttributeName.RETURNCODE, rc);
 	}
 
 	/**
-	 * 
 	 * @param headerAttribute
 	 * @param value
 	 */
@@ -215,21 +215,31 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
+	 * @param headerAttribute
+	 * @param value
+	 */
+	public String getHeader(final String headerAttribute)
+	{
+		final KElement header = getHeader();
+		return header == null ? null : header.getNonEmpty(headerAttribute);
+	}
+
+	/**
 	 * @param url
 	 * @return null if we ain't no query, else the subscription which can be further updated
 	 */
 	public JDFSubscription subscribe(final String url)
 	{
 		if (!isQuery())
+		{
 			return null;
+		}
 		final JDFSubscription sub = (JDFSubscription) getCreateElement(ElementName.SUBSCRIPTION);
 		sub.setURL(url);
 		return sub;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isQuery()
@@ -238,7 +248,6 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static boolean isMessage(final KElement element)
@@ -252,7 +261,6 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isCommand()
@@ -261,7 +269,6 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isResponse()
@@ -270,7 +277,6 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isAudit()
@@ -279,7 +285,6 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isSignal()
@@ -288,14 +293,14 @@ public class MessageHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param hQuery the query or command to set the refID to
-	 *
 	 */
 	public void setQuery(final MessageHelper hQuery)
 	{
 		if (!isResponse() && !isSignal() || hQuery == null || (hQuery.isResponse() || hQuery.isSignal()))
+		{
 			return;
+		}
 		final String id = ensureHeader(hQuery.theElement).appendAnchor(null);
 		ensureHeader(theElement).setAttribute(AttributeName.REFID, id);
 	}
@@ -308,13 +313,21 @@ public class MessageHelper extends BaseXJDFHelper
 	public EnumFamily getFamily()
 	{
 		if (isCommand())
+		{
 			return EnumFamily.Command;
+		}
 		else if (isQuery())
+		{
 			return EnumFamily.Query;
+		}
 		else if (isSignal())
+		{
 			return EnumFamily.Signal;
+		}
 		else if (isResponse())
+		{
 			return EnumFamily.Response;
+		}
 		return null;
 
 	}
@@ -322,21 +335,30 @@ public class MessageHelper extends BaseXJDFHelper
 	public EFamily getEFamily()
 	{
 		if (isCommand())
+		{
 			return EFamily.Command;
+		}
 		else if (isQuery())
+		{
 			return EFamily.Query;
+		}
 		else if (isSignal())
+		{
 			return EFamily.Signal;
+		}
 		else if (isResponse())
+		{
 			return EFamily.Response;
+		}
 		else if (isAudit())
+		{
 			return EFamily.Audit;
+		}
 		return null;
 
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public String getType()
