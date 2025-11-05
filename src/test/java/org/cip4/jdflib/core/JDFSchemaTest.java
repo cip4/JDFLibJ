@@ -55,10 +55,15 @@ import java.util.List;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoIdentificationField.EnumEncoding;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.extensions.XJDFSchemaPrune;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
@@ -72,13 +77,13 @@ import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFSchemaTest extends JDFTestCaseBase
 {
@@ -86,7 +91,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testSchema()
@@ -97,7 +101,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testDieMaking()
@@ -114,7 +117,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testLot()
@@ -174,7 +176,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testPlateType()
@@ -186,7 +187,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	// @Test
 	// void testSetIndex()
@@ -198,7 +198,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testInlineClass()
@@ -218,7 +217,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testCasingIn()
@@ -235,7 +233,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testPreviewResource()
@@ -253,7 +250,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testSchemafolder()
@@ -271,7 +267,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testSchemafolderJMF()
@@ -289,7 +284,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testIdentificationField()
@@ -311,7 +305,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
 	 *
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testIntegerrange() throws DataFormatException
@@ -329,7 +322,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testMiscConsumableIdentificationField()
@@ -350,7 +342,6 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 *
 	 */
 	@Test
 	void testTemplate()
@@ -402,6 +393,59 @@ class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 *
+	 */
+	public static KElement getMergedSchema()
+	{
+		File dir = new File(sm_dirTestSchema);
+		File jdfFile = new File(sm_dirTestSchema + "JDF.xsd");
+		KElement jdf = KElement.parseFile(jdfFile);
+		for (File s : FileUtil.listFilesWithExtension(dir, "xsd"))
+		{
+			if (!s.equals(jdfFile))
+			{
+				KElement nex = KElement.parseFile(s);
+				for (KElement e : nex.getChildElementArray())
+				{
+					jdf.copyElement(e, null);
+				}
+			}
+		}
+		jdf.addNameSpace("jdftyp", JDFElement.getSchemaURL());
+		return jdf;
+	}
+
+	@Test
+	void testPrunedJMF()
+	{
+		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		jmf.removeAttribute(JDFConstants.XSITYPE);
+		String outSchema = sm_dirTestDataTemp + "status.jmf.xsd";
+		JDFParser p = new JDFParser();
+		p.setJDFSchemaLocation(UrlUtil.fileToUrl(new File(outSchema), true));
+		JDFDoc jmf2 = p.parseString(jmf.toXML());
+		assertNotNull(jmf2);
+	}
+
+	@Test
+	void testPruneJMF()
+	{
+
+		final XMLDoc schema = getMergedSchema().getOwnerDocument_KElement();
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
+		prune.setPrefix("jdf");
+		prune.setCheckAttributes(false);
+		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		jmf.removeAttribute(JDFConstants.XSITYPE);
+		KElement pruned = prune.prune(jmf);
+		String outSchema = sm_dirTestDataTemp + "status.jmf.xsd";
+		pruned.write2File(outSchema);
+		JDFParser p = new JDFParser();
+		p.setJDFSchemaLocation(UrlUtil.fileToUrl(new File(outSchema), true));
+		JDFDoc jmf2 = p.parseString(jmf.toXML());
+		assertNotNull(jmf2);
+	}
+
+	/**
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -428,17 +472,29 @@ class JDFSchemaTest extends JDFTestCaseBase
 			if (!"further".equalsIgnoreCase(f.getParentFile().getName()))
 			{
 				if ("actionpool.jdf".equalsIgnoreCase(f.getName()))
+				{
 					continue;
+				}
 				if ("featurepool.jdf".equalsIgnoreCase(f.getName()))
+				{
 					continue;
+				}
 				if ("updateJDFCommand.jmf".equalsIgnoreCase(f.getName()))
+				{
 					continue;
+				}
 				if ("automatedImpositionMarkObject.jdf".equalsIgnoreCase(f.getName()))
+				{
 					continue;
+				}
 				if (f.getName().toLowerCase().indexOf("invalid") >= 0)
+				{
 					continue;
+				}
 				if (StringUtil.matchesIgnoreCase(f.getName(), "custom*.jmf"))
+				{
 					continue;
+				}
 				final JDFDoc doc = p.parseFile(f);
 				assertNotNull(doc, f.getName());
 				assertEquals("Valid", doc.getValidationResult().getRoot().getAttribute("ValidationResult"), f.getAbsolutePath());

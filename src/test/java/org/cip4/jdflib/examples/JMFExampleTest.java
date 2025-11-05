@@ -36,17 +36,23 @@
  */
 package org.cip4.jdflib.examples;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
-import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumScope;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -67,6 +73,7 @@ import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -87,12 +94,12 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * new activity element in JobPhase
 	 */
 	@Test
 	void testActivity()
 	{
+		KElement.setWantXsiType(false);
 		final JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
 		final JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.MIS);
 		final JDFSignal signal = jmf.getSignal(0);
@@ -102,7 +109,8 @@ class JMFExampleTest extends ExampleTest
 			activity.setAttribute("PersonalID", "P1");
 			activity.setAttribute("ActivityName", "Polishing");
 			activity.setAttribute("ActivityID", "ID1234");
-			activity.setXMLComment("The following activity is NOT job related (direct child of deviceInfo) \ndo we need both cost center and MISDetails here?", true);
+			activity.setXMLComment("The following activity is NOT job related (direct child of deviceInfo) \ndo we need both cost center and MISDetails here?",
+					true);
 			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P1");
 			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P2");
 			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P3");
@@ -121,14 +129,23 @@ class JMFExampleTest extends ExampleTest
 			activity.setAttribute("ActivityName", "NosePoking");
 			activity.setAttribute("ActivityID", "ID1236");
 			activity.setAttribute("PersonalID", "P3");
-			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?", true);
+			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?",
+					true);
 		}
 
 		writeTest(jmf, "Activity.jmf", true, null);
+		jmf.removeAttribute(JDFConstants.XSITYPE);
+		jmf.getOwnerDocument_JDFElement().setSchemaLocation(JDFElement.getSchemaURL(), null);
+		JDFParser p = new JDFParser();
+		String schemaLoc = sm_dirTestData + "schema/activity0.xsd";
+		KElement xsd = KElement.parseFile(schemaLoc);
+		assertNotNull(xsd);
+		p.setJDFSchemaLocation(UrlUtil.urlToFile(schemaLoc));
+		JDFDoc jmf2 = p.parseString(jmf.toXML());
+		assertNotNull(jmf2);
 	}
 
 	/**
-	 *
 	 * new activity element in JobPhase
 	 */
 	@Test
@@ -141,7 +158,6 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * test status subscription
 	 */
 	@Test
@@ -153,7 +169,6 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * test status subscription
 	 */
 	@Test
@@ -167,7 +182,6 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * test status subscription
 	 */
 	@Test
@@ -188,7 +202,6 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * test status subscription
 	 */
 	@Test
@@ -209,7 +222,6 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * test status subscription
 	 */
 	@Test
@@ -220,7 +232,7 @@ class JMFExampleTest extends ExampleTest
 		final JDFSignal s = jmf.getSignal(0);
 		s.getStatusQuParams().setJobID("job1");
 		final JDFDeviceInfo di = s.getDeviceInfo(0);
-		di.setDeviceStatus(EnumDeviceStatus.Setup);
+		di.setDeviceStatus(EDeviceStatus.Setup);
 		final JDFJobPhase jp = di.getCreateJobPhase(0);
 		jp.setJobID("job1");
 		jp.setStatus(EnumNodeStatus.Setup);
@@ -229,7 +241,6 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * new activity element in JobPhase
 	 */
 	@Test
@@ -248,7 +259,6 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * new activity element in JobPhase
 	 */
 	@Test
@@ -264,7 +274,6 @@ class JMFExampleTest extends ExampleTest
 	}
 
 	/**
-	 *
 	 * new lot
 	 */
 	@Test

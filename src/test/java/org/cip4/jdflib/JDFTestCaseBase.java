@@ -373,6 +373,7 @@ public abstract class JDFTestCaseBase
 	{
 		KElement.setLongID(true);
 		JDFElement.setDefaultJDFVersion(defaultVersion);
+		KElement.setWantXsiType(true);
 		JDFAudit.setStaticAgentName(agentName);
 		JDFAudit.setStaticAgentVersion(agentVersion);
 		JDFAudit.setStaticAuthor(author);

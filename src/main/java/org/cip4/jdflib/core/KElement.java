@@ -145,13 +145,25 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	private static AtomicInteger m_lStoreID = new AtomicInteger();
 	private static boolean bIDDate = true;
+	private static boolean wantXsiType = true;
+
+	public static boolean isWantXsiType()
+	{
+		return wantXsiType;
+	}
+
+	public static void setWantXsiType(boolean wantXsiType)
+	{
+		KElement.wantXsiType = wantXsiType;
+	}
+
 	private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyMMdd_kkmmssSSS");
 
 	/**
 	 * Constructor for KElement
 	 *
 	 * @param myOwnerDocument the owner document of the new element
-	 * @param qualifiedName the qualified name of the element
+	 * @param qualifiedName   the qualified name of the element
 	 */
 	public KElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
@@ -162,8 +174,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Constructor for KElement
 	 *
 	 * @param myOwnerDocument the owner document of the new element
-	 * @param myNamespaceURI the namespace of the new element
-	 * @param qualifiedName the qualified name of the element
+	 * @param myNamespaceURI  the namespace of the new element
+	 * @param qualifiedName   the qualified name of the element
 	 */
 	public KElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -174,9 +186,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Constructor for KElement
 	 *
 	 * @param myOwnerDocument the owner document of the new element
-	 * @param myNamespaceURI the namespace of the new element
-	 * @param qualifiedName the qualified name of the element
-	 * @param myLocalName the localname of the element
+	 * @param myNamespaceURI  the namespace of the new element
+	 * @param qualifiedName   the qualified name of the element
+	 * @param myLocalName     the localname of the element
 	 */
 	public KElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -195,8 +207,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * Set this element as dirty
-	 *
-	 *
 	 */
 	public void setDirty()
 	{
@@ -227,9 +237,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * searches for the first attribute occurrence in this element or any ancestors
 	 *
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param def the default if it does not exist
+	 * @param def          the default if it does not exist
 	 * @return String value of attribute found, value of def if not available
 	 * @default getInheritedAttribute(attrib, null, JDFCoreConstants.EMPTYSTRING)
 	 */
@@ -241,9 +251,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * searches for the first attribute occurrence in this element or any ancestors
 	 *
-	 * @param attrib the attribute name
+	 * @param attrib       the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param def the default if it does not exist
+	 * @param def          the default if it does not exist
 	 * @return String value of attribute found, value of def if not available
 	 * @default getInheritedAttribute_KElement(attrib, null, JDFCoreConstants.EMPTYSTRING)
 	 */
@@ -265,9 +275,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * mother of all attribute getters. Get a attribute out of this element
 	 *
-	 * @param attrib the name of the attribute you want to have
+	 * @param attrib       the name of the attribute you want to have
 	 * @param nameSpaceURI namespace of key
-	 * @param def the value that is returned if attrib does not exist in this or this is null
+	 * @param def          the value that is returned if attrib does not exist in this or this is null
 	 * @return String the attribute value as a string, or def if that attribute does not have a specified or default value
 	 * @default GetAttribute(attrib, null, JDFCoreConstants.EMPTYSTRING)
 	 */
@@ -279,9 +289,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Because getAttribute is overwritten in various classes this method can be called directly to get only KElement Attribute.
 	 *
-	 * @param attrib the name of the attribute you want to have
+	 * @param attrib       the name of the attribute you want to have
 	 * @param nameSpaceURI namespace of key
-	 * @param def the value that is returned if attrib does not exist in this - may be null
+	 * @param def          the value that is returned if attrib does not exist in this - may be null
 	 * @return String the attribute value as a string, or def if attribute was not found<br>
 	 *         <br>
 	 * @default getAttribute_KElement(attrib, null,null)
@@ -336,7 +346,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			for (final String keys : m.keySet())
 			{
 				if (key.equalsIgnoreCase(keys))
+				{
 					removeAttribute(keys);
+				}
 			}
 		}
 	}
@@ -349,14 +361,15 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			for (final String keys : m.keySet())
 			{
 				if (key.equalsIgnoreCase(keys))
+				{
 					removeAttribute_KElement(keys, null);
+				}
 			}
 		}
 	}
 
 	/**
 	 * similar to getAttribute but returns null for all empty strings
-	 *
 	 * Gets an attribute value out of an element
 	 *
 	 * @param strLocalName the name of the attribute you want to have
@@ -370,7 +383,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * similar to getAttribute but returns null for all empty strings
-	 *
 	 * Gets an attribute value out of an element
 	 *
 	 * @param strLocalName the name of the attribute you want to have
@@ -384,7 +396,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * similar to getAttribute but returns null for all empty strings
-	 *
 	 * Gets an attribute value out of an element
 	 *
 	 * @param strLocalName the name of the attribute you want to have
@@ -398,7 +409,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * similar to getAttribute but returns null for all empty strings
-	 *
 	 * Gets an attribute value out of an element
 	 *
 	 * @param strLocalName the name of the attribute you want to have
@@ -412,7 +422,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * similar to hasAttribute but returns false for all empty strings
-	 *
 	 * Gets an attribute value out of an element
 	 *
 	 * @param strLocalName the name of the attribute you want to have
@@ -426,7 +435,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * similar to hasAttribute but returns false for all empty strings
-	 *
 	 * Gets an attribute value out of an element
 	 *
 	 * @param strLocalName the name of the attribute you want to have
@@ -480,8 +488,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an NMTOKENS attribute to all elements from parameter value will be concatenate with blanks to the resulting NMTOKEN
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the values for the attribute key
+	 * @param key          the name of the attribute to set
+	 * @param value        the values for the attribute key
 	 * @param nameSpaceURI the namespace of the key
 	 * @deprecated use setAttribute instead
 	 * @default setvStringAttribute(key, vStr, null)
@@ -495,8 +503,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an NMTOKENS attribute to all elements from parameter value will be concatenate with blanks to the resulting NMTOKEN
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the values for the attribute key
+	 * @param key          the name of the attribute to set
+	 * @param value        the values for the attribute key
 	 * @param nameSpaceURI the namespace of the key
 	 * @default setvStringAttribute(key, vStr, null)
 	 */
@@ -509,8 +517,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an NMTOKENS attribute to all elements from parameter value will be concatenate with blanks to the resulting NMTOKEN
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the values for the attribute key
+	 * @param key          the name of the attribute to set
+	 * @param value        the values for the attribute key
 	 * @param nameSpaceURI the namespace of the key
 	 * @default setvStringAttribute(key, vStr, null)
 	 */
@@ -521,7 +529,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @param nameSpaceURI
@@ -529,12 +536,13 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public void setAttribute(final String key, JDFDate value, final String nameSpaceURI)
 	{
 		if (value == null)
+		{
 			value = new JDFDate();
+		}
 		setAttribute(key, value.getDateTimeISO(), nameSpaceURI);
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @param nameSpaceURI
@@ -548,9 +556,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get The DOM Attribute node of a given attribute if attrib has no namespace prefix and nameSpaceURI is a wildcard the attribute with the element prefix will be returned if no
 	 * empty attribute exists e.g. getDOMAttr("a") will return the node x:a in <x:e x:a="b"/>
 	 *
-	 * @param attrib the attribute Name
+	 * @param attrib       the attribute Name
 	 * @param nameSpaceURI then namespaceURI, defaults to the local namespace
-	 * @param bInherit search in parent elements as well
+	 * @param bInherit     search in parent elements as well
 	 * @return Node the DOMAttr node of the matching attribute
 	 */
 	public Attr getDOMAttr(final String attrib, String nameSpaceURI, final boolean bInherit)
@@ -617,8 +625,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * and EntityReference nodes, build the appropriate subtree, and use setAttributeNode to assign it as the value of an attribute. To set an attribute with a qualified name and
 	 * namespace URI, use the setAttributeNS method.
 	 *
-	 * @param key the qualified name of the attribute to create or alter.
-	 * @param value the value to set in string form. If null, the attribute is removed
+	 * @param key          the qualified name of the attribute to create or alter.
+	 * @param value        the value to set in string form. If null, the attribute is removed
 	 * @param nameSpaceURI the namespace the element is in
 	 * @throws JDFException if no settings of its attributes are possible
 	 */
@@ -838,8 +846,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 							{
-								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
-										+ "; attempting to set URI: " + nameSpaceURI);
+								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: "
+										+ nsURI2 + "; attempting to set URI: " + nameSpaceURI);
 							}
 							try
 							{
@@ -862,7 +870,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * no namespace variant
 	 *
-	 * @param key name of the attribute to set
+	 * @param key   name of the attribute to set
 	 * @param value value of the attribute
 	 */
 	@Override
@@ -874,7 +882,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * no namespace variant
 	 *
-	 * @param key name of the attribute to set
+	 * @param key   name of the attribute to set
 	 * @param value value of the attribute
 	 */
 	public void setAttribute(final String key, final Enum<?> value, final String ns)
@@ -885,7 +893,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * no namespace variant
 	 *
-	 * @param key name of the attribute to set
+	 * @param key   name of the attribute to set
 	 * @param value value of the attribute
 	 */
 	public <T extends Enum<T>> T getAttribute(final String key, final Class<T> c)
@@ -896,7 +904,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * fastest setAttribute - use only if you know exactly what you are doing
 	 *
-	 * @param key name of the attribute to set
+	 * @param key   name of the attribute to set
 	 * @param value value of the attribute
 	 */
 	public void setAttributeRaw(final String key, final String value)
@@ -907,8 +915,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * fastest setAttribute with namespace- use only if you know exactly what you are doing
 	 *
-	 * @param ns the namespace uri
-	 * @param key name of the attribute to set
+	 * @param ns    the namespace uri
+	 * @param key   name of the attribute to set
 	 * @param value value of the attribute
 	 */
 	public void setAttributeNSRaw(final String ns, final String key, final String value)
@@ -919,8 +927,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the value for the attribute
+	 * @param key          the name of the attribute to set
+	 * @param value        the value for the attribute
 	 * @param nameSpaceURI the namespace the element is in
 	 * @deprecated use setAttribute instead
 	 * @default SetAttribute(key, value, null)
@@ -934,8 +942,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the value for the attribute
+	 * @param key          the name of the attribute to set
+	 * @param value        the value for the attribute
 	 * @param nameSpaceURI the namespace the element is in
 	 * @default SetAttribute(key, value, null)
 	 */
@@ -947,8 +955,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the value for the attribute
+	 * @param key          the name of the attribute to set
+	 * @param value        the value for the attribute
 	 * @param nameSpaceURI the namespace the element is in
 	 * @default SetAttribute(key, value, null)
 	 */
@@ -960,8 +968,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the long value for the attribute
+	 * @param key          the name of the attribute to set
+	 * @param value        the long value for the attribute
 	 * @param nameSpaceURI the namespace the element is in
 	 * @default SetAttribute(key, value, null)
 	 */
@@ -973,8 +981,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the value for the attribute
+	 * @param key          the name of the attribute to set
+	 * @param value        the value for the attribute
 	 * @param nameSpaceURI the namespace the element is in
 	 * @deprecated use setAttribute instead
 	 * @default setAttribute(key, value, null)
@@ -988,8 +996,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the value for the attribute
+	 * @param key          the name of the attribute to set
+	 * @param value        the value for the attribute
 	 * @param nameSpaceURI the namespace the element is in
 	 * @default setAttribute(key, value, null)
 	 */
@@ -1001,11 +1009,10 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param value the value for the attribute
+	 * @param key          the name of the attribute to set
+	 * @param value        the value for the attribute
 	 * @param nameSpaceURI the namespace the element is in
 	 * @param precision
-	 *
 	 * @default setAttribute(key, value, null)
 	 */
 	public void setAttribute(final String key, final double value, final String nameSpaceURI, final int precision)
@@ -1016,8 +1023,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * SetAttribute - Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param b value of the boolean attribute to be set (true or false)
+	 * @param key          the name of the attribute to set
+	 * @param b            value of the boolean attribute to be set (true or false)
 	 * @param nameSpaceURI the nameSpace the attribute is in
 	 * @deprecated use setAttribute instead
 	 * @default setAttribute(key, b, null)
@@ -1031,8 +1038,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * SetAttribute - Sets an element attribute
 	 *
-	 * @param key the name of the attribute to set
-	 * @param b value of the boolean attribute to be set (true or false)
+	 * @param key          the name of the attribute to set
+	 * @param b            value of the boolean attribute to be set (true or false)
 	 * @param nameSpaceURI the nameSpace the attribute is in
 	 * @default setAttribute(key, b, null)
 	 */
@@ -1044,8 +1051,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * increments or decrements a numeric attribute by inc
 	 *
-	 * @param key the name of the attribute to set
-	 * @param inc the value to increment or decrement by
+	 * @param key          the name of the attribute to set
+	 * @param inc          the value to increment or decrement by
 	 * @param nameSpaceURI the nameSpace the attribute is in
 	 * @return double the attribute value after modification
 	 */
@@ -1060,8 +1067,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * increments or decrements a numeric attribute by inc
 	 *
-	 * @param key the name of the attribute to set
-	 * @param inc the value to increment or decrement by
+	 * @param key          the name of the attribute to set
+	 * @param inc          the value to increment or decrement by
 	 * @param nameSpaceURI the nameSpace the attribute is in
 	 * @return double the attribute value after modification
 	 */
@@ -1076,7 +1083,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Remove an attribute from the current element
 	 *
-	 * @param attrib attribute name to remove
+	 * @param attrib       attribute name to remove
 	 * @param nameSpaceURI the nameSpace of the attribut
 	 * @default removeAttribute(attrib, null)
 	 */
@@ -1088,7 +1095,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Remove a attribute from the current element
 	 *
-	 * @param attrib attribute name to remove
+	 * @param attrib       attribute name to remove
 	 * @param nameSpaceURI the nameSpace of the attribut
 	 * @default removeAttribute(attrib, null)
 	 */
@@ -1115,7 +1122,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Checks if the actual element has a specific attribute<br>
 	 * this version checks only the explicit element and NOT any inherited resource partiotions
-	 *
 	 * Attention! this behavior differs from that of @see getAttribute()
 	 *
 	 * @param attrib the name of the attribute to look for
@@ -1131,9 +1137,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Checks if the actual element has a specific attribute <br>
 	 * this version checks within the exact xml element
 	 *
-	 * @param attrib the name of the attribute to look for
+	 * @param attrib       the name of the attribute to look for
 	 * @param nameSpaceURI the nameSpace to look in
-	 * @param bInherit if true also check recursively in parent elements
+	 * @param bInherit     if true also check recursively in parent elements
 	 * @return boolean true if the attribute is present
 	 * @default hasAttribute(attrib, null, false)
 	 */
@@ -1146,9 +1152,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Checks if the actual element has a specific attribute <br>
 	 * this version checks within the exact xml element
 	 *
-	 * @param attrib the name of the attribute to look for
+	 * @param attrib       the name of the attribute to look for
 	 * @param nameSpaceURI the nameSpace to look in
-	 * @param bInherit if true also check recursively in parent elements
+	 * @param bInherit     if true also check recursively in parent elements
 	 * @return boolean true if the attribute is present
 	 * @default hasAttribute_KElement(attrib, null, false)
 	 */
@@ -1160,7 +1166,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * convenience
 	 *
-	 * @param key attribute key
+	 * @param key   attribute key
 	 * @param value string to be appended
 	 */
 	public String appendAttribute(final String key, final String value, final boolean unique)
@@ -1171,12 +1177,12 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Append the contents of value to the existing attribute key. Create Key, if it does not exist
 	 *
-	 * @param key attribute key
-	 * @param value string to be appended
+	 * @param key          attribute key
+	 * @param value        string to be appended
 	 * @param nameSpaceURI namespace of key
-	 * @param sep separator between the original attribute value and value, defaults to " " if null
-	 * @param bUnique if true, the attribute will only be appended if it is not yet within the current attribute value
-	 *        appendAttribute("key","next",JDFCoreConstants.EMPTYSTRING,JDFCoreConstants .COMMA) applied to <xml key="first"/> results in <xml key="first,next"/>
+	 * @param sep          separator between the original attribute value and value, defaults to " " if null
+	 * @param bUnique      if true, the attribute will only be appended if it is not yet within the current attribute value
+	 *                     appendAttribute("key","next",JDFCoreConstants.EMPTYSTRING,JDFCoreConstants .COMMA) applied to <xml key="first"/> results in <xml key="first,next"/>
 	 * @default appendAttribute(key, value, null, null, false)
 	 * @return the updated value; null if none exists
 	 */
@@ -1218,12 +1224,12 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Append the contents of value to the existing attribute key. Create Key, if it does not exist
 	 *
-	 * @param key attribute key
-	 * @param value string to be appended
+	 * @param key          attribute key
+	 * @param value        string to be appended
 	 * @param nameSpaceURI namespace of key
-	 * @param sep separator between the original attribute value and value, defaults to " " if null
-	 * @param bUnique if true, the attribute will only be appended if it is not yet within the current attribute value
-	 *        appendAttribute("key","next",JDFCoreConstants.EMPTYSTRING,JDFCoreConstants .COMMA) applied to <xml key="first"/> results in <xml key="first,next"/>
+	 * @param sep          separator between the original attribute value and value, defaults to " " if null
+	 * @param bUnique      if true, the attribute will only be appended if it is not yet within the current attribute value
+	 *                     appendAttribute("key","next",JDFCoreConstants.EMPTYSTRING,JDFCoreConstants .COMMA) applied to <xml key="first"/> results in <xml key="first,next"/>
 	 * @default appendAttribute(key, value, null, null, false)
 	 * @return the updated value; null if none exists
 	 */
@@ -1234,7 +1240,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			final StringArray old = StringArray.getVString(getAttribute(key, nameSpaceURI, sep), null);
 			final Collection<String> addAll = ContainerUtil.addAll(old, value);
 			if (bUnique)
+			{
 				ContainerUtil.unify(addAll);
+			}
 			setAttribute(key, (List<String>) addAll, nameSpaceURI);
 		}
 	}
@@ -1261,14 +1269,16 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public static boolean isEqual(final KElement e1, final KElement e2)
 	{
 		if (e1 == null)
+		{
 			return e2 == null;
+		}
 		return e1.isEqual(e2);
 	}
 
 	/**
 	 * Tests whether the specified nodename and namespace fits the nodename and namespace of 'this'
 	 *
-	 * @param nodeName the name of the node to test. May be either local or qualified
+	 * @param nodeName     the name of the node to test. May be either local or qualified
 	 * @param nameSpaceURI the namespace of the node to test.
 	 * @return boolean true if fits
 	 */
@@ -1321,7 +1331,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param prefix
 	 * @param bcache
 	 * @return
@@ -1382,7 +1391,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 			strNamespaceURI = getAttribute(prefix, JDFCoreConstants.XMLNSURI, null);
 			if (strNamespaceURI == null)
+			{
 				strNamespaceURI = StringUtil.getNonEmpty(super.getAttribute("xmlns:" + prefix));
+			}
 
 			// found a decent URI
 			if (strNamespaceURI != null)
@@ -1422,7 +1433,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		// we reached the document root and didn't find anything --> punt and return an empty string
 		final DocumentXMLImpl documentXMLImpl = (DocumentXMLImpl) getOwnerDocument();
 		if (prefix == null)
+		{
 			documentXMLImpl.setNamespaceURIFromPrefix(JDFConstants.COLON, "");
+		}
 		return null;
 	}
 
@@ -1557,7 +1570,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public void setAttributesRaw(final KElement kElem)
 	{
 		if (kElem == null)
+		{
 			return;
+		}
 		final NamedNodeMap nm = kElem.getAttributes();
 		if (nm != null)
 		{
@@ -1574,7 +1589,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is returned. Otherwhise
 	 * the size of the map (number of attributes from kElem) is returned.
 	 *
-	 * @param kElem the attribute source
+	 * @param kElem      the attribute source
 	 * @param ignoreList
 	 * @return int number of elements from kElem
 	 */
@@ -1607,12 +1622,16 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 						{
 							bCatch = true;
 							if (j == 1)
+							{
 								throw x;
+							}
 						}
 					}
 				}
 				if (!bCatch)
+				{
 					break; // one loop is enough in case all sets went through
+				}
 			}
 		}
 
@@ -1664,9 +1683,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 * @param elementName the elementname with namespace prefix "xyz:abc"
+	 * @param elementName  the elementname with namespace prefix "xyz:abc"
 	 * @param nameSpaceURI the namespace of the element "null" is valid if the namespace was specified already above. The method will lookup the namespace for you. Performance wise
-	 *        its better to add it nevertheless.
+	 *                     its better to add it nevertheless.
 	 * @return KElement the appended element or null
 	 * @throws JDFException if you tried to append an element into an unspecified namespace
 	 */
@@ -1680,7 +1699,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * appends an element without any namespace validity checks or initialization Faster but not sa safe...
 	 *
-	 * @param elementName element name
+	 * @param elementName  element name
 	 * @param nameSpaceURI element namespace
 	 * @return the newly created element
 	 * @since 090216
@@ -1754,7 +1773,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * append all children in a vector of elements in the order of the vector
 	 *
-	 * @param v the vector of elements to append, if null nothing happens
+	 * @param v           the vector of elements to append, if null nothing happens
 	 * @param beforeChild the child before which to append the elements of the vector
 	 */
 	public void copyElements(final VElement v, final KElement beforeChild)
@@ -1821,17 +1840,18 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get all children from the actual element matching the given conditions<br>
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
 	 *
-	 * @param nodeName element name you are searching for
+	 * @param nodeName     element name you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param mAttrib attributes you are lokking for
-	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
-	 * @param maxSize maximum size of the element vector
+	 * @param mAttrib      attributes you are lokking for
+	 * @param bAnd         if true, a child is only added if it has all attributes specified in Attributes mAttrib
+	 * @param maxSize      maximum size of the element vector
 	 * @return VElement vector with all found elements
 	 * @deprecated 060302 - use 6 parameter version
 	 * @default getChildElementVector(null, null, null, true, 0, false)
 	 */
 	@Deprecated
-	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
+	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd,
+			final int maxSize)
 	{
 		return getChildElementVector(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize, false);
 	}
@@ -1840,16 +1860,17 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get all children from the actual element matching the given conditions<br>
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
 	 *
-	 * @param nodeName element name you are searching for
-	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param mAttrib attributes you are lokking for
-	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
-	 * @param maxSize maximum size of the element vector (0=any)
+	 * @param nodeName       element name you are searching for
+	 * @param nameSpaceURI   nameSpace you are searching for
+	 * @param mAttrib        attributes you are lokking for
+	 * @param bAnd           if true, a child is only added if it has all attributes specified in Attributes mAttrib
+	 * @param maxSize        maximum size of the element vector (0=any)
 	 * @param bResolveTarget if true, IDRef elements are followed, dummy at this level but needed in JDFElement
 	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null, null, true, 0, true)
 	 */
-	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
+	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd,
+			final int maxSize, final boolean bResolveTarget)
 	{
 		return getChildElementVector_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize);
 	}
@@ -1858,7 +1879,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get all children from the actual element matching the given conditions<br>
 	 * convenience for getChildElementVector(nodeName, nameSpaceURI, null, true, 0, true)
 	 *
-	 * @param nodeName element name you are searching for
+	 * @param nodeName     element name you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
 	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null)
@@ -1872,7 +1893,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get all children from the actual element matching the given conditions<br>
 	 * convenience for getChildElementVector(nodeName, nameSpaceURI, null, true, 0, true)
 	 *
-	 * @param nodeName element name you are searching for
+	 * @param nodeName     element name you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
 	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null)
@@ -1886,7 +1907,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get all children from the actual element matching the given conditions<br>
 	 * convenience for getChildElementVector(nodeName, nameSpaceURI, null, true, 0, true)
 	 *
-	 * @param nodeName element name you are searching for
+	 * @param nodeName     element name you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
 	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null)
@@ -1900,16 +1921,17 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get all children from the actual element matching the given conditions<br>
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
 	 *
-	 * @param nodeName element name you are searching for
+	 * @param nodeName     element name you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param mAttrib attributes you are lokking for
-	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
-	 * @param maxSize maximum size of the element vector
+	 * @param mAttrib      attributes you are lokking for
+	 * @param bAnd         if true, a child is only added if it has all attributes specified in Attributes mAttrib
+	 * @param maxSize      maximum size of the element vector
 	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public synchronized VElement getChildElementVector_KElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
+	public synchronized VElement getChildElementVector_KElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib,
+			final boolean bAnd, final int maxSize)
 	{
 		final VElement v = new VElement();
 		v.addAll(getChildArray_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize));
@@ -1920,11 +1942,11 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get all children from the actual element matching the given conditions<br>
 	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
 	 *
-	 * @param nodeName element name you are searching for
+	 * @param nodeName     element name you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param mAttrib attributes you are lokking for
-	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
-	 * @param maxSize maximum size of the element vector
+	 * @param mAttrib      attributes you are lokking for
+	 * @param bAnd         if true, a child is only added if it has all attributes specified in Attributes mAttrib
+	 * @param maxSize      maximum size of the element vector
 	 * @return VElement vector with all found elements, an empty List if no elements match
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
@@ -1971,7 +1993,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param clazz the class of the children to zapp
 	 */
 	public void removeChildrenByClass(final Class<? extends Node> clazz)
@@ -1991,7 +2012,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param clazz
 	 * @param bRecurse
 	 * @param nMax
@@ -2013,7 +2033,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param clazz
 	 * @param <A>
 	 * @param bRecurse if true recurse through all children, grandchildren etc.
-	 * @param nMax maximum number to search - if 0 or negative, search all
+	 * @param nMax     maximum number to search - if 0 or negative, search all
 	 * @return Vector<a> vector with all found elements, never null
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
@@ -2030,7 +2050,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param clazz
 	 * @param <A>
 	 * @param bRecurse if true recurse through all children, grandchildren etc.
-	 * @param nMax maximum number to search - if 0 or negative, search all
+	 * @param nMax     maximum number to search - if 0 or negative, search all
 	 * @return Vector<a> vector with all found elements, never null
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
@@ -2040,7 +2060,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 		final List<A> v = new ArrayList<>();
 		if (bRecurse && clazz.isInstance(this))
+		{
 			v.add((A) this);
+		}
 		getChildArrayByClass(clazz, bRecurse, nMax, v);
 		return v;
 	}
@@ -2052,7 +2074,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param clazz
 	 * @param <A>
 	 * @param bRecurse if true recurse through all children, grandchildren etc.
-	 * @param nMax maximum number to search - if 0 or negative, search all
+	 * @param nMax     maximum number to search - if 0 or negative, search all
 	 * @return Vector<a> vector with all found elements, never null
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
@@ -2068,13 +2090,17 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			{
 				v.add((A) node);
 				if (++n == nMax)
+				{
 					return n;
+				}
 			}
 			if (bRecurse && (node instanceof KElement))
 			{
 				n += ((KElement) node).getChildArrayByClass(clazz, bRecurse, nMax - n, v);
 				if (nMax > 0 && n == nMax)
+				{
 					return n;
+				}
 			}
 			node = node.getNextSibling();
 		}
@@ -2100,7 +2126,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			{
 				final A b = ((KElement) n).getChildWithAttribute(clazz, attName, attVal, recurse);
 				if (b != null)
+				{
 					return b;
+				}
 			}
 			n = n.getNextSibling();
 		}
@@ -2211,7 +2239,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Gets the previous sibling named nodename from the namespace nameSpaceURI of 'this'.
 	 *
-	 * @param nodeName the name of the sibling
+	 * @param nodeName     the name of the sibling
 	 * @param nameSpaceURI the namespace of the sibling
 	 * @return KElement the next sibling element of 'this', null if none is found
 	 */
@@ -2232,7 +2260,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Gets the previous sibling named nodename from the namespace nameSpaceURI of 'this'.
 	 *
-	 * @param nodeName the name of the sibling
+	 * @param nodeName     the name of the sibling
 	 * @param nameSpaceURI the namespace of the sibling
 	 * @return KElement the next sibling element of 'this', null if none is found
 	 */
@@ -2253,7 +2281,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Gets the previous sibling named nodename from the namespace nameSpaceURI of 'this'.
 	 *
-	 * @param nodeName the name of the sibling
+	 * @param nodeName     the name of the sibling
 	 * @param nameSpaceURI the namespace of the sibling
 	 * @return KElement the previous sibling element of 'this', null if none is found
 	 */
@@ -2319,7 +2347,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Check if an attribute is present. If attValue is '*', "" or null it is checked if the element attName is present. Only for simple attributes where an exact .equals match is
 	 * appropriate, for ranges and rangelists use JDFElement.includesMatchingAttributes()
 	 *
-	 * @param attName the name of the attribute
+	 * @param attName  the name of the attribute
 	 * @param attValue the value of the attribute
 	 * @return boolean true if present
 	 * @default includesAttribute(attName, null)
@@ -2354,19 +2382,20 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Gets children of 'this' by tag name, nameSpaceURI and attribute map, if the attribute map is not empty.<br>
 	 * Searches the entire tree including hidden nodes that are children of non-matching nodes
 	 *
-	 * @param elementName elementname you are searching for
+	 * @param elementName  elementname you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param mAttrib map of attributes you are looking for <br>
-	 *        Wildcards in the attribute map are supported
-	 * @param bDirect if true, return value is a vector only of all direct child elements. <br>
-	 *        Otherwise the returned vector contains nodes of arbitrary depth
-	 * @param bAnd if true, a child is only added, if it includes all attributes, specified in mAttrib
-	 * @param maxSize maximum size of the element vector. maxSize is ignored if bDirect is false
+	 * @param mAttrib      map of attributes you are looking for <br>
+	 *                     Wildcards in the attribute map are supported
+	 * @param bDirect      if true, return value is a vector only of all direct child elements. <br>
+	 *                     Otherwise the returned vector contains nodes of arbitrary depth
+	 * @param bAnd         if true, a child is only added, if it includes all attributes, specified in mAttrib
+	 * @param maxSize      maximum size of the element vector. maxSize is ignored if bDirect is false
 	 * @return VElement: vector with all found elements
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, boolean)
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize)
+	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect,
+			final boolean bAnd, final int maxSize)
 	{
 		if (bDirect)
 		{
@@ -2407,19 +2436,20 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Gets children of 'this' by tag name, nameSpaceURI and attribute map, if the attribute map is not empty.<br>
 	 * Searches the entire tree including hidden nodes that are children of non-matching nodes
 	 *
-	 * @param elementName elementname you are searching for
+	 * @param elementName  elementname you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param mAttrib map of attributes you are looking for <br>
-	 *        Wildcards in the attribute map are supported
-	 * @param bDirect if true, return value is a vector only of all direct child elements. <br>
-	 *        Otherwise the returned vector contains nodes of arbitrary depth
-	 * @param bAnd if true, a child is only added, if it includes all attributes, specified in mAttrib
-	 * @param maxSize maximum size of the element vector. maxSize is ignored if bDirect is false
+	 * @param mAttrib      map of attributes you are looking for <br>
+	 *                     Wildcards in the attribute map are supported
+	 * @param bDirect      if true, return value is a vector only of all direct child elements. <br>
+	 *                     Otherwise the returned vector contains nodes of arbitrary depth
+	 * @param bAnd         if true, a child is only added, if it includes all attributes, specified in mAttrib
+	 * @param maxSize      maximum size of the element vector. maxSize is ignored if bDirect is false
 	 * @return VElement: vector with all found elements
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int, boolean)
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName_KElement(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize)
+	public VElement getChildrenByTagName_KElement(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect,
+			final boolean bAnd, final int maxSize)
 	{
 		if (bDirect)
 		{
@@ -2459,7 +2489,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * wrappers of DOM routines that dont bang on null nodes
 	 *
-	 * @param s the local name of the elements to match on
+	 * @param s            the local name of the elements to match on
 	 * @param nameSpaceURI the namespace URI of the elements to match on
 	 * @return VElement a new NodeList object containing all the matched Elements
 	 * @default getElementsByTagName_KElement(s, null)
@@ -2487,11 +2517,11 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Get a vector of all children with a matching attribte
 	 *
-	 * @param nodeName elementname you are searching for
-	 * @param attName attributes you are looking for
+	 * @param nodeName     elementname you are searching for
+	 * @param attName      attributes you are looking for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param attVal value of the attribute you are searching for
-	 * @param bDirect if true : return only direct children if false : search recursively
+	 * @param attVal       value of the attribute you are searching for
+	 * @param bDirect      if true : return only direct children if false : search recursively
 	 * @return VElement - vector with all found elements
 	 * @default GetChildrenWithAttribute(nodeName, attName, null, null, true)
 	 * @deprecated use getChildrenByTagName(nodeName, nameSpaceURI, new JDFAttributeMap(attName, attVal), bDirect, true, 0);
@@ -2530,8 +2560,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get a vector of all IDs that occur multiple times
 	 *
 	 * @param attName name of the attribute to test for
-	 * @param vRet used for recursion; should be null
-	 * @param setID used for recursion; should be null
+	 * @param vRet    used for recursion; should be null
+	 * @param setID   used for recursion; should be null
 	 */
 	private void getMultipleIDs(final String attName, final VString vRet, final Set<String> setID)
 	{
@@ -2554,9 +2584,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Get the actual element, create if not there
 	 *
-	 * @param nodeName name of the node from the element
+	 * @param nodeName     name of the node from the element
 	 * @param nameSpaceURI the name of the namespaceURI
-	 * @param iSkip which one you want
+	 * @param iSkip        which one you want
 	 * @return KElement the requested element
 	 * @default getCreateElement(nodeName, null, 0)
 	 */
@@ -2570,9 +2600,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Gets the iSkip-th child node with matching nodeName and nameSpaceURI, optionally creates it if it doesn't exist. <br>
 	 * If iSkip is more than one larger that the number of elements only one is appended
 	 *
-	 * @param nodeName name of the child node to get
+	 * @param nodeName     name of the child node to get
 	 * @param nameSpaceURI namespace to search for
-	 * @param iSkip number of matching child nodes to skip
+	 * @param iSkip        number of matching child nodes to skip
 	 * @return KElement the matching child element
 	 */
 	public KElement getCreateElement_KElement(final String nodeName, final String nameSpaceURI, final int iSkip)
@@ -2602,9 +2632,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Gets an existing iSkip-th child node with matching nodeName and nameSpaceURI
 	 *
-	 * @param nodeName name of the child node to get
+	 * @param nodeName     name of the child node to get
 	 * @param nameSpaceURI namespace to search for
-	 * @param iSkip number of matching child nodes to skip
+	 * @param iSkip        number of matching child nodes to skip
 	 * @return KElement the matching child element
 	 * @default getElement_KElement(nodeName, null, 0)
 	 */
@@ -2617,8 +2647,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * performance enhanced function to access multiple elements e.g. by ID get a HashMap of key= attribute value, object=element
 	 *
 	 * @param elementName the names of the elements, wildcard if null
-	 * @param elementNS the namespace URI of the elements, any if null
-	 * @param attName the attribute name - MUST not be null
+	 * @param elementNS   the namespace URI of the elements, any if null
+	 * @param attName     the attribute name - MUST not be null
 	 * @return a hashmap of the matching elements
 	 */
 	public HashMap<String, KElement> getElementHashMap(final String elementName, final String elementNS, final String attName)
@@ -2635,9 +2665,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * getElement - Get the actual element
 	 *
-	 * @param nodeName Name of the node
+	 * @param nodeName     Name of the node
 	 * @param nameSpaceURI Name of the namespaceURI to search in
-	 * @param iSkip number of element to get, if negative count backwards (-1 is the last)
+	 * @param iSkip        number of element to get, if negative count backwards (-1 is the last)
 	 * @return KElement the child node
 	 * @default getElement_KElement(nodeName, null, 0)
 	 */
@@ -2673,12 +2703,11 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * getElement - Get the actual element by java class
 	 *
-	 * @param <A> the data type to return
-	 * @param clazz java class of the requested element
-	 * @param iSkip number of element to get, if negative count backwards (-1 is the last)
+	 * @param <A>      the data type to return
+	 * @param clazz    java class of the requested element
+	 * @param iSkip    number of element to get, if negative count backwards (-1 is the last)
 	 * @param bRecurse if true recurse sub elements
 	 * @return KElement the child node
-	 *
 	 */
 	@SuppressWarnings("unchecked")
 	public <A extends KElement> A getElementByClass(final Class<A> clazz, int iSkip, final boolean bRecurse)
@@ -2751,7 +2780,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get the n'th Ancestor node with name parentNode
 	 *
 	 * @param parentNode name of the parent node to search for
-	 * @param depth which one you want to have in order of appearance
+	 * @param depth      which one you want to have in order of appearance
 	 * @return KElement the n'th ancestor node with name nodeName
 	 * @default getDeepParent(parentNode, 0)
 	 */
@@ -2781,7 +2810,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get the ancestor which may have one of the node names defined in parentNode
 	 *
 	 * @param vParentElement vector with node names to search for
-	 * @param depth which one you want to have (in order of appearance)
+	 * @param depth          which one you want to have (in order of appearance)
 	 * @return KElement the first ancestor node with name nodeName
 	 * @deprecated - loop over the single node method
 	 */
@@ -2894,7 +2923,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getTarget(id, JDFCoreConstants.ID)
 	 *
-	 * @param id value of the ID tag to search
+	 * @param id     value of the ID tag to search
 	 * @param attrib name of the ID tag, defaults to "ID"
 	 * @return KElement - the element if existing, otherwise <code>null</code>
 	 */
@@ -2906,7 +2935,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Gets the target of link. Follows an ID-IDREF pair by recursively searching for an attrib with the value id
 	 *
-	 * @param id value of the ID tag to search
+	 * @param id     value of the ID tag to search
 	 * @param attrib name of the ID tag, defaults to "ID"
 	 * @return KElement the target of link - the element node.
 	 */
@@ -2917,10 +2946,14 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			return null;
 		}
 		if (StringUtil.getNonEmpty(attrib) == null)
+		{
 			attrib = JDFCoreConstants.ID;
+		}
 		final KElement docRoot = getDocRoot();
 		if (docRoot.includesAttribute(attrib, id))
+		{
 			return docRoot;
+		}
 		return docRoot.getChildWithAttribute(null, attrib, null, id, 0, false);
 	}
 
@@ -3030,13 +3063,19 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			final Node node = atts.item(i);
 			final Node kNode = katts.item(i);
 			if (!node.getNodeName().equals(kNode.getNodeName()))
+			{
 				return false;
+			}
 			if (!node.getNodeValue().equals(kNode.getNodeValue()))
+			{
 				return false;
+			}
 		}
 
 		if (!ContainerUtil.equals(getText(), kElem.getText()))
+		{
 			return false;
+		}
 
 		final List<KElement> l1 = getChildArray_KElement(null, null, null, true, 0);
 		final List<KElement> l2 = kElem.getChildArray_KElement(null, null, null, true, 0);
@@ -3108,7 +3147,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: numChildElements(null, null)
 	 *
-	 * @param node the nodes with name 'node' to count
+	 * @param node         the nodes with name 'node' to count
 	 * @param nameSpaceURI the nameSpace to look in
 	 * @return int the number of matching child elements
 	 */
@@ -3121,9 +3160,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get the number of child elements of a certain class
 	 * <p>
 	 *
-	 * @param clazz the child class
+	 * @param clazz    the child class
 	 * @param bRecurse if true search the tree
-	 *
 	 * @return int the number of matching child elements
 	 */
 	public int numChildrenByClass(final Class<?> clazz, final boolean bRecurse)
@@ -3151,7 +3189,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: numChildElements_KElement(null, null)
 	 *
-	 * @param node the nodes with name 'node' to count
+	 * @param node         the nodes with name 'node' to count
 	 * @param nameSpaceURI the nameSpace to look in
 	 * @return int the number of matching child elements
 	 */
@@ -3175,9 +3213,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Removes the n'th child node that matches 'nodeName' and 'nameSpaceURI'
 	 *
-	 * @param node name of the child node to remove, if empty; or "*" removes the n'th element
+	 * @param node         name of the child node to remove, if empty; or "*" removes the n'th element
 	 * @param nameSpaceURI namespace to search in
-	 * @param n number of nodes to skip before deleting
+	 * @param n            number of nodes to skip before deleting
 	 * @return KElement the removed element
 	 */
 	public KElement removeChild(final String node, final String nameSpaceURI, final int n)
@@ -3197,19 +3235,22 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getChildByTagName(s, null, 0, null, true, true)
 	 *
-	 * @param s elementname you are searching for
+	 * @param s            elementname you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param index if more then one child match the condition you can specify which one you want to have via the index
-	 * @param mAttrib attributes you are lokking for
-	 * @param bDirect if true return value is directly the elemement. Otherwise the return value is the node of the found element. Only direct child, not grandchild etc.
-	 * @param bAnd if true, a child is only returned if it has all attributes specified in mAttrib
+	 * @param index        if more then one child match the condition you can specify which one you want to have via the index
+	 * @param mAttrib      attributes you are lokking for
+	 * @param bDirect      if true return value is directly the elemement. Otherwise the return value is the node of the found element. Only direct child, not grandchild etc.
+	 * @param bAnd         if true, a child is only returned if it has all attributes specified in mAttrib
 	 * @return KElement the found child (element or node), null if index < 0 or index < number of matching children
 	 */
-	public KElement getChildByTagName(final String s, final String nameSpaceURI, int index, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd)
+	public KElement getChildByTagName(final String s, final String nameSpaceURI, int index, final JDFAttributeMap mAttrib, final boolean bDirect,
+			final boolean bAnd)
 	{
 		final VElement v = getChildrenByTagName(s, nameSpaceURI, mAttrib, bDirect, bAnd, index + 1);
 		if (index < 0)
+		{
 			index += v.size();
+		}
 		if ((index >= 0) && (v.size() > index))
 		{
 			return v.item(index);
@@ -3222,9 +3263,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: removeChildren(nodeName, nameSpaceURI, null)
 	 *
-	 * @param nodeName name of the child node to get, if empty or null remove all
+	 * @param nodeName     name of the child node to get, if empty or null remove all
 	 * @param nameSpaceURI namespace to search in
-	 *
 	 */
 	public void removeChildren(final String nodeName, final String nameSpaceURI)
 	{
@@ -3236,9 +3276,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: removeChildren(null,null,null)
 	 *
-	 * @param nodeName name of the element typ to remove
+	 * @param nodeName     name of the element typ to remove
 	 * @param nameSpaceURI namespace in which the elements are to be removed
-	 * @param mAttrib map of attributes to match
+	 * @param mAttrib      map of attributes to match
 	 */
 	public void removeChildren(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib)
 	{
@@ -3254,18 +3294,20 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Removes the contents of value from the existing attribute key. Deletes the attribute Key, if it has no value.<br>
 	 * <code>removeFromAttribute("key","next","",",", -1)</code> applied to <code><xml key="first,next"/></code> results in <code><xml key="first"/></code>
 	 *
-	 * @param key attribute key
-	 * @param token string to remove
+	 * @param key          attribute key
+	 * @param token        string to remove
 	 * @param nameSpaceURI namespace of attribute key
-	 * @param sep separator between the values
-	 * @param nMax maximum number of value instances to remove (-1 = all)
+	 * @param sep          separator between the values
+	 * @param nMax         maximum number of value instances to remove (-1 = all)
 	 * @return int number of removed instances
 	 */
 	public int removeFromAttribute(final String key, final String token, final String nameSpaceURI, final String sep, final int nMax)
 	{
 		String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
 		if (strAttrValue == null || token == null)
+		{
 			return 0;
+		}
 
 		int n = 0;
 		int posOfToken = StringUtil.posOfToken(strAttrValue, token, sep, 0);
@@ -3400,9 +3442,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getDeepElement(nodeName, null, 0)
 	 *
-	 * @param nodeName the type of element you want to get
+	 * @param nodeName     the type of element you want to get
 	 * @param nameSpaceURI the namespace to search in !!! NOT USED IN FUCTION !!!
-	 * @param iSkip which element you want to have (order of appearance)
+	 * @param iSkip        which element you want to have (order of appearance)
 	 * @return KElement the iSkip element or a new element
 	 * @deprecated use getChildByTagName(nodeName, nameSpaceURI, iSkip, null, false, true);
 	 */
@@ -3430,8 +3472,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * default: getChildFromList(nodeNames, 0, null)
 	 *
 	 * @param nodeNames container for the node name string
-	 * @param iSkip how many of the found child should be skiped
-	 * @param map map of attributes to match
+	 * @param iSkip     how many of the found child should be skiped
+	 * @param map       map of attributes to match
 	 * @param bDirect
 	 * @return KElement a child matching the condition
 	 */
@@ -3480,7 +3522,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: renameElement(newName, null)
 	 *
-	 * @param newName the new name of the actual element
+	 * @param newName      the new name of the actual element
 	 * @param nameSpaceURI the new nameSpace, ignored if null
 	 * @return KElement the renamed child, i.e. this
 	 */
@@ -3571,7 +3613,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: moveElement(src, null)
 	 *
-	 * @param src node to move.
+	 * @param src         node to move.
 	 * @param beforeChild child of 'this' to insert src before. If beforeChild is null, src is appended to 'this'
 	 * @return KElement src element after moving, null if src is null
 	 * @throws JDFException if beforeChild is not a child of 'this'
@@ -3624,7 +3666,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param v
 	 * @param beforeChild
 	 * @deprecated use moveArray
@@ -3638,7 +3679,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * move all children in a vector of elements in the order of the vector
 	 *
-	 * @param v the vector of elements to append, if null nothing happens
+	 * @param v           the vector of elements to append, if null nothing happens
 	 * @param beforeChild the child before which to append the elements of the vector
 	 */
 	public void moveArray(final Collection<KElement> v, final KElement beforeChild)
@@ -3704,7 +3745,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: copyElement(src, null)
 	 *
-	 * @param src node to copy.
+	 * @param src         node to copy.
 	 * @param beforeChild child of 'this' to insert src before. If null, src is appended
 	 * @return KElement the copied element, <code>null</code> if src is <code>null</code>.
 	 */
@@ -3723,7 +3764,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * same as copyElement but over any node type
 	 *
-	 *
 	 * @param src
 	 * @param beforeChild
 	 * @return
@@ -3739,7 +3779,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		else
 		{
 			if (od instanceof DocumentJDFImpl)
+			{
 				((DocumentJDFImpl) od).setParentNode(this);
+			}
 			childNode = od.importNode(src, true);
 		}
 
@@ -3756,12 +3798,13 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param src
 	 * @param bRemove if true, remove existing information, else retain and overwrite / merge
 	 * @return this
-	 *
 	 */
 	public KElement copyInto(final KElement src, final boolean bRemove)
 	{
 		if (src == null || src == this)
+		{
 			return this;
+		}
 
 		if (bRemove)
 		{
@@ -3772,7 +3815,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		setAttributes(src);
 		final String srcNS = StringUtil.getNonEmpty(src.getNamespaceURI());
 		if (srcNS != null)
+		{
 			setNamespaceURI(srcNS);
+		}
 		Node e = src.getFirstChild();
 		while (e != null)
 		{
@@ -3872,9 +3917,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getLongAttribute(attrib, null, 0)
 	 *
-	 * @param attrib attribute to parse for an integer attribute
+	 * @param attrib       attribute to parse for an integer attribute
 	 * @param nameSpaceURI nameSpaceURI to search in
-	 * @param def the default to return if the value is empty or the attribute is not set
+	 * @param def          the default to return if the value is empty or the attribute is not set
 	 * @return the parsed int. If the attribute was not found, <code>long def</code> is returned.
 	 */
 	public long getLongAttribute(final String attrib, final String nameSpaceURI, final long def)
@@ -3888,9 +3933,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getIntAttribute(attrib, null, 0)
 	 *
-	 * @param attrib attribute to parse for an integer attribute
+	 * @param attrib       attribute to parse for an integer attribute
 	 * @param nameSpaceURI nameSpaceURI to search in
-	 * @param def the default to return if the value is not set or the attribute does not exists
+	 * @param def          the default to return if the value is not set or the attribute does not exists
 	 * @return int the parsed int. If the attribute was not found int def is returned
 	 */
 	public int getIntAttribute(final String attrib, final String nameSpaceURI, final int def)
@@ -3904,9 +3949,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getBoolAttribute(attrib, null, false)
 	 *
-	 * @param attrib attribute to parse for a boolean value
+	 * @param attrib       attribute to parse for a boolean value
 	 * @param nameSpaceURI nameSapceURI to search in
-	 * @param def the default to return if value is not set or the attribute does not exists
+	 * @param def          the default to return if value is not set or the attribute does not exists
 	 * @return boolean the boolean value or the def parameter
 	 */
 	public boolean getBoolAttribute(final String attrib, final String nameSpaceURI, final boolean def)
@@ -3920,9 +3965,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getRealAttribute(attrib, null, 0.0)
 	 *
-	 * @param attrib attribute to parse for a boolean value
+	 * @param attrib       attribute to parse for a boolean value
 	 * @param nameSpaceURI nameSapceURI to search in
-	 * @param def default to return if none value is set or attribute does not exist
+	 * @param def          default to return if none value is set or attribute does not exist
 	 * @return double the double value or <code>def</code>
 	 */
 	public double getRealAttribute(final String attrib, final String nameSpaceURI, final double def)
@@ -4013,8 +4058,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * previous comment is removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 *
 	 * @param commentText the comment text to set
-	 *
-	 *        Convenience - see {@link #setXMLComment(String,boolean)}
+	 *                    Convenience - see {@link #setXMLComment(String,boolean)}
 	 */
 	public void setXMLComment(final String commentText)
 	{
@@ -4026,12 +4070,14 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * previous comment is removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 *
 	 * @param commentText the comment text to set
-	 * @param single TODO
+	 * @param single      TODO
 	 */
 	public void setXMLComment(String commentText, final boolean single)
 	{
 		if (commentText == null)
+		{
 			return;
+		}
 		final KElement e = getParentNode_KElement();
 		if (e == null)
 		{
@@ -4092,7 +4138,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public void appendText(final String textName)
 	{
 		if (StringUtil.isEmpty(textName))
+		{
 			return;
+		}
 		final Text newChild = getOwnerDocument().createTextNode(textName);
 		appendChild(newChild);
 	}
@@ -4112,7 +4160,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * append a text element with text included
 	 *
 	 * @param nodeName node name of the text element
-	 * @param text the text to apend
+	 * @param text     the text to apend
 	 * @return KElement the appended text element
 	 */
 	public KElement appendTextElement(final String nodeName, final String text)
@@ -4133,7 +4181,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * merge nodes in a way that no duplicate elements are created<br>
 	 * <b>attention !! this kills pools !!</b> since elements in kElem overwrite those in *this
 	 *
-	 * @param kElem the node element to merge with the current node
+	 * @param kElem   the node element to merge with the current node
 	 * @param bDelete if true KElement kElem will be deleted
 	 * @return KElement the merged node element
 	 */
@@ -4171,7 +4219,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 		setAttributes(kElem);
 		if (bDelete)
+		{
 			kElem.deleteNode();
+		}
 		return this;
 	}
 
@@ -4180,15 +4230,16 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getChildWithAttribute(nodeName, attName, null,attValue, 0, true)
 	 *
-	 * @param nodeName name of the child node to search for
-	 * @param attName attribute name to search for
+	 * @param nodeName     name of the child node to search for
+	 * @param attName      attribute name to search for
 	 * @param nameSpaceURI namespace to search for
-	 * @param attVal the attribute value to search for, Wildcard supported ( <code>null</code>)
-	 * @param index if more then one child meets the condition, you can specify the one to return via an index
-	 * @param bDirect if true, looks only in direct children, else search through all children, grandchildren etc.
+	 * @param attVal       the attribute value to search for, Wildcard supported ( <code>null</code>)
+	 * @param index        if more then one child meets the condition, you can specify the one to return via an index
+	 * @param bDirect      if true, looks only in direct children, else search through all children, grandchildren etc.
 	 * @return KElement the element which matches the above conditions
 	 */
-	public KElement getChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect)
+	public KElement getChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index,
+			final boolean bDirect)
 	{
 		return getChildByTagName(nodeName, nameSpaceURI, index, new JDFAttributeMap(attName, attVal), bDirect, true);
 	}
@@ -4198,11 +4249,11 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getChildWithAttribute(nodeName, attName, null,attValue, 0, true)
 	 *
-	 * @param nodeName name of the child node to search for
-	 * @param attName attribute name to search for
+	 * @param nodeName     name of the child node to search for
+	 * @param attName      attribute name to search for
 	 * @param nameSpaceURI namespace to search for
-	 * @param attVal the attribute value to search for, Wildcard supported ( <code>null</code>)
-	 * @param index if more then one child meets the condition, you can specify the one to return via an index
+	 * @param attVal       the attribute value to search for, Wildcard supported ( <code>null</code>)
+	 * @param index        if more then one child meets the condition, you can specify the one to return via an index
 	 * @return KElement the element which matches the above conditions
 	 */
 	public KElement getCreateChildWithAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index)
@@ -4221,7 +4272,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: hasChildElement(String nodeName, null)
 	 *
-	 * @param nodeName name of the node to check for
+	 * @param nodeName     name of the node to check for
 	 * @param nameSpaceURI nameSpaceURI to search in
 	 * @return boolean true if there is a child with nodeName, otherwise false
 	 */
@@ -4235,9 +4286,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getInheritedElement(elementName, null, 0)
 	 *
-	 * @param elementName name of the element to be searched
+	 * @param elementName  name of the element to be searched
 	 * @param nameSpaceURI XML-namespace
-	 * @param iSkip leading siblings to be skipped
+	 * @param iSkip        leading siblings to be skipped
 	 * @return JDFElement the element found
 	 */
 	public KElement getInheritedElement(final String elementName, final String nameSpaceURI, final int iSkip)
@@ -4267,7 +4318,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Adds a NameSpace and maps the prefix to a URI. <br>
 	 * Checks all parents, whether such namespace is already defined in an ancestor
 	 *
-	 * @param strPrefix the namespace prefix to set
+	 * @param strPrefix       the namespace prefix to set
 	 * @param strNameSpaceURI the namespace URI to set
 	 * @return boolean true if newly set, false if already there and matching
 	 */
@@ -4275,7 +4326,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 		boolean fSuccess = false;
 
-		final String strNameSpace = (strPrefix == null || strPrefix.length() <= 0) ? JDFCoreConstants.XMLNS : JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + strPrefix;
+		final String strNameSpace = (strPrefix == null || strPrefix.length() <= 0) ? JDFCoreConstants.XMLNS
+				: JDFCoreConstants.XMLNS + JDFCoreConstants.COLON + strPrefix;
 
 		final String strOldNameSpaceURI = getInheritedAttribute(strNameSpace, null, JDFCoreConstants.EMPTYSTRING);
 		final String myNameSpaceURI = getNamespaceURI();
@@ -4300,7 +4352,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 
 		/**
-		 *
 		 * @param o1
 		 * @param o2
 		 * @return
@@ -4338,7 +4389,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 
 		/**
-		 *
 		 * @param o1
 		 * @param o2
 		 * @return
@@ -4365,7 +4415,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		/**
 		 * if the attribute is numeric, compare numerically, else lexical comparison is done
 		 *
-		 * @param xPath the xpath in the context of this element to use for comparing<br/>
+		 * @param xPath   the xpath in the context of this element to use for comparing<br/>
 		 * @param pInvert if true, sort backwards
 		 */
 		public SingleXPathComparator(final String xPath, final boolean pInvert)
@@ -4458,7 +4508,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		 * if the attribute is numeric, compare numerically, else lexical comparison is done
 		 *
 		 * @param pAttName the attribute to use for comparing<br/>
-		 * @param pInvert if true, sort backwards
+		 * @param pInvert  if true, sort backwards
 		 */
 		public SingleAttributeComparator(final String pAttName, final boolean pInvert)
 		{
@@ -4499,7 +4549,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		 * if the attribute is numeric, compare numerically, else lexical comparison is done
 		 *
 		 * @param pAttName the attribute to use for comparing<br/>
-		 * @param pInvert if true, sort backwards
+		 * @param pInvert  if true, sort backwards
 		 */
 		public MultiAttributeComparator(final List<String> pAttName, final boolean pInvert)
 		{
@@ -4529,7 +4579,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 				final String a2 = o2.getAttribute_KElement(att, null, null);
 				ret = compare(a1, a2);
 				if (ret != 0)
+				{
 					return ret;
+				}
 			}
 			return ret;
 		}
@@ -4593,13 +4645,15 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * insert e into this, assuming that this is already sorted
 	 *
-	 * @param e the existing element to sort
+	 * @param e          the existing element to sort
 	 * @param comparator the comparator object to sort by
 	 */
 	public synchronized void sortChild(final KElement e, final Comparator<KElement> comparator)
 	{
 		if (e == null)
+		{
 			return;
+		}
 		if (e.getParentNode_KElement() == this)
 		{
 			final KElement prev = e.getPreviousSiblingElement();
@@ -4610,9 +4664,13 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 				bSorted = next == null || comparator.compare(next, e) >= 0;
 			}
 			if (!bSorted)
+			{
 				e.deleteNode();
+			}
 			else
+			{
 				return; // heureka - nothing to do!
+			}
 
 		}
 		final List<KElement> v = getChildList();
@@ -4648,14 +4706,15 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * get a concatinated string of all values
 	 *
 	 * @return
-	 *
 	 */
 	public String toValueString(final char sep)
 	{
 		final StringBuilder b = new StringBuilder();
 		final String text = getText();
 		if (text != null)
+		{
 			b.append(text);
+		}
 		b.append(sep);
 		for (final String v : getAttributeMap_KElement().values())
 		{
@@ -4754,9 +4813,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: renameAttribute(oldName, newName, null, null)
 	 *
-	 * @param oldName attribute name to move from
-	 * @param newName attribute name to move to
-	 * @param nameSpaceURI attribute nameSpaceURI to move from
+	 * @param oldName         attribute name to move from
+	 * @param newName         attribute name to move to
+	 * @param nameSpaceURI    attribute nameSpaceURI to move from
 	 * @param newNameSpaceURI attribute nameSpaceURI to move the name to
 	 */
 	public void renameAttribute(final String oldName, final String newName, final String nameSpaceURI, final String newNameSpaceURI)
@@ -4788,15 +4847,16 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: getChildAttributeList(nodeName, attName, null, JDFCoreConstants.WILDCARD, true, true)
 	 *
-	 * @param nodeName element name you are searching for
-	 * @param attName attributes you are looking for
+	 * @param nodeName     element name you are searching for
+	 * @param attName      attributes you are looking for
 	 * @param nameSpaceURI nameSpace you are searching for
 	 * @param attValue
-	 * @param bDirect if true return value is a vector of all found elements. Otherwise the returned vector contains only the nodes
-	 * @param bUnique if you want to make sure, the attribute is unique, set this boolean to true. Otherwise attribute attName is added to the returned vector
+	 * @param bDirect      if true return value is a vector of all found elements. Otherwise the returned vector contains only the nodes
+	 * @param bUnique      if you want to make sure, the attribute is unique, set this boolean to true. Otherwise attribute attName is added to the returned vector
 	 * @return Vector - vector with attributes
 	 */
-	public VString getChildAttributeList(final String nodeName, final String attName, final String nameSpaceURI, final String attValue, final boolean bDirect, final boolean bUnique)
+	public VString getChildAttributeList(final String nodeName, final String attName, final String nameSpaceURI, final String attValue, final boolean bDirect,
+			final boolean bUnique)
 	{
 		final VString v = new VString();
 		final VElement vChildren = getChildrenByTagName(nodeName, nameSpaceURI, new JDFAttributeMap(attName, JDFCoreConstants.EMPTYSTRING), bDirect, true, 0);
@@ -4833,8 +4893,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: insertBefore(elementName, beforeChild, null)
 	 *
-	 * @param elementName The elementName to insert the element itself will be created
-	 * @param beforeChild The reference element, i.e., the elemente before which the new element must be inserted
+	 * @param elementName  The elementName to insert the element itself will be created
+	 * @param beforeChild  The reference element, i.e., the elemente before which the new element must be inserted
 	 * @param nameSpaceURI The namespace to create elementName in
 	 * @return KElement the element being inserted
 	 */
@@ -4854,7 +4914,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @param nodeNames list of node names that fit, both local and qualified node names are checked
 	 * @param map
 	 * @param bDirect
-	 * @param v the vector to be filled. if null, a new empty vector will be created
+	 * @param v         the vector to be filled. if null, a new empty vector will be created
 	 * @return VElement the found child elements
 	 */
 	public VElement getChildrenFromList(final VString nodeNames, final JDFAttributeMap map, final boolean bDirect, VElement v)
@@ -4888,7 +4948,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 *
 	 * @param nodeNames list of node names that fit, both local and qualified node names are checked
 	 * @param bDirect
-	 * @param v the vector to be filled. if null, a new empty vector will be created
+	 * @param v         the vector to be filled. if null, a new empty vector will be created
 	 * @return VElement the found child elements
 	 */
 	public VElement getChildrenIgnoreList(final VString nodeNames, final boolean bDirect, VElement v)
@@ -4918,8 +4978,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: AppendElementN(elementName, maxAllowed, null)
 	 *
-	 * @param elementName name of the new child element
-	 * @param maxAllowed the maximum number of children with defined name and nameSpace, that are allowed for 'this'
+	 * @param elementName  name of the new child element
+	 * @param maxAllowed   the maximum number of children with defined name and nameSpace, that are allowed for 'this'
 	 * @param nameSpaceURI nameSpace of the new child element
 	 * @return KElement newly created child element
 	 * @throws JDFException if more elements with name and namespace then maxAllowed already exist
@@ -4928,7 +4988,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 		if (numChildElements_KElement(elementName, nameSpaceURI) >= maxAllowed)
 		{
-			throw new JDFException("KElement:appendElementN:" + " too many elements (>" + maxAllowed + ") of type" + nameSpaceURI + JDFCoreConstants.COLON + elementName);
+			throw new JDFException(
+					"KElement:appendElementN:" + " too many elements (>" + maxAllowed + ") of type" + nameSpaceURI + JDFCoreConstants.COLON + elementName);
 		}
 
 		return appendElement(elementName, nameSpaceURI);
@@ -4964,7 +5025,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Gets the XPath full tree representation of 'this'
 	 *
-	 * @param relativeTo relative path to which to create an xpath
+	 * @param relativeTo        relative path to which to create an xpath
 	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
 	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
 	 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
@@ -4977,7 +5038,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * Gets the XPath full tree representation of 'this'
 	 *
-	 * @param relativeTo parent element to which to create an xpath
+	 * @param relativeTo        parent element to which to create an xpath
 	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
 	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
 	 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
@@ -4992,10 +5053,10 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: InsertAt(nodeName, beforePos, null, null, null)
 	 *
-	 * @param nodeName name of the new Element
-	 * @param beforePos index of beforeNode, i.e if beforePos = 0, put it before the first occurrence
-	 * @param beforeNode name of the node to put it before, default - any name, Wildcard supported
-	 * @param nameSpaceURI nameSpace of the new node
+	 * @param nodeName           name of the new Element
+	 * @param beforePos          index of beforeNode, i.e if beforePos = 0, put it before the first occurrence
+	 * @param beforeNode         name of the node to put it before, default - any name, Wildcard supported
+	 * @param nameSpaceURI       nameSpace of the new node
 	 * @param beforeNameSpaceURI nameSpace of the node to put it before, default - value of nameSpaceURI
 	 * @return KElement the newly created element
 	 * @throws JDFException if 'this' is a null element and thus nothing can be inserted in it
@@ -5003,7 +5064,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public KElement insertAt(final String nodeName, final int beforePos, final String beforeNode, final String nameSpaceURI, final String beforeNameSpaceURI)
 	{
 		KElement kRet = null;
-		final String strBeforeNS = ((beforeNameSpaceURI == null) || beforeNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING)) ? nameSpaceURI : beforeNameSpaceURI;
+		final String strBeforeNS = ((beforeNameSpaceURI == null) || beforeNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING)) ? nameSpaceURI
+				: beforeNameSpaceURI;
 		final KElement kElem = getElement_KElement(beforeNode, strBeforeNS, beforePos);
 
 		if (kElem == null)
@@ -5022,8 +5084,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Sets an attribute as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path  XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *              <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 */
 	public void setXPathValue(final String path, final String value)
@@ -5032,7 +5094,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * sets all xpaths to the values provided in map
 	 *
 	 * @param map map of XPath / values to set
@@ -5046,8 +5107,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Sets an attribute as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path  XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *              <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
@@ -5072,8 +5133,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
-	 * @param def default value if it doesn't exist
+	 *             <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param def  default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 * @default getXPathAttribute(path, null);
@@ -5090,8 +5151,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
-	 * @param def default value if it doesn't exist
+	 *             <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param def  default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 * @default getXPathAttribute(path, null);
@@ -5106,8 +5167,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
-	 *
+	 *             <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
@@ -5121,11 +5181,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Gets a map of attribute values as defined by XPath namespace prefixes are resolved <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 *
 	 *      <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
-	 *
 	 * @return String the String value of the xpath
-	 *
 	 */
 	public JDFAttributeMap getXPathValueMap()
 	{
@@ -5136,11 +5193,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Gets a map of attribute values as defined by XPath namespace prefixes are resolved <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 *
 	 *      <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
-	 *
 	 * @return String the String value of the xpath
-	 *
 	 */
 	public JDFAttributeMap getXPathValueMap(final boolean isRelative)
 	{
@@ -5153,7 +5207,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
+	 *             <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 * @throws IllegalArgumentException if path is not supported
 	 */
@@ -5167,8 +5221,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * gets an vector of elements element as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 * @param path    XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
+	 *                <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @param maxSize
 	 * @return VElement the vector of matching elements
 	 * @throws IllegalArgumentException if path is not supported
@@ -5183,7 +5237,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 *             <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 */
 	public KElement getCreateXPathElement(final String path)
@@ -5209,21 +5263,21 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * checks wether this has node childs of the stated node type
 	 *
 	 * @param nodeType <blockquote>
-	 *        <ul>
-	 *        <li>ELEMENT_NODE = 1
-	 *        <li>ATTRIBUTE_NODE = 2
-	 *        <li>TEXT_NODE = 3
-	 *        <li>CDATA_SECTION_NODE = 4
-	 *        <li>ENTITY_REFERENCE_NODE = 5
-	 *        <li>ENTITY_NODE = 6
-	 *        <li>PROCESSING_INSTRUCTION_NODE = 7
-	 *        <li>COMMENT_NODE = 8
-	 *        <li>DOCUMENT_NODE = 9
-	 *        <li>DOCUMENT_TYPE_NODE = 10
-	 *        <li>DOCUMENT_FRAGMENT_NODE = 11
-	 *        <li>NOTATION_NODE = 12
-	 *        <li>XML_DECL_NODE = 13 </blockquote>
-	 *        </ul>
+	 *                 <ul>
+	 *                 <li>ELEMENT_NODE = 1
+	 *                 <li>ATTRIBUTE_NODE = 2
+	 *                 <li>TEXT_NODE = 3
+	 *                 <li>CDATA_SECTION_NODE = 4
+	 *                 <li>ENTITY_REFERENCE_NODE = 5
+	 *                 <li>ENTITY_NODE = 6
+	 *                 <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *                 <li>COMMENT_NODE = 8
+	 *                 <li>DOCUMENT_NODE = 9
+	 *                 <li>DOCUMENT_TYPE_NODE = 10
+	 *                 <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *                 <li>NOTATION_NODE = 12
+	 *                 <li>XML_DECL_NODE = 13 </blockquote>
+	 *                 </ul>
 	 * @return boolean true if there is at least one child of the stated node type, false otherwise
 	 */
 	protected boolean hasChildNodes(final int nodeType)
@@ -5260,11 +5314,11 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get children from the actual element by the tag name, nameSpaceURI or attribute map. <br/>
 	 * GetTree only follows direct links, e.g. as in a JDF tree. Hidden nodes that are children of nodes with non-matching names are ignored
 	 *
-	 * @param nodeName elementname you are searching for
+	 * @param nodeName     elementname you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @param mAttrib attributes you are looking for. Wildcards in the attribute map are supported
-	 * @param bDirect if true return value is a vector of all direct elements. Otherwise the returned vector contains nodes of arbitrary depth
-	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
+	 * @param mAttrib      attributes you are looking for. Wildcards in the attribute map are supported
+	 * @param bDirect      if true return value is a vector of all direct elements. Otherwise the returned vector contains nodes of arbitrary depth
+	 * @param bAnd         if true, a child is only added if it has all attributes specified in Attributes mAttrib
 	 * @return VElement vector with all found elements
 	 */
 	public VElement getTree(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd)
@@ -5314,7 +5368,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		KElement e = getFirstChildElement();
 		final boolean bAlwaysFit = KElement.isWildCard(nodeName);
 		if (addself && (bAlwaysFit || getLocalName().equals(nodeName)))
+		{
 			v.add(this);
+		}
 		while (e != null)
 		{
 			if (bAlwaysFit || e.fitsName_KElement(nodeName, null))
@@ -5335,7 +5391,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 		final ArrayList<A> v = new ArrayList<>();
 		if (addself && (cl.isInstance(this)))
+		{
 			v.add((A) this);
+		}
 		KElement e = getFirstChildElement();
 		while (e != null)
 		{
@@ -5357,17 +5415,17 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Get child from the actual element by the tag name, nameSpaceURI or attribute map. GetTree only follows direct links, e.g. as in a JDF tree. Hidden nodes that are children of
 	 * non-matching nodes are ignored
 	 *
-	 * @param nodeName elementname you are searching for.<br>
-	 *        Required, no default.
+	 * @param nodeName     elementname you are searching for.<br>
+	 *                     Required, no default.
 	 * @param nameSpaceURI nameSpace you are searching for.<br>
-	 *        Default is <code>null</code>
-	 * @param mAttrib attributes you are looking for <br>
-	 *        Wildcards in the attribute map are supported. Default is an empty Map
-	 * @param bDirect if true, return value is a vector of all direct elements.<br>
-	 *        Otherwise the returned vector contains nodes of arbitrary depth. <br>
-	 *        Default is false.
-	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib.<br>
-	 *        Default is true.
+	 *                     Default is <code>null</code>
+	 * @param mAttrib      attributes you are looking for <br>
+	 *                     Wildcards in the attribute map are supported. Default is an empty Map
+	 * @param bDirect      if true, return value is a vector of all direct elements.<br>
+	 *                     Otherwise the returned vector contains nodes of arbitrary depth. <br>
+	 *                     Default is false.
+	 * @param bAnd         if true, a child is only added if it has all attributes specified in Attributes mAttrib.<br>
+	 *                     Default is true.
 	 * @return KElement the first found element
 	 */
 	public KElement getTreeElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd)
@@ -5443,7 +5501,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * copy attribute values or text from an xpath in src to this
 	 *
 	 * @param dstXPath the destination xpath in this element
-	 * @param src the source element, if null; use this
+	 * @param src      the source element, if null; use this
 	 * @param srcXPath the source xpath, if null same as dstXPath
 	 * @return the copied value; may be null if no value was found in srcXPath
 	 */
@@ -5457,10 +5515,10 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: copyAttribute(attrib, src, null, null, null)
 	 *
-	 * @param attrib the name of the attribute to copy (if source attribute is different only the value will be copied)
-	 * @param src source element where the attribute to be copied resides
-	 * @param srcAttrib attribute to copy, defaults to the value of attrib
-	 * @param nameSpaceURI of the attribute in the destination
+	 * @param attrib          the name of the attribute to copy (if source attribute is different only the value will be copied)
+	 * @param src             source element where the attribute to be copied resides
+	 * @param srcAttrib       attribute to copy, defaults to the value of attrib
+	 * @param nameSpaceURI    of the attribute in the destination
 	 * @param srcNameSpaceURI of the attribute in the source, defaults to the value of nameSpaceURI
 	 * @default copyAttribute(attrib,src,null,null,null);
 	 * @return the value of the copied attribute
@@ -5475,15 +5533,16 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: copyAttribute(attrib, src, null, null, null)
 	 *
-	 * @param attrib the name of the attribute to copy (if source attribute is different only the value will be copied)
-	 * @param src source element where the attribute to be copied resides
-	 * @param srcAttrib attribute to copy, defaults to the value of attrib
-	 * @param nameSpaceURI of the attribute in the destination
+	 * @param attrib          the name of the attribute to copy (if source attribute is different only the value will be copied)
+	 * @param src             source element where the attribute to be copied resides
+	 * @param srcAttrib       attribute to copy, defaults to the value of attrib
+	 * @param nameSpaceURI    of the attribute in the destination
 	 * @param srcNameSpaceURI of the attribute in the source, defaults to the value of nameSpaceURI
 	 * @default copyAttribute(attrib,src,null,null,null);
 	 * @return the value of the copied attribute
 	 */
-	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI, final boolean overwriteEmpty)
+	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI,
+			final boolean overwriteEmpty)
 	{
 		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFCoreConstants.EMPTYSTRING) ? attrib : srcAttrib;
 		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
@@ -5514,7 +5573,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * default: copyAttribute(attrib, src, null, null, null)
 	 *
 	 * @param attrib the name of the attribute to copy (if source attribute is different only the value will be copied)
-	 * @param src source element where the attribute to be copied resides
+	 * @param src    source element where the attribute to be copied resides
 	 * @return the value of the copied attribute
 	 */
 	public String copyAttribute(final String attrib, final KElement src)
@@ -5528,7 +5587,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * default: copyAttribute(attrib, src, null, null, null)
 	 *
 	 * @param attrib the name of the attribute to copy (if source attribute is different only the value will be copied)
-	 * @param src source element where the attribute to be copied resides
+	 * @param src    source element where the attribute to be copied resides
 	 * @return the value of the copied attribute
 	 */
 	public String copyAttribute(final String attrib, final KElement src, final boolean overwriteEmpty)
@@ -5537,7 +5596,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param elementName
 	 * @param src
 	 */
@@ -5548,9 +5606,13 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		{
 			final KElement e = src.getElement_KElement(elementName, null, iSkip++);
 			if (e != null)
+			{
 				copyElement(e, null);
+			}
 			else
+			{
 				break;
+			}
 		}
 	}
 
@@ -5559,10 +5621,10 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 * default: moveAttribute(attrib, src, null, null, null)
 	 *
-	 * @param attrib where to move the attribute
-	 * @param src element to move from
-	 * @param srcAttrib the attribute to move. If empty string, the string attrib is used as source and target
-	 * @param nameSpaceURI the namespaceURI to set
+	 * @param attrib          where to move the attribute
+	 * @param src             element to move from
+	 * @param srcAttrib       the attribute to move. If empty string, the string attrib is used as source and target
+	 * @param nameSpaceURI    the namespaceURI to set
 	 * @param srcNameSpaceURI
 	 */
 	public void moveAttribute(final String attrib, KElement src, final String srcAttrib, String nameSpaceURI, final String srcNameSpaceURI)
@@ -5601,7 +5663,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * <p>
 	 *
 	 * @param attrib where to move the attribute
-	 * @param src element to move from
+	 * @param src    element to move from
 	 */
 	public void moveAttribute(final String attrib, final KElement src)
 	{
@@ -5680,7 +5742,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			{
 				parent = parent.getParentNode();
 			}
-			while (parent != null && newParentName != null && !newParentName.equals(JDFCoreConstants.EMPTYSTRING) && !parent.getNodeName().equals(newParentName));
+			while (parent != null && newParentName != null && !newParentName.equals(JDFCoreConstants.EMPTYSTRING)
+					&& !parent.getNodeName().equals(newParentName));
 
 			if (parent != null)
 			{
@@ -5695,22 +5758,22 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * count the number of child nodes of DOM nodeType nodeType (0=count all)
 	 *
 	 * @param nodeType DOM nodeType <blockquote>
-	 *        <ul>
-	 *        <li>count all = 0
-	 *        <li>ELEMENT_NODE = 1
-	 *        <li>ATTRIBUTE_NODE = 2
-	 *        <li>TEXT_NODE = 3
-	 *        <li>CDATA_SECTION_NODE = 4
-	 *        <li>ENTITY_REFERENCE_NODE = 5
-	 *        <li>ENTITY_NODE = 6
-	 *        <li>PROCESSING_INSTRUCTION_NODE = 7
-	 *        <li>COMMENT_NODE = 8
-	 *        <li>DOCUMENT_NODE = 9
-	 *        <li>DOCUMENT_TYPE_NODE = 10
-	 *        <li>DOCUMENT_FRAGMENT_NODE = 11
-	 *        <li>NOTATION_NODE = 12
-	 *        <li>XML_DECL_NODE = 13 </blockquote>
-	 *        </ul>
+	 *                 <ul>
+	 *                 <li>count all = 0
+	 *                 <li>ELEMENT_NODE = 1
+	 *                 <li>ATTRIBUTE_NODE = 2
+	 *                 <li>TEXT_NODE = 3
+	 *                 <li>CDATA_SECTION_NODE = 4
+	 *                 <li>ENTITY_REFERENCE_NODE = 5
+	 *                 <li>ENTITY_NODE = 6
+	 *                 <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *                 <li>COMMENT_NODE = 8
+	 *                 <li>DOCUMENT_NODE = 9
+	 *                 <li>DOCUMENT_TYPE_NODE = 10
+	 *                 <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *                 <li>NOTATION_NODE = 12
+	 *                 <li>XML_DECL_NODE = 13 </blockquote>
+	 *                 </ul>
 	 * @return number of child nodes with "nodeType"
 	 * @deprecated use 2-parameter version numChildNodes(nodeType, false);
 	 */
@@ -5724,22 +5787,22 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * count the number of child nodes of DOM nodeType nodeType (0=count all)
 	 *
 	 * @param nodeType DOM nodeType <blockquote>
-	 *        <ul>
-	 *        <li>count all = 0
-	 *        <li>ELEMENT_NODE = 1
-	 *        <li>ATTRIBUTE_NODE = 2
-	 *        <li>TEXT_NODE = 3
-	 *        <li>CDATA_SECTION_NODE = 4
-	 *        <li>ENTITY_REFERENCE_NODE = 5
-	 *        <li>ENTITY_NODE = 6
-	 *        <li>PROCESSING_INSTRUCTION_NODE = 7
-	 *        <li>COMMENT_NODE = 8
-	 *        <li>DOCUMENT_NODE = 9
-	 *        <li>DOCUMENT_TYPE_NODE = 10
-	 *        <li>DOCUMENT_FRAGMENT_NODE = 11
-	 *        <li>NOTATION_NODE = 12
-	 *        <li>XML_DECL_NODE = 13 </blockquote>
-	 *        </ul>
+	 *                 <ul>
+	 *                 <li>count all = 0
+	 *                 <li>ELEMENT_NODE = 1
+	 *                 <li>ATTRIBUTE_NODE = 2
+	 *                 <li>TEXT_NODE = 3
+	 *                 <li>CDATA_SECTION_NODE = 4
+	 *                 <li>ENTITY_REFERENCE_NODE = 5
+	 *                 <li>ENTITY_NODE = 6
+	 *                 <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *                 <li>COMMENT_NODE = 8
+	 *                 <li>DOCUMENT_NODE = 9
+	 *                 <li>DOCUMENT_TYPE_NODE = 10
+	 *                 <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *                 <li>NOTATION_NODE = 12
+	 *                 <li>XML_DECL_NODE = 13 </blockquote>
+	 *                 </ul>
 	 * @param bRecurse
 	 * @return number of child nodes with "nodeType"
 	 */
@@ -5766,22 +5829,22 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * removes the i'th child node, that match NodeType
 	 *
 	 * @param nodeType the DOM NodeType,if 0 count all nodes <blockquote>
-	 *        <ul>
-	 *        <li>ELEMENT_NODE = 1
-	 *        <li>ATTRIBUTE_NODE = 2
-	 *        <li>TEXT_NODE = 3
-	 *        <li>CDATA_SECTION_NODE = 4
-	 *        <li>ENTITY_REFERENCE_NODE = 5
-	 *        <li>ENTITY_NODE = 6
-	 *        <li>PROCESSING_INSTRUCTION_NODE = 7
-	 *        <li>COMMENT_NODE = 8
-	 *        <li>DOCUMENT_NODE = 9
-	 *        <li>DOCUMENT_TYPE_NODE = 10
-	 *        <li>DOCUMENT_FRAGMENT_NODE = 11
-	 *        <li>NOTATION_NODE = 12
-	 *        <li>XML_DECL_NODE = 13 </blockquote>
-	 *        </ul>
-	 * @param i index of the child nodes to remove
+	 *                 <ul>
+	 *                 <li>ELEMENT_NODE = 1
+	 *                 <li>ATTRIBUTE_NODE = 2
+	 *                 <li>TEXT_NODE = 3
+	 *                 <li>CDATA_SECTION_NODE = 4
+	 *                 <li>ENTITY_REFERENCE_NODE = 5
+	 *                 <li>ENTITY_NODE = 6
+	 *                 <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *                 <li>COMMENT_NODE = 8
+	 *                 <li>DOCUMENT_NODE = 9
+	 *                 <li>DOCUMENT_TYPE_NODE = 10
+	 *                 <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *                 <li>NOTATION_NODE = 12
+	 *                 <li>XML_DECL_NODE = 13 </blockquote>
+	 *                 </ul>
+	 * @param i        index of the child nodes to remove
 	 * @return true if success, false if failed (no i'th node of nodeType found)
 	 */
 	public boolean removeChildNode(final int nodeType, final int i)
@@ -5848,21 +5911,21 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Gets the number of direct child nodes of 'this', that match NodeType
 	 *
 	 * @param nodeType the DOM NodeType, if 0 count all nodes <blockquote>
-	 *        <ul>
-	 *        <li>ELEMENT_NODE = 1
-	 *        <li>ATTRIBUTE_NODE = 2
-	 *        <li>TEXT_NODE = 3
-	 *        <li>CDATA_SECTION_NODE = 4
-	 *        <li>ENTITY_REFERENCE_NODE = 5
-	 *        <li>ENTITY_NODE = 6
-	 *        <li>PROCESSING_INSTRUCTION_NODE = 7
-	 *        <li>COMMENT_NODE = 8
-	 *        <li>DOCUMENT_NODE = 9
-	 *        <li>DOCUMENT_TYPE_NODE = 10
-	 *        <li>DOCUMENT_FRAGMENT_NODE = 11
-	 *        <li>NOTATION_NODE = 12
-	 *        <li>XML_DECL_NODE = 13 </blockquote>
-	 *        </ul>
+	 *                 <ul>
+	 *                 <li>ELEMENT_NODE = 1
+	 *                 <li>ATTRIBUTE_NODE = 2
+	 *                 <li>TEXT_NODE = 3
+	 *                 <li>CDATA_SECTION_NODE = 4
+	 *                 <li>ENTITY_REFERENCE_NODE = 5
+	 *                 <li>ENTITY_NODE = 6
+	 *                 <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *                 <li>COMMENT_NODE = 8
+	 *                 <li>DOCUMENT_NODE = 9
+	 *                 <li>DOCUMENT_TYPE_NODE = 10
+	 *                 <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *                 <li>NOTATION_NODE = 12
+	 *                 <li>XML_DECL_NODE = 13 </blockquote>
+	 *                 </ul>
 	 * @return int: the counted number of direct child nodes, that match NodeType
 	 */
 	public int getNumChildNodes(final int nodeType)
@@ -5915,22 +5978,22 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * gets the n'th child node of nodetype <code>nodeType</code> with n = iPos
 	 *
 	 * @param nodeType the DOM node type to get <blockquote>
-	 *        <ul>
-	 *        <li>ELEMENT_NODE = 1
-	 *        <li>ATTRIBUTE_NODE = 2
-	 *        <li>TEXT_NODE = 3
-	 *        <li>CDATA_SECTION_NODE = 4
-	 *        <li>ENTITY_REFERENCE_NODE = 5
-	 *        <li>ENTITY_NODE = 6
-	 *        <li>PROCESSING_INSTRUCTION_NODE = 7
-	 *        <li>COMMENT_NODE = 8
-	 *        <li>DOCUMENT_NODE = 9
-	 *        <li>DOCUMENT_TYPE_NODE = 10
-	 *        <li>DOCUMENT_FRAGMENT_NODE = 11
-	 *        <li>NOTATION_NODE = 12
-	 *        <li>XML_DECL_NODE = 13 </blockquote>
-	 *        </ul>
-	 * @param iPos the index of the node with default 0 for the first occurance
+	 *                 <ul>
+	 *                 <li>ELEMENT_NODE = 1
+	 *                 <li>ATTRIBUTE_NODE = 2
+	 *                 <li>TEXT_NODE = 3
+	 *                 <li>CDATA_SECTION_NODE = 4
+	 *                 <li>ENTITY_REFERENCE_NODE = 5
+	 *                 <li>ENTITY_NODE = 6
+	 *                 <li>PROCESSING_INSTRUCTION_NODE = 7
+	 *                 <li>COMMENT_NODE = 8
+	 *                 <li>DOCUMENT_NODE = 9
+	 *                 <li>DOCUMENT_TYPE_NODE = 10
+	 *                 <li>DOCUMENT_FRAGMENT_NODE = 11
+	 *                 <li>NOTATION_NODE = 12
+	 *                 <li>XML_DECL_NODE = 13 </blockquote>
+	 *                 </ul>
+	 * @param iPos     the index of the node with default 0 for the first occurance
 	 * @return KElement: a node that matches the filter, null if iPos is higher then the number of child nodes
 	 */
 	protected Node getChildNode(final int nodeType, final int iPos)
@@ -5974,7 +6037,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * sets multiple attributes at once both arrays need to be of equal length.
 	 *
 	 * @param myAttributes array of attributes
-	 * @param strValues array of values
+	 * @param strValues    array of values
 	 * @throws ArrayIndexOutOfBoundsException if the arrays are not of equal length
 	 * @deprecated use setAttributes(JDFAttributeMap)
 	 */
@@ -6038,7 +6101,10 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 */
 	public void setXSIType(final String typ)
 	{
-		setAttribute(JDFCoreConstants.XSITYPE, typ, JDFCoreConstants.XSIURI);
+		if (wantXsiType)
+		{
+			setAttribute(JDFCoreConstants.XSITYPE, typ, JDFCoreConstants.XSIURI);
+		}
 	}
 
 	/**
@@ -6070,7 +6136,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * Fix the parentNode from this. If flagSrc == null the flags of parentNode are used.
 	 *
 	 * @param parentSrc where we get the parent from
-	 * @param flagSrc where er get the flags from
+	 * @param flagSrc   where er get the flags from
 	 */
 	private void fixParent(final KElement parentSrc, final KElement flagSrc)
 	{
@@ -6288,7 +6354,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * check whether this element matches a simple xpath
 	 *
-	 * @param path xpath to match may include syntax <code>e[i]</code> or <code>e[@a="b"]</code>
+	 * @param path        xpath to match may include syntax <code>e[i]</code> or <code>e[@a="b"]</code>
 	 * @param bFollowRefs
 	 * @return boolean true, if this matches the given xpath
 	 */
@@ -6388,7 +6454,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * fills a HashSet with all values of the attribute in all child elements
 	 *
 	 * @param attName the attribute to search
-	 * @param attNS the namespace of the attribute
+	 * @param attNS   the namespace of the attribute
 	 * @return
 	 */
 	public final HashSet<String> fillHashSet(final String attName, final String attNS)
@@ -6402,7 +6468,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * fills a HashSet with all values of the attribute in all child elements
 	 *
 	 * @param attName attribute name
-	 * @param attNS attrib ute namespaceuri
+	 * @param attNS   attrib ute namespaceuri
 	 * @param preFill the HashSet to fill
 	 * @param bFirst
 	 */
@@ -6478,9 +6544,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * create and append a unique id, keep the existing one if it already exists
 	 *
 	 * @param newID the new id. if null, then a reasonably unique id is generated
-	 *
 	 * @return String - the value of the ID attribute after setting
-	 *
 	 * @default appendAnchor(null)
 	 */
 	public String appendAnchor(String newID)
@@ -6513,7 +6577,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * nn is a unique number, that is generated as the first integer higher than the number of sibling elements with the same name. <br>
 	 * Note that it is the responsibilty of the caller not to provide multiple siblings that use the same base IDs.
 	 *
-	 * @param key the attribute that is to be set to this ID, e.g. jobpartid
+	 * @param key          the attribute that is to be set to this ID, e.g. jobpartid
 	 * @param nameSpaceURI the attribute namespace that is to be set to this ID, e.g. jobpartid
 	 * @return String - the newly generated ID in the syntax parentID.nn
 	 */
@@ -6572,7 +6636,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * gets attribute ID
 	 *
 	 * @param id
-	 *
 	 */
 	public void setID(final String id)
 	{
@@ -6594,9 +6657,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * for details.
 	 *
 	 * @param id the starting id of the ID - should normally be 0 in order to increment
-	 *
 	 * @return the ID string value
-	 *
 	 * @default uniqueID(0)
 	 */
 	public static String uniqueID(final int id)
@@ -6605,7 +6666,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param id
 	 * @param bDate
 	 * @return
@@ -6634,7 +6694,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * create a new root document
 	 *
 	 * @param nodename
@@ -6647,7 +6706,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * create a new root document
 	 *
 	 * @param nodename
@@ -6662,7 +6720,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	/**
 	 * get the number of sibling elements
 	 *
-	 * @param elementName , if null any and all at the same level
+	 * @param elementName  , if null any and all at the same level
 	 * @param nameSpaceURI
 	 * @return
 	 */
@@ -6670,18 +6728,23 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 		final KElement parent = getParentNode_KElement();
 		if (parent == null)
+		{
 			return 0;
+		}
 		final VElement ve = parent.getChildElementVector(elementName, nameSpaceURI);
 		if (ve == null)
+		{
 			return 0;
+		}
 		int n = ve.size();
 		if (ve.contains(this))
+		{
 			n--;
+		}
 		return n;
 	}
 
 	/**
-	 *
 	 * write myself to an output stream
 	 *
 	 * @param stream
@@ -6712,7 +6775,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * write myself to a file
 	 *
 	 * @param file
@@ -6725,7 +6787,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * write myself to a file
 	 *
 	 * @param filename
@@ -6738,7 +6799,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * convenience setter
-	 *
 	 * same as setAttribute but never sets ""
 	 *
 	 * @param key
@@ -6750,7 +6810,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param s
 	 * @return
 	 */
@@ -6761,7 +6820,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param string
 	 * @return
 	 */
@@ -6772,7 +6830,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param filename
 	 * @return
 	 */
@@ -6783,7 +6840,6 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param filename
 	 * @return
 	 */

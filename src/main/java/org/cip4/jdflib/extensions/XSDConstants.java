@@ -59,6 +59,7 @@ public class XSDConstants
 	static final String XS_EXTENSION = "xs:extension";
 	static final String XS_COMPLEX_CONTENT = "xs:complexContent";
 	static final String XS_COMPLEX_TYPE = "xs:complexType";
+	static final String XS_GROUP = "xs:group";
 	static final String XS_LIST = "xs:list";
 	static final String XS_RESTRICTION = "xs:restriction";
 	static final String XS_SIMPLE_TYPE = "xs:simpleType";

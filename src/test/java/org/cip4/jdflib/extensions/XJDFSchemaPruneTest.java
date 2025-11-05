@@ -43,6 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
@@ -52,8 +54,10 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.FileUtil;
@@ -235,6 +239,19 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
+	}
+
+	@Test
+	void testPruneJMF()
+	{
+		final String jmfschema = sm_dirTestSchema + "JDFMessage.xsd";
+
+		final XMLDoc schema = XMLDoc.parseFile(jmfschema);
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
+		prune.setCheckAttributes(true);
+		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		KElement pruned = prune.prune(jmf);
+		pruned.write2File(sm_dirTestDataTemp + "status.jmf.xsd");
 	}
 
 	@Test
