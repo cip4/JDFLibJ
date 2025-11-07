@@ -3,7 +3,7 @@
  *
  *
  * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
- * 
+ *
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -73,6 +73,39 @@ public class MessageHelper extends BaseXJDFHelper
 					if (sl.startsWith(f.name().toLowerCase()))
 					{
 						return f;
+					}
+				}
+
+			}
+			return ret;
+		}
+
+		public String getType(final String base)
+		{
+			if (StringUtil.length(base) > name().length() && base.toLowerCase().startsWith(name().toLowerCase()))
+			{
+				return base.substring(name().length());
+			}
+			return null;
+		}
+
+	}
+
+	public enum EType
+	{
+		ForceGang, GangStatus, KnownDevices, KnownMessages, KnownSubscriptions, ModifyQueueEntry, Notification, PipeControl, QueueStatus, RequestQueueEntry, Resource, ResubmitQueueEntry, ReturnQueueEntry, ShutDown, Status, StopPersistentChannel, SubmitQueueEntry, Wakeup;
+
+		public static EType getEnum(final String name)
+		{
+			final EType ret = EnumUtil.getJavaEnumIgnoreCase(EType.class, name);
+			if (ret == null && name != null)
+			{
+				final String sl = name.toLowerCase();
+				for (final EType t : values())
+				{
+					if (sl.endsWith(t.name().toLowerCase()))
+					{
+						return t;
 					}
 				}
 
@@ -334,27 +367,8 @@ public class MessageHelper extends BaseXJDFHelper
 
 	public EFamily getEFamily()
 	{
-		if (isCommand())
-		{
-			return EFamily.Command;
-		}
-		else if (isQuery())
-		{
-			return EFamily.Query;
-		}
-		else if (isSignal())
-		{
-			return EFamily.Signal;
-		}
-		else if (isResponse())
-		{
-			return EFamily.Response;
-		}
-		else if (isAudit())
-		{
-			return EFamily.Audit;
-		}
-		return null;
+		final String name = getLocalName();
+		return EFamily.getEnum(name);
 
 	}
 
@@ -366,6 +380,12 @@ public class MessageHelper extends BaseXJDFHelper
 		final EFamily f = getEFamily();
 		final String name = getLocalName();
 		return (f == null || f.name().equals(name)) ? null : StringUtil.rightStr(name, -f.name().length());
+	}
+
+	public EType getEType()
+	{
+		final String name = getLocalName();
+		return EType.getEnum(name);
 	}
 
 }

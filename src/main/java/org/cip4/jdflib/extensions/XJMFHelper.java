@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -58,7 +59,6 @@ public class XJMFHelper extends MessagePoolHelper
 {
 
 	/**
-	 *
 	 * @param pool
 	 */
 	public XJMFHelper(final KElement pool)
@@ -67,7 +67,6 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 *
 	 * default version - currently 2.0
 	 */
 	public void setVersion(final EnumVersion v)
@@ -76,7 +75,6 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public List<MessageHelper> getMessageHelpers(final EFamily family)
@@ -86,13 +84,14 @@ public class XJMFHelper extends MessagePoolHelper
 		for (final MessageHelper mh : vA)
 		{
 			if (family == null || family.equals(mh.getEFamily()))
+			{
 				vM.add(mh);
+			}
 		}
 		return vM;
 	}
 
 	/**
-	 *
 	 * @param pool
 	 */
 	public XJMFHelper()
@@ -103,7 +102,6 @@ public class XJMFHelper extends MessagePoolHelper
 
 	/**
 	 * @return
-	 *
 	 */
 	public XJMFHelper newXJMF(final EnumVersion v)
 	{
@@ -119,7 +117,6 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 *
 	 * @param family
 	 * @param typ
 	 * @return
@@ -127,13 +124,29 @@ public class XJMFHelper extends MessagePoolHelper
 	public MessageHelper appendMessage(final EnumFamily family, final EnumType typ)
 	{
 		if (family == null || typ == null)
+		{
 			return null;
+		}
 
 		return appendMessage(getMessageName(family, typ.getName()));
 	}
 
 	/**
-	 *
+	 * @param family
+	 * @param typ
+	 * @return
+	 */
+	public MessageHelper appendMessage(final EFamily family, final EType typ)
+	{
+		if (family == null || typ == null)
+		{
+			return null;
+		}
+
+		return appendMessage(family.name() + typ.name());
+	}
+
+	/**
 	 * @param family
 	 * @param typ
 	 * @return
@@ -141,13 +154,14 @@ public class XJMFHelper extends MessagePoolHelper
 	public MessageHelper getCreateMessage(final EnumFamily family, final EnumType typ, int iSkip)
 	{
 		if (family == null || typ == null)
+		{
 			return null;
+		}
 
 		return getCreateMessage(getMessageName(family, typ.getName()), iSkip);
 	}
 
 	/**
-	 *
 	 * @param family
 	 * @param typ
 	 * @return
@@ -159,7 +173,6 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 *
 	 * @param family
 	 * @param typ
 	 * @return
@@ -167,7 +180,9 @@ public class XJMFHelper extends MessagePoolHelper
 	String getMessageName(final EnumFamily family, final String typ)
 	{
 		if (StringUtil.isEmpty(typ) || family == null || EnumFamily.Acknowledge.equals(family) || EnumFamily.Registration.equals(family))
+		{
 			return null;
+		}
 		return family.getName() + typ;
 	}
 
@@ -193,7 +208,6 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#cleanUp()
 	 */
 	@Override
@@ -223,14 +237,17 @@ public class XJMFHelper extends MessagePoolHelper
 	public static XJMFHelper getHelper(KElement root)
 	{
 		if (root == null)
+		{
 			return null;
-		if (!root.getLocalName().equals(XJDFConstants.XJMF))
+		}
+		if (!XJDFConstants.XJMF.equals(root.getLocalName()))
+		{
 			root = root.getDeepParent(XJDFConstants.XJMF, 0);
+		}
 		return (root != null) ? new XJMFHelper(root) : null;
 	}
 
 	/**
-	 *
 	 * @param fileName
 	 * @return
 	 */
@@ -240,7 +257,6 @@ public class XJMFHelper extends MessagePoolHelper
 	}
 
 	/**
-	 *
 	 * @param fileName
 	 * @return
 	 */
@@ -258,7 +274,9 @@ public class XJMFHelper extends MessagePoolHelper
 	public static XJMFHelper getHelper(final XMLDoc doc)
 	{
 		if (doc == null)
+		{
 			return null;
+		}
 		final KElement root = doc.getRoot();
 		return getHelper(root);
 	}

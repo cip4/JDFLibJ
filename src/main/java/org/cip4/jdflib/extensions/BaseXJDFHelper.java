@@ -52,7 +52,6 @@ import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
 
 /**
- *
  * @author rainer prosi
  * @date Feb 17, 2012
  */
@@ -68,7 +67,9 @@ public abstract class BaseXJDFHelper
 	public static BaseXJDFHelper getBaseHelper(final XMLDoc doc)
 	{
 		if (doc == null)
+		{
 			return null;
+		}
 		final KElement root = doc.getRoot();
 		return getBaseHelper(root);
 	}
@@ -83,15 +84,25 @@ public abstract class BaseXJDFHelper
 	{
 		BaseXJDFHelper h = AuditPoolHelper.getHelper(root);
 		if (h == null)
+		{
 			h = ResourceHelper.getHelper(root);
+		}
 		if (h == null)
+		{
 			h = SetHelper.getHelper(root);
+		}
 		if (h == null)
+		{
 			h = ProductHelper.getHelper(root);
+		}
 		if (h == null)
+		{
 			h = XJDFHelper.getHelper(root);
+		}
 		if (h == null)
+		{
 			h = XJMFHelper.getHelper(root);
+		}
 		return h;
 	}
 
@@ -132,7 +143,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param xpath
 	 * @return
 	 */
@@ -142,7 +152,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param xpath
 	 * @return
 	 */
@@ -152,7 +161,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param attName
 	 * @return
 	 */
@@ -162,7 +170,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param attName
 	 * @return
 	 */
@@ -172,7 +179,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param attrib
 	 * @param nameSpaceURI
 	 */
@@ -185,7 +191,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param attName
 	 * @param value
 	 * @return
@@ -199,7 +204,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param attName
 	 * @param value
 	 * @return
@@ -210,8 +214,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
-	 *
 	 * @param xpath
 	 * @param value
 	 */
@@ -224,7 +226,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * generic cleanup routine
 	 */
 	public void cleanUp()
@@ -236,7 +237,6 @@ public abstract class BaseXJDFHelper
 	protected KElement theElement;
 
 	/**
-	 *
 	 * @return the underlying element
 	 */
 	public KElement getRoot()
@@ -245,7 +245,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return the underlying element
 	 */
 	public JDFDoc getRootDoc()
@@ -254,7 +253,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return the underlying element
 	 */
 	public BaseXJDFHelper getXRoot()
@@ -264,7 +262,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return the underlying parent XJDF element
 	 */
 	public XJDFHelper getXJDFRoot()
@@ -273,7 +270,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return the underlying parent XJDF element
 	 */
 	public XJMFHelper getXJMFRoot()
@@ -282,20 +278,20 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return the underlying parent XJDF element
 	 */
 	public EnumVersion getVersion()
 	{
 		BaseXJDFHelper helper = XJDFHelper.getHelper(theElement);
 		if (helper == null)
+		{
 			helper = XJMFHelper.getHelper(theElement);
+		}
 		final String v = helper == null ? null : helper.getAttribute(AttributeName.VERSION);
 		return EnumVersion.getEnum(v);
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public KElement deleteNode()
@@ -310,13 +306,14 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isEqual(final BaseXJDFHelper other)
 	{
 		if (theElement == null)
+		{
 			return other == null || other.theElement == null;
+		}
 		return theElement.isEqual(other.theElement);
 	}
 
@@ -341,7 +338,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param newID
 	 */
 	public void setID(final String newID)
@@ -350,7 +346,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param newID
 	 */
 	void setExternalID(final String newID)
@@ -359,7 +354,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param description
 	 */
 	void setDescriptiveName(final String description)
@@ -390,11 +384,17 @@ public abstract class BaseXJDFHelper
 	public boolean equals(final Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		final BaseXJDFHelper other = (BaseXJDFHelper) obj;
 		return ContainerUtil.equals(theElement, other.theElement);
 	}
@@ -421,7 +421,7 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * copy the helper src into this
-	 * 
+	 *
 	 * @param src
 	 * @return
 	 */
@@ -441,7 +441,16 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
+	 * @param nodeName
+	 * @return
+	 * @see org.cip4.jdflib.core.KElement#getCreateElement(java.lang.String)
+	 */
+	public KElement getElement(final String nodeName)
+	{
+		return theElement == null ? null : theElement.getElement(nodeName);
+	}
+
+	/**
 	 * @return the local name of the root
 	 */
 	public String getLocalName()
@@ -450,7 +459,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param idUsage
 	 * @param idValue
 	 */
@@ -464,7 +472,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param idUsage
 	 * @param idValue
 	 */
@@ -481,7 +488,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return the comment text
 	 */
 	public String getComment(final int i)
@@ -492,7 +498,6 @@ public abstract class BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return the comment
 	 */
 	public JDFComment setComment(final String text)
@@ -516,7 +521,6 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * @return the productID of the product
-	 *
 	 */
 	public String getExternalID()
 	{
@@ -525,7 +529,6 @@ public abstract class BaseXJDFHelper
 
 	/**
 	 * @return the descriptive name of the product
-	 *
 	 */
 	public String getDescriptiveName()
 	{

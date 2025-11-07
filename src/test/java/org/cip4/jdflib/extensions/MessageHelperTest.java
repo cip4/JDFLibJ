@@ -49,6 +49,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.jmf.JDFKnownMsgQuParams;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -157,6 +158,19 @@ class MessageHelperTest extends JDFTestCaseBase
 		assertEquals(EFamily.Command, mh.getEFamily());
 		mh = xjmfHelper.appendMessage(EnumFamily.Signal, EnumType.Status);
 		assertEquals(EFamily.Signal, mh.getEFamily());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetType2()
+	{
+		final XJMFHelper xjmfHelper = new XJMFHelper();
+		MessageHelper mh = xjmfHelper.appendMessage(EFamily.Command, EType.Status);
+		assertEquals(EType.Status, mh.getEType());
+		mh = xjmfHelper.appendMessage(EFamily.Audit, EType.Resource);
+		assertEquals(EFamily.Audit, mh.getEFamily());
 	}
 
 	/**

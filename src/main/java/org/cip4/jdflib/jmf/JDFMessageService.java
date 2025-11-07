@@ -95,6 +95,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.ifaces.IDeviceCapable;
@@ -182,6 +184,26 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	public EnumType getEnumType()
 	{
 		return EnumType.getEnum(getNonEmpty(AttributeName.TYPE));
+	}
+
+	/**
+	 * Typesafe enumerated attribute Type for xjdf
+	 *
+	 * @return EType: the enumeration value of the attribute
+	 */
+	public EType getEType()
+	{
+		return EType.getEnum(getNonEmpty(AttributeName.TYPE));
+	}
+
+	/**
+	 * Typesafe enumerated attribute Type for xjdf
+	 *
+	 * @return EType: the enumeration value of the attribute
+	 */
+	public EFamily getEFamily()
+	{
+		return EFamily.getEnum(getNonEmpty(AttributeName.TYPE));
 	}
 
 	/**
