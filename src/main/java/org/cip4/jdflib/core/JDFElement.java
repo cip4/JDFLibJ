@@ -452,7 +452,7 @@ public class JDFElement extends KElement
 
 		final VString vAtts = getAttributeVector();
 		String prefix = getPrefix();
-		if (prefix != null && !prefix.equals(JDFConstants.EMPTYSTRING))
+		if (prefix != null && !JDFConstants.EMPTYSTRING.equals(prefix))
 		{
 			prefix += JDFConstants.COLON;
 		}
@@ -463,7 +463,7 @@ public class JDFElement extends KElement
 		for (int i = 0; i < vReqKeys.size() && vMissing.size() < nMax; i++)
 		{
 			final String req = vReqKeys.get(i);
-			if (!vAtts.contains(prefix + req) && !vAtts.contains(req) && (!req.equals(JDFConstants.XMLNS) || super.getNamespaceURI() == null))
+			if (!vAtts.contains(prefix + req) && !vAtts.contains(req) && (!JDFConstants.XMLNS.equals(req) || super.getNamespaceURI() == null))
 			{
 				vMissing.addElement(prefix + req);
 			}
@@ -487,7 +487,7 @@ public class JDFElement extends KElement
 		// vReqKeys
 
 		String prefix = getPrefix();
-		if (prefix != null && !prefix.equals(JDFConstants.EMPTYSTRING))
+		if (prefix != null && !JDFConstants.EMPTYSTRING.equals(prefix))
 		{
 			prefix += JDFConstants.COLON;
 		}
@@ -722,7 +722,7 @@ public class JDFElement extends KElement
 			for (int j = 0; j < vInNameSpace.size(); j++)
 			{
 				// tokenize needs a blank
-				if (vInNameSpace.elementAt(j).equals(JDFConstants.BLANK))
+				if (JDFConstants.BLANK.equals(vInNameSpace.elementAt(j)))
 				{
 					vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
 				}
@@ -787,7 +787,7 @@ public class JDFElement extends KElement
 		for (int j = 0; j < vInNameSpace.size(); j++)
 		{
 			// tokenize needs a blank
-			if (vInNameSpace.elementAt(j).equals(JDFConstants.BLANK))
+			if (JDFConstants.BLANK.equals(vInNameSpace.elementAt(j)))
 			{
 				vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
 			}
@@ -2457,7 +2457,7 @@ public class JDFElement extends KElement
 
 		String idRef = target.getID();
 
-		if (idRef == null || idRef.equals(JDFConstants.EMPTYSTRING))
+		if (idRef == null || JDFConstants.EMPTYSTRING.equals(idRef))
 		{
 			target.appendAnchor(preSet);
 			idRef = target.getID();
@@ -2484,7 +2484,7 @@ public class JDFElement extends KElement
 			return null;
 		}
 
-		if (refAttributeLocal == null || refAttributeLocal.equals(JDFConstants.EMPTYSTRING))
+		if (refAttributeLocal == null || JDFConstants.EMPTYSTRING.equals(refAttributeLocal))
 		{
 			refAttributeLocal = JDFConstants.RREF;
 		}
@@ -2669,11 +2669,11 @@ public class JDFElement extends KElement
 		final boolean hasAtt1 = hasAttribute(att1);
 		n += hasAtt1 ? 1 : 0;
 		n += hasAttribute(att2) ? 1 : 0;
-		if (!att3.equals(JDFConstants.EMPTYSTRING))
+		if (!JDFConstants.EMPTYSTRING.equals(att3))
 		{
 			n += hasAttribute(att3) ? 1 : 0;
 		}
-		if (!att4.equals(JDFConstants.EMPTYSTRING))
+		if (!JDFConstants.EMPTYSTRING.equals(att4))
 		{
 			n += hasAttribute(att4) ? 1 : 0;
 		}
@@ -2737,7 +2737,7 @@ public class JDFElement extends KElement
 			final KElement kElem = nl.elementAt(i);
 			final String s = kElem.getAttribute(attrib, nameSpaceURI, JDFConstants.EMPTYSTRING);
 
-			if (s.equals(JDFConstants.EMPTYSTRING))
+			if (JDFConstants.EMPTYSTRING.equals(s))
 			{
 				continue;
 			}
@@ -2988,7 +2988,7 @@ public class JDFElement extends KElement
 	 */
 	public static boolean isInJDFNameSpaceStatic(final String ns)
 	{
-		return ns == null || ns.equals(JDFConstants.EMPTYSTRING) || (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1_1") == 0)
+		return ns == null || JDFConstants.EMPTYSTRING.equals(ns) || (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1_1") == 0)
 				|| (ns.compareToIgnoreCase("http://www.CIP4.org/JDFSchema_1") == 0);
 	}
 
@@ -3243,7 +3243,7 @@ public class JDFElement extends KElement
 	{
 		final String id = target.getID();
 
-		if (id.equals(JDFConstants.EMPTYSTRING))
+		if (JDFConstants.EMPTYSTRING.equals(id))
 		{
 			throw new JDFException("RemoveRefElement: target has no id");
 		}
@@ -3748,7 +3748,7 @@ public class JDFElement extends KElement
 		{
 			return getAttribute(AttributeName.ID, null, null);
 		}
-		else if ((strName == null) || strName.equals(JDFConstants.EMPTYSTRING))
+		else if ((strName == null) || JDFConstants.EMPTYSTRING.equals(strName))
 		{
 			String local = JDFConstants.EMPTYSTRING;
 			final JDFNode n = getJDFRoot();
@@ -3904,7 +3904,7 @@ public class JDFElement extends KElement
 		final AttributeInfo ai = getAttributeInfo();
 		VString v = getInvalidAttributes_JDFElement(level, bIgnorePrivate, nMax, ai);
 		String s = getNamespaceURI();
-		if (s != null && s.toLowerCase().indexOf(JDFConstants.CIP4ORG) >= 0 && !s.equals(JDFConstants.JDFNAMESPACE))
+		if (s != null && s.toLowerCase().indexOf(JDFConstants.CIP4ORG) >= 0 && !JDFConstants.JDFNAMESPACE.equals(s))
 		{
 			if (v == null)
 			{
@@ -3917,7 +3917,7 @@ public class JDFElement extends KElement
 		}
 		s = getAttribute(AttributeName.XMLNSXSI, null, null);
 		{
-			if ((s != null) && (!s.equals(AttributeName.XSIURI)))
+			if ((s != null) && (!AttributeName.XSIURI.equals(s)))
 			{
 				v.appendUnique(AttributeName.XMLNSXSI);
 			}
@@ -4001,10 +4001,8 @@ public class JDFElement extends KElement
 	private VString getLocalRequiredAttributes(final Set<String> vReq)
 	{
 		final VString v = new VString();
-		final Iterator<String> it = vReq.iterator();
-		while (it.hasNext())
+		for (String next : vReq)
 		{
-			final String next = it.next();
 			if (getAttribute(next, null, null) == null)
 			{
 				v.add(next);
@@ -4253,7 +4251,7 @@ public class JDFElement extends KElement
 	public String newID(final String lastID)
 	{
 		final String idPrefix = getIDPrefix();
-		if (lastID == null || lastID.equals(JDFConstants.EMPTYSTRING))
+		if (lastID == null || JDFConstants.EMPTYSTRING.equals(lastID))
 		{
 			return idPrefix + uniqueID(0);
 		}
@@ -4296,7 +4294,7 @@ public class JDFElement extends KElement
 			s = getAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
 		}
 
-		if (!s.equals(JDFConstants.EMPTYSTRING) && v.contains(s))
+		if (!JDFConstants.EMPTYSTRING.equals(s) && v.contains(s))
 		{
 			i = v.indexOf(s);
 		}
@@ -4335,7 +4333,7 @@ public class JDFElement extends KElement
 		{
 			strAtt = getAttribute(key, nameSpaceURI, JDFConstants.EMPTYSTRING);
 		}
-		if (strAtt.equals(JDFConstants.EMPTYSTRING))
+		if (JDFConstants.EMPTYSTRING.equals(strAtt))
 		{
 			vs.add(strAtt);
 		}
@@ -4608,7 +4606,7 @@ public class JDFElement extends KElement
 	 */
 	public KElement getTarget_JDFElement(final String id, String attrib)
 	{
-		if (id == null || id.equals(JDFCoreConstants.EMPTYSTRING))
+		if (id == null || JDFCoreConstants.EMPTYSTRING.equals(id))
 		{
 			return null;
 		}
@@ -4621,7 +4619,7 @@ public class JDFElement extends KElement
 
 		// try to find the target ID in the cached list
 		XMLDocUserData userData = getXMLDocUserData();
-		if (attrib.equals(JDFCoreConstants.ID) && userData != null)
+		if (JDFCoreConstants.ID.equals(attrib) && userData != null)
 		{
 			kRet = userData.getTarget(id);
 			bID = true;
@@ -6767,9 +6765,8 @@ public class JDFElement extends KElement
 
 		for (final KElement e : v)
 		{
-			if (e instanceof JDFRefElement)
+			if (e instanceof final JDFRefElement ref)
 			{
-				final JDFRefElement ref = (JDFRefElement) e;
 				if (!vDoneRefs.contains(ref))
 				{
 					vDoneRefs.add(ref);
@@ -6816,11 +6813,10 @@ public class JDFElement extends KElement
 			final String locName = e.getLocalName();
 			if (!e.matchesPathName(v.get(i)))
 			{
-				if (bFollowRefs && eLast != null && locName.equals(ElementName.RESOURCEPOOL))
+				if (bFollowRefs && eLast != null && ElementName.RESOURCEPOOL.equals(locName))
 				{ // now look for a refelement that points at this
-					if (eLast instanceof JDFResource)
+					if (eLast instanceof final JDFResource r)
 					{
-						final JDFResource r = (JDFResource) eLast;
 						final VElement vRefs = r.getLinks(r.getRefString(), null);
 						if (vRefs != null)
 						{
@@ -6993,7 +6989,11 @@ public class JDFElement extends KElement
 				}
 			}
 		}
-
+		ValuedEnum en = e.getEnumforAttribute(attName);
+		if (en != null)
+		{
+			return en.getName();
+		}
 		return "New Value";
 	}
 
