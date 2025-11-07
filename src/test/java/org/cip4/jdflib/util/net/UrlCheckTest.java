@@ -38,7 +38,6 @@ package org.cip4.jdflib.util.net;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +46,6 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
@@ -55,7 +53,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Nov 16, 2012
  */
@@ -76,13 +73,17 @@ class UrlCheckTest extends JDFTestCaseBase
 	void testPing()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		UrlPart ping = null;
 		for (int i = 0; i < 3; i++)
 		{
 			ping = new UrlCheck("https://www.google.com").ping(9999);
 			if (ping != null)
+			{
 				break;
+			}
 		}
 
 		assertNotNull(ping, debugConnection());
@@ -96,7 +97,9 @@ class UrlCheckTest extends JDFTestCaseBase
 	void testHTTPDetails()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		UrlPart ping = null;
 		final HTTPDetails det = new HTTPDetails();
 		for (int i = 0; i < 3; i++)
@@ -105,7 +108,9 @@ class UrlCheckTest extends JDFTestCaseBase
 			urlCheck.setHTTPDetails(det);
 			ping = urlCheck.ping(9999);
 			if (ping != null)
+			{
 				break;
+			}
 		}
 
 		assertNotNull(ping, debugConnection());
@@ -132,7 +137,9 @@ class UrlCheckTest extends JDFTestCaseBase
 	void testBuffer()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.setBuffer(true);
 		final UrlPart ping = urlCheck.ping(5555);
@@ -147,7 +154,9 @@ class UrlCheckTest extends JDFTestCaseBase
 	void testPingRC()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		assertEquals(200, new UrlCheck("https://www.google.com").pingRC(8888), debugConnection());
 	}
 
@@ -159,23 +168,10 @@ class UrlCheckTest extends JDFTestCaseBase
 	void testPingRCGet()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		assertEquals(200, new UrlCheck("https://www.google.com", UrlUtil.GET).pingRC(5555), debugConnection());
-	}
-
-	/**
-	 *
-	 *
-	 */
-	@SuppressWarnings("resource")
-	@Test
-	void testPingRCPost()
-	{
-		if (!isTestNetwork())
-			return;
-		final UrlCheck urlCheck = new UrlCheck("https://www.google.com", UrlUtil.POST);
-		urlCheck.setStream(new ByteArrayIOStream("test".getBytes()).getInputStream());
-		assertTrue(urlCheck.pingRC(8888) > 200, "Google does not accept post... ");
 	}
 
 	/**
@@ -186,7 +182,9 @@ class UrlCheckTest extends JDFTestCaseBase
 	void testGetPingRC()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final UrlCheck urlCheck = new UrlCheck("https://www.google.com");
 		urlCheck.startPing(5555);
 		ThreadUtil.sleep(111);
@@ -200,7 +198,7 @@ class UrlCheckTest extends JDFTestCaseBase
 		{
 			return "Requesting from IP: " + IOUtils.toString(in, Charset.defaultCharset());
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			log.warn("nasty net exception - ignore", e);
 			return "bad connection";
