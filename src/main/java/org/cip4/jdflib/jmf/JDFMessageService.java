@@ -209,6 +209,22 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 			return JavaEnumUtil.getEnumList(EResponseMode.class, val, true);
 		}
 
+		public static boolean isSignal(EResponseMode m)
+		{
+			return FireAndForget.equals(m) || Reliable.equals(m);
+		}
+	}
+
+	public boolean isSignal()
+	{
+		for (final EResponseMode m : getResponseModes())
+		{
+			if (EResponseMode.isSignal(m))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -329,7 +345,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	 */
 	public Vector<EnumFamily> getFamilies()
 	{
-		final Vector<EnumFamily> fams = new Vector<EnumFamily>();
+		final Vector<EnumFamily> fams = new Vector<>();
 		if (getCommand())
 		{
 			fams.add(EnumFamily.Command);
@@ -415,6 +431,12 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 			return (ICapabilityElement) e;
 		}
 		return null;
+	}
+
+	public void addResponseMode(EResponseMode response)
+	{
+		appendAttribute(XJDFConstants.ResponseModes, JavaEnumUtil.getName(response), true);
+
 	}
 
 }
