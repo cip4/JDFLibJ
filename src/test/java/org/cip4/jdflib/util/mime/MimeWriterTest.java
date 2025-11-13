@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -320,6 +320,41 @@ class MimeWriterTest extends JDFTestCaseBase
 	 * @throws Exception
 	 */
 	@Test
+	void testExtendRefUTF8() throws Exception
+	{
+		final JDFDoc docJMF = new JDFDoc("JMF");
+		final JDFJMF jmf = docJMF.getJMFRoot();
+		jmf.setSenderID("DeviceID");
+		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.ReturnQueueEntry);
+		final JDFReturnQueueEntryParams returnQEParams = com.appendReturnQueueEntryParams();
+
+		final String queueEntryID = "qe1";
+		returnQEParams.setQueueEntryID(queueEntryID);
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		final JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
+		final String utf8name = "4% von test äöüß€.icc";
+		pv.setURL(sm_dirTestData + utf8name);
+		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
+		final MimeWriter mw = new MimeWriter();
+		mw.buildMimePackage(docJMF, docJDF, true);
+		assertEquals(3, mw.getCount());
+
+		final File f = new File(sm_dirTestDataTemp + "mimeurlutf.mjm");
+		mw.writeToFile(f.getAbsolutePath());
+		final MimeReader mr = new MimeReader(f);
+		assertTrue(f.exists());
+		assertNotNull(mr.getPartHelperByLocalName(utf8name));
+		final JDFNode n = mr.getBodyPartHelper(1).getJDFDoc().getJDFRoot();
+		final JDFPreview pv2 = (JDFPreview) n.getResource(ElementName.PREVIEW);
+		assertNotNull(pv2.getURL());
+		assertNotNull(pv2.getURLInputStream());
+		assertEquals(3, mr.getCount());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	@Test
 	void testBuildNull() throws Exception
 	{
 		final JDFDoc docJMF = new JDFDoc("JMF");
@@ -444,7 +479,9 @@ class MimeWriterTest extends JDFTestCaseBase
 		assertEquals(2, mr.getCount());
 		final JDFPreview pv3 = (JDFPreview) n.getResource(ElementName.PREVIEW, null, 1);
 		if (PlatformUtil.isWindows())
+		{
 			assertNotEquals(pv2.getURL(), pv3.getURL());
+		}
 		assertNotNull(pv3.getURLInputStream());
 
 	}
