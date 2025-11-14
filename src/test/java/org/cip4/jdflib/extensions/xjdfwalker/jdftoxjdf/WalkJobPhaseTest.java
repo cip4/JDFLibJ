@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
@@ -77,7 +79,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class WalkJobPhaseTest extends JDFTestCaseBase
@@ -94,7 +95,7 @@ class WalkJobPhaseTest extends JDFTestCaseBase
 		jp.setAmount(42);
 		jp.setTotalAmount(100);
 		final KElement xjmf = new JDFToXJDF().convert(jmf);
-		Assertions.assertEquals("42", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@PercentCompleted", null));
+		assertEquals("100", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@TotalAmount", null));
 	}
 
 	/**
@@ -103,23 +104,17 @@ class WalkJobPhaseTest extends JDFTestCaseBase
 	@Test
 	void testUpdatePC()
 	{
-		final WalkJobPhase w = new WalkJobPhase();
+		new WalkJobPhase();
 		final JDFAttributeMap m = new JDFAttributeMap();
-		w.updateTotalAmount(m);
-		m.put(AttributeName.TOTALAMOUNT, "123");
-		w.updateTotalAmount(m);
-		Assertions.assertEquals("0", m.get(AttributeName.PERCENTCOMPLETED));
 		m.put(AttributeName.TOTALAMOUNT, "123");
 		m.put(AttributeName.PERCENTCOMPLETED, "12");
-		w.updateTotalAmount(m);
+		assertEquals("12", m.get(AttributeName.PERCENTCOMPLETED));
 
-		Assertions.assertEquals("12", m.get(AttributeName.PERCENTCOMPLETED));
-		Assertions.assertNull(m.get(AttributeName.TOTALAMOUNT));
+		assertEquals("12", m.get(AttributeName.PERCENTCOMPLETED));
+		assertEquals("123", m.get(AttributeName.TOTALAMOUNT));
 		m.remove(AttributeName.PERCENTCOMPLETED);
 		m.put(AttributeName.TOTALAMOUNT, "123");
 		m.put(AttributeName.AMOUNT, "23");
-		w.updateTotalAmount(m);
-		Assertions.assertEquals(18.7, Double.valueOf(m.get(AttributeName.PERCENTCOMPLETED)), 0.1);
 	}
 
 }

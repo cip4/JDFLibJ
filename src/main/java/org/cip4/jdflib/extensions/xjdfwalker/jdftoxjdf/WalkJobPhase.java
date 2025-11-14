@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -118,28 +117,9 @@ public class WalkJobPhase extends WalkJDFSubElement
 	{
 		map.remove(AttributeName.ACTIVATION);
 		map.remove(AttributeName.SPEED);
-		updateTotalAmount(map);
 		map.remove(AttributeName.URL);
 		renamePhaseAttributes(map);
 		super.updateAttributes(map);
-	}
-
-	void updateTotalAmount(final JDFAttributeMap map)
-	{
-		final String ta = map.remove(AttributeName.TOTALAMOUNT);
-		if (!StringUtil.isEmpty(ta))
-		{
-			final String pc = map.get(AttributeName.PERCENTCOMPLETED);
-			if (StringUtil.isEmpty(pc))
-			{
-				final double am = StringUtil.parseDouble(map.get(AttributeName.AMOUNT), 0);
-				final double tam = StringUtil.parseDouble(ta, 0);
-				if (tam > 0)
-				{
-					map.put(AttributeName.PERCENTCOMPLETED, StringUtil.formatDouble((100.0 * am) / tam, 3));
-				}
-			}
-		}
 	}
 
 	void renamePhaseAttributes(final JDFAttributeMap map)
@@ -161,7 +141,6 @@ public class WalkJobPhase extends WalkJDFSubElement
 	}
 
 	/**
-	 *
 	 * @param jdf
 	 */
 	void moveCostCenter(final KElement jdf)

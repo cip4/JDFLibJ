@@ -36,6 +36,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.JavaEnumUtil;
 
 public class XSDConstants
@@ -47,9 +48,12 @@ public class XSDConstants
 
 	static final String NAME = "name";
 	static final String REF = "ref";
+	static final String TARGET_NAMESPACE = "targetNamespace";
+	static final String XMLNS = "xmlns";
 	static final String TYPE = "type";
 	static final String BASE = "base";
 	static final String USE = "use";
+	static final String VALUE = "value";
 
 	static final String ITEM_TYPE = "itemType";
 	static final String SUBSTITUTION_GROUP = "substitutionGroup";
@@ -76,6 +80,25 @@ public class XSDConstants
 		{
 			return JavaEnumUtil.getEnumIgnoreCase(eAttributeUse.class, s, optional);
 		}
+	}
+
+	/**
+	 * @param root
+	 * @param attName
+	 * @param typ
+	 * @param required
+	 */
+	public static KElement setXSAttribute(final KElement root, final String attName, String typ, final boolean required)
+	{
+		KElement att = root.getChildWithAttribute(XS_ATTRIBUTE, NAME, null, attName, 0, true);
+		if (att == null)
+		{
+			att = root.appendElement(XS_ATTRIBUTE);
+		}
+		att.setAttribute(USE, required ? eAttributeUse.required : eAttributeUse.optional, null);
+		att.setAttribute(NAME, attName);
+		att.setAttribute(TYPE, typ);
+		return att;
 	}
 
 }
