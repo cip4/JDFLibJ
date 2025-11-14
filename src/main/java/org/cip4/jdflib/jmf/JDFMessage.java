@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoMessage;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -105,6 +104,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.resource.JDFQueueEntryDefList;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
@@ -113,7 +113,6 @@ import org.cip4.jdflib.util.StringUtil;
  * super class for all message families Signal, Command,...
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class JDFMessage extends JDFAutoMessage
 {
@@ -206,7 +205,6 @@ public class JDFMessage extends JDFAutoMessage
 	 * Enumerations for message families
 	 *
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         May 17, 2009
 	 */
 	@SuppressWarnings("unchecked")
@@ -309,7 +307,6 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
-	 *
 	 *         < July 21, 2009
 	 */
 	@SuppressWarnings("unchecked")
@@ -666,10 +663,10 @@ public class JDFMessage extends JDFAutoMessage
 	@Deprecated
 	public static String typeString()
 	{
-		final String enums = "Unknown,Events,KnownControllers,KnownDevices,KnownJDFServices,KnownMessages," + "RepeatMessages,StopPersistentChannel,Occupation,Resource,"
-				+ "Status,Track,PipeClose,PipePull,PipePush,PipePause,AbortQueueEntry," + "HoldQueueEntry,removeQueueEntry,ResubmitQueueEntry,"
-				+ "ResumeQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority," + "SubmitQueueEntry,CloseQueue,FlushQueue,HoldQueue,OpenQueue,QueueEntryStatus,QueueStatus,"
-				+ "ResumeQueue,SubmissionMethods";
+		final String enums = "Unknown,Events,KnownControllers,KnownDevices,KnownJDFServices,KnownMessages,"
+				+ "RepeatMessages,StopPersistentChannel,Occupation,Resource," + "Status,Track,PipeClose,PipePull,PipePush,PipePause,AbortQueueEntry,"
+				+ "HoldQueueEntry,removeQueueEntry,ResubmitQueueEntry," + "ResumeQueueEntry,SetQueueEntryPosition,SetQueueEntryPriority,"
+				+ "SubmitQueueEntry,CloseQueue,FlushQueue,HoldQueue,OpenQueue,QueueEntryStatus,QueueStatus," + "ResumeQueue,SubmissionMethods";
 		return enums;
 	}
 
@@ -763,18 +760,18 @@ public class JDFMessage extends JDFAutoMessage
 			return true;
 		}
 
-		if (elementName.equals(ElementName.GENERALID) || elementName.equals(ElementName.COMMENT))
+		if (ElementName.GENERALID.equals(elementName) || ElementName.COMMENT.equals(elementName))
 		{
 			return true;
 		}
 		// it aint even valid for any family
-		final String[] familyTypeObj = familyTypeObj();
-		final boolean isFamilyTypeString = (familyTypeObj == null) ? false : ArrayUtils.contains(familyTypeObj, elementName);
+		final Set<String> familyTypeObj = familyTypeObj();
+		final boolean isFamilyTypeString = ContainerUtil.contains(familyTypeObj, elementName);
 		if (!isFamilyTypeString)
 		{
 			return false;
 		}
-		if (elementName.equals(ElementName.NOTIFICATION))
+		if (ElementName.NOTIFICATION.equals(elementName))
 		{
 			return true;
 		}
@@ -803,7 +800,7 @@ public class JDFMessage extends JDFAutoMessage
 		final Set<EnumType> validList = new HashSet<>();
 
 		// Commands
-		if (elementName.equals(ElementName.FLUSHQUEUEPARAMS))
+		if (ElementName.FLUSHQUEUEPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{ // validation for cardinality '?' or '-', when no more than 1
@@ -812,7 +809,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.FLUSHQUEUEINFO))
+		else if (ElementName.FLUSHQUEUEINFO.equals(elementName))
 		{
 			if (iSkip == 0)
 			{ // validation for cardinality '?' or '-', when no more than 1
@@ -821,7 +818,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.FLUSHRESOURCEPARAMS))
+		else if (ElementName.FLUSHRESOURCEPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -829,7 +826,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.NEWJDFCMDPARAMS))
+		else if (ElementName.NEWJDFCMDPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -837,7 +834,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.NODEINFOCMDPARAMS))
+		else if (ElementName.NODEINFOCMDPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -845,7 +842,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.PIPEPARAMS))
+		else if (ElementName.PIPEPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -856,7 +853,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.QUEUEENTRYDEF))
+		else if (ElementName.QUEUEENTRYDEF.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -868,7 +865,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.QUEUEENTRYPRIPARAMS))
+		else if (ElementName.QUEUEENTRYPRIPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -876,7 +873,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.QUEUEENTRYPOSPARAMS))
+		else if (ElementName.QUEUEENTRYPOSPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -884,7 +881,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.QUEUEFILTER))
+		else if (ElementName.QUEUEFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -910,35 +907,35 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.ABORTQUEUEENTRYPARAMS))
+		else if (ElementName.ABORTQUEUEENTRYPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.AbortQueueEntry);
 			}
 		}
-		else if (elementName.equals(ElementName.HOLDQUEUEENTRYPARAMS))
+		else if (ElementName.HOLDQUEUEENTRYPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.HoldQueueEntry);
 			}
 		}
-		else if (elementName.equals(ElementName.RESUMEQUEUEENTRYPARAMS))
+		else if (ElementName.RESUMEQUEUEENTRYPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.ResumeQueueEntry);
 			}
 		}
-		else if (elementName.equals(ElementName.REMOVEQUEUEENTRYPARAMS))
+		else if (ElementName.REMOVEQUEUEENTRYPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.RemoveQueueEntry);
 			}
 		}
-		else if (elementName.equals(ElementName.QUEUESUBMISSIONPARAMS))
+		else if (ElementName.QUEUESUBMISSIONPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -946,7 +943,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.REQUESTQUEUEENTRYPARAMS))
+		else if (ElementName.REQUESTQUEUEENTRYPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -954,7 +951,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.RESOURCECMDPARAMS))
+		else if (ElementName.RESOURCECMDPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -962,7 +959,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.RESOURCEPULLPARAMS))
+		else if (ElementName.RESOURCEPULLPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -970,7 +967,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.RESUBMISSIONPARAMS))
+		else if (ElementName.RESUBMISSIONPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -978,7 +975,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.RETURNQUEUEENTRYPARAMS))
+		else if (ElementName.RETURNQUEUEENTRYPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -986,7 +983,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.SHUTDOWNCMDPARAMS))
+		else if (ElementName.SHUTDOWNCMDPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -994,7 +991,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.STOPPERSCHPARAMS))
+		else if (ElementName.STOPPERSCHPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1002,7 +999,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.WAKEUPCMDPARAMS))
+		else if (ElementName.WAKEUPCMDPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1011,7 +1008,7 @@ public class JDFMessage extends JDFAutoMessage
 
 			// Queries
 		}
-		else if (elementName.equals(ElementName.DEVICEFILTER))
+		else if (ElementName.DEVICEFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1019,12 +1016,12 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.EMPLOYEEDEF))
+		else if (ElementName.EMPLOYEEDEF.equals(elementName))
 		{
 			validList.add(EnumType.Occupation);
 
 		}
-		else if (elementName.equals(ElementName.KNOWNMSGQUPARAMS))
+		else if (ElementName.KNOWNMSGQUPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1032,7 +1029,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.MSGFILTER))
+		else if (ElementName.MSGFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1040,7 +1037,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.NEWJDFQUPARAMS))
+		else if (ElementName.NEWJDFQUPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1048,7 +1045,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.NODEINFOQUPARAMS))
+		else if (ElementName.NODEINFOQUPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1056,7 +1053,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.NOTIFICATIONFILTER))
+		else if (ElementName.NOTIFICATIONFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1065,7 +1062,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.QUEUEENTRYDEFLIST))
+		else if (ElementName.QUEUEENTRYDEFLIST.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1073,7 +1070,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.RESOURCEQUPARAMS))
+		else if (ElementName.RESOURCEQUPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1081,7 +1078,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.STATUSQUPARAMS))
+		else if (ElementName.STATUSQUPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1089,7 +1086,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.TRACKFILTER))
+		else if (ElementName.TRACKFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1098,7 +1095,7 @@ public class JDFMessage extends JDFAutoMessage
 
 			// Responses
 		}
-		else if (elementName.equals(ElementName.DEVICELIST))
+		else if (ElementName.DEVICELIST.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1106,7 +1103,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.DEVICEINFO))
+		else if (ElementName.DEVICEINFO.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1116,7 +1113,7 @@ public class JDFMessage extends JDFAutoMessage
 			validList.add(EnumType.Status);
 
 		}
-		else if (elementName.equals(ElementName.FLUSHEDRESOURCES))
+		else if (ElementName.FLUSHEDRESOURCES.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1124,22 +1121,22 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.IDINFO))
+		else if (ElementName.IDINFO.equals(elementName))
 		{
 			validList.add(EnumType.NewJDF);
 
 		}
-		else if (elementName.equals(ElementName.JDFCONTROLLER))
+		else if (ElementName.JDFCONTROLLER.equals(elementName))
 		{
 			validList.add(EnumType.KnownControllers);
 
 		}
-		else if (elementName.equals(ElementName.JDFSERVICE))
+		else if (ElementName.JDFSERVICE.equals(elementName))
 		{
 			validList.add(EnumType.KnownJDFServices);
 
 		}
-		else if (elementName.equals(ElementName.JOBPHASE))
+		else if (ElementName.JOBPHASE.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1150,27 +1147,27 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.MESSAGESERVICE))
+		else if (ElementName.MESSAGESERVICE.equals(elementName))
 		{
 			validList.add(EnumType.KnownMessages);
 
 		}
-		else if (elementName.equals(ElementName.NODEINFORESP))
+		else if (ElementName.NODEINFORESP.equals(elementName))
 		{
 			validList.add(EnumType.NodeInfo);
 
 		}
-		else if (elementName.equals(ElementName.NOTIFICATIONDEF))
+		else if (ElementName.NOTIFICATIONDEF.equals(elementName))
 		{
 			validList.add(EnumType.Events);
 
 		}
-		else if (elementName.equals(ElementName.OCCUPATION))
+		else if (ElementName.OCCUPATION.equals(elementName))
 		{
 			validList.add(EnumType.Occupation);
 
 		}
-		else if (elementName.equals(ElementName.QUEUE))
+		else if (ElementName.QUEUE.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1195,7 +1192,7 @@ public class JDFMessage extends JDFAutoMessage
 			}
 
 		}
-		else if (elementName.equals(ElementName.QUEUEENTRY))
+		else if (ElementName.QUEUEENTRY.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1205,87 +1202,87 @@ public class JDFMessage extends JDFAutoMessage
 			validList.add(EnumType.QueueEntryStatus);
 
 		}
-		else if (elementName.equals(ElementName.RESOURCEINFO))
+		else if (ElementName.RESOURCEINFO.equals(elementName))
 		{
 			validList.add(EnumType.Resource);
 
 		}
-		else if (elementName.equals(ElementName.SUBMISSIONMETHODS))
+		else if (ElementName.SUBMISSIONMETHODS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.SubmissionMethods);
 			}
 		}
-		else if (elementName.equals(ElementName.SUBSCRIPTIONFILTER))
+		else if (ElementName.SUBSCRIPTIONFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.KnownSubscriptions);
 			}
 		}
-		else if (elementName.equals(ElementName.SUBSCRIPTIONINFO))
+		else if (ElementName.SUBSCRIPTIONINFO.equals(elementName))
 		{
 			validList.add(EnumType.KnownSubscriptions);
 		}
-		else if (elementName.equals(ElementName.TRACKRESULT))
+		else if (ElementName.TRACKRESULT.equals(elementName))
 		{
 			validList.add(EnumType.Track);
 		}
-		else if (elementName.equals(ElementName.UPDATEJDFCMDPARAMS))
+		else if (ElementName.UPDATEJDFCMDPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.UpdateJDF);
 			}
 		}
-		else if (elementName.equals(ElementName.MODIFYNODECMDPARAMS))
+		else if (ElementName.MODIFYNODECMDPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.ModifyNode);
 			}
 		}
-		else if (elementName.equals(ElementName.AUTHENTICATIONCMDPARAMS))
+		else if (ElementName.AUTHENTICATIONCMDPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.RequestForAuthentication);
 			}
 		}
-		else if (elementName.equals(ElementName.AUTHENTICATIONQUPARAMS))
+		else if (ElementName.AUTHENTICATIONQUPARAMS.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.RequestForAuthentication);
 			}
 		}
-		else if (elementName.equals(ElementName.AUTHENTICATIONRESP))
+		else if (ElementName.AUTHENTICATIONRESP.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.RequestForAuthentication);
 			}
 		}
-		else if (elementName.equals(ElementName.CONTROLLERFILTER))
+		else if (ElementName.CONTROLLERFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.KnownControllers);
 			}
 		}
-		else if (elementName.equals(ElementName.GANGINFO))
+		else if (ElementName.GANGINFO.equals(elementName))
 		{
 			validList.add(EnumType.GangStatus);
 		}
-		else if (elementName.equals(ElementName.GANGQUFILTER))
+		else if (ElementName.GANGQUFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
 				validList.add(EnumType.GangStatus);
 			}
 		}
-		else if (elementName.equals(ElementName.GANGCMDFILTER))
+		else if (ElementName.GANGCMDFILTER.equals(elementName))
 		{
 			if (iSkip == 0)
 			{
@@ -1316,7 +1313,7 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @return String comma separated valid object types for this family type
 	 */
-	private String[] familyTypeObj()
+	private Set<String> familyTypeObj()
 	{
 		final EnumFamily family = getFamily();
 		if (family == null)
@@ -1356,49 +1353,53 @@ public class JDFMessage extends JDFAutoMessage
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private final static String[] commandTypeObjString = { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.ABORTQUEUEENTRYPARAMS, ElementName.HOLDQUEUEENTRYPARAMS,
-			ElementName.RESUMEQUEUEENTRYPARAMS, ElementName.REMOVEQUEUEENTRYPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS, ElementName.GANGCMDFILTER,
-			ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFCMDPARAMS, ElementName.NODEINFOCMDPARAMS, ElementName.PIPEPARAMS, ElementName.QUEUEENTRYDEF,
-			ElementName.QUEUEENTRYPRIPARAMS, ElementName.QUEUEENTRYPOSPARAMS, ElementName.QUEUEFILTER, ElementName.QUEUESUBMISSIONPARAMS, ElementName.REQUESTQUEUEENTRYPARAMS,
-			ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS, ElementName.SHUTDOWNCMDPARAMS,
-			ElementName.STOPPERSCHPARAMS, ElementName.UPDATEJDFCMDPARAMS, ElementName.WAKEUPCMDPARAMS };
+	private final static Set<String> commandTypeObjString = (Set<String>) ContainerUtil.addAll(new HashSet<String>(),
+			new String[] { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.ABORTQUEUEENTRYPARAMS, ElementName.HOLDQUEUEENTRYPARAMS,
+					ElementName.RESUMEQUEUEENTRYPARAMS, ElementName.REMOVEQUEUEENTRYPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS,
+					ElementName.GANGCMDFILTER, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFCMDPARAMS, ElementName.NODEINFOCMDPARAMS,
+					ElementName.PIPEPARAMS, ElementName.QUEUEENTRYDEF, ElementName.QUEUEENTRYPRIPARAMS, ElementName.QUEUEENTRYPOSPARAMS,
+					ElementName.QUEUEFILTER, ElementName.QUEUESUBMISSIONPARAMS, ElementName.REMOVEQUEUEENTRYPARAMS, ElementName.REQUESTQUEUEENTRYPARAMS,
+					ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS,
+					ElementName.SHUTDOWNCMDPARAMS, ElementName.STOPPERSCHPARAMS, ElementName.UPDATEJDFCMDPARAMS, ElementName.WAKEUPCMDPARAMS });
 
 	/**
 	 * Enumeration strings for list of CommandTypeObj
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private final static String[] registrationTypeObjString = { ElementName.PIPEPARAMS, ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, };
+	private final static Set<String> registrationTypeObjString = (Set<String>) ContainerUtil.addAll(new HashSet<String>(),
+			new String[] { ElementName.PIPEPARAMS, ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, });
 
 	/**
 	 * Enumeration strings for list of QueryTypeObj
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private final static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.GANGQUFILTER,
-			ElementName.KNOWNMSGQUPARAMS, ElementName.MSGFILTER, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS, ElementName.NODEINFOQUPARAMS,
-			ElementName.NOTIFICATIONFILTER, ElementName.QUEUEENTRYDEFLIST, ElementName.QUEUEFILTER, ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS,
-			ElementName.SUBSCRIPTIONFILTER, ElementName.TRACKFILTER, ElementName.UPDATEJDFCMDPARAMS };
+	private final static Set<String> queryTypeObjString = (Set<String>) ContainerUtil.addAll(new HashSet<String>(),
+			new String[] { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.GANGQUFILTER,
+					ElementName.KNOWNMSGQUPARAMS, ElementName.MSGFILTER, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS,
+					ElementName.NODEINFOQUPARAMS, ElementName.NOTIFICATIONFILTER, ElementName.QUEUEENTRYDEFLIST, ElementName.QUEUEFILTER,
+					ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS, ElementName.SUBSCRIPTIONFILTER, ElementName.TRACKFILTER,
+					ElementName.UPDATEJDFCMDPARAMS });
 
 	/**
 	 * Enumeration strings for list of ResponseTypeObj
 	 *
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private final static String[] responseTypeObjString = { ElementName.DEVICELIST, ElementName.DEVICEINFO, ElementName.FLUSHQUEUEINFO, ElementName.FLUSHEDRESOURCES,
-			ElementName.GANGINFO, ElementName.IDINFO, ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE, ElementName.NODEINFORESP,
-			ElementName.NOTIFICATIONDEF, ElementName.NOTIFICATION, ElementName.OCCUPATION, ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO,
-			ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS, ElementName.TRACKRESULT, ElementName.COMMAND, ElementName.QUERY, ElementName.ACKNOWLEDGE,
-			ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION };
+	private final static Set<String> responseTypeObjString = (Set<String>) ContainerUtil.addAll(new HashSet<String>(),
+			new String[] { ElementName.DEVICELIST, ElementName.DEVICEINFO, ElementName.FLUSHQUEUEINFO, ElementName.FLUSHEDRESOURCES, ElementName.GANGINFO,
+					ElementName.IDINFO, ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE,
+					ElementName.NODEINFORESP, ElementName.NOTIFICATIONDEF, ElementName.NOTIFICATION, ElementName.OCCUPATION, ElementName.QUEUE,
+					ElementName.QUEUEENTRY, ElementName.RESOURCEINFO, ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS, ElementName.TRACKRESULT,
+					ElementName.COMMAND, ElementName.QUERY, ElementName.ACKNOWLEDGE, ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION });
 
-	private static String[] signalTypeObjString = initSignal();
+	private static Set<String> signalTypeObjString = initSignal();
 
-	private static String[] initSignal()
+	private static Set<String> initSignal()
 	{
-		final VString v = new VString(queryTypeObjString);
-		v.addAll(responseTypeObjString);
-		v.unify();
-		return v.toArray(new String[v.size()]);
+		final Set<String> v = new HashSet<>(queryTypeObjString);
+		return (Set<String>) ContainerUtil.addAll(v, responseTypeObjString);
 	}
 
 	private static String[] elemArray = null;
@@ -1407,7 +1408,7 @@ public class JDFMessage extends JDFAutoMessage
 	 * append an element<br>
 	 * throws a JDFException, if <code>elementName</code> is not legal and strictValidation is switched on
 	 *
-	 * @param elementName name of the element to append
+	 * @param elementName  name of the element to append
 	 * @param nameSpaceURI namespace URI of the element to append
 	 * @return the appended element
 	 */
@@ -1440,9 +1441,9 @@ public class JDFMessage extends JDFAutoMessage
 	 * get a (valid) element<br>
 	 * throws <code>JDFException</code> if the element is not valid and strictValidation is switched on
 	 *
-	 * @param nodeName name of the element to get
+	 * @param nodeName     name of the element to get
 	 * @param nameSpaceURI namespace URI of the element to get
-	 * @param iSkip number of elements to skip
+	 * @param iSkip        number of elements to skip
 	 * @return the element
 	 */
 	public KElement getValidElement(final String nodeName, final String nameSpaceURI, final int iSkip)
@@ -1460,9 +1461,9 @@ public class JDFMessage extends JDFAutoMessage
 	 * get a (valid) element, create if it doesn't exist<br>
 	 * throws <code>JDFException</code> if the element is not valid and strictValidation is switched on
 	 *
-	 * @param nodeName name of the element to get
+	 * @param nodeName     name of the element to get
 	 * @param nameSpaceURI namespace URI of the element to get
-	 * @param iSkip number of elements to skip
+	 * @param iSkip        number of elements to skip
 	 * @return KElement
 	 */
 	public KElement getCreateValidElement(final String nodeName, final String nameSpaceURI, final int iSkip)
@@ -2572,7 +2573,6 @@ public class JDFMessage extends JDFAutoMessage
 	/**
 	 * get StatusQuParams
 	 *
-	 *
 	 * @return JDFStatusQuParams: the element
 	 */
 	public JDFStatusQuParams getStatusQuParams()
@@ -3116,6 +3116,30 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
+	 * @return
+	 */
+	public JDFRemoveQueueEntryParams appendRemoveQueueEntryParams()
+	{
+		return (JDFRemoveQueueEntryParams) appendValidElement(ElementName.REMOVEQUEUEENTRYPARAMS, null);
+	}
+
+	/**
+	 * @return
+	 */
+	public JDFRemoveQueueEntryParams getRemoveQueueEntryParams()
+	{
+		return (JDFRemoveQueueEntryParams) getValidElement(ElementName.REMOVEQUEUEENTRYPARAMS, null, 0);
+	}
+
+	/**
+	 * @return
+	 */
+	public JDFRemoveQueueEntryParams getCreateRemoveQueueEntryParams()
+	{
+		return (JDFRemoveQueueEntryParams) getCreateValidElement(ElementName.REMOVEQUEUEENTRYPARAMS, null, 0);
+	}
+
+	/**
 	 * @param iSkip
 	 * @return
 	 */
@@ -3190,7 +3214,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @param iSkip
 	 * @return
 	 */
@@ -3200,7 +3223,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFReturnQueueEntryParams appendReturnQueueEntryParams()
@@ -3209,7 +3231,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @param iSkip
 	 * @return
 	 */
@@ -3219,7 +3240,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @param iSkip
 	 * @return
 	 */
@@ -3229,7 +3249,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFSubscriptionInfo appendSubscriptionInfo()
@@ -3238,7 +3257,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @param iSkip
 	 * @return
 	 */
@@ -3248,7 +3266,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFSubscriptionFilter getSubscriptionFilter()
@@ -3257,7 +3274,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFSubscriptionFilter getCreateSubscriptionFilter()
@@ -3266,7 +3282,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFSubscriptionFilter appendSubscriptionFilter()
@@ -3402,8 +3417,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
-	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
@@ -3498,9 +3511,11 @@ public class JDFMessage extends JDFAutoMessage
 		final VString s = super.optionalElements();
 		final EnumType t = getEnumType();
 		// loop over all valid potential elements for this family
-		final String[] vObjs = familyTypeObj();
+		final Set<String> vObjs = familyTypeObj();
 		if (vObjs == null)
+		{
 			return s;
+		}
 		// for each object, check whether it is compatible with the type of this
 		for (final String vObj : vObjs)
 		{
@@ -3516,7 +3531,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
@@ -3538,7 +3552,7 @@ public class JDFMessage extends JDFAutoMessage
 			return s;
 		}
 		final String xs = getXSIType();
-		if (xs != null && !xs.equals(getLocalName() + t))
+		if (xs != null && !(getLocalName() + t).equals(xs))
 		{
 			s.add(AttributeName.XSITYPE);
 		}
@@ -3556,7 +3570,6 @@ public class JDFMessage extends JDFAutoMessage
 	 * (21) get VString attribute ICSVersions, grab from parent JMF if none exists here
 	 *
 	 * @return VString the value of the attribute
-	 *
 	 */
 	@Override
 	public VString getICSVersions()

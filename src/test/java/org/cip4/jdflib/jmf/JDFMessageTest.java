@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -61,7 +61,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         far before May 17, 2009
  */
 class JDFMessageTest
@@ -213,6 +212,19 @@ class JDFMessageTest
 	{
 		final JDFCommand m = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.AbortQueueEntry);
 		assertNotNull(m.appendValidElement(ElementName.ABORTQUEUEENTRYPARAMS, null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testRemoveQEParams()
+	{
+		final JDFCommand m = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.RemoveQueueEntry);
+		final JDFRemoveQueueEntryParams rqp = m.appendRemoveQueueEntryParams();
+		assertNotNull(rqp);
+		assertEquals(rqp, m.getRemoveQueueEntryParams());
+		assertEquals(rqp, m.getCreateRemoveQueueEntryParams());
 	}
 
 	/**
