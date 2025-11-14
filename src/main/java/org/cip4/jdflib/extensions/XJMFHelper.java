@@ -138,12 +138,11 @@ public class XJMFHelper extends MessagePoolHelper
 	 */
 	public MessageHelper appendMessage(final EFamily family, final EType typ)
 	{
-		if (family == null || typ == null)
+		if (EFamily.Audit.equals(family))
 		{
-			return null;
+			throw new IllegalArgumentException("Cannot append audits to xjmf");
 		}
-
-		return appendMessage(family.name() + typ.name());
+		return appendMessage(MessageHelper.getMessageName(family, typ));
 	}
 
 	/**

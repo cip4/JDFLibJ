@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -41,9 +41,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -62,7 +63,6 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param sh
 	 * @return
 	 */
@@ -90,7 +90,6 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param message
 	 * @return
 	 */
@@ -100,7 +99,6 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param sh
 	 * @return
 	 */
@@ -144,7 +142,6 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 * @deprecated use getMessageHelpes
 	 */
@@ -155,7 +152,6 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public List<MessageHelper> getMessageHelpers()
@@ -173,27 +169,37 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param e
 	 * @return
 	 */
 	public MessageHelper getMessageHelper(final KElement e)
 	{
 		if (e == null)
+		{
 			return null;
-		final String name = e.getLocalName();
-		if (XJDFConstants.AuditResource.equals(name) || XJDFConstants.SignalResource.equals(name) || XJDFConstants.ResponseResource.equals(name))
+		}
+		final EType typ = EType.getEnum(e.getLocalName());
+		final EFamily family = EFamily.getEnum(e.getLocalName());
+		if (EType.Resource.equals(typ))
+		{
 			return newMessageResourceHelper(e);
-		else if (name.startsWith(JDFConstants.AUDIT))
+		}
+		else if (EFamily.Audit.equals(family))
+		{
 			return new AuditHelper(e);
+		}
 		else
+		{
 			return new MessageHelper(e);
+		}
 	}
 
 	public MessageHelper getMessageHelper(final String type, int i)
 	{
 		if (StringUtil.isEmpty(type))
+		{
 			return getMessageHelper(i);
+		}
 		else
 		{
 			final List<MessageHelper> messageHelpers = getMessageHelpers();
@@ -205,14 +211,15 @@ public class MessagePoolHelper extends BaseXJDFHelper
 			for (final MessageHelper mh : messageHelpers)
 			{
 				if (type.equals(mh.getType()) && (i >= 0 && i-- == 0))
+				{
 					return mh;
+				}
 			}
 		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @param e
 	 * @return
 	 */
@@ -220,16 +227,21 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	{
 		final List<MessageHelper> v = getMessageHelpers();
 		if (v == null)
+		{
 			return null;
+		}
 		if (i < 0)
+		{
 			i = i + v.size();
+		}
 		if (i < 0 || i >= v.size())
+		{
 			return null;
+		}
 		return v.get(i);
 	}
 
 	/**
-	 *
 	 * @param elementName
 	 * @return
 	 */
@@ -247,7 +259,6 @@ public class MessagePoolHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 *
 	 * @param elementName
 	 * @return
 	 */

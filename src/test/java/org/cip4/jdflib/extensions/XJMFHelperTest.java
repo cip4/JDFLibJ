@@ -47,6 +47,8 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.util.JDFDate;
@@ -58,7 +60,6 @@ import org.junit.jupiter.api.Test;
  */
 class XJMFHelperTest extends JDFTestCaseBase
 {
-	XJMFHelper theHelper = null;
 
 	/**
 	 * @see junit.framework.TestCase#setUp()
@@ -70,7 +71,6 @@ class XJMFHelperTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		KElement.setLongID(false);
-		theHelper = new XJMFHelper();
 	}
 
 	/**
@@ -79,6 +79,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testAddMessage()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
 		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
 	}
@@ -87,8 +88,21 @@ class XJMFHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testAddMessage2()
+	{
+		final XJMFHelper theHelper = new XJMFHelper();
+		final MessageHelper mh = theHelper.appendMessage(EFamily.Command, EType.SubmitQueueEntry);
+		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
+		assertEquals(mh, theHelper.getMessageHelpers().get(0));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testGetCreateMessage()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		final MessageHelper mh = theHelper.getCreateMessage(EnumFamily.Command, EnumType.SubmitQueueEntry, 0);
 		assertEquals("CommandSubmitQueueEntry", mh.getRoot().getLocalName());
 		final MessageHelper mh2 = theHelper.getCreateMessage(EnumFamily.Command, EnumType.SubmitQueueEntry, 0);
@@ -103,6 +117,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testGetMessageName()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		final String s = theHelper.getMessageName(EnumFamily.Command, "SubmitQueueEntry");
 		assertEquals("CommandSubmitQueueEntry", s);
 	}
@@ -113,6 +128,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testGetMessageNameDeprecated()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		final String s = theHelper.getMessageName(EnumFamily.Registration, "SubmitQueueEntry");
 		assertNull(s);
 		final String s2 = theHelper.getMessageName(EnumFamily.Acknowledge, "SubmitQueueEntry");
@@ -125,6 +141,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testAddMessageNull()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, "");
 		assertNull(mh);
 	}
@@ -135,6 +152,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testAddMessageDeprecated()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Registration, "Resource");
 		assertNull(mh);
 	}
@@ -145,6 +163,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testHeaderID()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		assertNotNull(theHelper.getXPathValue("Header/@ID"));
 	}
 
@@ -154,6 +173,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testHeaderID2()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		assertNull(theHelper.getXPathElement("Header/Header"));
 	}
 
@@ -163,6 +183,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testHeaderDate()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		assertNotNull(JDFDate.createDate(theHelper.getXPathValue("Header/@Time")));
 	}
 
@@ -172,13 +193,14 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testParseFile()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
 		final File file = new File(sm_dirTestDataTemp + "xjmf.xjmf");
 		file.delete();
 		theHelper.writeToFile(sm_dirTestDataTemp + "xjmf.xjmf");
 		assertTrue(file.exists());
-		XJMFHelper h2 = XJMFHelper.parseFile(file.getAbsolutePath());
-		XJMFHelper h3 = XJMFHelper.parseFile(file);
+		final XJMFHelper h2 = XJMFHelper.parseFile(file.getAbsolutePath());
+		final XJMFHelper h3 = XJMFHelper.parseFile(file);
 		assertTrue(h2.isEqual(h3));
 	}
 
@@ -188,6 +210,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	@Test
 	void testWriteToFile()
 	{
+		final XJMFHelper theHelper = new XJMFHelper();
 		theHelper.appendMessage(EnumFamily.Command, EnumType.SubmitQueueEntry);
 		final File file = new File(sm_dirTestDataTemp + "xjmf.xjmf");
 		file.delete();
@@ -195,12 +218,4 @@ class XJMFHelperTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 	}
 
-	/**
-	 * @see Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "XJMFHelperTest [theHelper=" + theHelper + "]";
-	}
 }

@@ -154,6 +154,20 @@ public class MessageHelper extends BaseXJDFHelper
 		ensureHeader(theElement);
 	}
 
+	static String getMessageName(EFamily family, EType typ)
+	{
+		if (family == null)
+		{
+			throw new IllegalArgumentException("Family must not be null");
+		}
+		if (typ == null)
+		{
+			throw new IllegalArgumentException("Type must not be null");
+		}
+		return family.name() + typ.name();
+
+	}
+
 	/**
 	 * @param message
 	 * @return
