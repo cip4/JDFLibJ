@@ -41,6 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -129,10 +130,8 @@ class XJMFHelperTest extends JDFTestCaseBase
 	void testGetMessageNameDeprecated()
 	{
 		final XJMFHelper theHelper = new XJMFHelper();
-		final String s = theHelper.getMessageName(EnumFamily.Registration, "SubmitQueueEntry");
-		assertNull(s);
-		final String s2 = theHelper.getMessageName(EnumFamily.Acknowledge, "SubmitQueueEntry");
-		assertNull(s2);
+		assertThrows(IllegalArgumentException.class, () -> theHelper.getMessageName(EnumFamily.Registration, "SubmitQueueEntry"));
+		assertThrows(IllegalArgumentException.class, () -> theHelper.getMessageName(EnumFamily.Acknowledge, "SubmitQueueEntry"));
 	}
 
 	/**
@@ -142,8 +141,7 @@ class XJMFHelperTest extends JDFTestCaseBase
 	void testAddMessageNull()
 	{
 		final XJMFHelper theHelper = new XJMFHelper();
-		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Command, "");
-		assertNull(mh);
+		assertThrows(IllegalArgumentException.class, () -> theHelper.appendMessage(EnumFamily.Command, ""));
 	}
 
 	/**
@@ -153,8 +151,17 @@ class XJMFHelperTest extends JDFTestCaseBase
 	void testAddMessageDeprecated()
 	{
 		final XJMFHelper theHelper = new XJMFHelper();
-		final MessageHelper mh = theHelper.appendMessage(EnumFamily.Registration, "Resource");
-		assertNull(mh);
+		assertThrows(IllegalArgumentException.class, () -> theHelper.appendMessage(EnumFamily.Registration, "Resource"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testAddAudit()
+	{
+		final XJMFHelper theHelper = new XJMFHelper();
+		assertThrows(IllegalArgumentException.class, () -> theHelper.appendMessage(EFamily.Audit, EType.Resource));
 	}
 
 	/**

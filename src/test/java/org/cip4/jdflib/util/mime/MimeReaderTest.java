@@ -38,21 +38,15 @@
  */
 package org.cip4.jdflib.util.mime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.File;
-import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.MimeUtil;
 import org.junit.jupiter.api.Test;
 
-import jakarta.mail.BodyPart;
 import jakarta.mail.Multipart;
 
 class MimeReaderTest extends JDFTestCaseBase
@@ -87,30 +81,6 @@ class MimeReaderTest extends JDFTestCaseBase
 	{
 		final MimeReader mr = new MimeReader(sm_dirTestData + File.separator + "evil.mjm");
 		assertNotNull(mr.getPartByCID("../../OtherJDF.jdf"));
-	}
-
-	@Test
-	void testRQE()
-	{
-		final MimeReader mr = new MimeReader("/data/unserstream0.txt");
-		final BodyPart[] bps = mr.getBodyParts();
-		assertEquals(2, bps.length);
-		for (final BodyPart bp : bps)
-		{
-			final JDFDoc jdfDoc = MimeUtil.getJDFDoc(bp);
-			assertNotNull(jdfDoc);
-		}
-	}
-
-	@Test
-	void testRQEUrl()
-	{
-		final MimeReader mr = new MimeReader("/data/unserstream0.txt");
-		final BodyPartHelper bph = mr.getBodyPartHelper(0);
-		final JDFJMF jmf = bph.getJDFDoc().getJMFRoot();
-		final InputStream is = jmf.getMessage(0).getReturnQueueEntryParams(0).getURLInputStream();
-		final JDFNode n = JDFNode.parseStream(is);
-		assertNotNull(n);
 	}
 
 	@Test

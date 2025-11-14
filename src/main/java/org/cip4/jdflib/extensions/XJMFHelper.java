@@ -123,11 +123,6 @@ public class XJMFHelper extends MessagePoolHelper
 	 */
 	public MessageHelper appendMessage(final EnumFamily family, final EnumType typ)
 	{
-		if (family == null || typ == null)
-		{
-			return null;
-		}
-
 		return appendMessage(getMessageName(family, typ.getName()));
 	}
 
@@ -152,11 +147,6 @@ public class XJMFHelper extends MessagePoolHelper
 	 */
 	public MessageHelper getCreateMessage(final EnumFamily family, final EnumType typ, int iSkip)
 	{
-		if (family == null || typ == null)
-		{
-			return null;
-		}
-
 		return getCreateMessage(getMessageName(family, typ.getName()), iSkip);
 	}
 
@@ -180,7 +170,7 @@ public class XJMFHelper extends MessagePoolHelper
 	{
 		if (StringUtil.isEmpty(typ) || family == null || EnumFamily.Acknowledge.equals(family) || EnumFamily.Registration.equals(family))
 		{
-			return null;
+			throw new IllegalArgumentException("Invalid type of family for XJMF " + family + " / " + typ);
 		}
 		return family.getName() + typ;
 	}
