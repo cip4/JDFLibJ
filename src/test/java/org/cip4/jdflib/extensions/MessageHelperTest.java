@@ -169,8 +169,8 @@ class MessageHelperTest extends JDFTestCaseBase
 		final XJMFHelper xjmfHelper = new XJMFHelper();
 		MessageHelper mh = xjmfHelper.appendMessage(EFamily.Command, EType.Status);
 		assertEquals(EType.Status, mh.getEType());
-		mh = xjmfHelper.appendMessage(EFamily.Audit, EType.Resource);
-		assertEquals(EFamily.Audit, mh.getEFamily());
+		mh = xjmfHelper.appendMessage(EFamily.Query, EType.Resource);
+		assertEquals(EFamily.Query, mh.getEFamily());
 	}
 
 	/**
