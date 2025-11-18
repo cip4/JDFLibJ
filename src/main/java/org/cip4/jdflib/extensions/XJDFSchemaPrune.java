@@ -72,6 +72,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -90,6 +92,7 @@ public class XJDFSchemaPrune
 	private boolean checkAttributes;
 	private boolean removeForeign;
 	private String prefix;
+	Log log = LogFactory.getLog(XJDFSchemaPrune.class);
 
 	public String getPrefix()
 	{
@@ -112,7 +115,7 @@ public class XJDFSchemaPrune
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public XJDFSchemaPrune(final XMLDoc rootSchema)
 	{
@@ -206,12 +209,12 @@ public class XJDFSchemaPrune
 		if (xsElement != null && !StringUtil.isEmpty(nodeName))
 		{
 
-			String type = xsElement.getAttribute(XSDConstants.TYPE);
+			final String type = xsElement.getAttribute(XSDConstants.TYPE);
 			addKeep(v, xsElement);
-			KElement ct = getComplexType(xsElement, nodeName, type);
+			final KElement ct = getComplexType(xsElement, nodeName, type);
 			addComplexType(v, ct);
 			checkGroup(v, ct);
-			KElement ct2 = getComplexType(null, null, xsitype);
+			final KElement ct2 = getComplexType(null, null, xsitype);
 			addComplexType(v, ct2);
 			checkGroup(v, ct2);
 			final KElement parent = example.getParentNode_KElement();
@@ -284,8 +287,8 @@ public class XJDFSchemaPrune
 		}
 		if (ct == null && !StringUtil.isEmpty(type))
 		{
-			KElement elem = getElementByName(type);
-			String newType = elem == null ? null : elem.getAttribute(XSDConstants.TYPE);
+			final KElement elem = getElementByName(type);
+			final String newType = elem == null ? null : elem.getAttribute(XSDConstants.TYPE);
 			if (!StringUtil.isEmpty(newType) && !type.equals(newType))
 			{
 				ct = getComplexType(null, null, newType);
@@ -323,15 +326,15 @@ public class XJDFSchemaPrune
 
 	void checkSchemaParent(final VElement v, String nodeName, final KElement schemaParent, String xsitype)
 	{
-		String localtype = schemaParent.getNonEmpty(XSDConstants.TYPE);
-		String parenttyp = StringUtil.isEmpty(xsitype) ? localtype : xsitype;
+		final String localtype = schemaParent.getNonEmpty(XSDConstants.TYPE);
+		final String parenttyp = StringUtil.isEmpty(xsitype) ? localtype : xsitype;
 		KElement schemaParentCT = getComplexType(schemaParent, null, parenttyp);
 		while (schemaParentCT != null)
 		{
 			addComplexType(v, schemaParentCT);
-			KElement ref = getElementByName(schemaParentCT, XSDConstants.XS_ELEMENT, XSDConstants.REF, ensureprefix(nodeName));
+			final KElement ref = getElementByName(schemaParentCT, XSDConstants.XS_ELEMENT, XSDConstants.REF, ensureprefix(nodeName));
 			addKeep(v, ref);
-			KElement refCT = getComplexType(null, nodeName, ensureprefix(nodeName));
+			final KElement refCT = getComplexType(null, nodeName, ensureprefix(nodeName));
 			addKeep(v, refCT);
 			final KElement ext = getExtension(schemaParentCT);
 			final String base = ext == null ? null : ext.getNonEmpty(XSDConstants.BASE);
@@ -374,18 +377,19 @@ public class XJDFSchemaPrune
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			KElement group = xsComplexType == null ? null : xsComplexType.getChildWithAttribute(XSDConstants.XS_GROUP, XSDConstants.REF, null, "*", i, false);
-			String groupref = group == null ? null : group.getNonEmpty(XSDConstants.REF);
+			final KElement group = xsComplexType == null ? null
+					: xsComplexType.getChildWithAttribute(XSDConstants.XS_GROUP, XSDConstants.REF, null, "*", i, false);
+			final String groupref = group == null ? null : group.getNonEmpty(XSDConstants.REF);
 			if (groupref != null)
 			{
 				final KElement next = getElementByName(XSDConstants.XS_GROUP, groupref);
 
-				VElement elements = next == null ? null : next.getChildrenByTagName(XSDConstants.XS_ELEMENT);
+				final VElement elements = next == null ? null : next.getChildrenByTagName(XSDConstants.XS_ELEMENT);
 				if (elements != null)
 				{
 					addKeep(v, next);
 					addKeep(v, group);
-					for (KElement element : elements)
+					for (final KElement element : elements)
 					{
 						addKeep(v, element);
 						final KElement ctSubst = getComplexType(null, element.getAttribute(XSDConstants.NAME), element.getAttribute(XSDConstants.REF));
@@ -477,6 +481,10 @@ public class XJDFSchemaPrune
 		while (e2 != null)
 		{
 			final boolean added = keep.add(e2);
+			if (added)
+			{
+				log.info("added " + XSDUtil.shortString(e2));
+			}
 			e2 = added ? e2.getParentNode_KElement() : null;
 		}
 	}

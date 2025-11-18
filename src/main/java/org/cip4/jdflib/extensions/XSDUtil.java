@@ -36,58 +36,82 @@
  */
 package org.cip4.jdflib.extensions;
 
-import org.cip4.jdflib.util.JavaEnumUtil;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.StringArray;
+import org.cip4.jdflib.extensions.XSDConstants.eAttributeUse;
+import org.cip4.jdflib.util.StringUtil;
 
-public class XSDConstants
+public class XSDUtil
 {
-	private XSDConstants()
+	private XSDUtil()
 	{
 		super();
 	}
 
-	static final String NAME = "name";
-	static final String REF = "ref";
-	static final String TARGET_NAMESPACE = "targetNamespace";
-	static final String XMLNS = "xmlns";
-	static final String TYPE = "type";
-	static final String BASE = "base";
-	static final String USE = "use";
-	static final String VALUE = "value";
-	static final String MIN_OCCURS = "minOccurs";
-	static final String MAX_OCCURS = "maxOccurs";
-
-	static final String ITEM_TYPE = "itemType";
-	static final String SUBSTITUTION_GROUP = "substitutionGroup";
-
-	static final String XS_ATTRIBUTE = "xs:attribute";
-	static final String XS_ELEMENT = "xs:element";
-	static final String XS_EXTENSION = "xs:extension";
-	static final String XS_COMPLEX_CONTENT = "xs:complexContent";
-	static final String XS_COMPLEX_TYPE = "xs:complexType";
-	static final String XS_GROUP = "xs:group";
-	static final String XS_LIST = "xs:list";
-	static final String XS_RESTRICTION = "xs:restriction";
-	static final String XS_SIMPLE_TYPE = "xs:simpleType";
-	static final String XS_SCHEMA = "xs:schema";
-	static final String XS_ANY = "xs:any";
-	static final String XS_ANY_ATTRIBUTE = "xs:anyAttribute";
-	static final String XS_SEQUENCE = "xs:sequence";
-	public static final String XS_STRING = "xs:string";
-	public static final String XS_ENUMERATION = "xs:enumeration";
-	public static final String XS_NMTOKEN = "xs:NMTOKEN";
-	public static final String XS_NMTOKENS = "xs:NMTOKENS";
-	public static final String XS_PATTERN = "xs:pattern";
-	public static final String XS_BOOLEAN = "xs:boolean";
-	public static final String UNBOUNDED = "unbounded";
-
-	enum eAttributeUse
+	/**
+	 * @param root
+	 * @param attName
+	 * @param typ
+	 * @param required
+	 */
+	public static KElement setXSAttribute(final KElement root, final String attName, String typ, final boolean required)
 	{
-		optional, prohibited, required;
-
-		static eAttributeUse getEnum(final String s)
+		KElement att = root.getChildWithAttribute(XSDConstants.XS_ATTRIBUTE, XSDConstants.NAME, null, attName, 0, true);
+		if (att == null)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(eAttributeUse.class, s, optional);
+			att = root.appendElement(XSDConstants.XS_ATTRIBUTE);
 		}
+		att.setAttribute(XSDConstants.USE, required ? eAttributeUse.required : eAttributeUse.optional, null);
+		att.setAttribute(XSDConstants.NAME, attName);
+		att.setAttribute(XSDConstants.TYPE, typ);
+		return att;
+	}
+
+	/**
+	 * @param root
+	 * @param simpleType
+	 * @param typ
+	 * @param required
+	 */
+	public static KElement createPatternType(final KElement root, final String simpleType, String pattern)
+	{
+		KElement simp = root.getChildWithAttribute(XSDConstants.XS_SIMPLE_TYPE, XSDConstants.NAME, null, simpleType, 0, true);
+		if (simp == null)
+		{
+			simp = root.appendElement(XSDConstants.XS_SIMPLE_TYPE);
+			simp.setAttribute(XSDConstants.NAME, simpleType);
+			final KElement res = simp.getCreateElement(XSDConstants.XS_RESTRICTION);
+			res.setAttribute(XSDConstants.BASE, XSDConstants.XS_NMTOKEN);
+			final KElement pat = res.getCreateElement(XSDConstants.XS_PATTERN);
+			pat.setAttribute(XSDConstants.VALUE, pattern);
+		}
+		return simp;
+	}
+
+	public static void removeAttribute(KElement parent, String name)
+	{
+		removeXSElement(parent, XSDConstants.XS_ATTRIBUTE, XSDConstants.NAME, name);
+
+	}
+
+	static void removeXSElement(KElement parent, String typ, String attName, String name)
+	{
+		final KElement e = parent.getChildWithAttribute(typ, attName, null, name, 0, true);
+		if (e != null)
+		{
+			e.deleteNode();
+		}
+
+	}
+
+	static String shortString(KElement schema)
+	{
+		String s = schema.getNodeName();
+		for (final String key : new StringArray("name ref type base"))
+		{
+			s = StringUtil.addToken(s, " " + key + ": ", schema.getInheritedAttribute(key));
+		}
+		return s;
 	}
 
 }

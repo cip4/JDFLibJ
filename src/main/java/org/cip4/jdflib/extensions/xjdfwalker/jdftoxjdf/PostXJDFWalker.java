@@ -71,6 +71,8 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -83,10 +85,12 @@ import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFModuleInfo;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFEvent;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFLaminatingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
@@ -892,7 +896,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET)
+			return !retainAll && SetHelper.RESOURCE_SET.equals(toCheck.getLocalName())
 					&& ElementName.STRIPPINGPARAMS.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
@@ -946,7 +950,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.MEDIA.equals(toCheck.getAttribute(AttributeName.NAME));
+			return !retainAll && SetHelper.RESOURCE_SET.equals(toCheck.getLocalName()) && ElementName.MEDIA.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
 		/**
@@ -996,7 +1000,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !retainAll && toCheck.getLocalName().equals(SetHelper.RESOURCE_SET) && ElementName.RUNLIST.equals(toCheck.getAttribute(AttributeName.NAME));
+			return !retainAll && SetHelper.RESOURCE_SET.equals(toCheck.getLocalName()) && ElementName.RUNLIST.equals(toCheck.getAttribute(AttributeName.NAME));
 		}
 
 		/**
@@ -1859,9 +1863,8 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
-			if (xjdf instanceof JDFIdentical)
+			if (xjdf instanceof final JDFIdentical id)
 			{
-				final JDFIdentical id = (JDFIdentical) xjdf;
 				final KElement xjdfRes = xjdf.getDeepParent(XJDFConstants.Resource, 0);
 				final KElement set = xjdfRes == null ? null : xjdfRes.getDeepParent(XJDFConstants.ResourceSet, 0);
 				if (set != null)
@@ -2653,8 +2656,6 @@ class PostXJDFWalker extends BaseElementWalker
 	}
 
 	/**
-	 * class that ensures that we do not have signaturename partitions
-	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 */
 	protected class WalkMessage extends WalkElement
@@ -2685,8 +2686,81 @@ class PostXJDFWalker extends BaseElementWalker
 		public boolean matches(final KElement e)
 		{
 			final String localName = e.getLocalName();
-			return localName.startsWith(ElementName.QUERY) || localName.startsWith(ElementName.SIGNAL) || localName.startsWith(ElementName.RESPONSE)
-					|| localName.startsWith(ElementName.COMMAND);
+			return EFamily.getEnum(localName) != null;
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkSignal extends WalkMessage
+	{
+
+		/**
+		 *
+		 */
+		public WalkSignal()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(final KElement e)
+		{
+			return EFamily.Signal.equals(EFamily.getEnum(e.getLocalName()));
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkStatusSignal extends WalkSignal
+	{
+
+		/**
+		 *
+		 */
+		public WalkStatusSignal()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(final KElement e)
+		{
+			return super.matches(e) && EType.Status.equals(EType.getEnum(e.getLocalName()));
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.PostXJDFWalker.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			moveEvents(xjdf);
+			return super.walk(xjdf, dummy);
+		}
+
+		void moveEvents(KElement xjdf)
+		{
+			final List<JDFNotification> nots = xjdf.getChildArrayByClass(JDFNotification.class, false, 0);
+			for (final JDFNotification not : nots)
+			{
+				final JDFEvent ev = not.getEvent();
+				if (ev != null)
+				{
+					xjdf.getCreateElement(ElementName.DEVICEINFO).moveElement(ev, null);
+				}
+				not.deleteNode();
+			}
 		}
 
 	}
@@ -2762,7 +2836,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement e)
 		{
-			return super.matches(e) && e.getLocalName().endsWith(XJDFConstants.Resource);
+			return super.matches(e) && EType.Resource.equals(EType.getEnum(e.getLocalName()));
 		}
 
 		/**

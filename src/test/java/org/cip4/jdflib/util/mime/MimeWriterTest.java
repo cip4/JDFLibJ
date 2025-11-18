@@ -333,7 +333,7 @@ class MimeWriterTest extends JDFTestCaseBase
 		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
 		final JDFPreview pv = (JDFPreview) docJDF.getJDFRoot().addResource(ElementName.PREVIEW, EnumUsage.Input);
 		final String utf8name = "4% von test äöüß€.icc";
-		pv.setURL(sm_dirTestData + utf8name);
+		pv.setURL(UrlUtil.fileToUrl(new File(sm_dirTestData + utf8name), false));
 		returnQEParams.setURL("cid:dummy"); // will be overwritten by buildMimePackage
 		final MimeWriter mw = new MimeWriter();
 		mw.buildMimePackage(docJMF, docJDF, true);

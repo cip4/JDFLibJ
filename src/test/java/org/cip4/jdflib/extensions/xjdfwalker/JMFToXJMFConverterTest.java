@@ -46,10 +46,12 @@ import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMessageService.EnumJMFRole;
+import org.cip4.jdflib.auto.JDFAutoNotification.EClass;
 import org.cip4.jdflib.auto.JDFAutoSignal.EnumChannelMode;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
@@ -93,9 +95,11 @@ import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFEvent;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
 import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
@@ -104,7 +108,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author rainer prosi
- *
  */
 class JMFToXJMFConverterTest extends JDFTestCaseBase
 {
@@ -206,7 +209,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		resp.setID("R1");
 		resp.setrefID("C1");
 		final JDFToXJDF conv = new JDFToXJDF();
-		final KElement xjmf = conv.makeNewJMF(jmf);
+		conv.makeNewJMF(jmf);
 
 		writeRoundTrip(jmf, "abortqeresp.jmf");
 	}
@@ -317,6 +320,22 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testDeviceInfoEmployee()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		final JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
+		di.setDeviceID("d1");
+		di.appendEmployee().setPersonalID("p1");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		final XJMFHelper xh = new XJMFHelper(xjmf);
+		assertEquals("p1", xh.getRoot().getElementByClass(JDFEmployee.class, 0, true).getPersonalID());
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testDeviceInfoOffline()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
@@ -413,11 +432,33 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testStatusSignalNotification()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		final JDFSignal sig = jmf.getSignal(0);
+		final JDFDeviceInfo di = sig.appendDeviceInfo();
+		di.setTotalProductionCounter(12345);
+		di.setDeviceStatus(EDeviceStatus.Running);
+		final JDFNotification not = sig.appendNotification();
+		not.setClass(EClass.Event);
+		not.appendEvent().setEventID("eid");
+
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("eid", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Event/@EventID", null));
+		assertNull(xjmf.getXPathElement("SignalStatus/Notification"));
+		writeRoundTrip(jmf, "statusnotification.jmf");
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testJobPhaseAmount()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getSignal(0).appendDeviceInfo();
-		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceStatus(EDeviceStatus.Running);
 		final JDFJobPhase jp = di.appendJobPhase();
 		jp.setAmount(42);
 		jp.setJobID("j1");
@@ -425,7 +466,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertEquals("42", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@Amount", null));
-		writeRoundTrip(jmf, "jophase.jmf");
+		writeRoundTrip(jmf, "jobphase.jmf");
 	}
 
 	/**
@@ -440,7 +481,7 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		jp.setJobID("j1");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertNull(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@TotalAmount", null));
+		assertEquals("42", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/JobPhase/@TotalAmount", null));
 	}
 
 	/**
@@ -821,7 +862,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
@@ -832,7 +872,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -853,7 +892,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -893,7 +931,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -918,7 +955,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -942,7 +978,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -958,7 +993,9 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 			final JDFResourceInfo ri = signal.getCreateResourceInfo(0);
 			ri.setResourceName(ElementName.MISCCONSUMABLE);
 			if (i == 1)
+			{
 				ri.appendElement(ElementName.MISCCONSUMABLE);
+			}
 			ri.setAmount(100);
 			final JDFToXJDF conv = new JDFToXJDF();
 			final KElement xjmf = conv.makeNewJMF(jmf);
@@ -970,7 +1007,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -993,7 +1029,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -1019,7 +1054,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -1046,7 +1080,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -1072,7 +1105,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -1094,7 +1126,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -1128,7 +1159,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test
@@ -1171,7 +1201,6 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test ink resource signal
 	 */
 	@Test

@@ -116,7 +116,6 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 	}
 
 	/**
-	 *
 	 * @param map
 	 */
 	void updateDeviceStatus(final JDFAttributeMap map)
@@ -142,7 +141,9 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 		}
 		map.put(AttributeName.DEVICECONDITION, JavaEnumUtil.getName(eXjdfDeviceCondition.getEnum(dc)));
 		if (eS != null)
+		{
 			status = eS.name();
+		}
 		map.put(AttributeName.STATUS, status);
 	}
 

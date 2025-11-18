@@ -83,7 +83,6 @@ import org.cip4.jdflib.core.KElement;
  * simple implementation of the IWalkerFactory
  *
  * @author prosirai
- *
  */
 public class BaseWalkerFactory implements IWalkerFactory
 {
@@ -92,8 +91,8 @@ public class BaseWalkerFactory implements IWalkerFactory
 	{
 		super();
 		maxDepth = 0;
-		vBaseWalker = new ArrayList<BaseWalker>();
-		nameMap = new HashMap<String, BaseWalker>();
+		vBaseWalker = new ArrayList<>();
+		nameMap = new HashMap<>();
 	}
 
 	protected int maxDepth;
@@ -101,8 +100,8 @@ public class BaseWalkerFactory implements IWalkerFactory
 	private final Map<String, BaseWalker> nameMap;
 
 	/**
-	 *
 	 * get the appropriate walker for a given element
+	 *
 	 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalker(org.cip4.jdflib .core.KElement)
 	 */
 	@Override
@@ -164,6 +163,7 @@ public class BaseWalkerFactory implements IWalkerFactory
 
 	/**
 	 * Getter for vBaseWalker attribute.
+	 *
 	 * @return the vBaseWalker
 	 */
 	public List<BaseWalker> getBaseWalkers()

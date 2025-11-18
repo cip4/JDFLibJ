@@ -126,7 +126,7 @@ public abstract class JDFTestCaseBase
 		}
 		final JDFParser p = getSchemaParser(major, minor);
 		final JDFDoc xParsed = p.parseString(written);
-		final XMLDoc val = xParsed.getValidationResult();
+		xParsed.getValidationResult();
 		return xParsed.isSchemaValid();
 	}
 
@@ -641,7 +641,7 @@ public abstract class JDFTestCaseBase
 		}
 		JDFParserFactory.getFactory().push(p);
 		assertTrue(valid, fileBase + ".xjdf.jdf");
-		return new MyPair<BaseXJDFHelper, JDFElement>(BaseXJDFHelper.getBaseHelper(xjdfRoot), jxRoot);
+		return new MyPair<>(BaseXJDFHelper.getBaseHelper(xjdfRoot), jxRoot);
 	}
 
 	static protected XMLDoc printValid(final JDFDoc converted)

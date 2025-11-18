@@ -248,6 +248,11 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		return getInheritedAttribute_KElement(attrib, nameSpaceURI, def);
 	}
 
+	public String getInheritedAttribute(final String attrib)
+	{
+		return getInheritedAttribute(attrib, null, null);
+	}
+
 	/**
 	 * searches for the first attribute occurrence in this element or any ancestors
 	 *
@@ -564,7 +569,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public Attr getDOMAttr(final String attrib, String nameSpaceURI, final boolean bInherit)
 	{
 		Attr a = null;
-		if ((nameSpaceURI == null) || nameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING))
+		if ((nameSpaceURI == null) || JDFCoreConstants.EMPTYSTRING.equals(nameSpaceURI))
 		{
 			a = getAttributeNode(attrib);
 			if (a != null)
@@ -648,7 +653,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			return;
 		}
 
-		if ((nameSpaceURI == null) || (nameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING)))
+		if ((nameSpaceURI == null) || (JDFCoreConstants.EMPTYSTRING.equals(nameSpaceURI)))
 		{ // //////////// DOM Level 1 ///////////////////
 			bDirty = setDomAttribute2FromDom1(key, value);
 		}
@@ -743,7 +748,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	void setDOMNSValue(final String key, final String value, final String nameSpaceURI)
 	{
-		if (value.equals(JDFCoreConstants.EMPTYSTRING))
+		if (JDFCoreConstants.EMPTYSTRING.equals(value))
 		{
 			removeAttributeNS(nameSpaceURI, key);
 		}
@@ -768,7 +773,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		// xmlns attributes and avoids duplicate serialization of the attribute and namespace nodes
 		if (key.startsWith(JDFCoreConstants.XMLNS) && (key.length() == 5 || key.charAt(5) == ':'))
 		{ // set an attribute which is a namespace
-			if (value.equals(JDFCoreConstants.EMPTYSTRING))
+			if (JDFCoreConstants.EMPTYSTRING.equals(value))
 			{
 				final Node a = getAttributeNode(key);
 				// never ever set "xmlns:foo="" !
@@ -1103,7 +1108,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 		if (hasAttribute(attrib, nameSpaceURI, false))
 		{
-			if ((nameSpaceURI == null) || nameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING))
+			if ((nameSpaceURI == null) || JDFCoreConstants.EMPTYSTRING.equals(nameSpaceURI))
 			{
 				super.removeAttribute(attrib);
 			}
@@ -1261,7 +1266,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * null safe test whether the elements e1 and e2 are equal
-	 * 
+	 *
 	 * @see isEqual(KElement)
 	 * @param e1
 	 * @param e2
@@ -1338,7 +1343,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	private String getNamespaceURIFromPrefix(final String prefix, final boolean bcache)
 	{
 		String strNamespaceURI = null;
-		if (prefix == null || prefix.equals(JDFCoreConstants.EMPTYSTRING))
+		if (prefix == null || JDFCoreConstants.EMPTYSTRING.equals(prefix))
 		{
 			final String elementPrefix = getPrefix();
 			if (elementPrefix == null)
@@ -1359,11 +1364,11 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		else
 		{
 			// some well known hardcoded stuff
-			if (prefix.equals(JDFCoreConstants.XSI))
+			if (JDFCoreConstants.XSI.equals(prefix))
 			{
 				return JDFCoreConstants.XSIURI;
 			}
-			if (prefix.equals(JDFCoreConstants.XMLNS))
+			if (JDFCoreConstants.XMLNS.equals(prefix))
 			{
 				return JDFCoreConstants.XMLNSURI;
 			}
@@ -1407,9 +1412,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			for (int i = 0; i < length; i++)
 			{
 				final Node at = nl.item(i);
-				if (at instanceof AttrNSImpl)
+				if (at instanceof final AttrNSImpl ati)
 				{
-					final AttrNSImpl ati = (AttrNSImpl) at;
 					if (prefix.equals(ati.getPrefix()))
 					{
 						strNamespaceURI = ati.getNamespaceURI();
@@ -2369,7 +2373,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	/**
 	 * convenience helper
-	 * 
+	 *
 	 * @param elementName
 	 * @return
 	 */
@@ -2502,7 +2506,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			s = JDFCoreConstants.STAR;
 		}
 
-		if ((nameSpaceURI == null) || nameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING))
+		if ((nameSpaceURI == null) || JDFCoreConstants.EMPTYSTRING.equals(nameSpaceURI))
 		{
 			vEle = new VElement(getElementsByTagName(s));
 		}
@@ -2552,7 +2556,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public VString getMultipleIDs(final String attName)
 	{
 		final VString vRet = new VString();
-		getMultipleIDs(attName, vRet, new HashSet<String>());
+		getMultipleIDs(attName, vRet, new HashSet<>());
 		return vRet.isEmpty() ? null : vRet;
 	}
 
@@ -2758,7 +2762,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		{
 			if (clazz.isInstance(n) && (iSkip == i++))
 			{
-				return new MyPair<>((A) n, Integer.valueOf(i));
+				return new MyPair<>((A) n, i);
 			}
 
 			final MyPair<A, Integer> ret = n.getElementByClassImpl(clazz, iSkip - i);
@@ -2773,7 +2777,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			n = n.getNextSiblingElement();
 		}
 
-		return i == 0 ? null : new MyPair<>(null, Integer.valueOf(i));
+		return i == 0 ? null : new MyPair<>(null, i);
 	}
 
 	/**
@@ -2941,7 +2945,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 */
 	public KElement getTarget_KElement(final String id, String attrib)
 	{
-		if (id == null || id.equals(JDFCoreConstants.EMPTYSTRING))
+		if (id == null || JDFCoreConstants.EMPTYSTRING.equals(id))
 		{
 			return null;
 		}
@@ -3419,7 +3423,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			for (int i = siz - 1; i >= 0; i--)
 			{
 				final Node item = nm.item(i);
-				if (item.getNodeValue().equals(JDFCoreConstants.EMPTYSTRING))
+				if (JDFCoreConstants.EMPTYSTRING.equals(item.getNodeValue()))
 				{
 					removeAttribute(item.getNodeName());
 				}
@@ -3718,7 +3722,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 				{
 					s = s.trim();
 				}
-				if (s.equals(JDFCoreConstants.EMPTYSTRING))
+				if (JDFCoreConstants.EMPTYSTRING.equals(s))
 				{
 					removeChild(n);
 					nRemove++;
@@ -4278,7 +4282,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 */
 	public boolean hasChildElement(final String nodeName, final String nameSpaceURI)
 	{
-		return !(getElement(nodeName, nameSpaceURI, 0) == null);
+		return (getElement(nodeName, nameSpaceURI, 0) != null);
 	}
 
 	/**
@@ -5064,7 +5068,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public KElement insertAt(final String nodeName, final int beforePos, final String beforeNode, final String nameSpaceURI, final String beforeNameSpaceURI)
 	{
 		KElement kRet = null;
-		final String strBeforeNS = ((beforeNameSpaceURI == null) || beforeNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING)) ? nameSpaceURI
+		final String strBeforeNS = ((beforeNameSpaceURI == null) || JDFCoreConstants.EMPTYSTRING.equals(beforeNameSpaceURI)) ? nameSpaceURI
 				: beforeNameSpaceURI;
 		final KElement kElem = getElement_KElement(beforeNode, strBeforeNS, beforePos);
 
@@ -5544,8 +5548,8 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public String copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI,
 			final boolean overwriteEmpty)
 	{
-		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFCoreConstants.EMPTYSTRING) ? attrib : srcAttrib;
-		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFCoreConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
+		final String strSrcAttrib = (srcAttrib == null) || JDFCoreConstants.EMPTYSTRING.equals(srcAttrib) ? attrib : srcAttrib;
+		final String strNameSpace = (srcNameSpaceURI == null) || JDFCoreConstants.EMPTYSTRING.equals(srcNameSpaceURI) ? nameSpaceURI : srcNameSpaceURI;
 		if (strNameSpace != null && KElement.xmlnsPrefix(attrib) == null)
 		{
 			final Attr an = src.getDOMAttr(strSrcAttrib, srcNameSpaceURI, false);
@@ -5742,7 +5746,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			{
 				parent = parent.getParentNode();
 			}
-			while (parent != null && newParentName != null && !newParentName.equals(JDFCoreConstants.EMPTYSTRING)
+			while (parent != null && newParentName != null && !JDFCoreConstants.EMPTYSTRING.equals(newParentName)
 					&& !parent.getNodeName().equals(newParentName));
 
 			if (parent != null)
@@ -6397,7 +6401,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 	protected boolean matchesPathName(final String pathAt)
 	{
-		if (pathAt == null || pathAt.equals(JDFCoreConstants.STAR))
+		if (pathAt == null || JDFCoreConstants.STAR.equals(pathAt))
 		{
 			return true;
 		}
@@ -6444,7 +6448,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 					return false;
 				}
 				value = value.substring(1, value.length() - 1);
-				return value.equals("*") && hasAttribute_KElement(nam, null, false) || value.equals(getAttribute_KElement(nam));
+				return "*".equals(value) && hasAttribute_KElement(nam, null, false) || value.equals(getAttribute_KElement(nam));
 			}
 		}
 		return false;
@@ -6554,7 +6558,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		{
 			return id;
 		}
-		else if ((newID == null) || newID.equals(JDFCoreConstants.EMPTYSTRING))
+		else if ((newID == null) || JDFCoreConstants.EMPTYSTRING.equals(newID))
 		{
 			newID = "id_" + uniqueID(0);
 		}

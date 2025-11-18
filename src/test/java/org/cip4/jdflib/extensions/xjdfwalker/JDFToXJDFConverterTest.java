@@ -58,6 +58,7 @@ import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoCut.EnumWorkingDirection;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumPageDelivery;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
@@ -738,9 +739,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setType(EnumType.Stripping);
 
 		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
-		final JDFLayout lo1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
-		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s2");
-		final JDFLayout lo3 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s3");
+		lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		lo.addPartition(EnumPartIDKey.SheetName, "s2");
+		lo.addPartition(EnumPartIDKey.SheetName, "s3");
 
 		final JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final JDFBinderySignature bs1 = (JDFBinderySignature) bs.addPartition(EnumPartIDKey.BinderySignatureName, "bs1");
@@ -775,9 +776,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setType(EnumType.Stripping);
 
 		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
-		final JDFLayout lo1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
-		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s2");
-		final JDFLayout lo3 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s3");
+		lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		lo.addPartition(EnumPartIDKey.SheetName, "s2");
+		lo.addPartition(EnumPartIDKey.SheetName, "s3");
 
 		final JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		final JDFBinderySignature bs1 = (JDFBinderySignature) bs.addPartition(EnumPartIDKey.BinderySignatureName, "bs1");
@@ -821,9 +822,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		n.setType(EnumType.Stripping);
 
 		final JDFLayout lo = (JDFLayout) n.addResource(ElementName.LAYOUT, EnumUsage.Output);
-		final JDFLayout lo1 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s1");
-		final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s2");
-		final JDFLayout lo3 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "s3");
+		lo.addPartition(EnumPartIDKey.SheetName, "s1");
+		lo.addPartition(EnumPartIDKey.SheetName, "s2");
+		lo.addPartition(EnumPartIDKey.SheetName, "s3");
 
 		final JDFBinderySignature bs1 = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		bs1.appendSignatureCell().setFrontPages(JDFIntegerList.createIntegerList("1 2"));
@@ -1724,13 +1725,13 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
-		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceStatus(EDeviceStatus.Running);
 		di.appendEmployee().setPersonalID("e1");
 		di.appendEmployee().setPersonalID("e2");
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity/@PersonalID", null), "e1");
-		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Activity[2]@PersonalID", null), "e2");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Employee/@PersonalID", null), "e1");
+		assertEquals(xjmf.getXPathAttribute("SignalStatus/DeviceInfo/Employee[2]@PersonalID", null), "e2");
 	}
 
 	/**
@@ -1743,10 +1744,10 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		jmf.setVersion(EnumVersion.Version_1_9);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
-		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceStatus(EDeviceStatus.Running);
 		final JDFModuleStatus moduleStatus = di.appendModuleStatus();
 		moduleStatus.setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
-		moduleStatus.setDeviceStatus(EnumDeviceStatus.Running);
+		moduleStatus.setDeviceStatus(EDeviceStatus.Running);
 		final JDFToXJDF conv = new JDFToXJDF();
 		conv.setNewVersion(EnumVersion.Version_2_3);
 		final KElement xjmf = conv.makeNewJMF(jmf);
@@ -1758,12 +1759,33 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testDeviceInfoModuleType()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
+		jmf.setVersion(EnumVersion.Version_1_9);
+		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
+		di.appendDevice().setDeviceID("id");
+		di.setDeviceStatus(EDeviceStatus.Running);
+		final JDFModuleStatus moduleStatus = di.appendModuleStatus();
+		moduleStatus.setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
+		moduleStatus.setDeviceStatus(EDeviceStatus.Running);
+		moduleStatus.setModuleType("typ");
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setNewVersion(EnumVersion.Version_2_3);
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertEquals("typ", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleType", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testDeviceInfoModuleStatusSkip()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo di = jmf.getCreateSignal(0).appendDeviceInfo();
 		di.appendDevice().setDeviceID("id");
-		di.setDeviceStatus(EnumDeviceStatus.Running);
+		di.setDeviceStatus(EDeviceStatus.Running);
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 0 }));
 		di.appendModuleStatus().setModuleIndex(new JDFIntegerRangeList(new int[] { 4, 6 }));
 		final JDFToXJDF conv = new JDFToXJDF();
@@ -1852,7 +1874,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	void testNodeInfoStatus()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
-		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		n.getCreateNodeInfo();
 		n.setPartStatus((VJDFAttributeMap) null, EnumNodeStatus.Completed, null);
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjdf = conv.makeNewJDF(n, null);

@@ -34,49 +34,25 @@
  *
  *
  */
-package org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf;
+package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
  */
-public class WalkStatusQuParams extends WalkJDFSubElement
+public class WalkEmployee extends WalkResource
 {
 	/**
 	 *
 	 */
-	public WalkStatusQuParams()
+	public WalkEmployee()
 	{
 		super();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
-	 * @param toCheck
-	 * @return true if it matches
-	 */
-	@Override
-	public boolean matches(final KElement toCheck)
-	{
-		return !jdfToXJDF.isRetainAll();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
-	 */
-	@Override
-	protected void updateAttributes(final JDFAttributeMap map)
-	{
-		map.remove(AttributeName.DEVICEDETAILS);
-		map.remove(AttributeName.EMPLOYEEINFO);
-		map.remove(AttributeName.JOBDETAILS);
-		map.remove(AttributeName.QUEUEINFO);
-		super.updateAttributes(map);
 	}
 
 	/**
@@ -85,7 +61,14 @@ public class WalkStatusQuParams extends WalkJDFSubElement
 	@Override
 	public VString getElementNames()
 	{
-		return new VString(ElementName.STATUSQUPARAMS, null);
+		return VString.getVString(ElementName.EMPLOYEE, null);
+	}
+
+	@Override
+	protected void updateAttributes(KElement elem)
+	{
+		elem.renameAttribute(XJDFConstants.Role, AttributeName.ROLES);
+		super.updateAttributes(elem);
 	}
 
 }

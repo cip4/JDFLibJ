@@ -81,13 +81,11 @@ import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
-import org.cip4.jdflib.node.JDFActivity;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
 public class WalkEmployee extends WalkResource
@@ -103,14 +101,14 @@ public class WalkEmployee extends WalkResource
 
 	/**
 	 * the new name
-	 * 
+	 *
 	 * @param jdf
 	 * @return
 	 */
 	@Override
 	protected String getXJDFName(final KElement jdf)
 	{
-		return ElementName.CONTACT;
+		return (jdf.getParentNode() instanceof JDFDeviceInfo) ? ElementName.EMPLOYEE : ElementName.CONTACT;
 	}
 
 	/**
@@ -125,19 +123,31 @@ public class WalkEmployee extends WalkResource
 	}
 
 	/**
-	 *
+	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#updateAttributes(org.cip4.jdflib.datatypes.JDFAttributeMap)
+	 */
+	@Override
+	protected void updateAttributes(final JDFAttributeMap map)
+	{
+		if (!jdfToXJDF.isRetainAll())
+		{
+			map.renameKey(AttributeName.ROLES, XJDFConstants.Role);
+		}
+		super.updateAttributes(map);
+	}
+
+	/**
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
 	public KElement walk(KElement jdf, KElement xjdf)
 	{
-		KElement parent = jdf.getParentNode_KElement();
-		JDFEmployee emp = (JDFEmployee) jdf;
+		final KElement parent = jdf.getParentNode_KElement();
+		final JDFEmployee emp = (JDFEmployee) jdf;
 		if ((parent instanceof JDFAudit) || (parent instanceof JDFMessage))
 		{
-			String personalID = StringUtil.getNonEmpty(emp.getPersonalID());
+			final String personalID = StringUtil.getNonEmpty(emp.getPersonalID());
 			xjdf.setAttribute(AttributeName.PERSONALID, personalID);
-			String author = StringUtil.getNonEmpty(emp.getDescriptiveName());
+			final String author = StringUtil.getNonEmpty(emp.getDescriptiveName());
 			xjdf.setAttribute(AttributeName.AUTHOR, author);
 			return null;
 		}
@@ -147,26 +157,24 @@ public class WalkEmployee extends WalkResource
 		}
 		else if (parent instanceof JDFDeviceInfo)
 		{
-			JDFActivity a = ((JDFDeviceInfo) xjdf).appendActivity();
-			a.setPersonalID(emp.getPersonalID());
-			return null;
+			return super.walk(jdf, xjdf);
 		}
 		else
 		{
 			if (parent instanceof JDFNodeInfo)
 			{
 				jdf.appendAttribute(AttributeName.ROLES, "CSR", null, JDFConstants.BLANK, true);
-				KElement e = moveToContact(jdf);
-				KElement walk = super.walk(e, xjdf);
+				final KElement e = moveToContact(jdf);
+				final KElement walk = super.walk(e, xjdf);
 				walk.moveAttribute(XJDFConstants.ExternalID, e);
 				return walk;
 			}
 			else
 			{
-				KElement e = moveToContact(jdf);
-				KElement walk = super.walk(e, xjdf);
+				final KElement e = moveToContact(jdf);
+				final KElement walk = super.walk(e, xjdf);
 
-				ResourceHelper helper = ResourceHelper.getHelper(xjdf);
+				final ResourceHelper helper = ResourceHelper.getHelper(xjdf);
 				helper.appendPartMap(new JDFAttributeMap(XJDFConstants.ContactType, ElementName.EMPLOYEE));
 				return walk;
 			}
@@ -174,13 +182,12 @@ public class WalkEmployee extends WalkResource
 	}
 
 	/**
-	 *
 	 * @param jdfEmployee
 	 * @return
 	 */
 	public KElement moveToContact(KElement jdfEmployee)
 	{
-		JDFContact contact = (JDFContact) safeRename(jdfEmployee, ElementName.CONTACT);
+		final JDFContact contact = (JDFContact) safeRename(jdfEmployee, ElementName.CONTACT);
 
 		contact.renameAttribute(AttributeName.PERSONALID, XJDFConstants.ExternalID, null, null);
 		contact.renameAttribute(AttributeName.ROLES, AttributeName.CONTACTTYPEDETAILS, null, null);

@@ -54,7 +54,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -82,7 +81,6 @@ import org.cip4.jdflib.util.StringUtil;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
  *         conversion class to convert JDF 1.x to XJDF 2.x<br/>
  *         very experimental and subject to change without notice
- *
  *         15.01.2009
  */
 public class JDFToXJDF extends PackageElementWalker
@@ -112,7 +110,7 @@ public class JDFToXJDF extends PackageElementWalker
 		wantProduct = true;
 		rootID = null;
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
-		componentProductMap = new HashMap<MyPair<String, JDFAttributeMap>, String>();
+		componentProductMap = new HashMap<>();
 		resourceAlias = new HashSet<>();
 		completedRefs = new HashMap<>();
 		wantDependent = true;
@@ -136,13 +134,13 @@ public class JDFToXJDF extends PackageElementWalker
 	{
 		final WalkElement constructWalker = (WalkElement) super.constructWalker(name);
 		if (constructWalker != null)
+		{
 			constructWalker.setParent(this);
+		}
 		return constructWalker;
 	}
 
 	/**
-	 *
-	 *
 	 * @param r
 	 * @return
 	 */
@@ -153,20 +151,20 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param r
 	 * @return
 	 */
 	protected WalkResource getWalker(final JDFResource r)
 	{
 		if (r == null)
+		{
 			return null;
+		}
 		final IWalker walker = theFactory.getWalker(r);
-		return (walker instanceof WalkResource) ? (WalkResource) walker : null;
+		return (walker instanceof final WalkResource w) ? w : null;
 	}
 
 	/**
-	 *
 	 * if true, add a modified audit
 	 *
 	 * @param trackAudits
@@ -188,7 +186,6 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * returns the official JDF schema URI for 2.0
 	 *
-	 *
 	 * @return the URL that fits to majorVersion and minorVersion - null if not supported
 	 */
 	public static String getSchemaURL()
@@ -197,8 +194,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
-	 *
 	 * @return the URL that fits to majorVersion and minorVersion - null if not supported
 	 */
 	String getSchemaURL(final EnumVersion version)
@@ -327,7 +322,6 @@ public class JDFToXJDF extends PackageElementWalker
 	final HashMap<JDFAttributeMap, String> completedRefs;
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isWantProduct()
@@ -336,7 +330,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param wantProduct
 	 */
 	public void setWantProduct(final boolean wantProduct)
@@ -385,7 +378,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isRemoveSignatureName()
@@ -394,7 +386,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param removeSignatureName
 	 */
 	public void setRemoveSignatureName(final boolean removeSignatureName)
@@ -403,7 +394,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
 	 * @param root
 	 * @return
 	 */
@@ -413,7 +403,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 * 
 	 * @param root
 	 * @return
 	 */
@@ -501,7 +490,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param root
 	 */
 	void preFixVersion(final JDFElement root)
@@ -518,7 +506,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param bJMF
 	 */
 	void postWalk(final boolean bJMF)
@@ -537,7 +524,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param pw
 	 */
 	void postWalkJDF(final PostXJDFWalker pw)
@@ -564,7 +550,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param pw
 	 */
 	void postWalkJMF(final PostXJDFWalker pw)
@@ -582,7 +567,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	PostXJDFWalker getPostWalker()
@@ -622,7 +606,6 @@ public class JDFToXJDF extends PackageElementWalker
 
 	/**
 	 * @param bJMF if true, create a jmf
-	 *
 	 */
 	private void prepareNewDoc(final boolean bJMF)
 	{
@@ -631,13 +614,14 @@ public class JDFToXJDF extends PackageElementWalker
 		newRoot = newDoc.getRoot();
 		newRoot.setNamespaceURI(getSchemaURL(newVersion));
 		if (EnumUtil.aLessThanB(EnumVersion.Version_2_0, newVersion))
+		{
 			newRoot.setAttribute(AttributeName.VERSION, newVersion.getName());
+		}
 		newRoot.setNamespaceURI(getSchemaURL(newVersion));
 		first = new HashSet<>();
 	}
 
 	/**
-	 *
 	 * @param compID
 	 * @param jdfAttributeMap
 	 * @param productID
@@ -648,7 +632,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param compID
 	 * @return
 	 */
@@ -670,7 +653,7 @@ public class JDFToXJDF extends PackageElementWalker
 	/**
 	 * @param fileName the filename of the zip file to save to
 	 * @param rootNode the root jdf to save
-	 * @param replace if true, overwrite existing files
+	 * @param replace  if true, overwrite existing files
 	 */
 	public void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 	{
@@ -678,10 +661,9 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
-	 * @param os the output stream
+	 * @param os       the output stream
 	 * @param rootNode the root jdf to save
-	 * @param jmf the submission or return jmf
+	 * @param jmf      the submission or return jmf
 	 */
 	public void writeStream(final OutputStream os, final JDFNode rootNode, final JDFJMF jmf)
 	{
@@ -696,7 +678,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param root
 	 * @return
 	 * @deprecated
@@ -707,12 +688,13 @@ public class JDFToXJDF extends PackageElementWalker
 		final Vector<XJDFHelper> v = new Vector<>();
 		final List<XJDFHelper> l = getXJDFs(root, true);
 		if (l != null)
+		{
 			v.addAll(l);
+		}
 		return v;
 	}
 
 	/**
-	 *
 	 * @param root
 	 * @param ordered
 	 * @return
@@ -729,13 +711,13 @@ public class JDFToXJDF extends PackageElementWalker
 	protected static VJDFAttributeMap getPartMapVector(final KElement res)
 	{
 		VJDFAttributeMap omaMaps = null;
-		final VElement parts = res.getChildElementVector(ElementName.PART, null, null, true, 0, false);
+		final List<JDFPart> parts = res.getChildArrayByClass(JDFPart.class, false, 0);
 		if (parts != null && parts.size() > 0)
 		{
 			omaMaps = new VJDFAttributeMap();
-			for (int i = 0; i < parts.size(); i++)
+			for (final JDFPart part : parts)
 			{
-				omaMaps.add(((JDFPart) parts.get(i)).getPartMap());
+				omaMaps.add(part.getPartMap());
 			}
 		}
 		return omaMaps;
@@ -993,7 +975,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param r
 	 * @return
 	 */
@@ -1004,7 +985,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param linkTarget
 	 * @return
 	 */
@@ -1015,7 +995,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isRetainAll()
@@ -1024,7 +1003,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param bRetainAll
 	 */
 	public void setRetainAll(final boolean bRetainAll)
@@ -1053,7 +1031,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public EnumProcessPartition getProcessPart()
@@ -1062,7 +1039,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isWantProcessList()
@@ -1087,7 +1063,6 @@ public class JDFToXJDF extends PackageElementWalker
 	}
 
 	/**
-	 *
 	 * @param node
 	 * @return
 	 */
@@ -1126,12 +1101,13 @@ public class JDFToXJDF extends PackageElementWalker
 	@Override
 	public String toString()
 	{
-		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste=" + bExplicitWaste
-				+ ", bRetainAll=" + bRetainAll + ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep=" + bMergeLayoutPrep + ", bMergeRunList="
-				+ bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo + ", bSingleNode=" + bSingleNode + ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage="
-				+ bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage + ", bSpanAsAttribute=" + bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition
-				+ ", bParameterSet=" + bParameterSet + ", wantProduct=" + wantProduct + ", componentProductMap=" + componentProductMap + ", resourceAlias=" + resourceAlias
-				+ ", bHTMLColor=" + bHTMLColor + ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName + ", processPartition="
+		return "JDFToXJDF [trackAudits=" + trackAudits + ", newRoot=" + newRoot + ", oldRoot=" + oldRoot + ", first=" + first + ", bExplicitWaste="
+				+ bExplicitWaste + ", bRetainAll=" + bRetainAll + ", bCleanup=" + bCleanup + ", bMergeLayout=" + bMergeLayout + ", bMergeLayoutPrep="
+				+ bMergeLayoutPrep + ", bMergeRunList=" + bMergeRunList + ", bRetainSpawnInfo=" + bRetainSpawnInfo + ", bSingleNode=" + bSingleNode
+				+ ", bUpdateVersion=" + bUpdateVersion + ", bTypeSafeMessage=" + bTypeSafeMessage + ", bAbstractMessage=" + bAbstractMessage
+				+ ", bSpanAsAttribute=" + bSpanAsAttribute + ", bIntentPartition=" + bIntentPartition + ", bParameterSet=" + bParameterSet + ", wantProduct="
+				+ wantProduct + ", componentProductMap=" + componentProductMap + ", resourceAlias=" + resourceAlias + ", bHTMLColor=" + bHTMLColor
+				+ ", bConvertTilde=" + bConvertTilde + ", rootID=" + rootID + ", removeSignatureName=" + removeSignatureName + ", processPartition="
 				+ processPartition + ", wantDependent=" + wantDependent + ", newVersion=" + newVersion + "]";
 	}
 

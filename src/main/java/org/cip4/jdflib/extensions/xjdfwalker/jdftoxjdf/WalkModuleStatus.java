@@ -92,7 +92,6 @@ public class WalkModuleStatus extends WalkJDFSubElement
 	protected void updateAttributes(final JDFAttributeMap map)
 	{
 		super.updateAttributes(map);
-		map.remove(AttributeName.MODULETYPE);
 		final String id = map.remove(AttributeName.MODULEINDEX);
 		if (id != null && map.get(AttributeName.MODULEID) == null)
 		{
@@ -100,7 +99,9 @@ public class WalkModuleStatus extends WalkJDFSubElement
 		}
 		String deviceStatus = map.remove(AttributeName.DEVICESTATUS);
 		if ("Running".equals(deviceStatus))
+		{
 			deviceStatus = eDeviceStatus.Production.name();
+		}
 		map.putNotNull(AttributeName.STATUS, deviceStatus);
 
 		map.remove(AttributeName.COMBINEDPROCESSINDEX);
@@ -127,15 +128,19 @@ public class WalkModuleStatus extends WalkJDFSubElement
 		{
 			String deviceStatus = (xjdf instanceof JDFDeviceInfo) ? xjdf.getAttribute(AttributeName.STATUS) : null;
 			if ("Production".equals(deviceStatus))
+			{
 				deviceStatus = "Running";
+			}
 			final EnumDeviceStatus eDeviceInfoStatus = EnumDeviceStatus.getEnum(deviceStatus);
-			parentIdle = EnumDeviceStatus.Down.equals(eDeviceInfoStatus) || EnumDeviceStatus.Idle.equals(eDeviceInfoStatus) || EnumDeviceStatus.Stopped.equals(eDeviceInfoStatus);
+			parentIdle = EnumDeviceStatus.Down.equals(eDeviceInfoStatus) || EnumDeviceStatus.Idle.equals(eDeviceInfoStatus)
+					|| EnumDeviceStatus.Stopped.equals(eDeviceInfoStatus);
 		}
 
 		final JDFModuleStatus ms = (JDFModuleStatus) jdf;
 		final String moduleStatus = ms.getNonEmpty(AttributeName.DEVICESTATUS);
 		final EnumDeviceStatus eModuleStatus = EnumDeviceStatus.getEnum(moduleStatus);
-		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(eModuleStatus) || EnumDeviceStatus.Idle.equals(eModuleStatus) || EnumDeviceStatus.Stopped.equals(eModuleStatus);
+		final boolean bModuleIdle = EnumDeviceStatus.Down.equals(eModuleStatus) || EnumDeviceStatus.Idle.equals(eModuleStatus)
+				|| EnumDeviceStatus.Stopped.equals(eModuleStatus);
 
 		final boolean needCopy = moduleStatus == null || bModuleIdle == parentIdle;
 		if (needCopy)
