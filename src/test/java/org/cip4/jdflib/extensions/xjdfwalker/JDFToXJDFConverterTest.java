@@ -1752,7 +1752,7 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		conv.setNewVersion(EnumVersion.Version_2_3);
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertEquals("0", xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleID", null));
-		assertEquals(eDeviceStatus.Production.name(), xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@Status", null));
+		assertEquals(eDeviceStatus.Production.name(), xjmf.getXPathAttribute("SignalStatus/DeviceInfo/ModuleInfo/@ModuleStatus", null));
 	}
 
 	/**

@@ -102,7 +102,7 @@ public class WalkModuleInfo extends WalkXElement
 	@Override
 	protected void updateAttributes(final KElement elem)
 	{
-		elem.renameAttribute(AttributeName.STATUS, AttributeName.DEVICESTATUS);
+		elem.renameAttribute(XJDFConstants.ModuleStatus, AttributeName.DEVICESTATUS);
 		final String newStatus = WalkDeviceInfo.updateDeviceStatus(elem.getNonEmpty(AttributeName.DEVICESTATUS));
 		elem.setAttribute(AttributeName.DEVICESTATUS, newStatus);
 		elem.removeAttribute(AttributeName.HOURCOUNTER);

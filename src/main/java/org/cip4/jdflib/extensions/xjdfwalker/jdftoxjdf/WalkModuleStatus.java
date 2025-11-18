@@ -102,7 +102,7 @@ public class WalkModuleStatus extends WalkJDFSubElement
 		{
 			deviceStatus = eDeviceStatus.Production.name();
 		}
-		map.putNotNull(AttributeName.STATUS, deviceStatus);
+		map.putNotNull(XJDFConstants.ModuleStatus, deviceStatus);
 
 		map.remove(AttributeName.COMBINEDPROCESSINDEX);
 	}
