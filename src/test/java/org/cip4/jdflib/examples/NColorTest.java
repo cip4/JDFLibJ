@@ -102,13 +102,13 @@ class NColorTest extends JDFTestCaseBase
 		node.getResource("ExposedMedia", null, 0).setIdentical(vMap);
 
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBackIdentSetup.jdf", 2);
-		run2Seps("Sheet1", EnumSide.Front, null, null, 550, 100, "press0", EnumNodeStatus.Stopped, false);
+		run2Seps("Sheet1", EnumSide.Front, null, null, false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBackIdent_Front0.jdf", 2);
-		run2Seps("Sheet2", EnumSide.Back, null, null, 550, 100, "press1", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet2", EnumSide.Back, null, null, false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBackIdent_Back1.jdf", 2);
-		run2Seps("Sheet2", EnumSide.Front, null, null, 1000, 150, "press0", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet2", EnumSide.Front, null, null, false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBackIdent_Front1.jdf", 2);
-		run2Seps("Sheet1", EnumSide.Back, null, null, 1000, 150, "press1", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet1", EnumSide.Back, null, null, false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBackIdent_Back0.jdf", 2);
 	}
 
@@ -205,17 +205,17 @@ class NColorTest extends JDFTestCaseBase
 		setUp(null, 1);
 
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBackSetup.jdf", 2);
-		run2Seps("Sheet1", EnumSide.Front, null, null, 550, 100, "press0", EnumNodeStatus.Stopped, false);
+		run2Seps("Sheet1", EnumSide.Front, null, null, false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBack_Front0.jdf", 2);
-		run2Seps("Sheet1", EnumSide.Back, null, null, 550, 100, "press1", EnumNodeStatus.Stopped, false);
+		run2Seps("Sheet1", EnumSide.Back, null, null, false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBack_Back0.jdf", 2);
-		run2Seps("Sheet1", EnumSide.Front, null, null, 1000, 150, "press0", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet1", EnumSide.Front, null, null, false);
 		final JDFAttributeMap attributeMapS0 = new JDFAttributeMap("SheetName", "Sheet1");
 		attributeMapS0.put(AttributeName.SIGNATURENAME, "Sig1");
 		// node.getLink(component, null).setAmountPoolAttribute("ActualAmount",
 		// String.valueOf(500), null, attributeMapS0);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "FrontBack_Front1.jdf", 2);
-		run2Seps("Sheet1", EnumSide.Back, null, null, 1000, 150, "press1", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet1", EnumSide.Back, null, null, false);
 		// node.getLink(component, null).setAmountPoolAttribute("ActualAmount",
 		// String.valueOf(1000), null, attributeMapS0);
 		node.setPartStatus(attributeMapS0, EnumNodeStatus.Completed, null);
@@ -232,28 +232,28 @@ class NColorTest extends JDFTestCaseBase
 		setUp(null, 2);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColorSetup.jdf", 2);
 
-		run2Seps("Sheet1", EnumSide.Front, "Cyan", "Magenta", 510, 55, "press", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet1", EnumSide.Front, "Cyan", "Magenta", false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColor_S0_F_CM.jdf", 2);
 
-		run2Seps("Sheet1", EnumSide.Back, "Cyan", "Magenta", 450, 60, "press", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet1", EnumSide.Back, "Cyan", "Magenta", false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColor_S0_B_CM.jdf", 2);
 
-		run2Seps("Sheet2", EnumSide.Front, "Cyan", "Magenta", 500, 55, "press", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet2", EnumSide.Front, "Cyan", "Magenta", false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColor_S1_F_CM.jdf", 2);
 
-		run2Seps("Sheet2", EnumSide.Back, "Cyan", "Magenta", 450, 50, "press", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet2", EnumSide.Back, "Cyan", "Magenta", false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColor_S1_B_CM.jdf", 2);
 
-		run2Seps("Sheet1", EnumSide.Front, "Black", "Yellow", 400, 50, "press", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet1", EnumSide.Front, "Black", "Yellow", false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColor_S0_F_KY.jdf", 2);
 
-		run2Seps("Sheet1", EnumSide.Back, "Black", "Yellow", 350, 50, "press", EnumNodeStatus.Completed, true);
+		run2Seps("Sheet1", EnumSide.Back, "Black", "Yellow", true);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColor_S0_B_KY.jdf", 2);
 
-		run2Seps("Sheet2", EnumSide.Front, "Black", "Yellow", 400, 50, "press", EnumNodeStatus.Completed, false);
+		run2Seps("Sheet2", EnumSide.Front, "Black", "Yellow", false);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColor_S1_F_KY.jdf", 2);
 
-		run2Seps("Sheet2", EnumSide.Back, "Black", "Yellow", 360, 40, "press", EnumNodeStatus.Completed, true);
+		run2Seps("Sheet2", EnumSide.Back, "Black", "Yellow", true);
 		bgt.write2File(sm_dirTestDataTemp + File.separator + "NColor_S1_B_KY.jdf", 2);
 	}
 
@@ -264,7 +264,7 @@ class NColorTest extends JDFTestCaseBase
 	 *
 	 * @param bLast TODO
 	 */
-	private void run2Seps(final String sheet, final EnumSide side, final String sep1, final String sep2, @SuppressWarnings("unused") final int good, @SuppressWarnings("unused") final int waste, @SuppressWarnings("unused") final String deviceID, @SuppressWarnings("unused") final EnumNodeStatus endStatus, final boolean bLast)
+	private void run2Seps(final String sheet, final EnumSide side, final String sep1, final String sep2, final boolean bLast)
 	{
 		String jmfFile = sm_dirTestDataTemp + File.separator + "NColorStatus";
 		final JDFAttributeMap[] map = new JDFAttributeMap[sep1 == null ? 1 : 2];

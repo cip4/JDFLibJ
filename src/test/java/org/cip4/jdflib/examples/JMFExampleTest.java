@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -136,12 +136,12 @@ class JMFExampleTest extends ExampleTest
 		writeTest(jmf, "Activity.jmf", true, null);
 		jmf.removeAttribute(JDFConstants.XSITYPE);
 		jmf.getOwnerDocument_JDFElement().setSchemaLocation(JDFElement.getSchemaURL(), null);
-		JDFParser p = new JDFParser();
-		String schemaLoc = sm_dirTestData + "schema/activity0.xsd";
-		KElement xsd = KElement.parseFile(schemaLoc);
+		final JDFParser p = new JDFParser();
+		final String schemaLoc = sm_dirTestData + "schema/activity0.xsd";
+		final KElement xsd = KElement.parseFile(schemaLoc);
 		assertNotNull(xsd);
 		p.setJDFSchemaLocation(UrlUtil.urlToFile(schemaLoc));
-		JDFDoc jmf2 = p.parseString(jmf.toXML());
+		final JDFDoc jmf2 = p.parseString(jmf.toXML());
 		assertNotNull(jmf2);
 	}
 

@@ -79,13 +79,13 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
 import org.cip4.jdflib.util.JDFDuration;
 
 // ----------------------------------
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         much prior to May 17, 2009
  */
 public class JDFModuleInfo extends JDFElement
@@ -131,12 +131,12 @@ public class JDFModuleInfo extends JDFElement
 
 	public eDeviceStatus getModuleStatus()
 	{
-		return eDeviceStatus.getEnum(getAttribute(AttributeName.STATUS));
+		return eDeviceStatus.getEnum(getAttribute(XJDFConstants.ModuleStatus));
 	}
 
 	public void setModuleStatus(final eDeviceStatus s)
 	{
-		setAttribute(AttributeName.STATUS, s, null);
+		setAttribute(XJDFConstants.ModuleStatus, s, null);
 	}
 
 	/**
@@ -161,7 +161,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @param enumVar
 	 */
 	public void setModuleCondition(final EnumDeviceCondition enumVar)
@@ -170,7 +169,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public EnumDeviceCondition getModuleCondition()
@@ -179,7 +177,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @param value
 	 */
 	public void setProductionCounter(final double value)
@@ -188,7 +185,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public double getProductionCounter()
@@ -197,7 +193,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @param value
 	 */
 	public void setStatusDetails(final String value)
@@ -206,7 +201,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public String getStatusDetails()
@@ -215,7 +209,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @param value
 	 */
 	public void setTotalProductionCounter(final double value)
@@ -224,7 +217,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public double getTotalProductionCounter()
@@ -233,7 +225,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @param value
 	 */
 	public void setModuleID(final String value)
@@ -242,7 +233,6 @@ public class JDFModuleInfo extends JDFElement
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public String getModuleID()

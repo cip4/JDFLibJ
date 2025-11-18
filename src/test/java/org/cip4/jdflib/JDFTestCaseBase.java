@@ -337,8 +337,8 @@ public abstract class JDFTestCaseBase
 	@BeforeEach
 	public void setUp() throws Exception
 	{
-		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_8);
-		BaseXJDFHelper.setDefaultVersion(EnumVersion.Version_2_2);
+		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_9);
+		BaseXJDFHelper.setDefaultVersion(EnumVersion.Version_2_3);
 		senderID = "TestSender";
 		JDFJMF.setTheSenderID(senderID);
 		KElement.uniqueID(1);
@@ -475,7 +475,7 @@ public abstract class JDFTestCaseBase
 	protected XMLDoc writeTestSnippets(final KElement e, String filename, final boolean parseSchema, final List<String> snippetPaths)
 	{
 		String ext = UrlUtil.extension(filename);
-		int minor = 1;
+		int minor = 3;
 		new File(sm_dirTestDataTemp + "xjdfexamples").mkdirs();
 		new File(sm_dirTestDataTemp + "jdfexamples").mkdirs();
 		if (ext.startsWith("x"))
@@ -551,7 +551,7 @@ public abstract class JDFTestCaseBase
 
 	int getMinor(final KElement e)
 	{
-		final String s = e.getInheritedAttribute(AttributeName.VERSION, null, "2.1");
+		final String s = e.getInheritedAttribute(AttributeName.VERSION, null, "2.3");
 		return StringUtil.parseInt(StringUtil.token(s, 1, "."), 0);
 	}
 

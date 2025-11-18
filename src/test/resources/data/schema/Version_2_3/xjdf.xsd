@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
     
-	XJDF Schema @@version@@ (@@buildTime@@)
+    XJDF Schema @@version@@ (@@buildTime@@)
 
     CIP4 Organization
     https://www.cip4.org
@@ -128,6 +128,7 @@
 			<xs:enumeration value="SelfAdhesive"/>
 			<xs:enumeration value="ShrinkFoil"/>
 			<xs:enumeration value="Sleeve"/>
+			<xs:enumeration value="Synthetic"/>
 			<xs:enumeration value="Textile"/>
 			<xs:enumeration value="Transparency"/>
 			<xs:enumeration value="Vinyl"/>
@@ -1027,6 +1028,7 @@
 			<xs:attribute name="Status" type="NodeStatus" use="required"/>
 			<xs:attribute name="StatusDetails" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
+			<xs:attribute name="TotalAmount" type="xs:float" use="optional"/>
 			<xs:attribute name="Waste" type="xs:float" use="optional"/>
 			<xs:attribute name="WorkStepID" type="xs:NMTOKEN" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -1040,9 +1042,9 @@
 			<xs:attribute name="HourCounter" type="xs:duration" use="optional"/>
 			<xs:attribute name="ModuleCondition" type="DeviceCondition" use="optional"/>
 			<xs:attribute name="ModuleID" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="ModuleStatus" type="DeviceStatus" use="required"/>
 			<xs:attribute name="ModuleType" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ProductionCounter" type="xs:float" use="optional"/>
-			<xs:attribute name="Status" type="DeviceStatus" use="required"/>
 			<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
 			<xs:attribute name="TotalProductionCounter" type="xs:float" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -4906,8 +4908,10 @@
 							<xs:enumeration value="CIP3Multiple"/>
 							<xs:enumeration value="CIP3Single"/>
 						</xs:restriction>
-					</xs:simpleType>
+					</xs:simpleType>					
 				</xs:attribute>
+				<xs:attribute name="Resolution" type="XYPair" use="optional"/>
+				<xs:attribute name="Size" type="XYPair" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -5410,6 +5414,7 @@
 			<xs:attribute name="MarkName" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="Offset" type="XYPair" use="optional"/>
 			<xs:attribute name="Orientation" type="Orientation" use="optional"/>
+			<xs:attribute name="PositionRef" type="xs:IDREF" use="optional"/>
 			<xs:attribute name="RelativeHeight" type="xs:float" use="optional"/>
 			<xs:attribute name="RelativeWidth" type="xs:float" use="optional"/>
 			<xs:attribute name="StripMarkDetails" type="xs:string" use="optional"/>
