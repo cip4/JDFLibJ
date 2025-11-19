@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,7 +88,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class ODPGoldenTicketTest extends BaseGoldenTicketTest
 {
@@ -122,7 +121,6 @@ class ODPGoldenTicketTest extends BaseGoldenTicketTest
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -137,8 +135,8 @@ class ODPGoldenTicketTest extends BaseGoldenTicketTest
 		odpGoldenTicket.assign(null);
 		final JDFNode node = odpGoldenTicket.getNode();
 		final VString icsVersions = node.getICSVersions(false);
-		assertTrue(icsVersions.contains("Base_L0-1.8"));
-		assertTrue(icsVersions.contains("ODP_L1-1.8"));
+		assertTrue(icsVersions.contains("Base_L0-1." + getJDFMinor()));
+		assertTrue(icsVersions.contains("ODP_L1-1." + getJDFMinor()));
 		assertEquals(icsVersions.size(), 2);
 
 		odpGoldenTicket.good = 10;
