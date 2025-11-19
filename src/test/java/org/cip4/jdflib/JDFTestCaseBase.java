@@ -143,6 +143,29 @@ public abstract class JDFTestCaseBase
 		return null;
 	}
 
+	protected static JDFParser getSchemaParser(final int major)
+	{
+		if (major == 1)
+		{
+			return getSchemaParser(EnumVersion.getEnum(major, getJDFMinor()));
+		}
+		else if (major == 2)
+		{
+			return getXJDFSchemaParser(major, getXJDFMinor());
+		}
+		return null;
+	}
+
+	protected static int getJDFMinor()
+	{
+		return JDFElement.getDefaultJDFVersion().getMinorVersion();
+	}
+
+	protected static int getXJDFMinor()
+	{
+		return XJDF20.getDefaultVersion().getMinorVersion();
+	}
+
 	/**
 	 * @return
 	 */

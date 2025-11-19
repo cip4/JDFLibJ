@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,16 +78,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 {
 	WideFormatGoldenTicket theTicket;
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -102,10 +99,10 @@ class WideFormatGoldenTicketTest extends BaseGoldenTicketTest
 		theTicket.assign(null);
 		final JDFNode node = theTicket.getNode();
 
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.8"));
-		assertTrue(node.getICSVersions(false).contains("DPW_L1-1.8"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("MIS_L1-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("DPW_L1-1." + getJDFMinor()));
 
 		theTicket.good = 10;
 		theTicket.waste = 0;

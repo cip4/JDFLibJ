@@ -71,7 +71,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPruneSimple()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.addType(EnumType.Product);
@@ -88,7 +88,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPruneForeign()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.addType(EnumType.Product);
@@ -108,7 +108,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPreForeign()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.addType(EnumType.Product);
@@ -128,7 +128,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPruneSimpleMissingRequired()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
 		h.setJobID(null);
@@ -146,7 +146,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPruneSimpleNoAtts()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		prune.setCheckAttributes(true);
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
@@ -165,7 +165,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPruneComment()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		prune.setCheckAttributes(true);
 		final XJDFHelper h = new XJDFHelper("j1", "p1");
@@ -188,7 +188,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	void testPruneComplex()
 	{
 		final File[] xjdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "xjdf"), "xjdf");
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 
 		for (final File xjdf : xjdfs)
 		{
@@ -209,7 +209,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPruneSimpleXJMF()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		final XJMFHelper h = new XJMFHelper();
 		h.appendMessage(EnumFamily.Query, org.cip4.jdflib.jmf.JDFMessage.EnumType.KnownMessages);
@@ -226,7 +226,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 	@Test
 	void testPruneSimpleXJMFNoAtts()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		prune.setCheckAttributes(true);
 		final XJMFHelper h = new XJMFHelper();
@@ -249,15 +249,15 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final XMLDoc schema = XMLDoc.parseFile(jmfschema);
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		prune.setCheckAttributes(true);
-		JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
-		KElement pruned = prune.prune(jmf);
+		final JDFJMF jmf = new JMFBuilder().buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.Full);
+		final KElement pruned = prune.prune(jmf);
 		pruned.write2File(sm_dirTestDataTemp + "status.jmf.xsd");
 	}
 
 	@Test
 	void testPruneSimpleMultiXJMFNoAtts()
 	{
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		prune.setCheckAttributes(true);
 		final XJMFHelper h = new XJMFHelper();
@@ -298,7 +298,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		phase.setStatus(EnumNodeStatus.Setup);
 		phase.setStartTime(new JDFDate().setTime(16, 0, 0));
 		xjmfHelper.cleanUp();
-		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema(2, 2));
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
 		prune.setCheckAttributes(true);
 		final KElement ret = prune.prune(xjmfHelper);

@@ -58,9 +58,9 @@ import java.io.StringReader;
 
 import org.apache.xerces.parsers.DOMParser;
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
+import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -77,7 +77,6 @@ import org.xml.sax.SAXException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         14.01.2009
  */
 class JDFDocTest extends JDFTestCaseBase
@@ -313,7 +312,6 @@ class JDFDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test graceful null handling
 	 */
 	@Test
@@ -324,7 +322,7 @@ class JDFDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testNoInit()
@@ -336,7 +334,6 @@ class JDFDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test graceful null handling
 	 */
 	@Test
@@ -457,12 +454,12 @@ class JDFDocTest extends JDFTestCaseBase
 	void testVersionFromName()
 	{
 		assertEquals(null, JDFDoc.getVersionFromDocType(null));
-		assertEquals(EnumVersion.Version_1_8, JDFDoc.getVersionFromDocType("JDF"));
-		assertEquals(EnumVersion.Version_1_8, JDFDoc.getVersionFromDocType("JDF"));
-		assertEquals(EnumVersion.Version_1_8, JDFDoc.getVersionFromDocType("jdf:JMF"));
+		assertEquals(JDFElement.getDefaultJDFVersion(), JDFDoc.getVersionFromDocType("JDF"));
+		assertEquals(JDFElement.getDefaultJDFVersion(), JDFDoc.getVersionFromDocType("JDF"));
+		assertEquals(JDFElement.getDefaultJDFVersion(), JDFDoc.getVersionFromDocType("jdf:JMF"));
 		assertEquals(null, JDFDoc.getVersionFromDocType("Foo"));
-		assertEquals(EnumVersion.Version_2_2, JDFDoc.getVersionFromDocType("XJDF"));
-		assertEquals(EnumVersion.Version_2_2, JDFDoc.getVersionFromDocType("XJMF"));
+		assertEquals(XJDF20.getDefaultVersion(), JDFDoc.getVersionFromDocType("XJDF"));
+		assertEquals(XJDF20.getDefaultVersion(), JDFDoc.getVersionFromDocType("XJMF"));
 	}
 
 	/**
@@ -492,7 +489,6 @@ class JDFDocTest extends JDFTestCaseBase
 	/**
 	 * @throws IOException
 	 * @throws SAXException
-	 *
 	 */
 	@Test
 	void testParseDOM() throws SAXException, IOException
@@ -598,7 +594,6 @@ class JDFDocTest extends JDFTestCaseBase
 
 	/**
 	 * make sure that corrupt files always return a null document
-	 *
 	 */
 	@Test
 	void testCorrupt()

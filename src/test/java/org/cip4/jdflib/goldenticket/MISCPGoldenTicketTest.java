@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 {
@@ -119,10 +118,10 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.assign(null);
 		JDFNode node = cpGoldenTicket.getNode();
 		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Manager", "_MISCPS_1_GB", null);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.8"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1." + getJDFMinor()));
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.good = 1000;
@@ -131,10 +130,10 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.execute(null, true, true);
 		node = cpGoldenTicket.getNode();
 		writeRoundTrip(cpGoldenTicket, "GoldenTicket_Worker", "_MISCPS_1_GB", null);
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1.8"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("MIS_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("MISCPS_L1-1." + getJDFMinor()));
 		assertTrue(node.isValid(EnumValidationLevel.Complete));
 
 		cpGoldenTicket.assign(null);
@@ -155,9 +154,6 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.execute(mapSingle, true, false);
 		cpGoldenTicket.write2File(sm_dirTestDataTemp + "GoldenTicket_Worker_MISCPS_1_GB_FrontBack_xBF.jdf", 2);
 	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// /
 
 	/**
 	 *
@@ -299,7 +295,7 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	{
 		final MISCPGoldenTicket cpGoldenTicket = new MISCPGoldenTicket(1, null, 2, 1, true, null);
 
-		final VString vICS = new VString("Base_L2-1.8,MIS_L1-1.8,MISCPS_L1-1.8", ",");
+		final VString vICS = new VString("Base_L2-1.9,MIS_L1-1.9,MISCPS_L1-1.9", ",");
 		assertEquals(cpGoldenTicket.getICSVersions(), vICS);
 	}
 
@@ -336,7 +332,6 @@ class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	}
 
 	/**
-	 *
 	 * @see BaseGoldenTicketTest#setUp()
 	 */
 	@Override

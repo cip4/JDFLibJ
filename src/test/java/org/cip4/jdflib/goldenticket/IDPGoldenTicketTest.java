@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,7 +87,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class IDPGoldenTicketTest extends BaseGoldenTicketTest
 {
@@ -121,7 +120,6 @@ class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -135,10 +133,10 @@ class IDPGoldenTicketTest extends BaseGoldenTicketTest
 
 		idpGoldenTicket.assign(null);
 		final JDFNode node = idpGoldenTicket.getNode();
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.8"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.8"));
-		assertTrue(node.getICSVersions(false).contains("IDP_L1-1.8"));
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("MIS_L1-1." + getJDFMinor()));
+		assertTrue(node.getICSVersions(false).contains("IDP_L1-1." + getJDFMinor()));
 
 		idpGoldenTicket.good = 10;
 		idpGoldenTicket.waste = 0;
