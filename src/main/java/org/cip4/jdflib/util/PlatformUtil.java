@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,7 +48,6 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
  * helper util for platform identifying.
  *
  * @author Stefan Meißner, CIP4
- *
  *         01.09.2009
  */
 public class PlatformUtil
@@ -63,7 +62,7 @@ public class PlatformUtil
 	 */
 	public static boolean isWindows()
 	{
-		return File.separator.equals(JDFCoreConstants.BACK_SLASH);
+		return JDFCoreConstants.BACK_SLASH.equals(File.separator);
 	}
 
 	/**
@@ -75,8 +74,22 @@ public class PlatformUtil
 	{
 		String property = System.getProperty(key);
 		if (StringUtil.isEmpty(property))
+		{
 			property = System.getenv(key);
+		}
 		return StringUtil.getNonEmpty(property);
+	}
+
+	/**
+	 * Returns either the non-empty property or environment variable key
+	 * if both are empty, returns def
+	 *
+	 * @return the value or def
+	 */
+	public static String getProperty(final String key, String def)
+	{
+		final String ret = getProperty(key);
+		return StringUtil.isEmpty(ret) ? def : ret;
 	}
 
 	public static String getJavaVersion()
@@ -86,19 +99,19 @@ public class PlatformUtil
 
 	public static JDFAttributeMap listProperties(boolean java, boolean env)
 	{
-		JDFAttributeMap map = new JDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 		if (java)
 		{
-			Properties props = System.getProperties();
-			for (String key : props.stringPropertyNames())
+			final Properties props = System.getProperties();
+			for (final String key : props.stringPropertyNames())
 			{
 				map.putNotNull(key, props.getProperty(key));
 			}
 		}
 		if (env)
 		{
-			Map<String, String> envMap = System.getenv();
-			for (Entry<String, String> e : envMap.entrySet())
+			final Map<String, String> envMap = System.getenv();
+			for (final Entry<String, String> e : envMap.entrySet())
 			{
 				map.putNotNull(e.getKey(), e.getValue());
 			}

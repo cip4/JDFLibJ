@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -53,9 +53,7 @@ import org.junit.jupiter.api.Test;
  * JUnit test case for PlatformUtil class.
  *
  * @author Stefan Meißner, CIP4
- *
  *         01.09.2009
- *
  */
 class PlatformUtilTest extends JDFTestCaseBase
 {
@@ -66,7 +64,7 @@ class PlatformUtilTest extends JDFTestCaseBase
 	@Test
 	void testIsWindows()
 	{
-		assertEquals(File.separator.equals(JDFCoreConstants.BACK_SLASH), PlatformUtil.isWindows(), "Return value is not windows.");
+		assertEquals(JDFCoreConstants.BACK_SLASH.equals(File.separator), PlatformUtil.isWindows(), "Return value is not windows.");
 	}
 
 	/**
@@ -86,6 +84,20 @@ class PlatformUtilTest extends JDFTestCaseBase
 	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
 	 */
 	@Test
+	void testGetPropertyDef()
+	{
+		System.setProperty("foo.bar", "");
+		assertEquals("a", PlatformUtil.getProperty("foo.bar", "a"));
+		assertEquals(null, PlatformUtil.getProperty("foo.bar", null));
+		System.setProperty("foo.bar", "fnarf");
+		assertEquals("fnarf", PlatformUtil.getProperty("foo.bar", "a"));
+		System.setProperty("foo.bar", "");
+	}
+
+	/**
+	 * Test method for {@link org.cip4.jdflib.util.PlatformUtil#isWindows()}.
+	 */
+	@Test
 	void testGetJavaVersion()
 	{
 		log.info(PlatformUtil.getJavaVersion());
@@ -98,15 +110,21 @@ class PlatformUtilTest extends JDFTestCaseBase
 	@Test
 	void testGetMap()
 	{
-		JDFAttributeMap m = PlatformUtil.listProperties(true, true);
-		for (String key : m.keySet())
+		final JDFAttributeMap m = PlatformUtil.listProperties(true, true);
+		for (final String key : m.keySet())
+		{
 			assertTrue(PlatformUtil.hasProperty(key));
-		JDFAttributeMap m1 = PlatformUtil.listProperties(true, false);
-		for (String key : m1.keySet())
+		}
+		final JDFAttributeMap m1 = PlatformUtil.listProperties(true, false);
+		for (final String key : m1.keySet())
+		{
 			assertTrue(PlatformUtil.hasProperty(key));
-		JDFAttributeMap m2 = PlatformUtil.listProperties(true, false);
-		for (String key : m2.keySet())
+		}
+		final JDFAttributeMap m2 = PlatformUtil.listProperties(true, false);
+		for (final String key : m2.keySet())
+		{
 			assertTrue(PlatformUtil.hasProperty(key));
+		}
 
 	}
 
