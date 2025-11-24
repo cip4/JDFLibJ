@@ -43,11 +43,9 @@ import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.KElement;
 
 /**
- *
  * elementwalker class that allows you to traverse a dom tree starting at a given root
  *
  * @author prosirai
- *
  */
 public class ElementWalker
 {
@@ -66,7 +64,7 @@ public class ElementWalker
 	/**
 	 * walk the tree starting at e.
 	 *
-	 * @param e the root element to walk, must not be null
+	 * @param e         the root element to walk, must not be null
 	 * @param trackElem a parallel element to e that may additionally be modified during the walk, may be null
 	 * @return n the number of traversed elements
 	 */
@@ -91,6 +89,14 @@ public class ElementWalker
 				for (final KElement e2 : v)
 				{
 					n += walkTree(e2, b);
+				}
+				try
+				{
+					w.postWalk(b, trackElem);
+				}
+				finally
+				{
+					// nop
 				}
 			}
 			try
@@ -180,7 +186,6 @@ public class ElementWalker
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

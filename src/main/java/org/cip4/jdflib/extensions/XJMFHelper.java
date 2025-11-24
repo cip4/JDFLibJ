@@ -48,6 +48,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EHeader;
 import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.extensions.xjdfwalker.IDRemover;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -64,6 +65,30 @@ public class XJMFHelper extends MessagePoolHelper
 	public XJMFHelper(final KElement pool)
 	{
 		super(pool);
+	}
+
+	/**
+	 * @param headerAttribute
+	 * @param value
+	 */
+	public void setHeader(final EHeader headerAttribute, final String value)
+	{
+		if (!StringUtil.isEmpty(value) || getElement(XJDFConstants.Header) != null)
+		{
+			final KElement header = getCreateElement(XJDFConstants.Header);
+			header.setAttribute(headerAttribute.name(), value);
+		}
+
+	}
+
+	/**
+	 * @param headerAttribute
+	 * @param value
+	 */
+	public String getHeader(final EHeader headerAttribute)
+	{
+		final KElement header = getHeader();
+		return header == null ? null : header.getNonEmpty(headerAttribute.name());
 	}
 
 	/**

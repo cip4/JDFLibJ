@@ -91,6 +91,11 @@ public class MessageHelper extends BaseXJDFHelper
 
 	}
 
+	public enum EHeader
+	{
+		AgentName, AgentVersion, Author, DescriptiveName, DeviceID, ICSVersions, ID, PersonalID, refID, Time
+	}
+
 	public enum EType
 	{
 		ForceGang, GangStatus, KnownDevices, KnownMessages, KnownSubscriptions, ModifyQueueEntry, Notification, PipeControl, QueueStatus, RequestQueueEntry, Resource, ResubmitQueueEntry, ReturnQueueEntry, ShutDown, Status, StopPersistentChannel, SubmitQueueEntry, Wakeup;
@@ -255,10 +260,15 @@ public class MessageHelper extends BaseXJDFHelper
 	 * @param headerAttribute
 	 * @param value
 	 */
+
 	public void setHeader(final String headerAttribute, final String value)
 	{
-		final KElement header = getCreateElement(XJDFConstants.Header);
-		header.setAttribute(headerAttribute, value);
+		if (!StringUtil.isEmpty(value) || getElement(XJDFConstants.Header) != null)
+		{
+			final KElement header = getCreateElement(XJDFConstants.Header);
+			header.setAttribute(headerAttribute, value);
+		}
+
 	}
 
 	/**
@@ -269,6 +279,20 @@ public class MessageHelper extends BaseXJDFHelper
 	{
 		final KElement header = getHeader();
 		return header == null ? null : header.getNonEmpty(headerAttribute);
+	}
+
+	public void setHeader(final EHeader headerAttribute, final String value)
+	{
+		setHeader(headerAttribute.name(), value);
+	}
+
+	/**
+	 * @param headerAttribute
+	 * @param value
+	 */
+	public String getHeader(final EHeader headerAttribute)
+	{
+		return getHeader(headerAttribute.name());
 	}
 
 	/**

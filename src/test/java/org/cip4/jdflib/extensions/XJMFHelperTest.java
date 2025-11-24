@@ -49,6 +49,7 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EHeader;
 import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -192,6 +193,17 @@ class XJMFHelperTest extends JDFTestCaseBase
 	{
 		final XJMFHelper theHelper = new XJMFHelper();
 		assertNotNull(JDFDate.createDate(theHelper.getXPathValue("Header/@Time")));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testHeader()
+	{
+		final XJMFHelper theHelper = new XJMFHelper();
+		theHelper.setHeader(EHeader.refID, "b");
+		assertEquals("b", theHelper.getHeader(EHeader.refID));
 	}
 
 	/**

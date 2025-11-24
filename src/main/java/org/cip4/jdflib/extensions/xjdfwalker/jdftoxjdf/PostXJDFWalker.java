@@ -72,6 +72,7 @@ import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.MessageHelper.EFamily;
+import org.cip4.jdflib.extensions.MessageHelper.EHeader;
 import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
@@ -3467,15 +3468,13 @@ class PostXJDFWalker extends BaseElementWalker
 		if (xjdf != null)
 		{
 			final JDFElement sender = (JDFElement) xjdf.getCreateElement(XJDFConstants.Header);
-			sender.moveAttribute(AttributeName.AGENTNAME, xjdf);
-			sender.moveAttribute(AttributeName.AGENTVERSION, xjdf);
-			sender.moveAttribute(AttributeName.AUTHOR, xjdf);
-			sender.moveAttribute(AttributeName.DEVICEID, xjdf);
-			sender.moveAttribute(AttributeName.TIME, xjdf);
-			sender.moveAttribute(AttributeName.ICSVERSIONS, xjdf);
-			sender.moveAttribute(AttributeName.PERSONALID, xjdf);
-			sender.moveAttribute(AttributeName.ID, xjdf);
-			sender.moveAttribute(AttributeName.REFID, xjdf);
+			for (final EHeader h : EHeader.values())
+			{
+				if (xjdf.hasNonEmpty(h.name()))
+				{
+					sender.moveAttribute(h.name(), xjdf);
+				}
+			}
 			if (!sender.hasAttribute(AttributeName.DEVICEID))
 			{
 				sender.setAttribute(AttributeName.DEVICEID, "dummy");

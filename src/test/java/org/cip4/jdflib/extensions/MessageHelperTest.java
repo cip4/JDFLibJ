@@ -90,6 +90,21 @@ class MessageHelperTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testHeader()
+	{
+		final XJMFHelper xjmf = new XJMFHelper();
+		final MessageHelper theHelper = xjmf.appendMessage(EnumFamily.Query, EnumType.Status);
+		assertEquals(null, theHelper.getHeader("a"));
+		theHelper.setHeader("a", "b");
+		assertEquals("b", theHelper.getHeader("a"));
+		theHelper.setHeader("a", null);
+		assertEquals(null, theHelper.getHeader("a"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testCleanupNotification()
 	{
 		final KElement resp = new XJMFHelper().getRoot().appendElement("ResponseKnownMessages");

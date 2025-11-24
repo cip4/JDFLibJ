@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,7 +68,7 @@
  *
  */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.elementwalker;
 
@@ -76,32 +76,43 @@ import org.cip4.jdflib.core.KElement;
 
 /**
  * @author Rainer Prosi
- * 
  */
 public interface IWalker
 {
 	/**
 	 * called for every IWalker that the factory returns
-	 * @param e the element to walk
+	 *
+	 * @param e         the element to walk
 	 * @param trackElem a parallel element to e that may additionally be modified during the walk
-	 * 
 	 * @return !=null if this element remains after walking, <br/>
-	 * null if it was deleted and therefore the walker should skip this and all its descendants<br/>
-	 * the element may either be trackElem or a converted element to continue with as trackElem
+	 *         null if it was deleted and therefore the walker should skip this and all its descendants<br/>
+	 *         the element may either be trackElem or a converted element to continue with as trackElem
 	 */
 	abstract KElement walk(KElement e, KElement trackElem);
 
 	/**
 	 * hook for guaranteed prewalk initialization
-	 * @param e the element to walk
+	 *
+	 * @param e         the element to walk
 	 * @param trackElem a parallel element to e that may additionally be modified during the walk
 	 */
 	abstract void prepareWalk(KElement e, KElement trackElem);
 
 	/**
 	 * hook for guaranteed postwalk finalization
-	 * @param e the element to walk
+	 *
+	 * @param e         the element to walk
 	 * @param trackElem a parallel element to e that may additionally be modified during the walk
 	 */
 	abstract void finalizeWalk(KElement e, KElement trackElem);
+
+	/**
+	 * hook for walking an element after all subelements have been processed
+	 *
+	 * @param b
+	 * @param trackElem
+	 */
+	default void postWalk(KElement b, KElement trackElem)
+	{
+	}
 }

@@ -73,12 +73,15 @@ public class XSDConstants
 	static final String XS_ANY_ATTRIBUTE = "xs:anyAttribute";
 	static final String XS_SEQUENCE = "xs:sequence";
 	public static final String XS_STRING = "xs:string";
+	public static final String XS_DURATION = "xs:duration";
 	public static final String XS_ENUMERATION = "xs:enumeration";
 	public static final String XS_NMTOKEN = "xs:NMTOKEN";
 	public static final String XS_NMTOKENS = "xs:NMTOKENS";
 	public static final String XS_PATTERN = "xs:pattern";
 	public static final String XS_BOOLEAN = "xs:boolean";
 	public static final String UNBOUNDED = "unbounded";
+	public static final String XS_ID = "xs:ID";
+	public static final String XS_DATETIME = "xs:dateTime";
 
 	enum eAttributeUse
 	{

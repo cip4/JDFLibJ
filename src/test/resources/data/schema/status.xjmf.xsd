@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+  elementFormDefault="qualified"
+  targetNamespace="http://www.CIP4.org/JDFSchema_2_0"
+  version="@@version@@" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Version">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="2.0"/>
+      <xs:enumeration value="2.1"/>
+      <xs:enumeration value="2.2"/>
+      <xs:enumeration value="2.3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NodeStatus">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Aborted"/>
+      <xs:enumeration value="Cleanup"/>
+      <xs:enumeration value="Completed"/>
+      <xs:enumeration value="InProgress"/>
+      <xs:enumeration value="Setup"/>
+      <xs:enumeration value="Stopped"/>
+      <xs:enumeration value="Suspended"/>
+      <xs:enumeration value="Waiting"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DeviceStatus">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="Cleanup"/>
+      <xs:enumeration value="Idle"/>
+      <xs:enumeration value="NonProductive"/>
+      <xs:enumeration value="Offline"/>
+      <xs:enumeration value="Production"/>
+      <xs:enumeration value="Setup"/>
+      <xs:enumeration value="Stopped"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DeviceInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="JobPhase"/>
+      </xs:sequence>
+      <xs:attribute name="Status" type="DeviceStatus" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="XJMF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="1" ref="Header"/>
+        <xs:choice maxOccurs="unbounded" minOccurs="1">
+          <xs:element ref="Message"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="Version" type="Version" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JobPhase">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
+      </xs:sequence>
+      <xs:attribute name="JobID" type="xs:NMTOKEN" use="required"/>
+      <xs:attribute name="JobPartID" type="xs:NMTOKEN" use="optional"/>
+      <xs:attribute name="StartTime" type="xs:dateTime" use="optional"/>
+      <xs:attribute name="Status" type="NodeStatus" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element abstract="true" name="Message" type="Message"/>
+  <xs:complexType abstract="true" name="Message">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" ref="Header"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Header">
+    <xs:complexType>
+      <xs:attribute name="AgentName" type="xs:string" use="optional"/>
+      <xs:attribute name="AgentVersion" type="xs:string" use="optional"/>
+      <xs:attribute name="DeviceID" type="xs:NMTOKEN" use="required"/>
+      <xs:attribute name="ID" type="xs:ID" use="optional"/>
+      <xs:attribute name="refID" type="xs:NMTOKEN" use="optional"/>
+      <xs:attribute name="Time" type="xs:dateTime" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element abstract="true" name="Signal" substitutionGroup="Message" type="Signal"/>
+  <xs:complexType abstract="true" name="Signal">
+    <xs:complexContent>
+      <xs:extension base="Message"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Part">
+    <xs:complexType>
+      <xs:attribute name="SheetName" type="xs:NMTOKEN" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SignalStatus" substitutionGroup="Signal" type="SignalStatus"/>
+  <xs:complexType name="SignalStatus">
+    <xs:complexContent>
+      <xs:extension base="Signal">
+        <xs:sequence>
+          <xs:element maxOccurs="1" minOccurs="1" ref="DeviceInfo"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

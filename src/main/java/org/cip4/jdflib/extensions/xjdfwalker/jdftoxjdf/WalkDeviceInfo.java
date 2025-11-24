@@ -75,11 +75,13 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFDeviceInfo.eXjdfDeviceCondition;
-import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.JavaEnumUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
@@ -164,9 +166,10 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 	{
 		super.setAttributes(jdf, eNew);
 		final KElement parent = eNew.getParentNode_KElement();
-		if (parent != null)
+		final String deviceID = ((JDFDeviceInfo) jdf).getDeviceID();
+		if (parent != null && !StringUtil.isEmpty(deviceID))
 		{
-			parent.moveAttribute(AttributeName.DEVICEID, eNew);
+			new MessageHelper(parent).setHeader(AttributeName.DEVICEID, deviceID);
 		}
 	}
 
@@ -187,25 +190,6 @@ public class WalkDeviceInfo extends WalkJDFSubElement
 			return xjdf;
 		}
 		return super.walk(jdf, xjdf);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkElement#removeUnusedElements(org.cip4.jdflib.core.KElement)
-	 */
-	@Override
-	protected void removeUnusedElements(final KElement jdf)
-	{
-		final JDFDevice dev = (JDFDevice) jdf.getElement(ElementName.DEVICE);
-		if (dev != null)
-		{
-			final String devID = dev.getDeviceID();
-			if (devID != null && jdf.getNonEmpty(AttributeName.DEVICEID) == null)
-			{
-				jdf.setAttribute(AttributeName.DEVICEID, devID);
-			}
-			dev.deleteNode();
-		}
-		super.removeUnusedElements(jdf);
 	}
 
 }
