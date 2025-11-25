@@ -87,14 +87,13 @@ class XJDFToJDFSchemaTest extends JDFTestCaseBase
 	static void createCopy()
 	{
 		new XJDFSchemaPruneTest().testSignalStatus();
-		FileUtil.copyFile(new File(sm_dirTestData + "status.xjmf.xsd"), xjdfXSD);
+		FileUtil.copyFile(new File(sm_dirTestData + "schema/status.xjmf.xsd"), xjdfXSD);
 	}
 
 	@Test
 	void testCopy()
 	{
-		final File hd = new File(sm_dirTestDataTemp + "xjmf.status.xsd");
-		final XJDFToJDFSchema xj = new XJDFToJDFSchema(KElement.parseFile(hd));
+		final XJDFToJDFSchema xj = new XJDFToJDFSchema(KElement.parseFile(xjdfXSD));
 		final KElement jmf = xj.update();
 		assertNotNull(jmf);
 		jmf.write2File(sm_dirTestDataTemp + "status.jmf.xsd");
