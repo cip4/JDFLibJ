@@ -53,6 +53,7 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.MessageHelper.EFamily;
 import org.cip4.jdflib.extensions.MessageHelper.EType;
 import org.cip4.jdflib.extensions.XSDConstants.eAttributeUse;
+import org.cip4.jdflib.util.StringUtil;
 
 public class XJDFToJDFSchema extends BaseElementWalker
 {
@@ -247,11 +248,10 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		}
 
 		@Override
-		public KElement walk(final KElement e, final KElement trackElem)
+		public void postWalk(final KElement e, final KElement trackElem)
 		{
-			final KElement copy = super.walk(e, trackElem);
-			updateDevice(copy, trackElem);
-			return copy;
+			super.postWalk(e, trackElem);
+			updateDevice(e, trackElem);
 		}
 
 		void updateDevice(KElement xsseq, KElement trackElem)
@@ -259,25 +259,6 @@ public class XJDFToJDFSchema extends BaseElementWalker
 			final KElement ref = xsseq.getCreateChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.REF, null, ElementName.DEVICE, 0);
 			ref.setAttribute(XSDConstants.MIN_OCCURS, 0, null);
 			ref.setAttribute(XSDConstants.MAX_OCCURS, 1, null);
-			KElement newDev = xsseq.getDocRoot().getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.NAME, null, ElementName.DEVICE, 0, false);
-			if (newDev == null)
-			{
-				final KElement oldDev = trackElem.getDocRoot().getChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.NAME, null, ElementName.DEVICE, 0,
-						false);
-				if (oldDev == null)
-				{
-					newDev = trackElem.getDocRoot().getCreateChildWithAttribute(XSDConstants.XS_ELEMENT, XSDConstants.NAME, null, ElementName.DEVICE, 0);
-					final KElement newDevC = newDev.appendElement(XSDConstants.XS_COMPLEX_TYPE);
-					XSDUtil.setXSAttribute(newDevC, AttributeName.DEVICEID, XSDConstants.XS_NMTOKEN, true);
-					XSDUtil.setXSAttribute(newDevC, AttributeName.DEVICETYPE, XSDConstants.XS_STRING, false);
-					XSDUtil.setXSAttribute(newDevC, AttributeName.PRODUCTID, XSDConstants.XS_NMTOKEN, false);
-					XSDUtil.setXSAttribute(newDevC, AttributeName.MANUFACTURER, XSDConstants.XS_STRING, false);
-					XSDUtil.setXSAttribute(newDevC, AttributeName.FRIENDLYNAME, XSDConstants.XS_STRING, false);
-					XSDUtil.setXSAttribute(newDevC, AttributeName.SERIALNUMBER, XSDConstants.XS_STRING, false);
-
-				}
-
-			}
 		}
 	}
 
@@ -387,7 +368,10 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		@Override
 		public void postWalk(KElement b, KElement trackElem)
 		{
-			XSDUtil.setXSAttribute(b, AttributeName.DESCRIPTIVENAME, XSDConstants.XS_STRING, false);
+			if (!StringUtil.parseBoolean(b.getInheritedAttribute("abstract"), false))
+			{
+				XSDUtil.setXSAttribute(b, AttributeName.DESCRIPTIVENAME, XSDConstants.XS_STRING, false);
+			}
 		}
 	}
 
@@ -398,6 +382,27 @@ public class XJDFToJDFSchema extends BaseElementWalker
 		public boolean matches(KElement e)
 		{
 			return XSDConstants.XS_EXTENSION.equals(e.getNodeName());
+		}
+
+	}
+
+	public class WalkDeviceExtension extends WalkExtension
+	{
+
+		@Override
+		public boolean matches(KElement e)
+		{
+			return super.matches(e) && ElementName.DEVICE.equals(e.getInheritedAttribute(XSDConstants.NAME, null, null));
+		}
+
+		@Override
+		public void postWalk(final KElement e, final KElement trackElem)
+		{
+			super.postWalk(e, trackElem);
+			XSDUtil.setXSAttribute(e, AttributeName.PRODUCTID, XSDConstants.XS_NMTOKEN, false);
+			XSDUtil.setXSAttribute(e, AttributeName.MANUFACTURER, XSDConstants.XS_STRING, false);
+			XSDUtil.setXSAttribute(e, AttributeName.FRIENDLYNAME, XSDConstants.XS_STRING, false);
+			XSDUtil.setXSAttribute(e, AttributeName.SERIALNUMBER, XSDConstants.XS_STRING, false);
 		}
 
 	}
@@ -424,6 +429,13 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	public class WalkMessageExtension extends WalkExtension
 	{
+
+		@Override
+		public void postWalk(KElement b, KElement trackElem)
+		{
+			// TODO Auto-generated method stub
+			super.postWalk(b, trackElem);
+		}
 
 		@Override
 		public boolean matches(KElement e)
@@ -462,7 +474,6 @@ public class XJDFToJDFSchema extends BaseElementWalker
 			copyAttribute(copy, AttributeName.AGENTNAME);
 			copyAttribute(copy, AttributeName.AGENTVERSION);
 			copyAttribute(copy, AttributeName.REFID);
-			copyAttribute(copy, AttributeName.DESCRIPTIVENAME);
 			copyAttribute(copy, AttributeName.DEVICEID, AttributeName.SENDERID);
 			XSDUtil.setXSAttribute(copy, AttributeName.SENDERID, XSDConstants.XS_STRING, false);
 			copyAttribute(copy, AttributeName.TIME, AttributeName.TIME, false);

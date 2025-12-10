@@ -394,7 +394,7 @@ class UrlUtilTest extends JDFTestCaseBase
 		final UrlPart writeToURL = UrlUtil.writeToURL("http://google.com", null, UrlUtil.GET, null, det);
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
-		final String s = new String(ByteArrayIOStream.getBufferedInputStream(writeToURL.getResponseStream()).getBuf());
+		new String(ByteArrayIOStream.getBufferedInputStream(writeToURL.getResponseStream()).getBuf());
 		assertEquals(200, writeToURL.getResponseCode());
 	}
 
@@ -1002,6 +1002,18 @@ class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Exception
+	 */
+	@Test
+	void testURLToFileEscape() throws Exception
+	{
+		final File f0 = new File(sm_dirTestDataTemp + "a%20b.txt");
+		f0.createNewFile();
+		final File f1 = UrlUtil.urlToFile("File://" + sm_dirTestDataTemp + "a%20b.txt");
+		assertEquals("a b.txt", f1.getName());
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -1219,7 +1231,7 @@ class UrlUtilTest extends JDFTestCaseBase
 			}
 			log.info("Waiting " + i);
 		}
-		final long l = f.lastModified();
+		f.lastModified();
 		final File f2 = UrlUtil.moveToDir(fs, newDir, null, false);
 		assertNotNull(f2, "error moving file to dir");
 		ThreadUtil.sleep(42);
@@ -1275,7 +1287,7 @@ class UrlUtilTest extends JDFTestCaseBase
 
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo2.pdf"));
 
-		final File newDir = new File(sm_dirTestDataTemp + "newDir2");
+		new File(sm_dirTestDataTemp + "newDir2");
 		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "blub2.pdf"));
 		fs.setURL("../blub2.pdf");
 	}

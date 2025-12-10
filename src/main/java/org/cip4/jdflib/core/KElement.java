@@ -1412,16 +1412,13 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			for (int i = 0; i < length; i++)
 			{
 				final Node at = nl.item(i);
-				if (at instanceof final AttrNSImpl ati)
+				if ((at instanceof final AttrNSImpl ati) && prefix.equals(ati.getPrefix()))
 				{
-					if (prefix.equals(ati.getPrefix()))
+					strNamespaceURI = ati.getNamespaceURI();
+					if (strNamespaceURI != null)
 					{
-						strNamespaceURI = ati.getNamespaceURI();
-						if (strNamespaceURI != null)
-						{
-							documentXMLImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
-							return strNamespaceURI;
-						}
+						documentXMLImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
+						return strNamespaceURI;
 					}
 				}
 			}

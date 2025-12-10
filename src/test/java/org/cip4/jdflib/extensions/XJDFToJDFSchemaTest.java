@@ -81,13 +81,13 @@ import org.junit.jupiter.api.Test;
 class XJDFToJDFSchemaTest extends JDFTestCaseBase
 {
 
-	private static File xjdfXSD = new File(sm_dirTestDataTemp + "status.xjmf.xsd");
+	private static File xjdfXSD = new File(sm_dirTestDataTemp + "xjmf.status.xsd");
 
 	@BeforeAll
 	static void createCopy()
 	{
-		new XJDFSchemaPruneTest().testSignalStatus();
-		FileUtil.copyFile(new File(sm_dirTestData + "schema/status.xjmf.xsd"), xjdfXSD);
+		// new XJDFSchemaPruneTest().testSignalStatus();
+		FileUtil.copyFile(new File(sm_dirTestData + "schema/xjmf.status.xsd"), xjdfXSD);
 	}
 
 	@Test

@@ -80,7 +80,6 @@ import jakarta.mail.Multipart;
  * collection of helper routines to convert urls
  *
  * @author prosirai
- *
  */
 public class UrlUtil
 {
@@ -103,7 +102,6 @@ public class UrlUtil
 	/**
 	 * @deprecated use the real class
 	 * @author prosirai
-	 *
 	 */
 	@Deprecated
 	public static class HTTPDetails extends org.cip4.jdflib.util.net.HTTPDetails
@@ -113,12 +111,13 @@ public class UrlUtil
 	/**
 	 * @deprecated use the real class
 	 * @author prosirai
-	 *
 	 */
 	@Deprecated
 	public static class URLWriter extends org.cip4.jdflib.util.URLWriter
 	{
-		public URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final org.cip4.jdflib.util.net.HTTPDetails details)
+		@Deprecated
+		public URLWriter(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType,
+				final org.cip4.jdflib.util.net.HTTPDetails details)
 		{
 			super(strUrl, streamWriter, method, contentType, details);
 		}
@@ -165,8 +164,6 @@ public class UrlUtil
 
 	/**
 	 * list of all http methods
-	 *
-	 *
 	 */
 	public enum HttpMethod
 	{
@@ -318,8 +315,8 @@ public class UrlUtil
 	/**
 	 * returns the relative URL of a file relative to the current working directory
 	 *
-	 * @param f the file to get the relative url for
-	 * @param baseDir the file that describes cwd, if <code>null</code> cwd is calculated
+	 * @param f          the file to get the relative url for
+	 * @param baseDir    the file that describes cwd, if <code>null</code> cwd is calculated
 	 * @param bEscape128 if true, escape > 128 (URL), else retain (IRL)
 	 * @return
 	 */
@@ -342,15 +339,17 @@ public class UrlUtil
 	 * get a prinect url for this host and path
 	 *
 	 * @param bSecure if true, make https
-	 * @param host hostname
-	 * @param port the port, duh
-	 * @param path may be null
+	 * @param host    hostname
+	 * @param port    the port, duh
+	 * @param path    may be null
 	 * @return
 	 */
 	public static String createHttpUrl(final boolean bSecure, final String host, final int port, String path)
 	{
 		if (path != null && !path.startsWith("/"))
+		{
 			path = "/" + path;
+		}
 		try
 		{
 			if (port > 0)
@@ -374,7 +373,7 @@ public class UrlUtil
 	 * returns the relative URL of a file relative to the current working directory<br>
 	 * this includes escaping of %20 etc.
 	 *
-	 * @param f the file to get the relative path for
+	 * @param f    the file to get the relative path for
 	 * @param fCWD the file that describes cwd, if <code>null</code> cwd is calculated from user.dir
 	 * @return
 	 */
@@ -461,11 +460,9 @@ public class UrlUtil
 	/**
 	 * get a readable inputstream from the CID url
 	 *
-	 * @param url the url to get a stream for
+	 * @param url       the url to get a stream for
 	 * @param multipart the multipart mime to which the cid refers
-	 *
 	 * @return InputStream - the readable input stream that this filespec refers to, <code>null</code> if broken or non-existent
-	 *
 	 */
 	public static InputStream getCidURLStream(final String url, final Multipart multipart)
 	{
@@ -476,7 +473,9 @@ public class UrlUtil
 		final MimeHelper mimeHelper = new MimeHelper(multipart);
 		BodyPartHelper bp = mimeHelper.getPartHelperByCID(url);
 		if (bp == null)
+		{
 			bp = mimeHelper.getPartHelperByLocalName(url);
+		}
 
 		return bp == null ? null : bp.getInputStream();
 	}
@@ -516,7 +515,6 @@ public class UrlUtil
 	 * get an array of urlparts, regardless of whether this was mime or not if the stream is mime/multipart get also extract that
 	 *
 	 * @param connection
-	 *
 	 * @return the array of body parts input stream
 	 */
 	public static UrlPart[] getURLParts(final HttpURLConnection connection)
@@ -629,7 +627,7 @@ public class UrlUtil
 	 * Convert a File to a valid file URL or IRL<br>
 	 * note that some internal functions use network protocol and therefor performance may be non-optimal
 	 *
-	 * @param f the File to parse,
+	 * @param f          the File to parse,
 	 * @param bEscape128 if true, escape non -ascii chars (URI), if false, don't (IRI)
 	 * @return the URL string
 	 */
@@ -677,7 +675,9 @@ public class UrlUtil
 			urlString = urlString.substring(0, posQ);
 		}
 		if (urlString.length() == 0)
+		{
 			return null;
+		}
 		final File urlToFile = urlToFile(urlString);
 		return urlToFile == null ? null : urlToFile.getName();
 
@@ -706,12 +706,6 @@ public class UrlUtil
 			return null;
 		}
 
-		final File f = new File(urlString);
-		if (f.exists())
-		{
-			return f;
-		}
-
 		urlString = UrlUtil.unEscape(urlString);
 
 		if (PlatformUtil.isWindows()) // on windows
@@ -720,7 +714,8 @@ public class UrlUtil
 			{
 				urlString = urlString.charAt(3) + ":" + urlString.substring(5);
 			}
-			else if (urlString.toLowerCase().startsWith("//localhost/") && urlString.length() > 15 && urlString.charAt(13) == ':' && urlString.charAt(14) == '/')
+			else if (urlString.toLowerCase().startsWith("//localhost/") && urlString.length() > 15 && urlString.charAt(13) == ':'
+					&& urlString.charAt(14) == '/')
 			{
 				urlString = urlString.charAt(12) + ":" + urlString.substring(14);
 			}
@@ -813,14 +808,16 @@ public class UrlUtil
 	 * adds a parameter to a given url using either ? or &
 	 *
 	 * @param baseUrl the base url - already escaped and ready to go
-	 * @param key the key to add - NOT escaped
-	 * @param val the value to add - NOT escaped - if null nothing is set
+	 * @param key     the key to add - NOT escaped
+	 * @param val     the value to add - NOT escaped - if null nothing is set
 	 * @return the escaped new url
 	 */
 	public static String addParameter(final String baseUrl, String key, String val)
 	{
 		if (StringUtil.isEmpty(baseUrl) || StringUtil.isEmpty(key) || StringUtil.isEmpty(val))
+		{
 			return baseUrl;
+		}
 		final int posQMark = baseUrl.indexOf("?");
 		final String flag = posQMark >= 0 ? "&" : "?";
 		final StringBuilder buf = new StringBuilder(baseUrl);
@@ -833,7 +830,7 @@ public class UrlUtil
 
 	/**
 	 * secure check of a file path
-	 * 
+	 *
 	 * @param baseFile
 	 * @param file
 	 * @return
@@ -843,9 +840,13 @@ public class UrlUtil
 	{
 		url = unEscape(url);
 		if (url == null || !allowAbsolute && !isRelativeURL(url))
+		{
 			throw new IllegalArgumentException("URL must be relative " + url);
+		}
 		if (StringUtil.hasToken(url, "..", "/\\", 0))
+		{
 			throw new IllegalArgumentException("URL must not contain .. " + url);
+		}
 		return cleanDots(url);
 	}
 
@@ -853,14 +854,16 @@ public class UrlUtil
 	 * adds a parameter to a given url using either ? or &
 	 *
 	 * @param baseUrl the base url - already escaped and ready to go
-	 * @param key the key to add - NOT escaped
-	 * @param val the value to add - NOT escaped - if null nothing is set
+	 * @param key     the key to add - NOT escaped
+	 * @param val     the value to add - NOT escaped - if null nothing is set
 	 * @return the escaped new url
 	 */
 	public static String setParameter(String baseUrl, final String key, final String val)
 	{
 		if (StringUtil.isEmpty(baseUrl) || StringUtil.isEmpty(key))
+		{
 			return baseUrl;
+		}
 
 		final String oldval = getParameter(baseUrl, key);
 		if (oldval != null)
@@ -870,7 +873,9 @@ public class UrlUtil
 			baseUrl = baseUrl.replace("?&", "?");
 			baseUrl = baseUrl.replace("&&", "&");
 			if (baseUrl.endsWith("?") || baseUrl.endsWith("&"))
+			{
 				baseUrl = StringUtil.leftStr(baseUrl, -1);
+			}
 		}
 		return addParameter(baseUrl, key, val);
 	}
@@ -885,7 +890,9 @@ public class UrlUtil
 			{
 				int posEnd = baseUrl.indexOf('&', pos);
 				if (posEnd < 0)
+				{
 					posEnd = baseUrl.length();
+				}
 				final String val = baseUrl.substring(pos + keye.length(), posEnd);
 				return unEscape(val);
 			}
@@ -899,7 +906,7 @@ public class UrlUtil
 	 * adds a path to a given url , keeping the parameters
 	 *
 	 * @param baseUrl the base url - already escaped and ready to go
-	 * @param path the path to add
+	 * @param path    the path to add
 	 * @return the escaped new url
 	 */
 	public static String addPath(final String baseUrl, final String path) throws IllegalArgumentException
@@ -915,7 +922,9 @@ public class UrlUtil
 		request = StringUtil.addToken(request, "/", path);
 		final String params = StringUtil.token(baseUrl, 1, "?");
 		if (params != null)
+		{
 			request += "?" + params;
+		}
 
 		return cleanDots(request);
 	}
@@ -923,10 +932,9 @@ public class UrlUtil
 	/**
 	 * standard url escaping
 	 *
-	 * @param toEscape the string to escape
+	 * @param toEscape   the string to escape
 	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is
 	 * @return the escaped string
-	 *
 	 */
 	public static String escape(final String toEscape, final boolean bEscape128)
 	{
@@ -936,15 +944,17 @@ public class UrlUtil
 	/**
 	 * standard url escaping
 	 *
-	 * @param toEscape the string to escape
-	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is
+	 * @param toEscape    the string to escape
+	 * @param bEscape128  if true, also escape >128, else leave non-ascii7 as is
 	 * @param escapeSlash if true also escape '/'
 	 * @return the escaped string
 	 */
 	public static String escape(String toEscape, final boolean bEscape128, final boolean escapeSlash)
 	{
 		if (toEscape == null)
+		{
 			return null;
+		}
 		final String esc = escapeSlash ? m_URIEscape + JDFConstants.SLASH : m_URIEscape;
 		if (bEscape128)
 		{
@@ -1210,7 +1220,9 @@ public class UrlUtil
 	public static boolean isFile(final String url)
 	{
 		if (url == null)
+		{
 			return false;
+		}
 		return url.toLowerCase().startsWith(FILE);
 	}
 
@@ -1224,7 +1236,7 @@ public class UrlUtil
 		{
 			return false;
 		}
-		return StringUtils.isAlpha(pathName.substring(0, 1)) && pathName.substring(1, 2).equals(":")
+		return StringUtils.isAlpha(pathName.substring(0, 1)) && ":".equals(pathName.substring(1, 2))
 				|| StringUtils.countMatches(pathName, "\\") > StringUtils.countMatches(pathName, "/");
 
 	}
@@ -1374,13 +1386,21 @@ public class UrlUtil
 	public static URLProtocol getProtocol(final String url)
 	{
 		if (isCID(url))
+		{
 			return URLProtocol.cid;
+		}
 		if (isHttp(url) || isHttps(url))
+		{
 			return URLProtocol.http;
+		}
 		if (isFile(url))
+		{
 			return URLProtocol.file;
+		}
 		if (isFtp(url))
+		{
 			return URLProtocol.ftp;
+		}
 		return null;
 	}
 
@@ -1401,7 +1421,9 @@ public class UrlUtil
 		{
 			b.append(ip[i]);
 			if (i > 0)
+			{
 				b.append('.');
+			}
 		}
 		return b.toString();
 	}
@@ -1416,14 +1438,18 @@ public class UrlUtil
 	{
 		final VString v = StringUtil.tokenize(ip, ".", false);
 		if (v == null || v.size() < 4)
+		{
 			return null;
+		}
 		final byte[] b = new byte[v.size()];
 		int n = 0;
 		for (final String s : v)
 		{
 			final int i = StringUtil.parseInt(s, -1);
 			if (i > 255 || i < 0)
+			{
 				return null;
+			}
 			b[n++] = (byte) i;
 		}
 		return b;
@@ -1443,7 +1469,7 @@ public class UrlUtil
 			return false;
 		}
 
-		return lower.equalsIgnoreCase("mjm") || lower.equalsIgnoreCase("mjd") || lower.equalsIgnoreCase("mim");
+		return "mjm".equalsIgnoreCase(lower) || "mjd".equalsIgnoreCase(lower) || "mim".equalsIgnoreCase(lower);
 	}
 
 	/**
@@ -1475,12 +1501,18 @@ public class UrlUtil
 	public static String removeProtocol(String url)
 	{
 		if (url == null)
+		{
 			return null;
+		}
 		final int pos = url.indexOf("://");
 		if (pos > -1)
+		{
 			url = url.substring(pos + 3);
+		}
 		else if (isCID(url))
+		{
 			url = StringUtil.rightStr(url, -4);
+		}
 		return StringUtil.getNonEmpty(url);
 	}
 
@@ -1491,7 +1523,9 @@ public class UrlUtil
 	public static boolean isURL(final String val)
 	{
 		if (val == null)
+		{
 			return false;
+		}
 
 		try
 		{
@@ -1517,7 +1551,7 @@ public class UrlUtil
 	 * get the local url without directory schemes in the base url are case insensitive, all others are case sensitive
 	 *
 	 * @param directory the url of the directory
-	 * @param url the absolute url
+	 * @param url       the absolute url
 	 * @return String - the local URL of url after removing directory
 	 */
 	public static String getLocalURL(final String directory, final String url)
@@ -1538,21 +1572,31 @@ public class UrlUtil
 		final VString vDirectory = StringUtil.tokenize(directory, "/", false);
 		final VString vURL = StringUtil.tokenize(url, "/", false);
 		if (vDirectory.size() >= vURL.size())
+		{
 			return null;
+		}
 		if (vDirectory.size() > 0 && vURL.size() > 0)
 		{
 			if (vDirectory.get(0).endsWith(":"))
+			{
 				vDirectory.set(0, vDirectory.get(0).toLowerCase());
+			}
 			if (vURL.get(0).endsWith(":"))
+			{
 				vURL.set(0, vURL.get(0).toLowerCase());
+			}
 		}
 		for (final String dirChunk : vDirectory)
 		{
 			final String urlChunk = vURL.get(0);
 			if (urlChunk.equals(dirChunk))
+			{
 				vURL.remove(0);
+			}
 			else
+			{
 				return null;
+			}
 
 		}
 		return StringUtil.setvString(vURL, "/", null, null);
@@ -1560,7 +1604,7 @@ public class UrlUtil
 
 	/**
 	 * securely add a subdirectory
-	 * 
+	 *
 	 * @param baseURL
 	 * @param url
 	 * @return
@@ -1569,15 +1613,25 @@ public class UrlUtil
 	public static String addSecure(final String baseURL, final String url) throws IllegalArgumentException
 	{
 		if (!isRelativeURL(url))
+		{
 			throw new IllegalArgumentException("url must be relative " + url);
+		}
 		if (StringUtil.isEmpty(baseURL))
+		{
 			throw new IllegalArgumentException("base url must not be empty");
+		}
 		if (isRelativeURL(baseURL))
+		{
 			throw new IllegalArgumentException("base url must not be relative " + baseURL);
+		}
 		if (StringUtil.hasToken(baseURL, "..", "/\\", 0))
+		{
 			throw new IllegalArgumentException("base url must not contain .. " + baseURL);
+		}
 		if (StringUtil.hasToken(url, "..", "/\\", 0))
+		{
 			throw new IllegalArgumentException("url must not contain .. " + url);
+		}
 
 		return StringUtil.addToken(baseURL, JDFConstants.SLASH, url);
 
@@ -1588,7 +1642,7 @@ public class UrlUtil
 	 * relative urls MUST NOT have a scheme (e.g. file:)
 	 *
 	 * @param directory the url of the directory
-	 * @param url the relative url of the file
+	 * @param url       the relative url of the file
 	 * @return String - the concatenated URL of the directory + file
 	 */
 	public static String getURLWithDirectory(String directory, String url)
@@ -1655,7 +1709,9 @@ public class UrlUtil
 		int pos = url.lastIndexOf('/');
 		final int pos2 = url.lastIndexOf('\\');
 		if (pos2 >= 0 && pos2 > pos)
+		{
 			pos = pos2;
+		}
 
 		return pos > 0 ? StringUtil.leftStr(url, pos) : ".";
 	}
@@ -1673,7 +1729,9 @@ public class UrlUtil
 			return null;
 		}
 		while (url.length() > 2 && url.startsWith("./"))
+		{
 			url = url.substring(2);
+		}
 		final int posDouble = url.indexOf("//");
 		final int posTriple = url.indexOf("///");
 		final int prefixLen = posDouble == posTriple ? 3 : 2;
@@ -1686,18 +1744,18 @@ public class UrlUtil
 		final VString vs = StringUtil.tokenize(url, "/", false);
 		for (int i = vs.size() - 1; i > 0; i--)
 		{
-			if (vs.get(i).equals("") || vs.get(i).equals("."))
+			if ("".equals(vs.get(i)) || ".".equals(vs.get(i)))
 			{
 				vs.remove(i);
 			}
 		}
 		for (int i = vs.size() - 1; i > 0; i--)
 		{
-			if (vs.get(i).equals(".."))
+			if ("..".equals(vs.get(i)))
 			{
 				for (int j = i - 1; j >= 0; j--)
 				{
-					if (!vs.get(j).equals(".."))
+					if (!"..".equals(vs.get(j)))
 					{
 						vs.remove(i--);
 						vs.remove(j);
@@ -1719,7 +1777,9 @@ public class UrlUtil
 	{
 		final VString v = StringUtil.tokenize(url, "/", false);
 		if (v == null)
+		{
 			return null;
+		}
 		String protocol = v.get(0);
 		if (!protocol.startsWith("http"))
 		{
@@ -1741,15 +1801,15 @@ public class UrlUtil
 	/**
 	 * write a Stream to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
 	 *
-	 * @param strUrl the URL to write to
-	 * @param stream the input stream to read from
-	 * @param method HEAD, GET or POST
+	 * @param strUrl      the URL to write to
+	 * @param stream      the input stream to read from
+	 * @param method      HEAD, GET or POST
 	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param det
 	 * @return {@link UrlPart} the opened http connection, null in case of error
-	 *
 	 */
-	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, final String contentType, final org.cip4.jdflib.util.net.HTTPDetails det)
+	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, final String contentType,
+			final org.cip4.jdflib.util.net.HTTPDetails det)
 	{
 		final org.cip4.jdflib.util.URLWriter urlWriter = new org.cip4.jdflib.util.URLWriter(stream, strUrl, method, contentType, det);
 		return urlWriter.writeToURL();
@@ -1758,15 +1818,15 @@ public class UrlUtil
 	/**
 	 * write the contents of an IStreamWriter to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
 	 *
-	 * @param strUrl the URL to write to
+	 * @param strUrl       the URL to write to
 	 * @param streamWriter the IStreamWriter to read from
-	 * @param method HEAD, GET or POST
-	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
+	 * @param method       HEAD, GET or POST
+	 * @param contentType  the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param det
 	 * @return {@link UrlPart} the opened http connection, null in case of error
-	 *
 	 */
-	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType, final org.cip4.jdflib.util.net.HTTPDetails det)
+	public static UrlPart writerToURL(final String strUrl, final IStreamWriter streamWriter, final String method, final String contentType,
+			final org.cip4.jdflib.util.net.HTTPDetails det)
 	{
 		final org.cip4.jdflib.util.URLWriter urlWriter = new org.cip4.jdflib.util.URLWriter(strUrl, streamWriter, method, contentType, det);
 		return urlWriter.writeToURL();
@@ -1775,8 +1835,8 @@ public class UrlUtil
 	/**
 	 * physically store the file at the location specified in dir and also modify this to reflect the new location
 	 *
-	 * @param parent the parent element, trypically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param parent    the parent element, trypically a filespec or preview
+	 * @param dir       the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
 	 * @deprecated use moveToDir(parent, dir, null, overWrite);
@@ -1791,8 +1851,8 @@ public class UrlUtil
 	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
 	 *
 	 * @param urlSetter the parent element, typically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
-	 * @param cwd the current working dir for local urls
+	 * @param dir       the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param cwd       the current working dir for local urls
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
 	 */
@@ -1805,8 +1865,8 @@ public class UrlUtil
 	 * physically store the file at the location specified in dir and also modify parent to reflect the new location
 	 *
 	 * @param urlSetter the parent element, typically a filespec or preview
-	 * @param dir the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
-	 * @param cwd the current working dir for local urls
+	 * @param dir       the directory to move to. dir is created if it does not exist. If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param cwd       the current working dir for local urls
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @throws IllegalArgumentException in case the filename contains '..'
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
@@ -1852,7 +1912,7 @@ public class UrlUtil
 			}
 		}
 
-		final XMLDoc d = (urlSetter instanceof KElement) ? ((KElement) urlSetter).getOwnerDocument_KElement() : null;
+		final XMLDoc d = (urlSetter instanceof final KElement k) ? k.getOwnerDocument_KElement() : null;
 		if (fileName == null)
 		{
 			final Multipart mp = d == null ? null : d.getMultiPart();
@@ -1912,7 +1972,9 @@ public class UrlUtil
 	{
 		url = StringUtil.token(url, 0, "?");
 		if (StringUtil.isEmpty(url))
+		{
 			return false;
+		}
 		return url.indexOf(":/") < 0 && url.indexOf(":\\") < 0 && !url.startsWith("/") && !url.startsWith("\\") && !isCID(url);
 	}
 
@@ -1925,12 +1987,16 @@ public class UrlUtil
 	public static boolean isXMLType(final String contentType)
 	{
 		if (contentType == null)
+		{
 			return false;
+		}
 
 		final String lower = normalizeType(contentType);
 
 		if (TEXT_XML.equals(lower) || APPLICATION_XML.equals(lower))
+		{
 			return true;
+		}
 		return (lower.startsWith("application") || (lower.startsWith("text"))) && lower.endsWith("+xml");
 	}
 
@@ -1943,7 +2009,9 @@ public class UrlUtil
 	public static boolean isJSONType(final String contentType)
 	{
 		if (contentType == null)
+		{
 			return false;
+		}
 
 		final String lower = normalizeType(contentType);
 		return TEXT_JSON.equals(lower) || APPLICATION_JSON.equals(lower) || lower.endsWith("+json");
@@ -1953,7 +2021,9 @@ public class UrlUtil
 	{
 		String lower = StringUtil.normalize(contentType, true);
 		while (lower.endsWith(";"))
+		{
 			lower = StringUtil.leftStr(lower, -1);
+		}
 		return lower;
 	}
 
@@ -1967,7 +2037,9 @@ public class UrlUtil
 	{
 		String lower = StringUtil.normalize(contentType, true);
 		while (lower != null && lower.endsWith(";"))
+		{
 			lower = StringUtil.leftStr(lower, -1);
+		}
 		return lower != null && (APPLICATION_ZIP.equals(lower) || APPLICATION_XZIP.equals(lower) || lower.endsWith("+zip"));
 	}
 
@@ -1987,13 +2059,15 @@ public class UrlUtil
 	 * replace the .extension of a file name
 	 *
 	 * @param strWork the file path
-	 * @param newExt the new extension (works with or without the initial "."
+	 * @param newExt  the new extension (works with or without the initial "."
 	 * @return the strWork with a replaced extension
 	 */
 	public static String newExtension(final String strWork, String newExt)
 	{
 		if (strWork == null)
+		{
 			return null;
+		}
 		if (newExt == null)
 		{
 			return UrlUtil.prefix(strWork);
@@ -2016,7 +2090,9 @@ public class UrlUtil
 	public static String prefix(final String strWork)
 	{
 		if (strWork == null)
+		{
 			return null;
+		}
 
 		final String ext = UrlUtil.extension(strWork);
 		if (ext == null)

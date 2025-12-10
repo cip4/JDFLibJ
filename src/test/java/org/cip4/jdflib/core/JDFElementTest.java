@@ -113,7 +113,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- *
  *         This implements the first fixture with unit tests for class JDFElement.
  */
 class JDFElementTest extends JDFTestCaseBase
@@ -225,7 +224,9 @@ class JDFElementTest extends JDFTestCaseBase
 		{
 			JDFElement.getValueForNewAttribute(e, null);
 			for (final String s : e.getAttributeArray_KElement())
+			{
 				JDFElement.getValueForNewAttribute(e, s);
+			}
 		}
 	}
 
@@ -594,7 +595,6 @@ class JDFElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////
 	/**
 	 * Method testGenerateDotID.
-	 *
 	 */
 	@Test
 	void testGenerateDotID()
@@ -624,7 +624,7 @@ class JDFElementTest extends JDFTestCaseBase
 		generateDotID = e2.generateDotID("foo", null);
 		e2.setAttribute("foo", generateDotID, null);
 		assertEquals(generateDotID, dotID + ".2");
-		for (int i = 3; i < 22; i++)
+		for (int i = 3; i < 2222; i++)
 		{
 			e2 = (JDFNode) e.appendElement("JDF", null);
 			generateDotID = e2.generateDotID("foo", null);
@@ -635,7 +635,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIncludesMatchingAttribute.
-	 *
 	 */
 	@Test
 	void testIncludesMatchingAttribute()
@@ -663,7 +662,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 *
 	 */
 	@Test
 	void testGetRefElement()
@@ -685,7 +683,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 *
 	 */
 	@Test
 	void testGetCreateElement()
@@ -748,7 +745,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 *
 	 */
 	@Test
 	void testGetChildElementVector()
@@ -790,7 +786,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testChildElementVector.
-	 *
 	 */
 	@Test
 	void testGetParentJDFStatic()
@@ -918,7 +913,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetElementByID.
-	 *
 	 */
 	@Test
 	void testGetElementByID()
@@ -931,7 +925,7 @@ class JDFElementTest extends JDFTestCaseBase
 			return; // soothe findbugs ;)
 		}
 		final String strAtrib = kelem.getAttribute("ID", "", "");
-		assertTrue(strAtrib.equals("n0006"), "ID!=n0006");
+		assertTrue("n0006".equals(strAtrib), "ID!=n0006");
 
 		// second try
 		final KElement kelem2 = m_jdfRoot.getTarget("n0006", "ID");
@@ -941,7 +935,7 @@ class JDFElementTest extends JDFTestCaseBase
 			return; // soothe findbugs ;)
 		}
 		final String strAtrib2 = kelem2.getAttribute("ID", "", "");
-		assertTrue(strAtrib2.equals("n0006"), "ID!=n0006");
+		assertTrue("n0006".equals(strAtrib2), "ID!=n0006");
 
 		// third try
 		final KElement kelem3 = m_jdfRoot.getTarget("198", "Preferred");
@@ -951,7 +945,7 @@ class JDFElementTest extends JDFTestCaseBase
 			return; // soothe findbugs ;)
 		}
 		final String strAtrib3 = kelem3.getAttribute("Preferred", "", "");
-		assertTrue(strAtrib3.equals("198"), "Preferred!=198");
+		assertTrue("198".equals(strAtrib3), "Preferred!=198");
 
 		// fourth try: GetChildWithAttribute does only find direct children but
 		// no deep children
@@ -1309,7 +1303,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	void testCloneNewDoc() throws CloneNotSupportedException
@@ -1334,7 +1327,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	void testCreateRoot()
@@ -1345,7 +1337,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws CloneNotSupportedException
-	 *
 	 */
 	@Test
 	void testCreateRoot2()
@@ -1403,7 +1394,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * Method testGetElementByID.
-	 *
 	 */
 	@Test
 	void testGetDeepElementByID()
@@ -1425,7 +1415,7 @@ class JDFElementTest extends JDFTestCaseBase
 		final KElement kelem2 = JDFElement.getDeepElementByID(jdfRoot, "Preferred", "198", null, null);
 		assertTrue(kelem2 != null, "kelem2==null");
 		final String strAtrib2 = kelem2.getAttribute("Preferred", "", "");
-		assertTrue(strAtrib2.equals("198"), "Preferred!=198");
+		assertTrue("198".equals(strAtrib2), "Preferred!=198");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -1576,7 +1566,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testSetAttributeNumList() throws DataFormatException
@@ -1590,7 +1579,6 @@ class JDFElementTest extends JDFTestCaseBase
 
 	/**
 	 * @throws DataFormatException
-	 *
 	 */
 	@Test
 	void testSetAttributeNameTimestamp() throws Exception
