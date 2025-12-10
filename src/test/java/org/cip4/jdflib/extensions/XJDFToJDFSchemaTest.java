@@ -76,6 +76,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.FileUtil;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class XJDFToJDFSchemaTest extends JDFTestCaseBase
 {
@@ -85,11 +86,16 @@ class XJDFToJDFSchemaTest extends JDFTestCaseBase
 	@BeforeAll
 	static void createCopy()
 	{
-		// new XJDFSchemaPruneTest().testSignalStatus();
+		new XJDFSchemaPruneTest().testSignalStatus();
 		FileUtil.copyFile(new File(sm_dirTestData + "schema/xjmf.status.xsd"), xjdfXSD);
 	}
 
-	// @Test
+	@Test
+	void testNop()
+	{
+		assertNotNull(this);
+	}
+
 	void testCopy()
 	{
 		final XJDFToJDFSchema xj = new XJDFToJDFSchema(KElement.parseFile(xjdfXSD));
