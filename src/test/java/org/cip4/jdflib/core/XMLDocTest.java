@@ -129,14 +129,14 @@ class XMLDocTest extends JDFTestCaseBase
 		protected void waitComplete()
 		{
 			if (mutex != null && !ThreadUtil.wait(mutex, 1234))
+			{
 				fail("whazzup");
+			}
 		}
 
 		protected abstract void runMyThread();
 
 		/**
-		 *
-		 *
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
@@ -164,8 +164,6 @@ class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @author rainer prosi
 	 * @date Jun 20, 2012
 	 */
@@ -191,15 +189,12 @@ class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @author rainer prosi
 	 * @date Jun 20, 2012
 	 */
 	protected class MyParseThread extends MyThread
 	{
 		/**
-		 *
 		 * @see org.cip4.jdflib.core.XMLDocTest.MyThread#runMyThread()
 		 */
 		@Override
@@ -212,7 +207,6 @@ class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * @author rainer prosi
 	 * @date Jun 20, 2012
 	 */
@@ -244,7 +238,6 @@ class XMLDocTest extends JDFTestCaseBase
 	 * thread class that writes a lot of documents
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
 	 */
 	protected class MyManyWriteThread extends MyThread
 	{
@@ -332,7 +325,7 @@ class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/*
-	 * 
+	 *
 	 *
 	 */
 	@Test
@@ -573,9 +566,8 @@ class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws IOException bang
+	 * @throws IOException  bang
 	 * @throws SAXException bang
-	 *
 	 */
 	@Test
 	void testParseDOM() throws SAXException, IOException
@@ -754,7 +746,6 @@ class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test graceful null handling
 	 */
 	@Test
@@ -765,7 +756,6 @@ class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test graceful null handling
 	 */
 	@Test
@@ -779,7 +769,6 @@ class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
 	 * test graceful null handling
 	 */
 	@Test
@@ -909,7 +898,7 @@ class XMLDocTest extends JDFTestCaseBase
 	{
 		final XMLDoc d = new XMLDoc("a", null);
 		final KElement e = d.getRoot();
-		final KElement b = e.appendElement("b");
+		e.appendElement("b");
 		try
 		{
 			d.write2Stream(null, 2, false);
@@ -1280,7 +1269,6 @@ class XMLDocTest extends JDFTestCaseBase
 
 	/**
 	 * tests all kinds of special characters in file names - including %, ï¿½ and umlauts
-	 *
 	 */
 	@Test
 	void testUmlaut()
@@ -1304,7 +1292,7 @@ class XMLDocTest extends JDFTestCaseBase
 		assertTrue(f.canRead());
 
 		final JDFParser p = new JDFParser();
-		final JDFDoc d2 = p.parseFile(out2);
+		final JDFDoc d2 = p.parseFile(f);
 		assertNotNull(d2);
 		assertEquals(d2.getRoot().getLocalName(), "doc");
 
