@@ -1636,8 +1636,39 @@ public class JDFElement extends KElement
 
 		public static EVersion getEnum(final String name)
 		{
-			return EnumUtil.getJavaEnumIgnoreCase(EVersion.class, name);
+			final EVersion v = EnumUtil.getJavaEnumIgnoreCase(EVersion.class, name);
+			if (v == null && name != null && !name.startsWith("Version"))
+			{
+				return getEnum("Version_" + StringUtil.replaceString(name, JDFConstants.DOT, JDFConstants.UNDERSCORE));
+			}
+			return v;
 		}
+
+		public static EVersion getEnum(final int major, final int minor)
+		{
+			return getEnum("VERSION_" + major + JDFConstants.UNDERSCORE + minor);
+		}
+
+		/**
+		 * gets the integer value of the minor version, e.g 2 for 1.3 etc
+		 *
+		 * @return
+		 */
+		public int getMinorVersion()
+		{
+			return StringUtil.parseInt(StringUtil.token(name(), -1, JDFConstants.UNDERSCORE), 0);
+		}
+
+		/**
+		 * gets the integer value of the major version, e.g 2 for 1.3 etc
+		 *
+		 * @return
+		 */
+		public int getMajorVersion()
+		{
+			return StringUtil.parseInt(StringUtil.token(name(), -2, JDFConstants.UNDERSCORE), 0);
+		}
+
 	}
 
 	/**
@@ -4001,7 +4032,7 @@ public class JDFElement extends KElement
 	private VString getLocalRequiredAttributes(final Set<String> vReq)
 	{
 		final VString v = new VString();
-		for (String next : vReq)
+		for (final String next : vReq)
 		{
 			if (getAttribute(next, null, null) == null)
 			{
@@ -6989,7 +7020,7 @@ public class JDFElement extends KElement
 				}
 			}
 		}
-		ValuedEnum en = e.getEnumforAttribute(attName);
+		final ValuedEnum en = e.getEnumforAttribute(attName);
 		if (en != null)
 		{
 			return en.getName();

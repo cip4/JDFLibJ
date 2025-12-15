@@ -59,6 +59,7 @@ import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
+import org.cip4.jdflib.core.JDFElement.EVersion;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumSeparation;
@@ -592,7 +593,23 @@ class JDFElementTest extends JDFTestCaseBase
 		assertFalse(xyR.evaluateXY(3.0, 2, 0.0, 0.0), "le");
 	}
 
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 *
+	 */
+	@Test
+	void testEVersion()
+	{
+		assertEquals(3, EVersion.Version_2_3.getMinorVersion());
+		assertEquals(1, EVersion.Version_1_3.getMajorVersion());
+		assertEquals(EVersion.Version_1_1, EVersion.getEnum("1.1"));
+		assertNull(EVersion.getEnum("version"));
+		assertNull(EVersion.getEnum("Version_"));
+		assertNull(EVersion.getEnum("8.1"));
+		assertNull(EVersion.getEnum(6, 5));
+		assertEquals(EVersion.Version_2_1, EVersion.getEnum("2.1"));
+		assertEquals(EVersion.Version_2_2, EVersion.getEnum(2, 2));
+	}
+
 	/**
 	 * Method testGenerateDotID.
 	 */

@@ -155,16 +155,17 @@ class XJDFProcessExampleTest extends ExampleTest
 		final XJDFHelper xjdfHelper = new XJDFHelper(EnumVersion.Version_2_3, "CutMarks");
 		xjdfHelper.setTypes("Cutting");
 		final SetHelper sh1 = xjdfHelper.getCreateSet(ElementName.CUTTINGPARAMS, EnumUsage.Input);
-		final ResourceHelper rh1 = sh1.getCreatePartition(0, true);
-		SetHelper cs = xjdfHelper.appendResourceSet(ElementName.COMPONENT, EnumUsage.Input);
+		sh1.getCreatePartition(0, true);
+		final SetHelper cs = xjdfHelper.appendResourceSet(ElementName.COMPONENT, EnumUsage.Input);
 		setSnippet(cs, true);
-		ResourceHelper ch = cs.appendPartition(null, true);
-		JDFComponent c = (JDFComponent) ch.getResource();
+		final ResourceHelper ch = cs.appendPartition(null, true);
+		final JDFComponent c = (JDFComponent) ch.getResource();
 		c.setDimensions((JDFXYPair) new JDFXYPair(70, 67).scaleFromCM(2));
-		JDFSurfaceMark sm = c.appendSurfaceMark(EFace.Front);
+		final JDFSurfaceMark sm = c.appendSurfaceMark(EFace.Front);
 		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(15.1, 52).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(29.4, 52).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(33.6, 52).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(47.9, 52).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(52.1, 52).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.TopVerticalCutMark, (JDFXYPair) new JDFXYPair(66.4, 52).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.LeftHorizontalCutMark, (JDFXYPair) new JDFXYPair(15.1, 52).scaleFromCM(2));
@@ -175,6 +176,7 @@ class XJDFProcessExampleTest extends ExampleTest
 		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(15.1, 31).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(29.4, 31).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(33.6, 31).scaleFromCM(2));
+		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(47.9, 31).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(52.1, 31).scaleFromCM(2));
 		sm.appendCutMark(EMarkType.BottomVerticalCutMark, (JDFXYPair) new JDFXYPair(66.4, 31).scaleFromCM(2));
 
