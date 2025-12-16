@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -62,6 +62,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
+import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -69,6 +70,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.process.JDFColorantControl.EProcessColorModel;
 import org.cip4.jdflib.util.StringUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -87,7 +89,6 @@ class JDFColorantControlTest extends JDFTestCaseBase
 
 	/**
 	 * tests the separationlist class
-	 *
 	 */
 	@Test
 	public final void testColorantAlias()
@@ -113,7 +114,6 @@ class JDFColorantControlTest extends JDFTestCaseBase
 
 	/**
 	 * tests the proposed Color/@ActualColorName attribute
-	 *
 	 */
 	@Test
 	public final void testActualColorName()
@@ -126,9 +126,8 @@ class JDFColorantControlTest extends JDFTestCaseBase
 
 		colControl.setXMLComment("ColorantControl after prepress has correctly set ActualColorName based on pdl content", true);
 		JDFColor co = colPool.appendColorWithName("Black", null);
-		co.setXMLComment(
-				"Color that maps the predefined separation Black\n" + "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color",
-				true);
+		co.setXMLComment("Color that maps the predefined separation Black\n"
+				+ "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color", true);
 		co.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
 		assertTrue(co.isValid(EnumValidationLevel.Incomplete));
 		co.setAttribute("ActualColorName", "Schwarz");
@@ -170,7 +169,6 @@ class JDFColorantControlTest extends JDFTestCaseBase
 
 	/**
 	 * tests the separationlist class
-	 *
 	 */
 	@Test
 	public final void testSeparationList()
@@ -204,7 +202,6 @@ class JDFColorantControlTest extends JDFTestCaseBase
 
 	/**
 	 * tests the separationlist class
-	 *
 	 */
 	@Test
 	public final void testGetSeparations()
@@ -224,6 +221,26 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * tests the separationlist class
+	 */
+	@Test
+	public final void testXJDFGetSeparations()
+	{
+		final XJDFHelper xjdf = new XJDFHelper(EnumVersion.Version_2_1, "cc");
+		final JDFColorantControl cc = (JDFColorantControl) xjdf.getCreateSet(ElementName.COLORANTCONTROL, null).getCreatePartition(0, true).getResource();
+
+		final VString seps = new VString("a b c");
+		cc.setColorantOrderSeparations(seps);
+		assertEquals(seps, cc.getColorantOrderSeparations());
+		final VString seps2 = new VString("d e f");
+		cc.setDeviceColorantOrderSeparations(seps2);
+		assertEquals(seps2, cc.getDeviceColorantOrderSeparations());
+		final VString seps3 = new VString("g h i");
+		cc.setColorantParamSeparations(seps3);
+		assertEquals(seps3, cc.getColorantParamSeparations());
+	}
+
+	/**
 	 *
 	 */
 	@Test
@@ -237,6 +254,23 @@ class JDFColorantControlTest extends JDFTestCaseBase
 		final JDFColorantControl cc = ((JDFColorantControl) kElem);
 		cc.setProcessColorModel("DeviceCMYK");
 		assertEquals(cc.getSeparations(), cc.getProcessSeparations());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	public final void testGetProcessSeparationsEnum()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		final JDFResourcePool resPool = root.getCreateResourcePool();
+		final KElement kElem = resPool.appendResource(ElementName.COLORANTCONTROL, null, null);
+		assertTrue(kElem instanceof JDFColorantControl);
+		final JDFColorantControl cc = ((JDFColorantControl) kElem);
+		cc.setProcessColorModel(EProcessColorModel.DeviceCMYK);
+		assertEquals(cc.getSeparations(), cc.getProcessSeparations());
+		assertEquals(EProcessColorModel.DeviceCMYK, cc.getEProcessColorModel());
 	}
 
 	/**
@@ -261,7 +295,6 @@ class JDFColorantControlTest extends JDFTestCaseBase
 
 	/**
 	 * tests the separationlist class
-	 *
 	 */
 	@Test
 	public final void testImplicitPartitions()
@@ -277,7 +310,6 @@ class JDFColorantControlTest extends JDFTestCaseBase
 
 	/**
 	 * tests the separationlist class
-	 *
 	 */
 	@Test
 	public final void testGetAllSeparations()
@@ -364,8 +396,8 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	@Test
 	void testGetColorantAliasMap()
 	{
-		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
-		final JDFColorantAlias a2 = colControl.appendColorantAlias("s2", "t2");
+		colControl.appendColorantAlias("s1", "t1");
+		colControl.appendColorantAlias("s2", "t2");
 		assertEquals("t2", colControl.getColorantAliasMap().get("s2"));
 		assertEquals(2, colControl.getColorantAliasMap().size());
 
@@ -374,7 +406,7 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	@Test
 	void testAppendColorantAlias()
 	{
-		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
+		colControl.appendColorantAlias("s1", "t1");
 		final JDFColorantAlias a2 = colControl.appendColorantAlias("s21", "t2");
 		final JDFColorantAlias a22 = colControl.appendColorantAlias("s22", "t2");
 		assertEquals(a2, a22);
@@ -384,8 +416,8 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	@Test
 	void testGetColorantAliasMapLeaf()
 	{
-		final JDFColorantAlias a1 = colControl.appendColorantAlias("s1", "t1");
-		final JDFColorantAlias a2 = colControl.appendColorantAlias("s2", "t2");
+		colControl.appendColorantAlias("s1", "t1");
+		colControl.appendColorantAlias("s2", "t2");
 		assertEquals("t2", colControl.getColorantAliasMap().get("s2"));
 		final JDFColorantControl leaf = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
 		assertEquals(2, colControl.getColorantAliasMap().size());
@@ -399,8 +431,8 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	void testGetColorantAliasMapRec()
 	{
 		final JDFColorantControl cBlatt = (JDFColorantControl) colControl.addPartition(EnumPartIDKey.SheetName, "s1");
-		final JDFColorantAlias a1 = cBlatt.appendColorantAlias("s1", "t1");
-		final JDFColorantAlias a2 = cBlatt.appendColorantAlias("s2", "t2");
+		cBlatt.appendColorantAlias("s1", "t1");
+		cBlatt.appendColorantAlias("s2", "t2");
 		assertEquals("t2", cBlatt.getColorantAliasMap().get("s2"));
 		assertEquals(2, cBlatt.getColorantAliasMap().size());
 
@@ -487,7 +519,6 @@ class JDFColorantControlTest extends JDFTestCaseBase
 	/**
 	 * @throws IOException
 	 * @throws SAXException
-	 *
 	 */
 	@Test
 	void testInternalColorModel() throws SAXException, IOException

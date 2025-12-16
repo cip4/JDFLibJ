@@ -36,23 +36,33 @@
  */
 package org.cip4.jdflib.extensions.examples;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoColor.EnumColorType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoMedia.EMediaType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EMediaUnit;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumISOPaperSubstrate;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoPart.ESide;
 import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishArea;
 import org.cip4.jdflib.auto.JDFAutoVarnishingParams.EnumVarnishMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -60,21 +70,22 @@ import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.extensions.XJDFSchemaPrune;
 import org.cip4.jdflib.node.ICSVersion;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.JDFVarnishingParams;
 import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFColorantControl.EProcessColorModel;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.prepress.JDFInk;
+import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFConvPrintExampleTest extends ExampleTest
 {
@@ -87,6 +98,11 @@ class XJDFConvPrintExampleTest extends ExampleTest
 	{
 		JDFElement.setLongID(false);
 		super.setUp();
+	}
+
+	private ResourceHelper ensureSheetName(SetHelper sh, String sheetname)
+	{
+		return sh.getCreatePartition(AttributeName.SHEETNAME, sheetname, true);
 	}
 
 	/**
@@ -125,14 +141,57 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		final SetHelper cpp = xjdfHelper.getCreateSet(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
 		cpp.getCreateResource(0, true).setResourceAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
 
-		final SetHelper inComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
-		final SetHelper outComp = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
+		final SetHelper inCompSet = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Input);
+		final ResourceHelper inCompRes = ensureSheetName(inCompSet, "S1");
+		final SetHelper outCompSet = xjdfHelper.getCreateSet(ElementName.COMPONENT, EnumUsage.Output);
 		final SetHelper mediaSet = xjdfHelper.getCreateSet(ElementName.MEDIA, null);
-		final ResourceHelper media = mediaSet.getCreateResource();
-		media.ensureReference(inComp.getCreateResource(), null);
-		media.ensureReference(outComp.getCreateResource(), null);
-		media.setResourceEnum(AttributeName.MEDIATYPE, EnumMediaType.Paper);
+		final SetHelper plateMediaSet = xjdfHelper.appendSet(ElementName.MEDIA, null);
+		final ResourceHelper plateMediaRes = plateMediaSet.getCreateResource();
+		final JDFMedia plateMedia = (JDFMedia) plateMediaRes.getResource();
+		plateMedia.setMediaType(EMediaType.Plate);
+		plateMedia.setDimensionCM(102, 88);
+
+		final SetHelper ccSet = xjdfHelper.getCreateSet(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		final SetHelper plateSet = xjdfHelper.getCreateSet(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
+		final JDFAttributeMap map = new JDFAttributeMap(AttributeName.SHEETNAME, "S1");
+		for (final String c : JDFColor.getCMYKSeparations())
+		{
+			map.put(AttributeName.SEPARATION, c);
+			for (final ESide s : ESide.values())
+			{
+				map.put(AttributeName.SIDE, s);
+				final JDFExposedMedia xm = (JDFExposedMedia) plateSet.getCreateExactPartition(map, true).getResource();
+				plateMediaRes.ensureReference(xm, null);
+			}
+		}
+		final JDFColorantControl cc = (JDFColorantControl) ccSet.getCreateResource().getResource();
+		cc.setProcessColorModel(EProcessColorModel.DeviceCMYK);
+		cc.setColorantParamSeparations(JDFColor.getCMYKSeparations());
+		final ResourceHelper mediaRes = mediaSet.getCreateResource();
+		mediaRes.ensureReference(inCompRes, null);
+		final ResourceHelper outCompRes = outCompSet.getCreateResource();
+		outCompRes.getCreateAmountPool().getCreatePartAmount().setAmount(2000);
+		outCompRes.getCreateAmountPool().getCreatePartAmount().setWaste(20);
+		mediaRes.ensureReference(outCompRes, null);
+		mediaRes.setResourceEnum(AttributeName.MEDIATYPE, EnumMediaType.Paper);
+		final JDFMedia media = (JDFMedia) mediaRes.getResource();
+		media.setDimensionCM(100, 60);
+		media.setMediaUnit(EMediaUnit.Sheet);
+		xjdfHelper.cleanUp();
+
 		writeTest(xjdfHelper, "processes/ConventionalPrintingICS1.xjdf");
+
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(XMLDoc.parseURL(getXJDFSchema(), null));
+		prune.setCheckAttributes(true);
+		prune.setCheckAttributeValues(true);
+		final KElement pruned = prune.prune(xjdfHelper);
+		final File prunedSchema = new File(sm_dirTestDataTemp + "processes/ConventionalPrintingICS1.xsd");
+		pruned.write2File(prunedSchema);
+
+		final JDFParser p = getXJDFSchemaParser(UrlUtil.fileToUrl(prunedSchema, true));
+		final JDFDoc d2 = p.parseString(xjdfHelper.getRoot().toXML());
+		assertTrue(d2.isSchemaValid());
+
 	}
 
 	/**
@@ -237,7 +296,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		i = 0;
 		for (final ResourceHelper ink : vInks)
 		{
-			((JDFInk) (ink.getResource())).setAttribute(XJDFConstants.InkType, (i++ == 4 ? "Varnish" : "Ink"));
+			(ink.getResource()).setAttribute(XJDFConstants.InkType, (i++ == 4 ? "Varnish" : "Ink"));
 		}
 
 		cleanSnippets(xjdfHelper);
@@ -349,7 +408,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		i = 0;
 		for (final ResourceHelper ink : vInks)
 		{
-			((JDFInk) (ink.getResource())).setAttribute(XJDFConstants.InkType, (i++ == 4 ? "Varnish" : "Ink"));
+			(ink.getResource()).setAttribute(XJDFConstants.InkType, (i++ == 4 ? "Varnish" : "Ink"));
 		}
 
 		cleanSnippets(xjdfHelper);

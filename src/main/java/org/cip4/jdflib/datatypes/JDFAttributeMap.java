@@ -88,7 +88,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	/**
 	 * utility constructor to construct a single value map
 	 *
-	 * @param key the key of the single value map
+	 * @param key   the key of the single value map
 	 * @param value the value of the single value map
 	 */
 	public JDFAttributeMap(final String key, final String value)
@@ -100,7 +100,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	/**
 	 * utility constructor to construct a single value map
 	 *
-	 * @param key the key of the single value map
+	 * @param key   the key of the single value map
 	 * @param value the value of the single value map
 	 */
 	public JDFAttributeMap(final String key, final ValuedEnum value)
@@ -127,7 +127,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * constructor: create a new map with one entry that is defined by partIDKey, value
 	 *
 	 * @param partIDKey the enumerated partIDKey
-	 * @param value the partition key value
+	 * @param value     the partition key value
 	 */
 	public JDFAttributeMap(final ValuedEnum partIDKey, final String value)
 	{
@@ -140,7 +140,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * showKeys - similar to toString but without class identifier
 	 *
 	 * @param sep the separator key between key-entry pairs
-	 *
 	 * @return String
 	 */
 	public String showKeys(String sep)
@@ -189,12 +188,10 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * put - maps the specified key to the specified value in this hashtable. the key MUST NOT be ""
-	 *
 	 * Note: This method is the equivalent to AddPair in C++
 	 *
-	 * @param key unique key of the pair to add. Must not be "" or null.
+	 * @param key   unique key of the pair to add. Must not be "" or null.
 	 * @param value value of the pair to add. MAY be "" or null.
-	 *
 	 * @return the previous value of oldkey, if any
 	 *         <p>
 	 *         NOTE: It is NOT possible to enter to identical keys. If you enter a key to a Attribute Map which already exists, the value will be replaced.
@@ -213,12 +210,10 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * put - maps the specified key to the specified value in this hashtable. Neither the key nor the value can be ""
-	 *
 	 * Note: This method is the equivalent to AddPair in C++
 	 *
-	 * @param key unique key of the pair to add. Must not be "" or null.
+	 * @param key   unique key of the pair to add. Must not be "" or null.
 	 * @param value value of the pair to add. Must not be "" or null.
-	 *
 	 * @return boolean - false if one Inputparamter is invalid (empty String and null are not alowed)<br>
 	 *         true if the new Key was inserted
 	 *         <p>
@@ -258,11 +253,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 
 	/**
 	 * subMap - returns true if map contains subMap, all keys of submap must be in this hashtable and they must have the same value<br>
-	 *
 	 * if subMap is null, the function returns true if subMap contains any wildcards, then the existance of the key in this defines a match
 	 *
 	 * @param subMap the map to compare
-	 *
 	 * @return boolean - true if this map contains subMap
 	 */
 	public boolean subMap(final JDFAttributeMap subMap)
@@ -372,8 +365,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 	/**
 	 * checks whether this attributemap matches a regexp
 	 *
-	 * @param key the key to match
-	 * @param regExp the simplified regexp
+	 * @param key        the key to match
+	 * @param regExp     the simplified regexp
 	 * @param ignoreCase duh...
 	 * @return true if the value matches the regexp
 	 */
@@ -387,7 +380,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * overlapMap - identical keys must have the same values in both maps i.e submap is either a superset or a subset of this
 	 *
 	 * @param subMap the map to compare with <code>this</this>
-	 *
 	 * @return boolean - true if identical keys have the same values in both maps
 	 */
 	public boolean overlapMap(final JDFAttributeMap subMap)
@@ -397,10 +389,8 @@ public class JDFAttributeMap extends HashMap<String, String>
 			return true;
 		}
 
-		final Iterator<String> it = subMap.keySet().iterator();
-		while (it.hasNext())
+		for (final String subMapKey : subMap.keySet())
 		{
-			final String subMapKey = it.next();
 			final String subMapVal = subMap.get(subMapKey);
 			if (KElement.isWildCard(subMapVal))
 			{
@@ -425,12 +415,12 @@ public class JDFAttributeMap extends HashMap<String, String>
 	public JDFAttributeMap orMap(final JDFAttributeMap subMap)
 	{
 		if (subMap == null)
-			return this;
-
-		final Iterator<String> it = subMap.keySet().iterator();
-		while (it.hasNext())
 		{
-			final String subMapKey = it.next();
+			return this;
+		}
+
+		for (final String subMapKey : subMap.keySet())
+		{
 			final String subMapVal = subMap.get(subMapKey);
 			final String hashTableVal = this.get(subMapKey);
 
@@ -572,7 +562,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	/**
 	 * reduceKey - reduces the map, only valid map entries with the given key vector will be copied to the new hashtable; if null, clear this map
 	 *
-	 *
 	 * @param keySet the collection of given keys
 	 * @return this after removal
 	 */
@@ -634,8 +623,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
-	 *
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
 	@Override
@@ -654,7 +641,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param keys
 	 * @return
 	 */
@@ -675,7 +661,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param keys
 	 * @return
 	 */
@@ -697,8 +682,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
-	 *
 	 * get but always return null instead of empty string
 	 */
 	public String getNonEmpty(final Object key)
@@ -707,13 +690,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * convenience int getter
 	 *
 	 * @param key
 	 * @param def
 	 * @return
-	 *
 	 */
 	public int getInt(final Object key, final int def)
 	{
@@ -721,13 +702,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * convenience boolean getter
 	 *
 	 * @param key
 	 * @param def
 	 * @return
-	 *
 	 */
 	public boolean getBool(final Object key, final boolean def)
 	{
@@ -735,13 +714,11 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * convenience double getter
 	 *
 	 * @param key
 	 * @param def
 	 * @return
-	 *
 	 */
 	public double getDouble(final Object key, final double def)
 	{
@@ -749,11 +726,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final ValuedEnum key, final String value)
 	{
@@ -761,11 +736,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final Enum<?> key, final String value)
 	{
@@ -773,11 +746,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final String key, final int value)
 	{
@@ -785,11 +756,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final ValuedEnum key, final int value)
 	{
@@ -797,11 +766,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final Enum<?> key, final int value)
 	{
@@ -809,11 +776,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final String key, final double value)
 	{
@@ -821,11 +786,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final ValuedEnum key, final double value)
 	{
@@ -838,11 +801,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final String key, final boolean value)
 	{
@@ -850,11 +811,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final ValuedEnum key, final boolean value)
 	{
@@ -867,11 +826,9 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
 	 */
 	public String put(final String key, final ValuedEnum value)
 	{
@@ -879,11 +836,19 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return
-	 *
+	 */
+	public String put(final String key, final Enum<?> value)
+	{
+		return put(key, value == null ? null : value.name());
+	}
+
+	/**
+	 * @param key
+	 * @param value
+	 * @return
 	 */
 	public String put(final ValuedEnum key, final ValuedEnum value)
 	{
@@ -966,7 +931,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param jdfAttributeMap
 	 * @return true if jdfAttributeMap==null or jdfAttributeMap is empty
 	 */
@@ -976,7 +940,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	}
 
 	/**
-	 *
 	 * @param strLocalName
 	 * @return
 	 */

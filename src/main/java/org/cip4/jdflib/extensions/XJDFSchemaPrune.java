@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -80,6 +81,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XSDConstants.eAttributeUse;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -88,8 +90,21 @@ import org.cip4.jdflib.util.StringUtil;
 public class XJDFSchemaPrune
 {
 	final Set<KElement> keep;
+	final ListMap<String, String> keepValues;
 	private final KElement schema;
 	private boolean checkAttributes;
+	private boolean checkAttributeValues;
+
+	public boolean isCheckAttributeValues()
+	{
+		return checkAttributeValues;
+	}
+
+	public void setCheckAttributeValues(boolean checkAttributeValues)
+	{
+		this.checkAttributeValues = checkAttributeValues;
+	}
+
 	private boolean removeForeign;
 	private String prefix;
 	Log log = LogFactory.getLog(XJDFSchemaPrune.class);
@@ -122,8 +137,10 @@ public class XJDFSchemaPrune
 		keep = new HashSet<>();
 		schema = rootSchema.getRoot().cloneNewDoc();
 		checkAttributes = true;
+		checkAttributeValues = false;
 		removeForeign = true;
 		prefix = "xjdf";
+		keepValues = new ListMap<>();
 	}
 
 	String ensureprefix(String in)
@@ -166,7 +183,25 @@ public class XJDFSchemaPrune
 				e.deleteNode();
 			}
 		}
+		if (checkAttributeValues)
+		{
+			cleanupValues(schemaElem);
+		}
 		return schemaElem;
+	}
+
+	void cleanupValues(KElement schemaElem)
+	{
+		for (final KElement en : schemaElem.getChildrenByTagName(XSDConstants.XS_ENUMERATION))
+		{
+			final String name = en.getInheritedAttribute(XSDConstants.NAME);
+			final List<String> valsArray = keepValues.get(name);
+			if (!ContainerUtil.isEmpty(valsArray) && !valsArray.contains(en.getAttribute(XSDConstants.VALUE)))
+			{
+				en.deleteNode();
+			}
+		}
+
 	}
 
 	void addPrune(final KElement example)
@@ -412,7 +447,7 @@ public class XJDFSchemaPrune
 		{
 			if (!checkAttributes || example.hasAttribute(e.getAttribute(XSDConstants.NAME)) || isRequired(e))
 			{
-				addAttribute(e);
+				addAttribute(e, example.getNonEmpty(e.getAttribute(XSDConstants.NAME)));
 			}
 		}
 
@@ -423,44 +458,51 @@ public class XJDFSchemaPrune
 		return eAttributeUse.required.equals(eAttributeUse.getEnum(e.getAttribute(XSDConstants.USE)));
 	}
 
-	void addAttribute(final KElement e)
+	void addAttribute(final KElement e, String val)
 	{
 		addTree(e);
 		final String type = e.getNonEmpty(XSDConstants.TYPE);
 		if (type != null)
 		{
-			addSimpleType(type);
+			addSimpleType(type, val);
 		}
 		else
 		{
 			final KElement stypeLocal = e.getElement(XSDConstants.XS_SIMPLE_TYPE);
-			addSimpleType(stypeLocal);
+			addSimpleType(stypeLocal, val);
 		}
 	}
 
-	void addSimpleType(final String type)
+	void addSimpleType(final String type, String val)
 	{
 		if (!"xs:".equals(StringUtil.leftStr(type, 3)))
 		{
 			final KElement stType = schema.getChildWithAttribute(XSDConstants.XS_SIMPLE_TYPE, XSDConstants.NAME, null, type, 0, false);
-			addSimpleType(stType);
+			addSimpleType(stType, val);
 		}
 	}
 
-	void addSimpleType(final KElement stType)
+	void addSimpleType(final KElement stType, String val)
 	{
 		if (stType != null)
 		{
 			addTree(stType);
+			if (checkAttributeValues && !StringUtil.isEmpty(val))
+			{
+				for (final String val0 : StringUtil.tokenize(val, null, false))
+				{
+					keepValues.putOne(stType.getInheritedAttribute(XSDConstants.NAME), val0);
+				}
+			}
 			final KElement list = stType.getElement(XSDConstants.XS_LIST);
 			if (list != null)
 			{
-				addSimpleType(list.getAttribute(XSDConstants.ITEM_TYPE));
+				addSimpleType(list.getAttribute(XSDConstants.ITEM_TYPE), val);
 			}
 			final KElement base = stType.getElement(XSDConstants.XS_RESTRICTION);
 			if (base != null)
 			{
-				addSimpleType(base.getAttribute("base"));
+				addSimpleType(base.getAttribute("base"), val);
 			}
 		}
 	}

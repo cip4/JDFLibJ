@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -44,6 +44,8 @@
  */
 package org.cip4.jdflib.core;
 
+import java.lang.invoke.WrongMethodTypeException;
+
 // import java.util.StringTokenizer;
 
 import java.util.Iterator;
@@ -51,6 +53,7 @@ import java.util.Iterator;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
@@ -70,7 +73,8 @@ public class JDFPartAmount extends JDFResourceLink
 		atrInfoTable_ToRemove[2] = new AtrInfoTable(AttributeName.PIPEPROTOCOL, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_ToRemove[3] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_ToRemove[4] = new AtrInfoTable(AttributeName.RSUBREF, 0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
-		atrInfoTable_ToRemove[5] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumPartIDKey.getEnum(0), null);
+		atrInfoTable_ToRemove[5] = new AtrInfoTable(AttributeName.PIPEPARTIDKEYS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations,
+				EnumPartIDKey.getEnum(0), null);
 		atrInfoTable_ToRemove[6] = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
 		atrInfoTable_ToRemove[7] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
 	}
@@ -90,7 +94,9 @@ public class JDFPartAmount extends JDFResourceLink
 	{
 		AttributeInfo ai = AttributeInfo.fixedMap.get("PartAmount");
 		if (ai != null)
+		{
 			return ai;
+		}
 
 		ai = super.getTheAttributeInfo().updateReplace((AtrInfoTable) null);
 		ai.updateRemove(atrInfoTable_ToRemove);
@@ -103,7 +109,9 @@ public class JDFPartAmount extends JDFResourceLink
 	{
 		ElementInfo eiRL = ElementInfo.getFixedmap().get(ElementName.PARTAMOUNT);
 		if (eiRL != null)
+		{
 			return eiRL;
+		}
 		eiRL = super.getTheElementInfo();
 		eiRL.updateRemove(elemInfoTable_ToRemove);
 		eiRL.updateReplace(elemInfoTable_ToReplace);
@@ -162,7 +170,6 @@ public class JDFPartAmount extends JDFResourceLink
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
@@ -227,8 +234,17 @@ public class JDFPartAmount extends JDFResourceLink
 		{
 			rl = rl.getParentNode_KElement();
 		}
-		return (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getLinkRoot() : null;
+		return (rl instanceof final JDFResourceLink j) ? j.getLinkRoot() : null;
 
+	}
+
+	public void setWaste(double value)
+	{
+		if (!isXJDF())
+		{
+			throw new WrongMethodTypeException("setWaste only valid for XJDF");
+		}
+		setAttribute(XJDFConstants.Waste, value, null);
 	}
 
 }

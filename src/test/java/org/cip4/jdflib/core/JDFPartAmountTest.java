@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,10 @@
  */
 package org.cip4.jdflib.core;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.lang.invoke.WrongMethodTypeException;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -85,7 +89,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- *
  *         This implements the first fixture with unit tests for class JDFAudit.
  */
 class JDFPartAmountTest extends JDFTestCaseBase
@@ -121,6 +124,16 @@ class JDFPartAmountTest extends JDFTestCaseBase
 		Assertions.assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).size(), 0);
 		rl.setAttribute("Amount", 20, null);
 		Assertions.assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).contains("Amount"));
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSetWaste()
+	{
+		assertThrows(WrongMethodTypeException.class, () -> pa.setWaste(42));
 
 	}
 

@@ -177,8 +177,7 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		assertNotNull(ret);
 		final String out = sm_dirTestDataTemp + "comment.xsd";
 		ret.write2File(out);
-		final XMLParser p = new XMLParser();
-		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+		final XMLParser p = getXJDFSchemaParser(new File(out));
 		h.cleanUp();
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());

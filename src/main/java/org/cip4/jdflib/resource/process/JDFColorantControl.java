@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -60,11 +60,11 @@ import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         Aug 10, 2009
  */
 public class JDFColorantControl extends JDFAutoColorantControl
@@ -89,7 +89,6 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 *
 	 * @throws DOMException
 	 */
 	public JDFColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
@@ -105,15 +104,44 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
-	 *
 	 */
-	public JDFColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
+	public enum EProcessColorModel
+	{
+		DeviceCMY, DeviceCMYK, DeviceGray, DeviceN, DeviceRGB, None;
+
+		public static EProcessColorModel getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EProcessColorModel.class, val, null);
+		}
+
+	}
+
+	/**
+	 * (36) set attribute ProcessColorModel
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setProcessColorModel(EProcessColorModel model)
+	{
+		setAttribute(AttributeName.PROCESSCOLORMODEL, model, null);
+	}
+
+	/**
+	 * (36) set attribute ProcessColorModel
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public EProcessColorModel getEProcessColorModel()
+	{
+		return EProcessColorModel.getEnum(getAttribute(AttributeName.PROCESSCOLORMODEL));
+	}
+
 	/**
 	 * toString
 	 *
@@ -155,6 +183,12 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		return tmp == null ? getColorantOrderSeparations() : new VString(tmp);
 	}
 
+	public VString getColorantParamSeparations()
+	{
+		final StringArray tmp = getSeparations(ElementName.COLORANTPARAMS);
+		return tmp == null ? getColorantOrderSeparations() : new VString(tmp);
+	}
+
 	/**
 	 * get the list of separations that this colorantcontrol describes - adds the separations that are implied by ProcessColorModel uses devicecolorantorder if it is specified,
 	 * else calls getColorantOrderSeparations()
@@ -176,6 +210,40 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		{
 			return null;
 		}
+	}
+
+	/**
+	 * get the list of separations that this colorantcontrol describes - adds the separations that are implied by ProcessColorModel uses devicecolorantorder if it is specified,
+	 * else calls getColorantOrderSeparations()
+	 *
+	 * @return
+	 */
+	void setSeparations(final String listName, List<String> seps)
+	{
+		if (isXJDF())
+		{
+			setAttribute(listName, seps, null);
+		}
+		else
+		{
+			final JDFSeparationList sl = (JDFSeparationList) getCreateElement_JDFElement(listName, null, 0);
+			sl.setSeparations(seps);
+		}
+	}
+
+	public void setDeviceColorantOrderSeparations(List<String> seps)
+	{
+		setSeparations(ElementName.DEVICECOLORANTORDER, seps);
+	}
+
+	public void setColorantOrderSeparations(List<String> seps)
+	{
+		setSeparations(ElementName.COLORANTORDER, seps);
+	}
+
+	public void setColorantParamSeparations(List<String> seps)
+	{
+		setSeparations(ElementName.COLORANTPARAMS, seps);
 	}
 
 	/**
@@ -203,9 +271,9 @@ public class JDFColorantControl extends JDFAutoColorantControl
 			return null;
 		}
 		final VString allCols = new VString();
-		for (int i = 0; i < e.size(); i++)
+		for (final JDFResource element : e)
 		{
-			allCols.addAll(((JDFColorantControl) e.get(i)).getSeparations());
+			allCols.addAll(((JDFColorantControl) element).getSeparations());
 		}
 		allCols.unify();
 		return allCols;
@@ -219,7 +287,9 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	public VString getSeparations()
 	{
 		if (hasAttribute(ElementName.COLORANTPARAMS) && !hasChildElement(ElementName.COLORANTPARAMS, null))
+		{
 			return new VString(getSeparations(ElementName.COLORANTPARAMS));
+		}
 		final VString vName = getProcessSeparations();
 		vName.appendUnique(getSeparations(ElementName.COLORANTPARAMS));
 		return vName;
@@ -234,31 +304,31 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	public VString getProcessSeparations()
 	{
 		VString vName = new VString();
-		final String model = getProcessColorModel();
-		if ("DeviceCMY".equals(model))
+		final EProcessColorModel model = getEProcessColorModel();
+		if (EProcessColorModel.DeviceCMY.equals(model))
 		{
 			vName.add(JDFConstants.SEPARATION_CYAN);
 			vName.add(JDFConstants.SEPARATION_MAGENTA);
 			vName.add(JDFConstants.SEPARATION_YELLOW);
 		}
-		else if ("DeviceCMYK".equals(model))
+		else if (EProcessColorModel.DeviceCMYK.equals(model))
 		{
 			vName.add(JDFConstants.SEPARATION_CYAN);
 			vName.add(JDFConstants.SEPARATION_MAGENTA);
 			vName.add(JDFConstants.SEPARATION_YELLOW);
 			vName.add(JDFConstants.SEPARATION_BLACK);
 		}
-		else if ("DeviceGray".equals(model))
+		else if (EProcessColorModel.DeviceGray.equals(model))
 		{
 			vName.add(JDFConstants.SEPARATION_BLACK);
 		}
-		else if ("DeviceRGB".equals(model))
+		else if (EProcessColorModel.DeviceRGB.equals(model))
 		{
 			vName.add(JDFConstants.SEPARATION_RED);
 			vName.add(JDFConstants.SEPARATION_GREEN);
 			vName.add(JDFConstants.SEPARATION_BLUE);
 		}
-		else if ("DeviceN".equals(model))
+		else if (EProcessColorModel.DeviceN.equals(model))
 		{
 			final JDFDeviceNSpace deviceNSpace = getDeviceNSpace(0);
 			if (deviceNSpace != null)
@@ -281,7 +351,6 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 *
 	 * @param sourceColor the source color to search
 	 * @return
 	 */
@@ -292,13 +361,14 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		{
 			final VString seps = ca.getSeparations();
 			if (seps.contains(sourceColor))
+			{
 				return ca;
+			}
 		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @param replacementColor the source color to search
 	 * @return
 	 */
@@ -308,7 +378,6 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 *
 	 * @param replacementColor the source color to search
 	 * @return
 	 */
@@ -324,7 +393,6 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 *
 	 * @param sourceColor the source color to search
 	 * @return
 	 */
@@ -337,13 +405,14 @@ public class JDFColorantControl extends JDFAutoColorantControl
 			final VString seps = ca.getSeparations();
 			final String target = ca.getReplacementColorantName();
 			for (final String sep : seps)
+			{
 				map.put(sep, target);
+			}
 		}
 		return map;
 	}
 
 	/**
-	 *
 	 * remove implied process colorors from the params list
 	 */
 	public void removeProcessColors()
@@ -369,7 +438,6 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 *
 	 * @param source
 	 * @param replacement
 	 * @return

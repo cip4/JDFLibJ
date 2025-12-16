@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -62,7 +62,6 @@ import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.elementwalker.IWalker;
 import org.cip4.jdflib.elementwalker.PackageElementWalker;
 import org.cip4.jdflib.elementwalker.RemoveEmpty;
-import org.cip4.jdflib.extensions.BaseXJDFHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.extensions.XJMFHelper;
@@ -85,20 +84,16 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFToXJDF extends PackageElementWalker
 {
-	private static EnumVersion defaultVersion = BaseXJDFHelper.getDefaultVersion();
 	final private static Log log = LogFactory.getLog(JDFToXJDF.class);
 
 	public static void setDefaultVersion(final EnumVersion v)
 	{
-		if (!EnumUtil.aLessThanB(v, EnumVersion.Version_2_0))
-		{
-			JDFToXJDF.defaultVersion = v;
-		}
+		XJDFHelper.setDefaultVersion(v);
 	}
 
 	public static EnumVersion getDefaultVersion()
 	{
-		return defaultVersion;
+		return XJDFHelper.getDefaultVersion();
 	}
 
 	/**
