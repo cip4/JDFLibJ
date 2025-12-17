@@ -81,7 +81,7 @@ class ThreadUtilTest extends JDFTestCaseBase
 			{
 				ThreadUtil.sleep(sleep);
 			}
-			return Integer.valueOf(42);
+			return 42;
 		}
 
 	}
@@ -93,7 +93,7 @@ class ThreadUtilTest extends JDFTestCaseBase
 	synchronized void testWaitTimeout()
 	{
 		assertEquals(new TestWait(200, 4).getWaitedObject().intValue(), 42);
-		assertNull(new TestWait(2, 5000).getWaitedObject());
+		assertNull(new TestWait(2, 43000).getWaitedObject());
 	}
 
 	/**

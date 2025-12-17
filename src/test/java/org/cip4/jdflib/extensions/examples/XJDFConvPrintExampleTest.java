@@ -80,7 +80,6 @@ import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFColorantControl.EProcessColorModel;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -188,7 +187,7 @@ class XJDFConvPrintExampleTest extends ExampleTest
 		final File prunedSchema = new File(sm_dirTestDataTemp + "processes/ConventionalPrintingICS1.xsd");
 		pruned.write2File(prunedSchema);
 
-		final JDFParser p = getXJDFSchemaParser(UrlUtil.fileToUrl(prunedSchema, true));
+		final JDFParser p = getXJDFSchemaParser(prunedSchema);
 		final JDFDoc d2 = p.parseString(xjdfHelper.getRoot().toXML());
 		assertTrue(d2.isSchemaValid());
 
