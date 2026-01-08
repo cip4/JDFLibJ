@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,13 +70,20 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.zip.ZipEntry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.zip.ZipReader;
 
@@ -84,8 +91,6 @@ import jakarta.mail.BodyPart;
 import jakarta.mail.Multipart;
 
 /**
- *
- *
  * @author rainerprosi
  * @date Feb 1, 2012
  */
@@ -97,22 +102,141 @@ public class URLReader
 	private final List<File> localRoots;
 	private final static Log log = LogFactory.getLog(URLReader.class);
 	private File notRelative;
+	private final static HashSet<String> validhosts = new HashSet<>();
+	private static EPackage packMethod = EPackage.PACKAGE;
+	static
+	{
+		initFilters();
+	}
+
+	public enum EPackage
+	{
+		MIME, ZIP, PACKAGE, NONE;
+
+		public static EPackage getEnum(String s)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EPackage.class, s, null);
+		}
+	}
+
+	public static void addHost(String e)
+	{
+		ContainerUtil.appendUnique(validhosts, e);
+	}
+
+	public static boolean removeHost(Object o)
+	{
+		return validhosts.remove(o);
+	}
+
+	public static void clearHosts()
+	{
+		validhosts.clear();
+	}
+
+	public static class InvalidHostException extends RuntimeException
+	{
+
+		public InvalidHostException(String message)
+		{
+			super(message);
+		}
+
+		/**
+		 *
+		 */
+		private static final long serialVersionUID = 1L;
+
+	}
 
 	/**
 	 * @param urlString
-	 *
 	 */
-	public URLReader(final String urlString)
+	public URLReader(final String urlString) throws InvalidHostException
 	{
+
 		this.urlString = urlString;
 		localRoots = new ArrayList<>();
 		notRelative = null;
 	}
 
+	boolean checkHost(String urlStr)
+	{
+		if (validhosts.contains(JDFConstants.STAR))
+		{
+			return true;
+		}
+		else if (validhosts.isEmpty())
+		{
+			return false;
+		}
+		try
+		{
+			final StringArray hosts = new StringArray();
+			try
+			{
+				if (UrlUtil.isRelativeURL(urlStr))
+				{
+					hosts.add(InetAddress.getLocalHost().getHostName());
+					hosts.add("localhost");
+				}
+				else
+				{
+					hosts.add(new URL(urlStr).getHost());
+				}
+				for (final String validHost : validhosts)
+				{
+					for (final String host : hosts)
+					{
+						if (StringUtil.matchesIgnoreCase(host, validHost, true))
+						{
+							return true;
+						}
+					}
+				}
+				for (final String host : new StringArray(hosts))
+				{
+					final InetAddress[] allByName = InetAddress.getAllByName(host);
+					for (final InetAddress a : allByName)
+					{
+						hosts.add(a.getHostAddress());
+						hosts.add(a.getHostName());
+						hosts.add(a.getCanonicalHostName());
+					}
+				}
+			}
+			catch (final UnknownHostException e)
+			{
+				// nop
+			}
+			hosts.unify();
+			for (final String validHost : validhosts)
+			{
+				for (final String host : hosts)
+				{
+					if (StringUtil.matchesIgnoreCase(host, validHost, true))
+					{
+						return true;
+					}
+				}
+			}
+		}
+		catch (final MalformedURLException e)
+		{
+			// nop
+		}
+		return false;
+	}
+
+	boolean checkPack(EPackage pack)
+	{
+
+		return packMethod == pack || packMethod == EPackage.PACKAGE;
+	}
+
 	/**
 	 * @param urlString
 	 * @param doc
-	 *
 	 */
 	public URLReader(final String urlString, final XMLDoc doc)
 	{
@@ -132,7 +256,6 @@ public class URLReader
 	}
 
 	/**
-	 *
 	 * @param bodyPart
 	 */
 	public void setBodyPart(final BodyPart bodyPart)
@@ -151,15 +274,13 @@ public class URLReader
 		{
 			log.error("cannot add null root");
 		}
-		else
+		else if (checkHost("."))
 		{
-			localRoots.add(root);
-			ContainerUtil.unify(localRoots);
+			ContainerUtil.appendUnique(localRoots, root);
 		}
 	}
 
 	/**
-	 *
 	 * @param zip
 	 */
 	public void setZipReader(final ZipReader zip)
@@ -170,13 +291,12 @@ public class URLReader
 	/**
 	 * get the opened input stream for a given url string
 	 *
-	 *
 	 * @return
 	 */
 	InputStream getBodyPartInputStream()
 	{
 		InputStream retStream = null;
-		if (bodypart != null)
+		if (bodypart != null && checkPack(EPackage.MIME))
 		{
 			final Multipart multipart = bodypart.getParent();
 			retStream = UrlUtil.getCidURLStream(urlString, multipart);
@@ -187,13 +307,12 @@ public class URLReader
 	/**
 	 * get the opened input stream for a given url string
 	 *
-	 *
 	 * @return
 	 */
 	InputStream getZipInputStream()
 	{
 		InputStream retStream = null;
-		if (zip != null)
+		if (zip != null && checkPack(EPackage.ZIP))
 		{
 			final ZipEntry e = zip.getEntry(urlString);
 			retStream = e == null ? null : zip.getInputStream();
@@ -202,7 +321,6 @@ public class URLReader
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public InputStream getURLInputStream()
@@ -238,7 +356,6 @@ public class URLReader
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XMLDoc getXMLDoc()
@@ -250,7 +367,6 @@ public class URLReader
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public JDFDoc getJDFDoc()
@@ -262,8 +378,6 @@ public class URLReader
 	}
 
 	/**
-	 *
-	 *
 	 * @param doc
 	 */
 	private void applyDoc(final XMLDoc doc)
@@ -280,41 +394,43 @@ public class URLReader
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	InputStream getNetInputStream()
 	{
-		if (UrlUtil.isNet(urlString))
+		if (UrlUtil.isNet(urlString) && checkHost(urlString))
 		{
 			final UrlPart part = UrlUtil.writeToURL(urlString, null, UrlUtil.GET, null, null);
 			if (UrlUtil.isReturnCodeOK(part))
+			{
 				return part.getResponseStream();
+			}
 		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	File getAbsoluteFile()
 	{
-		final File f = !UrlUtil.isNet(urlString) && !UrlUtil.isCID(urlString) ? UrlUtil.urlToFile(urlString) : null;
-		if ((f != null) && f.canRead())
+		if (checkHost(urlString))
 		{
-			return f;
+			final File f = !UrlUtil.isNet(urlString) && !UrlUtil.isCID(urlString) ? UrlUtil.urlToFile(urlString) : null;
+			if ((f != null) && f.canRead())
+			{
+				return f;
+			}
 		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	File getRelativeFile()
 	{
-		if (UrlUtil.isRelativeURL(urlString))
+		if (UrlUtil.isRelativeURL(urlString) && checkHost(urlString))
 		{
 			final File fLocal = UrlUtil.urlToFile(urlString);
 			for (final File root : localRoots)
@@ -331,12 +447,31 @@ public class URLReader
 	}
 
 	/**
-	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
 		return "URLReader: " + urlString + "\n" + localRoots + (zip != null ? " zip " : "") + (bodypart != null ? " mime " : "");
+	}
+
+	/**
+	 * the default is to allow all
+	 */
+	public static void initFilters()
+	{
+		clearHosts();
+		validhosts.add(JDFConstants.STAR);
+		packMethod = EPackage.PACKAGE;
+	}
+
+	public static EPackage getPackMethod()
+	{
+		return packMethod;
+	}
+
+	public static void setPackMethod(EPackage packMethod)
+	{
+		URLReader.packMethod = packMethod;
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,18 +68,25 @@
  */
 package org.cip4.jdflib.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.util.URLReader.EPackage;
 import org.cip4.jdflib.util.zip.ZipReader;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
  * @date Feb 1, 2012
  */
@@ -95,8 +102,90 @@ class URLReaderTest extends JDFTestCaseBase
 		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		final InputStream is = reader.getURLInputStream();
-		Assertions.assertNotNull(is);
-		Assertions.assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetUrlInputStreamLocalOnly()
+	{
+		URLReader.clearHosts();
+		URLReader.addHost("localhost");
+		final URLReader reader = new URLReader("job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetUrlInputStreamLocalOnlyIP()
+	{
+		URLReader.clearHosts();
+		URLReader.addHost("127.0.0.1");
+		final URLReader reader = new URLReader("job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+
+	}
+
+	/**
+	 * @throws UnknownHostException
+	 */
+	@Test
+	void testGetUrlInputStreamCanonHostOnly() throws UnknownHostException
+	{
+		URLReader.clearHosts();
+		URLReader.addHost(InetAddress.getLocalHost().getCanonicalHostName());
+		final URLReader reader = new URLReader("job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+
+	}
+
+	/**
+	 * @throws UnknownHostException
+	 */
+	@Test
+	void testGetUrlInputStreamHostOnly() throws UnknownHostException
+	{
+		URLReader.clearHosts();
+		URLReader.addHost(InetAddress.getLocalHost().getHostName());
+		final URLReader reader = new URLReader("job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		final InputStream is = reader.getURLInputStream();
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetUrlInputStreamLocalBlocked()
+	{
+		URLReader.clearHosts();
+		final URLReader reader = new URLReader("job.jdf");
+		reader.addLocalRoot(new File(sm_dirTestData));
+		final InputStream is = reader.getURLInputStream();
+		assertNull(is);
+
 	}
 
 	/**
@@ -108,7 +197,7 @@ class URLReaderTest extends JDFTestCaseBase
 	{
 		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
-		Assertions.assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
+		assertEquals(UrlUtil.urlToFile(sm_dirTestData + "job.jdf"), reader.getFile());
 	}
 
 	/**
@@ -121,7 +210,7 @@ class URLReaderTest extends JDFTestCaseBase
 		final String filePath = sm_dirTestData + "job.jdf";
 		final File file = new File(filePath);
 		final URLReader reader = new URLReader(UrlUtil.fileToUrl(file, false));
-		Assertions.assertEquals(file, reader.getFile());
+		assertEquals(file, reader.getFile());
 	}
 
 	/**
@@ -134,8 +223,8 @@ class URLReaderTest extends JDFTestCaseBase
 		final URLReader reader = new URLReader("job.jdf");
 		reader.addLocalRoot(new File(sm_dirTestData));
 		final XMLDoc xmlDoc = reader.getXMLDoc();
-		Assertions.assertNotNull(xmlDoc);
-		Assertions.assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");
+		assertNotNull(xmlDoc);
+		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");
 	}
 
 	/**
@@ -148,8 +237,8 @@ class URLReaderTest extends JDFTestCaseBase
 		final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "job.jdf");
 		final URLReader reader = new URLReader("job.jdf", d);
 		final XMLDoc xmlDoc = reader.getXMLDoc();
-		Assertions.assertNotNull(xmlDoc);
-		Assertions.assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");
+		assertNotNull(xmlDoc);
+		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, File.separator), "job.jdf");
 	}
 
 	/**
@@ -163,8 +252,73 @@ class URLReaderTest extends JDFTestCaseBase
 		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
 		reader.setZipReader(zip);
 		final XMLDoc xmlDoc = reader.getXMLDoc();
-		Assertions.assertNotNull(xmlDoc);
-		Assertions.assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, "/\\"), "BarcodeDetails.jdf");
+		assertNotNull(xmlDoc);
+		assertEquals(StringUtil.token(xmlDoc.getOriginalFileName(), -1, "/\\"), "BarcodeDetails.jdf");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetXMLDocZipNoHost()
+	{
+		URLReader.clearHosts();
+		URLReader.setPackMethod(null);
+		final URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
+		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
+		reader.setZipReader(zip);
+		final XMLDoc xmlDoc = reader.getXMLDoc();
+		assertNull(xmlDoc);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetXMLDocZipZip()
+	{
+		URLReader.clearHosts();
+		URLReader.setPackMethod(EPackage.ZIP);
+		final URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
+		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
+		reader.setZipReader(zip);
+		final XMLDoc xmlDoc = reader.getXMLDoc();
+		assertNotNull(xmlDoc);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetXMLDocZipPackNone()
+	{
+		URLReader.clearHosts();
+		URLReader.setPackMethod(EPackage.NONE);
+		final URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
+		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
+		reader.setZipReader(zip);
+		final XMLDoc xmlDoc = reader.getXMLDoc();
+		assertNull(xmlDoc);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testGetXMLDocZipLocal()
+	{
+		URLReader.clearHosts();
+		URLReader.addHost("localhost");
+		URLReader.setPackMethod(null);
+		final URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
+		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
+		reader.setZipReader(zip);
+		final XMLDoc xmlDoc = reader.getXMLDoc();
+		assertNull(xmlDoc);
 	}
 
 	/**
@@ -174,11 +328,13 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetURLInputStreamRedirect()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final URLReader reader = new URLReader("http://google.ch");
 		final InputStream is = reader.getURLInputStream();
-		Assertions.assertNotNull(is);
-		Assertions.assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
 	}
 
 	/**
@@ -188,11 +344,28 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetURLInputStreamSecure()
 	{
 		if (!isTestNetwork())
+		{
 			return;
+		}
 		final URLReader reader = new URLReader("https://google.ch");
 		final InputStream is = reader.getURLInputStream();
-		Assertions.assertNotNull(is);
-		Assertions.assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+		URLReader.clearHosts();
+		final URLReader reader2 = new URLReader("https://google.ch");
+		final InputStream is2 = reader2.getURLInputStream();
+		assertNull(is2);
+		URLReader.addHost("GOOGLE.CH");
+
+		final URLReader reader3 = new URLReader("https://google.ch");
+		final InputStream is3 = reader3.getURLInputStream();
+		assertNotNull(is3);
+		URLReader.clearHosts();
+		URLReader.addHost("GOOGLE.*");
+		final URLReader reader4 = new URLReader("https://google.ch");
+		final InputStream is4 = reader4.getURLInputStream();
+		assertNotNull(is4);
+
 	}
 
 	/**
@@ -202,11 +375,21 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetURLInputStreamFTP()
 	{
 		if (!isTestNetwork() || UrlUtilTest.FTP_SITE == null)
+		{
 			return;
+		}
 		final URLReader reader = new URLReader(UrlUtilTest.FTP_SITE);
 		final InputStream is = reader.getURLInputStream();
-		Assertions.assertNotNull(is);
-		Assertions.assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+		assertNotNull(is);
+		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+	}
+
+	@Override
+	@AfterEach
+	public void tearDown() throws Exception
+	{
+		super.tearDown();
+		URLReader.initFilters();
 	}
 
 }
