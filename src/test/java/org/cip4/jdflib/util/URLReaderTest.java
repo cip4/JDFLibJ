@@ -69,6 +69,7 @@
 package org.cip4.jdflib.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -170,6 +171,19 @@ class URLReaderTest extends JDFTestCaseBase
 		final InputStream is = reader.getURLInputStream();
 		assertNotNull(is);
 		assertTrue(ByteArrayIOStream.getBufferedInputStream(is).available() > 100);
+
+	}
+
+	/**
+	 * @throws UnknownHostException
+	 */
+	@Test
+	void testAddHost()
+	{
+		URLReader.clearHosts();
+		assertTrue(URLReader.addHost(null).isEmpty());
+		assertTrue(URLReader.addHost("").isEmpty());
+		assertFalse(URLReader.addHost("a").isEmpty());
 
 	}
 

@@ -75,6 +75,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -119,9 +120,15 @@ public class URLReader
 		}
 	}
 
-	public static void addHost(String e)
+	/**
+	 * add a trusted host
+	 *
+	 * @param host the hostname to add
+	 * @return the current list of valid hosts
+	 */
+	public static Collection<String> addHost(String host)
 	{
-		ContainerUtil.appendUnique(validhosts, e);
+		return ContainerUtil.appendUnique(validhosts, StringUtil.getNonEmpty(host));
 	}
 
 	public static boolean removeHost(Object o)
