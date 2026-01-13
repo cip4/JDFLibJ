@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -58,7 +58,6 @@ import org.mockito.Mockito;
 
 /**
  * @author Rainer
- *
  *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
 class ColdFolderTest extends JDFTestCaseBase
@@ -139,7 +138,7 @@ class ColdFolderTest extends JDFTestCaseBase
 	@Test
 	public synchronized void testProcSingle() throws Exception
 	{
-		final File cfd = new File(sm_dirTestDataTemp + "Cold2");
+		final File cfd = new File(sm_dirTestDataTemp + "Cold4");
 		final HotFolderTest.MyListener listener = new HotFolderTest.MyListener(false);
 		final ColdFolder cf = new ColdFolder(cfd, null, listener);
 		final File file = new File(cfd, "f1.txt");
