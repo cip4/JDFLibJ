@@ -2151,6 +2151,7 @@
         <Version Path="Activity" First="1.5" />
         <Version Path="Event" First="1.7" />
         <Version Path="ModuleStatus/Employee" Last="1.4" />
+        <Version Path="ModuleStatus/Part" First="1.9" />
         <Constraint Path="Activity" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="Device" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Employee" minOccurs="0" maxOccurs="unbounded" />
@@ -2158,6 +2159,7 @@
         <Constraint Path="JobPhase" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="ModuleStatus" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="ModuleStatus/Employee" minOccurs="0" maxOccurs="unbounded" />
+        <Constraint Path="ModuleStatus/Part" minOccurs="0" maxOccurs="unbounded" />
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -2200,6 +2202,7 @@
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="jdf:GenericElements" minOccurs="0" />
           <xs:element name="Employee" type="jdf:Employee_re" minOccurs="0" />
+          <xs:element name="Part" type="jdf:Part" minOccurs="0" />
         </xs:sequence>
         <xs:attribute name="CombinedProcessIndex" type="jdftyp:IntegerList" use="optional" />
         <xs:attribute name="DeviceStatus" type="jdftyp:eDeviceStatus_" use="required" />
@@ -2234,12 +2237,14 @@
         <Version Path="Activity" First="1.5" />
         <Version Path="Event" First="1.7" />
         <Version Path="ModuleStatus/Employee" Last="1.4" />
+        <Version Path="ModuleStatus/Part" First="1.9" />
         <Constraint Path="Device" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Employee" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="Event" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="JobPhase" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="ModuleStatus" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="ModuleStatus/Employee" minOccurs="0" maxOccurs="unbounded" />
+        <Constraint Path="ModuleStatus/Part" minOccurs="0" maxOccurs="unbounded" />
       </xs:appinfo>
     </xs:annotation>
     <xs:complexContent mixed="false">
@@ -2865,11 +2870,13 @@
         <Version Path="JDF" Last="1.3" />
         <Version Path="GangSource" First="1.6" />
         <Version Path="ModuleStatus/Employee" Last="1.4" />
+        <Version Path="ModuleStatus/Part" First="1.9" />
         <Constraint Path="Activity" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="CostCenter" minOccurs="0" maxOccurs="1" />
         <Constraint Path="JDF" minOccurs="0" maxOccurs="1" />
         <Constraint Path="ModuleStatus" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="ModuleStatus/Employee" minOccurs="0" maxOccurs="unbounded" />
+        <Constraint Path="ModuleStatus/Part" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="MISDetails" minOccurs="0" maxOccurs="1" />
         <Constraint Path="Part" minOccurs="0" maxOccurs="unbounded" />
         <Constraint Path="GangSource" minOccurs="0" maxOccurs="unbounded" />

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.w3c.dom.DOMException;
 
 public class JDFModuleStatus extends JDFAutoModuleStatus
@@ -93,7 +94,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 
 	/**
 	 * Constructor for JDFModuleStatus
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
@@ -105,7 +106,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 
 	/**
 	 * Constructor for JDFModuleStatus
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
@@ -118,14 +119,15 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 
 	/**
 	 * Constructor for JDFModuleStatus
-	 * 
+	 *
 	 * @param ownerDocument
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFModuleStatus(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFModuleStatus(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,11 +146,9 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 
 	/**
 	 * This function first, gets all required attributes and then compare them with the attributes present and returns a Vector with the missing attributes
-	 * 
+	 *
 	 * @param nMax maximum size of the returned Vector
-	 * 
 	 * @return VString vector with the missing attribute names
-	 * 
 	 * @default getMissingAttributes(9999999)
 	 */
 	@Override
@@ -165,6 +165,23 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 		}
 		return v;
 
+	}
+
+	/**
+	 * get part map array
+	 *
+	 * @return array of attribute, one for each part
+	 */
+	@Override
+	public JDFAttributeMapArray getPartMapArray()
+	{
+		return super.getPartMapArray();
+	}
+
+	@Override
+	public void setPartMapArray(JDFAttributeMapArray partArray)
+	{
+		super.setPartMapArray(partArray);
 	}
 
 }

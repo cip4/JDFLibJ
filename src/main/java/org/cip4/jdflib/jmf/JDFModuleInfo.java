@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,6 +79,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
 import org.cip4.jdflib.util.JDFDuration;
@@ -137,6 +138,16 @@ public class JDFModuleInfo extends JDFElement
 	public void setModuleStatus(final eDeviceStatus s)
 	{
 		setAttribute(XJDFConstants.ModuleStatus, s, null);
+	}
+
+	public String getModuleType()
+	{
+		return getAttribute(AttributeName.MODULETYPE);
+	}
+
+	public void setModuleType(final String s)
+	{
+		setAttribute(AttributeName.MODULETYPE, s);
 	}
 
 	/**
@@ -238,6 +249,23 @@ public class JDFModuleInfo extends JDFElement
 	public String getModuleID()
 	{
 		return getAttribute(AttributeName.MODULEID);
+	}
+
+	/**
+	 * get part map array
+	 *
+	 * @return array of attribute, one for each part
+	 */
+	@Override
+	public JDFAttributeMapArray getPartMapArray()
+	{
+		return super.getPartMapArray();
+	}
+
+	@Override
+	public void setPartMapArray(JDFAttributeMapArray partArray)
+	{
+		super.setPartMapArray(partArray);
 	}
 
 }

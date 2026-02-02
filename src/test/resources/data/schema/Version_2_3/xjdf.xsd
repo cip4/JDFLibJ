@@ -88,6 +88,11 @@
 			<xs:maxInclusive value="100"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="PositiveFloat">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TransferFunction">
 		<xs:restriction base="FloatList"/>
 	</xs:simpleType>
@@ -923,6 +928,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Activity"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="Device"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Employee"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Event"/>
 				<xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
@@ -1019,7 +1025,7 @@
 			<xs:attribute name="JobID" type="xs:NMTOKEN" use="required"/>
 			<xs:attribute name="JobPartID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ModuleIDs" type="xs:NMTOKENS" use="optional"/>
-			<xs:attribute name="PercentCompleted" type="Percentage" use="optional"/>
+			<xs:attribute name="PercentCompleted" type="PositiveFloat" use="optional"/>
 			<xs:attribute name="QueueEntryID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RelatedJobID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RelatedJobPartID" type="xs:NMTOKEN" use="optional"/>

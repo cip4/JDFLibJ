@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -105,7 +105,6 @@ import org.cip4.jdflib.util.StringUtil;
 // ----------------------------------
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         much prior to May 17, 2009
  */
 public class JDFDeviceInfo extends JDFAutoDeviceInfo
@@ -166,8 +165,6 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public void setCounterUnit(final eUnit unit)
@@ -176,8 +173,6 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public eUnit getCountUnitEnum()
@@ -329,7 +324,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * returns true if this is the same phase, i.e. the
 	 *
 	 * @param lastInfo the deviceInfo to compare with
-	 * @param bExact if true, use startTime as hook, else compare stati
+	 * @param bExact   if true, use startTime as hook, else compare stati
 	 * @return true if same
 	 */
 	public boolean isSamePhase(final JDFDeviceInfo lastInfo, final boolean bExact)
@@ -436,7 +431,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * set the parameters of this to the values from device
 	 *
 	 * @param device the device to copy here
-	 * @param bCopy if true, also copy the device element
+	 * @param bCopy  if true, also copy the device element
 	 */
 	public void setDevice(final JDFDevice device, final boolean bCopy)
 	{
@@ -452,49 +447,25 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	}
 
 	/**
-	 * (26) getCreateEvent
-	 *
-	 * @param iSkip number of elements to skip
-	 * @return JDFEvent the element
+	 * @param deviceID
+	 * @return
 	 */
-	@Override
-	public JDFEvent getCreateEvent(final int iSkip)
+	public JDFDevice appendDevice(final String deviceID)
 	{
-		return (JDFEvent) getCreateElement_JDFElement(ElementName.EVENT, null, iSkip);
+		final JDFDevice e = appendDevice();
+		e.setDeviceID(StringUtil.getNonEmpty(deviceID));
+		return e;
 	}
 
 	/**
-	 * (27) const get element Event
-	 *
-	 * @param iSkip number of elements to skip
-	 * @return JDFEvent the element default is getEvent(0)
+	 * @param deviceID
+	 * @return
 	 */
-	@Override
-	public JDFEvent getEvent(final int iSkip)
+	public JDFDevice getCreateDevice(final String deviceID)
 	{
-		return (JDFEvent) getElement(ElementName.EVENT, null, iSkip);
-	}
-
-	/**
-	 * Get all Event from the current element
-	 *
-	 * @return Collection<JDFEvent>, null if none are available
-	 */
-	@Override
-	public Collection<JDFEvent> getAllEvent()
-	{
-		return getChildrenByClass(JDFEvent.class, false, 0);
-	}
-
-	/**
-	 * (30) append element Event
-	 *
-	 * @return JDFEvent the element
-	 */
-	@Override
-	public JDFEvent appendEvent()
-	{
-		return (JDFEvent) appendElement(ElementName.EVENT, null);
+		final JDFDevice d = getCreateDevice();
+		d.setDeviceID(StringUtil.getNonEmpty(deviceID));
+		return d;
 	}
 
 	/**
@@ -521,7 +492,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * XJDF only!
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFModuleInfo getModuleInfo()
@@ -530,9 +501,8 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	}
 
 	/**
-	 * 
 	 * XJDF only!
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFModuleInfo getCreateModuleInfo()
@@ -541,9 +511,8 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	}
 
 	/**
-	 * 
 	 * XJDF only!
-	 * 
+	 *
 	 * @param iSkip
 	 * @return
 	 */
@@ -553,9 +522,8 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	}
 
 	/**
-	 * 
 	 * XJDF only!
-	 * 
+	 *
 	 * @param iSkip
 	 * @return
 	 */
@@ -565,9 +533,8 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	}
 
 	/**
-	 * 
 	 * XJDF only!
-	 * 
+	 *
 	 * @return
 	 */
 	public Collection<JDFModuleInfo> getAllModuleInfo()
@@ -577,7 +544,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * XJDF only!
-	 * 
+	 *
 	 * @return
 	 */
 	public JDFModuleInfo appendModuleInfo()

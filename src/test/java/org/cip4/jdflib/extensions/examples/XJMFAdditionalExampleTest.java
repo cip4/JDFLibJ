@@ -40,6 +40,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFAttributeMapArray;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.XJDFEnums.eDeviceStatus;
 import org.cip4.jdflib.extensions.XJDFHelper;
@@ -48,6 +50,9 @@ import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFModuleInfo;
+import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -98,6 +103,58 @@ class XJMFAdditionalExampleTest extends ExampleTest
 		xjmf.cleanUp();
 		xjmf.writeToFile(sm_dirTestDataTemp + "preliminary/moduleinfo.xjmf");
 		writeRoundTripX(xjmf, "ModuleInfo", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testModuleInfoPress()
+	{
+		final XJMFHelper xjmf = new XJMFHelper();
+		final MessageHelper signalStatus = xjmf.appendMessage(EnumFamily.Signal, EnumType.Status);
+		final JDFDeviceInfo di = (JDFDeviceInfo) signalStatus.appendElement(ElementName.DEVICEINFO);
+		di.setHourCounter(new JDFDuration().addOffset(0, 0, 10, 500));
+		di.setSpeed(12000);
+		di.setXJMFStatus(eDeviceStatus.Production);
+
+		final JDFDevice dev = di.appendDevice("pressID");
+		dev.setDeviceClass("SheetFedConventionalPress");
+		int i = 0;
+		for (final String sep : JDFColor.getKCMYSeparations())
+		{
+			final JDFModuleInfo mi = di.appendModuleInfo();
+			mi.setModuleID("P_" + ++i);
+			mi.setModuleStatus(eDeviceStatus.Production);
+			mi.setPartMapArray(new JDFAttributeMapArray(new JDFAttributeMap(EnumPartIDKey.Separation, sep)));
+			mi.setModuleType("PrintModule");
+		}
+
+		final JDFModuleInfo mi2 = di.appendModuleInfo();
+		mi2.setModuleID("P_" + ++i);
+		mi2.setModuleStatus(eDeviceStatus.Idle);
+		mi2.setModuleType("PrintModule");
+
+		final JDFModuleInfo mip = di.appendModuleInfo();
+		mip.setModuleID("ID_Perfector");
+		mip.setModuleStatus(eDeviceStatus.Production);
+		mip.setModuleType("PerfectingModule");
+
+		for (final String sep : JDFColor.getKCMYSeparations())
+		{
+			final JDFModuleInfo mi = di.appendModuleInfo();
+			mi.setModuleID("P_" + ++i);
+			mi.setModuleStatus(eDeviceStatus.Production);
+			mi.setPartMapArray(new JDFAttributeMapArray(new JDFAttributeMap(EnumPartIDKey.Separation, sep)));
+			mi.setModuleType("PrintModule");
+		}
+
+		final JDFModuleInfo miv = di.appendModuleInfo();
+		miv.setModuleID("ID_Coating");
+		miv.setModuleStatus(eDeviceStatus.Production);
+		miv.setModuleType("CoatingModule");
+
+		writeRoundTripX(xjmf, "ModuleInfoPress", EnumValidationLevel.Incomplete);
 	}
 
 }

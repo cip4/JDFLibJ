@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -4918,6 +4918,24 @@ public class JDFElement extends KElement
 		{
 
 			for (final JDFAttributeMap part : vPart)
+			{
+				final KElement p = appendElement(ElementName.PART, null);
+				p.setAttributes(part);
+			}
+		}
+	}
+
+	/**
+	 * sets all parts to those defined in partArray
+	 *
+	 * @param partArray vector of attribute maps for the parts
+	 */
+	protected void setPartMapArray(final JDFAttributeMapArray partArray)
+	{
+		removeChildrenByClass(JDFPart.class);
+		if (!JDFAttributeMapArray.isEmpty(partArray))
+		{
+			for (final JDFAttributeMap part : partArray)
 			{
 				final KElement p = appendElement(ElementName.PART, null);
 				p.setAttributes(part);

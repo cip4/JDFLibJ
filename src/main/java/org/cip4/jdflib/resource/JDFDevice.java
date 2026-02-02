@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,22 +56,23 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevice;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCoreConstants;
@@ -87,7 +88,6 @@ import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         way before June 3, 2009
  */
 public class JDFDevice extends JDFAutoDevice
@@ -96,11 +96,10 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * Constructor for JDFDevice
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFDevice(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -109,12 +108,11 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * Constructor for JDFDevice
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
-	 * 
 	 */
 	public JDFDevice(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -123,14 +121,15 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * Constructor for JDFDevice
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFDevice(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFDevice(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,11 +145,9 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * test whether a given node has the corect Types and Type Attribute
-	 * 
+	 *
 	 * @param testRoot the JDF or JMF to test
-	 * 
 	 * @return VElement - the list of matching JDF nodes, null if none found
-	 * 
 	 */
 	public VElement getMatchingTypeNodeVector(final JDFNode testRoot)
 	{
@@ -174,12 +171,10 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * return all deviceCap elements that correspond to testRoot
-	 * 
+	 *
 	 * @param testRoot the JDF or JMF to test
 	 * @param bLocal
-	 * 
 	 * @return VElement - the list of matching devicecap nodes, null if none found
-	 * 
 	 */
 	public VElement getMatchingDeviceCapVector(final JDFNode testRoot, final boolean bLocal)
 	{
@@ -202,12 +197,10 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * test whether a given node has the corect Types and Type Attribute
-	 * 
+	 *
 	 * @param testRoot the JDF or JMF to test
-	 * @param bLocal if true, only check the root of this, else check children as well
-	 * 
+	 * @param bLocal   if true, only check the root of this, else check children as well
 	 * @return boolean - true if this DeviceCaps TypeExpression fits testRoot/@Type and testRoot/@Types
-	 * 
 	 */
 	public boolean matchesType(final JDFNode testRoot, final boolean bLocal)
 	{
@@ -225,10 +218,10 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * Gets of jdfRoot a vector of all executable nodes (jdf root or children nodes that this Device may execute)
-	 * 
-	 * @param docRoot the node we test
-	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *        Will be used in fitsValue method of the State class.
+	 *
+	 * @param docRoot         the node we test
+	 * @param testlists       testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
+	 *                        Will be used in fitsValue method of the State class.
 	 * @param validationLevel validation level
 	 * @return VElement - vector of executable JDFNodes
 	 */
@@ -257,11 +250,11 @@ public class JDFDevice extends JDFAutoDevice
 	/**
 	 * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br>
 	 * Returns <code>null</code> if there are no errors.
-	 * 
-	 * @param jdfRoot the node to test
+	 *
+	 * @param jdfRoot   the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *        Will be used in fitsValue method of the State class.
-	 * @param level validation level
+	 *                  Will be used in fitsValue method of the State class.
+	 * @param level     validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
 	public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
@@ -324,7 +317,7 @@ public class JDFDevice extends JDFAutoDevice
 
 	/**
 	 * get the descriptivename - default to friendlyname if descriptivename is not set
-	 * 
+	 *
 	 * @see org.cip4.jdflib.core.JDFElement#getDescriptiveName()
 	 */
 	@Override
@@ -335,7 +328,6 @@ public class JDFDevice extends JDFAutoDevice
 	}
 
 	/**
-	 * 
 	 * @return
 	 */
 	public String getRestApiBaseURL()
@@ -346,6 +338,17 @@ public class JDFDevice extends JDFAutoDevice
 	public void setRestApiBaseURL(final String value)
 	{
 		setAttribute(XJDFConstants.RestApiBaseURL, value, null);
+	}
+
+	/**
+	 * (36) set attribute DeviceClass
+	 * convenience for single class only
+	 *
+	 * @param value the value to set the attribute to
+	 */
+	public void setDeviceClass(String value)
+	{
+		setAttribute(AttributeName.DEVICECLASS, value, null);
 	}
 
 }

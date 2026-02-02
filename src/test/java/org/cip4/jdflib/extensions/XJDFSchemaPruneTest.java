@@ -296,6 +296,8 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		phase.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, "s1"));
 		phase.setStatus(EnumNodeStatus.Setup);
 		phase.setStartTime(new JDFDate().setTime(16, 0, 0));
+		phase.setWorkStepID("wsid");
+
 		xjmfHelper.cleanUp();
 		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
 		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);

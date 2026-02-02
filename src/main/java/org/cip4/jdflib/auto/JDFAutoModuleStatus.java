@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 
 /**
@@ -113,10 +114,11 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x4444433333l);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x3111111111l);
 	}
 
 	@Override
@@ -190,8 +192,8 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 */
 	public JDFIntegerList getCombinedProcessIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
-		JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+		final JDFIntegerList nPlaceHolder = JDFIntegerList.createIntegerList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -229,7 +231,7 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 * (5) set attribute DeviceStatus
 	 *
 	 * @param enumVar the enumVar to set the attribute to
-	 * @deprecated use SetDeviceStatus(EeviceInfo.EnumDeviceStatus) based on java.lang.enum instead
+	 * @deprecated use SetDeviceStatus(EeviceInfo.EnumDeviceStatus) based on java.lang.enum
 	 */
 	@Deprecated
 	public void setDeviceStatus(JDFDeviceInfo.EnumDeviceStatus enumVar)
@@ -241,7 +243,7 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 * (9) get attribute DeviceStatus
 	 *
 	 * @return the value of the attribute
-	 * @deprecated use EeviceInfo.EnumDeviceStatus GetEDeviceStatus() based on java.lang.enum instead
+	 * @deprecated use EeviceInfo.EnumDeviceStatus GetEDeviceStatus() based on java.lang.enum
 	 */
 	@Deprecated
 	public JDFDeviceInfo.EnumDeviceStatus getDeviceStatus()
@@ -297,8 +299,8 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	 */
 	public JDFIntegerRangeList getModuleIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
-		JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
+		final String strAttrName = getAttribute(AttributeName.MODULEINDEX, null, null);
+		final JDFIntegerRangeList nPlaceHolder = JDFIntegerRangeList.createIntegerRangeList(strAttrName);
 		return nPlaceHolder;
 	}
 
@@ -419,6 +421,69 @@ public abstract class JDFAutoModuleStatus extends JDFElement
 	public JDFEmployee appendEmployee()
 	{
 		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+	}
+
+	/**
+	 * (24) const get element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart getPart()
+	{
+		return (JDFPart) getElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (25) getCreatePart
+	 * 
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart()
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, 0);
+	}
+
+	/**
+	 * (26) getCreatePart
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 */
+	public JDFPart getCreatePart(int iSkip)
+	{
+		return (JDFPart) getCreateElement_JDFElement(ElementName.PART, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Part
+	 *
+	 * @param iSkip number of elements to skip
+	 * @return JDFPart the element
+	 *         default is getPart(0)
+	 */
+	public JDFPart getPart(int iSkip)
+	{
+		return (JDFPart) getElement(ElementName.PART, null, iSkip);
+	}
+
+	/**
+	 * Get all Part from the current element
+	 * 
+	 * @return Collection<JDFPart>, null if none are available
+	 */
+	public Collection<JDFPart> getAllPart()
+	{
+		return getChildArrayByClass(JDFPart.class, false, 0);
+	}
+
+	/**
+	 * (30) append element Part
+	 *
+	 * @return JDFPart the element
+	 */
+	public JDFPart appendPart()
+	{
+		return (JDFPart) appendElement(ElementName.PART, null);
 	}
 
 }
