@@ -141,8 +141,8 @@ dependencies {
  	api 'com.sun.mail:jakarta.mail:2.0.2'
 
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.4'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.2'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
     testImplementation 'org.mockito:mockito-core:4.11.0'
 }
