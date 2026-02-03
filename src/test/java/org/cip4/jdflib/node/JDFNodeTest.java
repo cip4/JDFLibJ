@@ -1215,7 +1215,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		ra2.addNewOldLink(true, rl, EnumUsage.Input);
 		ra2.appendComment();
 		ra2.addNewOldLink(false, rl, EnumUsage.Input).setDescriptiveName("foo");
-		assertTrue(ra2.getOldLink().getDescriptiveName().equals("foo"), "addnewlink");
+		assertTrue("foo".equals(ra2.getOldLink().getDescriptiveName()), "addnewlink");
 		gd.write2File(sm_dirTestDataTemp + "testaudit.jdf", 2, false);
 		assertTrue(ra2.isValid(EnumValidationLevel.Complete), "audit valid with Link");
 		ra2.copyElement(rl, null);
@@ -1729,7 +1729,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode node = doc.getJDFRoot();
 		assertNotNull(node.getStatus());
-		assertFalse(node.getID().equals(""));
+		assertFalse("".equals(node.getID()));
 		node.init();
 		node.init();
 		final JDFAuditPool ap = node.getAuditPool();
@@ -2020,7 +2020,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
-		final JDFNode n1 = n.addProcessGroup(null);
+		n.addProcessGroup(null);
 		assertEquals(n.getTreeByClass(JDFNode.class, true).size(), 2);
 
 	}
@@ -2515,6 +2515,20 @@ class JDFNodeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testGetLink3()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ResourceDefinition);
+		n.addResource(ElementName.PREVIEW, EnumResourceClass.Parameter, EnumUsage.Output, null, null, null, null);
+		final JDFResource p2 = n.addResource(ElementName.PREVIEW, EnumResourceClass.Parameter, EnumUsage.Output, null, null, null, null);
+		assertEquals(p2, n.getResource(ElementName.PREVIEW, EnumUsage.Output, 1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testGetResourceNS()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -2752,7 +2766,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		final JDFDate date = new JDFDate().addOffset(0, 0, 0, 0);
 		nig.setStart(date);
 		final JDFNode nl = ng.addJDFNode(EnumType.ProcessGroup);
-		final JDFNodeInfo nil = nl.getCreateNodeInfo();
+		nl.getCreateNodeInfo();
 
 		final JDFNodeInfo ni2 = nl.getInheritedNodeInfo("@Start");
 		assertEquals(nig, ni2);
@@ -2775,7 +2789,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		nig.setFirstStart(date);
 		nig.setLastStart(new JDFDate(date).addOffset(0, 0, 0, 1));
 		final JDFNode nl = ng.addJDFNode(EnumType.ProcessGroup);
-		final JDFNodeInfo nil = nl.getCreateNodeInfo();
+		nl.getCreateNodeInfo();
 
 		assertEquals(date, nl.getNodeInfoFirstStart());
 		assertEquals(date.addOffset(0, 0, 0, 1), nl.getNodeInfoLastStart());
@@ -2797,7 +2811,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		nig.setFirstEnd(date);
 		nig.setLastEnd(new JDFDate(date).addOffset(0, 0, 0, 1));
 		final JDFNode nl = ng.addJDFNode(EnumType.ProcessGroup);
-		final JDFNodeInfo nil = nl.getCreateNodeInfo();
+		nl.getCreateNodeInfo();
 
 		assertEquals(date, nl.getNodeInfoFirstEnd());
 		assertEquals(date.addOffset(0, 0, 0, 1), nl.getNodeInfoLastEnd());
@@ -2816,9 +2830,9 @@ class JDFNodeTest extends JDFTestCaseBase
 		niRoot.setTotalDuration(new JDFDuration(66));
 		niRoot.setCleanupDuration(new JDFDuration(88));
 		final JDFNode ng = nRoot.addJDFNode(EnumType.ProcessGroup);
-		final JDFNodeInfo nig = ng.getCreateNodeInfo();
+		ng.getCreateNodeInfo();
 		final JDFNode nl = ng.addJDFNode(EnumType.ProcessGroup);
-		final JDFNodeInfo nil = nl.getCreateNodeInfo();
+		nl.getCreateNodeInfo();
 
 		assertEquals(new JDFDuration(42), nl.getNodeInfoSetupDuration());
 		assertEquals(new JDFDuration(66), nl.getNodeInfoTotalDuration());
@@ -3068,7 +3082,7 @@ class JDFNodeTest extends JDFTestCaseBase
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFNode p = (JDFNode) v.elementAt(i);
-			if (p.getCategory().equals("ContentCreation"))
+			if ("ContentCreation".equals(p.getCategory()))
 			{
 				ppnode = p;
 				break;

@@ -1771,22 +1771,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				final VJDFAttributeMap vMap = getPartVector(n);
 				// recurse down first so we have updated kids
-				for (int i = 0; i < vNodes.size(); i++)
+				for (final Object vNode : vNodes)
 				{
-					final JDFNode kid = (JDFNode) vNodes.get(i);
+					final JDFNode kid = (JDFNode) vNode;
 					update(kid);
 
 				}
 				// now compare by part
-				for (int ii = 0; ii < vMap.size(); ii++)
+				for (final JDFAttributeMap partMap : vMap)
 				{
 					boolean ciao = vNodes.size() == 0;
-					final JDFAttributeMap partMap = vMap.get(ii);
 					EnumNodeStatus minStatus = EnumNodeStatus.Aborted;
 					EnumNodeStatus maxStatus = EnumNodeStatus.Waiting;
-					for (int i = 0; i < vNodes.size(); i++)
+					for (final Object vNode : vNodes)
 					{
-						final JDFNode kid = (JDFNode) vNodes.get(i);
+						final JDFNode kid = (JDFNode) vNode;
 						minStatus = (EnumNodeStatus) EnumUtil.min(minStatus, kid.getPartStatus(partMap, -1));
 						if (minStatus == null)
 						{
@@ -2945,25 +2944,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	 */
 	public JDFResourceLink getLink(final String strName, final EnumUsage usage, final String processUsage, final String namespaceURI, int i)
 	{
-		VElement velem = null;
-		final JDFResourceLinkPool rlp = getResourceLinkPool();
-		if (rlp != null)
-		{
-			velem = rlp.getInOutLinksExtended(usage, true, strName, processUsage, namespaceURI, false);
-		}
 
-		final int siz = velem == null ? 0 : velem.size();
-		if (i < 0)
-		{
-			i += siz;
-		}
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.putNotNull(AttributeName.USAGE, usage);
+		map.putNotNull(AttributeName.PROCESSUSAGE, processUsage);
 
-		if (siz == 0 || i < 0 || i >= siz || velem == null)
-		{
-			return null;
-		}
+		final VElement velem = getResourceLinks(strName, map, namespaceURI);
 
-		return (JDFResourceLink) velem.elementAt(i);
+		return (JDFResourceLink) ContainerUtil.get(velem, i);
 	}
 
 	/**
@@ -3635,7 +3623,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-	
+
 	 *
 	 */
 
@@ -3832,7 +3820,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	@Deprecated
 	public JDFNode addTask(final String task, final VString tasks)
 	{
-		if (task.equals(JDFConstants.EMPTYSTRING))
+		if (JDFConstants.EMPTYSTRING.equals(task))
 		{
 			return this;
 		}
@@ -3841,7 +3829,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 		if (p != null)
 		{
-			if (task.equals(JDFConstants.COMBINED))
+			if (JDFConstants.COMBINED.equals(task))
 			{
 				p.setCombined(tasks);
 			}
@@ -4598,8 +4586,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			final KElement m = v.elementAt(i);
 			final String strName = m.getNodeName();
 			KElement mHere = null;
-			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO)) || (strName.equals(ElementName.RESOURCEPOOL))
-					|| (strName.equals(ElementName.RESOURCELINKPOOL)) || (strName.equals(ElementName.ANCESTORPOOL)) || (strName.equals(ElementName.AUDITPOOL)))
+			if ((ElementName.NODEINFO.equals(strName)) || (ElementName.CUSTOMERINFO.equals(strName)) || (ElementName.RESOURCEPOOL.equals(strName))
+					|| (ElementName.RESOURCELINKPOOL.equals(strName)) || (ElementName.ANCESTORPOOL.equals(strName)) || (ElementName.AUDITPOOL.equals(strName)))
 			{
 				mHere = getElement_JDFElement(m.getNodeName(), null, 0);
 			}
@@ -5275,7 +5263,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	public EnumProcessUsage getEnumProcessUsage(final String info, final int i)
 	{
 		final String iToken = StringUtil.token(info, i, JDFConstants.BLANK);
-		if (iToken.equals(JDFConstants.EMPTYSTRING))
+		if (JDFConstants.EMPTYSTRING.equals(iToken))
 		{
 			return null;
 		}
@@ -6671,15 +6659,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		VString vs = new VString();
 		final String myType = getType();
-		if (myType.equals(JDFConstants.PRODUCT))
+		if (JDFConstants.PRODUCT.equals(myType))
 		{
 			vs = new VString(JDFConstants.PRODUCT, null);
 		}
-		else if (myType.equals(JDFConstants.COMBINED))
+		else if (JDFConstants.COMBINED.equals(myType))
 		{
 			vs = getTypes();
 		}
-		else if (myType.equals(JDFConstants.PROCESSGROUP))
+		else if (JDFConstants.PROCESSGROUP.equals(myType))
 		{
 			final VElement vNodes = getvJDFNode(null, null, true);
 			final VString vsTypes = getTypes();
@@ -6896,7 +6884,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			return false;
 		}
 		final String id = vpa.elementAt(0);
-		if (id.equals(JDFConstants.EMPTYSTRING))
+		if (JDFConstants.EMPTYSTRING.equals(id))
 		{
 			throw new JDFException("JDFNode.HasParent: no id???");
 		}
@@ -6958,7 +6946,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					strID = strID.trim();
 					final int len = strID.length();
 
-					if (strID.equals(JDFConstants.EMPTYSTRING))
+					if (JDFConstants.EMPTYSTRING.equals(strID))
 					{
 						continue;
 					}
@@ -6974,7 +6962,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 						strID = strID.substring(iPos);
 					}
 
-					if (strID.equals(JDFConstants.EMPTYSTRING))
+					if (JDFConstants.EMPTYSTRING.equals(strID))
 					{
 						continue;
 					}
@@ -7012,7 +7000,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			final JDFNode e = (JDFNode) v.elementAt(i);
 			String s = e.getJobPartID(false);
-			if (s.equals(JDFConstants.EMPTYSTRING) || s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
+			if (JDFConstants.EMPTYSTRING.equals(s) || s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
 			{
 				continue;
 			}
@@ -7030,7 +7018,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			{
 				s = s.substring(s.length() - pos, s.length());
 			}
-			if (s.equals(JDFConstants.EMPTYSTRING))
+			if (JDFConstants.EMPTYSTRING.equals(s))
 			{
 				continue;
 			}
@@ -7058,7 +7046,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			throw new JDFException("JDFNode.addJDFNode adding JDF Node to invalid node type: Type = " + getType());
 		}
 		final JDFNode p = (JDFNode) appendElement(ElementName.JDF, null);
-		if (typ != null && !typ.equals(JDFConstants.EMPTYSTRING))
+		if (typ != null && !JDFConstants.EMPTYSTRING.equals(typ))
 		{
 			p.setType(typ, false);
 		}
@@ -7356,7 +7344,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			for (int j = 0; j < vInNameSpace.size(); j++)
 			{
 				// tokenize needs a blank
-				if (vInNameSpace.elementAt(j).equals(JDFConstants.BLANK))
+				if (JDFConstants.BLANK.equals(vInNameSpace.elementAt(j)))
 				{
 					vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
 				}
@@ -8700,7 +8688,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			linkName += JDFConstants.LINK;
 		}
 
-		return rlp.getPoolChildren(linkName, mLinkAtt, linkNS);
+		final VElement poolChildren = rlp.getPoolChildren(linkName, mLinkAtt, linkNS);
+		for (int i = ContainerUtil.size(poolChildren) - 1; i >= 0 && StringUtil.isEmpty(linkNS); i--)
+		{
+			final String nodeName = poolChildren.get(i).getNodeName();
+			if (!StringUtil.isEmpty(linkName) && !StringUtil.equals(linkName, nodeName) && !"jdf".equalsIgnoreCase(KElement.xmlnsPrefix(linkName))
+					&& !"jdf".equalsIgnoreCase(KElement.xmlnsPrefix(nodeName)))
+			{
+				poolChildren.remove(i);
+			}
+		}
+		return poolChildren;
 	}
 
 	/**

@@ -532,7 +532,8 @@ public class XJDFToJDFSchema extends BaseElementWalker
 
 	}
 
-	private static final StringArray stringList = new StringArray(new String[] { AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.SENDERID });
+	private static final StringArray stringList = new StringArray(
+			new String[] { AttributeName.JOBID, AttributeName.JOBPARTID, AttributeName.SENDERID, AttributeName.EVENTID });
 
 	public class WalkStringType extends WalkXSAttribute
 	{

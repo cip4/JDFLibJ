@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -54,6 +54,7 @@ import java.util.HashSet;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFResourceLink.EUsage;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
@@ -66,7 +67,6 @@ import org.junit.jupiter.api.Test;
  * test of JDFAttributemap
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 class JDFAttributeMapTest extends JDFTestCaseBase
 {
@@ -257,6 +257,8 @@ class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.get("Side"), "Front");
 		m1.putNotNull(EPartIDKey.Side, "Back");
 		assertEquals(m1.get(EPartIDKey.Side), "Back");
+		m1.putNotNull(EPartIDKey.SheetName, null);
+		assertFalse(m1.keySet().contains(AttributeName.SHEETNAME));
 	}
 
 	/**

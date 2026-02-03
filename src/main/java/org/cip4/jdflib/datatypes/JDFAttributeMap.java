@@ -238,7 +238,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 		String v1 = null;
 		if (value instanceof String)
 		{
-			v1 = (String) value;
+			v1 = StringUtil.getNonEmpty((String) value);
 		}
 		else if (value instanceof ValuedEnum)
 		{
@@ -246,7 +246,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 		}
 		else if (value instanceof Enum<?>)
 		{
-			return JavaEnumUtil.getName((Enum<?>) value);
+			v1 = JavaEnumUtil.getName((Enum<?>) value);
 		}
 		return StringUtil.getNonEmpty(v1) == null ? null : put(k1, v1);
 	}
