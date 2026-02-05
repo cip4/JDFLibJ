@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -81,6 +81,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode.CombinedProcessLinkHelper;
 import org.cip4.jdflib.node.JDFNode.EActivation;
+import org.cip4.jdflib.node.JDFNode.EType;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -798,6 +799,18 @@ class JDFNodeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testAddTask()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode mainNode = doc.getJDFRoot();
+		mainNode.addTask(EType.CoilBinding.name(), null);
+		assertNotNull(mainNode.addTask(EType.Combined.name(), null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testURLInput()
 	{
 		final JDFNode n = JDFNode.createRoot();
@@ -972,6 +985,18 @@ class JDFNodeTest extends JDFTestCaseBase
 		assertNull(EnumType.getEnum(-1));
 		assertNull(EnumType.getEnum("FOO"));
 		assertEquals(EnumType.ConventionalPrinting, EnumType.getEnum(JDFConstants.TYPE_CONVENTIONALPRINTING));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testEType()
+	{
+		assertNull(EType.getEnum("FOO"));
+		assertEquals(EType.ConventionalPrinting, EType.getEnum(JDFConstants.TYPE_CONVENTIONALPRINTING));
+		assertEquals(EType.LooseBinding, EType.getEnum(" loosebinding"));
+		assertEquals(EType.ConventionalPrinting, EType.getEnum(JDFConstants.TYPE_CONVENTIONALPRINTING.toLowerCase()));
 	}
 
 	/**
