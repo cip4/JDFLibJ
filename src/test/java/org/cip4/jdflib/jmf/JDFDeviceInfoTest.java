@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -73,7 +73,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Rainer Prosi
- *
  *         Test of the Status JMF
  */
 class JDFDeviceInfoTest extends JDFTestCaseBase
@@ -105,7 +104,7 @@ class JDFDeviceInfoTest extends JDFTestCaseBase
 		assertEquals(jmf.getSenderID(), di.getDeviceID());
 		di.appendDevice().setDeviceID("dd");
 		assertEquals(di.getDeviceID(), "dd");
-		di.setDeviceID("da");
+		di.getCreateDevice("da");
 		assertEquals(di.getDeviceID(), "da");
 	}
 

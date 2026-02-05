@@ -312,6 +312,23 @@ class JDFNodeTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testStatusSynch()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		final JDFNode n2 = n.addJDFNode("ImageSetting");
+		final JDFResource r = n2.addResource("ExposedMedia", null, EnumUsage.Output, null, n, null, null);
+		final JDFNode n3 = n.addJDFNode("ConventionalPrinting");
+		n3.linkResource(r, EnumUsage.Input, null);
+		n.getStatusSynch().update();
+		assertNotNull(n);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testGetPredecessorsPartition()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
