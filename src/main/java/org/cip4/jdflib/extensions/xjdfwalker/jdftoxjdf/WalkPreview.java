@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -46,7 +46,6 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFPreview;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
  */
 public class WalkPreview extends WalkResource
@@ -72,7 +71,6 @@ public class WalkPreview extends WalkResource
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.xjdfwalker.jdftoxjdf.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 	 */
 	@Override
@@ -82,13 +80,15 @@ public class WalkPreview extends WalkResource
 		moveToFileSpec(pv);
 		final String typ = jdf.getAttribute(AttributeName.PREVIEWUSAGE);
 		final KElement xjdfPreview = super.walk(jdf, xjdf);
-		final ResourceHelper ph = new ResourceHelper(xjdfPreview.getParentNode_KElement());
-		ph.ensurePart(AttributeName.PREVIEWTYPE, typ);
+		if (xjdfPreview != null)
+		{
+			final ResourceHelper ph = new ResourceHelper(xjdfPreview.getParentNode_KElement());
+			ph.ensurePart(AttributeName.PREVIEWTYPE, typ);
+		}
 		return xjdfPreview;
 	}
 
 	/**
-	 *
 	 * @param jdf
 	 */
 	void moveToFileSpec(final JDFPreview pv)

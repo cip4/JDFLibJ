@@ -105,6 +105,28 @@ public class URLReader
 	private File notRelative;
 	private final static HashSet<String> validhosts = new HashSet<>();
 	private static EPackage packMethod = EPackage.PACKAGE;
+	private EPackage localPackMethod;
+
+	/**
+	 * override for the static default
+	 *
+	 * @return
+	 */
+	public EPackage getLocalPackMethod()
+	{
+		return localPackMethod;
+	}
+
+	/**
+	 * override for the static default
+	 *
+	 * @param localPackMethod
+	 */
+	public void setLocalPackMethod(EPackage localPackMethod)
+	{
+		this.localPackMethod = localPackMethod;
+	}
+
 	static
 	{
 		initFilters();
@@ -165,6 +187,7 @@ public class URLReader
 		this.urlString = urlString;
 		localRoots = new ArrayList<>();
 		notRelative = null;
+		localPackMethod = null;
 	}
 
 	boolean checkHost(String urlStr)
@@ -237,8 +260,8 @@ public class URLReader
 
 	boolean checkPack(EPackage pack)
 	{
-
-		return packMethod == pack || packMethod == EPackage.PACKAGE;
+		final EPackage currentPackMethod = localPackMethod == null ? packMethod : localPackMethod;
+		return currentPackMethod == pack || currentPackMethod == EPackage.PACKAGE;
 	}
 
 	/**

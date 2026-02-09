@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -108,7 +108,7 @@ class XJDFProcessExampleTest extends ExampleTest
 	*
 	*/
 	@Test
-	public final void testCombined()
+	final void testCombined()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("CombinedExample", null, null);
 		xjdfHelper.addType(EnumType.Interpreting.getName(), 0);
@@ -124,7 +124,7 @@ class XJDFProcessExampleTest extends ExampleTest
 	*
 	*/
 	@Test
-	public final void testPDLCreation()
+	final void testPDLCreation()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("PDLCreationExample", null, null);
 		xjdfHelper.addType(EnumType.PDLCreation);
@@ -234,7 +234,7 @@ class XJDFProcessExampleTest extends ExampleTest
 	*
 	*/
 	@Test
-	public final void testQualityControl()
+	final void testQualityControl()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("QualityControlExample", null, null);
 		xjdfHelper.addType(EnumType.ConventionalPrinting.getName(), 0);
@@ -255,7 +255,7 @@ class XJDFProcessExampleTest extends ExampleTest
 	*
 	*/
 	@Test
-	public final void testDieLayoutProd()
+	final void testDieLayoutProd()
 	{
 		final XJDFHelper xjdfHelper = new XJDFHelper("Die1", null, null);
 		xjdfHelper.addType(EnumType.DieLayoutProduction.getName(), 0);
