@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -71,7 +71,7 @@ class FileTimeTest extends JDFTestCaseBase
 	@Test
 	void testmodified()
 	{
-		File f = new File(sm_dirTestDataTemp + "ft1.txt");
+		final File f = new File(sm_dirTestDataTemp + "ft1.txt");
 		FileUtil.forceDelete(f);
 		FileUtil.createNewFile(f);
 		final FileTime ft = new FileTime(f, false);
@@ -86,13 +86,17 @@ class FileTimeTest extends JDFTestCaseBase
 	{
 		for (final boolean b : new boolean[] { true, false })
 		{
-			File f = new File(sm_dirTestDataTemp + "ft" + b + ".txt");
+			final File f = new File(sm_dirTestDataTemp + "ft" + b + ".txt");
 			final FileTime ft = new FileTime(f, b);
 			assertTrue(FileUtil.forceDelete(f));
 			FileUtil.createNewFile(f);
-			for (int i = 0; i < 42; i++)
+			for (int i = 0; i < 420; i++)
+			{
 				if (!f.exists())
+				{
 					ThreadUtil.sleep(2);
+				}
+			}
 			for (int i = 0; i < 1; i++)
 			{
 				final FileOutputStream fos = new FileOutputStream(f, true);
