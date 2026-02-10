@@ -188,6 +188,22 @@ class URLReaderTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws UnknownHostException
+	 */
+	@Test
+	void testPack()
+	{
+		URLReader.setPackMethod(EPackage.NONE);
+		assertEquals(EPackage.NONE, URLReader.getPackMethod());
+		final URLReader u = new URLReader("foo");
+		assertEquals(EPackage.NONE, u.getCurrentPackMethod());
+		u.setLocalPackMethod(EPackage.MIME);
+		assertEquals(EPackage.MIME, u.getLocalPackMethod());
+		assertEquals(EPackage.MIME, u.getCurrentPackMethod());
+
+	}
+
+	/**
 	 *
 	 *
 	 */

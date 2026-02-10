@@ -120,6 +120,16 @@ public class URLReader
 	/**
 	 * override for the static default
 	 *
+	 * @return
+	 */
+	public EPackage getCurrentPackMethod()
+	{
+		return localPackMethod == null ? getPackMethod() : localPackMethod;
+	}
+
+	/**
+	 * override for the static default
+	 *
 	 * @param localPackMethod
 	 */
 	public void setLocalPackMethod(EPackage localPackMethod)
