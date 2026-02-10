@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -61,12 +61,14 @@ public class XSDUtil
 	public static KElement setXSAttribute(KElement root, final String attName, String typ, boolean required)
 	{
 		final KElement root2 = root.getElement(XSDConstants.XS_COMPLEX_CONTENT);
+		boolean extension = false;
 		if (root2 != null)
 		{
 			final KElement root3 = root2.getElement(XSDConstants.XS_EXTENSION);
 			if (root3 != null)
 			{
 				root = root3;
+				extension = true;
 			}
 		}
 		KElement att = root.getChildWithAttribute(XSDConstants.XS_ATTRIBUTE, XSDConstants.NAME, null, attName, 0, true);
@@ -74,7 +76,7 @@ public class XSDUtil
 		{
 			att = root.appendElement(XSDConstants.XS_ATTRIBUTE);
 		}
-		required = required || eAttributeUse.required.equals(eAttributeUse.getEnum(att.getAttribute(XSDConstants.USE)));
+		required = required || (extension && eAttributeUse.required.equals(eAttributeUse.getEnum(att.getAttribute(XSDConstants.USE))));
 		att.setAttribute(XSDConstants.USE, required ? eAttributeUse.required : eAttributeUse.optional, null);
 		att.setAttribute(XSDConstants.NAME, attName);
 		att.setAttribute(XSDConstants.TYPE, typ);
