@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -53,7 +53,6 @@ class MultiTaskQueueTest extends JDFTestCaseBase
 	class WaitRunner implements Runnable
 	{
 		/**
-		 *
 		 * @param i
 		 */
 		WaitRunner(final int i)
@@ -131,7 +130,9 @@ class MultiTaskQueueTest extends JDFTestCaseBase
 		final MultiTaskQueue q = MultiTaskQueue.getCreateQueue("multi42", 3);
 		assertNotNull(q.toString());
 		for (int i = 0; i < 10; i++)
+		{
 			q.queue(new WaitRunner(i, i));
+		}
 		final String shortString = q.shortString();
 		assertNotNull(shortString);
 	}
@@ -143,16 +144,18 @@ class MultiTaskQueueTest extends JDFTestCaseBase
 	@Test
 	synchronized void testMulti()
 	{
-		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testMulti()", 3);
+		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testMulti", 3);
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 10; i++)
+		{
 			q.queue(new WaitRunner(i, 100));
+		}
 		assertEquals(q.getAvQueue(), 0);
-		for (int i = 0; i < 142; i++)
+		for (int i = 0; i < 442; i++)
 		{
 			ThreadUtil.sleep(10);
-			if (q.size() <= 8)
+			if (q.size() <= 7)
 			{
 				break;
 			}
@@ -195,7 +198,9 @@ class MultiTaskQueueTest extends JDFTestCaseBase
 		assertEquals(0, q.getAvQueue());
 		assertEquals(0, q.getAvRun());
 		for (int i = 0; i < 333; i++)
+		{
 			q.queue(new WaitRunner(i, 5));
+		}
 
 		for (int i = 0; i < 442; i++)
 		{
@@ -247,10 +252,14 @@ class MultiTaskQueueTest extends JDFTestCaseBase
 	{
 		final OrderedTaskQueue q = MultiTaskQueue.getCreateQueue("testInterruptMulti", 3);
 		for (int i = 0; i < 10; i++)
+		{
 			q.queue(new WaitRunner(i, 111));
+		}
 
 		while (q.size() > 7)
+		{
 			ThreadUtil.sleep(10);
+		}
 
 		final long t0 = System.currentTimeMillis();
 		while (q.size() > 0)
