@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,9 +76,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFColor;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkColor extends WalkResource
 {
@@ -92,6 +90,7 @@ public class WalkColor extends WalkResource
 
 	/**
 	 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+	 *
 	 * @param xjdf
 	 * @return true if must continue
 	 */
@@ -99,7 +98,7 @@ public class WalkColor extends WalkResource
 	public KElement walk(final KElement jdf, final KElement xjdf)
 	{
 		final JDFColor k = (JDFColor) super.walk(jdf, xjdf);
-		if (jdfToXJDF.isHTMLColor())
+		if (k != null && jdfToXJDF.isHTMLColor())
 		{
 			k.setAttribute("HTMLColor", ((JDFColor) jdf).getHTMLColor());
 		}
