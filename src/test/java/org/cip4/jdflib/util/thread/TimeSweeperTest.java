@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2015 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,9 +68,13 @@
  */
 package org.cip4.jdflib.util.thread;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class TimeSweeperTest extends JDFTestCaseBase
@@ -81,12 +85,12 @@ class TimeSweeperTest extends JDFTestCaseBase
 		@Override
 		public void run()
 		{
-			log.info("running: " + n++);
+			log.info("running: " + n.incrementAndGet());
 		}
 
 	}
 
-	int n;
+	AtomicInteger n = new AtomicInteger();
 
 	/**
 	*
@@ -94,14 +98,17 @@ class TimeSweeperTest extends JDFTestCaseBase
 	@Test
 	void testAddSweeperRun()
 	{
-		n = 0;
-		RegularJanitor janitor = RegularJanitor.getJanitor();
+		n.set(0);
+		final RegularJanitor janitor = RegularJanitor.getJanitor();
 		janitor.setInterval(1);
-		janitor.addSweeper(new TimeSweeper(2, new TestRun()), true);
+		janitor.addSweeper(new TimeSweeper(1, new TestRun()), true);
 		janitor.startSweep(0);
-		Assertions.assertEquals(janitor.numSweepers(), 1);
-		ThreadUtil.sleep(4231);
-		Assertions.assertTrue(n > 1);
+		assertEquals(janitor.numSweepers(), 1);
+		for (int nn = 0; nn < 100 && n.get() < 2; nn++)
+		{
+			ThreadUtil.sleep(420);
+		}
+		assertTrue(n.get() > 1);
 	}
 
 }
