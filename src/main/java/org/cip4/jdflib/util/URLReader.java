@@ -148,7 +148,7 @@ public class URLReader
 
 		public static EPackage getEnum(String s)
 		{
-			return JavaEnumUtil.getEnumIgnoreCase(EPackage.class, s, null);
+			return JavaEnumUtil.getEnumIgnoreCase(EPackage.class, s, EPackage.PACKAGE);
 		}
 	}
 
@@ -512,6 +512,9 @@ public class URLReader
 
 	public static void setPackMethod(EPackage packMethod)
 	{
-		URLReader.packMethod = packMethod;
+		if (packMethod != null)
+		{
+			URLReader.packMethod = packMethod;
+		}
 	}
 }
