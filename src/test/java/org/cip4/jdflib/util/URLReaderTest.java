@@ -294,7 +294,7 @@ class URLReaderTest extends JDFTestCaseBase
 	void testGetXMLDocZipNoHost()
 	{
 		URLReader.clearHosts();
-		URLReader.setPackMethod(null);
+		URLReader.setPackMethod(EPackage.NONE);
 		final URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
 		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
 		reader.setZipReader(zip);
@@ -343,7 +343,7 @@ class URLReaderTest extends JDFTestCaseBase
 	{
 		URLReader.clearHosts();
 		URLReader.addHost("localhost");
-		URLReader.setPackMethod(null);
+		URLReader.setPackMethod(EPackage.NONE);
 		final URLReader reader = new URLReader("schema/BarcodeDetails.jdf");
 		final ZipReader zip = new ZipReader(sm_dirTestData + "schema.zip");
 		reader.setZipReader(zip);
