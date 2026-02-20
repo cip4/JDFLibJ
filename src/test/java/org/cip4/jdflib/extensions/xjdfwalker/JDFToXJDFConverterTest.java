@@ -73,6 +73,7 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumPolarity;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
+import org.cip4.jdflib.auto.JDFAutoUsageCounter.EScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -3490,6 +3491,25 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		assertEquals(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@ISOPaperSubstrate", null), "PS1");
 		assertNull(xjdfc.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/Media/@Grade", null));
 		writeRoundTripX(xjdfc, "MediaGrade", EnumValidationLevel.Incomplete);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testUsageCounter()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.DigitalPrinting);
+		final JDFUsageCounter uc = (JDFUsageCounter) n.addResource(ElementName.USAGECOUNTER, EnumUsage.Input);
+		uc.setCounterID("cid");
+		uc.setScope(EScope.Job);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper xjdfc = conv.convertToXJDF(n);
+		assertEquals("cid", xjdfc.getSet(ElementName.USAGECOUNTER, 0).getResource(0).getExternalID());
+
+		final JDFNode n2 = (JDFNode) writeRoundTripX(xjdfc, "UsageCounter", EnumValidationLevel.Incomplete);
+		assertEquals("cid", ((JDFUsageCounter) n2.getResource(ElementName.USAGECOUNTER)).getCounterID());
 	}
 
 	/**

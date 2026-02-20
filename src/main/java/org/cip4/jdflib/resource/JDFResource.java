@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -177,11 +177,13 @@ public class JDFResource extends JDFElement
 	public class PartitionGetter extends org.cip4.jdflib.resource.PartitionGetter
 	{
 
+		@Deprecated
 		public PartitionGetter()
 		{
 			super(JDFResource.this);
 		}
 
+		@Deprecated
 		@Override
 		public String toString()
 		{
@@ -189,6 +191,7 @@ public class JDFResource extends JDFElement
 			return super.toString();
 		}
 
+		@Deprecated
 		@Override
 		public boolean isFollowIdentical()
 		{
@@ -196,6 +199,7 @@ public class JDFResource extends JDFElement
 			return super.isFollowIdentical();
 		}
 
+		@Deprecated
 		@Override
 		public void setFollowIdentical(final boolean followIdentical)
 		{
@@ -203,6 +207,7 @@ public class JDFResource extends JDFElement
 			super.setFollowIdentical(followIdentical);
 		}
 
+		@Deprecated
 		@Override
 		public VElement getPartitionVector(final VJDFAttributeMap vm, final EnumPartUsage partUsage)
 		{
@@ -210,6 +215,7 @@ public class JDFResource extends JDFElement
 			return super.getPartitionVector(vm, partUsage);
 		}
 
+		@Deprecated
 		@Override
 		public VJDFAttributeMap getPartitionMaps(final VJDFAttributeMap vm, final EnumPartUsage partUsage)
 		{
@@ -217,6 +223,7 @@ public class JDFResource extends JDFElement
 			return super.getPartitionMaps(vm, partUsage);
 		}
 
+		@Deprecated
 		@Override
 		public VElement getPartitionVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
 		{
@@ -224,6 +231,7 @@ public class JDFResource extends JDFElement
 			return super.getPartitionVector(m, partUsage);
 		}
 
+		@Deprecated
 		@Override
 		public JDFResource getPartition(final JDFAttributeMap m, final EnumPartUsage partUsage)
 		{
@@ -231,6 +239,7 @@ public class JDFResource extends JDFElement
 			return super.getPartition(m, partUsage);
 		}
 
+		@Deprecated
 		@Override
 		protected JDFResource getDeepPart(final JDFAttributeMap m, final EnumPartUsage partUsage)
 		{
@@ -238,12 +247,14 @@ public class JDFResource extends JDFElement
 			return super.getDeepPart(m, partUsage);
 		}
 
+		@Deprecated
 		@Override
 		public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
 		{
 			return super.getCreatePartition(partMap, vPartKeys);
 		}
 
+		@Deprecated
 		@Override
 		public JDFResource addPartition(final EnumPartIDKey partType, final String value)
 		{
@@ -251,6 +262,7 @@ public class JDFResource extends JDFElement
 			return super.addPartition(partType, value);
 		}
 
+		@Deprecated
 		@Override
 		public void setStrictPartVersion(final boolean strictPartVersion)
 		{
@@ -1120,8 +1132,8 @@ public class JDFResource extends JDFElement
 
 		public boolean isXJDF()
 		{
-			return EnumPartIDKey.BinderySignatureID.equals(this) || EnumPartIDKey.ContactType.equals(this) || EnumPartIDKey.Metadata.equals(this)
-					|| EnumPartIDKey.Product.equals(this) || EnumPartIDKey.ProductPart.equals(this);
+			return this.equals(EnumPartIDKey.BinderySignatureID) || this.equals(EnumPartIDKey.ContactType) || this.equals(EnumPartIDKey.Metadata)
+					|| this.equals(EnumPartIDKey.Product) || this.equals(EnumPartIDKey.ProductPart);
 		}
 
 		/**
@@ -1688,7 +1700,7 @@ public class JDFResource extends JDFElement
 			if ((parentNode instanceof JDFNode) || (parentNode instanceof JDFJMF))
 			{
 				// 100525 return resource root, even if it is incorrectly placed
-				return (elem instanceof JDFResource) ? (JDFResource) elem : null;
+				return (elem instanceof final JDFResource j) ? j : null;
 			}
 
 			if ((elem instanceof JDFResource) && !(parentNode instanceof JDFResource))
@@ -1857,9 +1869,8 @@ public class JDFResource extends JDFElement
 
 		for (final KElement kElem : v)
 		{
-			if (kElem instanceof JDFResourceLink)
+			if (kElem instanceof final JDFResourceLink l)
 			{
-				final JDFResourceLink l = (JDFResourceLink) kElem;
 				if (JDFResourceLink.EnumUsage.Input.equals(l.getUsage()) != bCreate)
 				{
 					final JDFPool pool = l.getPool();
@@ -3060,9 +3071,9 @@ public class JDFResource extends JDFElement
 		final VString v = getPartIDKeys();
 		if (v != null)
 		{
-			for (int i = 0; i < v.size(); i++)
+			for (final String element : v)
 			{
-				removeAttribute(v.get(i));
+				removeAttribute(element);
 			}
 		}
 		removeAttribute(AttributeName.LOCKED);
@@ -3103,7 +3114,7 @@ public class JDFResource extends JDFElement
 	{
 		if (super.hasAttribute(attrib, nameSpaceURI, false))
 		{
-			if ((nameSpaceURI == null) || nameSpaceURI.equals(JDFConstants.EMPTYSTRING))
+			if ((nameSpaceURI == null) || JDFConstants.EMPTYSTRING.equals(nameSpaceURI))
 			{
 				removeAttribute(attrib);
 			}
@@ -3663,18 +3674,6 @@ public class JDFResource extends JDFElement
 		 *
 		 * @param bCollapseToNode   only collapse redundant attributes and elements that pre-exist in the nodes
 		 * @param bCollapseElements if true, collapse elements, else only collapse attributes
-		 * @default Collapse(false)
-		 */
-		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
-		{
-			collapse(bCollapseToNode, bCollapseElements, null);
-		}
-
-		/**
-		 * collapse all redundant attributes and elements
-		 *
-		 * @param bCollapseToNode   only collapse redundant attributes and elements that pre-exist in the nodes
-		 * @param bCollapseElements if true, collapse elements, else only collapse attributes
 		 * @param keepFilter        TODO
 		 * @default Collapse(false)
 		 */
@@ -4210,7 +4209,7 @@ public class JDFResource extends JDFElement
 						final int index = vTest.indexOf(kidMap);
 						if (index >= 0)
 						{
-							vTmp.add(Integer.valueOf(index));
+							vTmp.add(index);
 						}
 						else
 						{
@@ -4233,7 +4232,7 @@ public class JDFResource extends JDFElement
 							{
 								if ((vTmp.get(kk)).intValue() > mymax)
 								{
-									mymax = (vTmp.get(kk)).intValue();
+									mymax = (vTmp.get(kk));
 									posMax = kk;
 								}
 							}
@@ -4281,7 +4280,7 @@ public class JDFResource extends JDFElement
 		String preFix = id;
 		final VString siblingIDs = getResourcePool().getResIds();
 
-		if (postFix.substring(0, "_old_".length()).equals("_old_"))
+		if ("_old_".equals(postFix.substring(0, "_old_".length())))
 		{
 			preFix = id.substring(0, id.length() - 8);
 		}
@@ -4333,7 +4332,7 @@ public class JDFResource extends JDFElement
 	private String makeID(final String s, final int numberOfDigits, final int value)
 	{
 		String result = s;
-		final Integer myValue = Integer.valueOf(value);
+		final Integer myValue = value;
 
 		final int numberOfValueDigits = myValue.toString().length();
 
@@ -4382,7 +4381,7 @@ public class JDFResource extends JDFElement
 
 		// special handling for NI and CI as resources
 		final String locName = parentNode.getLocalName();
-		if (locName.equals(ElementName.NODEINFO) || locName.equals(ElementName.CUSTOMERINFO))
+		if (ElementName.NODEINFO.equals(locName) || ElementName.CUSTOMERINFO.equals(locName))
 		{
 			if (getResourcePool() != null)
 			{
@@ -4669,9 +4668,8 @@ public class JDFResource extends JDFElement
 		{
 			// no direct kids, check parents
 			final KElement n = getParentNode_KElement();
-			if (n != null && n.getNodeName().equals(getNodeName()) && (n instanceof JDFResource))
+			if (n != null && n.getNodeName().equals(getNodeName()) && (n instanceof final JDFResource r))
 			{
-				final JDFResource r = (JDFResource) n;
 				// recurse into parents
 				final VElement v2 = r.getChildElementVector(element, nameSpaceURI, mAttrib, bAnd, maxSize, bResolveTarget);
 				final Set<String> nodeNames = v.getElementNameSet(false);
@@ -4772,9 +4770,9 @@ public class JDFResource extends JDFElement
 			}
 
 			// Check found part ID key.
-			if ((strPartIDKey != null) && ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES))
-					|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX))
-					|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))))
+			if ((strPartIDKey != null) && ((JDFConstants.PARTIDKEY_DOCINDEX.equals(strPartIDKey)) || (JDFConstants.PARTIDKEY_DOCCOPIES.equals(strPartIDKey))
+					|| (JDFConstants.PARTIDKEY_DOCRUNINDEX.equals(strPartIDKey)) || (JDFConstants.PARTIDKEY_DOCSHEETINDEX.equals(strPartIDKey))
+					|| (JDFConstants.PARTIDKEY_RUNINDEX.equals(strPartIDKey)) || (JDFConstants.PARTIDKEY_SHEETINDEX.equals(strPartIDKey))))
 			{
 				return false;
 			}
@@ -5848,7 +5846,7 @@ public class JDFResource extends JDFElement
 		final String localLock = getAttribute_KElement(AttributeName.LOCKED, null, null);
 		if (localLock != null)
 		{
-			final boolean b = localLock.equalsIgnoreCase(JDFConstants.TRUE);
+			final boolean b = JDFConstants.TRUE.equalsIgnoreCase(localLock);
 			if (b == value)
 			{
 				return; // don't reset to current value - NOP
@@ -7414,7 +7412,7 @@ public class JDFResource extends JDFElement
 
 		final boolean bLeaf = isLeaf();
 		final EnumPartUsage partUsage = getResourceRoot().getPartUsage();
-		final boolean bForceIncomplete = !(partUsage == EnumPartUsage.Implicit) || (partUsage == EnumPartUsage.Sparse);
+		final boolean bForceIncomplete = (partUsage != EnumPartUsage.Implicit) || (partUsage == EnumPartUsage.Sparse);
 		if (bLeaf)
 		{
 			if (!super.isValid(level))
@@ -7619,7 +7617,13 @@ public class JDFResource extends JDFElement
 		{
 			return true;
 		}
-		return getLocalName().equals(namedResLink);
+		boolean ok = getLocalName().equals(namedResLink) || getNodeName().equals(namedResLink);
+		if (!ok)
+		{
+			final String pidCheck = StringUtil.token(namedResLink, 1, JDFConstants.COLON);
+			ok = !StringUtil.isEmpty(pidCheck) && pidCheck.equals(getProductID());
+		}
+		return ok;
 	}
 
 	/**

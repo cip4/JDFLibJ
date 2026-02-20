@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1192,6 +1192,8 @@ class JDFResourceLinkTest extends JDFTestCaseBase
 		assertFalse(link.matchesString("Output"));
 		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + "Link"));
 		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + ":Plate"));
+		r.setProductID("P1");
+		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS + ":P1"));
 	}
 
 	/**

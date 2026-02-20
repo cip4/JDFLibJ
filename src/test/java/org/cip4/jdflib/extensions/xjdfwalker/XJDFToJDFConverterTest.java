@@ -105,7 +105,6 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.PartitionGetter;
 import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntent;
-import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.intent.JDFMediaIntent;
@@ -178,6 +177,26 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(h);
 		final JDFNode jdf = d.getJDFRoot();
 		assertEquals("d1", jdf.getResource(ElementName.LAYOUT).getDescriptiveName());
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testUsageCounter()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.DigitalPrinting);
+		final JDFUsageCounter uc = (JDFUsageCounter) n.addResource(ElementName.USAGECOUNTER, EnumUsage.Input);
+		uc.setCounterID("cid");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final XJDFHelper xjdfc = conv.convertToXJDF(n);
+		assertEquals("cid", xjdfc.getSet(ElementName.USAGECOUNTER, 0).getResource(0).getExternalID());
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdfc);
+
+		assertEquals("cid", ((JDFUsageCounter) d.getJDFRoot().getResource(ElementName.USAGECOUNTER)).getCounterID());
 	}
 
 	/**
@@ -695,7 +714,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		h.setTypes(EnumType.ImageSetting.getName());
 		final ResourceHelper partition = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
 		partition.setExternalID("ws1");
-		final JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		partition.getResource();
 
 		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
 		final JDFDoc docjdf = conv.convert(h);
@@ -2223,7 +2242,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final XJDFHelper h = new XJDFHelper("j1", "p1", null);
 		h.setVersion(EnumVersion.Version_2_1);
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
-		final JDFDoc d = xCon.convert(h);
+		xCon.convert(h);
 		assertEquals(EnumVersion.Version_2_1.getJDFVersion(), xCon.getVersion());
 
 	}
@@ -2468,7 +2487,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(h);
 		final JDFNode parent = d.getJDFRoot();
 		final JDFDeliveryIntent di = (JDFDeliveryIntent) parent.getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
-		final JDFDropIntent dri = di.getDropIntent(0);
+		di.getDropIntent(0);
 	}
 
 	/**
