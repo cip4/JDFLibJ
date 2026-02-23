@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -61,10 +61,7 @@ import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * Description: This class represents a vector of JDFAttributeMaps
- *
- *
  */
 public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 {
@@ -134,7 +131,6 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	}
 
 	/**
-	 *
 	 * @param v
 	 * @return
 	 */
@@ -144,7 +140,6 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	}
 
 	/**
-	 *
 	 * @param partMap
 	 * @return
 	 */
@@ -165,7 +160,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	}
 
 	/**
-	 * @param sepMap the separator between maps
+	 * @param sepMap   the separator between maps
 	 * @param sepEntry the separator between map entries
 	 * @return the string representation
 	 */
@@ -187,7 +182,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	}
 
 	/**
-	 * @param strKey the attribute to get values from
+	 * @param strKey  the attribute to get values from
 	 * @param bUnique if true, ensure unique vector, else the vector corresponds to the vector of values
 	 * @return the Vector of all values
 	 */
@@ -319,7 +314,9 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 		for (final JDFAttributeMap map : this)
 		{
 			if (map.containsKey(key))
+			{
 				return true;
+			}
 		}
 		return false;
 	}
@@ -508,7 +505,6 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	}
 
 	/**
-	 *
 	 * @param map map to append
 	 */
 	public void appendUnique(final JDFAttributeMap map)
@@ -566,8 +562,8 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	/**
 	 * Method overlapMap. get a copy of this with all matching maps the maps are NOT cloned
 	 *
-	 * @param key the key to match
-	 * @param regExp the simplified regexp
+	 * @param key        the key to match
+	 * @param regExp     the simplified regexp
 	 * @param ignoreCase duh...
 	 * @return a new VJDFAttributemap with the matching entries of this - never null (may be safely daisy-chained)
 	 */
@@ -589,7 +585,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 *
 	 * @param vMap the map to check against
 	 */
-	public JDFAttributeMapArray overlapMap(final JDFAttributeMapArray vMap)
+	public JDFAttributeMapArray overlapMap(final Collection<JDFAttributeMap> vMap)
 	{
 		if (vMap != null)
 		{
@@ -693,7 +689,6 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	 * If input is not of type VJDFAttributeMap, result of superclasses equals method is returned.
 	 *
 	 * @param other in this case VJDFAttributeMap to compare
-	 *
 	 * @return boolean - true if the maps are equal, otherwise false
 	 */
 	@Override
@@ -732,7 +727,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	/**
 	 * replace all maps in this with n maps that have the values strKey, vsValues
 	 *
-	 * @param strKey the new key to add
+	 * @param strKey   the new key to add
 	 * @param vsValues String of values
 	 */
 	public void extendMap(final String strKey, final Collection<String> vsValues)
@@ -765,7 +760,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	/**
 	 * put the key value pair into all entries
 	 *
-	 * @param key the key to set - may be either String or Enum
+	 * @param key   the key to set - may be either String or Enum
 	 * @param value the value to set - may be either String or Enum
 	 * @throws IllegalArgumentException if key or value have the wrong type
 	 */
@@ -823,7 +818,7 @@ public class JDFAttributeMapArray extends ArrayList<JDFAttributeMap>
 	/**
 	 * put the key value pair into all entries; if no entries are there, create exactly one entry with the given key value pair
 	 *
-	 * @param key the key to set
+	 * @param key   the key to set
 	 * @param value the value to set
 	 */
 	public void put(final String key, final String value)

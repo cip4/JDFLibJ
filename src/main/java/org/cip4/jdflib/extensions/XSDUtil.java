@@ -39,10 +39,13 @@ package org.cip4.jdflib.extensions;
 import java.util.List;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.JDFElement.EVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.extensions.XSDConstants.eAttributeUse;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 public class XSDUtil
@@ -50,6 +53,21 @@ public class XSDUtil
 	private XSDUtil()
 	{
 		super();
+	}
+
+	private static final String SCHEMA = "/schema/";
+	private static final String XJDF_XSD = "/xjdf.xsd";
+
+	public static XMLDoc getLocalXJDFSchemaDoc(EVersion v)
+	{
+		if (v == null)
+		{
+			v = XJDFHelper.getEDefaultVersion();
+		}
+		v = JavaEnumUtil.max(v, EVersion.Version_2_0);
+		v = JavaEnumUtil.min(v, EVersion.Version_2_3);
+		final String path = SCHEMA + v + XJDF_XSD;
+		return XMLDoc.parseStream(XSDUtil.class.getResourceAsStream(path));
 	}
 
 	/**
