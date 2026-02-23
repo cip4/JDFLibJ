@@ -201,7 +201,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		 */
 		public EnumUsage invert()
 		{
-			return Output.equals(this) ? Input : Output;
+			return this.equals(Output) ? Input : Output;
 		}
 
 		/**
@@ -209,7 +209,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		 */
 		public boolean isInput()
 		{
-			return Input.equals(this);
+			return this.equals(Input);
 		}
 	}
 
@@ -415,12 +415,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	public JDFResource getLinkRoot()
 	{
 		final JDFResource eLink = super.getLinkRoot(null);
-		if (eLink != null)
+		if ((eLink != null) && !(eLink.getNodeName().equals(getLinkedResourceName())))
 		{
-			if (!(eLink.getNodeName().equals(getLinkedResourceName())))
-			{
-				return null;
-			}
+			return null;
 		}
 		return eLink;
 	}
@@ -526,7 +523,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	public void setStatus(final JDFResource.EResStatus s)
 	{
 		final VElement targets = getTargetVector(-1);
-		for (KElement t : targets)
+		for (final KElement t : targets)
 		{
 			((JDFResource) t).setResStatus(s, true);
 		}
@@ -753,8 +750,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			}
 		}
 		final VElement v = getMapTargetVector(vmParts, -1, true);
-		final JDFResource commonAncestor = (JDFResource) v.getCommonAncestor();
-		return commonAncestor;
+		return (JDFResource) v.getCommonAncestor();
 	}
 
 	/**
@@ -1000,17 +996,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 *                        This ResourceLink must always be the full ResourceLink, i.e. Part Elements are not allowed as parameters.
 	 * @return true, if the resource link selects the resource
 	 */
+	@Deprecated
 	public boolean isResourceSelected(final JDFResource resourceToCheck)
 	{
-		// For the decision, compare the leaves of the Resource with the Leaves
-		// pointed to by the
-		// resource link. If all leaves of the Resource are pointed to by the
-		// ResourceLink, then the
-		// ResourceLink selects the Resource (partition). This method checks if
-		// the leaves
-		// represented by the
-		// Resource are a subset of the leaves represented by the ResourceLink
-		boolean b_ResurceIsSelected = false;
 
 		// get the resource leaves from resource and resource link
 		final VElement resourceLeavesFromResource = resourceToCheck.getLeaves(false);
@@ -1059,9 +1047,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			i_CurrentLeafFromResource++;
 		}
 
-		b_ResurceIsSelected = b_SelectionIsPossible;
-
-		return b_ResurceIsSelected;
+		return b_SelectionIsPossible;
 	}
 
 	/**
@@ -1136,9 +1122,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			{
 				final JDFResource targ = (JDFResource) e;
 				final VElement leaves = targ.getLeaves(false);
-				for (int k = 0; k < leaves.size(); k++)
+				for (final Object element : leaves)
 				{
-					JDFResource leaf = (JDFResource) leaves.get(k);
+					JDFResource leaf = (JDFResource) element;
 					while (!leaf.getPartMap().overlapMap(vmParts.elementAt(i)) && !leaf.isResourceRoot())
 					{
 						leaf = (JDFResource) leaf.getParentNode();
@@ -1180,9 +1166,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 
 		}
 
-		s = getLinkedResourceName() + JDFConstants.COLON + s;
-
-		return s;
+		return getLinkedResourceName() + JDFConstants.COLON + s;
 	}
 
 	/**
@@ -1295,12 +1279,9 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	{
 		boolean fIsImplementation = false;
 		final JDFResource linkRoot = getLinkRoot();
-		if (linkRoot != null)
+		if ((linkRoot != null) && (linkRoot.getResourceClass() == JDFResource.EnumResourceClass.Implementation))
 		{
-			if (linkRoot.getResourceClass() == JDFResource.EnumResourceClass.Implementation)
-			{
-				fIsImplementation = true;
-			}
+			fIsImplementation = true;
 		}
 		return fIsImplementation;
 	}
@@ -1422,9 +1403,8 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		attribs.add(AttributeName.AMOUNT);
 		attribs.add(AttributeName.ACTUALAMOUNT);
 
-		for (int j = 0; j < attribs.size(); j++)
+		for (final String attribName : attribs)
 		{
-			final String attribName = attribs.get(j);
 			if (hasAttribute(attribName))
 			{
 				final String att = getAttribute(attribName, null, null);
@@ -1622,7 +1602,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 					// don't count ParAmount elements with multiple parts more than once
 					if (!hsDone.contains(pa))
 					{
-						double delta = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2);
+						double delta = Math.max(0, AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2));
 						if (m2.get(AttributeName.CONDITION) == null)
 						{
 							final JDFAttributeMap m2Good = m2.clone();
@@ -1640,7 +1620,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 			}
 			if (d == 0)
 			{
-				d = AmountPoolHelper.getAmountPoolDouble(this, attName, mPart);
+				d = Math.max(0, AmountPoolHelper.getAmountPoolDouble(this, attName, mPart));
 			}
 
 		}
@@ -2040,7 +2020,7 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		bMatch = bMatch || namedResLink.equals(getNodeName());
 		bMatch = bMatch || namedResLink.equals(getrRef());
 		bMatch = bMatch || namedResLink.equals(getAttribute(AttributeName.USAGE));
-		bMatch = bMatch || namedResLink.equals(getLinkedResourceName() + JDFConstants.COLON + getAttribute(AttributeName.USAGE));
+		bMatch = bMatch || (getLinkedResourceName() + JDFConstants.COLON + getAttribute(AttributeName.USAGE)).equals(namedResLink);
 
 		if (!bMatch && StringUtil.token(namedResLink, 0, JDFConstants.COLON).equals(getLinkedResourceName()))
 		{

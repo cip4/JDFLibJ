@@ -2005,7 +2005,7 @@ public class StatusCounter
 	 */
 	public void setPercentComplete(final double percent)
 	{
-		percentComplete = Math.min(100, percent);
+		percentComplete = Math.max(0, Math.min(100, percent));
 	}
 
 	/**
