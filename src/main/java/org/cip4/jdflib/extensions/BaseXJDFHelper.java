@@ -44,14 +44,12 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFElement.EVersion;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.EnumUtil;
 
 /**
  * @author rainer prosi
@@ -109,20 +107,12 @@ public abstract class BaseXJDFHelper
 	}
 
 	protected final static Log log = LogFactory.getLog(BaseXJDFHelper.class);
-	private static EVersion defaultVersion = EVersion.Version_2_2;
+	private static EnumVersion defaultVersion = EnumVersion.Version_2_2;
 
 	/**
 	 * @return the defaultVersion
 	 */
 	public static EnumVersion getDefaultVersion()
-	{
-		return (EnumVersion) EnumUtil.getEnumIgnoreCase(EnumVersion.class, getEDefaultVersion());
-	}
-
-	/**
-	 * @return the defaultVersion
-	 */
-	public static EVersion getEDefaultVersion()
 	{
 		return defaultVersion;
 	}
@@ -130,17 +120,9 @@ public abstract class BaseXJDFHelper
 	/**
 	 * @param defaultVersion the defaultVersion to set
 	 */
-	public static void setDefaultVersion(final EVersion defaultVersion)
-	{
-		BaseXJDFHelper.defaultVersion = defaultVersion;
-	}
-
-	/**
-	 * @param defaultVersion the defaultVersion to set
-	 */
 	public static void setDefaultVersion(final EnumVersion defaultVersion)
 	{
-		BaseXJDFHelper.defaultVersion = EnumUtil.getJavaEnum(defaultVersion);
+		BaseXJDFHelper.defaultVersion = defaultVersion;
 	}
 
 	/**

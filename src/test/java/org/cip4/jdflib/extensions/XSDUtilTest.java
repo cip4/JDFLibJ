@@ -14,7 +14,7 @@ class XSDUtilTest
 	{
 		final XMLDoc localXJDFSchemaDoc = XSDUtil.getLocalXJDFSchemaDoc(null);
 		assertNotNull(localXJDFSchemaDoc);
-		final XMLDoc docdef = XSDUtil.getLocalXJDFSchemaDoc(BaseXJDFHelper.getEDefaultVersion());
+		final XMLDoc docdef = XSDUtil.getLocalXJDFSchemaDoc(BaseXJDFHelper.getDefaultVersion());
 		assertEquals(localXJDFSchemaDoc.toXML(), docdef.toXML());
 	}
 
