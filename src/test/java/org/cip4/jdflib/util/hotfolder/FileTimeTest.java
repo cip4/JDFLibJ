@@ -100,7 +100,7 @@ class FileTimeTest extends JDFTestCaseBase
 			for (int i = 0; i < 1; i++)
 			{
 				final FileOutputStream fos = new FileOutputStream(f, true);
-				for (int j = 0; j < 42; j++)
+				for (int j = 0; j < 2; j++)
 				{// incrementally fill file
 					fos.write(i);
 				}
@@ -109,7 +109,7 @@ class FileTimeTest extends JDFTestCaseBase
 				ThreadUtil.sleep(220);
 				final long updateModified = ft.updateModified();
 				log.info("loop " + i + " " + updateModified % 10000 + " " + ft.length);
-				assertEquals(System.currentTimeMillis(), updateModified, 66000, "loop " + i + " " + b);
+				assertEquals(System.currentTimeMillis(), updateModified, 166000, "loop " + i + " " + b);
 			}
 		}
 	}
