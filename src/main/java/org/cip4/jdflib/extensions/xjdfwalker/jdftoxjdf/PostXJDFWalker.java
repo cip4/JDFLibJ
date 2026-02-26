@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
@@ -272,6 +273,28 @@ class PostXJDFWalker extends BaseElementWalker
 			e.setAttribute(name, newToken);
 		}
 
+		private static Collection<String> getNormalize()
+		{
+			final HashSet<String> set = new HashSet<>();
+			set.add(AttributeName.JOBID);
+			set.add(AttributeName.RELATEDJOBID);
+			set.add(AttributeName.RELATEDJOBPARTID);
+			set.add(AttributeName.RELATEDPROJECTID);
+			set.add(AttributeName.PROJECTID);
+			set.add(AttributeName.JOBPARTID);
+			set.add(AttributeName.WORKSTEPID);
+			set.add(AttributeName.SHEETNAME);
+			set.add(AttributeName.STATIONNAME);
+			set.add(AttributeName.PIPEID);
+			set.add(AttributeName.DROPID);
+			set.add(AttributeName.PUNCHTYPE);
+
+			set.add(XJDFConstants.ExternalID);
+			return set;
+		}
+
+		private final static Collection<String> nmTokenStrings = getNormalize();
+
 		/**
 		 * rename hook
 		 *
@@ -279,7 +302,16 @@ class PostXJDFWalker extends BaseElementWalker
 		 */
 		void updateAttributes(final KElement xjdf)
 		{
-			// NOP
+			final JDFAttributeMap map = xjdf.getAttributeMap();
+			for (final Entry<String, String> e : map.entrySet())
+			{
+				if (nmTokenStrings.contains(e.getKey()) && !StringUtil.isNMTOKEN(e.getValue()))
+				{
+					final String newVal = StringUtil.replaceString(StringUtil.normalize(e.getValue()), JDFConstants.BLANK, JDFConstants.UNDERSCORE);
+					log.info("updating NMTOKEN " + xjdf.getNodeName() + "/@" + e.getKey() + " from: '" + e.getValue() + "' to '" + newVal + "'");
+					xjdf.setAttribute(e.getKey(), newVal);
+				}
+			}
 		}
 
 		/**
@@ -1445,8 +1477,7 @@ class PostXJDFWalker extends BaseElementWalker
 			moveToSet(xjdf);
 			final ResourceHelper rh = new ResourceHelper(xjdf);
 			moveAmountToPool(rh);
-			final KElement ret = super.walk(xjdf, dummy);
-			return ret;
+			return super.walk(xjdf, dummy);
 		}
 
 		private void moveAmountToPool(final ResourceHelper rh)

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,11 +39,13 @@ package org.cip4.jdflib.extensions.xjdfwalker.xjdftojdf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.MessageHelper;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -54,9 +56,10 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.junit.jupiter.api.Test;
 
-class XJDFPrepWalkerTest
+class XJDFPrepWalkerTest extends JDFTestCaseBase
 {
 
 	/**
@@ -102,6 +105,31 @@ class XJDFPrepWalkerTest
 		w.convert();
 		assertEquals(EnumVersion.Version_2_0, h.getVersion());
 
+	}
+
+	/**
+	 * @return
+	 */
+	@Test
+	void testRunListListMulti()
+	{
+		final XJDFHelper xjdf = new XJDFHelper("j1", null);
+		xjdf.setTypes("ImageSetting");
+		final SetHelper rs = xjdf.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		final ResourceHelper r1 = rs.appendPartition(AttributeName.RUN, "r1", true);
+		r1.appendPartMap(new JDFAttributeMap(AttributeName.RUN, "r11"));
+		final JDFRunList rl1 = (JDFRunList) r1.getResource();
+		rl1.setFileSpecURL("file:r1.pdf");
+		rl1.setAttribute(AttributeName.PAGES, "0 0");
+		final ResourceHelper r2 = rs.appendPartition(AttributeName.RUN, "r2", true);
+		r2.appendPartMap(new JDFAttributeMap(AttributeName.RUN, "r21"));
+		final JDFRunList rl2 = (JDFRunList) r2.getResource();
+		rl2.setFileSpecURL("file:r2.pdf");
+		rl2.setAttribute(AttributeName.PAGES, "0 0");
+
+		final XJDFPrepWalker w = new XJDFPrepWalker(xjdf);
+		w.convert();
+		assertEquals(4, rs.getResourceList().size());
 	}
 
 	/**

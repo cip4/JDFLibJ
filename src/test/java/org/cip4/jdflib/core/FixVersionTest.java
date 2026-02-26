@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -315,9 +315,12 @@ class FixVersionTest extends JDFTestCaseBase
 		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
 		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
 		final JDFRunList rlr = rl.addRun("foo,pdf", 0, 0);
+		final JDFRunList rlr2 = rl.addRun("foo2.pdf", 0, 0);
 		rlr.setRun("a b");
+		rlr2.setRun("a b ");
 		f1.convert(n);
 		assertEquals("a_b", rlr.getRun());
+		assertEquals("a_b", rlr2.getRun());
 
 	}
 

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -62,7 +62,6 @@ import org.cip4.jdflib.util.StringUtil;
  * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
  *
  * @author prosirai
- *
  */
 public class WalkElement extends WalkAnyElement
 {
@@ -77,7 +76,7 @@ public class WalkElement extends WalkAnyElement
 
 	/**
 	 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-	 * @param e1 - the element to track
+	 * @param e1        - the element to track
 	 * @param trackElem - always null
 	 * @return the element to continue walking
 	 */
@@ -236,7 +235,8 @@ public class WalkElement extends WalkAnyElement
 		{
 			el.setAttribute(key, fixVersion.version, null);
 		}
-		else if (fixVersion.version != null && AttributeName.MAXVERSION.equals(key) && EnumUtil.aLessEqualsThanB(EnumVersion.getEnum(value), fixVersion.version))
+		else if (fixVersion.version != null && AttributeName.MAXVERSION.equals(key)
+				&& EnumUtil.aLessEqualsThanB(EnumVersion.getEnum(value), fixVersion.version))
 		{
 			el.setAttribute(key, fixVersion.version, null);
 		}
@@ -266,7 +266,7 @@ public class WalkElement extends WalkAnyElement
 	{
 		if (!StringUtil.isNMTOKEN(value))
 		{
-			final String newVal = StringUtil.replaceCharSet(value, " ", "_", 0);
+			final String newVal = StringUtil.replaceCharSet(StringUtil.normalize(value), " ", "_", 0);
 			if (!StringUtil.equals(newVal, value) && StringUtil.isNMTOKEN(newVal))
 			{
 				el.setAttribute(key, newVal);
@@ -285,19 +285,16 @@ public class WalkElement extends WalkAnyElement
 	}
 
 	/**
-	 *
 	 * @param el
 	 * @param key
 	 * @param value
 	 */
 	protected void fixSourceObjects(final JDFElement el, final String key, final String value)
 	{
-		if (AttributeName.SOURCEOBJECTS.equals(key) && EnumUtil.aLessEqualsThanB(EnumVersion.Version_1_5, fixVersion.version))
+		if ((AttributeName.SOURCEOBJECTS.equals(key) && EnumUtil.aLessEqualsThanB(EnumVersion.Version_1_5, fixVersion.version))
+				&& StringUtil.hasToken(value, "All", null, 0))
 		{
-			if (StringUtil.hasToken(value, "All", null, 0))
-			{
-				el.removeAttribute_KElement(key, null);
-			}
+			el.removeAttribute_KElement(key, null);
 		}
 	}
 

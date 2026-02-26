@@ -1865,6 +1865,19 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testJobIDNMTOKEN()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setJobID(" a b");
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjdf = conv.makeNewJDF(n, null);
+		assertEquals("a_b", xjdf.getAttribute(AttributeName.JOBID));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testNodeInfoEmployee()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();

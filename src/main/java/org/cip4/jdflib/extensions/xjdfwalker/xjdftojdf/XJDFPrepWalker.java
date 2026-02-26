@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -176,14 +177,15 @@ class XJDFPrepWalker extends BaseElementWalker
 					{
 						final String ctypeString = cTypes.getString("_", null, null);
 						if (!ElementName.EMPLOYEE.equals(ctypeString))
+						{
 							vMap.put(AttributeName.OPTION, ctypeString);
+						}
 					}
 					vMap.unify();
 					contactHelper.setPartMapVector(vMap);
 				}
 			}
-			final KElement ret = super.walk(e, trackElem);
-			return ret;
+			return super.walk(e, trackElem);
 		}
 
 		/**
@@ -339,7 +341,9 @@ class XJDFPrepWalker extends BaseElementWalker
 							mo = po.appendElement(ElementName.MARKOBJECT);
 						}
 						for (final KElement kid2 : kids)
+						{
 							mo.moveElement(kid2, null);
+						}
 						final KElement dm = mo.appendElement(ElementName.DEVICEMARK);
 						dm.setAttributes(xjdf);
 						xjdf.deleteNode();
@@ -452,8 +456,8 @@ class XJDFPrepWalker extends BaseElementWalker
 		public KElement walk(final KElement xjdf, final KElement dummy)
 		{
 			final SetHelper sh = SetHelper.getHelper(xjdf);
-			if (ContainerUtil.containsAny(sh.getXJDF().getTypes(), new StringArray("ImpositionPreparation Stripping")) || xjdf.getXPathElement("Resource/Layout/Position") != null
-					|| xjdf.getXPathElement("Resource/Layout/FileSpec") != null)
+			if (ContainerUtil.containsAny(sh.getXJDF().getTypes(), new StringArray("ImpositionPreparation Stripping"))
+					|| xjdf.getXPathElement("Resource/Layout/Position") != null || xjdf.getXPathElement("Resource/Layout/FileSpec") != null)
 			{
 				moveToStrippingParams(xjdf, sh);
 				if (sh.isEmpty())
@@ -490,8 +494,8 @@ class XJDFPrepWalker extends BaseElementWalker
 
 		boolean isStripping(final ResourceHelper loRes)
 		{
-			return loRes.getPartKey(AttributeName.SIDE) == null && !VJDFAttributeMap.isEmpty(loRes.getPartMapList()) || loRes.getXPathElement("Layout/Position") != null
-					|| loRes.getXPathElement("Layout/FileSpec") != null;
+			return loRes.getPartKey(AttributeName.SIDE) == null && !VJDFAttributeMap.isEmpty(loRes.getPartMapList())
+					|| loRes.getXPathElement("Layout/Position") != null || loRes.getXPathElement("Layout/FileSpec") != null;
 		}
 
 	}
@@ -528,6 +532,58 @@ class XJDFPrepWalker extends BaseElementWalker
 				return null;
 			}
 			return super.walk(xjdf, dummy);
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 */
+	protected class WalkNoIdenticalSet extends WalkElement
+	{
+
+		@Override
+		public boolean matches(final KElement e)
+		{
+			return SetHelper.isSet(e) && ElementName.RUNLIST.equals(SetHelper.getResourceName(e));
+		}
+
+		public WalkNoIdenticalSet()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement xjdf, final KElement dummy)
+		{
+			final SetHelper sh = SetHelper.getHelper(xjdf);
+			if (sh != null)
+			{
+				splitIdentical(sh);
+			}
+			return super.walk(xjdf, dummy);
+		}
+
+		void splitIdentical(SetHelper sh)
+		{
+			for (final ResourceHelper rh : sh.getResourceList())
+			{
+				final List<JDFAttributeMap> parts = rh.getPartMapList();
+				if (ContainerUtil.size(parts) > 1)
+				{
+					int i = 0;
+					for (final JDFAttributeMap part : parts)
+					{
+						final ResourceHelper nrh = (i++ == 0) ? rh : rh.clonePartition();
+						nrh.setPartMap(part);
+					}
+				}
+			}
+
 		}
 
 	}

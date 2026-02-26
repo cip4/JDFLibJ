@@ -53,9 +53,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.Node;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
 public class WalkElement extends BaseWalker
 {
@@ -76,7 +74,6 @@ public class WalkElement extends BaseWalker
 	 * fills this into the factory
 	 *
 	 * @param parent
-	 *
 	 */
 	public void setParent(final JDFToXJDF parent)
 	{
@@ -105,7 +102,9 @@ public class WalkElement extends BaseWalker
 		{
 			final String xmlComment = jdf.getXMLComment(i);
 			if (xmlComment == null)
+			{
 				break;
+			}
 			final Node comment = eNew.appendXMLComment(xmlComment, null);
 			if (before == null)
 			{
@@ -135,13 +134,12 @@ public class WalkElement extends BaseWalker
 	}
 
 	/**
-	 *
 	 * @param jdf
 	 * @param eNew
 	 */
 	protected void setAttributes(final KElement jdf, final KElement eNew)
 	{
-		final JDFAttributeMap map = (jdf instanceof JDFElement) ? convertRanges((JDFElement) jdf) : jdf.getAttributeMap_KElement();
+		final JDFAttributeMap map = (jdf instanceof final JDFElement j) ? convertRanges(j) : jdf.getAttributeMap_KElement();
 		if (map != null)
 		{
 			final Set<String> keySet = map.keySet();
@@ -172,7 +170,6 @@ public class WalkElement extends BaseWalker
 	}
 
 	/**
-	 *
 	 * @param map
 	 */
 	protected void updateAttributes(final JDFAttributeMap map)
@@ -251,15 +248,16 @@ public class WalkElement extends BaseWalker
 	}
 
 	/**
-	 *
 	 * @param original the original element
-	 * @param newName the new name
+	 * @param newName  the new name
 	 * @return
 	 */
 	protected KElement safeRename(final KElement original, final String newName)
 	{
 		if (original == null)
+		{
 			return null;
+		}
 		if (original instanceof JDFResource)
 		{
 			final List<? extends KElement> leaves = ((JDFResource) original).getDirectPartitionArray();

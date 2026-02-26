@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1568,7 +1568,7 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		rl1.setFileSpecURL("file:r1.pdf");
 		r1.setGeneralID("PageListName", "PL1");
 		final ResourceHelper r2 = rs.appendPartition(AttributeName.RUN, "r2", true);
-		final JDFRunList rl2 = (JDFRunList) r1.getResource();
+		final JDFRunList rl2 = (JDFRunList) r2.getResource();
 		rl2.setFileSpecURL("file:r2.pdf");
 		r2.setGeneralID("PageListName", "PL2");
 
@@ -1577,6 +1577,35 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		d.write2File(sm_dirTestDataTemp + "PageList.name.jdf", 2, false);
 		assertEquals("PL1", root.getResource(ElementName.RUNLIST).getPartition(new JDFAttributeMap("Run", "r1"), null).getGeneralID("PageListName"));
+		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 * @return
+	 */
+	@Test
+	void testRunListListMulti()
+	{
+		final XJDFHelper xjdf = new XJDFHelper("j1", null);
+		xjdf.setTypes("ImageSetting");
+		final SetHelper rs = xjdf.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		final ResourceHelper r1 = rs.appendPartition(AttributeName.RUN, "r1", true);
+		r1.appendPartMap(new JDFAttributeMap(AttributeName.RUN, "r11"));
+		final JDFRunList rl1 = (JDFRunList) r1.getResource();
+		rl1.setFileSpecURL("file:r1.pdf");
+		rl1.setAttribute(AttributeName.PAGES, "0 0");
+		final ResourceHelper r2 = rs.appendPartition(AttributeName.RUN, "r2", true);
+		r2.appendPartMap(new JDFAttributeMap(AttributeName.RUN, "r21"));
+		final JDFRunList rl2 = (JDFRunList) r2.getResource();
+		rl2.setFileSpecURL("file:r2.pdf");
+		rl2.setAttribute(AttributeName.PAGES, "0 0");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdf);
+		final JDFNode root = d.getJDFRoot();
+		d.write2File(sm_dirTestDataTemp + "multi.run.jdf", 2, false);
+		final JDFResource ruli = root.getResource(ElementName.RUNLIST);
+		assertEquals(4, ruli.getLeafArray(false).size());
 		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
 	}
 
