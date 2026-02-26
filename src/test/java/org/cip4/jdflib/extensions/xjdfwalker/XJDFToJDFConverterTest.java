@@ -2218,7 +2218,8 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		assertEquals("r1", rl.getLeaf(0).getRun());
 		assertFalse(rl.getLeaf(0).hasNonEmpty(AttributeName.RUNINDEX));
 		final JDFResourceLink resL = jdfRoot.getLink(rl, null);
-		assertEquals("3 ~ 5 7 ~ -1", resL.getPartMapVector().get(0).get("RunIndex"));
+		assertEquals("3 ~ 5", resL.getPartMapVector().get(0).get("RunIndex"));
+		assertEquals("7 ~ -1", resL.getPartMapVector().get(1).get("RunIndex"));
 	}
 
 	/**
