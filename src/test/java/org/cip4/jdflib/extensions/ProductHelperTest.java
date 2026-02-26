@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,6 +47,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
 import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.junit.jupiter.api.Test;
 
@@ -169,6 +170,22 @@ class ProductHelperTest extends JDFTestCaseBase
 		assertNull(ph.getIntent(XJDFConstants.AssemblingIntent));
 		ph.appendIntent(XJDFConstants.AssemblingIntent);
 		assertNotNull(ph.getIntent(XJDFConstants.AssemblingIntent));
+	}
+
+	/**
+	*
+	*/
+	@Test
+	void testAppendIntent2()
+	{
+		final XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		final ProductHelper ph = theHelper.appendProduct();
+		for (final EIntentType typ : EIntentType.values())
+		{
+			final IntentHelper ih = ph.appendIntent(typ);
+			assertEquals(typ, ih.getType());
+			assertEquals(typ.name(), ih.getResource().getNodeName());
+		}
 	}
 
 	/**

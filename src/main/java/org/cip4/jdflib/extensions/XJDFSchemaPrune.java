@@ -230,9 +230,8 @@ public class XJDFSchemaPrune
 
 	KElement getExtension(final KElement xsElement)
 	{
-		KElement cc = xsElement == null ? null : xsElement.getElement(XSDConstants.XS_COMPLEX_CONTENT);
-		cc = cc == null ? null : cc.getElement(XSDConstants.XS_EXTENSION);
-		return cc;
+		final KElement cc = xsElement == null ? null : xsElement.getElement(XSDConstants.XS_COMPLEX_CONTENT);
+		return cc == null ? null : cc.getElement(XSDConstants.XS_EXTENSION);
 	}
 
 	VElement getElementsByRef(final KElement example)

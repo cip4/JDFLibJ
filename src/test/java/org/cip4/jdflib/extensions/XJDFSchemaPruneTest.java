@@ -53,6 +53,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
+import org.cip4.jdflib.extensions.ProductHelper.eProductType;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -82,6 +84,86 @@ class XJDFSchemaPruneTest extends JDFTestCaseBase
 		final XMLParser p = new XMLParser();
 		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
 		final XMLDoc d = p.parseString(h.getRoot().toDisplayXML(2));
+		assertTrue(d.isSchemaValid());
+	}
+
+	@Test
+	void testPruneXJDFProduct()
+	{
+		final XMLDoc schema = XMLDoc.parseFile(getXJDFSchema());
+		final XJDFSchemaPrune prune = new XJDFSchemaPrune(schema);
+		prune.setCheckAttributes(false);
+
+		final XJDFHelper h = new XJDFHelper("j1", "product");
+		h.addType(EnumType.Product);
+		final ProductHelper prod = h.getCreateRootProduct(0);
+		for (final EIntentType typ : EIntentType.values())
+		{
+			final IntentHelper ih = prod.appendIntent(typ);
+			ih.setExternalID("ID_" + typ);
+		}
+		h.removeSet(ElementName.NODEINFO);
+
+		final KElement assIntent = prod.getIntent(EIntentType.AssemblingIntent).getResource();
+		assIntent.appendElement(XJDFConstants.AssemblyItem);
+		assIntent.appendElement(XJDFConstants.BindIn).appendElement(ElementName.GLUE);
+		assIntent.appendElement(XJDFConstants.BlowIn);
+		assIntent.appendElement(XJDFConstants.StickOn).appendElement(ElementName.GLUE);
+
+		final KElement bindIntent = prod.getIntent(EIntentType.BindingIntent).getResource();
+		bindIntent.appendElement(XJDFConstants.AssemblyItem);
+		bindIntent.appendElement(ElementName.ADHESIVENOTE).appendElement(ElementName.GLUE);
+		bindIntent.appendElement(ElementName.EDGEGLUING);
+		bindIntent.appendElement(ElementName.HARDCOVERBINDING).appendElement(ElementName.REGISTERRIBBON);
+
+		final KElement lb = bindIntent.appendElement(XJDFConstants.LooseBinding);
+		lb.appendElement(ElementName.COILBINDING);
+		lb.appendElement(XJDFConstants.CombBinding);
+		lb.appendElement(XJDFConstants.HolePattern);
+		lb.appendElement(XJDFConstants.ScrewBinding);
+		lb.appendElement(ElementName.RINGBINDING);
+
+		final KElement colorIntent = prod.getIntent(EIntentType.ColorIntent).getResource();
+		colorIntent.appendElement(XJDFConstants.SurfaceColor).appendElement(ElementName.CERTIFICATION);
+
+		final KElement contentIntent = prod.getIntent(EIntentType.ContentCheckIntent).getResource();
+		contentIntent.appendElement(XJDFConstants.PreflightItem);
+		contentIntent.appendElement(ElementName.PROOFITEM);
+
+		final KElement embossIntent = prod.getIntent(EIntentType.EmbossingIntent).getResource();
+		embossIntent.appendElement(ElementName.EMBOSSINGITEM);
+
+		final KElement foldIntent = prod.getIntent(EIntentType.FoldingIntent).getResource();
+		foldIntent.appendElement(ElementName.CREASE);
+		foldIntent.appendElement(ElementName.FOLD);
+		foldIntent.appendElement(ElementName.PERFORATE);
+
+		final KElement holeIntent = prod.getIntent(EIntentType.HoleMakingIntent).getResource();
+		holeIntent.appendElement(XJDFConstants.HolePattern);
+
+		final KElement mediaIntent = prod.getIntent(EIntentType.MediaIntent).getResource();
+		mediaIntent.appendElement(ElementName.CERTIFICATION);
+
+		final KElement prodIntent = prod.getIntent(EIntentType.ProductionIntent).getResource();
+		prodIntent.appendElement(ElementName.CERTIFICATION);
+
+		final KElement shapeIntent = prod.getIntent(EIntentType.ShapeCuttingIntent).getResource();
+		shapeIntent.appendElement(ElementName.SHAPECUT);
+
+		h.writeToFile(sm_dirTestDataTemp + "product.xsd.xjdf");
+		final KElement ret = prune.prune(h.getRoot());
+		assertNotNull(ret);
+		final String out = sm_dirTestDataTemp + "prune.intent.xsd";
+		ret.write2File(out);
+		final XMLParser p = new XMLParser();
+		p.setSchemaLocation(XJDF20.getSchemaURL(), UrlUtil.fileToUrl(new File(out), true));
+
+		final XJDFHelper h2 = new XJDFHelper("j1", "p1");
+
+		h2.getCreateRootProduct(0).setProductType(eProductType.Book);
+		h2.removeSet(ElementName.NODEINFO);
+		h2.setTypes(XJDFConstants.Product);
+		final XMLDoc d = p.parseString(h2.getRoot().toDisplayXML(2));
 		assertTrue(d.isSchemaValid());
 	}
 
