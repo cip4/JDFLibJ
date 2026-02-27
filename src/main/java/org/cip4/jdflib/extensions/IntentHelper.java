@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2022 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -43,6 +43,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -71,17 +72,31 @@ public class IntentHelper extends BaseXJDFHelper
 		theElement = intent;
 	}
 
+	public enum EIntentType
+	{
+		AssemblingIntent, BindingIntent, ColorIntent, ContentCheckIntent, EmbossingIntent, FoldingIntent, HoleMakingIntent, LaminatingIntent, LayoutIntent, MediaIntent, ProductionIntent, ShapeCuttingIntent, VariableIntent;
+
+		public static EIntentType getEnum(String val)
+		{
+			return JavaEnumUtil.getEnumIgnoreCase(EIntentType.class, KElement.xmlnsLocalName(val), null);
+		}
+
+	}
+
 	/**
-	 *
 	 * @param toCheck
 	 */
 	public static boolean isIntentResource(final KElement toCheck)
 	{
 		if (toCheck == null)
+		{
 			return false;
+		}
 		final KElement parent = toCheck.getParentNode_KElement();
 		if (parent == null)
+		{
 			return false;
+		}
 
 		return (XJDFConstants.Intent.equals(parent.getLocalName())) ? new IntentHelper(parent).getResource() == toCheck : false;
 	}
@@ -187,7 +202,6 @@ public class IntentHelper extends BaseXJDFHelper
 	/**
 	 * @param att
 	 * @param val
-	 *
 	 */
 	public void setSpan(final String att, final String val)
 	{
@@ -204,7 +218,9 @@ public class IntentHelper extends BaseXJDFHelper
 	{
 		KElement resource = getResource();
 		if (resource == null)
+		{
 			return null;
+		}
 		final String elem = StringUtil.removeToken(spanPath, -1, JDFConstants.SLASH);
 		if (elem != null)
 		{
@@ -224,8 +240,6 @@ public class IntentHelper extends BaseXJDFHelper
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param attName the attribute
 	 * @return the attribute value as a list
 	 */
@@ -293,5 +307,10 @@ public class IntentHelper extends BaseXJDFHelper
 	public static void setSpanAsAttribute(final boolean bSpanAsAttribute)
 	{
 		IntentHelper.bSpanAsAttribute = bSpanAsAttribute;
+	}
+
+	public EIntentType getType()
+	{
+		return EIntentType.getEnum(getName());
 	}
 }

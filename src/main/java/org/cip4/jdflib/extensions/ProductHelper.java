@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -49,8 +49,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.StringArray;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JavaEnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -144,6 +146,15 @@ public class ProductHelper extends BaseXJDFHelper
 	}
 
 	/**
+	 * @param typ
+	 * @return
+	 */
+	public IntentHelper getCreateIntent(final EIntentType typ)
+	{
+		return getCreateIntent(typ.name());
+	}
+
+	/**
 	 * @param name
 	 * @param ih
 	 * @return
@@ -153,14 +164,17 @@ public class ProductHelper extends BaseXJDFHelper
 		final KElement intent = theElement.appendElement(XJDFConstants.Intent);
 		intent.appendElement(name);
 		intent.setAttribute(AttributeName.NAME, name);
-		if (ElementName.COLORINTENT.equals(name))
-		{
-			return new ColorIntentHelper(intent);
-		}
-		else
-		{
-			return new IntentHelper(intent);
-		}
+		return getIntent(name);
+	}
+
+	/**
+	 * @param name
+	 * @param ih
+	 * @return
+	 */
+	public IntentHelper appendIntent(final EIntentType typ)
+	{
+		return appendIntent(typ.name());
 	}
 
 	/**
@@ -182,6 +196,11 @@ public class ProductHelper extends BaseXJDFHelper
 		{
 			return new IntentHelper(intent);
 		}
+	}
+
+	public IntentHelper getIntent(final EIntentType typ)
+	{
+		return getIntent(JavaEnumUtil.getName(typ));
 	}
 
 	/**
@@ -604,12 +623,9 @@ public class ProductHelper extends BaseXJDFHelper
 		}
 		for (final ProductHelper p : v)
 		{
-			if (productType == null || productType.equals(p.getProduct().getAttribute(AttributeName.PRODUCTTYPE)))
+			if ((productType == null || productType.equals(p.getProduct().getAttribute(AttributeName.PRODUCTTYPE))) && (n-- == 0))
 			{
-				if (n-- == 0)
-				{
-					return p;
-				}
+				return p;
 			}
 		}
 		return null;

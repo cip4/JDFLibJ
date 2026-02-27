@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -70,6 +70,7 @@ public abstract class XJDFConstants
 	public static final String CoatingDetail = "CoatingDetail";
 	public static final String CoilBindingDetails = "CoilBindingDetails";
 	public static final String ColorantName = "ColorantName";
+	public static final String CombBinding = "CombBinding";
 	public static final String CompanyID = "CompanyID";
 	public static final String ContactType = "ContactType";
 	public static final String Container = "Container";
