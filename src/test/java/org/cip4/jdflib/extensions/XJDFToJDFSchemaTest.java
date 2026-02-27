@@ -104,7 +104,7 @@ class XJDFToJDFSchemaTest extends JDFTestCaseBase
 		jmf.write2File(sm_dirTestDataTemp + "status.jmf.xsd");
 	}
 
-	@Test
+	// @Test
 	void testCopy2()
 	{
 		final File f = new File("c:/data/xjmf.status.xsd");
