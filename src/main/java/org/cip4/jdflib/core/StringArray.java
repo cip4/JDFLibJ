@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -50,7 +50,6 @@ package org.cip4.jdflib.core;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -119,7 +118,6 @@ public class StringArray extends ArrayList<String>
 	 * convenience - constructs a VString by tokenizing a string
 	 *
 	 * @param strIn the string to tokenize by blank
-	 *
 	 */
 	public StringArray(final String strIn)
 	{
@@ -139,10 +137,9 @@ public class StringArray extends ArrayList<String>
 	}
 
 	/**
-	 *
 	 * constructs a VString by tokenizing a string
 	 *
-	 * @param strIn the string to tokenize
+	 * @param strIn  the string to tokenize
 	 * @param strSep the list of separator characters - null if whitespace
 	 */
 	public StringArray(final String strIn, final String strSep)
@@ -200,10 +197,9 @@ public class StringArray extends ArrayList<String>
 	/**
 	 * serialize to a string
 	 *
-	 * @param sep separator between strings
+	 * @param sep   separator between strings
 	 * @param front string before the first entry
-	 * @param back string after the last entry
-	 *
+	 * @param back  string after the last entry
 	 * @return a tokenized string
 	 */
 	public String getString(final String sep, final String front, final String back)
@@ -214,10 +210,9 @@ public class StringArray extends ArrayList<String>
 	/**
 	 * serialize to a string
 	 *
-	 * @param sep separator between strings
+	 * @param sep   separator between strings
 	 * @param front string before the first entry
-	 * @param back string after the last entry
-	 *
+	 * @param back  string after the last entry
 	 * @return a tokenized string
 	 */
 	public String getString()
@@ -228,9 +223,9 @@ public class StringArray extends ArrayList<String>
 	/**
 	 * unify - make VString unique, retaining initial order
 	 */
-	public void unify()
+	public StringArray unify()
 	{
-		ContainerUtil.unify(this);
+		return (StringArray) StringUtil.unify(this);
 	}
 
 	/**
@@ -242,10 +237,9 @@ public class StringArray extends ArrayList<String>
 	public Set<String> getSet()
 	{
 		final HashSet<String> set = new LinkedHashSet<>();
-		final Iterator<String> it = iterator();
-		while (it.hasNext())
+		for (final String element : this)
 		{
-			set.add(it.next());
+			set.add(element);
 		}
 
 		return set;
@@ -318,7 +312,9 @@ public class StringArray extends ArrayList<String>
 	{
 		final String t2 = StringUtil.getNonEmpty(text);
 		if (t2 != null)
+		{
 			add(t2);
+		}
 
 	}
 

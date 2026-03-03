@@ -76,7 +76,6 @@ import org.mockito.Mockito;
 
 /**
  * @author MatternK
- *
  *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
 class StringUtilTest extends JDFTestCaseBase
@@ -121,6 +120,18 @@ class StringUtilTest extends JDFTestCaseBase
 		assertNull(StringUtil.underToCamel(""));
 		assertNull(StringUtil.underToCamel(""));
 		assertEquals("AaBb", StringUtil.underToCamel("AA_BB"));
+	}
+
+	@Test
+	void testUnify()
+	{
+		final StringArray a = new StringArray("a a b b c");
+		assertEquals(3, StringUtil.unify(a).size());
+		assertEquals(3, a.size());
+		a.add("");
+		a.add("f");
+		a.add("");
+		assertEquals(4, StringUtil.unify(a).size());
 	}
 
 	@Test
@@ -552,7 +563,6 @@ class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testWrite2StringBad() throws IOException
@@ -575,7 +585,6 @@ class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test regexp matching utility
-	 *
 	 */
 	@Test
 	void testMatchesIgnoreCase()
@@ -589,7 +598,6 @@ class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test prefix stripper
-	 *
 	 */
 	@Test
 	void testStripPrefix()
@@ -646,7 +654,6 @@ class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test regexp matching utility
-	 *
 	 */
 	@Test
 	void testMatchesSimple()
@@ -723,7 +730,6 @@ class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test regexp matching utility
-	 *
 	 */
 	@Test
 	void testMatchesRegExp()
@@ -800,7 +806,6 @@ class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test normalize utility
-	 *
 	 */
 	@Test
 	void testNormalize()
@@ -814,7 +819,6 @@ class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test normalize utility
-	 *
 	 */
 	@Test
 	void testNormalize3()
@@ -855,7 +859,9 @@ class StringUtilTest extends JDFTestCaseBase
 		{
 			ct.start();
 			if (StringUtil.matches("abc" + i, "(.)?bc(1|2)?00(1)?"))
+			{
 				b++;
+			}
 			ct.stop();
 		}
 		System.out.print(ct.toString());

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -47,11 +47,9 @@
  */
 package org.cip4.jdflib.core;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -163,7 +161,6 @@ public class VString extends Vector<String>
 	 * convenience - constructs a VString by tokenizing a string
 	 *
 	 * @param strIn the string to tokenize by blank
-	 *
 	 */
 	public VString(final String strIn)
 	{
@@ -192,17 +189,18 @@ public class VString extends Vector<String>
 	public static VString getVString(final Collection<String> c)
 	{
 		if (ContainerUtil.isEmpty(c))
+		{
 			return null;
+		}
 		final VString v = new VString();
 		v.addAll(c);
 		return v;
 	}
 
 	/**
-	 *
 	 * constructs a VString by tokenizing a string
 	 *
-	 * @param strIn the string to tokenize
+	 * @param strIn  the string to tokenize
 	 * @param strSep the separator character
 	 */
 	public VString(final String strIn, final String strSep)
@@ -235,7 +233,9 @@ public class VString extends Vector<String>
 	{
 		super();
 		while (a.hasMoreElements())
+		{
 			add(a.nextElement());
+		}
 	}
 
 	// **************************************** Methods *********************************************
@@ -314,7 +314,7 @@ public class VString extends Vector<String>
 	 * Method setAllStrings - put a separated string into the vString<br>
 	 * e.g. "asdf asdf asdf asdf"
 	 *
-	 * @param strIn separated string
+	 * @param strIn  separated string
 	 * @param strSep string separator
 	 */
 	public void setAllStrings(final String strIn, final String strSep)
@@ -335,7 +335,6 @@ public class VString extends Vector<String>
 	 * index - get the index of s in the vector
 	 *
 	 * @param s
-	 *
 	 * @return int the index of a string
 	 */
 	public int index(final String s)
@@ -359,7 +358,6 @@ public class VString extends Vector<String>
 	 * hasString - is 's' a member of <code>this</code>?
 	 *
 	 * @param s string to find
-	 *
 	 * @return boolean - true, if 's' is included in <code>this</code>
 	 * @deprecated 2005-02-14 use contains ...
 	 */
@@ -417,7 +415,7 @@ public class VString extends Vector<String>
 	/**
 	 * removeStrings - remove all occurrences of a set of string
 	 *
-	 * @param v the vector of strings to remove from <code>this</code>
+	 * @param v    the vector of strings to remove from <code>this</code>
 	 * @param nMax the max number of strings to remove
 	 */
 	public void removeStrings(final Collection<String> v, int nMax)
@@ -434,7 +432,9 @@ public class VString extends Vector<String>
 				this.removeElementAt(i);
 				nMax--;
 				if (nMax == 0)
+				{
 					break;
+				}
 			}
 		}
 	}
@@ -454,13 +454,15 @@ public class VString extends Vector<String>
 	/**
 	 * removeStrings - remove nMax occurrences of a string
 	 *
-	 * @param s the string to remove
+	 * @param s    the string to remove
 	 * @param nMax remove s max. nMax times , 0 or negative = infinite
 	 */
 	public void removeStrings(final String s, int nMax)
 	{
 		if (s == null)
+		{
 			return;
+		}
 		for (int i = this.size() - 1; i >= 0; i--)
 		{
 			if (s.equals(get(i)))
@@ -468,7 +470,9 @@ public class VString extends Vector<String>
 				this.removeElementAt(i);
 				nMax--;
 				if (nMax == 0)
+				{
 					break;
+				}
 			}
 		}
 	}
@@ -476,10 +480,9 @@ public class VString extends Vector<String>
 	/**
 	 * serialize to a string
 	 *
-	 * @param sep separator between strings
+	 * @param sep   separator between strings
 	 * @param front string before the first entry
-	 * @param back string after the last entry
-	 *
+	 * @param back  string after the last entry
 	 * @return a tokenized string
 	 */
 	public String getString(final String sep, final String front, final String back)
@@ -490,10 +493,9 @@ public class VString extends Vector<String>
 	/**
 	 * serialize to a string
 	 *
-	 * @param sep separator between strings
+	 * @param sep   separator between strings
 	 * @param front string before the first entry
-	 * @param back string after the last entry
-	 *
+	 * @param back  string after the last entry
 	 * @return a tokenized string
 	 */
 	public String getString()
@@ -504,10 +506,10 @@ public class VString extends Vector<String>
 	/**
 	 * create a string from a vector of tokens
 	 *
-	 * @param v vector of tokens
-	 * @param sep separator between tokens
+	 * @param v     vector of tokens
+	 * @param sep   separator between tokens
 	 * @param front prefix to string (before the first token)
-	 * @param end suffix to string (after the last token)
+	 * @param end   suffix to string (after the last token)
 	 * @return condensed string of tokens separated by sep
 	 * @deprecated use getString
 	 */
@@ -534,9 +536,12 @@ public class VString extends Vector<String>
 	/**
 	 * unify - make VString unique, retaining initial order
 	 */
-	public void unify()
+	/**
+	 * unify - make VString unique, retaining initial order
+	 */
+	public VString unify()
 	{
-		ContainerUtil.unify(this);
+		return (VString) ContainerUtil.unify(this);
 	}
 
 	/**
@@ -565,10 +570,9 @@ public class VString extends Vector<String>
 	public Set<String> getSet()
 	{
 		final HashSet<String> set = new LinkedHashSet<>();
-		final Iterator<String> it = iterator();
-		while (it.hasNext())
+		for (final String element : this)
 		{
-			set.add(it.next());
+			set.add(element);
 		}
 
 		return set;
@@ -579,8 +583,7 @@ public class VString extends Vector<String>
 	 */
 	public void sort()
 	{
-		final Object[] array = this.elementData;
-		Arrays.sort(array, 0, size());
+		sort(null);
 	}
 
 	/**
@@ -657,7 +660,9 @@ public class VString extends Vector<String>
 	{
 		final String t2 = StringUtil.getNonEmpty(text);
 		if (t2 != null)
+		{
 			add(t2);
+		}
 
 	}
 

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -2059,7 +2059,8 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		r1.setPages(JDFIntegerRangeList.createIntegerRangeList("0~2 4~6 7"));
 		final JDFRunList r2 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
 		r2.setFileURL("file:///fooout.pdf");
-		writeRoundTrip(n, "RunListPages");
+		final XJDFHelper xh = (XJDFHelper) writeRoundTrip(n, "RunListPages").getA();
+		assertEquals(3, xh.getSet(ElementName.RUNLIST, 0).getResourceList().size());
 	}
 
 	/**
@@ -2078,6 +2079,9 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final JDFRunList r2 = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Output);
 		r2.setFileURL("file:///fooout.pdf");
 		writeRoundTrip(n, "RunListPagesRepeat");
+		final XJDFHelper xh = (XJDFHelper) writeRoundTrip(n, "RunListPages").getA();
+		final SetHelper rlSet = xh.getSet(ElementName.RUNLIST, 0);
+		assertEquals(10, rlSet.getResourceList().size());
 	}
 
 	/**

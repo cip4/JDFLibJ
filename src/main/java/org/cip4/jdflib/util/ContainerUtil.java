@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -156,10 +156,9 @@ public class ContainerUtil
 		final int size = list.size();
 		final HashSet<A> s = new HashSet<>(size + 10);
 
-		final Iterator<A> it = list.iterator();
-		while (it.hasNext())
+		for (final A element : list)
 		{
-			s.add(it.next());
+			s.add(element);
 		}
 		return s;
 	}
@@ -469,6 +468,31 @@ public class ContainerUtil
 			c.add(a);
 		}
 		return c;
+	}
+
+	/**
+	 * @param strLocalName
+	 * @return
+	 */
+	public static <A> A getIgnoreCase(Map<String, A> map, final String name)
+	{
+		if (map == null)
+		{
+			return null;
+		}
+		final A val = map.get(name);
+		if (val == null && !StringUtil.isEmpty(name))
+		{
+			for (final String key : map.keySet())
+			{
+				if (name.equalsIgnoreCase(key))
+				{
+					return map.get(key);
+				}
+			}
+		}
+
+		return val;
 	}
 
 	/**

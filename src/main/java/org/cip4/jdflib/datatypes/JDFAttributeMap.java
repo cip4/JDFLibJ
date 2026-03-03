@@ -3,8 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
- *
+ * Copyright (c) 2001-2026
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
  * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -945,18 +944,6 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public String getIgnoreCase(final String strLocalName)
 	{
-		final String val = get(strLocalName);
-		if (val == null && !StringUtil.isEmpty(strLocalName))
-		{
-			for (final String key : keySet())
-			{
-				if (strLocalName.equalsIgnoreCase(key))
-				{
-					return get(key);
-				}
-			}
-		}
-
-		return val;
+		return ContainerUtil.getIgnoreCase(this, strLocalName);
 	}
 }
