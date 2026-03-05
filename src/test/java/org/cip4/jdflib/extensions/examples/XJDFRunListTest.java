@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,6 +45,7 @@ import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -60,9 +61,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJDFRunListTest extends JDFTestCaseBase
 {
@@ -162,10 +161,42 @@ class XJDFRunListTest extends JDFTestCaseBase
 		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
 		final ResourceHelper runh = rlh.appendPartition(null, null, true);
 		final JDFRunList rl = (JDFRunList) runh.getResource();
-		rl.setAttribute(AttributeName.PAGES, "0 -1");
+		rl.setPages(new JDFXYPair(0, -1));
 		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///in/colortest.pdf");
 		cleanSnippets(xjdfHelper);
 		writeTest(xjdfHelper, "resources/RunListSimple.xjdf");
+
+	}
+
+	/**
+	*
+	*/
+	@Test
+	public final void testRepeatPageRunList()
+	{
+		final XJDFHelper xjdfHelper = new XJDFHelper("RunList", null, null);
+		xjdfHelper.setTypes(EnumType.Imposition.getName());
+		final SetHelper rlh = xjdfHelper.getCreateSet(ElementName.RUNLIST, EnumUsage.Input, null);
+
+		ResourceHelper runh = rlh.appendPartition(null, null, true);
+		JDFRunList rl = (JDFRunList) runh.getResource();
+		rl.setPages(new JDFXYPair(0, 0));
+		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///in/notebook.pdf");
+		runh.appendPartMap(new JDFAttributeMap(AttributeName.RUN, "FrontCover"));
+
+		runh = rlh.appendPartition(null, null, true);
+		rl = (JDFRunList) runh.getResource();
+		rl.setPages(new JDFXYPair(1, 1));
+		rl.appendElement(ElementName.FILESPEC).setAttribute(AttributeName.URL, "File:///in/notebook.pdf");
+		for (int i = 0; i < 4; i++)
+		{
+			runh.appendPartMap(new JDFAttributeMap(AttributeName.RUN, "Body_" + i));
+		}
+		xjdfHelper.cleanUp();
+		setSnippet(rlh, true);
+		writeTest(xjdfHelper, "resources/RunListRepeat.xjdf");
+
+		writeRoundTripX(xjdfHelper, "RunlistRepeat", EnumValidationLevel.Incomplete);
 
 	}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -65,6 +65,8 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFNumList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
@@ -98,7 +100,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
-	 *
 	 */
 	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -110,7 +111,6 @@ public class JDFRunList extends JDFAutoRunList
 	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 *
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -126,10 +126,10 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
-	 *
 	 * @throws DOMException
 	 */
-	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
+	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+			throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -152,7 +152,6 @@ public class JDFRunList extends JDFAutoRunList
 	 *
 	 * @param fileName
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -167,7 +166,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param fileName
 	 * @param first
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -182,7 +180,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param fileName
 	 * @param first
 	 * @param last
-	 *
 	 * @return JDFRunList
 	 */
 	public JDFRunList addRun(final String fileName, final int first, final int last)
@@ -209,7 +206,9 @@ public class JDFRunList extends JDFAutoRunList
 	private void updateNPage(final int first, final int last, final boolean bLeaf)
 	{
 		if (first < 0 || last < 0)
+		{
 			return;
+		}
 
 		int npage;
 		if (bLeaf)
@@ -227,7 +226,9 @@ public class JDFRunList extends JDFAutoRunList
 		setNPage(npage);
 		final JDFRunList parent = (JDFRunList) getParentPartition();
 		if (parent != null)
+		{
 			parent.updateNPage(first, last, false);
+		}
 	}
 
 	/**
@@ -235,7 +236,6 @@ public class JDFRunList extends JDFAutoRunList
 	 *
 	 * @param fileName
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -250,7 +250,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param fileName
 	 * @param first
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -263,9 +262,8 @@ public class JDFRunList extends JDFAutoRunList
 	 * addPDF add a pdf file to this RunList
 	 *
 	 * @param fileName the URL (!) of the file
-	 * @param first 0 based first page in the file
-	 * @param last 0 based last page in the file
-	 *
+	 * @param first    0 based first page in the file
+	 * @param last     0 based last page in the file
 	 * @return JDFRunList
 	 */
 	public JDFRunList addPDF(final String fileName, final int first, final int last)
@@ -282,7 +280,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param fileNames
 	 * @param sepNames
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -299,7 +296,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param first
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -316,9 +312,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param first
 	 * @param n
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -336,7 +330,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param pageMajor
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -352,9 +345,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param fileNames
 	 * @param sepNames
 	 * @param pageMajor
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -368,12 +359,11 @@ public class JDFRunList extends JDFAutoRunList
 	 * add a run separation
 	 *
 	 * @param fileNames vector of file names for the URL attribute of the FileSpec in the LayoutElement
-	 * @param sepNames parallel vector of separation names.
-	 * @param first index of the first page in the file - Sets the RunList FirstPage attribute
-	 * @param n the number of logical pages in this run
+	 * @param sepNames  parallel vector of separation names.
+	 * @param first     index of the first page in the file - Sets the RunList FirstPage attribute
+	 * @param n         the number of logical pages in this run
 	 * @param pageMajor if true, separations are ordered as page Major, i.e CMYKCMYK<br>
-	 *        if false, ordering is CCMMYYKK
-	 *
+	 *                  if false, ordering is CCMMYYKK
 	 * @return JDFRunList
 	 */
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first, final int n, final boolean pageMajor)
@@ -415,7 +405,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param fileSpec
 	 * @param sepNames
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -431,7 +420,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param first
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -449,7 +437,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param n
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -467,7 +454,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param pageMajor
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -484,7 +470,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param pageMajor
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@SuppressWarnings("unchecked")
@@ -502,7 +487,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param n
 	 * @param pageMajor
-	 *
 	 * @return JDFRunList
 	 * @deprecated 060503 use the version with VString VString
 	 */
@@ -551,7 +535,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param fileSpec
 	 * @param sepNames
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -569,7 +552,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param first
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -588,7 +570,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param n
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -607,7 +588,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param pageMajor
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -625,7 +605,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param pageMajor
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -643,7 +622,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param sep
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -662,7 +640,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param sep
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -681,9 +658,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param n
 	 * @param sep
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -702,9 +677,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param pageMajor
 	 * @param sep
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -723,7 +696,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param pageMajor
 	 * @param sep
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -743,9 +715,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param n
 	 * @param pageMajor
 	 * @param sep
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -762,7 +732,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param fileNames
 	 * @param sepNames
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -778,7 +747,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param first
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -795,7 +763,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param n
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -812,7 +779,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param pageMajor
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -828,7 +794,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param pageMajor
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -844,7 +809,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param sep
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -861,7 +825,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param sep
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -878,9 +841,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param n
 	 * @param sep
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -897,9 +858,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param first
 	 * @param pageMajor
 	 * @param sep
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -915,9 +874,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param sepNames
 	 * @param pageMajor
 	 * @param sep
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -935,9 +892,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param n
 	 * @param pageMajor
 	 * @param sep
-	 *
 	 * @deprecated
-	 *
 	 * @return JDFRunList
 	 */
 	@Deprecated
@@ -1000,7 +955,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * get RunList/LayoutElement/FileSpec/@URL also evaluate RunList/@directory and concatinate Directory + URL in case URL is a relative URL
 	 *
 	 * @Directory is ignored if URL contains a scheme or is an absolute URL
-	 *
 	 * @return URL if a URL or Directory attribute exists, else null
 	 */
 	public String getFileURL()
@@ -1038,6 +992,16 @@ public class JDFRunList extends JDFAutoRunList
 		{
 			setNPage(value.getElementCount());
 		}
+	}
+
+	/**
+	 * xjdf only
+	 *
+	 * @param value
+	 */
+	public void setPages(JDFXYPair value)
+	{
+		setAttribute(AttributeName.PAGES, JDFNumList.getString(value, 0));
 	}
 
 	/**
@@ -1114,7 +1078,6 @@ public class JDFRunList extends JDFAutoRunList
 	 */
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.resource.JDFResource#getImplicitPartitions()
 	 */
 	@Override
@@ -1122,7 +1085,9 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		Vector<EnumPartIDKey> v = super.getImplicitPartitions();
 		if ("Dynamic".equals(getAttribute(AttributeName.AUTOMATION)))
+		{
 			return v;
+		}
 
 		if (v == null)
 		{
@@ -1138,7 +1103,6 @@ public class JDFRunList extends JDFAutoRunList
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public Iterator<JDFRunData> getPageIterator()
@@ -1172,7 +1136,6 @@ public class JDFRunList extends JDFAutoRunList
 
 		/**
 		 * null constructor
-		 *
 		 */
 		protected JDFRunData()
 		{
@@ -1255,7 +1218,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * gets the first logical RunIndex for this partition
 	 *
 	 * @param last
-	 *
 	 * @return the first RunIndex that this RunList partition specifies
 	 */
 	protected int getFirstIndex(final JDFRunData last)
@@ -1337,7 +1299,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * gets the last logical RunIndex for this partition
 	 *
 	 * @param last
-	 *
 	 * @return the last RunIndex that this RunList partition specifies
 	 */
 	protected int getLastIndex(final JDFRunData last)
@@ -1401,8 +1362,7 @@ public class JDFRunList extends JDFAutoRunList
 		if (hasAttribute_KElement(AttributeName.PAGES, null, false))
 		{
 			final JDFIntegerRangeList pages = getPages();
-			final int nPage = pages.getElementCount();
-			return nPage;
+			return pages.getElementCount();
 		}
 		final List<KElement> v = getChildArray_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
 
@@ -1428,7 +1388,6 @@ public class JDFRunList extends JDFAutoRunList
 	 *
 	 * @param index the runIndex to search for
 	 * @return JDFRunList the partition that contains this index. use @see getPageInFile to find the correct page
-	 *
 	 *         warning blindly calling this from inside a loop may cause performance issues - use the getPageIterator if you need performance optimized access
 	 */
 	public JDFRunList getIndexPartition(final int index)
@@ -1450,7 +1409,6 @@ public class JDFRunList extends JDFAutoRunList
 	 * get the 0 based page number in the specified file
 	 *
 	 * @param runIndex
-	 *
 	 * @return the page number in the file; -1 if ot of range
 	 */
 	public int getPageInFile(final int runIndex)
@@ -1522,7 +1480,6 @@ public class JDFRunList extends JDFAutoRunList
 		}
 
 		/**
-		 *
 		 * @see java.util.Iterator#next() returns a JDFRunIndex object that refers to the RunList entry and the index within it
 		 */
 		@Override
@@ -1560,9 +1517,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * collapse all redundant attributes and elements
 	 *
-	 * @param bCollapseToNode only collapse redundant attriutes and elements that pre-exist in the nodes
+	 * @param bCollapseToNode   only collapse redundant attriutes and elements that pre-exist in the nodes
 	 * @param bCollapseElements if true, collapse elements, else only collapse attributes
-	 *
 	 * @default Collapse(false)
 	 */
 	@Override
@@ -1585,8 +1541,6 @@ public class JDFRunList extends JDFAutoRunList
 
 	/**
 	 * write NPage into all leaves with IsPage=true and write the appropriate value into the lower level nodes
-	 *
-	 *
 	 */
 	public void fixNPage()
 	{
@@ -1710,7 +1664,9 @@ public class JDFRunList extends JDFAutoRunList
 		}
 		int nPage = getFileSpecNPage();
 		if (nPage == 0)
+		{
 			nPage = super.getNPage();
+		}
 		if (nPage > 0)
 		{
 			irl.setDef(nPage);
@@ -1735,7 +1691,9 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		JDFIntegerRangeList list = super.getPageListIndex();
 		if (list == null)
+		{
 			list = new JDFIntegerRangeList();
+		}
 		final JDFPageList pl = getPageList();
 		int nPage = 0;
 
@@ -1744,7 +1702,9 @@ public class JDFRunList extends JDFAutoRunList
 			nPage = pl.getNPage();
 		}
 		if (nPage <= 0)
+		{
 			nPage = getNPage();
+		}
 		list.setDef(nPage);
 		return list;
 	}

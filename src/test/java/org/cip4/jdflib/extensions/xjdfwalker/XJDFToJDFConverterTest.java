@@ -1613,6 +1613,34 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 	 * @return
 	 */
 	@Test
+	void testRunListListMultiEvil()
+	{
+		final XJDFHelper xjdf = new XJDFHelper("j1", null);
+		xjdf.setTypes("ImageSetting");
+		final SetHelper rs = xjdf.appendResourceSet(ElementName.RUNLIST, EnumUsage.Input);
+		final ResourceHelper r1 = rs.appendPartition(AttributeName.RUN, "r1", true);
+		final JDFRunList rl1 = (JDFRunList) r1.getResource();
+		rl1.setFileSpecURL("file:r1.pdf");
+		rl1.setAttribute(AttributeName.PAGES, "0 0 0 0");
+		final ResourceHelper r2 = rs.appendPartition(AttributeName.RUN, "r2", true);
+		final JDFRunList rl2 = (JDFRunList) r2.getResource();
+		rl2.setFileSpecURL("file:r2.pdf");
+		rl2.setAttribute(AttributeName.PAGES, "0 0 0 0 0 0");
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdf);
+		final JDFNode root = d.getJDFRoot();
+		d.write2File(sm_dirTestDataTemp + "multi.run.evil.jdf", 2, false);
+		final JDFRunList ruli = (JDFRunList) root.getResource(ElementName.RUNLIST);
+		assertEquals(2, ruli.getLeafArray(false).size());
+		assertEquals(5, ruli.getNPage());
+		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 * @return
+	 */
+	@Test
 	void testPreview()
 	{
 		final KElement xjdf = new JDFToXJDFConverterTest()._testPreview();

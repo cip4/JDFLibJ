@@ -576,9 +576,10 @@ class XJDFPrepWalker extends BaseElementWalker
 				if (ContainerUtil.size(parts) > 1)
 				{
 					int i = 0;
+					ResourceHelper nrh = null;
 					for (final JDFAttributeMap part : parts)
 					{
-						final ResourceHelper nrh = (i++ == 0) ? rh : rh.clonePartition();
+						nrh = (i++ == 0) ? rh : nrh.clonePartition();
 						nrh.setPartMap(part);
 					}
 				}
