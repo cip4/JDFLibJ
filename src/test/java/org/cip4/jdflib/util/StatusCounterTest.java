@@ -122,6 +122,12 @@ public class StatusCounterTest extends JDFTestCaseBase
 	}
 
 	@Test
+	void testAddPhase()
+	{
+		new SingleStatusCounterTest().testAddPhase();
+	}
+
+	@Test
 	void testMemLeak()
 	{
 		new SingleStatusCounterTest().testMemLeak();
@@ -336,7 +342,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 			final String resID = outComp.getID();
 			sc.addPhase(resID, 0, 100, true);
 			sc.setTrackWaste(resID, true);
-			final JDFResourceLink rlXM = n.getLink(xpMedia, null);
+			final JDFResourceLink rlXM = n.getLink(outComp, null);
 			for (int loop = 1; loop < 4; loop++)
 			{
 				bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
