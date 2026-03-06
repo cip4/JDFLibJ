@@ -103,9 +103,8 @@ class ContainerUtilTest extends JDFTestCaseBase
 		public int hashCode()
 		{
 			final int prime = 31;
-			int result = 1;
-			result = prime * result + i;
-			return result;
+			final int result = 1;
+			return prime * result + i;
 		}
 
 		/**
@@ -377,7 +376,7 @@ class ContainerUtilTest extends JDFTestCaseBase
 		final Vector<Integer> v = new Vector<>();
 		for (int i = 0; i < 10; i++)
 		{
-			v.add(Integer.valueOf(i % 2));
+			v.add(i % 2);
 		}
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
 		assertEquals(ContainerUtil.getMatches(simpleMatch1, v).size(), 5);
@@ -393,7 +392,7 @@ class ContainerUtilTest extends JDFTestCaseBase
 		final List<Integer> v = new ArrayList<>();
 		for (int i = 0; i < 10; i++)
 		{
-			v.add(Integer.valueOf(i % 2));
+			v.add(i % 2);
 		}
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
 		assertEquals(ContainerUtil.getMatchesList(simpleMatch1, v).size(), 5);
@@ -520,12 +519,29 @@ class ContainerUtilTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testGetKeyList()
+	{
+		final List<Map<String, String>> hm = new ArrayList<>();
+		for (int i = 0; i < 10; i++)
+		{
+			final HashMap<String, String> m = new HashMap<>();
+			m.put("" + i, "a" + i);
+			hm.add(m);
+		}
+		final Collection<String> v = ContainerUtil.getAllKeys(hm);
+		assertEquals(v.size(), 10);
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testToString()
 	{
-		final Collection<Integer> l = new HashSet<Integer>();
+		final Collection<Integer> l = new HashSet<>();
 		for (int i = 10; i >= 0; i--)
 		{
-			l.add(Integer.valueOf(i));
+			l.add(i);
 		}
 		assertEquals("", ContainerUtil.toString(null));
 		assertTrue(ContainerUtil.toString(l).startsWith("0,"));

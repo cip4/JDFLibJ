@@ -199,14 +199,7 @@ public class ContainerUtil
 		}
 		final Vector<A> v = new Vector<>();
 		v.ensureCapacity(array.length);
-		for (final A element : array)
-		{
-			if (element != null)
-			{
-				v.add(element);
-			}
-		}
-		return v;
+		return (Vector<A>) addAll(v, array);
 	}
 
 	/**
@@ -224,7 +217,7 @@ public class ContainerUtil
 		}
 		final List<A> l = new ArrayList<>();
 		l.addAll(c);
-		l.sort(null);
+		sort(l);
 		final StringBuilder b = new StringBuilder();
 		int i = 0;
 		for (final A e : l)
@@ -236,6 +229,24 @@ public class ContainerUtil
 			b.append(e.toString());
 		}
 		return b.toString();
+	}
+
+	/**
+	 * unsortable safe utility
+	 *
+	 * @param <A>
+	 * @param l
+	 */
+	static <A> void sort(final List<A> l)
+	{
+		try
+		{
+			l.sort(null);
+		}
+		catch (final Throwable t)
+		{
+			// nop - cannot sort
+		}
 	}
 
 	/**
@@ -1266,6 +1277,20 @@ public class ContainerUtil
 	public static <A> List<A> getKeyList(final Map<A, ?> m)
 	{
 		return (List<A>) getKeyArray(m);
+	}
+
+	public static <A, B> List<A> getAllKeys(final Collection<Map<A, B>> ml)
+	{
+		final List<A> ret = new ArrayList<>();
+		if (ml != null)
+		{
+			for (final Map<A, ?> m : ml)
+			{
+				appendUnique(ret, m.keySet());
+			}
+			sort(ret);
+		}
+		return ret;
 	}
 
 	/**

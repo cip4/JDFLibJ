@@ -41,7 +41,7 @@
  */
 package org.cip4.jdflib.util;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -110,28 +110,27 @@ public class StatusCounter
 	}
 
 	private double percentComplete = 0;
-	protected JDFNode m_Node;
+	private JDFNode m_Node;
 	private boolean bCompleted = false;
 	private JDFDoc docJMFPhaseTime;
-	private JDFDoc docJMFResource;
-	private JDFDoc docJMFNotification;
-	protected VJDFAttributeMap m_vPartMap;
-	protected VString m_ignoreParts = null;
+	private VJDFAttributeMap m_vPartMap;
+	private VString m_ignoreParts = null;
 	private String m_deviceID = null;
 	private VString m_moduleID = null;
 	private VString m_moduleType = null;
-	private LinkAmount[] vLinkAmount = null;
+	private final List<LinkAmount> vLinkAmount;
 	private String firstRefID = null;
 	private String queueEntryID;
 	private EnumDeviceOperationMode operationMode = EnumDeviceOperationMode.Productive;
 	private EnumWorkType workType = null;
-	protected HashSet<String> setTrackWaste = new HashSet<>();
-	protected HashSet<String> setCopyResInfo = new HashSet<>();
+	private final HashSet<String> setTrackWaste = new HashSet<>();
+	private final HashSet<String> setCopyResInfo = new HashSet<>();
 	private EnumDeviceStatus status = null;
 	private String statusDetails = null;
 	private JDFDate startDate;
 	private NodeIdentifier nodeID = null;
 	private final Vector<JDFEmployee> vEmployees = new Vector<>();
+	private final List<JDFNotification> events;
 
 	private double totalCounter = -1;
 	private VString icsVersions = null;
@@ -236,7 +235,7 @@ public class StatusCounter
 	@Override
 	public String toString()
 	{
-		return "[StatusCounter - counter: " + m_deviceID + "Start date: " + startDate + " " + Arrays.toString(vLinkAmount) + "]";
+		return "[StatusCounter - counter: " + m_deviceID + "Start date: " + startDate + " " + ContainerUtil.toString(vLinkAmount) + "]";
 	}
 
 	/**
@@ -246,7 +245,7 @@ public class StatusCounter
 	{
 		if (m_Node != null)
 		{
-			getVResLink(2); // write all reslinks to disk
+			getVResLink(ELinkType.Node); // write all reslinks to disk
 		}
 	}
 
@@ -259,7 +258,9 @@ public class StatusCounter
 	 */
 	public StatusCounter(final JDFNode node, final VJDFAttributeMap vPartMap, final VElement vResLinks)
 	{
+		vLinkAmount = new ArrayList<>();
 		addPhaseTimeAmounts = true;
+		events = new ArrayList<>();
 		setActiveNode(node, vPartMap, vResLinks);
 	}
 
@@ -289,9 +290,8 @@ public class StatusCounter
 		bCompleted = false;
 		m_Node = node;
 		m_vPartMap = vPartMap;
-		vLinkAmount = null;
+		vLinkAmount.clear();
 		firstRefID = null;
-		docJMFResource = null;
 		docJMFPhaseTime = null;
 		startDate = new JDFDate();
 		nodeID = null;
@@ -339,23 +339,17 @@ public class StatusCounter
 	 * @param refID the refID, name or usage of the resource of the bag - this MUST match the refID of a ResourceLink
 	 * @return the LinkAmount with matching refID, null if none found or bags is null
 	 */
-	protected LinkAmount getLinkAmount(final String refID)
+	protected LinkAmount getLinkAmount(String refID)
 	{
-		String refIDLocal = refID;
 
-		if (vLinkAmount == null || vLinkAmount.length == 0)
+		if (refID == null)
 		{
-			return null;
-		}
-
-		if (refIDLocal == null)
-		{
-			refIDLocal = getFirstRefID();
+			refID = getFirstRefID();
 		}
 
 		for (final LinkAmount element : vLinkAmount)
 		{
-			if (element.linkFitsKey(refIDLocal))
+			if (element.linkFitsKey(refID))
 			{
 				return element;
 			}
@@ -376,23 +370,17 @@ public class StatusCounter
 	 * @param refID the refID, name or usage of the resource of the bag - this MUST match the refID of a ResourceLink
 	 * @return the actual refID of the matching resLink, null if none found or bags is null
 	 */
-	public String getLinkID(final String refID)
+	public String getLinkID(String refID)
 	{
-		String refIDLocal = refID;
 
-		if (vLinkAmount == null || vLinkAmount.length == 0)
+		if (refID == null)
 		{
-			return null;
-		}
-
-		if (refIDLocal == null)
-		{
-			refIDLocal = getFirstRefID();
+			refID = getFirstRefID();
 		}
 
 		for (final LinkAmount element : vLinkAmount)
 		{
-			if (element.linkFitsKey(refIDLocal))
+			if (element.linkFitsKey(refID))
 			{
 				return element.rl.getrRef();
 			}
@@ -409,11 +397,7 @@ public class StatusCounter
 	 */
 	protected LinkAmount getLinkAmount(final int n)
 	{
-		if (vLinkAmount == null || vLinkAmount.length <= n)
-		{
-			return null;
-		}
-		return vLinkAmount[n];
+		return ContainerUtil.get(vLinkAmount, n);
 	}
 
 	/**
@@ -427,11 +411,11 @@ public class StatusCounter
 		{
 			return firstRefID;
 		}
-		if (vLinkAmount == null || vLinkAmount.length == 0)
+		if (vLinkAmount.isEmpty())
 		{
 			return null;
 		}
-		return vLinkAmount[0].rl.getrRef();
+		return vLinkAmount.get(0).rl.getrRef();
 	}
 
 	/**
@@ -472,10 +456,10 @@ public class StatusCounter
 	{
 		if (!ContainerUtil.isEmpty(resLinks))
 		{
-			vLinkAmount = new LinkAmount[resLinks.size()];
-			for (int i = 0; i < vLinkAmount.length; i++)
+			vLinkAmount.clear();
+			for (final KElement rl : resLinks)
 			{
-				vLinkAmount[i] = new LinkAmount((JDFResourceLink) resLinks.elementAt(i));
+				vLinkAmount.add(new LinkAmount((JDFResourceLink) rl));
 			}
 		}
 	}
@@ -496,6 +480,40 @@ public class StatusCounter
 	}
 
 	/**
+	 * add the amount specified by amount and waste to the resource with id refID
+	 *
+	 * @param refID    , type or usage of the resource, if null all are updated
+	 * @param amount
+	 * @param waste
+	 * @param sumTotal if true, also sum up the total amounts, else only phase
+	 */
+	public void addPhase(final String refID, final double amount, final double waste, final boolean sumTotal)
+	{
+		addPhase(refID, amount, waste, sumTotal, null);
+	}
+
+	public synchronized void addPhase(final String refID, final double amount, final double waste, final boolean sumTotal, JDFAttributeMap map)
+	{
+		final LinkAmount la = getLinkAmount(refID);
+		if (la == null)
+		{
+			return;
+		}
+		la.addPhase(amount, waste, bCompleted, addPhaseTimeAmounts, map);
+		if (JDFAttributeMap.isEmpty(map))
+		{
+			if (sumTotal)
+			{
+				la.updateSpeed();
+			}
+			if (amount >= 0)
+			{
+				updatePercentComplete(la);
+			}
+		}
+	}
+
+	/**
 	 * set the phase the amount specified by amount and waste to the resource with id refID
 	 *
 	 * @param refID  , type or usage of the resource, if null all are updated
@@ -504,42 +522,17 @@ public class StatusCounter
 	 */
 	public synchronized void setPhase(final String refID, final double amount, final double waste)
 	{
-		final LinkAmount la = getLinkAmount(refID);
-		if (la == null)
-		{
-			return;
-		}
-		la.addPhase(amount, waste, true, false);
-		if (amount >= 0)
-		{
-			updatePercentComplete(la);
-		}
+		setPhase(refID, amount, waste, null);
 	}
 
-	/**
-	 * add the amount specified by amount and waste to the resource with id refID
-	 *
-	 * @param refID    , type or usage of the resource, if null all are updated
-	 * @param amount
-	 * @param waste
-	 * @param sumTotal if true, also sum up the total amounts, else only phase
-	 */
-	public synchronized void addPhase(final String refID, final double amount, final double waste, final boolean sumTotal)
+	public synchronized void setPhase(final String refID, final double amount, final double waste, JDFAttributeMap map)
 	{
 		final LinkAmount la = getLinkAmount(refID);
 		if (la == null)
 		{
 			return;
 		}
-		la.addPhase(amount, waste, false, sumTotal);
-		if (sumTotal)
-		{
-			la.updateSpeed();
-		}
-		if (amount >= 0)
-		{
-			updatePercentComplete(la);
-		}
+		la.addPhase(amount, waste, true, false, map);
 	}
 
 	/**
@@ -578,11 +571,11 @@ public class StatusCounter
 		}
 		if (bWaste)
 		{
-			la.setAmount(EAmountType.TotalWaste, amount);
+			la.setAmount(EAmountType.TotalWaste, amount, map);
 		}
 		else
 		{
-			la.setAmount(EAmountType.TotalAmount, amount);
+			la.setAmount(EAmountType.TotalAmount, amount, map);
 			updatePercentComplete(la);
 		}
 		la.updateSpeed();
@@ -612,14 +605,14 @@ public class StatusCounter
 	 */
 	public JDFResourceLink[] getAmountLinks()
 	{
-		if (vLinkAmount == null || vLinkAmount.length == 0)
+		if (ContainerUtil.isEmpty(vLinkAmount))
 		{
 			return null;
 		}
-		final JDFResourceLink[] d = new JDFResourceLink[vLinkAmount.length];
+		final JDFResourceLink[] d = new JDFResourceLink[vLinkAmount.size()];
 		for (int i = 0; i < d.length; i++)
 		{
-			d[i] = vLinkAmount[i].rl;
+			d[i] = vLinkAmount.get(i).rl;
 		}
 		return d;
 	}
@@ -683,7 +676,7 @@ public class StatusCounter
 		return la == null ? 0 : la.getAmount(EAmountType.PhaseWaste, map);
 	}
 
-	private boolean resetPhase()
+	boolean resetPhase()
 	{
 		if (m_Node == null)
 		{
@@ -706,19 +699,14 @@ public class StatusCounter
 	 * @param comment    the comment text, if null no comment is set
 	 * @return
 	 */
-	public synchronized JDFNotification setEvent(final String eventID, final String eventValue, final String comment)
+	public synchronized void setEvent(final String eventID, final String eventValue, final String comment)
 	{
 		final JDFNotification notif = createBaseNotification();
-		final JDFJMF jmf = createNotificationJMF();
-		final JDFSignal s = jmf.appendSignal(EnumType.Notification);
-		s.copyAttribute(AttributeName.ICSVERSIONS, jmf);
-
 		notif.setEvent(eventID, eventValue, comment);
-		s.copyElement(notif, null);
-		return notif;
+		events.add(notif);
 	}
 
-	private JDFNotification createBaseNotification()
+	JDFNotification createBaseNotification()
 	{
 		JDFNotification notif;
 
@@ -737,18 +725,6 @@ public class StatusCounter
 		}
 		notif.setNode(m_Node);
 		return notif;
-	}
-
-	/**
-	 * @return JDFJMF the newly created Notification JMF
-	 */
-	private synchronized JDFJMF createNotificationJMF()
-	{
-		if (docJMFNotification == null)
-		{
-			docJMFNotification = createJMFDoc();
-		}
-		return docJMFNotification.getJMFRoot();
 	}
 
 	/**
@@ -776,7 +752,6 @@ public class StatusCounter
 			statusDetails = deviceStatusDetails;
 		}
 		final JDFJMF jmfStatus = createPhaseTimeJMF();
-		final JDFJMF jmfRes = createResourceJMF();
 
 		final LinkAmount mainLinkAmount = getLinkAmount(getFirstRefID());
 		// other threads may have broken things
@@ -805,11 +780,6 @@ public class StatusCounter
 			bCompleted = false;
 		}
 
-		if (nextPhase != null)
-		{
-			generateResourceResponse(jmfRes);
-		}
-
 		if (lastPhase != null && nextPhase != lastPhase) // we explicitly added
 		// a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
 		{
@@ -834,32 +804,22 @@ public class StatusCounter
 		}
 
 		jmfStatus.eraseEmptyAttributes(true);
-		jmfRes.eraseEmptyAttributes(true);
 		return bChanged;
 	}
 
 	/**
 	 * append resource audits and set output resource to available, if necessary
 	 */
-	private void appendResourceAudits()
+	void appendResourceAudits()
 	{
-		if (vLinkAmount != null)
+		for (final LinkAmount element : vLinkAmount)
 		{
-			for (final LinkAmount element : vLinkAmount)
-			{
-				setResourceAudit(element.refID, EnumReason.ProcessResult);
-				element.updateNodeResource();
-			}
+			setResourceAudit(element.rl.getrRef(), EnumReason.ProcessResult);
+			element.updateNodeResource();
 		}
 	}
 
-	private synchronized JDFJMF createResourceJMF()
-	{
-		docJMFResource = createJMFDoc();
-		return docJMFResource.getJMFRoot();
-	}
-
-	private synchronized JDFJMF createPhaseTimeJMF()
+	synchronized JDFJMF createPhaseTimeJMF()
 	{
 		docJMFPhaseTime = createJMFDoc();
 		return docJMFPhaseTime.getJMFRoot();
@@ -870,7 +830,7 @@ public class StatusCounter
 	 *
 	 * @return the @see JDFDoc representing the JMF
 	 */
-	private JDFDoc createJMFDoc()
+	JDFDoc createJMFDoc()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = d.getJMFRoot();
@@ -887,7 +847,7 @@ public class StatusCounter
 	 * @param deviceStatusDetails
 	 * @return true if change since last time
 	 */
-	private synchronized boolean setIdlePhase(final EnumDeviceStatus deviceStatus, final String deviceStatusDetails)
+	synchronized boolean setIdlePhase(final EnumDeviceStatus deviceStatus, final String deviceStatusDetails)
 	{
 		boolean bChanged = docJMFPhaseTime == null; // first aftersetPhase
 		final JDFResponse r = bChanged ? null : docJMFPhaseTime.getJMFRoot().getResponse(0);
@@ -915,7 +875,7 @@ public class StatusCounter
 	 * @param newDevInfo
 	 * @param la
 	 */
-	private void fillDeviceInfo(final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFDeviceInfo newDevInfo, final LinkAmount la)
+	void fillDeviceInfo(final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFDeviceInfo newDevInfo, final LinkAmount la)
 	{
 		newDevInfo.setDeviceStatus(deviceStatus);
 		newDevInfo.setStatusDetails(deviceStatusDetails);
@@ -958,7 +918,7 @@ public class StatusCounter
 		if (m_Node != null && nodeStatus != null) // may be null if idle
 		{
 			m_Node.setPartStatus(m_vPartMap, nodeStatus, nodeStatusDetails);
-			getVResLink(2);// update the nodes links
+			getVResLink(ELinkType.Node);// update the nodes links
 
 			if (bEnd)
 			{
@@ -968,14 +928,14 @@ public class StatusCounter
 			{
 				if (addPhaseTimeAmounts)
 				{
-					pt2.setLinks(getVResLink(1));
+					pt2.setLinks(getVResLink(ELinkType.PhaseTime));
 				}
 				pt2.eraseEmptyAttributes(true);
 			}
 		}
 	}
 
-	private JDFResponse closeJobPhase(final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt1)
+	JDFResponse closeJobPhase(final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt1)
 	{
 		final JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
@@ -987,20 +947,18 @@ public class StatusCounter
 		setJobPhaseAmounts(la, jp);
 		if (addPhaseTimeAmounts)
 		{
-			pt1.setLinks(getVResLink(1));
+			pt1.setLinks(getVResLink(ELinkType.PhaseTime));
 		}
 		// cleanup!
-		if (vLinkAmount != null)
+		for (final LinkAmount element : vLinkAmount)
 		{
-			for (final LinkAmount element : vLinkAmount)
-			{
-				element.addPhase(0, 0, true, true);
-			}
+			element.addPhase(0, 0, true, true);
 		}
+
 		return respStatus;
 	}
 
-	private void appendProcessRun(final EnumNodeStatus nodeStatus, final JDFAuditPool ap)
+	void appendProcessRun(final EnumNodeStatus nodeStatus, final JDFAuditPool ap)
 	{
 		final JDFProcessRun pr = (JDFProcessRun) ap.addAudit(EnumAuditType.ProcessRun, null);
 		pr.setPartMapVector(m_vPartMap);
@@ -1014,10 +972,13 @@ public class StatusCounter
 
 	/**
 	 * @param jmfRes
+	 * @return
 	 */
-	private void generateResourceResponse(final JDFJMF jmfRes)
+	public JDFDoc getDocJMFResource()
 	{
-		final VElement vResResourceInfo = getVResLink(3);
+		final JDFDoc jmfDoc = createJMFDoc();
+		final JDFJMF jmfRes = jmfDoc.getJMFRoot();
+		final VElement vResResourceInfo = getVResLink(ELinkType.ResourceInfo);
 		final JDFSignal sig = jmfRes.appendSignal(EnumType.Resource);
 		sig.copyAttribute(AttributeName.ICSVERSIONS, jmfRes);
 
@@ -1046,6 +1007,8 @@ public class StatusCounter
 			}
 		}
 		rqp.setExact(bAllExact);
+		jmfRes.eraseEmptyAttributes(true);
+		return jmfDoc;
 	}
 
 	/**
@@ -1054,7 +1017,7 @@ public class StatusCounter
 	 * @param la
 	 * @param jp
 	 */
-	private void setJobPhaseAmounts(final LinkAmount la, final JDFJobPhase jp)
+	void setJobPhaseAmounts(final LinkAmount la, final JDFJobPhase jp)
 	{
 		if (jp == null || !addPhaseTimeAmounts)
 		{
@@ -1098,38 +1061,50 @@ public class StatusCounter
 		}
 	}
 
+	enum ELinkType
+	{
+		PhaseTime, Node, ResourceInfo, ResourceAudit
+	}
+
 	/**
 	 * @param n : 1=phaseTime, 2=node, 3=resourceinfo
 	 * @return VElement a vector of resourcelinks
 	 */
-	private VElement getVResLink(final int n)
+	VElement getVResLink(final ELinkType typ)
 	{
-		if (vLinkAmount == null || m_Node == null)
+		if (m_Node == null)
 		{
 			return null;
 		}
 		final VElement vRet = new VElement();
 		for (final LinkAmount la : vLinkAmount)
 		{
-			if (n == 1)
+			switch (typ)
+			{
+			case PhaseTime:
 			{
 				final JDFResourceLink phaseTimeLink = la.getPhaseTimeLink();
 				if (phaseTimeLink != null)
 				{
 					vRet.add(phaseTimeLink);
 				}
+				break;
 			}
-			if (n == 2)
+			case Node:
 			{
 				vRet.add(la.updateNodeLink());
+				break;
 			}
-			if (n == 3)
+			case ResourceInfo:
 			{
 				vRet.add(la.getResourceInfoLink());
+				break;
 			}
-			if (n == 4)
+			case ResourceAudit:
 			{
 				vRet.add(la.getResourceAuditLink());
+				break;
+			}
 			}
 		}
 		return vRet;
@@ -1148,42 +1123,32 @@ public class StatusCounter
 	}
 
 	/**
-	 * @return the docJMFResource
-	 */
-	public synchronized JDFDoc getDocJMFResource()
-	{
-		if (docJMFResource == null)
-		{
-			return null;
-		}
-		return docJMFResource.clone();
-	}
-
-	/**
 	 * @param bClean
 	 * @return the docJMFNotification
 	 */
 	public synchronized JDFDoc getDocJMFNotification(final boolean bClean)
 	{
-		JDFDoc ret = null;
-		if (docJMFNotification != null)
+		if (!events.isEmpty())
 		{
+			final JDFDoc jmfDoc = createJMFDoc();
+			final JDFJMF jmf = jmfDoc.getJMFRoot();
+			for (final JDFNotification notif : events)
+			{
+				final JDFSignal s = jmf.appendSignal(EnumType.Notification);
+				s.copyAttribute(AttributeName.ICSVERSIONS, jmf);
+				s.copyElement(notif, null);
+			}
 			if (bClean)
 			{
-				ret = docJMFNotification;
-				docJMFNotification = null;
+				events.clear();
 			}
-			else
-			{
-				ret = docJMFNotification.clone();
-			}
+			return jmfDoc;
 		}
-		return ret;
+		else
+		{
+			return null;
+		}
 	}
-
-	// /////////////////////////////////////////////////////////////////////
-
-	// /////////////////////////////////////////////////////////////////////
 
 	/**
 	 * container class to set amounts and waste in phaseTime
@@ -1192,7 +1157,7 @@ public class StatusCounter
 	{
 		private class AmountBag
 		{
-			public AmountBag()
+			AmountBag()
 			{
 				super();
 				theMap = new EnumMap<>(EAmountType.class);
@@ -1208,7 +1173,7 @@ public class StatusCounter
 			/**
 			 *
 			 */
-			protected void reset()
+			void reset()
 			{
 				theMap.put(EAmountType.TotalAmount, 0.0);
 				theMap.put(EAmountType.TotalWaste, 0.0);
@@ -1216,19 +1181,19 @@ public class StatusCounter
 				theMap.put(EAmountType.PhaseWaste, 0.0);
 			}
 
-			protected double increment(EAmountType typ, double val)
+			double increment(EAmountType typ, double val)
 			{
 				final double d = theMap.get(typ) + val;
 				theMap.put(typ, d);
 				return d;
 			}
 
-			protected double get(EAmountType typ)
+			double get(EAmountType typ)
 			{
 				return theMap.get(typ);
 			}
 
-			protected void set(EAmountType typ, double d)
+			void set(EAmountType typ, double d)
 			{
 				theMap.put(typ, d);
 			}
@@ -1239,7 +1204,7 @@ public class StatusCounter
 			 * @param bNewPhase
 			 * @param sumTotal  if true, also sum up the total amounts, else only phase
 			 */
-			protected void addPhase(final double amount, final double waste, final boolean bNewPhase, final boolean sumTotal)
+			void addPhase(final double amount, final double waste, final boolean bNewPhase, final boolean sumTotal)
 			{
 				if (sumTotal)
 				{
@@ -1298,12 +1263,11 @@ public class StatusCounter
 
 		} // end AmountBag
 
-		protected JDFResourceLink rl;
-		protected String refID;
-		protected final HashMap<JDFAttributeMap, AmountBag> lastBags;
+		private final JDFResourceLink rl;
+		private final HashMap<JDFAttributeMap, AmountBag> lastBags;
 		private final boolean bInteger;
 
-		protected LinkAmount(final JDFResourceLink _rl)
+		LinkAmount(final JDFResourceLink _rl)
 		{
 			final JDFNode dump = new JDFDoc("JDF").getJDFRoot();
 			dump.appendResourceLinkPool().copyElement(_rl, null);
@@ -1312,7 +1276,6 @@ public class StatusCounter
 			dump.appendResourcePool().copyElement(target, null);
 			rl = (JDFResourceLink) dump.getResourceLinkPool().getElement(_rl.getNodeName(), null, 0);
 
-			refID = rl.getrRef();
 			lastBags = new HashMap<>();
 			prefillBags();
 			fillBags();
@@ -1343,16 +1306,17 @@ public class StatusCounter
 			}
 		}
 
-		public void setAmount(EAmountType typ, double amount)
+		void setAmount(EAmountType typ, double amount, JDFAttributeMap map)
 		{
-			setAmount(typ, amount, null);
+			final AmountBag bag = getCreateBag(map);
+			bag.set(typ, amount);
 
 		}
 
-		void setAmount(EAmountType typ, double amount, JDFAttributeMap map)
+		void addAmount(EAmountType typ, double amount, JDFAttributeMap map)
 		{
-			final AmountBag bag = getBag(map);
-			bag.set(typ, amount);
+			final AmountBag bag = getCreateBag(map);
+			bag.increment(typ, amount);
 
 		}
 
@@ -1391,7 +1355,7 @@ public class StatusCounter
 			}
 		}
 
-		public void reset()
+		void reset()
 		{
 			for (final AmountBag ab : lastBags.values())
 			{
@@ -1406,7 +1370,7 @@ public class StatusCounter
 		 * @param target
 		 * @return true if the resource is an integer type
 		 */
-		private boolean isInteger(final JDFResource target)
+		boolean isInteger(final JDFResource target)
 		{
 			return (target instanceof JDFUsageCounter) || (target instanceof JDFMedia) || (target instanceof JDFExposedMedia)
 					|| (target instanceof JDFComponent);
@@ -1415,7 +1379,7 @@ public class StatusCounter
 		/**
 		 * @return the updated reslink
 		 */
-		protected JDFResourceLink updateNodeLink()
+		JDFResourceLink updateNodeLink()
 		{
 			final JDFResourceLink nodeLink = m_Node.getLink(0, null, new JDFAttributeMap(AttributeName.RREF, rl.getrRef()), null);
 			if (nodeLink != null)
@@ -1535,7 +1499,7 @@ public class StatusCounter
 		/**
 		 * @return get a link to dump into a paseTime audit
 		 */
-		protected JDFResourceLink getPhaseTimeLink()
+		JDFResourceLink getPhaseTimeLink()
 		{
 			cleanAmounts();
 			return setPhaseAmounts();
@@ -1544,7 +1508,7 @@ public class StatusCounter
 		/**
 		 * @return JDFResourceLink the resource link for a resource audit
 		 */
-		protected JDFResourceLink getResourceAuditLink()
+		JDFResourceLink getResourceAuditLink()
 		{
 			cleanAmounts();
 			setTotalAmounts();
@@ -1554,13 +1518,13 @@ public class StatusCounter
 		/**
 		 * @return JDFResourceLink the resource link for a resourceInfo
 		 */
-		protected JDFResourceLink getResourceInfoLink()
+		JDFResourceLink getResourceInfoLink()
 		{
 			cleanAmounts();
 			return setTotalAmounts();
 		}
 
-		private JDFResourceLink setPhaseAmounts()
+		JDFResourceLink setPhaseAmounts()
 		{
 			boolean bEmpty = true;
 			for (final Entry<JDFAttributeMap, AmountBag> e : lastBags.entrySet())
@@ -1665,7 +1629,7 @@ public class StatusCounter
 		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
-		protected double getAmount(final double amount)
+		double getAmount(final double amount)
 		{
 			return bInteger ? ((int) amount) : amount;
 		}
@@ -1676,7 +1640,7 @@ public class StatusCounter
 		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
-		protected double getAmount(EAmountType typ)
+		double getAmount(EAmountType typ)
 		{
 			double d = 0;
 			for (final AmountBag ab : lastBags.values())
@@ -1692,7 +1656,7 @@ public class StatusCounter
 		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
-		protected double getAmount(EAmountType typ, JDFAttributeMap map)
+		double getAmount(EAmountType typ, JDFAttributeMap map)
 		{
 			final AmountBag ab = getBag(map);
 			return getAmount(ab == null ? 0 : ab.get(typ));
@@ -1707,11 +1671,22 @@ public class StatusCounter
 			return lastBags.get(map);
 		}
 
+		AmountBag getCreateBag(JDFAttributeMap map)
+		{
+			AmountBag ab = getBag(map);
+			if (ab == null)
+			{
+				ab = new AmountBag();
+				lastBags.put(map, ab);
+			}
+			return ab;
+		}
+
 		/**
 		 * @param amount
 		 * @return the formatted amount, either as integer or double
 		 */
-		protected String formatAmount(final double amount)
+		String formatAmount(final double amount)
 		{
 			return bInteger ? StringUtil.formatInteger((int) amount) : StringUtil.formatDouble(amount);
 		}
@@ -1719,7 +1694,7 @@ public class StatusCounter
 		/**
 		 *
 		 */
-		private void cleanAmounts()
+		void cleanAmounts()
 		{
 
 			rl.removeAttribute(AttributeName.AMOUNT);
@@ -1733,9 +1708,14 @@ public class StatusCounter
 		 * @param bNewPhase
 		 * @param sumTotal  if true, also sum up the total amounts, else only phase
 		 */
-		protected void addPhase(final double amount, final double waste, final boolean bNewPhase, final boolean sumTotal)
+		void addPhase(final double amount, final double waste, final boolean bNewPhase, final boolean sumTotal)
 		{
-			getBag(null).addPhase(amount, waste, bNewPhase, sumTotal);
+			addPhase(amount, waste, bNewPhase, sumTotal, null);
+		}
+
+		void addPhase(final double amount, final double waste, final boolean bNewPhase, final boolean sumTotal, JDFAttributeMap map)
+		{
+			getCreateBag(map).addPhase(amount, waste, bNewPhase, sumTotal);
 		}
 
 		/*
@@ -1747,14 +1727,16 @@ public class StatusCounter
 		public String toString()
 		{
 			final StringBuilder sb = new StringBuilder();
-			sb.append("LinkAmount: " + rl.getLinkedResourceName() + " refID=");
-			sb.append(refID);
+			sb.append("LinkAmount: " + rl.shortString());
+			final JDFAttributeMapArray a = new JDFAttributeMapArray();
+			a.addAll(lastBags.keySet());
+			sb.append(" bags: " + lastBags.size() + " " + a.getKeys());
 
 			return sb.toString();
 
 		}
 
-		protected boolean linkFitsKey(final String key)
+		boolean linkFitsKey(final String key)
 		{
 			if (key == null)
 			{
@@ -1764,21 +1746,21 @@ public class StatusCounter
 			return rl.matchesString(key);
 		}
 
-		protected boolean linkFitsKey(final Set<String> keys)
+		boolean linkFitsKey(final Set<String> keys)
 		{
 			if (keys == null)
 			{
 				return false;
 			}
 
-			return keys.contains("*") || keys.contains(rl.getNamedProcessUsage()) || keys.contains(rl.getLinkedResourceName()) || keys.contains(refID)
+			return keys.contains("*") || keys.contains(rl.getNamedProcessUsage()) || keys.contains(rl.getLinkedResourceName()) || keys.contains(rl.getrRef())
 					|| keys.contains(rl.getAttribute(AttributeName.USAGE));
 		}
 
 		/**
 		 * @return the bCopyResInfo
 		 */
-		public boolean isCopyResInfo()
+		boolean isCopyResInfo()
 		{
 			return linkFitsKey(setCopyResInfo);
 		}
@@ -1786,7 +1768,7 @@ public class StatusCounter
 		/**
 		 * @return the bTrackWaste
 		 */
-		public boolean isTrackWaste()
+		boolean isTrackWaste()
 		{
 			return linkFitsKey(setTrackWaste);
 		}
