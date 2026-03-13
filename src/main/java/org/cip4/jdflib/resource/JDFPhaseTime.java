@@ -76,7 +76,6 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         14.11.2008
  */
 public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
@@ -181,9 +180,8 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	 * default: GetInvalidElements(true, 999999)
 	 *
 	 * @param bIgnorePrivate used by JDFElement during the validation
-	 * @param nMax maximum size of the returned vector
+	 * @param nMax           maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
-	 *
 	 *         !!! Do not change the signature of this method
 	 */
 	@Override
@@ -203,21 +201,17 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 		{
 			return;
 		}
-		final int size = vRL.size();
-		if (size == 0)
-		{
-			return;
-		}
 
-		for (int i = 0; i < size; i++)
+		for (final KElement e : vRL)
 		{
-			final JDFResourceLink rl = (JDFResourceLink) vRL.elementAt(i);
+			final JDFResourceLink rl = (JDFResourceLink) e;
 			removeChildren(rl.getLocalName(), rl.getNamespaceURI(), null);
 		}
-		for (int i = 0; i < size; i++)
+		for (final KElement e : vRL)
 		{
-			final JDFResourceLink rl = (JDFResourceLink) vRL.elementAt(i);
-			copyElement(rl, null);
+			final JDFResourceLink rl = (JDFResourceLink) e;
+			final JDFResourceLink rlpt = (JDFResourceLink) copyElement(rl, null);
+			rlpt.removeAttributeFromChildren(AttributeName.AMOUNT, null);
 		}
 	}
 
@@ -233,12 +227,9 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 		int n = 0;
 		while (e != null)
 		{
-			if (e instanceof JDFResourceLink)
+			if ((e instanceof JDFResourceLink) && (n++ >= iSkip))
 			{
-				if (n++ >= iSkip)
-				{
-					return (JDFResourceLink) e;
-				}
+				return (JDFResourceLink) e;
 			}
 			e = e.getNextSiblingElement();
 		}
@@ -274,7 +265,9 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	{
 		final JDFDevice d = getDevice(0);
 		if (d == null)
+		{
 			return null;
+		}
 		return StringUtil.getNonEmpty(d.getDeviceID());
 	}
 
@@ -287,10 +280,14 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	{
 		final List<JDFDevice> vd = getChildArrayByClass(JDFDevice.class, false, 0);
 		if (vd == null)
+		{
 			return null;
+		}
 		final VString ret = new VString();
 		for (final JDFDevice d : vd)
+		{
 			ret.add(d.getDeviceID());
+		}
 		return ret;
 	}
 
@@ -326,7 +323,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	}
 
 	/**
-	 * @param moduleIDs the list of module ids to add, if null: nop
+	 * @param moduleIDs   the list of module ids to add, if null: nop
 	 * @param moduleTypes
 	 * @return the list of ModulePhase element
 	 * @throws IllegalArgumentException if the vectors have different lengths
@@ -405,13 +402,12 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	@Override
 	public int compare(final JDFAudit a1, final JDFAudit a2)
 	{
-		final JDFDate d1 = (a1 instanceof JDFPhaseTime) ? ((JDFPhaseTime) a1).getEnd() : a1.getTimeStamp();
-		final JDFDate d2 = (a2 instanceof JDFPhaseTime) ? ((JDFPhaseTime) a2).getEnd() : a2.getTimeStamp();
+		final JDFDate d1 = (a1 instanceof final JDFPhaseTime j) ? j.getEnd() : a1.getTimeStamp();
+		final JDFDate d2 = (a2 instanceof final JDFPhaseTime j) ? j.getEnd() : a2.getTimeStamp();
 		return ContainerUtil.compare(d1, d2);
 	}
 
 	/**
-	 *
 	 * @param phase
 	 */
 	public void setPhase(final JDFJobPhase phase)

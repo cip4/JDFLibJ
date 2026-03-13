@@ -41,7 +41,9 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EOrder;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoStitchingParams.EStitchType;
+import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -49,6 +51,7 @@ import org.cip4.jdflib.core.JDFElement.ESides;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFConstants;
@@ -56,13 +59,18 @@ import org.cip4.jdflib.extensions.XJDFHelper;
 import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFUsageCounter;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -95,8 +103,32 @@ class XJDFIDPTest extends JDFTestCaseBase
 		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) xjdfHelper.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, null);
 		dpp.setSides(ESides.OneSidedFront);
 
+		final SetHelper ucs = xjdfHelper.getCreateSet(ElementName.USAGECOUNTER, EnumUsage.Input);
+		for (int c = 1; c <= 2; c++)
+		{
+			final ResourceHelper ucr = ucs.appendPartition(AttributeName.OPTION, "C" + c, true);
+			ucr.setExternalID("C" + c);
+			final JDFUsageCounter uc = (JDFUsageCounter) ucr.getResource();
+			uc.setScope(EnumScope.Job);
+		}
+
 		final JDFComponent comp = (JDFComponent) xjdfHelper.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, null);
 		ResourceHelper.getHelper(comp).setAmount(100, null, true);
+
+		final JDFComponent inComp = (JDFComponent) xjdfHelper.getCreateResource(ElementName.COMPONENT, EnumUsage.Input, null);
+		final ResourceHelper ich = ResourceHelper.getHelper(inComp);
+		ich.setAmount(100, null, true);
+		ich.setStatus(EnumResStatus.Available);
+		final JDFMedia media = (JDFMedia) xjdfHelper.getCreateResource(ElementName.MEDIA, null, null);
+		ResourceHelper.getHelper(media).ensureReference(inComp, null);
+		media.setMediaType(EnumMediaType.Paper);
+
+		final SetHelper inks = xjdfHelper.getCreateSet(ElementName.INK, EnumUsage.Input);
+		for (final String sep : JDFColor.getCMYKSeparations())
+		{
+			final JDFInk ink = (JDFInk) inks.getCreateResource(new JDFAttributeMap(AttributeName.SEPARATION, sep), true).getResource();
+			ink.setAttribute(XJDFConstants.InkType, "Inkjet");
+		}
 
 		writeRoundTripX(xjdfHelper, "processes/IDPSimplex", EnumValidationLevel.Complete);
 	}

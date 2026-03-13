@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2567,12 +2567,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	private void getMultipleIDs(final String attName, final VString vRet, final Set<String> setID)
 	{
 		final String id = getAttributeRaw(attName);
-		if (id != null)
+		if ((id != null) && !setID.add(id))
 		{
-			if (!setID.add(id))
-			{
-				vRet.appendUnique(id);
-			}
+			vRet.appendUnique(id);
 		}
 		KElement child = getFirstChildElement();
 		while (child != null)
@@ -2688,13 +2685,10 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 		while (kElem != null)
 		{
-			if (kElem.fitsName_KElement(nodeName, nameSpaceURI))
+			// this guy is the one
+			if (kElem.fitsName_KElement(nodeName, nameSpaceURI) && (i++ == iSkip))
 			{
-				// this guy is the one
-				if (i++ == iSkip)
-				{
-					return kElem;
-				}
+				return kElem;
 			}
 			kElem = kElem.getNextSiblingElement();
 		}
@@ -2730,12 +2724,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			int i = 0;
 			while (n != null)
 			{
-				if (clazz.isInstance(n))
+				if (clazz.isInstance(n) && (iSkip == i++))
 				{
-					if (iSkip == i++)
-					{
-						return (A) n;
-					}
+					return (A) n;
 				}
 				n = n.getNextSiblingElement();
 			}
@@ -3484,15 +3475,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		KElement kElem = getFirstChildElement();
 		while (kElem != null)
 		{
-			if (nodeNames.contains(kElem.getLocalName()))
+			if ((nodeNames.contains(kElem.getLocalName()) && (map == null || kElem.includesAttributes(map, true))) && (i++ >= iSkip))
 			{
-				if (map == null || kElem.includesAttributes(map, true))
-				{
-					if (i++ >= iSkip)
-					{
-						return kElem; // this guy is the one
-					}
-				}
+				return kElem; // this guy is the one
 			}
 			if (!bDirect)
 			{
@@ -4781,8 +4766,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 			serial.asDOMSerializer();
 			serial.serialize(this);
 
-			final String s = osw.toString();
-			return s;
+			return osw.toString();
 		}
 		catch (final IOException e)
 		{
@@ -4928,12 +4912,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 
 		while (kElem != null)
 		{
-			if (nodeNames.contains(kElem.getLocalName()) || nodeNames.contains(kElem.getNodeName()))
+			if ((nodeNames.contains(kElem.getLocalName()) || nodeNames.contains(kElem.getNodeName())) && (map == null || kElem.includesAttributes(map, true)))
 			{
-				if (map == null || kElem.includesAttributes(map, true))
-				{
-					v.addElement(kElem);
-				}
+				v.addElement(kElem);
 			}
 			if (!bDirect)
 			{
@@ -6007,12 +5988,9 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 		// turn and i will then be iPos + 1
 		while ((node != null) && (i != iPos + 1))
 		{
-			if (node.getNodeType() == nodeType)
+			if ((node.getNodeType() == nodeType) && (i++ == iPos))
 			{
-				if (i++ == iPos)
-				{
-					retNode = node;
-				}
+				retNode = node;
 			}
 			node = node.getNextSibling();
 		}
@@ -6174,6 +6152,19 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	public void removeAttribute(final String attrib) throws DOMException
 	{
 		removeAttribute_KElement(attrib, null);
+	}
+
+	/**
+	 * @param attName
+	 * @param ns
+	 */
+	public void removeAttributeFromChildren(final String attName, String ns)
+	{
+		final VElement kids = getChildrenByTagName(null);
+		for (final KElement any : kids)
+		{
+			any.removeAttribute_KElement(attName, ns);
+		}
 	}
 
 	/**

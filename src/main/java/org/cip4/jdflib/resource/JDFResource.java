@@ -1869,15 +1869,12 @@ public class JDFResource extends JDFElement
 
 		for (final KElement kElem : v)
 		{
-			if (kElem instanceof final JDFResourceLink l)
+			if ((kElem instanceof final JDFResourceLink l) && (JDFResourceLink.EnumUsage.Input.equals(l.getUsage()) != bCreate))
 			{
-				if (JDFResourceLink.EnumUsage.Input.equals(l.getUsage()) != bCreate)
+				final JDFPool pool = l.getPool();
+				if (pool != null)
 				{
-					final JDFPool pool = l.getPool();
-					if (pool != null)
-					{
-						vv.add(pool.getParentNode_KElement());
-					}
+					vv.add(pool.getParentNode_KElement());
 				}
 			}
 		}
@@ -2348,12 +2345,9 @@ public class JDFResource extends JDFElement
 			return false;
 		}
 		final List<EnumPartIDKey> vImplicitKeys = getImplicitPartitions();
-		if (vImplicitKeys != null)
+		if ((vImplicitKeys != null) && vImplicitKeys.contains(key))
 		{
-			if (vImplicitKeys.contains(key))
-			{
-				return false;
-			}
+			return false;
 		}
 
 		final String keyName = key.getName();
@@ -3430,7 +3424,7 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public void collapse(final boolean bCollapseToNode)
 	{
-		new Collapser().collapse(bCollapseToNode, true, null);
+		new Collapser().collapse(bCollapseToNode, true, null, null);
 	}
 
 	/**
@@ -3442,7 +3436,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 	{
-		new Collapser().collapse(bCollapseToNode, bCollapseElements, null);
+		new Collapser().collapse(bCollapseToNode, bCollapseElements, null, null);
 	}
 
 	/**
@@ -3454,7 +3448,20 @@ public class JDFResource extends JDFElement
 	 */
 	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements, final Collection<String> keepFilter)
 	{
-		new Collapser().collapse(bCollapseToNode, bCollapseElements, keepFilter);
+		new Collapser().collapse(bCollapseToNode, bCollapseElements, keepFilter, null);
+	}
+
+	/**
+	 * collapse all redundant attributes and elements
+	 *
+	 * @param bCollapseToNode   only collapse redundant attributes and elements that pre-exist in the nodes
+	 * @param bCollapseElements if true, collapse elements, else only collapse attributes
+	 * @default Collapse(false)
+	 */
+	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements, final Collection<String> keepFilter,
+			final Collection<String> skipFilter)
+	{
+		new Collapser().collapse(bCollapseToNode, bCollapseElements, keepFilter, skipFilter);
 	}
 
 	/**
@@ -3549,22 +3556,19 @@ public class JDFResource extends JDFElement
 				}
 			}
 			final VString v = r.getAttributeVector_KElement();
-			if (v != null)// should actually always be the case...
+			final VString ignoreAtts = r.getPartIDKeys();
+			ignoreAtts.add(AttributeName.CLASS);
+			ignoreAtts.add(AttributeName.ID);
+			ignoreAtts.add(AttributeName.AGENTNAME);
+			ignoreAtts.add(AttributeName.AGENTVERSION);
+			ignoreAtts.add(AttributeName.PARTUSAGE);
+			if (r.isResourceRoot())
 			{
-				final VString ignoreAtts = r.getPartIDKeys();
-				ignoreAtts.add(AttributeName.CLASS);
-				ignoreAtts.add(AttributeName.ID);
-				ignoreAtts.add(AttributeName.AGENTNAME);
-				ignoreAtts.add(AttributeName.AGENTVERSION);
-				ignoreAtts.add(AttributeName.PARTUSAGE);
-				if (r.isResourceRoot())
-				{
-					ignoreAtts.add("Status");
-				}
-				v.removeStrings(ignoreAtts, 0);
-				return v.size() != 0;
+				ignoreAtts.add("Status");
 			}
-			return false;
+			v.removeStrings(ignoreAtts, 0);
+			return !v.isEmpty();
+
 		}
 
 		/**
@@ -3674,10 +3678,10 @@ public class JDFResource extends JDFElement
 		 *
 		 * @param bCollapseToNode   only collapse redundant attributes and elements that pre-exist in the nodes
 		 * @param bCollapseElements if true, collapse elements, else only collapse attributes
-		 * @param keepFilter        TODO
+		 * @param keepFilter        only zapp those in keepFilter
 		 * @default Collapse(false)
 		 */
-		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements, final Collection<String> keepFilter)
+		void collapse(final boolean bCollapseToNode, final boolean bCollapseElements, final Collection<String> keepFilter, final Collection<String> skipFilter)
 		{
 			final boolean hasIdentical = getElementByClass(JDFIdentical.class, 0, true) != null;
 			final VElement leaves2 = getLeaves(false);
@@ -3686,17 +3690,17 @@ public class JDFResource extends JDFElement
 			{
 				return; // this is a non partitioned root node
 			}
-			final boolean hasFilter = !StringUtil.isEmpty(keepFilter);
 			final VString parts = getRootPartAtts();
 			for (final KElement l : leaves)
 			{
 				JDFResource leaf = (JDFResource) l;
 				final VString atts = leaf.getAttributeVector_JDFResource();
 				atts.removeStrings(parts, Integer.MAX_VALUE);
-				if (hasFilter)
+				if (!ContainerUtil.isEmpty(keepFilter))
 				{
 					atts.retainAll(keepFilter);
 				}
+				ContainerUtil.removeAll(atts, skipFilter);
 				JDFResource parent = (JDFResource) leaf.getParentNode_KElement();
 
 				while (true)
@@ -3709,7 +3713,7 @@ public class JDFResource extends JDFElement
 					// since 190602 also collapse elements
 					if (bCollapseElements)
 					{
-						collapseElements(bCollapseToNode, leaf, parent, localLeaves, keepFilter);
+						collapseElements(bCollapseToNode, leaf, parent, localLeaves, keepFilter, skipFilter);
 					}
 					if (parent.isResourceRoot() || parent == JDFResource.this)
 					{
@@ -3729,7 +3733,7 @@ public class JDFResource extends JDFElement
 			for (final String att : atts)
 			{
 				// reduce lower stuff
-				if (!bCollapseToNode && (!parent.hasAttribute(att, null, false)))
+				if (!bCollapseToNode && !parent.hasAttribute(att, null, false))
 				{
 					final String attVal = leaf.getAttribute_KElement(att, null, JDFConstants.EMPTYSTRING);
 					if (!parent.getAttribute(att).equals(attVal) || !parent.hasAttribute(att))
@@ -3771,8 +3775,8 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		private void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves,
-				final Collection<String> keepFilter)
+		void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves,
+				final Collection<String> keepFilter, Collection<String> skipFilter)
 		{
 			final int localSize = localLeaves.size();
 			final List<KElement> vElm = leaf.getChildArray_KElement(null, null, null, true, 0);
@@ -3781,7 +3785,8 @@ public class JDFResource extends JDFElement
 			{
 				final String nodeName = e.getNodeName();
 				if (resName.equals(nodeName)
-						|| !StringUtil.isEmpty(keepFilter) && !keepFilter.contains(nodeName) && !keepFilter.contains(JDFRefElement.getRefLocalName(nodeName)))
+						|| !StringUtil.isEmpty(keepFilter) && !keepFilter.contains(nodeName) && !keepFilter.contains(JDFRefElement.getRefLocalName(nodeName))
+						|| !StringUtil.isEmpty(skipFilter) && skipFilter.contains(nodeName) && skipFilter.contains(JDFRefElement.getRefLocalName(nodeName)))
 				{
 					continue; // don't collapse partitions
 				}
@@ -4381,12 +4386,9 @@ public class JDFResource extends JDFElement
 
 		// special handling for NI and CI as resources
 		final String locName = parentNode.getLocalName();
-		if (ElementName.NODEINFO.equals(locName) || ElementName.CUSTOMERINFO.equals(locName))
+		if ((ElementName.NODEINFO.equals(locName) || ElementName.CUSTOMERINFO.equals(locName)) && (getResourcePool() != null))
 		{
-			if (getResourcePool() != null)
-			{
-				return false;
-			}
+			return false;
 		}
 
 		return isValidParentNodeName(locName);
@@ -7175,12 +7177,9 @@ public class JDFResource extends JDFElement
 			{
 				final JDFResource rs = (JDFResource) v.elementAt(i);
 				final EnumResStatus rss = rs.getResStatus(false);
-				if (rss != null)
+				if ((rss != null) && ((ret == null) || (rss.getValue() < ret.getValue())))
 				{
-					if ((ret == null) || (rss.getValue() < ret.getValue()))
-					{
-						ret = rss;
-					}
+					ret = rss;
 				}
 			}
 			return ret;
@@ -7453,21 +7452,15 @@ public class JDFResource extends JDFElement
 				return false;
 			}
 
-			if (!isResourceElement())
-			{
-				if (hasAttribute_KElement(AttributeName.CLASS, null, false))
-				{
-					return false;
-				}
-			}
-			// if partusage=implicit, the root must also be complete and valid by itself
-		}
-		else if (!bLeaf && !bForceIncomplete)
-		{
-			if (!super.isValid(level))
+			if (!isResourceElement() && hasAttribute_KElement(AttributeName.CLASS, null, false))
 			{
 				return false;
 			}
+			// if partusage=implicit, the root must also be complete and valid by itself
+		}
+		else if ((!bLeaf && !bForceIncomplete) && !super.isValid(level))
+		{
+			return false;
 		}
 		return bRet;
 	}
@@ -7743,15 +7736,12 @@ public class JDFResource extends JDFElement
 
 	void updatePartitionMap(final Node src)
 	{
-		if (src != null && src.getNodeName().equals(getNodeName()) && !isResourceElement())
+		if ((src != null && src.getNodeName().equals(getNodeName()) && !isResourceElement()) && (getResourceRoot().partitionMap != null))
 		{
-			if (getResourceRoot().partitionMap != null)
+			final JDFAttributeMap newPartMap = ((JDFResource) src).getPartMap();
+			if (!newPartMap.isEmpty())
 			{
-				final JDFAttributeMap newPartMap = ((JDFResource) src).getPartMap();
-				if (!newPartMap.isEmpty())
-				{
-					getResourceRoot().partitionMap.addPartitionMap(newPartMap, (JDFResource) src);
-				}
+				getResourceRoot().partitionMap.addPartitionMap(newPartMap, (JDFResource) src);
 			}
 		}
 	}

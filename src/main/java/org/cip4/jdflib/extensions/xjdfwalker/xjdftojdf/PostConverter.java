@@ -86,8 +86,6 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
- *
  * @author rainer prosi
  * @date Feb 26, 2013
  */
@@ -179,7 +177,6 @@ class PostConverter
 		}
 
 		/**
-		 *
 		 * @param e
 		 */
 		private void cleanGangLink(final KElement e)
@@ -295,12 +292,10 @@ class PostConverter
 			{
 				bs1 = bs0;
 			}
-			bs1 = bs1.getLeaf(0);
-			return bs1;
+			return bs1.getLeaf(0);
 		}
 
 		/**
-		 *
 		 * @param e
 		 */
 		void cleanLinkAmount(final KElement e)
@@ -330,19 +325,24 @@ class PostConverter
 	{
 		final JDFDeliveryParams dp = (JDFDeliveryParams) theNode.getResource(ElementName.DELIVERYPARAMS, EnumUsage.Input, 0);
 		final VString allTypes = theNode.getAllTypes();
-		if (dp != null && (allTypes.contains(XJDFConstants.Product) || dp.getChildWithAttribute(ElementName.PART, AttributeName.PRODUCTPART, null, "*", 0, false) != null))
+		if (dp != null && (allTypes.contains(XJDFConstants.Product)
+				|| dp.getChildWithAttribute(ElementName.PART, AttributeName.PRODUCTPART, null, "*", 0, false) != null))
 		{
 			boolean keepDI = theNode.getResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0) != null;
 			final JDFDeliveryIntent di = (JDFDeliveryIntent) theNode.getCreateResource(ElementName.DELIVERYINTENT, EnumUsage.Input, 0);
 			keepDI = di.setFromDeliveryParams(dp) || keepDI;
 			if (!keepDI)
+			{
 				di.deleteNode();
+			}
 
 			boolean keepADI = theNode.getResource(ElementName.ARTDELIVERYINTENT, EnumUsage.Input, 0) != null;
 			final JDFArtDeliveryIntent adi = (JDFArtDeliveryIntent) theNode.getCreateResource(ElementName.ARTDELIVERYINTENT, EnumUsage.Input, 0);
 			keepADI = adi.setFromDeliveryParams(dp) || keepADI;
 			if (!keepADI)
+			{
 				adi.deleteNode();
+			}
 
 			dp.deleteNode();
 		}
@@ -414,14 +414,17 @@ class PostConverter
 	}
 
 	/**
-	 *
 	 * @author rainer prosi
-	 *
 	 */
 	class ResourceCleaner
 	{
 		private final VElement products;
 		private final HashSet<KElement> rootLinks;
+		private final static Collection<String> noCollapse = ContainerUtil.addAll(new HashSet<String>(), new String[] { AttributeName.DESCRIPTIVENAME,
+				AttributeName.PRODUCTID, AttributeName.COUNTERID, AttributeName.ID, AttributeName.ASSEMBLYID, AttributeName.ASSEMBLYIDS });
+		private final static Collection<String> noCollapseElements = ContainerUtil.addAll(new HashSet<String>(),
+				new String[] { ElementName.ASSEMBLY, ElementName.COLORINTENT, ElementName.NODEINFO, ElementName.RUNLIST, ElementName.COMPONENT,
+						ElementName.EXPOSEDMEDIA, ElementName.PREVIEW, ElementName.INKZONEPROFILE });
 
 		public ResourceCleaner()
 		{
@@ -459,8 +462,6 @@ class PostConverter
 		}
 
 		/**
-		 *
-		 *
 		 * @param theNode
 		 * @return
 		 */
@@ -479,8 +480,6 @@ class PostConverter
 		}
 
 		/**
-		 *
-		 *
 		 * @param eRoot
 		 */
 		void cleanResource(final KElement eRoot)
@@ -488,6 +487,10 @@ class PostConverter
 			final JDFResource resRoot = (JDFResource) eRoot;
 			if (resRoot != null)
 			{
+				if (!noCollapseElements.contains(resRoot.getLocalName()))
+				{
+					resRoot.collapse(false, false, null, noCollapse);
+				}
 				final EnumResStatus s = resRoot.getStatusFromLeaves(false);
 				if (s != null)
 				{
@@ -540,7 +543,8 @@ class PostConverter
 						if (product.getID().equals(extID) || extID.equals(product.getNonEmpty(XJDFConstants.ExternalID)))
 						{
 							final JDFResourceLink baselink = theNode.getLink(leaf, null);
-							((JDFNode) product).ensureLinkPU(leaf, baselink == null ? null : baselink.getUsage(), baselink == null ? null : baselink.getProcessUsage());
+							((JDFNode) product).ensureLinkPU(leaf, baselink == null ? null : baselink.getUsage(),
+									baselink == null ? null : baselink.getProcessUsage());
 							ContainerUtil.add(rootLinks, baselink);
 						}
 					}
@@ -752,7 +756,6 @@ class PostConverter
 		}
 
 		/**
-		 *
 		 * @param sp
 		 * @param i
 		 * @param bs
@@ -853,8 +856,6 @@ class PostConverter
 		}
 
 		/**
-		 *
-		 *
 		 * @param r
 		 */
 		private void cleanColorPool(final JDFResource r)
@@ -894,14 +895,15 @@ class PostConverter
 	private class DependencyCleaner
 	{
 		/**
-		 *
 		 * @param root
 		 */
 		private void fixDependencies(final JDFNode root)
 		{
 			final List<JDFDependencies> vDep = root.getChildArrayByClass(JDFDependencies.class, true, 0);
 			if (vDep == null)
+			{
 				return;
+			}
 			for (final JDFDependencies dep : vDep)
 			{
 				fixOneDependencies(dep);
@@ -910,16 +912,19 @@ class PostConverter
 		}
 
 		/**
-		 *
 		 * @param dep
 		 */
 		private void fixOneDependencies(final JDFDependencies dep)
 		{
 			if (dep == null)
+			{
 				return;
+			}
 			final List<KElement> v = dep.getChildArray_KElement("RunListRef", null, null, true, 0);
 			if (v == null)
+			{
 				return;
+			}
 			for (final KElement e : v)
 			{
 				final JDFRefElement rl = (JDFRefElement) e;
@@ -946,7 +951,7 @@ class PostConverter
 					}
 					for (final KElement r : vR)
 					{
-						final JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
+						final JDFLayoutElement loe = (r instanceof final JDFRunList j) ? j.getLayoutElement() : null;
 						if (loe != null)
 						{
 							final Collection<KElement> v3 = loe.getChildArray_KElement(null, null, null, true, 0);
@@ -1002,7 +1007,9 @@ class PostConverter
 	void mergeProductLinks(final JDFNode childNode, final JDFNode parentProduct)
 	{
 		if (childNode == parentProduct)
+		{
 			return;
+		}
 
 		mergeProductLink(childNode, parentProduct, ElementName.CUSTOMERINFO, EnumUsage.Input);
 		final JDFResource ni = mergeProductLink(childNode, parentProduct, ElementName.NODEINFO, EnumUsage.Input);

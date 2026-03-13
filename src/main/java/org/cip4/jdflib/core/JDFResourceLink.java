@@ -2021,9 +2021,14 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 	 */
 	public boolean matchesString(final String namedResLink)
 	{
+		return getMatchingParts(namedResLink) != null;
+	}
+
+	public VJDFAttributeMap getMatchingParts(final String namedResLink)
+	{
 		if (namedResLink == null)
 		{
-			return false;
+			return null;
 		}
 
 		boolean bMatch = namedResLink.equals(getNamedProcessUsage());
@@ -2034,23 +2039,32 @@ public class JDFResourceLink extends JDFAutoResourceLink implements IAmountPoolC
 		bMatch = bMatch || namedResLink.equals(getAttribute(AttributeName.USAGE));
 		bMatch = bMatch || (getLinkedResourceName() + JDFConstants.COLON + getAttribute(AttributeName.USAGE)).equals(namedResLink);
 
+		if (bMatch)
+		{
+			return new VJDFAttributeMap(new JDFAttributeMap());
+		}
 		if (!bMatch && StringUtil.token(namedResLink, 0, JDFConstants.COLON).equals(getLinkedResourceName()))
 		{
 			final VElement v = getTargetVector(0);
 			if (v != null)
 			{
-				final int siz = v.size();
-				for (int i = 0; i < siz; i++)
+				final VJDFAttributeMap ret = new VJDFAttributeMap();
+				for (final KElement e : v)
 				{
-					if (((JDFResource) v.elementAt(i)).matchesString(namedResLink))
+					final JDFResource r = (JDFResource) e;
+					if (r.matchesString(namedResLink))
 					{
-						return true;
+						ret.add(r.getPartMap());
 					}
+				}
+				if (!ret.isEmpty())
+				{
+					return ret;
 				}
 			}
 		}
 
-		return bMatch;
+		return null;
 	}
 
 	public List<JDFResource> getTargetList()
