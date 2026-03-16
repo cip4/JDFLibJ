@@ -68,9 +68,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	public static final String SET = "Set";
 
 	/**
-	 *
 	 * @author rainerprosi
-	 *
 	 */
 	public enum EnumFamily
 	{
@@ -88,7 +86,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	public static final String RESOURCE_SET = XJDFConstants.ResourceSet;
 
 	/**
-	 *
 	 * @param bGood good=true
 	 * @return
 	 */
@@ -97,7 +94,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		double a = 0;
 		final List<ResourceHelper> l = getPartitionList();
 		for (final ResourceHelper h : l)
+		{
 			a += h.getAmountSum(bGood);
+		}
 		return a;
 	}
 
@@ -115,23 +114,25 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 *
 	 * @param src
 	 * @param key the reference key in src
-	 *
 	 */
 	public void ensureReference(final KElement src, String key)
 	{
 		if (src != null && theElement != null)
 		{
 			if (StringUtil.isEmpty(key))
+			{
 				key = getName();
+			}
 			if (!key.endsWith(JDFConstants.REF) && !key.endsWith(JDFConstants.REFS))
+			{
 				key += JDFConstants.REF;
+			}
 			final String id = ensureID();
 			src.setAttribute(key, id);
 		}
 	}
 
 	/**
-	 *
 	 * is the element a set?
 	 *
 	 * @param e
@@ -243,7 +244,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 			e = insertPartitionBefore(e, map, addRes);
 		}
 		if (addRes)
+		{
 			e.getCreateResource();
+		}
 		return e;
 	}
 
@@ -280,7 +283,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		}
 		e.setPartMapVector(vmap);
 		if (addRes)
+		{
 			e.getCreateResource();
+		}
 		return e;
 	}
 
@@ -299,7 +304,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 * 
 	 * @param map
 	 * @return
 	 */
@@ -379,7 +383,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		List<ResourceHelper> v = getResourceList();
 		int size = v.size();
 		if (index < 0)
+		{
 			index += size;
+		}
 		while (index < 0)
 		{
 			appendResource((JDFAttributeMap) null, addRes);
@@ -391,10 +397,14 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 			size++;
 		}
 		if (size != v.size())
+		{
 			v = getResourceList();
+		}
 		final ResourceHelper ph = v.get(index);
 		if (addRes)
+		{
 			ph.getCreateResource();
+		}
 		return ph;
 	}
 
@@ -451,7 +461,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 
 	/**
 	 * @param partMap
-	 * @param addRes if true, also add the detailed resource element, e.g. Layout
+	 * @param addRes  if true, also add the detailed resource element, e.g. Layout
 	 * @return
 	 */
 	public ResourceHelper appendResource(final JDFAttributeMap partMap, final boolean addRes)
@@ -461,7 +471,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 
 	/**
 	 * @param partMap
-	 * @param addRes if true, also add the detailed resource element, e.g. Layout
+	 * @param addRes  if true, also add the detailed resource element, e.g. Layout
 	 * @return
 	 */
 	public ResourceHelper appendPartition(final JDFAttributeMap partMap, final boolean addRes)
@@ -471,7 +481,7 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 
 	/**
 	 * @param partMap
-	 * @param addRes if true, also add the detailed resource element, e.g. Layout
+	 * @param addRes  if true, also add the detailed resource element, e.g. Layout
 	 * @return
 	 */
 	public ResourceHelper appendResource(final VJDFAttributeMap partMaps, final boolean addRes)
@@ -490,8 +500,25 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		return partitionHelper;
 	}
 
+	public List<ResourceHelper> getCreateResources(final VJDFAttributeMap partMaps, boolean addRes)
+	{
+		final List<ResourceHelper> ret = new ArrayList<>();
+		if (ContainerUtil.isEmpty(partMaps))
+		{
+			ret.add(getCreateResource((JDFAttributeMap) null, addRes));
+		}
+		else
+		{
+			for (final JDFAttributeMap partMap : partMaps)
+			{
+				ret.add(getCreateResource(partMap, addRes));
+			}
+		}
+
+		return ret;
+	}
+
 	/**
-	 *
 	 * @return
 	 */
 	public XJDFHelper getXJDF()
@@ -586,16 +613,13 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 
 	/**
 	 * @return
-	 *
 	 */
 	public String getPartitionName()
 	{
-		final String name = getSetName(theElement.getLocalName());
-		return name;
+		return getSetName(theElement.getLocalName());
 	}
 
 	/**
-	 *
 	 * @param e the element to test
 	 * @return the asset type name (Parameter, Resource etc)
 	 */
@@ -605,7 +629,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @param e the element to test
 	 * @return then resourceset @Name (RunList, Layout etc)
 	 */
@@ -616,7 +639,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @param setName the name of the set element
 	 * @return then asset type name (Parameter, Resource etc)
 	 */
@@ -629,7 +651,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
@@ -641,18 +662,21 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 * @param explicitCPI TODO
+	 * @param explicitCPI  TODO
 	 * @return the SetHelper for the vector of resourcesets
 	 */
-	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi, final boolean explicitCPI)
+	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi,
+			final boolean explicitCPI)
 	{
 		KElement e = parent.getFirstChildElement();
 		final String usageString = usage == null ? null : usage.getName();
 		while (e != null)
 		{
 			final JDFIntegerList setCpi = new SetHelper(e).getCombinedProcessIndex();
-			if (isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
-					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE)) && (!explicitCPI && setCpi == null || ContainerUtil.containsAny(setCpi, cpi)))
+			if (isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME)))
+					&& StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE))
+					&& StringUtil.equals(processUsage, e.getNonEmpty(AttributeName.PROCESSUSAGE))
+					&& (!explicitCPI && setCpi == null || ContainerUtil.containsAny(setCpi, cpi)))
 			{
 				return new SetHelper(e);
 			}
@@ -664,7 +688,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	/**
 	 * @param name
 	 * @param usage
-	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public static SetHelper getSet(final KElement parent, final String name, final EnumUsage usage)
@@ -673,7 +696,8 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 		final String usageString = usage == null ? null : usage.getName();
 		while (e != null)
 		{
-			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME))) && StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE)))
+			if (SetHelper.isSet(e) && (name == null || name.equals(e.getNonEmpty(AttributeName.NAME)))
+					&& StringUtil.equals(usageString, e.getNonEmpty(AttributeName.USAGE)))
 			{
 				return new SetHelper(e);
 			}
@@ -695,7 +719,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @param name
 	 * @param usage
 	 * @return a new set element
@@ -704,7 +727,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	{
 		SetHelper set = getSet(parent, name, usage);
 		if (set == null)
+		{
 			set = appendSet(parent, name, usage);
+		}
 		return set;
 	}
 
@@ -712,7 +737,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 *
 	 * @return the SetHelper
 	 */
 	public static SetHelper getCreateSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
@@ -724,10 +748,11 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 * @param explicitCPI TODO
+	 * @param explicitCPI  TODO
 	 * @return the SetHelper
 	 */
-	public static SetHelper getCreateSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi, final boolean explicitCPI)
+	public static SetHelper getCreateSet(final KElement parent, final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi,
+			final boolean explicitCPI)
 	{
 		SetHelper s0 = getSet(parent, name, usage, processUsage, cpi, explicitCPI);
 		if (s0 == null)
@@ -846,8 +871,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public EnumUsage getUsage()
@@ -856,8 +879,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public String getProcessUsage()
@@ -866,8 +887,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public JDFIntegerList getCombinedProcessIndex()
@@ -924,7 +943,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	{
 		JDFIntegerList il = getCombinedProcessIndex();
 		if (insert && il == null)
+		{
 			il = new JDFIntegerList();
+		}
 		if (il != null)
 		{
 			boolean mod = false;
@@ -983,8 +1004,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public void setCombinedProcessIndex(final JDFIntegerList cpi)
@@ -993,8 +1012,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public void setProcessUsage(final String processUsage)
@@ -1003,8 +1020,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public void setUnit(final eUnit unit)
@@ -1013,8 +1028,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
-	 *
 	 * @return
 	 */
 	public eUnit getUnit()
@@ -1023,7 +1036,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	@Override
@@ -1034,7 +1046,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 
 	/**
 	 * @return the productID of the product
-	 *
 	 */
 	@Override
 	public String getExternalID()
@@ -1067,7 +1078,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 			while (e != null)
 			{
 				if (id.equals(e.getID()))
+				{
 					return new ResourceHelper(e);
+				}
 				e = e.getNextSiblingElement(partitionName, null);
 			}
 		}
@@ -1075,20 +1088,20 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public EnumFamily getFamily()
 	{
 		if (theElement == null)
+		{
 			return null;
+		}
 		String name = theElement.getLocalName();
 		name = StringUtil.leftStr(name, -3);
 		return EnumFamily.valueOf(name);
 	}
 
 	/**
-	 *
 	 * @see org.cip4.jdflib.extensions.BaseXJDFHelper#setID(java.lang.String)
 	 */
 	@Override
@@ -1143,7 +1156,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @return the ordered collection of PartMapVectors of each child resource
 	 */
 	public Collection<VJDFAttributeMap> getPartMapVectors()
@@ -1158,7 +1170,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @return the ordered collection of PartMapVectors of each child resource
 	 */
 	public Collection<List<JDFAttributeMap>> getPartMapLists()
@@ -1173,7 +1184,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public VString getDependentJobParts()
@@ -1192,7 +1202,6 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @param name
 	 */
 	public void setName(final String name)
@@ -1218,17 +1227,20 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	}
 
 	/**
-	 *
 	 * @param bsHelper
 	 * @return
 	 */
 	public int indexOf(final ResourceHelper bsHelper)
 	{
 		if (bsHelper == null)
+		{
 			return -1;
+		}
 		final List<KElement> v = theElement.getChildList(getPartitionName(), null);
 		if (v == null)
+		{
 			return -1;
+		}
 		return v.indexOf(bsHelper.getRoot());
 
 	}
@@ -1242,7 +1254,9 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	public static SetHelper getHelper(KElement e)
 	{
 		while (e != null && !isSet(e))
+		{
 			e = e.getParentNode_KElement();
+		}
 		return isSet(e) ? new SetHelper(e) : null;
 	}
 
@@ -1276,21 +1290,28 @@ public class SetHelper extends BaseXJDFHelper implements IMatches
 	@Override
 	public boolean matches(final Object subset)
 	{
-		if (!(subset instanceof SetHelper))
+		if (!(subset instanceof final SetHelper sh))
+		{
 			return false;
-		final SetHelper sh = (SetHelper) subset;
+		}
 		if (!ContainerUtil.equals(sh.getUsage(), getUsage()))
+		{
 			return false;
+		}
 		if (!ContainerUtil.equals(sh.getProcessUsage(), getProcessUsage()))
+		{
 			return false;
+		}
 		if (!ContainerUtil.equals(sh.getCombinedProcessIndex(), getCombinedProcessIndex()))
+		{
 			return false;
+		}
 		return true;
 	}
 
 	/**
 	 * the number of partitions (resource elements)
-	 * 
+	 *
 	 * @return
 	 */
 	public int size()

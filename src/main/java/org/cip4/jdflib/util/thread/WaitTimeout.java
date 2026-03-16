@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,13 +39,10 @@ package org.cip4.jdflib.util.thread;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.cip4.jdflib.util.ThreadUtil;
-
 /**
  * abstract class to run uninteruptable stuff in an interruptable thread
  *
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         11.12.2008
  * @param <a> the returned object data type
  */
@@ -115,7 +112,6 @@ public abstract class WaitTimeout<a> implements Runnable
 	}
 
 	/**
-	 *
 	 * start the thread
 	 */
 	public final void start()
@@ -134,7 +130,10 @@ public abstract class WaitTimeout<a> implements Runnable
 		myThread = null;
 		final MyMutex tmp = mutex;
 		mutex = null;
-		ThreadUtil.notifyAll(tmp);
+		if (tmp != null)
+		{
+			tmp.notifyMe();
+		}
 	}
 
 	/**
@@ -146,7 +145,7 @@ public abstract class WaitTimeout<a> implements Runnable
 		if ((t1 - t0 < waitMillis) && (mutex != null))
 		{
 			final long dt = waitMillis - (t1 - t0);
-			ThreadUtil.wait(mutex, (int) dt);
+			mutex.waitForMe((int) dt);
 			if (mutex != null && myThread != null)
 			{
 				myThread.interrupt();

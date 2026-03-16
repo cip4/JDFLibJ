@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -98,7 +98,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	public static XJDFHelper getHelper(final XMLDoc doc)
 	{
 		if (doc == null)
+		{
 			return null;
+		}
 		final KElement root = doc.getRoot();
 		return getHelper(root);
 	}
@@ -112,14 +114,17 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	public static XJDFHelper getHelper(KElement root)
 	{
 		if (root == null)
+		{
 			return null;
-		if (!root.getLocalName().equals(XJDFConstants.XJDF))
+		}
+		if (!XJDFConstants.XJDF.equals(root.getLocalName()))
+		{
 			root = root.getDeepParent(XJDFConstants.XJDF, 0);
+		}
 		return (root != null) ? new XJDFHelper(root) : null;
 	}
 
 	/**
-	 *
 	 * @param root
 	 * @return
 	 */
@@ -129,7 +134,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param root
 	 * @return
 	 */
@@ -139,7 +143,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param fileName
 	 * @return
 	 */
@@ -149,7 +152,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param fileName
 	 * @return
 	 */
@@ -179,7 +181,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 * @param jobID , if null a new jobid is generated
+	 * @param jobID     , if null a new jobid is generated
 	 * @param jobPartID
 	 * @param parts
 	 */
@@ -188,7 +190,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		super();
 		newXJDF(null);
 		if (jobID == null)
+		{
 			jobID = "Job_" + new JDFDate().getFormattedDateTime("MMdd_hhmmss");
+		}
 		setAttribute(AttributeName.JOBID, jobID);
 		setAttribute(AttributeName.JOBPARTID, jobPartID);
 
@@ -197,7 +201,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param jobID
 	 * @param jobPartID
 	 */
@@ -210,7 +213,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param jobID
 	 * @param jobPartID
 	 */
@@ -230,19 +232,22 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 
 	/**
 	 * @param version2
-	 *
 	 */
 	void newXJDF(EnumVersion version)
 	{
 		if (version == null)
+		{
 			version = getDefaultVersion();
+		}
 
 		final JDFDoc doc = new JDFDoc(XJDFConstants.XJDF, version);
 		doc.setInitOnCreate(false);
 
 		theElement = doc.getRoot();
 		if (EnumUtil.aLessThanB(EnumVersion.Version_2_0, version))
+		{
 			theElement.setAttribute(AttributeName.VERSION, version.getName());
+		}
 		final AuditPoolHelper aph = getCreateAuditPool();
 		aph.appendMessage(XJDFConstants.AuditCreated);
 	}
@@ -256,7 +261,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param setName
 	 * @param usage
 	 * @return the vector of parametersets and resourcesets
@@ -281,7 +285,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public AuditPoolHelper getAuditPool()
@@ -291,7 +294,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public AuditPoolHelper getCreateAuditPool()
@@ -307,12 +309,16 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	public SetHelper getSet(final String id)
 	{
 		if (StringUtil.isEmpty(id))
+		{
 			return null;
+		}
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
 			if (id.equals(e.getID()) && SetHelper.isSet(e))
+			{
 				return new SetHelper(e);
+			}
 			e = e.getNextSiblingElement();
 		}
 
@@ -320,7 +326,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public SetHelper getNodeInfo()
@@ -329,7 +334,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public SetHelper getCreateNodeInfo()
@@ -361,7 +365,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	public ResourceHelper getPartition(final String id)
 	{
 		if (id == null)
+		{
 			return null;
+		}
 		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
@@ -379,7 +385,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * is the element a set?
 	 *
 	 * @param e
@@ -393,7 +398,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return the
 	 */
 	public String getJobID()
@@ -402,9 +406,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param usage if Input, get predecessors, if Output get followers, if null get any
-	 *
 	 * @return the list of dependents, null if none were found
 	 */
 	public VString getDependentJobParts(final EnumUsage usage)
@@ -422,31 +424,30 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param id
 	 * @return
 	 */
 	public ProductHelper getProduct(final String id)
 	{
 		final KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
-		final KElement productElement = productList == null ? null : productList.getChildWithAttribute(ProductHelper.PRODUCT, AttributeName.ID, null, id, 0, true);
+		final KElement productElement = productList == null ? null
+				: productList.getChildWithAttribute(ProductHelper.PRODUCT, AttributeName.ID, null, id, 0, true);
 		return productElement == null ? null : new ProductHelper(productElement);
 	}
 
 	/**
-	 *
 	 * @param id
 	 * @return
 	 */
 	public ProductHelper getProductByExternalID(final String id)
 	{
 		final KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
-		final KElement productElement = productList == null ? null : productList.getChildWithAttribute(ProductHelper.PRODUCT, XJDFConstants.ExternalID, null, id, 0, true);
+		final KElement productElement = productList == null ? null
+				: productList.getChildWithAttribute(ProductHelper.PRODUCT, XJDFConstants.ExternalID, null, id, 0, true);
 		return productElement == null ? null : new ProductHelper(productElement);
 	}
 
 	/**
-	 *
 	 * @param id
 	 * @return
 	 */
@@ -456,7 +457,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param id
 	 * @return
 	 */
@@ -467,7 +467,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param id
 	 * @param externalID TODO
 	 * @return
@@ -526,7 +525,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param rootOnly
 	 * @return
 	 */
@@ -537,14 +535,15 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return the xjdf root element
 	 */
 	public Vector<ProductHelper> getRootProductHelpers()
 	{
 		final Vector<ProductHelper> vp = getProductHelpers();
 		if (vp == null)
+		{
 			return null;
+		}
 		final Vector<ProductHelper> vp2 = new Vector<>();
 
 		for (final ProductHelper ph : vp)
@@ -567,7 +566,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		final KElement productList = theElement == null ? null : theElement.getElement(ProductHelper.PRODUCTLIST);
 		final VElement products = productList == null ? null : productList.getChildElementVector(ProductHelper.PRODUCT, null);
 		if (ContainerUtil.isEmpty(products))
+		{
 			return null;
+		}
 
 		final Vector<ProductHelper> vph = new Vector<>();
 		for (final KElement e : products)
@@ -613,13 +614,10 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		KElement e2 = null;
 		while (e != null)
 		{
-			if (SetHelper.isSet(e) && (name == null || name.equals(e.getAttribute(AttributeName.NAME, null, null))))
+			if ((SetHelper.isSet(e) && (name == null || name.equals(e.getAttribute(AttributeName.NAME, null, null)))) && (n++ == iSkip))
 			{
-				if (n++ == iSkip)
-				{
-					e2 = e;
-					break;
-				}
+				e2 = e;
+				break;
 			}
 			e = e.getNextSiblingElement();
 		}
@@ -630,7 +628,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param name
 	 * @param usage
 	 * @param processUsage - if uses as a type then the cpi is calculated and returned
-	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage)
@@ -652,7 +649,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi, final boolean explicitCPI)
@@ -664,7 +660,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
@@ -676,7 +671,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 *
 	 * @return the SetHelper
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage, final String processUsage, final int cpi)
@@ -688,7 +682,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 *
 	 * @return the SetHelper
 	 */
 	public SetHelper getCreateSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi)
@@ -700,7 +693,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param name
 	 * @param usage
 	 * @param processUsage
-	 * @param explicitCPI TODO
+	 * @param explicitCPI  TODO
 	 * @return the SetHelper
 	 */
 	public SetHelper getCreateSet(final String name, final EnumUsage usage, final String processUsage, final JDFIntegerList cpi, final boolean explicitCPI)
@@ -711,7 +704,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	/**
 	 * @param name
 	 * @param usage
-	 *
 	 * @return the SetHelper for the vector of resourcesets
 	 */
 	public SetHelper getSet(final String name, final EnumUsage usage)
@@ -749,7 +741,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param name
 	 * @param usage
 	 * @return a new set element
@@ -762,7 +753,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param name
 	 * @param usage
 	 * @return a new set element
@@ -771,12 +761,13 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	{
 		SetHelper set = getSet(name, usage);
 		if (set == null)
+		{
 			set = appendResourceSet(name, usage);
+		}
 		return set;
 	}
 
 	/**
-	 *
 	 * @param name
 	 * @param usage
 	 * @return a new set element
@@ -808,7 +799,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param name
 	 * @param usage
 	 * @return a new set element
@@ -837,7 +827,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * @param usage
 	 * @return a new set element
 	 * @deprecated
-	 *
 	 */
 	@Deprecated
 	public SetHelper appendParameter(final String name, final EnumUsage usage)
@@ -905,8 +894,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	public boolean writeToFile(final String file)
 	{
 		cleanUp();
-		final boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
-		return b;
+		return getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
 	}
 
 	/**
@@ -949,7 +937,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param types
 	 */
 	public void setTypes(final String types)
@@ -959,16 +946,14 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param vtypes
 	 */
-	public void setTypes(final VString vtypes)
+	public void setTypes(final List<String> vtypes)
 	{
 		setAttribute(AttributeName.TYPES, StringUtil.setvString(vtypes));
 	}
 
 	/**
-	 *
 	 * @return types the vector of types
 	 */
 	public VString getTypes()
@@ -977,7 +962,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return the category
 	 */
 	public String getCategory()
@@ -986,7 +970,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return the category
 	 */
 	public VJDFAttributeMap getPartMapVector()
@@ -996,7 +979,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return the implied JDF/@Type - if only one type in @Types, then we use said @Types, else ProcessGroup
 	 */
 	public EnumType getType()
@@ -1050,7 +1032,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 			auditPool.cleanUp();
 		}
 		if (zappIDs)
+		{
 			new IDRemover().removeIDs(theElement);
+		}
 	}
 
 	void sortProducts(final List<ProductHelper> vp)
@@ -1095,7 +1079,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return a clone of this; any underlying documents or elements are also cloned
 	 */
 	@Override
@@ -1106,7 +1089,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public String getJobPartID()
@@ -1115,7 +1097,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param jobPartID
 	 */
 	public void setJobPartID(final String jobPartID)
@@ -1124,7 +1105,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param jobID
 	 */
 	public void setJobID(final String jobID)
@@ -1133,7 +1113,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param cat
 	 */
 	public void setCategory(final String cat)
@@ -1143,7 +1122,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 
 	/**
 	 * @return the productID of the product
-	 *
 	 */
 	@Override
 	public String getDescriptiveName()
@@ -1180,7 +1158,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * append a types token
 	 *
 	 * @param typ
-	 *
 	 */
 	public XJDFHelper addType(final String typ)
 	{
@@ -1198,7 +1175,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * append a enumerated types token
 	 *
 	 * @param typ
-	 *
 	 */
 	public XJDFHelper addType(final EnumType typ)
 	{
@@ -1209,7 +1185,7 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	 * add a types token
 	 *
 	 * @param typ
-	 * @param iSkip <0 for append
+	 * @param iSkip  <0 for append
 	 * @param insert
 	 */
 	public void addType(final String typ, int iSkip, final boolean insert)
@@ -1221,7 +1197,9 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 		}
 		final int lastPos = types.size();
 		if (iSkip < 0)
+		{
 			iSkip = lastPos;
+		}
 
 		if (iSkip <= lastPos)
 		{
@@ -1239,7 +1217,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @param typ
 	 * @param iSkip
 	 * @return the cpi of the iSkip occurrence of typ
@@ -1269,7 +1246,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return default version - currently 2.0
 	 */
 	public static EnumVersion defaultVersion()
@@ -1278,7 +1254,6 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	}
 
 	/**
-	 *
 	 * @return default version - currently 2.0
 	 */
 	public void setVersion(final EnumVersion v)
@@ -1349,6 +1324,11 @@ public class XJDFHelper extends BaseXJDFHelper implements Cloneable, INodeIdenti
 	public JDFGeneralID setGeneralID(final String idUsage, final String idValue)
 	{
 		return super.setGeneralID(idUsage, idValue);
+	}
+
+	public VString getICSVersions()
+	{
+		return VString.getVString(getAttribute(AttributeName.ICSVERSIONS), null);
 	}
 
 }

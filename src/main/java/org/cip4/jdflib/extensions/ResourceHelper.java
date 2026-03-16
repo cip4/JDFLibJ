@@ -80,7 +80,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public static boolean isAsset(final KElement toCheck)
 	{
 		if (toCheck == null)
+		{
 			return false;
+		}
 		final KElement parent = toCheck.getParentNode_KElement();
 		final String setName = SetHelper.getSetName(parent);
 		return toCheck.getLocalName().equals(setName);
@@ -112,7 +114,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public static boolean isResourceElement(final KElement toCheck)
 	{
 		if (toCheck == null)
+		{
 			return false;
+		}
 		final KElement parent = toCheck.getParentNode_KElement();
 		return ResourceHelper.isAsset(parent) && new ResourceHelper(parent).getResource() == toCheck;
 	}
@@ -126,9 +130,13 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public static ResourceHelper getHelper(final KElement res)
 	{
 		if (isAsset(res))
+		{
 			return new ResourceHelper(res);
+		}
 		if (isResourceElement(res))
+		{
 			return new ResourceHelper(res.getParentNode_KElement());
+		}
 		return null;
 	}
 
@@ -147,9 +155,13 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	{
 		final Collection<KElement> vParts = theElement.getChildList(ElementName.PART, null);
 		for (final KElement e : vParts)
+		{
 			vMap.add(e.getAttributeMap());
+		}
 		if (vParts.isEmpty())
+		{
 			vMap.add(new JDFAttributeMap());
+		}
 	}
 
 	/**
@@ -163,7 +175,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 * 
 	 * @param exactMap the map that must be present
 	 * @return
 	 */
@@ -201,7 +212,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param map the partmap to set the part element
 	 */
 	public void setPartMap(final JDFAttributeMap map)
@@ -215,7 +225,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @param value
 	 * @return this - useful for lazy chaining
@@ -240,20 +249,33 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
+	 * convenience..
+	 *
+	 * @param src
+	 */
+	public void ensureReference(final KElement src)
+	{
+		ensureReference(src, null);
+	}
+
+	/**
 	 * ensure a reference *FROM* src
 	 *
 	 * @param src
 	 * @param key the reference key in src
-	 *
 	 */
 	public void ensureReference(final KElement src, String key)
 	{
 		if (src != null && theElement != null)
 		{
 			if (StringUtil.isEmpty(key))
+			{
 				key = getName();
+			}
 			if (!key.endsWith(JDFConstants.REF) && !key.endsWith(JDFConstants.REFS))
+			{
 				key += JDFConstants.REF;
+			}
 			final String id = ensureID();
 			src.setAttribute(key, id);
 		}
@@ -264,7 +286,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	 *
 	 * @param src
 	 * @param key the reference key in src
-	 *
 	 */
 	public void ensureReference(final ResourceHelper src, final String key)
 	{
@@ -272,7 +293,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param vPart the vector of partmaps to set the part element
 	 */
 	public void setPartMapVector(final VJDFAttributeMap vPart)
@@ -288,7 +308,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param vPart the vector of partmaps to set the part element
 	 */
 	public void appendPartMapVector(VJDFAttributeMap vPart)
@@ -309,7 +328,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param part
 	 */
 	public void appendPartMap(final JDFAttributeMap part)
@@ -325,7 +343,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public boolean matches(JDFAttributeMap map)
 	{
 		if (map == null)
+		{
 			map = new JDFAttributeMap();
+		}
 		return map.subMap(getPartMapVector());
 	}
 
@@ -336,7 +356,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public boolean containsMap(JDFAttributeMap map)
 	{
 		if (map == null)
+		{
 			map = new JDFAttributeMap();
+		}
 		final VJDFAttributeMap vm = getPartMapVector();
 		return vm.contains(map);
 	}
@@ -348,7 +370,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public boolean matches(VJDFAttributeMap vmap)
 	{
 		if (vmap == null)
+		{
 			vmap = new VJDFAttributeMap();
+		}
 		return vmap.subMap(getPartMapVector());
 	}
 
@@ -366,13 +390,14 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	public SetHelper getSet()
 	{
 		final KElement parent = theElement.getParentNode_KElement();
-		if (parent != null && parent.getNodeName().equals(theElement.getNodeName() + "Set"))
+		if (parent != null && (theElement.getNodeName() + "Set").equals(parent.getNodeName()))
+		{
 			return new SetHelper(parent);
+		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XJDFHelper getXJDF()
@@ -381,7 +406,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param amount
 	 * @param moreMap
 	 * @param bGood
@@ -392,7 +416,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param amount
 	 * @param moreMap
 	 * @param bGood
@@ -427,7 +450,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 			while (e != null)
 			{
 				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFAmountPool) && !(e instanceof JDFComment))
+				{
 					return e;
+				}
 				e = e.getNextSiblingElement();
 			}
 		}
@@ -435,14 +460,12 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @return the name of this resource - calculated from ResourceSet/@Name
 	 */
 	public String getName()
 	{
 		final SetHelper set = getSet();
-		final String name = set != null ? set.getAttribute(AttributeName.NAME) : null;
-		return name;
+		return set != null ? set.getAttribute(AttributeName.NAME) : null;
 	}
 
 	/**
@@ -452,7 +475,9 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	{
 		final String name = getName();
 		if (name != null)
+		{
 			return theElement.getCreateElement(name);
+		}
 		return null;
 	}
 
@@ -495,7 +520,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param partMap
 	 * @return
 	 */
@@ -507,7 +531,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param partMap
 	 * @return
 	 */
@@ -578,7 +601,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param brand
 	 */
 	public void setBrand(final String brand)
@@ -587,7 +609,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @return the brand
 	 */
 	public String getBrand()
@@ -596,7 +617,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @return the comment text
 	 */
 	@Override
@@ -608,7 +628,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param externalID
 	 */
 	@Override
@@ -619,7 +638,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 
 	/**
 	 * @return the descriptive name of the product
-	 *
 	 */
 	@Override
 	public String getDescriptiveName()
@@ -629,7 +647,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 
 	/**
 	 * @return the productID of the product
-	 *
 	 */
 	@Override
 	public String getExternalID()
@@ -638,19 +655,21 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param available
 	 */
 	public void setStatus(final EnumResStatus status)
 	{
 		if (EnumResStatus.Available.equals(status) || EnumResStatus.Unavailable.equals(status))
+		{
 			setAttribute(AttributeName.STATUS, status.getName());
+		}
 		else
+		{
 			setAttribute(AttributeName.STATUS, null);
+		}
 	}
 
 	/**
-	 *
 	 * @return the res status enum
 	 */
 	public EnumResStatus getStatus()
@@ -677,7 +696,6 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 	}
 
 	/**
-	 *
 	 * @param string
 	 * @return the attribute of the detailed resource, null if empty
 	 */
@@ -689,7 +707,7 @@ public class ResourceHelper extends BaseXJDFHelper implements IAmountPoolContain
 
 	/**
 	 * return a clone of this, placed just behind this
-	 * 
+	 *
 	 * @return
 	 */
 	public ResourceHelper clonePartition()

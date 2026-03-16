@@ -739,15 +739,12 @@ public class JDFElement extends KElement
 					continue;
 				}
 
-				if (bAllNS || ns == null || vInNameSpace.contains(ns))
+				if ((bAllNS || ns == null || vInNameSpace.contains(ns)) && !vKnownKeys.contains(strAtts))
 				{
-					if (!vKnownKeys.contains(strAtts))
+					vUnknown.addElement(strAtts);
+					if (vUnknown.size() >= nMax)
 					{
-						vUnknown.addElement(strAtts);
-						if (vUnknown.size() >= nMax)
-						{
-							break;
-						}
+						break;
 					}
 				}
 			}
@@ -810,12 +807,9 @@ public class JDFElement extends KElement
 					ns = JDFConstants.EMPTYSTRING;
 				}
 
-				if (bAllNS || (vInNameSpace.contains(ns)))
+				if ((bAllNS || (vInNameSpace.contains(ns))) && !vKnownKeys.contains(attr))
 				{
-					if (!vKnownKeys.contains(attr))
-					{
-						vUnknown.addElement(attr);
-					}
+					vUnknown.addElement(attr);
 				}
 			}
 			while (vUnknown.size() < nMax && ++i < vAtts.size());
@@ -981,8 +975,7 @@ public class JDFElement extends KElement
 	{
 		final VString vKnownElements = knownElements();
 		final VString vUniqueElements = uniqueElements();
-		final VString vStrRet = getInsertElementVector(vKnownElements, vUniqueElements);
-		return vStrRet;
+		return getInsertElementVector(vKnownElements, vUniqueElements);
 	}
 
 	/**
@@ -1082,12 +1075,9 @@ public class JDFElement extends KElement
 		for (int i = 0; i < vRequiredKeys.size() && vMissing.size() < nMax; i++)
 		{
 			final String requiredKey = vRequiredKeys.elementAt(i);
-			if (!vElements.contains(requiredKey))
+			if (!vElements.contains(requiredKey) && !checkInstance(vElements, requiredKey))
 			{
-				if (!checkInstance(vElements, requiredKey))
-				{
-					vMissing.add(requiredKey);
-				}
+				vMissing.add(requiredKey);
 			}
 		}
 
@@ -3534,14 +3524,11 @@ public class JDFElement extends KElement
 
 						// in case there is no element for the REF, target will
 						// be null and will be skipped
-						if (target != null)
+						// so we must upcast
+						if ((target != null) && (bMapEmpty || target.includesAttributes(mAttrib, bAnd)))
 						{ // we want the jdfElem version of IncludesAttributes,
-							// so we must upcast
-							if (bMapEmpty || target.includesAttributes(mAttrib, bAnd))
-							{
-								v.addElement(target);
-								iSize++;
-							}
+							v.addElement(target);
+							iSize++;
 						}
 					}
 					catch (final JDFException ex)
@@ -3625,34 +3612,31 @@ public class JDFElement extends KElement
 
 		while (jdfElem != null)
 		{
-			if (jdfElem.fitsName(nodeName, nameSpaceURI))
+			// this guy is the one
+			if (jdfElem.fitsName(nodeName, nameSpaceURI) && (i++ == iSkip))
 			{
-				// this guy is the one
-				if (i++ == iSkip)
+				// follow valid (!) refElements, invalid refelements are ignored
+				// 300502 RP added check for explicit refelements
+				if (jdfElem instanceof JDFRefElement && !bExplicitRefElement)
 				{
-					// follow valid (!) refElements, invalid refelements are ignored
-					// 300502 RP added check for explicit refelements
-					if (jdfElem instanceof JDFRefElement && !bExplicitRefElement)
+					try
 					{
-						try
+						final JDFRefElement re = (JDFRefElement) jdfElem;
+						final KElement target = re.getTarget();
+						if (target != null)
 						{
-							final JDFRefElement re = (JDFRefElement) jdfElem;
-							final KElement target = re.getTarget();
-							if (target != null)
-							{
-								return target;
-							}
+							return target;
 						}
-						catch (final JDFException ex)
-						{
-							// simply ignore invalid refelements
-						}
-						i--; // this one was screwed up -> don't count it
 					}
-					else
-					{ // not a refElement or explicitly want the refElement
-						return jdfElem;
+					catch (final JDFException ex)
+					{
+						// simply ignore invalid refelements
 					}
+					i--; // this one was screwed up -> don't count it
+				}
+				else
+				{ // not a refElement or explicitly want the refElement
+					return jdfElem;
 				}
 			}
 
@@ -5240,24 +5224,18 @@ public class JDFElement extends KElement
 		if (ud != null) // grab target from the cache
 		{
 			final KElement kOwner = ud.getTarget(myid);
-			if (kOwner != null)
+			if ((kOwner != null) && (kOwner instanceof JDFResource))
 			{
-				if (kOwner instanceof JDFResource)
-				{
-					ret = (JDFResource) kOwner;
-					if (!ret.isResourceRootRoot())
-					{
-						ret = null;
-					}
-				}
-			}
-
-			if (ret != null) // we found something in the cache
-			{
-				if (!validResourcePosition(ret))
+				ret = (JDFResource) kOwner;
+				if (!ret.isResourceRootRoot())
 				{
 					ret = null;
 				}
+			}
+
+			if ((ret != null) && !validResourcePosition(ret))
+			{
+				ret = null;
 			}
 		}
 		return ret;
@@ -5424,6 +5402,11 @@ public class JDFElement extends KElement
 				return getEnum(1, getMinorVersion() + 6);
 			}
 			return this;
+		}
+
+		public String getJDFVersionName()
+		{
+			return getMajorVersion() + JDFConstants.DOT + getMinorVersion();
 		}
 
 		/**
@@ -6587,12 +6570,9 @@ public class JDFElement extends KElement
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFElement e = (JDFElement) v.elementAt(i);
-			if (e.includesMatchingAttribute(attName, attVal, dataType))
+			if (e.includesMatchingAttribute(attName, attVal, dataType) && (n++ == index))
 			{
-				if (n++ == index)
-				{
-					return e;
-				}
+				return e;
 			}
 		}
 		return null;
@@ -6657,13 +6637,10 @@ public class JDFElement extends KElement
 				do
 				{
 					KElement e = e0;
-					if (e instanceof JDFRefElement)
+					if ((e instanceof JDFRefElement) && !(this instanceof JDFResourcePool))
 					{
-						if (!(this instanceof JDFResourcePool))
-						{
-							// loops!
-							e = ((JDFRefElement) e0).getTarget();
-						}
+						// loops!
+						e = ((JDFRefElement) e0).getTarget();
 					}
 
 					if (e != null)
@@ -6862,29 +6839,25 @@ public class JDFElement extends KElement
 			final String locName = e.getLocalName();
 			if (!e.matchesPathName(v.get(i)))
 			{
-				if (bFollowRefs && eLast != null && ElementName.RESOURCEPOOL.equals(locName))
+				if ((bFollowRefs && eLast != null && ElementName.RESOURCEPOOL.equals(locName)) && (eLast instanceof final JDFResource r))
 				{ // now look for a refelement that points at this
-					if (eLast instanceof final JDFResource r)
+					final VElement vRefs = r.getLinks(r.getRefString(), null);
+					if (vRefs != null)
 					{
-						final VElement vRefs = r.getLinks(r.getRefString(), null);
-						if (vRefs != null)
+						String subPath = v.get(0);
+						for (int k = 1; k <= i + 1; k++)
 						{
-							String subPath = v.get(0);
-							for (int k = 1; k <= i + 1; k++)
+							subPath += "/" + v.get(k);
+						}
+						subPath += JDFConstants.REF;
+						for (final KElement eRef : vRefs)
+						{
+							final boolean b = eRef.matchesPath(subPath, bFollowRefs);
+							if (b)
 							{
-								subPath += "/" + v.get(k);
-							}
-							subPath += JDFConstants.REF;
-							for (final KElement eRef : vRefs)
-							{
-								final boolean b = eRef.matchesPath(subPath, bFollowRefs);
-								if (b)
-								{
-									return true;
-								}
+								return true;
 							}
 						}
-
 					}
 				}
 				return false;
