@@ -96,7 +96,7 @@ class XJDFConvPrintICSGoldenTicketTest extends JDFTestCaseBase
 	void testRefs()
 	{
 		final XJDFHelper xjdfHelper = new XJDFConvPrintICSGoldenTicket(1, EnumVersion.Version_2_2, getPartMaps()).getXJDFHelper();
-		assertEquals(8, xjdfHelper.getSets().size());
+		assertEquals(9, xjdfHelper.getSets().size());
 	}
 
 	@Test

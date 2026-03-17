@@ -120,7 +120,7 @@ public class XJDFBaseGoldenTicket
 		this.theVersion = jdfVersion;
 		this.icsLevel = baseICSLevel;
 		this.vParts = (VJDFAttributeMap) ContainerUtil.addAll(new VJDFAttributeMap(), vParts);
-		helper = null;
+		refresh();
 	}
 
 	public void refresh()
