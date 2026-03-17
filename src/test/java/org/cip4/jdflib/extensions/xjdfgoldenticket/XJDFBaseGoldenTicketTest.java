@@ -98,7 +98,7 @@ class XJDFBaseGoldenTicketTest extends ExampleTest
 	@Test
 	void testSimple()
 	{
-		final XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
+		final XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0, null);
 		bt.writeToFile(sm_dirTestDataTemp + "xjdf/BaseGT.xjdf");
 	}
 }

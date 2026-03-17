@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -93,6 +93,15 @@ class UnitParserTest extends JDFTestCaseBase
 		assertEquals(unitParser.extractUnits("8.5in 11.in"), "612 792");
 		assertEquals(unitParser.extractUnits("007 11in"), "007 792");
 		assertEquals(unitParser.extractUnits("007 0011in"), "007 792");
+	}
+
+	@Test
+	void testInverse()
+	{
+		for (final eParserUnit unit : eParserUnit.values())
+		{
+			assertEquals(1, unit.getFactor() * unit.getInverse(), 0.0000001);
+		}
 	}
 
 	/**
@@ -231,6 +240,7 @@ class UnitParserTest extends JDFTestCaseBase
 	@Test
 	void testGetFactor()
 	{
+		assertEquals(unitParser.getFactor("MU"), 72. / 25400, 0.0001);
 		assertEquals(unitParser.getFactor("cm"), 72. / 2.54, 0.0001);
 		assertEquals(unitParser.getFactor("MM"), 72. / 25.4, 0.0001);
 		assertEquals(unitParser.getFactor("in "), 72., 0.0001);

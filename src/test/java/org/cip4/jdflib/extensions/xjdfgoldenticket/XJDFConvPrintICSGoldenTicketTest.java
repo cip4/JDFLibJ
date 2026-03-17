@@ -68,29 +68,65 @@
  */
 package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.extensions.XJDFConstants;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * @author Rainer Prosi, Heidelberger Druckmaschinen *
- */
-public class XJDFProductGoldenTicket extends XJDFBaseGoldenTicket
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoPart.ESide;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.resource.process.JDFColor;
+import org.junit.jupiter.api.Test;
+
+class XJDFConvPrintICSGoldenTicketTest extends JDFTestCaseBase
 {
 
-	/**
-	 * @param pIcsLevel
-	 * @param jdfVersion
-	 */
-	public XJDFProductGoldenTicket(int pIcsLevel, EnumVersion jdfVersion)
+	@Test
+	void testICSVersions()
 	{
-		super(pIcsLevel, jdfVersion, null);
+		assertEquals("MIS_L1-2.2 MIS-CP_L1-2.2", new XJDFConvPrintICSGoldenTicket(1, EnumVersion.Version_2_2, getPartMaps()).getICSVersions(1).getString());
+		assertEquals("MIS_L1-2.2 MIS-CP_L1-2.2",
+				new XJDFConvPrintICSGoldenTicket(1, EnumVersion.Version_2_2, getPartMaps()).getXJDFHelper().getICSVersions().getString());
 	}
 
-	@Override
-	public VString getTypes()
+	@Test
+	void testRefs()
 	{
-		return new VString(XJDFConstants.Product);
+		final XJDFHelper xjdfHelper = new XJDFConvPrintICSGoldenTicket(1, EnumVersion.Version_2_2, getPartMaps()).getXJDFHelper();
+		assertEquals(8, xjdfHelper.getSets().size());
+	}
+
+	@Test
+	void testRoundTrip()
+	{
+		final XJDFConvPrintICSGoldenTicket gt = new XJDFConvPrintICSGoldenTicket(1, EnumVersion.Version_2_2, getPartMaps());
+		gt.setPerfecting(true);
+		gt.setAmount(1000);
+		gt.refresh();
+
+		final XJDFHelper xjdfHelper = gt.getXJDFHelper();
+
+		writeRoundTripX(xjdfHelper, "XJDF_ICS_CP1", EnumValidationLevel.Complete);
+	}
+
+	VJDFAttributeMap getPartMaps()
+	{
+		final VJDFAttributeMap maps = new VJDFAttributeMap();
+		final JDFAttributeMap sepMap = new JDFAttributeMap(AttributeName.SHEETNAME, "Sheet1");
+		for (final ESide side : ESide.values())
+		{
+			sepMap.put(AttributeName.SIDE, side);
+			for (final String sep : JDFColor.getKCMYSeparations())
+			{
+				sepMap.put(AttributeName.SEPARATION, sep);
+				maps.add(new JDFAttributeMap(sepMap));
+			}
+		}
+
+		return maps;
 	}
 
 }

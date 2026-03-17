@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -98,7 +98,7 @@ public class UnitParser
 
 	public enum eParserUnit
 	{
-		in, cm, mm, pt;
+		in, cm, mm, pt, mu;
 
 		public static eParserUnit getEnum(final String val)
 		{
@@ -121,6 +121,8 @@ public class UnitParser
 		{
 			switch (this)
 			{
+			case mu:
+				return 72. / 25400;
 			case mm:
 				return 72. / 25.4;
 			case cm:
@@ -130,6 +132,11 @@ public class UnitParser
 			default:
 				return 1.0;
 			}
+		}
+
+		public double getInverse()
+		{
+			return 1. / getFactor();
 		}
 	}
 
@@ -193,7 +200,6 @@ public class UnitParser
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @return
 	 */
@@ -203,7 +209,6 @@ public class UnitParser
 	}
 
 	/**
-	 *
 	 * @param key
 	 * @return
 	 */
@@ -349,7 +354,6 @@ public class UnitParser
 	}
 
 	/**
-	 *
 	 * @param key the attribute name to check
 	 * @param val
 	 * @return
@@ -369,9 +373,13 @@ public class UnitParser
 	public String getUnitString(final String key, final eParserUnit pu, final String val0, final String sep)
 	{
 		if (isUnit(key))
+		{
 			return getUnitString(pu, val0, sep);
+		}
 		else
+		{
 			return val0;
+		}
 	}
 
 	private static final UnitParser roundTrip = getRoundTrip();

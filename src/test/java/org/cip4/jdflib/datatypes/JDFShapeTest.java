@@ -3,8 +3,8 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,157 +56,171 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
- * 
+ *
+ *
  */
 /**
  * JDFShapeRangeListTest.java
  *
  * @author Elena Skobchenko
- * 
- * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ *
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration
  * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
  */
 package org.cip4.jdflib.datatypes;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
- *  
  * @author rainer prosi
  * @date Feb 23, 2011
  */
-class JDFShapeTest {
+class JDFShapeTest
+{
 	/**
-	 * 
-	 *  
 	 * @throws Exception
 	 */
 	@Test
-	public final void testSetString() throws Exception
+	final void testSetString() throws Exception
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
 
 		JDFShape xy = new JDFShape("1 2");
 		n.setAttribute("test", xy, null);
 
 		xy = new JDFShape("1.1 2.2 3.3");
 		n.setAttribute("test2", xy, null);
-		Assertions.assertEquals(n.getAttribute("test2", null, ""), "1.1 2.2 3.3", "double double double");
+		assertEquals(n.getAttribute("test2", null, ""), "1.1 2.2 3.3", "double double double");
 
 		try
 		{
 			new JDFShape("1 2 3 4");
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
-			Assertions.assertTrue(true, "exception 1234 caught");
+			assertTrue(true, "exception 1234 caught");
 		}
 		try
 		{
 			new JDFShape((String) null);
 		}
-		catch (DataFormatException dfe)
+		catch (final DataFormatException dfe)
 		{
-			Assertions.assertTrue(true, "exception null caught");
+			assertTrue(true, "exception null caught");
 		}
 	}
 
 	/**
-	 * 
-	 *  
 	 * @throws Exception
 	 */
 	@Test
-	public final void testSingleVal() throws Exception
+	final void testSingleVal() throws Exception
 	{
 		JDFShape xy = new JDFShape("4");
-		Assertions.assertEquals(xy.getX(), 4, 0.0);
-		Assertions.assertEquals(xy.getY(), 0, 0.0);
-		Assertions.assertEquals(xy.getZ(), 0, 0.0);
+		assertEquals(xy.getX(), 4, 0.0);
+		assertEquals(xy.getY(), 0, 0.0);
+		assertEquals(xy.getZ(), 0, 0.0);
 
 		xy = new JDFShape("4 1");
-		Assertions.assertEquals(xy.getX(), 4, 0.0);
-		Assertions.assertEquals(xy.getY(), 1, 0.0);
-		Assertions.assertEquals(xy.getZ(), 0, 0.0);
+		assertEquals(xy.getX(), 4, 0.0);
+		assertEquals(xy.getY(), 1, 0.0);
+		assertEquals(xy.getZ(), 0, 0.0);
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@Test
-	public final void testIsGreaterOrEqual()
+	final void testIsGreaterOrEqual()
 	{
-		JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
-		JDFShape xy = new JDFShape(1.0 + JDFBaseDataTypes.EPSILON / 2.0, 2.0 + JDFBaseDataTypes.EPSILON / 2.0, 3.0 + JDFBaseDataTypes.EPSILON / 2.0);
+		final JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
+		final JDFShape xy = new JDFShape(1.0 + JDFBaseDataTypes.EPSILON / 2.0, 2.0 + JDFBaseDataTypes.EPSILON / 2.0, 3.0 + JDFBaseDataTypes.EPSILON / 2.0);
 
-		Assertions.assertTrue(ab.equals(xy));
-		Assertions.assertTrue(ab.isLessOrEqual(xy));
-		Assertions.assertTrue(ab.isGreaterOrEqual(xy));
+		assertTrue(ab.equals(xy));
+		assertTrue(ab.isLessOrEqual(xy));
+		assertTrue(ab.isGreaterOrEqual(xy));
 	}
 
 	/**
-	 *  
+	 *
 	 */
 	@Test
-	public final void testClone()
+	final void testClone()
 	{
 
-		JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
-		JDFShape ac = new JDFShape(ab);
+		final JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
+		final JDFShape ac = new JDFShape(ab);
 		ac.setX(3.0);
-		Assertions.assertEquals(ab.getX(), 1.0, 0.0);
+		assertEquals(ab.getX(), 1.0, 0.0);
 	}
 
 	/**
-	 * 
-	 *  
+	 *
 	 */
 	@Test
-	public final void testIsLessOrEqual()
+	final void testXY()
+	{
+		final JDFXYPair ab = new JDFXYPair(1.0, 2.0);
+		final JDFShape ac = new JDFShape(ab);
+		assertEquals(ac.getX(), 1.0, 0.0);
+		assertEquals(ac.getY(), 2.0, 0.0);
+		assertEquals(ac.getZ(), 0.0, 0.0);
+		ac.setZ(3);
+		assertEquals(ac.getZ(), 3.0, 0.0);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	final void testIsLessOrEqual()
 	{
 		JDFShape xy = new JDFShape();
 
-		JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
+		final JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
 		xy = new JDFShape(1.0 - JDFBaseDataTypes.EPSILON / 2.0, 2.0 - JDFBaseDataTypes.EPSILON / 2.0, 3.0 - JDFBaseDataTypes.EPSILON / 2.0);
 
-		Assertions.assertTrue(ab.equals(xy));
-		Assertions.assertTrue(ab.isLessOrEqual(xy));
-		Assertions.assertTrue(ab.isGreaterOrEqual(xy));
+		assertTrue(ab.equals(xy));
+		assertTrue(ab.isLessOrEqual(xy));
+		assertTrue(ab.isGreaterOrEqual(xy));
 	}
 
 	/**
-	 * 
-	 *  
+	 *
+	 *
 	 */
 	@Test
-	public final void testcreateShape()
+	final void testcreateShape()
 	{
-		Assertions.assertNull(JDFShape.createShape(null));
-		Assertions.assertNull(JDFShape.createShape(""));
-		Assertions.assertNull(JDFShape.createShape("a"));
-		Assertions.assertNotNull(JDFShape.createShape("1"));
-		Assertions.assertNull(JDFShape.createShape("1 2 3 a"));
-		Assertions.assertNotNull(JDFShape.createShape("1 2 3"));
-		Assertions.assertNotNull(JDFShape.createShape("  1 2 3 "));
-		Assertions.assertNotNull(JDFShape.createShape("  1. 2 3 "));
-		Assertions.assertNotNull(JDFShape.createShape("  1.00 2.00 -3.0 "));
+		assertNull(JDFShape.createShape(null));
+		assertNull(JDFShape.createShape(""));
+		assertNull(JDFShape.createShape("a"));
+		assertNotNull(JDFShape.createShape("1"));
+		assertNull(JDFShape.createShape("1 2 3 a"));
+		assertNotNull(JDFShape.createShape("1 2 3"));
+		assertNotNull(JDFShape.createShape("  1 2 3 "));
+		assertNotNull(JDFShape.createShape("  1. 2 3 "));
+		assertNotNull(JDFShape.createShape("  1.00 2.00 -3.0 "));
 	}
 }

@@ -69,7 +69,7 @@ class XJDFProductGoldenTicketTest extends JDFTestCaseBase
 	@Test
 	void testSimple()
 	{
-		final XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0);
+		final XJDFBaseGoldenTicket bt = new XJDFBaseGoldenTicket(1, EnumVersion.Version_2_0, null);
 		bt.getXJDFHelper().writeToFile(sm_dirTestDataTemp + "xjdf/GTSimple.xjdf");
 	}
 

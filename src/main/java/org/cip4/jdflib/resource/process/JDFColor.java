@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,12 +48,12 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFRGBColor;
+import org.cip4.jdflib.extensions.ResourceHelper;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         23.01.2009
  */
 public class JDFColor extends JDFAutoColor
@@ -62,7 +62,6 @@ public class JDFColor extends JDFAutoColor
 	private static final StringArray CMYK = new StringArray("Cyan Magenta Yellow Black", null);
 
 	/**
-	 *
 	 * @return
 	 */
 	public static List<String> getCMYKSeparations()
@@ -71,7 +70,6 @@ public class JDFColor extends JDFAutoColor
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public static List<String> getKCMYSeparations()
@@ -98,7 +96,6 @@ public class JDFColor extends JDFAutoColor
 	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
-	 *
 	 * @param qualifiedName
 	 */
 	public JDFColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
@@ -190,8 +187,40 @@ public class JDFColor extends JDFAutoColor
 	@Override
 	public String getActualColorName()
 	{
-		final String strName = getAttribute(AttributeName.ACTUALCOLORNAME, null, null);
+		final String strName = getNonEmpty(AttributeName.ACTUALCOLORNAME);
 		return strName == null ? getName() : strName;
+	}
+
+	/**
+	 * Gets the Name or Separation if no Name is set
+	 *
+	 * @return String Name of the color extracted from RawName, or if this is missing from Name, using the default transcoder
+	 */
+	@Override
+	public String getName()
+	{
+		final String strName = getNonEmpty(AttributeName.NAME);
+		return strName == null ? getSeparation() : strName;
+	}
+
+	/**
+	 * Gets the Name or Separation if no Name is set
+	 *
+	 * @return String Name of the color extracted from RawName, or if this is missing from Name, using the default transcoder
+	 */
+	@Override
+	public String getSeparation()
+	{
+		String sep = super.getSeparation();
+		if (StringUtil.isEmpty(sep))
+		{
+			final ResourceHelper rh = ResourceHelper.getHelper(this);
+			if (rh != null)
+			{
+				sep = rh.getPartKey(AttributeName.SEPARATION);
+			}
+		}
+		return sep;
 	}
 
 	/**
@@ -212,8 +241,6 @@ public class JDFColor extends JDFAutoColor
 		return getActualColorName();
 	}
 
-	// //////////////////////////////////////////////////////////////
-
 	/**
 	 * get the FileSpec referring to ColorProfile
 	 *
@@ -228,20 +255,15 @@ public class JDFColor extends JDFAutoColor
 			for (int i = 0; i < siz; i++)
 			{
 				final JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
-				if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
+				if (res.hasAttribute(AttributeName.RESOURCEUSAGE) && "ColorProfile".equals(res.getResourceUsage()))
 				{
-					if (res.getResourceUsage().equals("ColorProfile"))
-					{
-						return res;
-					}
+					return res;
 				}
 			}
 		}
 
 		return null;
 	}
-
-	// /////////////////////////////////////////////////////////////////
 
 	/**
 	 * get or create a ColorProfile FileSpec
@@ -258,8 +280,6 @@ public class JDFColor extends JDFAutoColor
 		return res;
 	}
 
-	// /////////////////////////////////////////////////////////////////
-
 	/**
 	 * append a ColorProfoe FileSpec
 	 *
@@ -272,9 +292,6 @@ public class JDFColor extends JDFAutoColor
 
 		return res;
 	}
-
-	// /////////////////////////////////////////////////////////////////
-	// /////////////////////////////////////////////////////////////////
 
 	/**
 	 * get or create a TargetProfile FileSpec
@@ -289,12 +306,9 @@ public class JDFColor extends JDFAutoColor
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
-			if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
+			if (res.hasAttribute(AttributeName.RESOURCEUSAGE) && "TargetProfile".equals(res.getResourceUsage()))
 			{
-				if (res.getResourceUsage().equals("TargetProfile"))
-				{
-					return res;
-				}
+				return res;
 			}
 		}
 		return null;
@@ -344,7 +358,9 @@ public class JDFColor extends JDFAutoColor
 	{
 		final VString v = super.getInvalidAttributes(level, ignorePrivate, max);
 		if ((v.size() > max && max > 0) || v.contains(AttributeName.NAME))
+		{
 			return v;
+		}
 		final KElement parent = getParentNode_KElement();
 		if (parent instanceof JDFColorPool)
 		{
@@ -371,5 +387,17 @@ public class JDFColor extends JDFAutoColor
 		}
 		v.unify();
 		return v;
+	}
+
+	@Override
+	public JDFCMYKColor getCMYK()
+	{
+
+		final JDFCMYKColor c = super.getCMYK();
+		if ((c == null))
+		{
+			return JDFCMYKColor.createCMYKColor(getActualColorName());
+		}
+		return c;
 	}
 }

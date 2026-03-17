@@ -47,7 +47,6 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -61,13 +60,10 @@ import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
  * Description: This class represents a vector of JDFAttributeMaps
  *
  * @author Torsten Kaehlert
- *
  * @version 1.0 2002-01-24
- *
  */
 public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 {
@@ -152,7 +148,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 *
 	 * @param v
 	 * @return
 	 */
@@ -162,7 +157,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 *
 	 * @param partMap
 	 * @return
 	 */
@@ -188,7 +182,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * @param sepMap the separator between maps
+	 * @param sepMap   the separator between maps
 	 * @param sepEntry the separator between map entries
 	 * @return the string representation
 	 */
@@ -210,7 +204,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 * @param strKey the attribute to get values from
+	 * @param strKey  the attribute to get values from
 	 * @param bUnique if true, ensure unique vector, else the vector corresponds to the vector of values
 	 * @return the Vector of all values
 	 */
@@ -236,7 +230,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * replace all maps in this with n maps that have the values strKey, vsValues
 	 *
-	 * @param strKey the new key to add
+	 * @param strKey   the new key to add
 	 * @param vsValues String of values
 	 */
 	public void extendMap(final String strKey, final List<String> vsValues)
@@ -472,11 +466,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	@Override
 	public JDFAttributeMap get(int i)
 	{
-		if (i < 0)
-		{
-			i += size();
-		}
-		return super.get(i);
+		final int index = ContainerUtil.index(this, i);
+		return index >= 0 ? super.get(index) : null;
 	}
 
 	/**
@@ -484,7 +475,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 *
 	 * @param set
 	 */
-	public void removeKeys(final Collection<String> set)
+	public VJDFAttributeMap removeKeys(final Collection<String> set)
 	{
 		for (int i = size() - 1; i >= 0; i--)
 		{
@@ -495,6 +486,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			}
 		}
 		unify();
+		return this;
 	}
 
 	@Override
@@ -508,8 +500,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * remove the key specified and then erase any duplicates and emptys
 	 *
 	 * @param key
+	 * @return
 	 */
-	public void removeKey(final String key)
+	public VJDFAttributeMap removeKey(final String key)
 	{
 		for (int i = size() - 1; i >= 0; i--)
 		{
@@ -520,6 +513,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			}
 		}
 		unify();
+		return this;
 	}
 
 	/**
@@ -557,10 +551,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 				// the map
 				bEquals = true;
 				final Set<String> mapSet = map.keySet();
-				final Iterator<String> it = mapSet.iterator();
-				while (it.hasNext())
+				for (final String key : mapSet)
 				{
-					final String key = it.next();
 					if (!attmap.containsKey(key))
 					{
 						bEquals = false;
@@ -586,7 +578,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 *
 	 * @param vKeys
 	 * @deprecated use reduceMap
 	 */
@@ -706,12 +697,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 *
 	 * @param map map to append
 	 */
-	public void appendUnique(final JDFAttributeMap map)
+	public VJDFAttributeMap appendUnique(final JDFAttributeMap map)
 	{
-		ContainerUtil.appendUnique(this, map);
+		return (VJDFAttributeMap) ContainerUtil.appendUnique(this, map);
 	}
 
 	@Override
@@ -723,10 +713,12 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 	/**
 	 * unify - make VElement unique, retaining initial order
+	 *
+	 * @return
 	 */
-	public void unify()
+	public VJDFAttributeMap unify()
 	{
-		ContainerUtil.unify(this);
+		return (VJDFAttributeMap) ContainerUtil.unify(this);
 	}
 
 	/**
@@ -750,7 +742,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	}
 
 	/**
-	 *
 	 * deprecated legacy support
 	 *
 	 * @param v
@@ -800,8 +791,8 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * Method overlapMap. get a copy of this with all matching maps the maps are NOT cloned
 	 *
-	 * @param key the key to match
-	 * @param regExp the simplified regexp
+	 * @param key        the key to match
+	 * @param regExp     the simplified regexp
 	 * @param ignoreCase duh...
 	 * @return a new VJDFAttributemap with the matching entries of this - never null (may be safely daisy-chained)
 	 */
@@ -822,27 +813,28 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * Method overlapMap. only entries that contain at least one matching map entry are retained
 	 *
 	 * @param vMap the map to check against
+	 * @return
 	 */
-	public void overlapMap(final VJDFAttributeMap vMap)
+	public VJDFAttributeMap overlapMap(final VJDFAttributeMap vMap)
 	{
-		overlapMap((Collection<JDFAttributeMap>) vMap);
+		return overlapMap((Collection<JDFAttributeMap>) vMap);
 	}
 
-	public void overlapMap(final Collection<JDFAttributeMap> vMap)
+	public VJDFAttributeMap overlapMap(final Collection<JDFAttributeMap> vMap)
 	{
-		if (vMap == null)
+		if (vMap != null)
 		{
-			return;
-		}
-		final Set<JDFAttributeMap> set = ContainerUtil.toHashSet(vMap);
-		for (int i = size() - 1; i >= 0; i--)
-		{
-			final JDFAttributeMap attributeMap = get(i);
-			if (!set.contains(attributeMap) && !attributeMap.overlapMap(vMap))
+			final Set<JDFAttributeMap> set = ContainerUtil.toHashSet(vMap);
+			for (int i = size() - 1; i >= 0; i--)
 			{
-				remove(i);
+				final JDFAttributeMap attributeMap = get(i);
+				if (!set.contains(attributeMap) && !attributeMap.overlapMap(vMap))
+				{
+					remove(i);
+				}
 			}
 		}
+		return this;
 	}
 
 	/**
@@ -930,10 +922,9 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 		if (vMap != null)
 		{
-			final Iterator<JDFAttributeMap> it = vMap.iterator();
-			while (it.hasNext())
+			for (final JDFAttributeMap element : vMap)
 			{
-				if (overlapsMap(it.next()))
+				if (overlapsMap(element))
 				{
 					return true;
 				}
@@ -947,7 +938,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 * If input is not of type VJDFAttributeMap, result of superclasses equals method is returned.
 	 *
 	 * @param other in this case VJDFAttributeMap to compare
-	 *
 	 * @return boolean - true if the maps are equal, otherwise false
 	 */
 	@Override
@@ -1000,11 +990,12 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * put the key value pair into all entries
 	 *
-	 * @param key the key to set - may be either String or Enum
+	 * @param key   the key to set - may be either String or Enum
 	 * @param value the value to set - may be either String or Enum
+	 * @return
 	 * @throws IllegalArgumentException if key or value have the wrong type
 	 */
-	public void put(final Object key, final Object value)
+	public VJDFAttributeMap put(final Object key, final Object value)
 	{
 		String s1 = null;
 		if (key instanceof String)
@@ -1028,7 +1019,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 
 		if (s1 != null && s2 != null)
 		{
-			put(s1, s2);
+			return put(s1, s2);
 		}
 		else
 		{
@@ -1039,10 +1030,11 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	/**
 	 * put the key value pair into all entries; if no entries are there, create exactly one entry with the given key value pair
 	 *
-	 * @param key the key to set
+	 * @param key   the key to set
 	 * @param value the value to set
+	 * @return
 	 */
-	public void put(final String key, final String value)
+	public VJDFAttributeMap put(final String key, final String value)
 	{
 		final int size = size();
 		if (size == 0)
@@ -1056,6 +1048,7 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 				elementAt(i).put(key, value);
 			}
 		}
+		return this;
 	}
 
 	/**

@@ -52,6 +52,7 @@ import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.auto.JDFAutoInterpretingParams.EnumPrintQuality;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoPart.EPreviewType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -97,6 +98,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
@@ -128,6 +130,7 @@ import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.JDFUsageCounter;
@@ -1648,6 +1651,31 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(xjdf);
 		final JDFNode root = d.getJDFRoot();
 		d.write2File(sm_dirTestDataTemp + "Preview.xjdf.jdf", 2, false);
+		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
+	}
+
+	/**
+	 * @return
+	 */
+	@Test
+	void testPreviewType()
+	{
+		final XJDFHelper xjdf = new XJDFHelper("j1", "p1", null);
+		final SetHelper pvSet = xjdf.appendSet(ElementName.PREVIEW, EnumUsage.Input);
+		for (final String sep : JDFColor.getKCMYSeparations())
+		{
+
+			final JDFAttributeMap pvMap = new JDFAttributeMap(AttributeName.SEPARATION, sep);
+			pvMap.put(EPartIDKey.PreviewType, EPreviewType.Separation);
+			final ResourceHelper pvh = pvSet.appendPartition(pvMap, true);
+			final JDFPreview pv = (JDFPreview) pvh.getResource();
+			pv.setFileSpecURL("file/" + sep + ".png");
+		}
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(xjdf);
+		final JDFNode root = d.getJDFRoot();
+		d.write2File(sm_dirTestDataTemp + "Preview.jdf", 2, false);
+		assertTrue(root.getResource(ElementName.PREVIEW).getPartIDKeyList().contains("PreviewType"));
 		assertTrue(root.isValid(EnumValidationLevel.Incomplete));
 	}
 

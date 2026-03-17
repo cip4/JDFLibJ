@@ -65,48 +65,90 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
- */package org.cip4.jdflib.extensions.xjdfgoldenticket;
+ */
+package org.cip4.jdflib.extensions.xjdfgoldenticket;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.extensions.AuditHelper.eAudit;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.util.ContainerUtil;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class XJDFBaseGoldenTicket
 {
-	protected EnumVersion theVersion;
+	private final EnumVersion theVersion;
+
+	EnumVersion getVersion()
+	{
+		return theVersion;
+	}
+
+	private final VJDFAttributeMap vParts;
+	int icsLevel;
 
 	/**
-	 * 
-	 * @param parent
+	 * @return
 	 */
-	public XJDFBaseGoldenTicket(XJDFBaseGoldenTicket parent)
+	public VString getICSVersions(int icsVersion)
 	{
-		helper = new XJDFHelper(null, null, null);
-		this.theVersion = parent.theVersion;
+		return new VString("MIS_L" + icsVersion + "-" + theVersion.getJDFVersionName());
 	}
 
 	/**
 	 * @return
 	 */
-	public VString getICSVersions()
+	public VString getTypes()
 	{
 		return new VString();
 	}
 
 	/**
-	 * 
 	 * @param baseICSLevel
 	 * @param jdfVersion
+	 * @param vParts       TODO
 	 */
-	public XJDFBaseGoldenTicket(int baseICSLevel, EnumVersion jdfVersion)
+	public XJDFBaseGoldenTicket(int baseICSLevel, EnumVersion jdfVersion, VJDFAttributeMap vParts)
 	{
 		this.theVersion = jdfVersion;
-		helper = new XJDFHelper(null, null, null);
-		helper.getRoot().setAttribute(AttributeName.ICSVERSIONS, getICSVersions(), null);
+		this.icsLevel = baseICSLevel;
+		this.vParts = (VJDFAttributeMap) ContainerUtil.addAll(new VJDFAttributeMap(), vParts);
+		helper = null;
+	}
+
+	public void refresh()
+	{
+		helper = new XJDFHelper(null, null, getWorkstepParts());
+
+		helper.setTypes(getTypes());
+		helper.getRoot().setAttribute(AttributeName.ICSVERSIONS, getICSVersions(icsLevel), null);
+		helper.getCreateAuditPool().getCreateAudit(eAudit.Created, 0);
+		addSets();
+	}
+
+	VString getWorkstepKeys()
+	{
+		return vParts.getKeys();
+	}
+
+	VJDFAttributeMap getWorkstepParts()
+	{
+		final VJDFAttributeMap ret = getParts();
+		ret.reduceMap(getWorkstepKeys());
+
+		return ret;
+	}
+
+	VJDFAttributeMap getParts()
+	{
+		return new VJDFAttributeMap(vParts);
 	}
 
 	XJDFHelper helper;
@@ -117,6 +159,13 @@ public class XJDFBaseGoldenTicket
 	public XJDFHelper getXJDFHelper()
 	{
 		return helper;
+	}
+
+	void addSets()
+	{
+		final SetHelper nis = helper.getCreateNodeInfo();
+		final JDFNodeInfo ni = (JDFNodeInfo) nis.getCreateResource().getCreateResource();
+		ni.setStatus(EnumNodeStatus.Waiting);
 	}
 
 	/**

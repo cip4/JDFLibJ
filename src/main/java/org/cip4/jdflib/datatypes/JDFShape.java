@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2012 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,8 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * This class is a representation of a JDFShape. It is a blank separated list of double values consisting of a width(x), a height(y) and a depth(z) value. this spans a standard right-handed xyz
+ * This class is a representation of a JDFShape. It is a blank separated list of double values consisting of a width(x), a height(y) and a depth(z) value. this spans a standard
+ * right-handed xyz
  * coordinate system
  */
 public class JDFShape extends JDFNumList
@@ -95,14 +96,16 @@ public class JDFShape extends JDFNumList
 
 	/**
 	 * factory for JDFShape that silently returns null in case of illegal strings
-	 * 
+	 *
 	 * @param s the string to parse - if JDFXYPair compatible, a 0 z dimension value is assumed
 	 * @return the JDFShape, null if s is not compatible
 	 */
 	public static JDFShape createShape(final String s)
 	{
 		if (s == null || s.length() == 0)
+		{
 			return null;
+		}
 
 		try
 		{
@@ -126,7 +129,6 @@ public class JDFShape extends JDFNumList
 	 * constructor - constructs a shape with all values set via a Vector of Double objects
 	 *
 	 * @param v the given vector
-	 *
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 * @deprecated use typesafe constructors
 	 */
@@ -140,7 +142,6 @@ public class JDFShape extends JDFNumList
 	 * constructor - constructs a shape with all values set via a String
 	 *
 	 * @param s the given String
-	 *
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
 	public JDFShape(final String s) throws DataFormatException
@@ -152,7 +153,6 @@ public class JDFShape extends JDFNumList
 	 * constructor - constructs a shape with all values set via a JDFNumberList
 	 *
 	 * @param nl the given number list
-	 *
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
 	public JDFShape(final JDFNumList nl) throws DataFormatException
@@ -161,11 +161,9 @@ public class JDFShape extends JDFNumList
 	}
 
 	/**
-	 * constructor - constructs a shape with all values set via a JDFNumberList
+	 * constructor - constructs a shape with all values set via a shape
 	 *
 	 * @param nl the given number list
-	 *
-	 *
 	 */
 	public JDFShape(final JDFShape nl)
 	{
@@ -174,8 +172,19 @@ public class JDFShape extends JDFNumList
 	}
 
 	/**
-	 * swap x and y coordinates -
+	 * constructor - constructs a shape with all values set via an xypair
 	 *
+	 * @param nl the given number list
+	 */
+	public JDFShape(final JDFXYPair xy)
+	{
+		super();
+		addAll(xy);
+		add(0.0);
+	}
+
+	/**
+	 * swap x and y coordinates -
 	 */
 	public void swapXY()
 	{
@@ -270,7 +279,8 @@ public class JDFShape extends JDFNumList
 
 		final JDFShape shape = (JDFShape) other;
 
-		return (Math.abs(this.getY() - shape.getY()) <= EPSILON) && (Math.abs(this.getX() - shape.getX()) <= EPSILON) && (Math.abs(this.getZ() - shape.getZ()) <= EPSILON);
+		return (Math.abs(this.getY() - shape.getY()) <= EPSILON) && (Math.abs(this.getX() - shape.getX()) <= EPSILON)
+				&& (Math.abs(this.getZ() - shape.getZ()) <= EPSILON);
 	}
 
 	/**
@@ -330,7 +340,6 @@ public class JDFShape extends JDFNumList
 	 * getHeight - returns the height
 	 *
 	 * @deprecated use getY - attention height and width were accidentally exchanged
-	 *
 	 * @return double - the height
 	 */
 	@Deprecated
@@ -343,7 +352,6 @@ public class JDFShape extends JDFNumList
 	 * getY - returns the width
 	 *
 	 * @return double - the width
-	 *
 	 */
 	public double getY()
 	{
@@ -377,7 +385,6 @@ public class JDFShape extends JDFNumList
 	 *
 	 * @deprecated use getX - attention height and width were accidentally exchanged
 	 * @return double - the width
-	 *
 	 */
 	@Deprecated
 	public double getWidth()
@@ -389,7 +396,6 @@ public class JDFShape extends JDFNumList
 	 * getX - returns the width
 	 *
 	 * @return double - the width
-	 *
 	 */
 	public double getX()
 	{
