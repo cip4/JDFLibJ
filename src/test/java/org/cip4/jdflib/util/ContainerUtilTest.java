@@ -55,6 +55,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
@@ -397,6 +398,64 @@ class ContainerUtilTest extends JDFTestCaseBase
 		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
 		assertEquals(ContainerUtil.getMatchesList(simpleMatch1, v).size(), 5);
 		assertEquals(ContainerUtil.getMatch(simpleMatch1, v, 0), Integer.valueOf(1));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetIgnoreCase()
+	{
+		final Map<String, Integer> m = new HashMap<>();
+		for (int i = 0; i < 100000; i++)
+		{
+			m.put("m" + i, i);
+		}
+		for (int i = 0; i < 100000; i += 420)
+		{
+			new Thread(new IgnoreGetter(m, i)).start();
+		}
+		for (int i = 0; i < 100000; i++)
+		{
+			m.put("mm" + i, i);
+		}
+
+		for (int i = 0; i < 100; i++)
+		{
+			if (IgnoreGetter.n.get() <= 42)
+			{
+				break;
+			}
+			ThreadUtil.sleep(42);
+		}
+	}
+
+	private static class IgnoreGetter implements Runnable
+	{
+
+		private static AtomicInteger n = new AtomicInteger();
+		private final Map<String, Integer> m;
+		private final int i;
+
+		public IgnoreGetter(Map<String, Integer> m, int i)
+		{
+			this.m = m;
+			this.i = i;
+			n.incrementAndGet();
+		}
+
+		@Override
+		public void run()
+		{
+			final Integer ic = ContainerUtil.getIgnoreCase(m, "M" + i);
+			assertEquals(i, ic, "M" + i);
+			final Integer ic1 = ContainerUtil.getIgnoreCase(m, "m" + i);
+			assertEquals(i, ic1, "m" + i);
+			final Integer ic0 = ContainerUtil.getIgnoreCase(m, "N" + i);
+			assertNull(ic0);
+			n.decrementAndGet();
+		}
+
 	}
 
 	/**

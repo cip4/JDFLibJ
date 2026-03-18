@@ -482,7 +482,9 @@ public class ContainerUtil
 	}
 
 	/**
-	 * @param strLocalName
+	 * @param <A>
+	 * @param map
+	 * @param name
 	 * @return
 	 */
 	public static <A> A getIgnoreCase(Map<String, A> map, final String name)
@@ -494,7 +496,7 @@ public class ContainerUtil
 		final A val = map.get(name);
 		if (val == null && !StringUtil.isEmpty(name))
 		{
-			for (final String key : map.keySet())
+			for (final String key : getKeyArray(map))
 			{
 				if (name.equalsIgnoreCase(key))
 				{
@@ -988,7 +990,7 @@ public class ContainerUtil
 		synchronized (m)
 		{
 			final ListMap<B, A> inv = new ListMap<>();
-			final Collection<A> keys = m.keySet();
+			final Collection<A> keys = getKeyArray(m);
 			if (keys.size() == 0)
 			{
 				return null;
@@ -1270,7 +1272,10 @@ public class ContainerUtil
 		}
 		final ArrayList<A> v = new ArrayList<>();
 		v.ensureCapacity(keySet.size());
-		v.addAll(keySet);
+		synchronized (m)
+		{
+			v.addAll(keySet);
+		}
 		return v;
 	}
 
