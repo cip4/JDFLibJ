@@ -489,7 +489,7 @@ public class ContainerUtil
 	 */
 	public static <A> A getIgnoreCase(Map<String, A> map, final String name)
 	{
-		if (map == null)
+		if (isEmpty(map))
 		{
 			return null;
 		}
@@ -1260,16 +1260,12 @@ public class ContainerUtil
 
 	public static <A> Collection<A> getKeyArray(final Map<A, ?> m)
 	{
-		if (m == null)
+		if (isEmpty(m))
 		{
 			return null;
 		}
 
 		final Set<A> keySet = m.keySet();
-		if (keySet.isEmpty())
-		{
-			return null;
-		}
 		final ArrayList<A> v = new ArrayList<>();
 		v.ensureCapacity(keySet.size());
 		synchronized (m)
