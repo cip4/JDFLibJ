@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -611,9 +611,9 @@ class StorageHotFolderTest extends JDFTestCaseBase
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
-			ThreadUtil.sleep(200);
+			ThreadUtil.sleep(42);
 			if (theHFDir.listFiles().length <= 2 && tmpHFDir.listFiles().length < 2)
 			{
 				log.info("stop " + i);
