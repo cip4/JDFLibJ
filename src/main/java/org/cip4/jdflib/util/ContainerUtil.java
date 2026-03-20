@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -982,29 +983,25 @@ public class ContainerUtil
 	 */
 	public static <A, B> ListMap<B, A> getInvertedListMap(final Map<A, B> m)
 	{
-		if (m == null)
+		final ListMap<B, A> inv = new ListMap<>();
+		if (!isEmpty(m))
 		{
-			return null;
-		}
-
-		synchronized (m)
-		{
-			final ListMap<B, A> inv = new ListMap<>();
-			final Collection<A> keys = getKeyArray(m);
-			if (keys.size() == 0)
+			final Map<A, B> m2;
+			synchronized (m)
 			{
-				return null;
+				m2 = new HashMap<>(m);
 			}
-			for (final A key : keys)
+			for (final Entry<A, B> e : m2.entrySet())
 			{
-				final B val = m.get(key);
+				final B val = e.getValue();
 				if (val != null)
 				{
-					inv.putOne(val, key);
+					inv.putOne(val, e.getKey());
 				}
 			}
-			return inv;
 		}
+
+		return inv;
 	}
 
 	/**

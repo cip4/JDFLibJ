@@ -612,6 +612,8 @@ class ContainerUtilTest extends JDFTestCaseBase
 	@Test
 	void testGetInvertedVector()
 	{
+		assertNull(ContainerUtil.getInvertedMap(null));
+		assertNull(ContainerUtil.getInvertedMap(new JDFAttributeMap()));
 		final HashMap<String, String> hm = new HashMap<>();
 		for (int i = 0; i < 10; i++)
 		{
@@ -628,6 +630,39 @@ class ContainerUtilTest extends JDFTestCaseBase
 			hm.put("b" + i, "a" + i);
 		}
 		inv = ContainerUtil.getInvertedMap(hm);
+		assertEquals(inv.size(), 10);
+		for (int i = 0; i < 10; i++)
+		{
+			assertEquals(inv.get("a" + i).size(), 2);
+			assertTrue(inv.get("a" + i).contains("b" + i));
+			assertTrue(inv.get("a" + i).contains("" + i));
+		}
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testGetInvertedListMap()
+	{
+		assertTrue(ContainerUtil.getInvertedListMap(null).isEmpty());
+		assertTrue(ContainerUtil.getInvertedListMap(new JDFAttributeMap()).isEmpty());
+		final HashMap<String, String> hm = new HashMap<>();
+		for (int i = 0; i < 10; i++)
+		{
+			hm.put("" + i, "a" + i);
+		}
+		ListMap<String, String> inv = ContainerUtil.getInvertedListMap(hm);
+		assertEquals(inv.size(), 10);
+		for (int i = 0; i < 10; i++)
+		{
+			assertEquals(inv.getOne("a" + i, 0), "" + i);
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			hm.put("b" + i, "a" + i);
+		}
+		inv = ContainerUtil.getInvertedListMap(hm);
 		assertEquals(inv.size(), 10);
 		for (int i = 0; i < 10; i++)
 		{
