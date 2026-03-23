@@ -1447,7 +1447,7 @@ public class StatusCounter
 						for (final JDFResource rr : leaves)
 						{
 							final VJDFAttributeMap vMap = rr.getPartMapVector(false);
-							if (m_vPartMap != null && m_vPartMap.overlapsMap(vMap))
+							if (m_vPartMap == null || m_vPartMap.overlapsMap(vMap))
 							{
 								rr.setResStatus(EnumResStatus.Available, true);
 							}
