@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2014 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,16 +70,24 @@
  */
 package org.cip4.jdflib.resource.intent;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.extensions.IntentHelper.EIntentType;
+import org.cip4.jdflib.extensions.XJDFHelper;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.span.JDFStringSpan;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class JDFColorIntentTest extends JDFTestCaseBase
 {
@@ -90,9 +98,37 @@ class JDFColorIntentTest extends JDFTestCaseBase
 	@Test
 	void testAppendColorantICCStandard()
 	{
-		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
-		JDFStringSpan ns = ci.appendColorICCStandard();
-		Assertions.assertNotNull(ns);
+		final JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
+		final JDFStringSpan ns = ci.appendColorICCStandard();
+		assertNotNull(ns);
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSetSurfaceColorBad()
+	{
+		final JDFNode n = JDFNode.createRoot();
+		final JDFColorIntent ci = (JDFColorIntent) n.getCreateResource(ElementName.COLORINTENT, EnumUsage.Input);
+		assertThrows(JDFException.class, () -> ci.setSurfaceColor(true, "a", "b"));
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSetSurfaceColor()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "p");
+		final JDFColorIntent ci = (JDFColorIntent) h.getCreateRootProduct(0).getCreateIntent(EIntentType.ColorIntent).getResource();
+		ci.setSurfaceColor(true, "a", "b");
+		assertEquals("b", ci.getSurfaceColor(true).getAttribute("a"));
+		ci.setSurfaceColor(true, "a", "c");
+		assertEquals("c", ci.getSurfaceColor(true).getAttribute("a"));
+		ci.setSurfaceColor(false, "a", "b");
+		assertEquals("c", ci.getSurfaceColor(true).getAttribute("a"));
+		assertEquals("b", ci.getSurfaceColor(false).getAttribute("a"));
 	}
 
 	/**
@@ -101,13 +137,13 @@ class JDFColorIntentTest extends JDFTestCaseBase
 	@Test
 	void testGetNColors()
 	{
-		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
+		final JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		ci.appendColorsUsed().setCMYK();
-		Assertions.assertEquals(ci.getNumColors(), 4);
+		assertEquals(ci.getNumColors(), 4);
 		ci.setNumColors(4);
-		Assertions.assertEquals(ci.getNumColors(), 4);
+		assertEquals(ci.getNumColors(), 4);
 		ci.getColorsUsed().setSeparations(new VString("Spot1", null));
-		Assertions.assertEquals(ci.getNumColors(), 5);
+		assertEquals(ci.getNumColors(), 5);
 	}
 
 	/**
@@ -116,11 +152,11 @@ class JDFColorIntentTest extends JDFTestCaseBase
 	@Test
 	void testGetNumVarnish()
 	{
-		JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
+		final JDFColorIntent ci = (JDFColorIntent) new JDFDoc(ElementName.COLORINTENT).getRoot();
 		ci.appendColorsUsed().setCMYK();
 		ci.getColorsUsed().setSeparations(new VString("Spot1", null));
-		Assertions.assertEquals(ci.getNumVarnish(), 0);
+		assertEquals(ci.getNumVarnish(), 0);
 		ci.getColorsUsed().setSeparations(new VString("Spot1 DullVarnish Aqueous", null));
-		Assertions.assertEquals(ci.getNumVarnish(), 2);
+		assertEquals(ci.getNumVarnish(), 2);
 	}
 }

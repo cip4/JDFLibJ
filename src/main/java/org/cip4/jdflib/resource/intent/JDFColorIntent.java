@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2017 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,9 +83,15 @@ package org.cip4.jdflib.resource.intent;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorIntent;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.extensions.XJDFConstants;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
@@ -132,19 +138,44 @@ public class JDFColorIntent extends JDFAutoColorIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	@Override
-	public String toString()
-	{
-		return "JDFColorIntent[  --> " + super.toString() + " ]";
-	}
-
 	/**
-	 *
 	 * @return
 	 */
 	public int getNumColorsRaw()
 	{
 		return super.getNumColors();
+	}
+
+	/**
+	 * @param front
+	 * @param key
+	 * @param val
+	 * @return
+	 */
+	public KElement setSurfaceColor(boolean front, String key, String val)
+	{
+		KElement sc = getSurfaceColor(front);
+		if (sc == null)
+		{
+			sc = appendElement(XJDFConstants.SurfaceColor);
+			sc.setAttribute(AttributeName.SURFACE, front ? EnumSide.Front : EnumSide.Back, null);
+		}
+		sc.setAttribute(key, val);
+		return sc;
+	}
+
+	/**
+	 * @param front
+	 * @return
+	 */
+	public KElement getSurfaceColor(boolean front)
+	{
+		if (!isXJDF())
+		{
+			throw new JDFException("Invalid JDF Version for setSurfaceColor");
+		}
+		return getChildByTagName(XJDFConstants.SurfaceColor, null, 0, new JDFAttributeMap(AttributeName.SURFACE, front ? EnumSide.Front : EnumSide.Back), true,
+				true);
 	}
 
 	/**
@@ -155,13 +186,17 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	@Override
 	public int getNumColors()
 	{
-		int n = super.getNumColors();
-		JDFSeparationList sl = getColorsUsed();
+		final int n = super.getNumColors();
+		final JDFSeparationList sl = getColorsUsed();
 		if (sl == null)
+		{
 			return n;
-		VString vSep = sl.getSeparations();
+		}
+		final VString vSep = sl.getSeparations();
 		if (n >= 1)
+		{
 			vSep.remove(JDFConstants.SEPARATION_BLACK);
+		}
 		if (n == 4)
 		{
 			vSep.remove(JDFConstants.SEPARATION_CYAN);
@@ -178,12 +213,14 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	 */
 	public int getNumVarnish()
 	{
-		JDFSeparationList sl = getColorsUsed();
+		final JDFSeparationList sl = getColorsUsed();
 		if (sl == null)
+		{
 			return 0;
-		VString seps = sl.getSeparations();
+		}
+		final VString seps = sl.getSeparations();
 		int n = 0;
-		for (String sep : seps)
+		for (final String sep : seps)
 		{
 			if (isVarnish(sep))
 			{
@@ -202,11 +239,17 @@ public class JDFColorIntent extends JDFAutoColorIntent
 	{
 		color = StringUtil.normalize(color, true);
 		if (color == null)
+		{
 			return false;
+		}
 		if (color.indexOf("varnish") >= 0)
+		{
 			return true;
+		}
 		if ("aqueous".equals(color) || "bronzing".equals(color))
+		{
 			return true;
+		}
 		return false;
 	}
 }
