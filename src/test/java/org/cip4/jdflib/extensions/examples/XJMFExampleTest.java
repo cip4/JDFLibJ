@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2018 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -77,9 +77,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author rainer prosi
- *
  */
 class XJMFExampleTest extends ExampleTest
 {
@@ -433,7 +431,7 @@ class XJMFExampleTest extends ExampleTest
 
 	JDFJobPhase addJobPhase(JDFDeviceInfo di, String jobID, String sheetName)
 	{
-		JDFJobPhase p = di.appendJobPhase();
+		final JDFJobPhase p = di.appendJobPhase();
 		p.setJobID(jobID);
 		p.setJobPartID("p1");
 		p.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, sheetName));

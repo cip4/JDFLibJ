@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -614,6 +614,28 @@ class JMFToXJMFConverterTest extends JDFTestCaseBase
 		final JDFToXJDF conv = new JDFToXJDF();
 		final KElement xjmf = conv.makeNewJMF(jmf);
 		assertNotNull(xjmf.getXPathElement("ResponseKnownMessages"));
+
+		writeRoundTrip(jmf, "KnownMessageResp");
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testKnownMessageQCResponse()
+	{
+		final JDFJMF jmf = new JMFBuilder().createJMF(EnumFamily.Response, EnumType.KnownMessages);
+		final JDFMessageService ms = jmf.getCreateResponse().appendMessageService();
+		ms.setType(EnumType.Resource);
+		ms.setQuery(true);
+		ms.setCommand(true);
+		ms.setPersistent(true);
+		final JDFToXJDF conv = new JDFToXJDF();
+		final KElement xjmf = conv.makeNewJMF(jmf);
+		assertNotNull(xjmf.getXPathElement("ResponseKnownMessages"));
+		final XJMFHelper h = new XJMFHelper(xjmf);
+		final KElement resp = h.getMessageHelper(0).getRoot();
+		assertNotNull(resp.getElement(ElementName.MESSAGESERVICE, null, 1));
 
 		writeRoundTrip(jmf, "KnownMessageResp");
 	}
