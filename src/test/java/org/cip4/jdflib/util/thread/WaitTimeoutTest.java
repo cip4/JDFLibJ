@@ -46,7 +46,7 @@ import org.junit.jupiter.api.Test;
 
 class WaitTimeoutTest extends JDFTestCaseBase
 {
-	class TestWait extends WaitTimeout<Boolean>
+	static class TestWait extends WaitTimeout<Boolean>
 	{
 
 		private final int sleep;
@@ -61,9 +61,7 @@ class WaitTimeoutTest extends JDFTestCaseBase
 		@Override
 		protected Boolean handle()
 		{
-			log.info("running: ");
 			ThreadUtil.sleep(sleep);
-			log.info("ran: ");
 			return Boolean.TRUE;
 		}
 
