@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -57,15 +57,26 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
- *
  * @author rainer prosi
  * @date Apr 14, 2011
  */
 class StreamUtilTest extends JDFTestCaseBase
 {
 	/**
-	 *
-	 *
+	 * @throws IOException
+	 */
+	@Test
+	void testAvailable() throws IOException
+	{
+		assertEquals(0, StreamUtil.available(null));
+		final ByteArrayIOStream bos = new ByteArrayIOStream();
+		assertEquals(0, StreamUtil.available(bos.getInputStream()));
+		bos.write("foooo\nbar\nbar2".getBytes());
+		assertEquals("foooo\nbar\nbar2".length(), StreamUtil.available(bos.getInputStream()));
+		bos.close();
+	}
+
+	/**
 	 * @throws IOException
 	 */
 	@Test
@@ -90,7 +101,6 @@ class StreamUtilTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *
 	 */
 	@Test
 	void testWrite2StringBad() throws IOException
@@ -102,8 +112,6 @@ class StreamUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -123,8 +131,6 @@ class StreamUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -138,8 +144,6 @@ class StreamUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -157,8 +161,6 @@ class StreamUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -168,7 +170,8 @@ class StreamUtilTest extends JDFTestCaseBase
 		final InputStream s = FileUtil.getBufferedInputStream(f1);
 		final File f2 = new File(sm_dirTestDataTemp + "page1.pdf");
 		final OutputStream os = FileUtil.getBufferedOutputStream(f2);
-		assertTrue(StreamUtil.replaceBytes(s, os, "QuarkXPress".getBytes(StandardCharsets.UTF_8), "CIP4Library AND LOTS Longer".getBytes(StandardCharsets.UTF_8), 1));
+		assertTrue(StreamUtil.replaceBytes(s, os, "QuarkXPress".getBytes(StandardCharsets.UTF_8),
+				"CIP4Library AND LOTS Longer".getBytes(StandardCharsets.UTF_8), 1));
 		StreamUtil.close(s);
 		StreamUtil.close(os);
 		assertEquals(f1.length(), f2.length() - "CIP4Library AND LOTS Longer".length() + "QuarkXPress".length());
@@ -176,8 +179,6 @@ class StreamUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -201,8 +202,6 @@ class StreamUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -215,7 +214,9 @@ class StreamUtilTest extends JDFTestCaseBase
 		final InputStream s2 = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
 		final byte[] md52 = StreamUtil.getMD5(s2);
 		for (int i = 0; i < md5.length; i++)
+		{
 			assertEquals(md5[i], md52[i]);
+		}
 		s2.close();
 	}
 }

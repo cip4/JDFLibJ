@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -59,7 +59,6 @@ import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         August 10, 2009
  */
 public class StreamUtil
@@ -91,8 +90,7 @@ public class StreamUtil
 	 * write to a stream
 	 *
 	 * @param file the file to write
-	 * @param w the writer to write to
-	 *
+	 * @param w    the writer to write to
 	 * @return the stream that was created, null if snafu
 	 */
 	public static OutputStream write2Stream(final IStreamWriter w, final OutputStream os)
@@ -177,7 +175,9 @@ public class StreamUtil
 			{
 				final int readByte = in.read();
 				if (readByte < 0)
+				{
 					break;
+				}
 				final byte b = (byte) (readByte & 0xff);
 				if (srcbytes[pos + 1] == b)
 				{
@@ -229,7 +229,9 @@ public class StreamUtil
 	public static byte[] getMD5(final InputStream is)
 	{
 		if (is == null)
+		{
 			return null;
+		}
 		MessageDigest md5;
 		try
 		{
@@ -262,7 +264,6 @@ public class StreamUtil
 	}
 
 	/**
-	 *
 	 * exception catching null safe close
 	 *
 	 * @param ios
@@ -284,7 +285,6 @@ public class StreamUtil
 	}
 
 	/**
-	 *
 	 * exception catching null safe copy
 	 *
 	 * @param ios
@@ -305,25 +305,39 @@ public class StreamUtil
 	}
 
 	/**
-	 *
 	 * @param stream
 	 */
 	static public void reset(final InputStream stream)
 	{
-		if (stream == null)
-			return;
-		try
+		if (stream != null)
 		{
-			stream.reset();
-		}
-		catch (final IOException e)
-		{
-			// nop
+			try
+			{
+				stream.reset();
+			}
+			catch (final IOException e)
+			{
+				// nop
+			}
 		}
 	}
 
 	/**
-	 *
+	 * @param stream
+	 */
+	static public int available(final InputStream stream)
+	{
+		try
+		{
+			return stream == null ? 0 : stream.available();
+		}
+		catch (final IOException e)
+		{
+			return 0;
+		}
+	}
+
+	/**
 	 * exception catching null safe close
 	 *
 	 * @param ios
