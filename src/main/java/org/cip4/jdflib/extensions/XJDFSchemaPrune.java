@@ -85,7 +85,7 @@ import org.cip4.jdflib.util.ListMap;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * the old implementattion was obsolete this implementation extracts more data from the xml schema that can be injected into the json schema
+ * the old implementation was obsolete this implementation extracts more data from the xml schema that can be injected into the json schema
  */
 public class XJDFSchemaPrune
 {

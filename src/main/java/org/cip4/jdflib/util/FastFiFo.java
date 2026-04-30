@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,7 +75,6 @@ import java.util.Arrays;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
- *
  *         quick and dirty fast fifo built on a circular array May 26, 2009
  * @param <x> the element class to dump into the fifo
  */
@@ -87,7 +86,6 @@ public class FastFiFo<x>
 
 	/**
 	 * @param n size of the fifo
-	 *
 	 */
 	public FastFiFo(final int n)
 	{
@@ -106,7 +104,7 @@ public class FastFiFo<x>
 
 	/**
 	 * pushes an element into the back and returns the previous content of the cell
-	 * 
+	 *
 	 * @param back the element to push
 	 * @return the element that has been replaced, null if we are not yet full
 	 */
@@ -124,7 +122,7 @@ public class FastFiFo<x>
 
 	/**
 	 * pops the first to go
-	 * 
+	 *
 	 * @return the first element, null if empty
 	 */
 	@SuppressWarnings("unchecked")
@@ -143,14 +141,14 @@ public class FastFiFo<x>
 
 	/**
 	 * peeks into the fifo from the beginning
-	 * 
+	 *
 	 * @param i the index of the element to peek
 	 * @return the object at position i
 	 */
 	@SuppressWarnings("unchecked")
 	public x peek(final int i)
 	{
-		if (i >= fill)
+		if (i >= fill || i < 0)
 		{
 			return null;
 		}
@@ -159,7 +157,7 @@ public class FastFiFo<x>
 
 	/**
 	 * peeks into the fifo from the beginning
-	 * 
+	 *
 	 * @return a snapshot of the current fifo, null if empty
 	 */
 	@SuppressWarnings("unchecked")

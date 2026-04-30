@@ -1,50 +1,122 @@
+/*
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *
+ *
+ */
 /**
- * 
+ *
  */
 package org.cip4.jdflib.util;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
  *         May 26, 2009
  */
 class FastFiFoTest extends JDFTestCaseBase
 {
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testPush()
 	{
-		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
+		final FastFiFo<MyInteger> ff = new FastFiFo<>(10);
 		for (int i = 0; i < 100; i++)
 		{
 			final MyInteger r = ff.push(new MyInteger(i));
 			if (i < 10)
 			{
-				Assertions.assertNull(r, "loop " + i);
+				assertNull(r, "loop " + i);
 			}
 			else
 			{
-				Assertions.assertEquals(r, new MyInteger(i - 10), "loop " + i);
+				assertEquals(r, new MyInteger(i - 10), "loop " + i);
 			}
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testPeek()
 	{
-		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
+		final FastFiFo<MyInteger> ff = new FastFiFo<>(10);
 		for (int i = 0; i < 100; i++)
 		{
 			// final MyInteger r =
@@ -54,44 +126,57 @@ class FastFiFoTest extends JDFTestCaseBase
 				final MyInteger r2 = ff.peek(j);
 				if (j > i)
 				{
-					Assertions.assertNull(r2, "loop " + i);
+					assertNull(r2, "loop " + i);
 				}
 				else
 				{
-					Assertions.assertEquals(r2, new MyInteger(i - Math.min(9, i) + j), "loop " + i + "/" + j);
+					assertEquals(r2, new MyInteger(i - Math.min(9, i) + j), "loop " + i + "/" + j);
 				}
 			}
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	void testPeekArray()
 	{
-		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
+		final FastFiFo<MyInteger> ff = new FastFiFo<>(10);
 		for (int i = 0; i < 100; i++)
 		{
 			// final MyInteger r =
 			ff.push(new MyInteger(i));
 			final MyInteger[] a = ff.peekArray();
-			Assertions.assertEquals(a[0], new MyInteger(Math.max(0, i - 9)), "loop " + i);
+			assertEquals(a[0], new MyInteger(Math.max(0, i - 9)), "loop " + i);
 			if (i > 5)
 			{
-				Assertions.assertEquals(a[5], new MyInteger(Math.max(5, i - 4)), "loop " + i);
-				Assertions.assertTrue(a[5].i > a[4].i, "loop " + i);
+				assertEquals(a[5], new MyInteger(Math.max(5, i - 4)), "loop " + i);
+				assertTrue(a[5].i > a[4].i, "loop " + i);
 			}
 		}
 	}
 
 	/**
-	 * 
+	 *
+	 */
+	@Test
+	void testPeekBad()
+	{
+		final FastFiFo<MyInteger> ff = new FastFiFo<>(10);
+		for (int i = -10; i < 33; i++)
+		{
+			assertNull(ff.peek(i));
+		}
+	}
+
+	/**
+	 *
 	 */
 	@Test
 	void testSpeed()
 	{
-		final FastFiFo<MyInteger> fifo = new FastFiFo<MyInteger>(10000);
+		final FastFiFo<MyInteger> fifo = new FastFiFo<>(10000);
 		long l0 = System.currentTimeMillis();
 		for (int i = 0; i < 1000000; i++)
 		{
@@ -100,7 +185,7 @@ class FastFiFoTest extends JDFTestCaseBase
 		System.out.println("T=" + (System.currentTimeMillis() - l0));
 
 		l0 = System.currentTimeMillis();
-		final ArrayList<MyInteger> v = new ArrayList<MyInteger>(10000);
+		final ArrayList<MyInteger> v = new ArrayList<>(10000);
 		for (int i = 0; i < 100000; i++) // note the factor 10 less for the arraylist...
 		{
 			v.add(new MyInteger(i));
@@ -111,7 +196,7 @@ class FastFiFoTest extends JDFTestCaseBase
 		}
 		System.out.println("T=" + (System.currentTimeMillis() - l0));
 		l0 = System.currentTimeMillis();
-		final ArrayDeque<MyInteger> ad = new ArrayDeque<MyInteger>(10000);
+		final ArrayDeque<MyInteger> ad = new ArrayDeque<>(10000);
 		for (int i = 0; i < 100000; i++) // note the factor 10 less for the arraylist...
 		{
 			v.add(new MyInteger(i));
