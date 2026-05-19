@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -568,8 +568,8 @@ class KElementTest extends JDFTestCaseBase
 	@Test
 	void testGetElementById()
 	{
-		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>"
-				+ "</ELEM2>" + "</JDF>";
+		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>"
+				+ "</ELEM3>" + "</ELEM2>" + "</JDF>";
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -1756,6 +1756,22 @@ class KElementTest extends JDFTestCaseBase
 	 *
 	 */
 	@Test
+	void testCopyAttributeNS2()
+	{
+		final KElement a = new XMLDoc("a", null).getRoot();
+		a.setAttributeNS("www.foo.com", "foo:test", "bar");
+
+		final KElement b = new XMLDoc("b", null).getRoot();
+		b.copyAttribute("test", a, "test", null, "www.foo.com");
+		assertEquals(b.getAttribute("test", "www.foo.com", null), "bar");
+
+		assertNull(b.copyAttribute("a", null));
+	}
+
+	/**
+	 *
+	 */
+	@Test
 	void testNameSpace()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1772,19 +1788,19 @@ class KElementTest extends JDFTestCaseBase
 
 		// add an element with a (predefined) prefix and no namespace
 		final KElement kElem9 = root.appendElement(myPrefix + JDFConstants.COLON + "MyElementLevel_2", "");
-		assertTrue(kElem9.getNamespaceURI().equals(docNS));
-		assertTrue(kElem9.getPrefix().equals(myPrefix));
+		assertTrue(docNS.equals(kElem9.getNamespaceURI()));
+		assertTrue(myPrefix.equals(kElem9.getPrefix()));
 
 		final KElement kElem1 = root.appendElement("MyElementLevel_1", docNS);
-		assertTrue(kElem1.getNamespaceURI().equals(docNS));
+		assertTrue(docNS.equals(kElem1.getNamespaceURI()));
 
 		// kElem1.setAttributeNS(docNS, myPrefix+":att", "attval");
 		kElem1.setAttributeNS(docNS, "att1", "attval1");
 
 		// add an element in a namespace
 		final KElement kElem = root.appendElement(myPrefix + JDFConstants.COLON + "MyElement", docNS);
-		assertTrue(kElem.getNamespaceURI().equals(docNS));
-		assertTrue(kElem.getPrefix().equals(myPrefix));
+		assertTrue(docNS.equals(kElem.getNamespaceURI()));
+		assertTrue(myPrefix.equals(kElem.getPrefix()));
 
 		// add an attribute and its value in a namespace
 		kElem.setAttributeNS(docNS, myPrefix + JDFConstants.COLON + "MyAttribute", "MyValue");
@@ -1793,24 +1809,24 @@ class KElementTest extends JDFTestCaseBase
 		final KElement kElem2 = root.getElement_KElement("MyElement", docNS, 0);
 
 		String attr = kElem2.getAttribute_KElement("MyAttribute", docNS, "MyDefault");
-		assertTrue(attr.equals("MyValue"));
+		assertTrue("MyValue".equals(attr));
 
 		// this is pretty invalid but the ns url takes precedence
 		attr = kElem2.getAttribute_KElement(myPrefix + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
-		assertTrue(attr.equals("MyValue"));
+		assertTrue("MyValue".equals(attr));
 
 		// this is even more invalid but the ns url takes precedence
 		attr = kElem2.getAttribute_KElement("fnarf" + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
-		assertTrue(attr.equals("MyValue"));
+		assertTrue("MyValue".equals(attr));
 
 		// How to get the element, Version 2
 		final KElement kElem3 = root.getElement_KElement(myPrefix + JDFConstants.COLON + "MyElement", docNS, 0);
 
 		attr = kElem3.getAttribute_KElement("MyAttribute", docNS, "MyDefault");
-		assertTrue(attr.equals("MyValue"));
+		assertTrue("MyValue".equals(attr));
 
 		attr = kElem3.getAttribute_KElement(myPrefix + JDFConstants.COLON + "MyAttribute", docNS, "MyDefault");
-		assertTrue(attr.equals("MyValue"));
+		assertTrue("MyValue".equals(attr));
 
 		final DocumentJDFImpl doc0 = (DocumentJDFImpl) root.getOwnerDocument();
 
@@ -1867,15 +1883,16 @@ class KElementTest extends JDFTestCaseBase
 		// cip4NameSpaceURI
 		final KElement kElement2 = root.appendElement(cip4Prefix1 + JDFConstants.COLON + "kElement2", null);
 		assertTrue(kElement2.getNamespaceURI().equals(cip4NameSpaceURI));
-		assertTrue(kElement2.getPrefix().equals(cip4Prefix1));
+		assertTrue(cip4Prefix1.equals(kElement2.getPrefix()));
 
 		final KElement kElement3 = root.appendElement(cip4Prefix1 + JDFConstants.COLON + "kElement3", cip4NameSpaceURI);
 		assertTrue(kElement3.getNamespaceURI().equals(cip4NameSpaceURI));
-		assertTrue(kElement3.getPrefix().equals(cip4Prefix1));
+		assertTrue(cip4Prefix1.equals(kElement3.getPrefix()));
 
 		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">"
-				+ "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
+				+ "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" "
+				+ "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>" + "<jdf:kElement3/>"
+				+ "</JDF>";
 
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseString(jdfDocString);
@@ -1918,8 +1935,8 @@ class KElementTest extends JDFTestCaseBase
 		{
 			// add an element in a namespace
 			final KElement kElem1 = root.appendElement(myPrefix + JDFConstants.COLON + "Foo_1", docNS1);
-			assertTrue(kElem1.getNamespaceURI().equals(docNS1));
-			assertTrue(kElem1.getPrefix().equals(myPrefix));
+			assertTrue(docNS1.equals(kElem1.getNamespaceURI()));
+			assertTrue(myPrefix.equals(kElem1.getPrefix()));
 
 			kElem1.setAttribute(myPrefix + JDFConstants.COLON + "Foo_1", "attval1", docNS1);
 			kElem1.setAttribute(myPrefix + JDFConstants.COLON + "Foo_2", "attval2", docNS2);
@@ -2049,7 +2066,8 @@ class KElementTest extends JDFTestCaseBase
 		root.setType(JDFNode.EnumType.Imposition.getName(), false);
 		final JDFRunList rl = (JDFRunList) root.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Document, null);
 		rl.appendLayoutElement();
-		final JDFRunList leaf = (JDFRunList) rl.getCreatePartition(JDFResource.EnumPartIDKey.Run, "Run1", new VString(JDFResource.EnumPartIDKey.Run.getName(), " "));
+		final JDFRunList leaf = (JDFRunList) rl.getCreatePartition(JDFResource.EnumPartIDKey.Run, "Run1",
+				new VString(JDFResource.EnumPartIDKey.Run.getName(), " "));
 
 		final KElement el1 = rl.getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
 		final KElement el2 = leaf.getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
@@ -2416,7 +2434,8 @@ class KElementTest extends JDFTestCaseBase
 		assertEquals(root.getElement("foo").getElement("bar").getNextSiblingElement("bar", null).numChildElements("fnarf", null), 5, "");
 		assertNotNull(root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]"), "create by attribute value now implemented");
 		assertEquals("blahblah", root.getCreateXPathElement("./foo/bar[@blub=\"blahblah\"]").getAttribute("blub"), "getCreate actually sets the attribute");
-		assertEquals("blahblah", root.getCreateXPathElement("./foo/bar[gaga/@blub=\"blahblah\"]").getXPathAttribute("gaga/@blub", null), "getCreate actually sets the attribute");
+		assertEquals("blahblah", root.getCreateXPathElement("./foo/bar[gaga/@blub=\"blahblah\"]").getXPathAttribute("gaga/@blub", null),
+				"getCreate actually sets the attribute");
 	}
 
 	/**
@@ -2756,7 +2775,7 @@ class KElementTest extends JDFTestCaseBase
 		attribute = "notExistingAttribute";
 		root.removeXPathAttribute("AuditPool/" + nodeName + "@" + attribute);
 		attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "dummydefault");
-		assertTrue(attValue.equals("dummydefault"), "");
+		assertTrue("dummydefault".equals(attValue), "");
 	}
 
 	/**
@@ -3267,18 +3286,18 @@ class KElementTest extends JDFTestCaseBase
 
 		final String nodeName = "Created";
 		final KElement kElem = root.getXPathElement("AuditPool/" + nodeName);
-		assertTrue(kElem.getNodeName().equals(nodeName), "");
+		assertTrue(nodeName.equals(kElem.getNodeName()), "");
 
 		// does setAttribute really set an empty value?
 		kElem.setAttribute("Author", "");
-		assertTrue(kElem.getAttribute("Author", null, null).equals(""), "");
+		assertTrue("".equals(kElem.getAttribute("Author", null, null)), "");
 
 		assertTrue(kElem.hasAttribute("Author", "", false), "");
 		assertFalse(kElem.hasAttribute("NewAttribute", "", false));
 
 		kElem.setAttribute("Author", "", AttributeName.XMLNSURI);
 		kElem.setAttribute("NewAttribute", "");
-		assertTrue(kElem.getAttribute("NewAttribute", null, null).equals(""), "");
+		assertTrue("".equals(kElem.getAttribute("NewAttribute", null, null)), "");
 		kElem.setAttribute("foo", "€€€\"\'");
 		assertEquals(kElem.getAttribute("foo", null, null), "€€€\"\'", "special characters");
 	}
@@ -3364,7 +3383,8 @@ class KElementTest extends JDFTestCaseBase
 		}
 		assertEquals(root.getElementHashMap(null, null, "ID").size(), 2000, "");
 		assertEquals(root.getElementHashMap(null, "myns", "ID").size(), 1000, "");
-		assertEquals(root.getElementHashMap(null, null, "ID").get("id1_50"), root.getChildByTagName("child1", null, 0, new JDFAttributeMap("ID", "id1_50"), true, true), "");
+		assertEquals(root.getElementHashMap(null, null, "ID").get("id1_50"),
+				root.getChildByTagName("child1", null, 0, new JDFAttributeMap("ID", "id1_50"), true, true), "");
 	}
 
 	/**
@@ -3778,9 +3798,9 @@ class KElementTest extends JDFTestCaseBase
 			final KElement f = root.insertBefore("fnarf", c, null);
 			assertTrue(f.getNamespaceURI().equals(root.getNamespaceURI()), "ns insert ok");
 			assertTrue(f.getNamespaceURI() != null, "ns  ok");
-			assertTrue(f.getNamespaceURI().equals(JDFConstants.JDFNAMESPACE), "ns  ok");
+			assertTrue(JDFConstants.JDFNAMESPACE.equals(f.getNamespaceURI()), "ns  ok");
 			final KElement f2 = root.insertBefore("fnarf:fnarf", c, "www.fnarf");
-			assertTrue(f2.getNamespaceURI().equals("www.fnarf"), "ns  ok");
+			assertTrue("www.fnarf".equals(f2.getNamespaceURI()), "ns  ok");
 
 			// try to add an element into an unspecified namespace MUST FAIL
 			try
@@ -4315,6 +4335,7 @@ class KElementTest extends JDFTestCaseBase
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
 		assertTrue(root.toString().trim().endsWith("<doc/>"));
+		assertEquals("<doc", root.shortString());
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -81,7 +81,7 @@ public class XSLTransformHelper implements IStreamWriter
 	private static void setFactory()
 	{
 		// use well-defined xslt
-		String property = System.getProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY);
+		final String property = System.getProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY);
 		if (StringUtil.isEmpty(property))
 		{
 			System.setProperty(JAVAX_XML_TRANSFORM_TRANSFORMER_FACTORY, "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
@@ -105,7 +105,7 @@ public class XSLTransformHelper implements IStreamWriter
 	}
 
 	/**
-	 * @param d - the document to transform - must not be null
+	 * @param d   - the document to transform - must not be null
 	 * @param xsl
 	 */
 	public XSLTransformHelper(final XMLDoc d, final XMLDoc xsl)
@@ -114,7 +114,6 @@ public class XSLTransformHelper implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public XMLDoc getTransformElement()
@@ -134,6 +133,7 @@ public class XSLTransformHelper implements IStreamWriter
 		else
 		{
 			final XMLDoc xmlDoc = new XMLDoc((Document) transformedDoc);
+			xmlDoc.getRoot().fixNS(elem);
 			xmlDoc.copyMeta(elem.getOwnerDocument_KElement());
 			return xmlDoc;
 		}
@@ -157,9 +157,7 @@ public class XSLTransformHelper implements IStreamWriter
 	}
 
 	/**
-	 *
 	 * @param stream the stream to fill
-	 *
 	 */
 	@Override
 	public void writeStream(final OutputStream stream)

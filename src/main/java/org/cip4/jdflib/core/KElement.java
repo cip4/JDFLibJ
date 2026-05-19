@@ -4728,6 +4728,17 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
+	 * this to string, used for debug purpose mostly
+	 *
+	 * @return string representativ of this
+	 * @see Object#toString()
+	 */
+	public String shortString()
+	{
+		return "<" + getNodeName();
+	}
+
+	/**
 	 * serialize this to a string
 	 *
 	 * @return String the dom element serialized as a string
@@ -6848,6 +6859,72 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	{
 		final DocumentXMLImpl doc = (DocumentXMLImpl) getOwnerDocument();
 		doc.nsMap.clear();
+	}
 
+	public void fixNS(KElement src)
+	{
+		if (src != null)
+		{
+			final JDFAttributeMap nsMap = fillNSMap(src);
+			updateNS(nsMap);
+		}
+	}
+
+	public void updateNS(final JDFAttributeMap nsMap)
+	{
+		final VElement vNew = getChildrenByTagName(null);
+		vNew.add(this);
+		final List<Node> fix = new ArrayList<>();
+		for (final KElement e : vNew)
+		{
+			final NamedNodeMap attributes = e.getAttributes();
+			for (int i = 0; i < attributes.getLength(); i++)
+			{
+				final Node a = attributes.item(i);
+				final String prefix = KElement.xmlnsPrefix(a.getNodeName());
+				if (!StringUtil.isEmpty(prefix))
+				{
+					final String uri = a.getNamespaceURI();
+					if (StringUtil.isEmpty(uri))
+					{
+						fix.add(a);
+					}
+				}
+			}
+			if (!fix.isEmpty())
+			{
+				for (final Node a : fix)
+				{
+					e.setAttribute(a.getNodeName(), a.getNodeValue(), nsMap.get(KElement.xmlnsPrefix(a.getNodeName())));
+				}
+				fix.clear();
+			}
+		}
+	}
+
+	public JDFAttributeMap fillNSMap(KElement src)
+	{
+		final JDFAttributeMap nsMap = new JDFAttributeMap();
+		final VElement v = src.getChildrenByTagName(null);
+		v.add(src);
+		for (final KElement e : v)
+		{
+			final NamedNodeMap attributes = e.getAttributes();
+			for (int i = 0; i < attributes.getLength(); i++)
+			{
+				final Node a = attributes.item(i);
+				final String prefix = KElement.xmlnsPrefix(a.getNodeName());
+				if (!StringUtil.isEmpty(prefix))
+				{
+					final String uri = a.getNamespaceURI();
+					if (!StringUtil.isEmpty(uri))
+					{
+						nsMap.put(prefix, uri);
+					}
+				}
+			}
+
+		}
+		return nsMap;
 	}
 }
