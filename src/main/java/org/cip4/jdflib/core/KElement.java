@@ -5079,6 +5079,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path  XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
 	 *              <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 *              an index of 0 appends an element
 	 * @param value string to be set as attribute value
 	 */
 	public void setXPathValue(final String path, final String value)
@@ -5090,6 +5091,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * sets all xpaths to the values provided in map
 	 *
 	 * @param map map of XPath / values to set
+	 *            an index of 0 appends an element
 	 */
 	public void setXPathValues(final JDFAttributeMap map)
 	{
@@ -5102,6 +5104,7 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path  XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
 	 *              <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 *              an index of 0 appends an element
 	 * @param value string to be set as attribute value
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */

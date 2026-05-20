@@ -2565,7 +2565,7 @@ class KElementTest extends JDFTestCaseBase
 		assertEquals(root.getXPathAttribute("b/c[5]/d", null), "txt");
 		try
 		{
-			root.getXPathAttribute("foo/bar[0]/sub/@c", null);
+			final String ret = root.getXPathAttribute("foo/bar[0]/sub/@c", null);
 			fail("index must be >0");
 		}
 		catch (final IllegalArgumentException x)
@@ -2792,6 +2792,19 @@ class KElementTest extends JDFTestCaseBase
 		e.setXPathAttribute("a[@a=\"b\"]/c[@d=\"e\"]/@f", "g");
 		final String s2 = e.toXML();
 		assertEquals(s1, s2);
+
+	}
+
+	/**
+	 *
+	 */
+	@Test
+	void testSetXPathAttributeAppend()
+	{
+		final KElement e = new XMLDoc("foo", null).getRoot();
+		e.setXPathAttribute("a[0]/@b", "c");
+		e.setXPathAttribute("a[0]/@b", "d");
+		assertEquals(2, e.numChildElements("a", null));
 
 	}
 

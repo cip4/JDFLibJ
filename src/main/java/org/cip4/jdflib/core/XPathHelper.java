@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2020 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -45,7 +45,6 @@ import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Node;
 
 /**
- *
  * implementation class for all the KElement xpath stuff
  *
  * @author rainer prosi
@@ -68,7 +67,7 @@ class XPathHelper
 	 * copy attribute values or text from an xpath in src to this
 	 *
 	 * @param dstXPath the destination xpath in this element
-	 * @param src the source element, if null; use this
+	 * @param src      the source element, if null; use this
 	 * @param srcXPath the source xpath, if null same as dstXPath
 	 * @return the copied value; may be null if no value was found in srcXPath
 	 */
@@ -93,7 +92,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 *             <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 */
 	KElement getCreateXPathElement(final String path)
@@ -108,15 +107,22 @@ class XPathHelper
 		 *
 		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 		 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-		 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+		 *             <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 		 * @return KElement the specified element
 		 */
 		KElement getCreateXPathElement(final String path)
 		{
-			final KElement e = getXPathElement(path);
-			if (e != null)
+			try
 			{
-				return e;
+				final KElement e = getXPathElement(path);
+				if (e != null)
+				{
+					return e;
+				}
+			}
+			catch (final IllegalArgumentException x)
+			{
+				// nop
 			}
 
 			if (path.startsWith(JDFCoreConstants.SLASH))
@@ -142,11 +148,18 @@ class XPathHelper
 			if (endPos > 0)
 			{
 				String next = path.substring(0, endPos);
-				final KElement e = getXPathElement(next);
-				if (e != null)
+				try
 				{
-					next = path.substring(endPos + 1);
-					return new XPathHelper(e).getCreateXPathElement(next);
+					final KElement e = getXPathElement(next);
+					if (e != null)
+					{
+						next = path.substring(endPos + 1);
+						return new XPathHelper(e).getCreateXPathElement(next);
+					}
+				}
+				catch (final IllegalArgumentException x)
+				{
+					// nop
 				}
 			}
 
@@ -174,16 +187,23 @@ class XPathHelper
 							iSkip = calcSkipFromAtt(iSkip, newPath, slash, attName);
 						}
 					}
-
-					if (iSkip < 0)
-					{
-						throw new IllegalArgumentException("GetCreateXPath: illegal path:" + path);
-					}
 				}
 				else
 				{
 					iSkip = StringUtil.parseInt(siSkip, 1);
-					iSkip--;
+					if (iSkip > 0)
+					{
+						iSkip--;
+					}
+					else
+					{
+						final String elemName = path.substring(0, posB0);
+						iSkip = theElement.numChildElements(elemName, null) + iSkip;
+					}
+				}
+				if (iSkip < 0)
+				{
+					throw new IllegalArgumentException("GetCreateXPath: illegal path:" + path);
 				}
 			}
 			fillMissing(iSkip, newPath, slash);
@@ -214,11 +234,11 @@ class XPathHelper
 			{
 				return theElement.getParentNode_KElement().getCreateXPathElement(path.substring(3));
 			}
-			if (path.equals(JDFCoreConstants.DOT))
+			if (JDFCoreConstants.DOT.equals(path))
 			{
 				return theElement;
 			}
-			if (path.equals(".."))
+			if ("..".equals(path))
 			{
 				return theElement.getParentNode_KElement();
 			}
@@ -262,8 +282,6 @@ class XPathHelper
 		}
 
 		/**
-		 *
-		 *
 		 * @param iSkip
 		 * @param newPath
 		 * @param pos
@@ -291,8 +309,6 @@ class XPathHelper
 		}
 
 		/**
-		 *
-		 *
 		 * @param iSkip
 		 * @param newPath
 		 * @param pos
@@ -314,7 +330,7 @@ class XPathHelper
 	/**
 	 * Gets the XPath full tree representation of 'this'
 	 *
-	 * @param relativeTo relative element to which to create an xpath
+	 * @param relativeTo        relative element to which to create an xpath
 	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
 	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
 	 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
@@ -322,7 +338,9 @@ class XPathHelper
 	String buildRelativeXPath(final KElement relativeTo, final int methCountSiblings)
 	{
 		if (relativeTo == theElement)
+		{
 			return ".";
+		}
 		final KElement parent = theElement.getParentNode_KElement();
 
 		String path = buildLocalPath(methCountSiblings, parent);
@@ -337,7 +355,7 @@ class XPathHelper
 	/**
 	 * Gets the XPath full tree representation of 'this'
 	 *
-	 * @param relativeTo relative path to which to create an xpath
+	 * @param relativeTo        relative path to which to create an xpath
 	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3, add [@ID="id"]
 	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
 	 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
@@ -352,18 +370,15 @@ class XPathHelper
 			path = new XPathHelper(parent).buildXPath(relativeTo, methCountSiblings) + path;
 		}
 
-		if (relativeTo != null)
+		if ((relativeTo != null) && path.startsWith(relativeTo))
 		{
-			if (path.startsWith(relativeTo))
+			path = '.' + path.substring(relativeTo.length());
+			if (path.startsWith(".["))
 			{
-				path = '.' + path.substring(relativeTo.length());
-				if (path.startsWith(".["))
+				final int iB = path.indexOf(']');
+				if (iB > 0)
 				{
-					final int iB = path.indexOf(']');
-					if (iB > 0)
-					{
-						path = '.' + path.substring(iB + 1);
-					}
+					path = '.' + path.substring(iB + 1);
 				}
 			}
 		}
@@ -371,7 +386,6 @@ class XPathHelper
 	}
 
 	/**
-	 *
 	 * @param methCountSiblings
 	 * @param parent
 	 * @return
@@ -414,8 +428,8 @@ class XPathHelper
 	 * Sets an attribute as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path  XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *              <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 */
 	void setXPathValue(final String path, final String value)
@@ -446,7 +460,6 @@ class XPathHelper
 	}
 
 	/**
-	 *
 	 * sets all xpaths to the values provided in map
 	 *
 	 * @param map map of XPath / values to set
@@ -454,7 +467,9 @@ class XPathHelper
 	void setXPathValues(final JDFAttributeMap map)
 	{
 		if (map == null)
+		{
 			return;
+		}
 		final Set<String> keys = map.keySet();
 
 		// we need this double loop to ensure that all namespaces are correctly set
@@ -479,8 +494,8 @@ class XPathHelper
 	 * Sets an attribute as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param path  XPath abbreviated syntax representation of the attribute, e.g.: <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *              <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
@@ -494,7 +509,15 @@ class XPathHelper
 
 		final String att = path.substring(pos + 1);
 		final String strAttrPath = path.substring(0, pos);
-		VElement vEle = getXPathElementVectorInternal(strAttrPath, -1, true);
+		VElement vEle = null;
+		try
+		{
+			vEle = getXPathElementVectorInternal(strAttrPath, -1, true);
+		}
+		catch (final IllegalArgumentException x)
+		{
+			// nop
+		}
 		if (vEle == null)
 		{
 			vEle = new VElement();
@@ -532,8 +555,8 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
-	 * @param def default value if it doesn't exist
+	 *             <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param def  default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 * @default getXPathAttribute(path, null);
@@ -553,7 +576,9 @@ class XPathHelper
 		}
 		final KElement kEle = getXPathElement(elemPath);
 		if (kEle == null)
+		{
 			return def;
+		}
 		if (pos >= 0)
 		{
 			return kEle.getAttribute_KElement(path.substring(pos + 1), null, def);
@@ -571,8 +596,8 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
-	 * @param def default value if it doesn't exist
+	 *             <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param def  default value if it doesn't exist
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 * @default getXPathAttribute(path, null);
@@ -617,10 +642,9 @@ class XPathHelper
 	 * Gets a map of attribute values as defined by XPath namespace prefixes are resolved <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
+	 * @param path      XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code>
+	 *                  <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code> if null, assume .//@*, i.e. all of this
 	 * @param bWantText if true, also add text
-	 *
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
@@ -669,7 +693,9 @@ class XPathHelper
 				if (text != null || vKeys == null || vKeys.size() == 0)
 				{
 					if (text == null)
+					{
 						text = JDFConstants.EMPTYSTRING;
+					}
 					map.put(baseXPath, text);
 				}
 			}
@@ -682,7 +708,7 @@ class XPathHelper
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
+	 *             <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 * @throws IllegalArgumentException if path is not supported
 	 */
@@ -727,8 +753,8 @@ class XPathHelper
 	 * gets an vector of elements element as defined by XPath to value <br>
 	 *
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
-	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-	 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 * @param path    XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
+	 *                <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * @param maxSize
 	 * @param bLocal
 	 * @return VElement the vector of matching elements
@@ -745,8 +771,8 @@ class XPathHelper
 		 * gets an vector of elements element as defined by XPath to value <br>
 		 *
 		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
-		 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
-		 *        <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+		 * @param path    XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code> <code>parentElement/thisElement[2]</code>
+		 *                <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 		 * @param maxSize
 		 * @param bLocal
 		 * @return VElement the vector of matching elements
@@ -779,7 +805,7 @@ class XPathHelper
 			if (posB0 >= 0)
 			{
 				final char next = path.charAt(posB0 + 1);
-				if (next < '0' || next > '9')
+				if ((next < '0' || next > '9') && next != '-')
 				{
 					posB0 = -1;
 				}
@@ -810,15 +836,19 @@ class XPathHelper
 					iSkip = StringUtil.parseInt(n, 0);
 				}
 
+				bExplicitSkip = true;
+				final String childName = path.substring(0, posB0);
+				newPath = childName + path.substring(posB1 + 1);
+				if (iSkip < 0)
+				{
+					iSkip = theElement.numChildElements_KElement(childName, null) + 1 + iSkip;
+				}
 				if (iSkip <= 0)
 				{
 					throw new IllegalArgumentException("getXPathVector: bad index:" + iSkip);
 				}
-
 				iSkip--;
-				bExplicitSkip = true;
-				final String childName = path.substring(0, posB0);
-				newPath = childName + path.substring(posB1 + 1);
+
 				pos = newPath.indexOf('/');
 			}
 			else if (posBAt != -1 && (posBAt < pos || pos == -1)) // parse for [@a="b"]
@@ -925,7 +955,9 @@ class XPathHelper
 			{
 				VElement v = getXPathElementVectorInternal(path.substring(3), maxSize, false);
 				if (v == null)
+				{
 					v = new VElement();
+				}
 				v.add(theElement);
 				return v;
 			}
@@ -944,12 +976,12 @@ class XPathHelper
 
 				return new XPathHelper(parent).getXPathElementVectorInternal(path.substring(JDFCoreConstants.DOTDOTSLASH.length()), maxSize, true);
 			}
-			else if (path.equals(JDFCoreConstants.DOT))
+			else if (JDFCoreConstants.DOT.equals(path))
 			{
 				vRet.add(theElement);
 				return vRet;
 			}
-			else if (path.equals(".."))
+			else if ("..".equals(path))
 			{
 				final KElement parent = theElement.getParentNode_KElement();
 				if (parent == null)
