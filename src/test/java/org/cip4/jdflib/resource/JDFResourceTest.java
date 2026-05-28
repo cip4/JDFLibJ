@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -127,7 +127,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- *
  *         20.01.2009
  */
 class JDFResourceTest extends JDFTestCaseBase
@@ -458,7 +457,9 @@ class JDFResourceTest extends JDFTestCaseBase
 		{
 			assertEquals(k, EnumPartIDKey.getEnum(k.getName()));
 			if (k.isXJDF())
+			{
 				n++;
+			}
 		}
 		assertEquals(5, n);
 	}
@@ -823,12 +824,12 @@ class JDFResourceTest extends JDFTestCaseBase
 			final JDFAttributeMap myMap = ((JDFResource) vRes.elementAt(i)).getPartMap();
 			if ("Black".equals(myMap.get("Separation")))
 			{
-				assertTrue(myMap.get("Side").equals("Front"));
-				assertTrue(myMap.get("PreviewType").equals("Separation"));
+				assertTrue("Front".equals(myMap.get("Side")));
+				assertTrue("Separation".equals(myMap.get("PreviewType")));
 				assertTrue(myMap.get("SheetName").startsWith("Sheet ")); // "Sheet 1"
 				// or
 				// "Sheet 2"
-				assertTrue(myMap.get("Separation").equals("Black"));
+				assertTrue("Black".equals(myMap.get("Separation")));
 			}
 		}
 	}
@@ -876,10 +877,10 @@ class JDFResourceTest extends JDFTestCaseBase
 		myPreview = myPreview.getDeepPart(m, EnumPartUsage.Explicit);
 		final VString vPartValues = myPreview.getPartValues(JDFResource.EnumPartIDKey.Separation);
 
-		assertTrue((vPartValues.elementAt(0)).equals("Cyan"));
-		assertTrue((vPartValues.elementAt(1)).equals("Magenta"));
-		assertTrue((vPartValues.elementAt(2)).equals("Yellow"));
-		assertTrue((vPartValues.elementAt(3)).equals("Black"));
+		assertTrue("Cyan".equals(vPartValues.elementAt(0)));
+		assertTrue("Magenta".equals(vPartValues.elementAt(1)));
+		assertTrue("Yellow".equals(vPartValues.elementAt(2)));
+		assertTrue("Black".equals(vPartValues.elementAt(3)));
 	}
 
 	/**
@@ -1052,8 +1053,8 @@ class JDFResourceTest extends JDFTestCaseBase
 		colControl.setProcessColorModel("DeviceCMY");
 		colControl.appendColorantParams().appendSeparationSpec().setName("Spot");
 
-		final JDFColorSpaceConversionParams cpp = (JDFColorSpaceConversionParams) root.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null,
-				null);
+		final JDFColorSpaceConversionParams cpp = (JDFColorSpaceConversionParams) root.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null,
+				EnumUsage.Input, null, null, null, null);
 		final JDFColorSpaceConversionOp cso = cpp.appendColorSpaceConversionOp();
 		final Vector<EnumSourceObjects> sourceObjects = new Vector<>();
 		sourceObjects.add(EnumSourceObjects.ImagePhotographic);
@@ -2150,7 +2151,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 		final JDFResource xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
-		final JDFResource xm2 = xm.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, "Front");
+		final JDFResource xm2 = xm.addPartition(EnumPartIDKey.SignatureName, "Sig1").addPartition(EnumPartIDKey.SheetName, "s1")
+				.addPartition(EnumPartIDKey.Side, "Front");
 		final VElement vSeps = xm2.addPartitions(EnumPartIDKey.Separation, new VString("C M Y K", null));
 		for (final KElement sep : vSeps)
 		{
@@ -2482,7 +2484,9 @@ class JDFResourceTest extends JDFTestCaseBase
 			final VElement vL = xm.getLeaves(false);
 			ct.stop();
 			if (i % 22 == 0)
+			{
 				log.info(ct.toString());
+			}
 			assertEquals(vL.size(), 2222, "size false");
 
 		}
@@ -2521,7 +2525,6 @@ class JDFResourceTest extends JDFTestCaseBase
 
 	/**
 	 * @return the doc
-	 *
 	 */
 	public static JDFDoc creatRLDoc()
 	{
@@ -2600,10 +2603,12 @@ class JDFResourceTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		final JDFResource r1 = n.addResource(ElementName.SPINETAPINGPARAMS, EnumUsage.Input);
 		final JDFResource r2 = n.addResource(ElementName.SPINETAPINGPARAMS, EnumUsage.Input);
-		final JDFResource r1p = r1.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFResource r1p = r1.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1")
+				.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		r1p.setAgentName("a1");
 		r1.setAgentVersion("v1");
-		final JDFResource r2p = r2.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1").addPartition(EnumPartIDKey.Side, EnumSide.Front);
+		final JDFResource r2p = r2.addPartition(EnumPartIDKey.SignatureName, "sig1").addPartition(EnumPartIDKey.SheetName, "s1")
+				.addPartition(EnumPartIDKey.Side, EnumSide.Front);
 		r2p.setAttributes(r1p, new VString("a"));
 		assertEquals(r2p.getAgentName(), "a1", "child copied");
 		assertEquals(r2p.getAgentVersion(), "v1", "root copied");
@@ -2672,24 +2677,24 @@ class JDFResourceTest extends JDFTestCaseBase
 			final JDFExposedMedia xm2 = (JDFExposedMedia) xm3.getParentNode();
 			assertFalse(xm2.getLocked());
 			assertFalse(xm3.getLocked());
-			assertFalse(xm2.hasAttribute(AttributeName.LOCKED));
-			assertFalse(xm3.hasAttribute(AttributeName.LOCKED));
+			assertFalse(xm2.hasAttribute_KElement(AttributeName.LOCKED));
+			assertFalse(xm3.hasAttribute_KElement(AttributeName.LOCKED));
 			xm.setLocked(true);
 			assertTrue(xm.getLocked());
 			assertTrue(xm2.getLocked());
 			assertTrue(xm3.getLocked());
-			assertFalse(xm2.hasAttribute(AttributeName.LOCKED));
-			assertFalse(xm3.hasAttribute(AttributeName.LOCKED));
+			assertFalse(xm2.hasAttribute_KElement(AttributeName.LOCKED));
+			assertFalse(xm3.hasAttribute_KElement(AttributeName.LOCKED));
 			xm2.setLocked(false);
 			assertFalse(xm2.getLocked());
 			assertFalse(xm3.getLocked());
-			assertTrue(xm2.hasAttribute(AttributeName.LOCKED));
-			assertFalse(xm3.hasAttribute(AttributeName.LOCKED));
+			assertTrue(xm2.hasAttribute_KElement(AttributeName.LOCKED));
+			assertFalse(xm3.hasAttribute_KElement(AttributeName.LOCKED));
 			xm3.setLocked(true);
 			assertFalse(xm2.getLocked());
 			assertTrue(xm3.getLocked());
-			assertTrue(xm2.hasAttribute(AttributeName.LOCKED));
-			assertTrue(xm3.hasAttribute(AttributeName.LOCKED));
+			assertTrue(xm2.hasAttribute_KElement(AttributeName.LOCKED));
+			assertTrue(xm3.hasAttribute_KElement(AttributeName.LOCKED));
 
 		}
 	}
@@ -3046,7 +3051,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3069,7 +3075,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3088,7 +3095,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3108,7 +3116,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3128,7 +3137,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3148,7 +3158,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3172,7 +3183,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3197,7 +3209,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3221,7 +3234,8 @@ class JDFResourceTest extends JDFTestCaseBase
 	{
 		final JDFNode n = JDFNode.createRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		final JDFResource sig = dpp.addPartition(EnumPartIDKey.SignatureName, "s1");
 		final JDFResource sh = sig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		final JDFResource f = sh.addPartition(EnumPartIDKey.Side, "Front");
@@ -3267,7 +3281,8 @@ class JDFResourceTest extends JDFTestCaseBase
 		final JDFDoc doc = creatRLDoc();
 		final JDFNode n = doc.getJDFRoot();
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		dpp.collapse(true, true);
 		dpp.collapse(false, true);
 
@@ -3299,7 +3314,7 @@ class JDFResourceTest extends JDFTestCaseBase
 		rlRun.expand(true);
 		rlRun.collapse(false, true);
 		assertTrue(rlRun.hasAttribute(AttributeName.RUNTAG));
-		assertFalse(rlSep.hasAttribute(AttributeName.RUNTAG));
+		assertFalse(rlSep.hasAttribute_KElement(AttributeName.RUNTAG));
 		assertFalse(rlSet.hasAttribute(AttributeName.RUNTAG));
 		rlRun.expand(true);
 		rlRun.collapse(true, true);
@@ -3401,7 +3416,8 @@ class JDFResourceTest extends JDFTestCaseBase
 		assertFalse(xmPart4.getElement_KElement("GeneralID", null, 0) != null, "hasID");
 		assertTrue(xmPart.getElement("GeneralID", null, 0) != null, "hasID");
 
-		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null,
+				null, null);
 		dpp.expand(true);
 		dpp.expand(false);
 		assertTrue(dpp.hasAttribute("ID"));
@@ -3987,8 +4003,6 @@ class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @see JDFTestCaseBase#tearDown()
 	 */
 	@Override
@@ -4001,8 +4015,6 @@ class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
 	 * @see JDFTestCaseBase#setUp()
 	 */
 	@Override

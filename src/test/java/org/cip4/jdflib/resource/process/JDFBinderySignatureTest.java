@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -38,11 +38,15 @@ package org.cip4.jdflib.resource.process;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.junit.jupiter.api.Test;
 
 class JDFBinderySignatureTest extends JDFTestCaseBase
@@ -100,6 +104,19 @@ class JDFBinderySignatureTest extends JDFTestCaseBase
 		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc(ElementName.BINDERYSIGNATURE).getRoot();
 		bs.appendDieLayout();
 		assertEquals(EnumBinderySignatureType.Die, bs.getBinderySignatureType());
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testHasAttribute()
+	{
+		final JDFBinderySignature bs = (JDFBinderySignature) new JDFDoc("JDF").getJDFRoot().addResource(ElementName.BINDERYSIGNATURE, EnumUsage.Input);
+		bs.setBinderySignatureType(EnumBinderySignatureType.Die);
+		final JDFBinderySignature bss = (JDFBinderySignature) bs.addPartition(EnumPartIDKey.BinderySignatureName, "n");
+		assertTrue(bss.hasAttribute(AttributeName.BINDERYSIGNATURETYPE));
 	}
 
 }

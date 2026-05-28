@@ -2703,6 +2703,22 @@ public class JDFResource extends JDFElement
 
 	/**
 	 * Checks if the actual element has a specific attribute<br>
+	 * this version checks within the resource and its partitioned parent xml elements
+	 *
+	 * @param attrib       the name of the attribute to look for
+	 * @param nameSpaceURI the nameSpace to look in
+	 * @param bInherit     if true also check recursively in parent elements, regardless of partitioning
+	 * @return boolean true, if the attribute is present
+	 * @default hasAttribute(attrib, null, false)
+	 */
+	@Override
+	public boolean hasAttribute(final String attrib)
+	{
+		return hasAttribute_JDFResource(attrib, null, false);
+	}
+
+	/**
+	 * Checks if the actual element has a specific attribute<br>
 	 * this version checks within the resource and its partitioned parent xml elements this was added in order to implement the c++ JDFResource::HasAttribute
 	 *
 	 * @param attrib       the name of the attribute to look for

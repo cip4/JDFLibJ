@@ -1139,6 +1139,19 @@ public class KElement extends ElementNSImpl implements Element, IStreamWriter
 	}
 
 	/**
+	 * Checks if the actual element has a specific attribute<br>
+	 * this version checks only the explicit element and NOT any inherited resource partiotions
+	 * Attention! this behavior differs from that of @see getAttribute()
+	 *
+	 * @param attrib the name of the attribute to look for
+	 * @return boolean true, if the attribute is present
+	 */
+	public boolean hasAttribute_KElement(final String attrib)
+	{
+		return hasAttribute_KElement(attrib, null, false);
+	}
+
+	/**
 	 * Checks if the actual element has a specific attribute <br>
 	 * this version checks within the exact xml element
 	 *
