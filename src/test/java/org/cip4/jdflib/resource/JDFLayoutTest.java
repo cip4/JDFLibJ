@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -89,7 +89,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
- *
  */
 class JDFLayoutTest extends JDFTestCaseBase
 {
@@ -178,7 +177,8 @@ class JDFLayoutTest extends JDFTestCaseBase
 	void testIDField()
 	{
 
-		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null).addPartition(EnumPartIDKey.Side, "Front");
+		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null).addPartition(EnumPartIDKey.Side,
+				"Front");
 		final JDFMarkObject mo = lo.appendMarkObject();
 		mo.setCTM(JDFMatrix.getUnitMatrix());
 		mo.setOrd(0);
@@ -198,7 +198,9 @@ class JDFLayoutTest extends JDFTestCaseBase
 		final Vector<Integer> v = lo.getAllOrds();
 		assertEquals(v.size(), 32);
 		for (int i = 0; i < 16; i++)
+		{
 			assertTrue(v.contains(Integer.valueOf(i)), "pos: " + i);
+		}
 	}
 
 	/**
@@ -396,7 +398,6 @@ class JDFLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * build a 1.2 layout using appendsignature etc
-	 *
 	 */
 	@Test
 	void testBuildOldLayout()
@@ -473,7 +474,6 @@ class JDFLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * build a 1.3 layout using appendsignature etc
-	 *
 	 */
 	@Test
 	void testBuildNewLayout()
@@ -543,7 +543,7 @@ class JDFLayoutTest extends JDFTestCaseBase
 		assertTrue(JDFLayout.isNewLayout(lo));
 		final JDFSignature si = lo.getSignature(0);
 		assertEquals(si.getSignatureName(), "Sig1");
-		assertFalse(si.hasAttribute(AttributeName.CLASS));
+		assertFalse(si.hasAttribute_KElement(AttributeName.CLASS));
 	}
 
 	/**
@@ -561,7 +561,7 @@ class JDFLayoutTest extends JDFTestCaseBase
 		assertTrue(JDFLayout.isNewLayout(lo));
 		final JDFSignature si = lo.getSignature(0);
 		assertEquals(si.getSignatureName(), "Sig1");
-		assertFalse(si.hasAttribute(AttributeName.CLASS));
+		assertFalse(si.hasAttribute_KElement(AttributeName.CLASS));
 	}
 
 	// ///////////////////////////////////////////////////
@@ -898,12 +898,10 @@ class JDFLayoutTest extends JDFTestCaseBase
 
 	/**
 	 * GeneratedObject
-	 *
 	 * CTM or Position Position: See ImageShift PositionX and PositionY, Shift (Margins) --> See ShiftFront RelativeShift?
-	 *
 	 * Anchor Point (same as position ll, ul, cc, spine�) (if CTM is given) Orientation (rotation, matrix or ll, ul, ...) Contents Format/Template JobField (Replace, DynamicField?)
 	 * SeparationList Mark References (FoldMark, CIE, ...)
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

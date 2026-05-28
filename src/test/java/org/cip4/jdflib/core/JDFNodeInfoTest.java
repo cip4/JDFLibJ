@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author MuchaD
- *
  *         This implements the first fixture with unit tests for class JDFNodeInfo.
  */
 class JDFNodeInfoTest extends JDFTestCaseBase
@@ -182,11 +181,15 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 			JDFNodeInfo.setDefaultWorkStepID(j == 1);
 			final JDFNodeInfo ni = n.getCreateNodeInfo();
 			if (j == 1)
+			{
 				assertTrue(ni.hasAttribute("WorkStepID"));
+			}
 			else
+			{
 				assertFalse(ni.hasAttribute("WorkStepID"));
+			}
 			final long l = System.currentTimeMillis();
-			final HashSet<String> s = new HashSet<String>();
+			final HashSet<String> s = new HashSet<>();
 			for (int i = 0; i < 1000; i++)
 			{
 				final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SheetName, "Sheet" + i);
@@ -202,7 +205,9 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 					s.add(workStepID);
 				}
 				else
+				{
 					assertFalse(niPart.hasAttribute("WorkStepID"));
+				}
 			}
 			System.out.println(j + " t: " + (System.currentTimeMillis() - l));
 			// assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
@@ -224,11 +229,15 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 			final JDFNodeInfo ni = n.getCreateNodeInfo();
 			ni.setPartIDKeys(new VString("SignatureName SheetName PartVersion", null));
 			if (j == 1)
+			{
 				assertTrue(ni.hasAttribute("WorkStepID"));
+			}
 			else
+			{
 				assertFalse(ni.hasAttribute("WorkStepID"));
+			}
 			final long l = System.currentTimeMillis();
-			final HashSet<String> s = new HashSet<String>();
+			final HashSet<String> set = new HashSet<>();
 			for (int i = 0; i < 10; i++)
 			{
 				final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig" + i);
@@ -247,11 +256,13 @@ class JDFNodeInfoTest extends JDFTestCaseBase
 							assertTrue(niPart.hasAttribute("WorkStepID"));
 							final String workStepID = niPart.getWorkStepID();
 							assertTrue(workStepID.startsWith(ni.getWorkStepID()));
-							assertFalse(s.contains(workStepID));
-							s.add(workStepID);
+							assertFalse(set.contains(workStepID));
+							set.add(workStepID);
 						}
 						else
+						{
 							assertFalse(niPart.hasAttribute("WorkStepID"));
+						}
 					}
 				}
 			}

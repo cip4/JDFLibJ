@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2016 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -142,7 +142,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	{
 		AttributeInfo ai;
 
-		if (getParentNode().getLocalName().equals(ElementName.JDF))
+		if (ElementName.JDF.equals(getParentNode().getLocalName()))
 		{
 			ai = super.getTheAttributeInfo_JDFElement().updateReplace(atrInfoTable);
 		}
@@ -169,7 +169,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	{
 		ElementInfo ei;
 
-		if (getParentNode().getLocalName().equals(ElementName.JDF))
+		if (ElementName.JDF.equals(getParentNode().getLocalName()))
 		{
 			ei = new ElementInfo(super.getTheElementInfo_JDFElement(), elemInfoTable);
 		}
@@ -182,7 +182,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * Constructor for JDFNodeInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
@@ -193,7 +193,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * Constructor for JDFNodeInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -205,7 +205,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * Constructor for JDFNodeInfo
-	 * 
+	 *
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
@@ -275,7 +275,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 		/**
 		 * Retrieve all allowed value names of this Enum in a vector
-		 * 
+		 *
 		 * @return the <code>String Vector of</code> names
 		 * @deprecated
 		 */
@@ -328,7 +328,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	// *********************************************
 	/**
 	 * toString
-	 * 
+	 *
 	 * @return String
 	 */
 	@Override
@@ -358,11 +358,11 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void ensureWorkStepID()
 	{
-		if (!hasAttribute(AttributeName.WORKSTEPID))
+		if (!hasAttribute_KElement(AttributeName.WORKSTEPID))
 		{
 			if (isResourceRoot())
 			{
@@ -377,7 +377,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * UpdateBusiness
-	 * 
+	 *
 	 * @param businessObject
 	 * @param newID
 	 * @return
@@ -410,8 +410,8 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * Get the linked resources matching some conditions
-	 * 
-	 * @param mResAtt map of Resource attributes to search for
+	 *
+	 * @param mResAtt     map of Resource attributes to search for
 	 * @param bFollowRefs true if internal references shall be followed
 	 * @return vResource: vector with all elements matching the conditions default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */
@@ -445,7 +445,6 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * remove any resource specific attribute when making this to an element
-	 * 
 	 */
 	@Override
 	public void cleanResourceAttributes()
@@ -465,7 +464,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * if set to true, all newly generated partitions are generated with a unique WorkStepID attribute
-	 * 
+	 *
 	 * @param defaultWorkStepID the bDefaultWorkStepID to set
 	 */
 	public static void setDefaultWorkStepID(final boolean defaultWorkStepID)
@@ -475,7 +474,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * gets the subscription query for a given messagetype or creates one if not yet there note that newly created query do not contain a subscription
-	 * 
+	 *
 	 * @param queryType
 	 * @return the appropriate query
 	 */
@@ -507,7 +506,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 	/**
 	 * getEnd with some better defaulting in case first or last is set
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -515,15 +514,19 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	{
 		JDFDate end = super.getEnd();
 		if (end == null)
+		{
 			end = super.getLastEnd();
+		}
 		if (end == null)
+		{
 			end = super.getFirstEnd();
+		}
 		return end;
 	}
 
 	/**
 	 * getStart with some better defaulting
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -531,9 +534,13 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	{
 		JDFDate start = super.getStart();
 		if (start == null)
+		{
 			start = super.getFirstStart();
+		}
 		if (start == null)
+		{
 			start = super.getLastStart();
+		}
 		return start;
 	}
 
