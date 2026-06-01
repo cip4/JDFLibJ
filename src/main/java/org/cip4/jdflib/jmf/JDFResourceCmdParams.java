@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -168,18 +168,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 				return false;
 			}
 
-			final boolean isIncremental = (getUpdateMethod() == EnumUpdateMethod.Incremental);
-
-			// commented out, statements have no effect
-			// double dAmount = -1.0;
-			// if (hasAttribute (AttributeName.PRODUCTIONAMOUNT))
-			// {
-			// dAmount = getProductionAmount (); // TODO: set ProductionAmount
-			// }
-			// final String strProcessUsage = getProcessUsage(); // TODO: use
-			// ProcessUsage
-			// final JDFElement.EnumNodeStatus status = getStatus(); // TODO:
-			// set Status
+			final boolean isIncremental = EnumUpdateMethod.Incremental.equals(getUpdateMethod());
 
 			final VJDFAttributeMap vamParts = getPartMapVector();
 			JDFResource resTarget = getTargetResource(node, true);
@@ -226,9 +215,9 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 				resTarget.setID(id);
 			}
 
-			if (sizeParts > 0 && resTarget instanceof JDFNodeInfo)
+			if (sizeParts > 0 && resTarget instanceof final JDFNodeInfo ni)
 			{
-				fixNodeStatusFromNodeInfo(node, resTarget);
+				fixNodeStatusFromNodeInfo(node, ni);
 			}
 			return true;
 		}
@@ -350,14 +339,14 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * @param node      the jdf node
 		 * @param resTarget
 		 */
-		void fixNodeStatusFromNodeInfo(final JDFNode node, final JDFResource resTarget)
+		void fixNodeStatusFromNodeInfo(final JDFNode node, final JDFNodeInfo ni)
 		{
 			final EnumNodeStatus nodeStatus = node.getStatus();
-			if (!EnumNodeStatus.Part.equals(nodeStatus) && !EnumNodeStatus.Pool.equals(node.getStatus()))
+			if (!EnumNodeStatus.Part.equals(nodeStatus) && !EnumNodeStatus.Pool.equals(nodeStatus))
 			{
 				node.setStatus(EnumNodeStatus.Part);
-				final JDFNodeInfo ni = (JDFNodeInfo) resTarget;
-				if (!ni.hasAttribute(AttributeName.NODESTATUS))
+				ni.getResourceRoot().setStatus(nodeStatus);
+				if (!ni.hasAttribute_KElement(AttributeName.NODESTATUS))
 				{
 					ni.setNodeStatus(nodeStatus);
 				}

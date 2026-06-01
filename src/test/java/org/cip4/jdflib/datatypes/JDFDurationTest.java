@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2019 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -57,14 +57,12 @@ import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 class JDFDurationTest
 {
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -102,7 +100,6 @@ class JDFDurationTest
 	}
 
 	/**
-	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -145,11 +142,19 @@ class JDFDurationTest
 		assertEquals(d.getDurationISO(), "PT1H");
 	}
 
-	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
+	@Test
+	final void testJDFDuration0D() throws Exception
+	{
+		assertEquals(5 * 60 * 1000l, new JDFDuration("P0DT5M").getDurationMillis());
+		assertEquals(new JDFDuration("PT5M").getDurationMillis(), new JDFDuration("P0DT5M").getDurationMillis());
+		assertEquals(new JDFDuration("PT0H35M0S").getDurationMillis(), new JDFDuration("P0DT0H35M0S").getDurationMillis());
+	}
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	final void testFractions() throws Exception
@@ -163,7 +168,6 @@ class JDFDurationTest
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	final void testEqualsFractions() throws Exception
@@ -178,7 +182,6 @@ class JDFDurationTest
 
 	/**
 	 * @throws Exception
-	 *
 	 */
 	@Test
 	final void testEqualsFractionsHash() throws Exception
