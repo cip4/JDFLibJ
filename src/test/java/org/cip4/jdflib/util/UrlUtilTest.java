@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -1009,8 +1009,11 @@ class UrlUtilTest extends JDFTestCaseBase
 	{
 		final File f0 = new File(sm_dirTestDataTemp + "a%20b.txt");
 		f0.createNewFile();
+		new File(sm_dirTestDataTemp + "a b.txt").delete();
 		final File f1 = UrlUtil.urlToFile("File://" + sm_dirTestDataTemp + "a%20b.txt");
 		assertEquals("a b.txt", f1.getName());
+		final File f2 = UrlUtil.urlToFile(sm_dirTestDataTemp + "a%20b.txt");
+		assertEquals("a%20b.txt", f2.getName());
 	}
 
 	/**

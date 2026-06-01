@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2025 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -300,7 +300,7 @@ public class UrlUtil
 	 *
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
-	public static enum URLProtocol
+	public enum URLProtocol
 	{
 		/** mime */
 		cid,
@@ -331,8 +331,7 @@ public class UrlUtil
 		relPath = StringUtil.replaceChar(relPath, '\\', "/", 0);
 		final byte[] utf8 = StringUtil.getUTF8Bytes(relPath);
 		relPath = new String(utf8);
-		relPath = UrlUtil.escape(relPath, bEscape128, false);
-		return relPath;
+		return UrlUtil.escape(relPath, bEscape128, false);
 	}
 
 	/**
@@ -691,23 +690,39 @@ public class UrlUtil
 	 */
 	public static File urlToFile(String urlString)
 	{
-		if (urlString == null || isCID(urlString) || isNet(urlString))
+		if (StringUtil.isEmpty(urlString) || isCID(urlString) || isNet(urlString))
 		{
 			return null;
 		}
 
-		if (isFile(urlString))
+		final boolean isFile = isFile(urlString);
+		if (isFile)
 		{
 			urlString = urlString.substring(5); // remove "file:"
+			if (StringUtil.isEmpty(urlString))
+			{
+				return null;
+			}
 		}
-
-		if (StringUtil.getNonEmpty(urlString) == null)
+		String unescaped = UrlUtil.unEscape(urlString);
+		final File funescaped = new File(unescaped);
+		if (funescaped.exists())
 		{
-			return null;
+			return funescaped;
+		}
+		final File f = new File(urlString);
+		if (!isFile && f.exists())
+		{
+			return f;
 		}
 
-		urlString = UrlUtil.unEscape(urlString);
+		unescaped = checkWindows(unescaped);
 
+		return new File(unescaped);
+	}
+
+	static String checkWindows(String urlString)
+	{
 		if (PlatformUtil.isWindows()) // on windows
 		{
 			if (urlString.startsWith("///") && urlString.length() > 6 && urlString.charAt(4) == ':' && urlString.charAt(5) == '/')
@@ -739,8 +754,7 @@ public class UrlUtil
 				urlString = urlString.substring(2);
 			}
 		}
-
-		return new File(urlString);
+		return urlString;
 	}
 
 	/**
@@ -768,8 +782,7 @@ public class UrlUtil
 		urlString = StringUtil.replaceCharSet(urlString, "/\\", "" + (char) 0, 0);
 		urlString = unEscape(urlString);
 		urlString = StringUtil.escape(urlString, m_UNCEscape, "%", 16, 2, -1, -1);
-		urlString = StringUtil.replaceChar(urlString, (char) 0, "\\", 0);
-		return urlString;
+		return StringUtil.replaceChar(urlString, (char) 0, "\\", 0);
 	}
 
 	/**
@@ -1335,9 +1348,7 @@ public class UrlUtil
 			final URL url = stringToURL(urlString);
 			urlString = urlToString(url);
 		}
-		urlString = UrlUtil.cleanDots(urlString);
-
-		return urlString;
+		return UrlUtil.cleanDots(urlString);
 	}
 
 	/**
@@ -1531,12 +1542,9 @@ public class UrlUtil
 		{
 			final URI uri = new URI(val);
 			final String scheme = uri.getScheme();
-			if (scheme != null && scheme.toLowerCase().startsWith("http"))
+			if ((scheme != null && scheme.toLowerCase().startsWith("http")) && (uri.getHost() == null))
 			{
-				if (uri.getHost() == null)
-				{
-					return false;
-				}
+				return false;
 			}
 			// add any other exceptions here
 		}
