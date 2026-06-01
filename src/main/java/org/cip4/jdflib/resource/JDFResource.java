@@ -2491,6 +2491,28 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
+	 * Gets a list of all direct leaves
+	 *
+	 * @param bAll if true include all intermediate and leaf nodes including this<br>
+	 *             if false, include only the final leaves
+	 * @return VElement - the vector of all leaves - never null
+	 * @default getLeaves(false)
+	 */
+	public List<JDFResource> getNonIdenticalLeafArray()
+	{
+		final List<JDFResource> vLeaves = getLeafArray(false);
+		final List<JDFResource> next = new ArrayList<>();
+		for (final JDFResource leaf : vLeaves)
+		{
+			if (leaf.getIdentical() == null)
+			{
+				next.add(leaf);
+			}
+		}
+		return next;
+	}
+
+	/**
 	 * @return
 	 */
 	public Vector<? extends KElement> getDirectPartitionVector()

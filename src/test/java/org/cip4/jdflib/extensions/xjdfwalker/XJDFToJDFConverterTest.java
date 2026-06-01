@@ -139,6 +139,7 @@ import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
 import org.cip4.jdflib.resource.process.press.JDFPrintCondition.ePrintQuality;
 import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -676,6 +677,39 @@ class XJDFToJDFConverterTest extends JDFTestCaseBase
 		final JDFNodeInfo nij = docjdf.getJDFRoot().getNodeInfo();
 		assertEquals(EnumResStatus.Available, nij.getResStatus(false));
 		assertEquals(EnumNodeStatus.InProgress, nij.getNodeStatus());
+	}
+
+	/**
+	*
+	*
+	*/
+	@Test
+	void testNodeInfoIdentical()
+	{
+		final XJDFHelper h = new XJDFHelper("j", "p", null);
+		h.setTypes(EnumType.ConventionalPrinting.getName());
+		final ResourceHelper partition = h.getCreateSet(ElementName.NODEINFO, EnumUsage.Input).getCreatePartition(0, true);
+		partition.setStatus(EnumResStatus.Available);
+		final JDFAttributeMap p = new JDFAttributeMap(AttributeName.SHEETNAME, "S1");
+		for (final String c : JDFColor.getCMYKSeparations())
+		{
+			p.put(AttributeName.SEPARATION, c);
+			partition.appendPartMap(p);
+		}
+		final JDFNodeInfo ni = (JDFNodeInfo) partition.getResource();
+		ni.setAttribute(AttributeName.STATUS, "InProgress");
+		ni.setTotalDuration(new JDFDuration(300));
+
+		final XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		final JDFDoc docjdf = conv.convert(h);
+		final JDFNodeInfo nij = (JDFNodeInfo) docjdf.getJDFRoot().getNodeInfo().getLeaf(0);
+		assertEquals(EnumResStatus.Available, nij.getResStatus(false));
+		assertEquals(EnumNodeStatus.InProgress, nij.getNodeStatus());
+		assertEquals(300000l, nij.getTotalDuration().getDurationMillis());
+		final JDFNodeInfo ni0 = (JDFNodeInfo) nij.getResourceRoot();
+		assertEquals(1, ni0.getNonIdenticalLeafArray().size());
+		final JDFNodeInfo ni2 = (JDFNodeInfo) ni0.getLeaf(0);
+		assertEquals(300000l, ni2.getTotalDuration().getDurationMillis());
 	}
 
 	/**
