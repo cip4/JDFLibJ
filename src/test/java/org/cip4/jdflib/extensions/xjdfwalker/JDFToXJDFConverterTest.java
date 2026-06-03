@@ -189,6 +189,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 import org.cip4.jdflib.resource.process.press.JDFPrintCondition;
 import org.cip4.jdflib.resource.process.press.JDFPrintCondition.ePrintQuality;
+import org.cip4.jdflib.span.JDFSpanBindingType.EnumSpanBindingType;
 import org.cip4.jdflib.span.JDFSpanScreeningType.EnumSpanScreeningType;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.JDFDate;
@@ -1391,6 +1392,48 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ExternalID", null), "prodID");
 		writeRoundTrip(n, "pid");
+	}
+
+	/**
+	 *
+	 *
+	 */
+	@Test
+	void testComponentProductIDCB()
+	{
+		final JDFToXJDF conv = new JDFToXJDF();
+		conv.setWantProduct(true);
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setType(EnumType.Product);
+		n.setJobPartID("book");
+		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c.setDescriptiveName("desc");
+		c.setProductID("prodID");
+		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+		n.setStatus(EnumNodeStatus.Cleanup);
+		final JDFNode n2 = n.addProduct();
+		n2.setJobPartID("Cover");
+		final JDFComponent c2 = (JDFComponent) n2.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c2.setDescriptiveName("cover");
+		c2.setProductID("prodID");
+		c2.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+		n.linkResource(c2, EnumUsage.Input, null);
+		final JDFNode n3 = n.addProduct();
+		n3.setJobPartID("Body");
+		final JDFComponent c3 = (JDFComponent) n3.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c3.setDescriptiveName("body");
+		c3.setProductID("prodID");
+		c3.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+		n.linkResource(c3, EnumUsage.Input, null);
+
+		final JDFBindingIntent bi = (JDFBindingIntent) n.addResource(ElementName.BINDINGINTENT, EnumUsage.Input);
+		bi.appendBindingType().setActual(EnumSpanBindingType.SaddleStitch);
+		final KElement xjdf = conv.convert(n);
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ExternalID", null), "prodID");
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ID", null), null);
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product[2]/@ID", null), "IDP_Cover");
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product[3]/@ID", null), "IDP_Body");
+		writeRoundTrip(n, "pidcb");
 	}
 
 	/**

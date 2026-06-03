@@ -569,8 +569,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		 */
 		public static EnumType getEnum(final String enumName)
 		{
-			final EnumType myEnum = (EnumType) getEnum(EnumType.class, enumName);
-			return myEnum;
+			return (EnumType) getEnum(EnumType.class, enumName);
 		}
 
 		/**
@@ -1717,9 +1716,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		public int hashCode()
 		{
 			final int prime = 31;
-			int result = 1;
-			result = prime * result + Objects.hash(part, res);
-			return result;
+			final int result = 1;
+			return prime * result + Objects.hash(part, res);
 		}
 
 		@Override
@@ -1797,12 +1795,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 					if (!ciao)
 					{
 						final EnumNodeStatus synchStatus = getSynchStatus(minStatus, maxStatus);
-						if (synchStatus != null)
+						if ((synchStatus != null) && EnumUtil.aLessThanB(n.getPartStatus(partMap, 0), synchStatus))
 						{
-							if (EnumUtil.aLessThanB(n.getPartStatus(partMap, 0), synchStatus))
-							{
-								n.setPartStatus(partMap, synchStatus, null);
-							}
+							n.setPartStatus(partMap, synchStatus, null);
 						}
 					}
 				}
@@ -1896,14 +1891,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 					for (int ti = 0; ti < linkInfo.size(); ti++)
 					{
-						if (linkInfo.matchesUsage(ti, usage))
+						if (linkInfo.matchesUsage(ti, usage) && (processUsage == null || processUsage.getName().equals(linkInfo.getProcessUsage(ti))))
 						{
-							if (processUsage == null || processUsage.getName().equals(linkInfo.getProcessUsage(ti)))
-							{
-								bMatchUsage = true;
-								bAddCPI = true;
-								break; // one match is enough!
-							}
+							bMatchUsage = true;
+							bAddCPI = true;
+							break; // one match is enough!
 						}
 					}
 					if (bMatchUsage && linkInfoLast != null)
@@ -3623,7 +3615,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 
 	/**
 	 *
-
+	
 	 *
 	 */
 
@@ -3960,15 +3952,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 			if (!root.hasAttribute(AttributeName.PARTIDKEYS))
 			{
 				e.mergeElement(root, false);
-				if (i == 1)
+				if ((i == 1) && (getStatus() == EnumNodeStatus.Part))
 				{
-					if (getStatus() == EnumNodeStatus.Part)
+					moveAttribute(AttributeName.STATUS, e, AttributeName.NODESTATUS, null, null);
+					if (e.hasAttribute(AttributeName.NODESTATUSDETAILS))
 					{
-						moveAttribute(AttributeName.STATUS, e, AttributeName.NODESTATUS, null, null);
-						if (e.hasAttribute(AttributeName.NODESTATUSDETAILS))
-						{
-							moveAttribute(AttributeName.STATUSDETAILS, e, AttributeName.NODESTATUSDETAILS, null, null);
-						}
+						moveAttribute(AttributeName.STATUSDETAILS, e, AttributeName.NODESTATUSDETAILS, null, null);
 					}
 				}
 			}
@@ -4340,13 +4329,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	{
 		final JDFAttributeMap jobPartIDMap = new JDFAttributeMap(AttributeName.JOBPARTID, jobPartID);
 		JDFNode n = (JDFNode) getTreeElement(ElementName.JDF, null, jobPartIDMap, false, true);
-		if (n != null && !isWildCard(jobID))
+		if ((n != null && !isWildCard(jobID)) && !jobID.equals(n.getJobID(true)))
 		{
-			if (!jobID.equals(n.getJobID(true)))
-			{
-				jobPartIDMap.put(AttributeName.JOBID, jobID);
-				n = (JDFNode) getTreeElement(ElementName.JDF, null, jobPartIDMap, false, true);
-			}
+			jobPartIDMap.put(AttributeName.JOBID, jobID);
+			n = (JDFNode) getTreeElement(ElementName.JDF, null, jobPartIDMap, false, true);
 		}
 		return n;
 	}
@@ -7082,8 +7068,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 	@Deprecated
 	public JDFNode addProcess(final String prodName)
 	{
-		final JDFNode p = addJDFNode(prodName);
-		return p;
+		return addJDFNode(prodName);
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -7133,8 +7118,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 		{
 			throw new JDFException("JDFNode.AddProduct adding Product to invalid node type: Type = " + getType());
 		}
-		final JDFNode p = addJDFNode(EnumType.Product);
-		return p;
+		return addJDFNode(EnumType.Product);
 	}
 
 	// /////////////////////////////////////////////////////////////
@@ -7359,20 +7343,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable, IURLSetter
 				final JDFResourceLink rl = (JDFResourceLink) veIterator.next();
 				final String nodename = rl.getNodeName().substring(0, rl.getNodeName().length() - 4);
 
-				if (bAllNS || (vInNameSpace != null && vInNameSpace.contains(xmlnsPrefix(nodename))))
+				if ((bAllNS || (vInNameSpace != null && vInNameSpace.contains(xmlnsPrefix(nodename)))) && !names.contains(nodename))
 				{
-					if (!names.contains(nodename))
+					if (vUnknown == null)
 					{
-						if (vUnknown == null)
-						{
-							vUnknown = new VElement();
-						}
+						vUnknown = new VElement();
+					}
 
-						vUnknown.add(rl);
-						if (vUnknown.size() >= nMax)
-						{
-							break;
-						}
+					vUnknown.add(rl);
+					if (vUnknown.size() >= nMax)
+					{
+						break;
 					}
 				}
 			}

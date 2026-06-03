@@ -312,7 +312,7 @@ public class JDFToXJDF extends PackageElementWalker
 	 */
 	boolean wantProduct;
 
-	final private HashMap<MyPair<String, JDFAttributeMap>, String> componentProductMap;
+	private final HashMap<MyPair<String, JDFAttributeMap>, String> componentProductMap;
 	final Set<String> resourceAlias;
 	final HashMap<JDFAttributeMap, String> completedRefs;
 
@@ -633,6 +633,15 @@ public class JDFToXJDF extends PackageElementWalker
 	protected String getProduct(final String compID, final JDFAttributeMap partMap)
 	{
 		return componentProductMap.get(new MyPair<>(compID, partMap));
+	}
+
+	/**
+	 * @param compID
+	 * @return
+	 */
+	protected boolean hasProduct(final String prodID)
+	{
+		return componentProductMap.containsValue(prodID);
 	}
 
 	/**

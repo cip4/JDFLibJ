@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2024 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -78,6 +78,7 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class WalkJDFElement extends WalkElement
 {
+	private static final String IDP = "IDP_";
 	final String m_spawnInfo = "SpawnInfo";
 
 	/**
@@ -225,8 +226,7 @@ public class WalkJDFElement extends WalkElement
 		{
 			name += 's';
 		}
-		name = getMediaRefName(re, name);
-		return name;
+		return getMediaRefName(re, name);
 	}
 
 	String getMediaRefName(final JDFRefElement re, String name)
@@ -272,7 +272,7 @@ public class WalkJDFElement extends WalkElement
 	 */
 	KElement getProductForElement(final KElement xjdf, final JDFElement rl)
 	{
-		final JDFNode rlParent = (rl instanceof JDFNode) ? (JDFNode) rl : rl.getParentJDF();
+		final JDFNode rlParent = (rl instanceof final JDFNode j) ? j : rl.getParentJDF();
 		final String parentID = getXJDFProductID(rlParent);
 		final KElement product = new XJDFHelper(xjdf).getCreateProduct(parentID, null).getProduct();
 		if (jdfToXJDF.isRetainAll())
@@ -297,17 +297,9 @@ public class WalkJDFElement extends WalkElement
 			{
 				jpID = cid.get(0);
 			}
-			else
-			{
-				final String productID = c.getProductID();
-				if (!StringUtil.isEmpty(productID))
-				{
-					jpID = productID;
-				}
-			}
 		}
 		final String id = StringUtil.isEmpty(jpID) ? node.getID() : jpID;
-		return "IDP_" + id;
+		return IDP + id;
 	}
 
 	/**
@@ -378,7 +370,7 @@ public class WalkJDFElement extends WalkElement
 		{
 			return null;
 		}
-		final JDFResourceLink resLink = (rl instanceof JDFResourceLink) ? (JDFResourceLink) rl : null;
+		final JDFResourceLink resLink = (rl instanceof final JDFResourceLink j) ? j : null;
 		if (isExchangeResource(resLink, linkTarget))
 		{
 			return null;
@@ -444,7 +436,7 @@ public class WalkJDFElement extends WalkElement
 	{
 		final boolean implicit = jdfToXJDF.wantImplicit() && EnumPartUsage.Implicit.equals(linkTarget.getPartUsage());
 		final boolean isLayout = (linkTarget instanceof JDFLayout) || (linkTarget instanceof JDFStrippingParams);
-		return implicit && !(isLayout && ContainerUtil.contains(linkTarget.getPartIDKeyList(), AttributeName.SHEETNAME));
+		return implicit && (!isLayout || !ContainerUtil.contains(linkTarget.getPartIDKeyList(), AttributeName.SHEETNAME));
 	}
 
 	List<KElement> loopLeaves(final JDFElement rl, final String className, final KElement resourceSet, final int nLeaves, final VElement vRes)
@@ -528,8 +520,7 @@ public class WalkJDFElement extends WalkElement
 	 */
 	protected KElement getSet(final String resID, final KElement xRoot, final String className)
 	{
-		final KElement resourceSet = xRoot.getChildWithAttribute(className + SetHelper.SET, AttributeName.ID, null, resID, 0, true);
-		return resourceSet;
+		return xRoot.getChildWithAttribute(className + SetHelper.SET, AttributeName.ID, null, resID, 0, true);
 	}
 
 	/**
