@@ -1260,20 +1260,21 @@ class PostXJDFWalker extends BaseElementWalker
 
 		void walkSingleDropItem(final SetHelper sh, final ResourceHelper rh, final JDFDeliveryParams dp2, final JDFDropItem dropitem)
 		{
+			String productRef = dropitem.hasAttribute("ComponentRef") ? rh.getPartKey(XJDFConstants.Product) : null;
+			if (productRef != null)
+			{
+				final XJDFHelper xh = sh.getXJDF();
+				final ProductHelper p = xh.getProductByExternalID(productRef);
+				if (p != null)
+				{
+					productRef = p.ensureID();
+				}
+			}
 			dropitem.renameAttribute("ProductRef", XJDFConstants.ItemRef);
 			dropitem.renameAttribute("ComponentRef", XJDFConstants.ItemRef);
-			if (!dropitem.hasNonEmpty(XJDFConstants.ItemRef))
+
+			if (productRef != null)
 			{
-				String productRef = rh.getPartKey(XJDFConstants.Product);
-				if (productRef != null)
-				{
-					final XJDFHelper xh = sh.getXJDF();
-					final ProductHelper p = xh.getProductByExternalID(productRef);
-					if (p != null)
-					{
-						productRef = p.ensureID();
-					}
-				}
 				dropitem.setAttribute(XJDFConstants.ItemRef, productRef);
 			}
 			if (dropitem.hasNonEmpty(XJDFConstants.ItemRef))

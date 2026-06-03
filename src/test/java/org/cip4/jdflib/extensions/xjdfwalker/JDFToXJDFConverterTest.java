@@ -1428,11 +1428,18 @@ public class JDFToXJDFConverterTest extends JDFTestCaseBase
 
 		final JDFBindingIntent bi = (JDFBindingIntent) n.addResource(ElementName.BINDINGINTENT, EnumUsage.Input);
 		bi.appendBindingType().setActual(EnumSpanBindingType.SaddleStitch);
+
+		final JDFDeliveryIntent di = (JDFDeliveryIntent) n.addResource(ElementName.DELIVERYINTENT, EnumUsage.Input);
+		final JDFDropItemIntent dii = di.appendDropIntent().appendDropItemIntent();
+		dii.refComponent(c);
+		dii.setAmount(42);
+
 		final KElement xjdf = conv.convert(n);
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ExternalID", null), "prodID");
-		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ID", null), null);
+		assertEquals(xjdf.getXPathAttribute("ProductList/Product/@ID", null), "IDP_book");
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product[2]/@ID", null), "IDP_Cover");
 		assertEquals(xjdf.getXPathAttribute("ProductList/Product[3]/@ID", null), "IDP_Body");
+
 		writeRoundTrip(n, "pidcb");
 	}
 
