@@ -305,6 +305,8 @@ public class StreamUtil
 	}
 
 	/**
+	 * exception catching null safe reset
+	 *
 	 * @param stream
 	 */
 	static public void reset(final InputStream stream)
@@ -358,9 +360,12 @@ public class StreamUtil
 	}
 
 	/**
+	 * exception catching null safe mark
+	 *
 	 * @param ios
+	 * @param limit
 	 */
-	public static void mark(final InputStream ios, int limit)
+	public static void mark(final InputStream ios, final int limit)
 	{
 		if (ios != null && ios.markSupported())
 		{
