@@ -118,7 +118,7 @@ class StreamUtilTest extends JDFTestCaseBase
 	void testReset() throws IOException
 	{
 		final InputStream s = FileUtil.getBufferedInputStream(new File(sm_dirTestData + "page.pdf"));
-		s.mark(42);
+		StreamUtil.mark(s, 42);
 		final byte[] b = new byte[4];
 		s.read(b);
 		assertEquals(new String(b), "%PDF");

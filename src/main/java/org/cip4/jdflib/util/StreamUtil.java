@@ -342,7 +342,7 @@ public class StreamUtil
 	 *
 	 * @param ios
 	 */
-	static public void close(final InputStream ios)
+	public static void close(final InputStream ios)
 	{
 		if (ios != null)
 		{
@@ -356,4 +356,16 @@ public class StreamUtil
 			}
 		}
 	}
+
+	/**
+	 * @param ios
+	 */
+	public static void mark(final InputStream ios, int limit)
+	{
+		if (ios != null && ios.markSupported())
+		{
+			ios.mark(limit);
+		}
+	}
+
 }
