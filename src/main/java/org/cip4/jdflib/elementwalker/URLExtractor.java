@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2023 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
+ * Copyright (c) 2001-2026 The International Cooperation for the Integration of Processes in Prepress, Press and Postpress (CIP4). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -48,6 +48,7 @@ import java.util.Set;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.ifaces.IElementConverter;
 import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
@@ -90,7 +91,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 
 	protected final File dir;
 	protected final String baseURL;
-	protected Set<URLProtocol> protocols;
+	protected final Set<URLProtocol> protocols;
 	protected final String currentURL;
 	protected final Map<String, String> saved;
 	protected boolean deleteFile;
@@ -124,9 +125,9 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	private boolean wantLog;
 
 	/**
-	 * @param dumpDir the local directory where any files are dumped
+	 * @param dumpDir    the local directory where any files are dumped
 	 * @param currentURL the current local input url for relative urls - in general this will be a file url (cwd)
-	 * @param baseURL the base output url of the extracted data, for instance in an http server environment
+	 * @param baseURL    the base output url of the extracted data, for instance in an http server environment
 	 */
 	public URLExtractor(final File dumpDir, final String currentURL, final String baseURL)
 	{
@@ -135,16 +136,13 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 		this.baseURL = baseURL;
 		this.currentURL = currentURL;
 		saved = new HashMap<>();
-		protocols = null;
+		protocols = new HashSet<>();
 		setDeleteFile(false);
 		setWantLog(false);
 	}
 
 	/**
-	 *
-	 *
 	 * @param bWant if true, we will log each move
-	 *
 	 */
 	public void setWantLog(final boolean bWant)
 	{
@@ -158,16 +156,13 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 	 */
 	public void addProtocol(final URLProtocol protocol)
 	{
-		if (protocols == null)
-			protocols = new HashSet<>();
-		protocols.add(protocol);
+		ContainerUtil.appendUnique(protocols, protocol);
 	}
 
 	/**
 	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 *
 	 * @author prosirai
-	 *
 	 */
 	public class WalkURL extends WalkElement
 	{
@@ -182,7 +177,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e the element to walk over
+		 * @param e         the element to walk over
 		 * @param trackElem - unused should be null
 		 * @return the element to continue walking
 		 */
@@ -195,7 +190,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			{
 				return e;
 			}
-			String newUrl = saved.get(url);
+			final String newUrl = saved.get(url);
 			if (!StringUtil.isEmpty(newUrl))
 			{
 				urlSetter.setURL(newUrl);
@@ -203,7 +198,9 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 			}
 			// we have a circular reference to something we put here ourselves - no need to do anything
 			if (baseURL != null && url.startsWith(baseURL) || newUrl != null)
+			{
 				return e;
+			}
 
 			if (protocols != null)
 			{
@@ -220,7 +217,9 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				for (int i = 1; i < 4; i++)
 				{
 					if (newFile != null || UrlUtil.isRelativeURL(url))
+					{
 						break;
+					}
 					if (!ThreadUtil.sleep(1234))
 					{
 						return null;

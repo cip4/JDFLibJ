@@ -305,11 +305,18 @@ public class UrlUtil
 		/** mime */
 		cid,
 		/** http or https */
-		http,
+		http, https,
 		/*** file */
-		file,
+		file, local,
 		/*** ftp */
-		ftp
+		ftp;
+
+		public static URLProtocol getEnum(String val)
+		{
+			final boolean hasColon = StringUtil.index(val, JDFConstants.COLON, 0) > 0;
+			final String token = hasColon ? StringUtil.token(val, 0, JDFConstants.COLON) : null;
+			return JavaEnumUtil.getEnumIgnoreCase(URLProtocol.class, token, StringUtil.isEmpty(val) ? null : local);
+		}
 	}
 
 	/**
@@ -335,7 +342,7 @@ public class UrlUtil
 	}
 
 	/**
-	 * get a prinect url for this host and path
+	 * get a http url for this host and path
 	 *
 	 * @param bSecure if true, make https
 	 * @param host    hostname
@@ -1400,19 +1407,7 @@ public class UrlUtil
 		{
 			return URLProtocol.cid;
 		}
-		if (isHttp(url) || isHttps(url))
-		{
-			return URLProtocol.http;
-		}
-		if (isFile(url))
-		{
-			return URLProtocol.file;
-		}
-		if (isFtp(url))
-		{
-			return URLProtocol.ftp;
-		}
-		return null;
+		return URLProtocol.getEnum(url);
 	}
 
 	/**

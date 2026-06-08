@@ -177,8 +177,13 @@ class UrlUtilTest extends JDFTestCaseBase
 	{
 		assertNull(UrlUtil.getProtocol(null));
 		assertEquals(URLProtocol.http, UrlUtil.getProtocol("http://foo.bar.com"));
+		assertEquals(URLProtocol.https, UrlUtil.getProtocol("https://foo.bar.com"));
 		assertEquals(URLProtocol.cid, UrlUtil.getProtocol("cid:blah"));
+		assertEquals(URLProtocol.cid, UrlUtil.getProtocol("<cid:blah"));
 		assertEquals(URLProtocol.file, UrlUtil.getProtocol("file:blah"));
+		assertEquals(URLProtocol.file, UrlUtil.getProtocol("FILE://blah"));
+		assertEquals(URLProtocol.local, UrlUtil.getProtocol("a/b"));
+		assertEquals(null, UrlUtil.getProtocol(""));
 	}
 
 	/**
