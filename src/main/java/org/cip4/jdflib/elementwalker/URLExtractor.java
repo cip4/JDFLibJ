@@ -202,7 +202,7 @@ public class URLExtractor extends BaseElementWalker implements IElementConverter
 				return e;
 			}
 
-			if (protocols != null)
+			if (!protocols.isEmpty())
 			{
 				final URLProtocol protocol = UrlUtil.getProtocol(url);
 				if (!protocols.contains(protocol))
